@@ -1,7 +1,6 @@
 #ifndef ERROR_H
 #define ERROR_H
 
-
 #define MH_E_NO_ERROR 0
 #define MH_E_UNKNOWN_CODE -1
 #define MH_E_TOO_SHORT -2
