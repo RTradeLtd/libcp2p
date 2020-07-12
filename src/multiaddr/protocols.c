@@ -66,7 +66,13 @@ int load_protocols(struct ProtocolListItem** head)
 	struct ProtocolListItem* last = NULL;
 	for(int i = 0; i < num_protocols; i++) {
 		struct ProtocolListItem* current_item = (struct ProtocolListItem*)malloc(sizeof(struct ProtocolListItem));
+		if (current_item == NULL) {
+			return 0;
+		}
 		current_item->current = (struct Protocol*)malloc(sizeof(struct Protocol));
+		if (current_item->current == NULL) {
+			return 0;
+		}
 		current_item->next = NULL;
 		current_item->current->deccode = dec_code[i];
 		strcpy(current_item->current->name, name[i]);
@@ -217,6 +223,10 @@ void protocols_with_string(const struct ProtocolListItem* head, char* meee, int 
 				lesbo++;
 			}
 			words[atword-1] = (char *) malloc(currentsize+2);
+			// analyzer-possible-null-argument
+			if (words[atword-1] == NULL) {
+				break;
+			}
 			strcpy(words[atword-1], haay);
 			memset(haay, 0, 20);
 			/*!
