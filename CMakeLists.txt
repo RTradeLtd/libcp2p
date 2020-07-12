@@ -37,12 +37,12 @@ add_library(libmultiaddr
         ./include/multiaddr/protoutils.h
         ./include/multiaddr/varhexutils.h
         ./include/multiaddr/varint.h
-        ./multiaddr/base58.c
-        ./multiaddr/multiaddr.c
-        ./multiaddr/protocols.c
-        ./multiaddr/testing.c
-        ./multiaddr/varhexutils.c
-        ./multiaddr/varint.c
+        ./src/multiaddr/base58.c
+        ./src/multiaddr/multiaddr.c
+        ./src/multiaddr/protocols.c
+        ./src/multiaddr/testing.c
+        ./src/multiaddr/varhexutils.c
+        ./src/multiaddr/varint.c
 )
 target_compile_options(libmultiaddr PRIVATE ${flags})
 
@@ -52,29 +52,29 @@ add_library(libmultihash
         ./include/multihash/generic.h
         ./include/multihash/hashes.h
         ./include/multihash/multihash.h
-        ./multihash/errors.c
-        ./multihash/hashes.c
-        ./multihash/multihash.c
+        ./src/multihash/errors.c
+        ./src/multihash/hashes.c
+        ./src/multihash/multihash.c
 )
 target_compile_options(libmultihash PRIVATE ${flags})
 
 
 add_library(libvarint
     SHARED
-        ./protobuf/varint.h
-        ./protobuf/varint.c
+        ./src/protobuf/varint.h
+        ./src/protobuf/varint.c
 )
 target_compile_options(libvarint PRIVATE ${flags})
 
 add_library(libprotobuf
     SHARED
-        ./protobuf/protobuf.h
-        ./protobuf/protobuf.c
+        ./src/protobuf/protobuf.h
+        ./src/protobuf/protobuf.c
 )
 target_compile_options(libprotobuf PRIVATE ${flags})
 target_link_libraries(libprotobuf libvarint)
 
-add_executable(libprotobuf-cli ./protobuf/main.c)
+add_executable(libprotobuf-cli ./src/protobuf/main.c)
 target_link_libraries(libprotobuf-cli libvarint)
 target_link_libraries(libprotobuf-cli libprotobuf)
 target_compile_options(libprotobuf-cli PRIVATE ${flags})
