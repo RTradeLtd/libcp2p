@@ -1,8 +1,9 @@
 /***
  * handles varint
  */
-#ifndef _VARINT_H_
-#define _VARINT_H_
+
+#pragma once
+
 #include <stdlib.h>
 
 /**
@@ -28,5 +29,3 @@ unsigned long long varint_decode(const unsigned char* buf, int len, size_t* byte
  *
  */
 int varint_encoding_length(unsigned long long n);
-
-#endif
