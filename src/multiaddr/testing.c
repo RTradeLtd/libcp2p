@@ -25,10 +25,11 @@ int (*funcs[])(void) = {test_new_from_string,
 int testit(const char *name, int (*func)(void)) {
     printf("Testing %s...\n", name);
     int retVal = func();
-    if (retVal)
+    if (retVal) {
         printf("%s success!\n", name);
-    else
+    } else {
         printf("** Uh oh! %s failed.**\n", name);
+    }
     return retVal;
 }
 
@@ -42,8 +43,9 @@ int main(int argc, char **argv) {
         if (argv[1][0] == '\'') { // some shells put quotes around arguments
             argv[1][strlen(argv[1]) - 1] = 0;
             test_wanted = &(argv[1][1]);
-        } else
+        } else {
             test_wanted = argv[1];
+        }
     }
     int array_length = sizeof(funcs) / sizeof(funcs[0]);
     int array2_length = sizeof(names) / sizeof(names[0]);
@@ -65,9 +67,9 @@ int main(int argc, char **argv) {
         }
     }
 
-    if (tests_ran == 0)
+    if (tests_ran == 0) {
         printf("***** No tests found *****\n");
-    else {
+    } else {
         if (tests_ran - counter > 0) {
             printf("***** There were %d failed test(s) (%d "
                    "successful) *****\n",
