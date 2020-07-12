@@ -1,6 +1,5 @@
 #include "multiaddr/varint.h"
 
-
 DEFN_ENCODER(32)
 DEFN_DECODER(32)
 

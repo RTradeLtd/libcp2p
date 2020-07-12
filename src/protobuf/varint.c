@@ -1,8 +1,8 @@
-#include <assert.h>
 #include "varint.h"
+#include <assert.h>
 
-// to fix overflow in conversion from ‘int’ to ‘char’ changes value from ‘128’ to ‘-128’
-// use unsigned char
+// to fix overflow in conversion from ‘int’ to ‘char’ changes value from ‘128’
+// to ‘-128’ use unsigned char
 static const unsigned char MSB = 0x80;
 static const char MSBALL = ~0x7F;
 
@@ -17,18 +17,21 @@ static const unsigned long long N8 = 72057594037927936;
 static const unsigned long long N9 = 9223372036854775808U;
 
 int varint_encoding_length(unsigned long long n) {
-  return (
-      n < N1 ? 1
-    : n < N2 ? 2
-    : n < N3 ? 3
-    : n < N4 ? 4
-    : n < N5 ? 5
-    : n < N6 ? 6
-    : n < N7 ? 7
-    : n < N8 ? 8
-    : n < N9 ? 9
-    :         10
-  );
+  return (n < N1
+              ? 1
+              : n < N2
+                    ? 2
+                    : n < N3
+                          ? 3
+                          : n < N4
+                                ? 4
+                                : n < N5
+                                      ? 5
+                                      : n < N6 ? 6
+                                               : n < N7 ? 7
+                                                        : n < N8 ? 8
+                                                                 : n < N9 ? 9
+                                                                          : 10);
 }
 
 /**
@@ -41,9 +44,12 @@ int varint_encoding_length(unsigned long long n) {
  * @todo
  *   0 determine why `len` isnt being used
  */
-#pragma GCC diagnostic ignored "-Wunused-parameter" // when compiling with NDEBUG, len is unused and gives a warning
-unsigned char* varint_encode(const unsigned long long n, unsigned char* buf, int len, size_t* bytes) {
-  unsigned char* ptr = buf;
+#pragma GCC diagnostic ignored                                                 \
+    "-Wunused-parameter" // when compiling with NDEBUG, len is unused and gives
+                         // a warning
+unsigned char *varint_encode(const unsigned long long n, unsigned char *buf,
+                             int len, size_t *bytes) {
+  unsigned char *ptr = buf;
   unsigned long long copy = n;
 
   while (copy & MSBALL) {
@@ -52,7 +58,8 @@ unsigned char* varint_encode(const unsigned long long n, unsigned char* buf, int
     assert((ptr - buf) < len);
   }
   *ptr = copy;
-  if (bytes != NULL) *bytes = ptr - buf + 1;
+  if (bytes != NULL)
+    *bytes = ptr - buf + 1;
 
   return buf;
 }
@@ -64,11 +71,13 @@ unsigned char* varint_encode(const unsigned long long n, unsigned char* buf, int
  * @param bytes number of bytes processed
  * @returns the value decoded
  */
-unsigned long long varint_decode(const unsigned char* buf, int len, size_t* bytes) {
+unsigned long long varint_decode(const unsigned char *buf, int len,
+                                 size_t *bytes) {
   unsigned long long result = 0;
-  if (bytes != NULL) *bytes = 0;
+  if (bytes != NULL)
+    *bytes = 0;
   int bits = 0;
-  const unsigned char* ptr = buf;
+  const unsigned char *ptr = buf;
   unsigned long long ll;
   while (*ptr & MSB) {
     ll = *ptr;
@@ -80,7 +89,8 @@ unsigned long long varint_decode(const unsigned char* buf, int len, size_t* byte
   ll = *ptr;
   result += ((ll & 0x7F) << bits);
 
-  if (bytes != NULL) *bytes = ptr - buf + 1;
+  if (bytes != NULL)
+    *bytes = ptr - buf + 1;
 
   return result;
 }
