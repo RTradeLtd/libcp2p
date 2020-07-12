@@ -27,7 +27,7 @@ int test_new_like_libp2p() {
 int test_new_from_string() {
 	struct MultiAddress* a = multiaddress_new_from_string("/ip4/127.0.0.1/tcp/8080/");
 	printf("Number of Bytes: %lu, Bytes: ", a->bsize);
-	for(int i = 0; i < a->bsize; i++) {
+	for(int i = 0; i < (int)a->bsize; i++) {
 		printf("%02x ", a->bytes[i]);
 	}
 	printf(" End of bytes\n");

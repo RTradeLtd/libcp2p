@@ -23,6 +23,7 @@ static const int8_t b58digits_map[] = {
 	47,48,49,50,51,52,53,54, 55,56,57,-1,-1,-1,-1,-1,
 };
 
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 /**
  * convert a base58 encoded string into a binary array
  * @param b58 the base58 encoded string
@@ -81,16 +82,21 @@ int multiaddr_encoding_base58_decode(const char* b58, size_t base58_size, unsign
 			return 0;
 		}
 	}
-	
+	/*!
+		* @note NOTE(bonedaddy) compiler warns about fall through so I added the breaks 
+	*/
 	j = 0;
 	switch (bytesleft) {
 		case 3:
 			*(binu++) = (outi[0] & 0xff0000) >> 16;
+			break; /*! <--- */
 		case 2:
 			*(binu++) = (outi[0] & 0xff00) >> 8;
+			break; /*! <--- */
 		case 1:
 			*(binu++) = (outi[0] & 0xff);
 			++j;
+			break; /*! <--- */
 		default:
 			break;
 	}

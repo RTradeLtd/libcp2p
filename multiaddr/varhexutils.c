@@ -1,6 +1,14 @@
 #ifndef VARHEXUTILS
 #define VARHEXUTILS
 
+/*!
+ * @warning suffers a string truncation bug from `stringoptruncation`
+ * /usr/include/x86_64-linux-gnu/bits/string_fortified.h:106:10: error: ‘__builtin_strncpy’ output may be truncated copying 1 byte from a string of length 799 [-Werror=stringop-truncation]
+  106 |   return __builtin___strncpy_chk (__dest, __src, __len, __bos (__dest));
+  * temporarily ignored
+*/
+#pragma GCC diagnostic ignored "-Wstringop-truncation"
+
 #include <stdlib.h>
 #include <string.h>
 #include <strings.h>
@@ -8,6 +16,8 @@
 #include <inttypes.h>
 #include "multiaddr/varint.h"
 #include "multiaddr/varhexutils.h"
+
+
 
 /*uint8_t * encode_big_endian_32(uint32_t ebex32)
 {
@@ -158,7 +168,8 @@ unsigned char* Hex_To_Var(const char* incoming, size_t* num_bytes) //HEX TO VAR[
 void convert(char * convert_result, uint8_t * buf)					//Both of them read them properly.
 {
 	char conv_proc[800]="\0";
-	bzero(conv_proc,800);
+	memset(conv_proc, 0, 800);
+	// bzero(conv_proc,800);
 	int i;
 	for(i=0; i < 10; i++)
 	{
@@ -170,10 +181,13 @@ void convert(char * convert_result, uint8_t * buf)					//Both of them read them 
 char * Num_To_HexVar_64(uint64_t TOHVINPUT) //UINT64 TO HEXIFIED VAR
 {											//Code to varint - py
 	static char convert_result[800]="\0";//Note that the hex resulted from this will differ from py
-	bzero(convert_result,800);
+	/*! @todo TODO(bonedaddy): figure out the previous code did bzero before memset */
+	memset(convert_result, 0, 800);
+	// bzero(convert_result,800);
 	memset(convert_result,0,sizeof(convert_result));//But if you make sure the string is always 20 chars in size
 	uint8_t buf[400] = {0};
-	bzero(buf,400);
+	memset(buf, 0, 400);
+	// bzero(buf,400);
 	uvarint_encode64(TOHVINPUT, buf, 800);
 	convert(convert_result,buf);
 	return convert_result;
@@ -184,7 +198,8 @@ void convert2(char * convert_result2, uint8_t * bufhx)
 	buf = bufhx;
 	char conv_proc[4]="\0";
 	conv_proc[3] = '\0';
-	bzero(conv_proc, 3);
+	memset(conv_proc, 0, 3);
+	// bzero(conv_proc, 3);
 	int i;
 	for(i=0; i == 0; i++)
 	{
@@ -197,11 +212,13 @@ void convert2(char * convert_result2, uint8_t * bufhx)
 char * Num_To_HexVar_32(uint32_t TOHVINPUT) //UINT32 TO HEXIFIED VAR
 {											//Code to varint - py
 	static char convert_result2[3]="\0";
-	bzero(convert_result2,3);
+	memset(convert_result2, 0, 3);
+	// bzero(convert_result2,3);
 	convert_result2[2] = '\0';
 	memset(convert_result2,0,sizeof(convert_result2));
 	uint8_t buf[1] = {0};
-	bzero(buf,1);
+	memset(buf, 0, 1);
+	// bzero(buf,1);
 	uvarint_encode32(TOHVINPUT, buf, 1);
 	convert2(convert_result2,buf);
 	return convert_result2;
@@ -211,7 +228,8 @@ uint64_t HexVar_To_Num_64(char * theHEXstring) //HEXIFIED VAR TO UINT64_T
 {											   //Varint to code - py
 	uint8_t buffy[400] = {0};
 	char codo[800] = "\0";
-	bzero(codo,800);
+	memset(codo, 0, 800);
+	// bzero(codo,800);
 	strcpy(codo, theHEXstring);
 	char code[3] = "\0";
 	int x = 0;
@@ -233,12 +251,15 @@ uint64_t HexVar_To_Num_64(char * theHEXstring) //HEXIFIED VAR TO UINT64_T
 uint32_t HexVar_To_Num_32(char theHEXstring[]) //HEXIFIED VAR TO UINT32_T
 {												//Varint to code py
 	uint8_t buffy[400] = {0};
-	bzero(buffy,400);
+	memset(buffy, 0, 400);
+	// bzero(buffy,400);
 	char codo[800] = "\0";
-	bzero(codo,800);
+	memset(codo, 0, 800);
+	// bzero(codo,800);
 	strcpy(codo, theHEXstring);
 	char code[4] = "\0";
-	bzero(code,3);
+	memset(code, 0, 3);
+	// bzero(code,3);
 	code[3] = '\0';
 	int x = 0;
 	for(int i= 0;i<399;i++)

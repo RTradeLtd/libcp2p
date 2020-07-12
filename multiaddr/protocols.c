@@ -168,6 +168,8 @@ struct Protocol* proto_with_deccode(const struct ProtocolListItem* head, int pro
 	return NULL;
 }
 
+#pragma GCC diagnostic ignored "-Wunused-variable"
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 void protocols_with_string(const struct ProtocolListItem* head, char* meee, int sizi) // NOT FINISHED, DO NOT USE!
 {
 	int finalsize = 0;
@@ -199,13 +201,13 @@ void protocols_with_string(const struct ProtocolListItem* head, char* meee, int 
 			printf("NEW WORD!\n");
 			atword++;
 			int currentsize = 0;
-			for(int j = i+1; mestring[j] != '/' && j < sizeof(mestring)-2; j++)
+			for (int j = i+1; mestring[j] != '/' && j < (int)(sizeof(mestring) - 2); j++)
 			{
 				currentsize++;
 			}
 			char haay[20];
 			int lesbo = 0;
-			for(int x = i+1; x<sizeof(mestring)-2; x++)
+			for(int x = i+1; x < (int)(sizeof(mestring) - 2); x++)
 			{
 				if(mestring[x] == '/')
 				{
@@ -216,7 +218,11 @@ void protocols_with_string(const struct ProtocolListItem* head, char* meee, int 
 			}
 			words[atword-1] = (char *) malloc(currentsize+2);
 			strcpy(words[atword-1], haay);
-			bzero(haay,20);
+			memset(haay, 0, 20);
+			/*!
+				* @todo TODO(bonedaddy): figure out why bzero is not present and if we should use
+			*/
+			// bzero(haay,20);
 		}
 	}
 	printf("Result:%s\n", words[0]);
