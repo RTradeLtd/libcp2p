@@ -4,10 +4,10 @@
 
 #include <stdlib.h>
 
-#include "mh/hashes.h"
+#include "multihash/hashes.h"
 
-#include "mh/errors.h"
-#include "mh/generic.h"
+#include "multihash/errors.h"
+#include "multihash/generic.h"
 
 
 static const struct hash_info {

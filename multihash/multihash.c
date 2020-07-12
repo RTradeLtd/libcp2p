@@ -1,8 +1,7 @@
-#include "mh/multihash.h"
-
-#include "mh/hashes.h"
-#include "mh/errors.h"
-#include "mh/generic.h"
+#include "multihash/multihash.h"
+#include "multihash/hashes.h"
+#include "multihash/errors.h"
+#include "multihash/generic.h"
 
 #include <string.h>
 #include <stdlib.h>

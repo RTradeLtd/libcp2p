@@ -1,8 +1,8 @@
 #include <string.h>
 #include "minunit.h"
-#include "mh/multihash.h"
+#include "multihash/multihash.h"
 
-#include "mh/hashes.h"
+#include "multihash/hashes.h"
 
 #include "examples.h"
 

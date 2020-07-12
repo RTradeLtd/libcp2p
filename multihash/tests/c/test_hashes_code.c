@@ -1,8 +1,8 @@
 #include <string.h>
 #include "minunit.h"
 
-#include "mh/errors.h"
-#include "mh/hashes.h"
+#include "multihash/errors.h"
+#include "multihash/hashes.h"
 
 char error_buf[256];
 

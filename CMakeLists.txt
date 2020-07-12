@@ -46,6 +46,19 @@ add_library(libmultiaddr
 )
 target_compile_options(libmultiaddr PRIVATE ${flags})
 
+add_library(libmultihash
+    SHARED
+        ./include/multihash/errors.h
+        ./include/multihash/generic.h
+        ./include/multihash/hashes.h
+        ./include/multihash/multihash.h
+        ./multihash/errors.c
+        ./multihash/hashes.c
+        ./multihash/multihash.c
+)
+target_compile_options(libmultihash PRIVATE ${flags})
+
+
 add_library(libvarint
     SHARED
         ./protobuf/varint.h

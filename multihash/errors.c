@@ -1,4 +1,4 @@
-#include "mh/errors.h"
+#include "multihash/errors.h"
 
 /**
  * Convert an error code into a string
