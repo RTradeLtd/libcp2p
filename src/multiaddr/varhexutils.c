@@ -109,6 +109,11 @@ uint64_t Hex_To_Int(char * hax)
 void vthconvert(const unsigned char* in, int in_size, unsigned char** out)
 {
 	*out = (unsigned char*)malloc( (in_size * 2) + 1);
+	/*! @todo TODO(bonedaddy): figure out best way to error here
+	*/
+	if (*out == NULL) {
+		return;
+	}
 	memset(*out, 0, (in_size * 2) + 1);
 	unsigned char *ptr = *out;
 
