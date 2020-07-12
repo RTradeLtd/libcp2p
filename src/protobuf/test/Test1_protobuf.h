@@ -3,7 +3,7 @@
 #include "protobuf.h"
 
 struct Test1 {
-  int a;
+    int a;
 };
 
 int Test1_new(struct Test1 **test1);

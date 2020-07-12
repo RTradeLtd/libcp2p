@@ -10,9 +10,9 @@
 #include "multihash/generic.h"
 
 static const struct hash_info {
-  int hash;
-  const char *name;
-  int length;
+    int hash;
+    const char *name;
+    int length;
 } hash_infos[] = {
     {MH_H_SHA1, "sha1", 20},           {MH_H_SHA2_256, "sha2-256", 32},
     {MH_H_SHA2_512, "sha2-512", 64},   {MH_H_SHA3_512, "sha3-512", 64},
@@ -29,14 +29,14 @@ mh_assert_static(sizeof(hash_infos) / sizeof(hash_infos[0]) == MH_H_COUNT);
  * @returns a hash_info struct that has an int, const char* and int
  */
 static const struct hash_info *find_hash(int hash) {
-  // naive search, could be replaced with binary
-  unsigned int i = 0;
-  for (; i < MH_H_COUNT; i++) {
-    if (hash_infos[i].hash == hash)
-      return &hash_infos[i];
-  }
+    // naive search, could be replaced with binary
+    unsigned int i = 0;
+    for (; i < MH_H_COUNT; i++) {
+        if (hash_infos[i].hash == hash)
+            return &hash_infos[i];
+    }
 
-  return NULL;
+    return NULL;
 }
 
 /**
@@ -45,8 +45,8 @@ static const struct hash_info *find_hash(int hash) {
  * @returns the name as text, such as "sha1"
  */
 const char *mh_hash_name(int hash) {
-  const struct hash_info *info = find_hash(hash);
-  return (info != NULL) ? info->name : NULL;
+    const struct hash_info *info = find_hash(hash);
+    return (info != NULL) ? info->name : NULL;
 }
 
 /**
@@ -55,6 +55,6 @@ const char *mh_hash_name(int hash) {
  * @returns the default length of that hash
  */
 int mh_hash_default_length(int hash) {
-  const struct hash_info *info = find_hash(hash);
-  return (info != NULL) ? info->length : MH_E_UNKNOWN_CODE;
+    const struct hash_info *info = find_hash(hash);
+    return (info != NULL) ? info->length : MH_E_UNKNOWN_CODE;
 }

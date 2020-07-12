@@ -9,9 +9,9 @@
 #include "Test2_protobuf.h"
 
 struct Test3 {
-  char *a_string;
-  int an_int;
-  struct Test2 *test2;
+    char *a_string;
+    int an_int;
+    struct Test2 *test2;
 };
 
 int Test3_new(struct Test3 **test1);

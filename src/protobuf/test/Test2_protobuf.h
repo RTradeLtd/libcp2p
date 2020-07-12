@@ -3,7 +3,7 @@
 #include "protobuf.h"
 
 struct Test2 {
-  char *a;
+    char *a;
 };
 
 int Test2_protobuf_encode(struct Test2 *incoming, unsigned char *buffer,

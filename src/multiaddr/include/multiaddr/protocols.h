@@ -9,15 +9,15 @@
 #include <string.h>
 
 struct Protocol {
-  // char hexcode[21];
-  int deccode;
-  int size;
-  char name[30];
+    // char hexcode[21];
+    int deccode;
+    int size;
+    char name[30];
 };
 
 struct ProtocolListItem {
-  struct Protocol *current;
-  struct ProtocolListItem *next;
+    struct Protocol *current;
+    struct ProtocolListItem *next;
 };
 
 int protocol_REMOVE_id(struct ProtocolListItem *head,

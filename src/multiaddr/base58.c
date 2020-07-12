@@ -34,93 +34,93 @@ static const int8_t b58digits_map[] = {
  */
 int multiaddr_encoding_base58_decode(const char *b58, size_t base58_size,
                                      unsigned char **bin, size_t *binszp) {
-  size_t binsz = *binszp;
-  const unsigned char *b58u = (const void *)b58;
-  unsigned char *binu = *bin;
-  size_t outisz = (binsz + 3) / 4;
-  uint32_t outi[outisz];
-  uint64_t t;
-  uint32_t c;
-  size_t i, j;
-  uint8_t bytesleft = binsz % 4;
-  uint32_t zeromask = bytesleft ? (0xffffffff << (bytesleft * 8)) : 0;
-  unsigned zerocount = 0;
-  size_t b58sz;
+    size_t binsz = *binszp;
+    const unsigned char *b58u = (const void *)b58;
+    unsigned char *binu = *bin;
+    size_t outisz = (binsz + 3) / 4;
+    uint32_t outi[outisz];
+    uint64_t t;
+    uint32_t c;
+    size_t i, j;
+    uint8_t bytesleft = binsz % 4;
+    uint32_t zeromask = bytesleft ? (0xffffffff << (bytesleft * 8)) : 0;
+    unsigned zerocount = 0;
+    size_t b58sz;
 
-  b58sz = strlen(b58);
+    b58sz = strlen(b58);
 
-  memset(outi, 0, outisz * sizeof(*outi));
+    memset(outi, 0, outisz * sizeof(*outi));
 
-  // Leading zeros, just count
-  for (i = 0; i < b58sz && !b58digits_map[b58u[i]]; ++i) {
-    ++zerocount;
-  }
-
-  for (; i < b58sz; ++i) {
-    if (b58u[i] & 0x80) {
-      // High-bit set on invalid digit
-      return 0;
+    // Leading zeros, just count
+    for (i = 0; i < b58sz && !b58digits_map[b58u[i]]; ++i) {
+        ++zerocount;
     }
-    if (b58digits_map[b58u[i]] == -1) {
-      // Invalid base58 digit
-      return 0;
-    }
-    c = (unsigned)b58digits_map[b58u[i]];
-    for (j = outisz; j--;) {
-      t = ((uint64_t)outi[j]) * 58 + c;
-      c = (t & 0x3f00000000) >> 32;
-      outi[j] = t & 0xffffffff;
-    }
-    if (c) {
-      // Output number too big (carry to the next int32)
-      memset(outi, 0, outisz * sizeof(*outi));
-      return 0;
-    }
-    if (outi[0] & zeromask) {
-      // Output number too big (last int32 filled too far)
-      memset(outi, 0, outisz * sizeof(*outi));
-      return 0;
-    }
-  }
-  /*!
-   * @note NOTE(bonedaddy) compiler warns about fall through so I added the
-   * breaks
-   */
-  j = 0;
-  switch (bytesleft) {
-  case 3:
-    *(binu++) = (outi[0] & 0xff0000) >> 16;
-    break; /*! <--- */
-  case 2:
-    *(binu++) = (outi[0] & 0xff00) >> 8;
-    break; /*! <--- */
-  case 1:
-    *(binu++) = (outi[0] & 0xff);
-    ++j;
-    break; /*! <--- */
-  default:
-    break;
-  }
 
-  for (; j < outisz; ++j) {
-    *(binu++) = (outi[j] >> 0x18) & 0xff;
-    *(binu++) = (outi[j] >> 0x10) & 0xff;
-    *(binu++) = (outi[j] >> 8) & 0xff;
-    *(binu++) = (outi[j] >> 0) & 0xff;
-  }
-
-  // Count canonical base58 byte count
-  binu = *bin;
-  for (i = 0; i < binsz; ++i) {
-    if (binu[i]) {
-      break;
+    for (; i < b58sz; ++i) {
+        if (b58u[i] & 0x80) {
+            // High-bit set on invalid digit
+            return 0;
+        }
+        if (b58digits_map[b58u[i]] == -1) {
+            // Invalid base58 digit
+            return 0;
+        }
+        c = (unsigned)b58digits_map[b58u[i]];
+        for (j = outisz; j--;) {
+            t = ((uint64_t)outi[j]) * 58 + c;
+            c = (t & 0x3f00000000) >> 32;
+            outi[j] = t & 0xffffffff;
+        }
+        if (c) {
+            // Output number too big (carry to the next int32)
+            memset(outi, 0, outisz * sizeof(*outi));
+            return 0;
+        }
+        if (outi[0] & zeromask) {
+            // Output number too big (last int32 filled too far)
+            memset(outi, 0, outisz * sizeof(*outi));
+            return 0;
+        }
     }
-    --*binszp;
-  }
-  *binszp += zerocount;
+    /*!
+     * @note NOTE(bonedaddy) compiler warns about fall through so I added
+     * the breaks
+     */
+    j = 0;
+    switch (bytesleft) {
+        case 3:
+            *(binu++) = (outi[0] & 0xff0000) >> 16;
+            break; /*! <--- */
+        case 2:
+            *(binu++) = (outi[0] & 0xff00) >> 8;
+            break; /*! <--- */
+        case 1:
+            *(binu++) = (outi[0] & 0xff);
+            ++j;
+            break; /*! <--- */
+        default:
+            break;
+    }
 
-  memset(outi, 0, outisz * sizeof(*outi));
-  return 1;
+    for (; j < outisz; ++j) {
+        *(binu++) = (outi[j] >> 0x18) & 0xff;
+        *(binu++) = (outi[j] >> 0x10) & 0xff;
+        *(binu++) = (outi[j] >> 8) & 0xff;
+        *(binu++) = (outi[j] >> 0) & 0xff;
+    }
+
+    // Count canonical base58 byte count
+    binu = *bin;
+    for (i = 0; i < binsz; ++i) {
+        if (binu[i]) {
+            break;
+        }
+        --*binszp;
+    }
+    *binszp += zerocount;
+
+    memset(outi, 0, outisz * sizeof(*outi));
+    return 1;
 }
 
 /**
@@ -133,47 +133,47 @@ int multiaddr_encoding_base58_decode(const char *b58, size_t base58_size,
  */
 int multiaddr_encoding_base58_encode(const unsigned char *data, size_t binsz,
                                      unsigned char **b58, size_t *b58sz) {
-  const uint8_t *bin = data;
-  int carry;
-  ssize_t i, j, high, zcount = 0;
-  size_t size;
+    const uint8_t *bin = data;
+    int carry;
+    ssize_t i, j, high, zcount = 0;
+    size_t size;
 
-  while (zcount < (ssize_t)binsz && !bin[zcount]) {
-    ++zcount;
-  }
-
-  size = (binsz - zcount) * 138 / 100 + 1;
-  uint8_t buf[size];
-  memset(buf, 0, size);
-
-  for (i = zcount, high = size - 1; i < (ssize_t)binsz; ++i, high = j) {
-    for (carry = bin[i], j = size - 1; (j > high) || carry; --j) {
-      carry += 256 * buf[j];
-      buf[j] = carry % 58;
-      carry /= 58;
+    while (zcount < (ssize_t)binsz && !bin[zcount]) {
+        ++zcount;
     }
-  }
 
-  for (j = 0; j < (ssize_t)size && !buf[j]; ++j)
-    ;
-
-  if (*b58sz <= zcount + size - j) {
-    *b58sz = zcount + size - j + 1;
+    size = (binsz - zcount) * 138 / 100 + 1;
+    uint8_t buf[size];
     memset(buf, 0, size);
-    return 0;
-  }
 
-  if (zcount) {
-    memset(b58, '1', zcount);
-  }
-  for (i = zcount; j < (ssize_t)size; ++i, ++j) {
-    (*b58)[i] = b58digits_ordered[buf[j]];
-  }
-  (*b58)[i] = '\0';
-  *b58sz = i + 1;
+    for (i = zcount, high = size - 1; i < (ssize_t)binsz; ++i, high = j) {
+        for (carry = bin[i], j = size - 1; (j > high) || carry; --j) {
+            carry += 256 * buf[j];
+            buf[j] = carry % 58;
+            carry /= 58;
+        }
+    }
 
-  memset(buf, 0, size);
-  return 1;
+    for (j = 0; j < (ssize_t)size && !buf[j]; ++j)
+        ;
+
+    if (*b58sz <= zcount + size - j) {
+        *b58sz = zcount + size - j + 1;
+        memset(buf, 0, size);
+        return 0;
+    }
+
+    if (zcount) {
+        memset(b58, '1', zcount);
+    }
+    for (i = zcount; j < (ssize_t)size; ++i, ++j) {
+        (*b58)[i] = b58digits_ordered[buf[j]];
+    }
+    (*b58)[i] = '\0';
+    *b58sz = i + 1;
+
+    memset(buf, 0, size);
+    return 1;
 }
 
 /***
@@ -183,13 +183,13 @@ int multiaddr_encoding_base58_encode(const unsigned char *data, size_t binsz,
  */
 size_t
 multiaddr_encoding_base58_decode_size(const unsigned char *base58_string) {
-  size_t string_length = strlen((char *)base58_string);
-  size_t decoded_length = 0;
-  size_t radix = strlen(b58digits_ordered);
-  double bits_per_digit = log2(radix);
+    size_t string_length = strlen((char *)base58_string);
+    size_t decoded_length = 0;
+    size_t radix = strlen(b58digits_ordered);
+    double bits_per_digit = log2(radix);
 
-  decoded_length = floor(string_length * bits_per_digit / 8);
-  return decoded_length;
+    decoded_length = floor(string_length * bits_per_digit / 8);
+    return decoded_length;
 }
 
 /**
@@ -199,11 +199,11 @@ multiaddr_encoding_base58_decode_size(const unsigned char *base58_string) {
  */
 size_t
 multiaddr_encoding_base58_decode_max_size(const unsigned char *base58_string) {
-  size_t string_length = strlen((char *)base58_string);
-  size_t decoded_length = 0;
-  size_t radix = strlen(b58digits_ordered);
-  double bits_per_digit = log2(radix);
+    size_t string_length = strlen((char *)base58_string);
+    size_t decoded_length = 0;
+    size_t radix = strlen(b58digits_ordered);
+    double bits_per_digit = log2(radix);
 
-  decoded_length = ceil(string_length * bits_per_digit / 8);
-  return decoded_length;
+    decoded_length = ceil(string_length * bits_per_digit / 8);
+    return decoded_length;
 }
