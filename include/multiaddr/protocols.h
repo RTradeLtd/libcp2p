@@ -1,5 +1,7 @@
-#ifndef PROTOCOLS
-#define PROTOCOLS
+// #ifndef PROTOCOLS
+// #define PROTOCOLS
+
+#pragma once
 
 #include "varhexutils.h"
 #include <ctype.h>
@@ -43,4 +45,4 @@ struct Protocol *proto_with_deccode(
 void protocols_with_string(const struct ProtocolListItem *head, char *meee,
                            int sizi); // NOT FINISHED, DO NOT USE!
 
-#endif
+// #endif

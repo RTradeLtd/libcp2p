@@ -40,11 +40,13 @@ add_library(libmultiaddr
         ./src/multiaddr/base58.c
         ./src/multiaddr/multiaddr.c
         ./src/multiaddr/protocols.c
-        ./src/multiaddr/testing.c
+        ./src/multiaddr/protoutils.c
         ./src/multiaddr/varhexutils.c
         ./src/multiaddr/varint.c
 )
 target_compile_options(libmultiaddr PRIVATE ${flags})
+add_executable(libmultiaddr-test ./src/multiaddr/testing.c ./src/multiaddr/test_multiaddr.h)
+target_link_libraries(libmultiaddr-test libmultiaddr)
 
 add_library(libmultihash
     SHARED

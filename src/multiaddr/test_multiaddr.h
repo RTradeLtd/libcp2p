@@ -1,5 +1,5 @@
 #pragma once
-#pragma GCC diagnostic ignored "-Wanalyzer-possible-null-argument"
+// #pragma GCC diagnostic ignored "-Wanalyzer-possible-null-argument"
 #include "multiaddr/multiaddr.h"
 #include "multiaddr/varhexutils.h"
 

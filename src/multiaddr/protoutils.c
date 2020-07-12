@@ -10,6 +10,9 @@
 #include <string.h>
 #include <strings.h>
 
+#pragma GCC diagnostic ignored "-Wunused-variable"
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+
 extern char *strtok_r(char *, const char *, char **);
 
 //////////////////////////////////////////////////////////
@@ -245,7 +248,8 @@ uint64_t ip2int(const char *ipconvertint) {
 char *int2ip(int inputintip) {
     uint32_t ipint = inputintip;
     static char xxx_int2ip_result[16] = "\0";
-    bzero(xxx_int2ip_result, 16);
+    memset(xxx_int2ip_result, 0, 16);
+    // bzero(xxx_int2ip_result, 16);
     uint32_t ipint0 = (ipint >> 8 * 3) % 256;
     uint32_t ipint1 = (ipint >> 8 * 2) % 256;
     uint32_t ipint2 = (ipint >> 8 * 1) % 256;
@@ -305,7 +309,8 @@ NAX:
             //////////Address:
             // Keeping Valgrind happy
             char name[30];
-            bzero(name, 30);
+            memset(name, 0, 30);
+            // bzero(name, 30);
             strcpy(name, protocol->name);
             //
             strcat(results, "/");
@@ -391,7 +396,8 @@ char *address_string_to_bytes(struct Protocol *protocol, const char *incoming,
         case 4: // IPv4
         {
             char testip[16] = "\0";
-            bzero(testip, 16);
+            memset(testip, 0, 16);
+            // bzero(testip, 16);
             strcpy(testip, incoming);
             if (is_valid_ipv4(testip) == 1) {
                 uint64_t iip = ip2int(incoming);
@@ -415,7 +421,8 @@ char *address_string_to_bytes(struct Protocol *protocol, const char *incoming,
         {
             if (atoi(incoming) < 65536 && atoi(incoming) > 0) {
                 static char himm_woot[5] = "\0";
-                bzero(himm_woot, 5);
+                memset(himm_woot, 0, 5);
+                // bzero(himm_woot, 5);
                 strcpy(himm_woot, Int_To_Hex(atoi(incoming)));
                 if (himm_woot[2] == '\0') { // manual switch
                     char swap0 = '0';
@@ -450,7 +457,8 @@ char *address_string_to_bytes(struct Protocol *protocol, const char *incoming,
         {
             if (atoi(incoming) < 65536 && atoi(incoming) > 0) {
                 static char himm_woot2[5] = "\0";
-                bzero(himm_woot2, 5);
+                memset(himm_woot2, 0, 5);
+                // bzero(himm_woot2, 5);
                 strcpy(himm_woot2, Int_To_Hex(atoi(incoming)));
                 if (himm_woot2[2] == '\0') { // Manual Switch2be
                     char swap0 = '0';
@@ -522,7 +530,7 @@ char *address_string_to_bytes(struct Protocol *protocol, const char *incoming,
             char addr_encoded[300];
             memset(addr_encoded, 0, 300);
             int ilen = 0;
-            for (int i = 0; i < result_buffer_length; i++) {
+            for (int i = 0; i < (int)result_buffer_length; i++) {
                 // get the char so we can see it in the debugger
                 char miu[3];
                 sprintf(miu, "%02x", ptr_to_result[i]);
@@ -587,7 +595,8 @@ int string_to_bytes(uint8_t **finalbytes, size_t *realbbsize, const char *strx,
     // Initializing variables to store our processed HEX in:
     int malf = 0;        // In case something goes wrong this will be 1.
     char processed[800]; // HEX CONTAINER
-    bzero(processed, 800);
+    memset(processed, 0, 800);
+    // bzero(processed, 800);
 
     // Now Setting up variables for calculating which is the first
     // and second word:

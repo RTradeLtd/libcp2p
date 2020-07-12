@@ -1,5 +1,11 @@
-#ifndef PROTOUTILS
-#define PROTOUTILS
+#include <stdint.h>
+#include <stddef.h>
+#include "protocols.h"
+
+#pragma once
+
+// #ifndef PROTOUTILS
+// #define PROTOUTILS
 
 //////////////////////////////////////////////////////////
 char ASCII2bits(char ch);
@@ -55,4 +61,4 @@ char *address_string_to_bytes(struct Protocol *protocol, const char *incoming,
 int string_to_bytes(uint8_t **finalbytes, size_t *realbbsize, const char *strx,
                     size_t strsize);
 
-#endif
+// #endif
