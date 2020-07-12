@@ -15,20 +15,11 @@
 #define MH_H_BLAKE2B 0x40
 #define MH_H_BLAKE2S 0x41
 
-
 // list of avaliable hash functions.
 static const int mh_all_hashes[] = {
-	MH_H_SHA1,
-	MH_H_SHA2_256,
-	MH_H_SHA2_512,
-	MH_H_SHA3_512,
-	MH_H_SHA3_384,
-	MH_H_SHA3_256,
-	MH_H_SHA3_224,
-	MH_H_SHAKE_128,
-	MH_H_SHAKE_256,
-	MH_H_BLAKE2B,
-	MH_H_BLAKE2S,
+    MH_H_SHA1,      MH_H_SHA2_256, MH_H_SHA2_512, MH_H_SHA3_512,
+    MH_H_SHA3_384,  MH_H_SHA3_256, MH_H_SHA3_224, MH_H_SHAKE_128,
+    MH_H_SHAKE_256, MH_H_BLAKE2B,  MH_H_BLAKE2S,
 };
 
 #define MH_H_COUNT (int)(sizeof(mh_all_hashes) / sizeof(mh_all_hashes[0]))
