@@ -53,9 +53,13 @@ include(cmake/libraries/multihash.cmake)
 
 include(cmake/libraries/protobuf.cmake)
 
-# mbedtls
+# mbedtls #
 
 include(cmake/thirdparty/mbedtls.cmake)
+
+# crypto #
+
+include(cmake/libraries/crypto.cmake)
 
 #########################
 # END COMPILE LIBRARIES #

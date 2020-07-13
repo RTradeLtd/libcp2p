@@ -7,3 +7,6 @@ add_library(libmbedtls
     SHARED
         ${MBEDTLS_SOURCES}
 )
+
+# commenting this out as there are a lot of warnings
+# target_compile_options(libmbedtls PRIVATE ${flags})
