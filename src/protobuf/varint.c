@@ -1,4 +1,5 @@
 #include "varint.h"
+
 #include <assert.h>
 
 // to fix overflow in conversion from ‘int’ to ‘char’ changes value from ‘128’

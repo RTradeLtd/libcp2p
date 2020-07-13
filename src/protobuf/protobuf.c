@@ -1,10 +1,11 @@
 /***
  * Helper to derived protobuf objects
  */
+#include "protobuf.h"
+
 #include <stdint.h>
 #include <string.h>
 
-#include "protobuf.h"
 #include "varint.h"
 
 int protobuf_encode_length_delimited(int field_number, enum WireType field_type, const char *incoming, size_t incoming_length, unsigned char *buffer,

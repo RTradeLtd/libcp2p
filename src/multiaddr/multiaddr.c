@@ -1,7 +1,8 @@
+#include "multiaddr/multiaddr.h"
+
 #include <string.h>
 #include <sys/socket.h>
 
-#include "multiaddr/multiaddr.h"
 #include "multiaddr/protocols.h"
 #include "multiaddr/protoutils.h"
 #include "multiaddr/varhexutils.h"

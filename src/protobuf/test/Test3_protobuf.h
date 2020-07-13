@@ -4,9 +4,8 @@
 
 #pragma once
 
-#include "protobuf.h"
-
 #include "Test2_protobuf.h"
+#include "protobuf.h"
 
 struct Test3 {
     char *a_string;

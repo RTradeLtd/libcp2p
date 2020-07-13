@@ -1,10 +1,11 @@
 #include "multihash/multihash.h"
-#include "multihash/errors.h"
-#include "multihash/generic.h"
-#include "multihash/hashes.h"
 
 #include <stdlib.h>
 #include <string.h>
+
+#include "multihash/errors.h"
+#include "multihash/generic.h"
+#include "multihash/hashes.h"
 
 #define VARINT_MASK (1 << 7)
 

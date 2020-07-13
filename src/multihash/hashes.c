@@ -2,9 +2,9 @@
  * Some helpers in identifying hashes
  */
 
-#include <stdlib.h>
-
 #include "multihash/hashes.h"
+
+#include <stdlib.h>
 
 #include "multihash/errors.h"
 #include "multihash/generic.h"

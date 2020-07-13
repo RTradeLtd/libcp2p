@@ -1,9 +1,11 @@
 #include "Test2_protobuf.h"
-#include "protobuf.h"
-#include "varint.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "protobuf.h"
+#include "varint.h"
 
 enum WireType Test2_message_fields[] = {WIRETYPE_LENGTH_DELIMITED};
 

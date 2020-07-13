@@ -1,7 +1,5 @@
 #include "multiaddr/protoutils.h"
-#include "multiaddr/base58.h"
-#include "multiaddr/protocols.h"
-#include "multiaddr/varhexutils.h"
+
 #include <ctype.h>
 #include <inttypes.h>
 #include <math.h>
@@ -9,6 +7,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <strings.h>
+
+#include "multiaddr/base58.h"
+#include "multiaddr/protocols.h"
+#include "multiaddr/varhexutils.h"
 
 #pragma GCC diagnostic ignored "-Wunused-variable"
 #pragma GCC diagnostic ignored "-Wunused-parameter"
@@ -82,7 +84,6 @@ int is_valid_ipv4(char *ip_str) {
         err = 1;
 
     while (ptr) {
-
         /* after parsing string, it must contain only digits */
         if (!valid_digit(ptr))
             err = 1;

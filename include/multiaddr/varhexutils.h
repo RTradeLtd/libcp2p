@@ -1,12 +1,13 @@
 #ifndef VARHEXUTILS
 #define VARHEXUTILS
 
-#include "endian.h"
-#include "varint.h"
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "endian.h"
+#include "varint.h"
 /*uint8_t * encode_big_endian_32(uint32_t ebex32)
 {
         uint8_t encbe[10] = {0};

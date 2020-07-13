@@ -1,7 +1,6 @@
 #include "varint.h"
 
 int test_varint() {
-
     unsigned long long ull = 150;
     size_t buffer_size = 256;
     unsigned char buffer[buffer_size];

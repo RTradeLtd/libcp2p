@@ -1,6 +1,7 @@
-#include "protocols.h"
 #include <stddef.h>
 #include <stdint.h>
+
+#include "protocols.h"
 
 #pragma once
 

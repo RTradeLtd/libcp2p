@@ -1,3 +1,5 @@
+#include "multiaddr/protocols.h"
+
 #include <ctype.h>
 #include <errno.h>
 #include <stdio.h>
@@ -5,7 +7,6 @@
 #include <string.h>
 #include <strings.h>
 
-#include "multiaddr/protocols.h"
 #include "multiaddr/varhexutils.h"
 
 /*

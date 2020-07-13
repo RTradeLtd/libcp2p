@@ -12,12 +12,14 @@
 #pragma GCC diagnostic ignored "-Wstringop-truncation"
 
 #include "multiaddr/varhexutils.h"
-#include "multiaddr/varint.h"
+
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <strings.h>
+
+#include "multiaddr/varint.h"
 
 /*uint8_t * encode_big_endian_32(uint32_t ebex32)
 {
