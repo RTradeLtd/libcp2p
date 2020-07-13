@@ -8,8 +8,18 @@
 #include "multihash/errors.h"
 #include "multihash/hashes.h"
 #include "multihash/multihash.h"
+#include "multihash/base64.h"
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
+
+void test_bin_to_64(void **state) {
+    unsigned char *p = bin_to_b64("123456781234567812345678");
+    assert(
+        strcmp(
+            p, "BBB="
+        ) == 0
+    );
+}
 
 void test_error_messages_exist(void **state) {
     int i = -1;
@@ -75,6 +85,7 @@ void test_lengths_are_correct_for_known_codes(void **state) {
 
 int main(void) {
     const struct CMUnitTest tests[] = {
+        cmocka_unit_test(test_bin_to_64),
         cmocka_unit_test(test_error_messages_exist),
         cmocka_unit_test(test_all_hashes_have_names),
         cmocka_unit_test(test_name_is_null_when_out_of_bands),

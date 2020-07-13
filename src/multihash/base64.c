@@ -26,6 +26,9 @@ unsigned char *bin_to_b64(unsigned const char *bin) {
     }
 
     unsigned char *in = malloc(length + 24);
+    if (in == NULL) {
+        return NULL;
+    }
     memcpy(in, bin, length);
 
     size_t octets = (length - (length % 8)) / 8;
@@ -38,6 +41,10 @@ unsigned char *bin_to_b64(unsigned const char *bin) {
     }
 
     unsigned char *out = malloc(4 * ((length * 2) / 3));
+    if (out == NULL) {
+        free(in);
+        return NULL;
+    }
 
     size_t chunks = length / 6;
     for (int i = 0; i < (int)chunks; i++) {
@@ -50,6 +57,7 @@ unsigned char *bin_to_b64(unsigned const char *bin) {
         } else {
             out[i] = b64[bin_to_dec(chunk)];
         }
+        free(chunk);
     }
 
     return out;
