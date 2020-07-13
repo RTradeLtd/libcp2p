@@ -43,78 +43,19 @@ include(${PROJECT_SOURCE_DIR}/cmake/pkgs/doxygen.cmake)
 
 # multiaddr #
 
-add_library(libmultiaddr
-    SHARED
-        ./include/multiaddr/base58.h
-        ./include/multiaddr/endian.h
-        ./include/multiaddr/multiaddr.h
-        ./include/multiaddr/protocols.h
-        ./include/multiaddr/protoutils.h
-        ./include/multiaddr/varhexutils.h
-        ./include/multiaddr/varint.h
-        ./src/multiaddr/base58.c
-        ./src/multiaddr/multiaddr.c
-        ./src/multiaddr/protocols.c
-        ./src/multiaddr/protoutils.c
-        ./src/multiaddr/varhexutils.c
-        ./src/multiaddr/varint.c
-)
-target_compile_options(libmultiaddr PRIVATE ${flags})
-target_link_libraries(libmultiaddr m)
-
-add_executable(libmultiaddr-test ./src/multiaddr/multiaddr_test.c)
-target_link_libraries(libmultiaddr-test cmocka)
-target_link_libraries(libmultiaddr-test libmultiaddr)
-target_link_libraries(libmultiaddr-test m)
+include(cmake/libraries/multiaddr.cmake)
 
 # multihash #
 
-add_library(libmultihash
-    SHARED
-        ./include/multihash/errors.h
-        ./include/multihash/generic.h
-        ./include/multihash/hashes.h
-        ./include/multihash/multihash.h
-        ./include/multihash/base64.h
-        ./include/multihash/dec.h
-        ./include/multihash/hex.h
-        ./include/multihash/operations.h
-        ./src/multihash/errors.c
-        ./src/multihash/hashes.c
-        ./src/multihash/multihash.c
-        ./src/multihash/base64.c
-        ./src/multihash/dec.c
-        ./src/multihash/operations.c
-)
-target_compile_options(libmultihash PRIVATE ${flags})
-
-add_executable(libmultihash-test ./src/multihash/multihash_test.c)
-target_link_libraries(libmultihash-test cmocka)
-target_link_libraries(libmultihash-test libmultihash)
-target_link_libraries(libmultihash-test m)
+include(cmake/libraries/multihash.cmake)
 
 # protobuf #
 
-add_library(libvarint
-    SHARED
-        ./src/protobuf/varint.h
-        ./src/protobuf/varint.c
-)
-target_compile_options(libvarint PRIVATE ${flags})
+include(cmake/libraries/protobuf.cmake)
 
-add_library(libprotobuf
-    SHARED
-        ./src/protobuf/protobuf.h
-        ./src/protobuf/protobuf.c
-)
-target_compile_options(libprotobuf PRIVATE ${flags})
-target_link_libraries(libprotobuf libvarint)
+# mbedtls
 
-add_executable(libprotobuf-cli ./src/protobuf/main.c)
-target_link_libraries(libprotobuf-cli libvarint)
-target_link_libraries(libprotobuf-cli libprotobuf)
-target_compile_options(libprotobuf-cli PRIVATE ${flags})
-
+include(cmake/thirdparty/mbedtls.cmake)
 
 #########################
 # END COMPILE LIBRARIES #
