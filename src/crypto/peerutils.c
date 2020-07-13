@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "mh/multihash.h"
-#include "mh/hashes.h"
+#include "multihash/multihash.h"
+#include "multihash/hashes.h"
 #include "crypto/encoding/base58.h"
 #include "crypto/sha256.h"
 #include "crypto/peerutils.h"

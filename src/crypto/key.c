@@ -4,7 +4,7 @@
 #include "crypto/key.h"
 #include "crypto/sha256.h"
 #include "crypto/peerutils.h"
-#include "protobuf.h"
+#include "protobuf/protobuf.h"
 
 /**
  * Utilities for public and private keys
