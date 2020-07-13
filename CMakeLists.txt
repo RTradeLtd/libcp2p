@@ -1,6 +1,10 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.0)
 project(libcp2p LANGUAGES C)
 set(CMAKE_C_COMPILER gcc)
+
+# not having this in is causing asserts to fail
+
+
 
 # handle debug build type
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -18,12 +22,12 @@ endif()
 # handle no build type
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Release")
-    # disable debug stuff, useful for disabling asserts
-    list(APPEND flags -std=c17 -Wall -Wextra -Werror -pedantic -g)
+    list(APPEND flags -std=c17 -Wall -Wextra -Werror -pedantic)
 endif()
 
-
 list(APPEND flags -D_POSIX_C_SOURCE=201112L)
+
+set(CMAKE_C_FLAGS_RELEASE "")
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
@@ -44,9 +48,12 @@ add_library(libmultiaddr
         ./src/multiaddr/varint.c
 )
 target_compile_options(libmultiaddr PRIVATE ${flags})
-add_executable(libmultiaddr-test ./src/multiaddr/testing.c ./src/multiaddr/test_multiaddr.h)
+target_link_libraries(libmultiaddr m)
+
+add_executable(libmultiaddr-test ./src/multiaddr/testing.c)
 target_link_libraries(libmultiaddr-test cmocka)
 target_link_libraries(libmultiaddr-test libmultiaddr)
+target_link_libraries(libmultiaddr-test m)
 
 add_library(libmultihash
     SHARED
