@@ -7,7 +7,7 @@ BreakBeforeBraces: Attach
 ContinuationIndentWidth: 4
 IndentCaseLabels: true
 IndentWidth: 4
-ColumnLimit: 160
+ColumnLimit: 80
 AllowShortIfStatementsOnASingleLine: false
 AllowShortLoopsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: false
