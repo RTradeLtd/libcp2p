@@ -1,11 +1,18 @@
-//clang-format off
+// clang-format off <- leave these here to prevent import ordering issues
 #include <stdio.h>
+// clang-format off
 #include <assert.h>
+// clang-format off
 #include <stdarg.h>
+// clang-format off
 #include <stddef.h>
+// clang-format off
 #include <setjmp.h>
+// clang-format off
 #include <cmocka.h>
+// clang-format off
 #include "multiaddr/multiaddr.h"
+// clang-format off
 #include "multiaddr/varhexutils.h"
 
 #define assert__(x) for ( ; !(x) ; assert(x) )
