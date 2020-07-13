@@ -5,7 +5,11 @@
  * under the terms of the standard MIT license.  See COPYING for more details.
  */
 
-// required for proper multiaddr bytes conversion
+/*! 
+ * @author bonedaddy
+ * @note required for proper multiaddr bytes conversion otherwise switch statements below cause errors when compiling
+ * @note I tried to the code passing the diagnostic, but that broke multiaddress_new_from_bytes during testing
+*/
 #pragma GCC diagnostic ignored "-Wimplicit-fallthrough"
 
 #include <math.h>
