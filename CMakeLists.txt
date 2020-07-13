@@ -50,7 +50,7 @@ add_library(libmultiaddr
 target_compile_options(libmultiaddr PRIVATE ${flags})
 target_link_libraries(libmultiaddr m)
 
-add_executable(libmultiaddr-test ./src/multiaddr/testing.c)
+add_executable(libmultiaddr-test ./src/multiaddr/multiaddr_test.c)
 target_link_libraries(libmultiaddr-test cmocka)
 target_link_libraries(libmultiaddr-test libmultiaddr)
 target_link_libraries(libmultiaddr-test m)
