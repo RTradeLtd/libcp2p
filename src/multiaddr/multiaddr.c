@@ -36,6 +36,7 @@ struct MultiAddress *multiaddress_new() {
  * @param byteaddress the byte array
  * @param size the size of the byte array
  * @returns a new MultiAddress struct filled in, or NULL on error
+ * @warning this currently is failing tests
  */
 struct MultiAddress *
 multiaddress_new_from_bytes(const uint8_t *byteaddress,
