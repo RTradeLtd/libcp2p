@@ -1,20 +1,21 @@
-#include "multiaddr/multiaddr.h"
-#include "multiaddr/varhexutils.h"
+//clang-format off
+#include <stdio.h>
 #include <assert.h>
-#include <cmocka.h>
-#include <setjmp.h>
 #include <stdarg.h>
 #include <stddef.h>
-#include <stdio.h>
+#include <setjmp.h>
+#include <cmocka.h>
+#include "multiaddr/multiaddr.h"
+#include "multiaddr/varhexutils.h"
 
-#define assert__(x) for (; !(x); assert(x))
+#define assert__(x) for ( ; !(x) ; assert(x) )
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 void test_int_to_hex(void **state) {
     int val = 2555351;
     char *result = Int_To_Hex(val);
     assert(result != NULL);
-    int retVal = Hex_To_Int(result);
+    int retVal = Hex_To_Int(result); 
     assert(retVal == val);
 }
 
@@ -52,10 +53,13 @@ void test_new_like_libp2p(void **state) {
     // convert to binary
     struct MultiAddress *ma_binary =
         multiaddress_new_from_bytes(ma_string->bytes, ma_string->bsize);
-    assert(strcmp(ma_string->string, ma_binary->string) == 0);
+    assert(
+        strcmp(ma_string->string, ma_binary->string) == 0
+    );
     multiaddress_free(ma_string);
     multiaddress_free(ma_binary);
 }
+
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 void test_multiaddr_utils(void **state) {
@@ -66,10 +70,12 @@ void test_multiaddr_utils(void **state) {
     char *ip = NULL;
     multiaddress_get_ip_address(addr, &ip);
     assert(ip != NULL);
-    assert(strcmp(ip, "127.0.0.1") == 0);
+    assert(
+        strcmp(ip, "127.0.0.1") == 0
+    );
     int port = multiaddress_get_ip_port(addr);
     assert(port == 4001);
-
+    
     free(ip);
     multiaddress_free(addr);
 }
@@ -105,10 +111,11 @@ void test_multiaddr_peer_id(void **state) {
 
     addr = multiaddress_new_from_string(full_string);
     result = multiaddress_get_peer_id(addr);
-    assert__(result) { printf("result is not NULL\n"); };
+    assert__(result) {
+        printf("result is not NULL\n"); 
+    };
     assert__(strcmp(result, orig_address) == 0) {
-        printf("Original string was %s but new string is %s\n", result,
-               orig_address);
+        printf("Original string was %s but new string is %s\n", result, orig_address);
     }
     free(result);
 
@@ -119,39 +126,37 @@ void test_multiaddr_peer_id(void **state) {
     // fprintf(stderr, "Original Bytes: %s\n", result);
     free(result);
 
-    /* TODO(bonedaddy): fix as this has an error
-     // make a new MultiAddress from bytes
-     bytes = malloc(addr->bsize);
-     memcpy(bytes, addr->bytes, addr->bsize);
-     // TODO(bonedaddy): this is bugged and doesnt return the correct
-     multiaddress
-     // interestingly enough the new bytes matches the old bytes???
-     addr2 = multiaddress_new_from_bytes(bytes, addr->bsize);
-     assert(addr2 != NULL);
-     free(bytes);
+   /* TODO(bonedaddy): fix as this has an error
+    // make a new MultiAddress from bytes
+    bytes = malloc(addr->bsize);
+    memcpy(bytes, addr->bytes, addr->bsize);
+    // TODO(bonedaddy): this is bugged and doesnt return the correct multiaddress
+    // interestingly enough the new bytes matches the old bytes???
+    addr2 = multiaddress_new_from_bytes(bytes, addr->bsize);
+    assert(addr2 != NULL);
+    free(bytes);
+    
+    // 2. Display the resultant bytes
+    result = Var_To_Hex(addr2->bytes, addr2->bsize);
+    fprintf(stderr, "New      Bytes: %s\n", result);
+    free(result);
 
-     // 2. Display the resultant bytes
-     result = Var_To_Hex(addr2->bytes, addr2->bsize);
-     fprintf(stderr, "New      Bytes: %s\n", result);
-     free(result);
+    assert__(strcmp(full_string, addr2->string) == 0) {
+        printf("Original string was %s but new string is %s\n", full_string, addr2->string);
+    }
 
-     assert__(strcmp(full_string, addr2->string) == 0) {
-         printf("Original string was %s but new string is %s\n", full_string,
-     addr2->string);
-     }
+    port = multiaddress_get_ip_port(addr2);
+    assert__(port == 4001) {
+        printf("Original port was 4001 but new port is %i\n", port);
+    }
 
-     port = multiaddress_get_ip_port(addr2);
-     assert__(port == 4001) {
-         printf("Original port was 4001 but new port is %i\n", port);
-     }
-
-     result = multiaddress_get_peer_id(addr2);
-     assert__(strcmp(result, orig_address) == 0) {
-         printf("New peer id %s does not match %s\n", result, orig_address);
-     }
-
-     free(result);
-     */
+    result = multiaddress_get_peer_id(addr2);
+    assert__(strcmp(result, orig_address) == 0) {
+        printf("New peer id %s does not match %s\n", result, orig_address);
+    }
+ 
+    free(result);
+    */
 }
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
@@ -165,7 +170,9 @@ void test_multiaddr_bytes(void **state) {
     result = multiaddress_new_from_bytes(orig->bytes, orig->bsize);
 
     assert(result != NULL);
-    assert(strcmp(orig_address, result->string) == 0);
+    assert(
+        strcmp(orig_address, result->string) == 0
+    );
     multiaddress_free(orig);
     multiaddress_free(result);
 }
@@ -212,6 +219,7 @@ void test_full(void **state) {
     multiaddress_free(beta);
 }
 
+
 int main(void) {
     const struct CMUnitTest tests[] = {
         cmocka_unit_test(test_multiaddr_peer_id),
@@ -222,6 +230,7 @@ int main(void) {
         cmocka_unit_test(test_int_to_hex),
         cmocka_unit_test(test_multiaddr_utils),
         cmocka_unit_test(test_multiaddr_bytes),
-        cmocka_unit_test(test_full)};
+        cmocka_unit_test(test_full)
+    };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
