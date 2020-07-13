@@ -47,7 +47,8 @@ struct RsaPrivateKey *libp2p_crypto_private_key_to_rsa(struct PrivateKey *in);
  * @param num_bits_for_keypair the size of the key (1024 minimum)
  * @returns true(1) on success
  */
-int libp2p_crypto_rsa_generate_keypair(struct RsaPrivateKey *private_key, unsigned long num_bits_for_keypair);
+int libp2p_crypto_rsa_generate_keypair(struct RsaPrivateKey *private_key,
+                                       unsigned long num_bits_for_keypair);
 
 /**
  * Use the private key DER to fill in the public key DER
@@ -68,11 +69,16 @@ struct RsaPrivateKey *libp2p_crypto_rsa_rsa_private_key_new(void);
  * @param private_key the private key
  * @param message the message to be signed
  * @param message_length the length of message
- * @param result the resultant signature. Note: should be pre-allocated and be the size of the private key (i.e. 2048)
+ * @param result the resultant signature. Note: should be pre-allocated and be
+ * the size of the private key (i.e. 2048)
  * @returns true(1) on successs, otherwise false(0)
  */
-int libp2p_crypto_rsa_sign(struct RsaPrivateKey *private_key, const char *message, size_t message_length, unsigned char **result, size_t *result_size);
+int libp2p_crypto_rsa_sign(struct RsaPrivateKey *private_key, const char *message,
+                           size_t message_length, unsigned char **result,
+                           size_t *result_size);
 
-int libp2p_crypto_rsa_verify(struct RsaPublicKey *public_key, const unsigned char *message, size_t message_length, const unsigned char *signature);
+int libp2p_crypto_rsa_verify(struct RsaPublicKey *public_key,
+                             const unsigned char *message, size_t message_length,
+                             const unsigned char *signature);
 
 #endif /* rsa_h */

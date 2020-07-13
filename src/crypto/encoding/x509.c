@@ -18,7 +18,8 @@
  * @param bytes where to put the resultant bytes
  * @returns true(1) on success
  */
-int libp2p_crypto_encoding_x509_private_key_to_der(struct RsaPrivateKey *private_key, unsigned char *bytes[1600]) {
+int libp2p_crypto_encoding_x509_private_key_to_der(struct RsaPrivateKey *private_key,
+                                                   unsigned char *bytes[1600]) {
 
     // get everything setup
     mbedtls_pk_context ctx;
@@ -65,7 +66,8 @@ int libp2p_crypto_encoding_x509_private_key_to_der(struct RsaPrivateKey *private
  * @param private_key the RsaPrivateKey to fill
  * @returns true(1) on success
  */
-int libp2p_crypto_encoding_x509_der_to_private_key(unsigned char *der, size_t der_length, struct RsaPrivateKey *private_key) {
+int libp2p_crypto_encoding_x509_der_to_private_key(
+    unsigned char *der, size_t der_length, struct RsaPrivateKey *private_key) {
     mbedtls_pk_context ctx;
     mbedtls_pk_init(&ctx);
 

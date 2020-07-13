@@ -30,7 +30,8 @@ void libp2p_crypto_public_key_free(struct PublicKey *in) {
 }
 
 /***
- * Calculates an approximate required size of a buffer for protobuf encoding a public key
+ * Calculates an approximate required size of a buffer for protobuf encoding a
+ * public key
  * @param in the public key to examine
  * @returns the size in bytes
  */
@@ -46,17 +47,23 @@ size_t libp2p_crypto_public_key_protobuf_encode_size(const struct PublicKey *in)
  * @param bytes_written how many bytes were used in the buffer
  * @returns true(1) on success, otherwise false(0)
  */
-int libp2p_crypto_public_key_protobuf_encode(const struct PublicKey *in, unsigned char *buffer, size_t max_buffer_length, size_t *bytes_written) {
+int libp2p_crypto_public_key_protobuf_encode(const struct PublicKey *in,
+                                             unsigned char *buffer,
+                                             size_t max_buffer_length,
+                                             size_t *bytes_written) {
     // data & data_size
     size_t bytes_used = 0;
     *bytes_written = 0;
     int retVal = 0;
     // key type (RSA vs ...)
-    retVal = protobuf_encode_varint(1, WIRETYPE_VARINT, in->type, &buffer[*bytes_written], max_buffer_length - *bytes_written, &bytes_used);
+    retVal =
+        protobuf_encode_varint(1, WIRETYPE_VARINT, in->type, &buffer[*bytes_written],
+                               max_buffer_length - *bytes_written, &bytes_used);
     *bytes_written += bytes_used;
     // public key
-    retVal = protobuf_encode_length_delimited(2, WIRETYPE_LENGTH_DELIMITED, (char *)in->data, in->data_size, &buffer[*bytes_written],
-                                              max_buffer_length - *bytes_written, &bytes_used);
+    retVal = protobuf_encode_length_delimited(
+        2, WIRETYPE_LENGTH_DELIMITED, (char *)in->data, in->data_size,
+        &buffer[*bytes_written], max_buffer_length - *bytes_written, &bytes_used);
     if (retVal == 0)
         return 0;
     *bytes_written += bytes_used;
@@ -70,7 +77,9 @@ int libp2p_crypto_public_key_protobuf_encode(const struct PublicKey *in, unsigne
  * @param out the pointer to the struct PublicKey that will be allocated
  * @returns true(1) on success, otherwise false(0)
  */
-int libp2p_crypto_public_key_protobuf_decode(unsigned char *buffer, size_t buffer_length, struct PublicKey **out) {
+int libp2p_crypto_public_key_protobuf_decode(unsigned char *buffer,
+                                             size_t buffer_length,
+                                             struct PublicKey **out) {
 
     // first field is type (RSA vs ED25519)
     // second field is the public key
@@ -85,18 +94,23 @@ int libp2p_crypto_public_key_protobuf_decode(unsigned char *buffer, size_t buffe
         size_t bytes_read = 0;
         int field_no;
         enum WireType field_type;
-        if (protobuf_decode_field_and_type(&buffer[pos], buffer_length, &field_no, &field_type, &bytes_read) == 0) {
+        if (protobuf_decode_field_and_type(&buffer[pos], buffer_length, &field_no,
+                                           &field_type, &bytes_read) == 0) {
             goto exit;
         }
         pos += bytes_read;
         switch (field_no) {
             case (1): // type
-                if (protobuf_decode_varint(&buffer[pos], buffer_length - pos, (long long unsigned int *)&((*out)->type), &bytes_read) == 0)
+                if (protobuf_decode_varint(&buffer[pos], buffer_length - pos,
+                                           (long long unsigned int *)&((*out)->type),
+                                           &bytes_read) == 0)
                     goto exit;
                 pos += bytes_read;
                 break;
             case (2): // key
-                if (protobuf_decode_length_delimited(&buffer[pos], buffer_length - pos, (char **)&((*out)->data), &((*out)->data_size), &bytes_read) == 0)
+                if (protobuf_decode_length_delimited(
+                        &buffer[pos], buffer_length - pos, (char **)&((*out)->data),
+                        &((*out)->data_size), &bytes_read) == 0)
                     goto exit;
                 pos += bytes_read;
                 break;
@@ -131,7 +145,8 @@ void libp2p_crypto_private_key_free(struct PrivateKey *in) {
     }
 }
 
-int libp2p_crypto_private_key_copy(const struct PrivateKey *source, struct PrivateKey *destination) {
+int libp2p_crypto_private_key_copy(const struct PrivateKey *source,
+                                   struct PrivateKey *destination) {
     if (source != NULL && destination != NULL) {
         destination->type = source->type;
         destination->data = (unsigned char *)malloc(source->data_size);
@@ -149,16 +164,23 @@ size_t libp2p_crypto_private_key_protobuf_encode_size(const struct PrivateKey *i
     return 22 + in->data_size;
 }
 
-int libp2p_crypto_private_key_protobuf_encode(const struct PrivateKey *in, unsigned char *buffer, size_t max_buffer_length, size_t *bytes_written) {
+int libp2p_crypto_private_key_protobuf_encode(const struct PrivateKey *in,
+                                              unsigned char *buffer,
+                                              size_t max_buffer_length,
+                                              size_t *bytes_written) {
     *bytes_written = 0;
     size_t bytes_used;
     // type (RSA vs ED25519)
-    if (!protobuf_encode_varint(1, WIRETYPE_VARINT, in->type, &buffer[*bytes_written], max_buffer_length - *bytes_written, &bytes_used))
+    if (!protobuf_encode_varint(1, WIRETYPE_VARINT, in->type,
+                                &buffer[*bytes_written],
+                                max_buffer_length - *bytes_written, &bytes_used))
         return 0;
     *bytes_written += bytes_used;
     // private key
-    if (!protobuf_encode_length_delimited(2, WIRETYPE_LENGTH_DELIMITED, (char *)in->data, in->data_size, &buffer[*bytes_written],
-                                          max_buffer_length - *bytes_written, &bytes_used))
+    if (!protobuf_encode_length_delimited(
+            2, WIRETYPE_LENGTH_DELIMITED, (char *)in->data, in->data_size,
+            &buffer[*bytes_written], max_buffer_length - *bytes_written,
+            &bytes_used))
         return 0;
     *bytes_written += bytes_used;
     return 1;
@@ -171,7 +193,9 @@ int libp2p_crypto_private_key_protobuf_encode(const struct PrivateKey *in, unsig
  * @param out the pointer to the struct PrivateKey that will be allocated
  * @returns true(1) on success, otherwise false(0)
  */
-int libp2p_crypto_private_key_protobuf_decode(unsigned char *buffer, size_t buffer_length, struct PrivateKey **out) {
+int libp2p_crypto_private_key_protobuf_decode(unsigned char *buffer,
+                                              size_t buffer_length,
+                                              struct PrivateKey **out) {
 
     // first field is type (RSA vs ED25519)
     // second field is the public key
@@ -186,18 +210,23 @@ int libp2p_crypto_private_key_protobuf_decode(unsigned char *buffer, size_t buff
         size_t bytes_read = 0;
         int field_no;
         enum WireType field_type;
-        if (protobuf_decode_field_and_type(&buffer[pos], buffer_length, &field_no, &field_type, &bytes_read) == 0) {
+        if (protobuf_decode_field_and_type(&buffer[pos], buffer_length, &field_no,
+                                           &field_type, &bytes_read) == 0) {
             goto exit;
         }
         pos += bytes_read;
         switch (field_no) {
             case (1): // type
-                if (protobuf_decode_varint(&buffer[pos], buffer_length - pos, (long long unsigned int *)&((*out)->type), &bytes_read) == 0)
+                if (protobuf_decode_varint(&buffer[pos], buffer_length - pos,
+                                           (long long unsigned int *)&((*out)->type),
+                                           &bytes_read) == 0)
                     goto exit;
                 pos += bytes_read;
                 break;
             case (2): // key
-                if (protobuf_decode_length_delimited(&buffer[pos], buffer_length - pos, (char **)&((*out)->data), &((*out)->data_size), &bytes_read) == 0)
+                if (protobuf_decode_length_delimited(
+                        &buffer[pos], buffer_length - pos, (char **)&((*out)->data),
+                        &((*out)->data_size), &bytes_read) == 0)
                     goto exit;
                 pos += bytes_read;
                 break;
@@ -219,18 +248,22 @@ exit:
  * @param peer_id the results, in a null-terminated string
  * @returns true(1) on success, otherwise false(0)
  */
-int libp2p_crypto_public_key_to_peer_id(struct PublicKey *public_key, char **peer_id) {
+int libp2p_crypto_public_key_to_peer_id(struct PublicKey *public_key,
+                                        char **peer_id) {
 
     /**
-     * Converting to a peer id involves protobufing the struct PublicKey, SHA256 it, turn it into a MultiHash and base58 it
+     * Converting to a peer id involves protobufing the struct PublicKey,
+     * SHA256 it, turn it into a MultiHash and base58 it
      */
     size_t protobuf_len = libp2p_crypto_public_key_protobuf_encode_size(public_key);
     unsigned char protobuf[protobuf_len];
 
-    libp2p_crypto_public_key_protobuf_encode(public_key, protobuf, protobuf_len, &protobuf_len);
+    libp2p_crypto_public_key_protobuf_encode(public_key, protobuf, protobuf_len,
+                                             &protobuf_len);
 
     unsigned char hashed[32];
-    // libp2p_crypto_hashing_sha256(public_key->data, public_key->data_size, hashed);
+    // libp2p_crypto_hashing_sha256(public_key->data, public_key->data_size,
+    // hashed);
     libp2p_crypto_hashing_sha256(protobuf, protobuf_len, hashed);
     size_t final_id_size = 100;
     unsigned char final_id[final_id_size];

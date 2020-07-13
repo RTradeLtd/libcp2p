@@ -10,7 +10,8 @@
 #pragma GCC diagnostic ignored "-Wunused-function"
 
 struct StretchedKey *libp2p_crypto_ephemeral_stretched_key_new() {
-    struct StretchedKey *key = (struct StretchedKey *)malloc(sizeof(struct StretchedKey));
+    struct StretchedKey *key =
+        (struct StretchedKey *)malloc(sizeof(struct StretchedKey));
     if (key != NULL) {
         key->cipher_key = NULL;
         key->cipher_size = 0;
@@ -35,11 +36,13 @@ void libp2p_crypto_ephemeral_stretched_key_free(struct StretchedKey *key) {
 }
 
 static struct EphemeralPrivateKey *libp2p_crypto_ephemeral_key_new(void) {
-    struct EphemeralPrivateKey *results = (struct EphemeralPrivateKey *)malloc(sizeof(struct EphemeralPrivateKey));
+    struct EphemeralPrivateKey *results =
+        (struct EphemeralPrivateKey *)malloc(sizeof(struct EphemeralPrivateKey));
     if (results != NULL) {
         results->num_bits = 0;
         results->secret_key = 0;
-        results->public_key = (struct EphemeralPublicKey *)malloc(sizeof(struct EphemeralPublicKey));
+        results->public_key =
+            (struct EphemeralPublicKey *)malloc(sizeof(struct EphemeralPublicKey));
         if (results->public_key == NULL) {
             free(results);
             results = NULL;
@@ -104,7 +107,9 @@ static uint64_t unserialize_uint64(unsigned char in[8]) {
  * @param bytes_written how many bytes were written to results
  * @returns true(1) on success, otherwise false(0)
  */
-static int libp2p_crypto_ephemeral_point_marshal(int bit_size, uint64_t x, uint64_t y, unsigned char **results, size_t *bytes_written) {
+static int libp2p_crypto_ephemeral_point_marshal(int bit_size, uint64_t x,
+                                                 uint64_t y, unsigned char **results,
+                                                 size_t *bytes_written) {
     int byteLen = (bit_size + 7) >> 3;
 
     // bytelen is 32, and we never fill in from 1 to 33. hmmm....
@@ -123,7 +128,10 @@ static int libp2p_crypto_ephemeral_point_marshal(int bit_size, uint64_t x, uint6
     return 1;
 }
 
-static int libp2p_crypto_ephemeral_point_unmarshal(int bit_size, unsigned char *buffer, size_t buffer_length, uint64_t *x, uint64_t *y) {
+static int libp2p_crypto_ephemeral_point_unmarshal(int bit_size,
+                                                   unsigned char *buffer,
+                                                   size_t buffer_length, uint64_t *x,
+                                                   uint64_t *y) {
     int byteLen = (bit_size + 7) >> 3;
 
     if ((int)buffer_length != 2 * byteLen + 1)
@@ -144,7 +152,8 @@ static int libp2p_crypto_ephemeral_point_unmarshal(int bit_size, unsigned char *
  * @param private_key the struct to store the generated key
  * @returns true(1) on success, otherwise false(0)
  */
-int libp2p_crypto_ephemeral_keypair_generate(char *curve, struct EphemeralPrivateKey **private_key_ptr) {
+int libp2p_crypto_ephemeral_keypair_generate(
+    char *curve, struct EphemeralPrivateKey **private_key_ptr) {
     int retVal = 0;
     // mbedtls_ecdh_context ctx;
     mbedtls_entropy_context entropy;
@@ -171,7 +180,8 @@ int libp2p_crypto_ephemeral_keypair_generate(char *curve, struct EphemeralPrivat
     // seed random number generator
     mbedtls_entropy_init(&entropy);
     mbedtls_ctr_drbg_init(&ctr_drbg);
-    if (mbedtls_ctr_drbg_seed(&ctr_drbg, mbedtls_entropy_func, &entropy, (const unsigned char *)pers, strlen(pers)) != 0)
+    if (mbedtls_ctr_drbg_seed(&ctr_drbg, mbedtls_entropy_func, &entropy,
+                              (const unsigned char *)pers, strlen(pers)) != 0)
         goto exit;
 
     // Prepare to generate the public key
@@ -181,8 +191,9 @@ int libp2p_crypto_ephemeral_keypair_generate(char *curve, struct EphemeralPrivat
     // create and marshal public key
     public_key->bytes_size = 66;
     public_key->bytes = (unsigned char *)malloc(public_key->bytes_size);
-    if (mbedtls_ecdh_make_public(&private_key->ctx, &public_key->bytes_size, public_key->bytes, public_key->bytes_size, mbedtls_ctr_drbg_random, &ctr_drbg) !=
-        0)
+    if (mbedtls_ecdh_make_public(&private_key->ctx, &public_key->bytes_size,
+                                 public_key->bytes, public_key->bytes_size,
+                                 mbedtls_ctr_drbg_random, &ctr_drbg) != 0)
         goto exit;
 
     // ship all this stuff back to the caller
@@ -201,8 +212,11 @@ exit:
  * @param bytes_written the number of bytes written
  * @returns true(1) on success, otherwise false(0)
  */
-static int libp2p_crypto_ephemeral_keypair_to_public_bytes(struct EphemeralPublicKey *public_key, unsigned char **results, size_t *bytes_written) {
-    return libp2p_crypto_ephemeral_point_marshal(public_key->num_bits, public_key->x, public_key->y, results, bytes_written);
+static int libp2p_crypto_ephemeral_keypair_to_public_bytes(
+    struct EphemeralPublicKey *public_key, unsigned char **results,
+    size_t *bytes_written) {
+    return libp2p_crypto_ephemeral_point_marshal(
+        public_key->num_bits, public_key->x, public_key->y, results, bytes_written);
 }
 
 /**
@@ -212,8 +226,9 @@ static int libp2p_crypto_ephemeral_keypair_to_public_bytes(struct EphemeralPubli
  * @param remote_public_key_size the size of the remote public key
  * @reutrns true(1) on success, otherwise false(0)
  */
-int libp2p_crypto_ephemeral_generate_shared_secret(struct EphemeralPrivateKey *private_key, const unsigned char *remote_public_key,
-                                                   size_t remote_public_key_size) {
+int libp2p_crypto_ephemeral_generate_shared_secret(
+    struct EphemeralPrivateKey *private_key, const unsigned char *remote_public_key,
+    size_t remote_public_key_size) {
     int retVal = 0;
     mbedtls_entropy_context entropy;
     mbedtls_ctr_drbg_context ctr_drbg;
@@ -222,20 +237,26 @@ int libp2p_crypto_ephemeral_generate_shared_secret(struct EphemeralPrivateKey *p
     // seed random number generator
     mbedtls_entropy_init(&entropy);
     mbedtls_ctr_drbg_init(&ctr_drbg);
-    if (mbedtls_ctr_drbg_seed(&ctr_drbg, mbedtls_entropy_func, &entropy, (const unsigned char *)pers, strlen(pers)) != 0)
+    if (mbedtls_ctr_drbg_seed(&ctr_drbg, mbedtls_entropy_func, &entropy,
+                              (const unsigned char *)pers, strlen(pers)) != 0)
         goto exit;
 
     // read the remote key
-    if (mbedtls_ecdh_read_public(&private_key->ctx, remote_public_key, remote_public_key_size) < 0)
+    if (mbedtls_ecdh_read_public(&private_key->ctx, remote_public_key,
+                                 remote_public_key_size) < 0)
         goto exit;
 
     // generate the shared key
     // reserve some memory for the shared key
     // TODO: set this to something reasonable
     private_key->public_key->shared_key_size = 100;
-    private_key->public_key->shared_key = malloc(private_key->public_key->shared_key_size);
-    if (mbedtls_ecdh_calc_secret(&private_key->ctx, &private_key->public_key->shared_key_size, private_key->public_key->shared_key,
-                                 private_key->public_key->shared_key_size, mbedtls_ctr_drbg_random, &ctr_drbg) != 0)
+    private_key->public_key->shared_key =
+        malloc(private_key->public_key->shared_key_size);
+    if (mbedtls_ecdh_calc_secret(&private_key->ctx,
+                                 &private_key->public_key->shared_key_size,
+                                 private_key->public_key->shared_key,
+                                 private_key->public_key->shared_key_size,
+                                 mbedtls_ctr_drbg_random, &ctr_drbg) != 0)
         goto exit;
 
     retVal = 1;

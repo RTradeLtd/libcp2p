@@ -14,13 +14,17 @@
 #include <string.h>
 #include <sys/types.h>
 
-static const char b58digits_ordered[] = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+static const char b58digits_ordered[] =
+    "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 
 static const int8_t b58digits_map[] = {
-    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0,  1,  2,  3,  4,  5,  6,  7,  8,  -1, -1, -1, -1, -1, -1,
-    -1, 9,  10, 11, 12, 13, 14, 15, 16, -1, 17, 18, 19, 20, 21, -1, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, -1, -1, -1, -1, -1,
-    -1, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, -1, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0,  1,  2,  3,  4,  5,  6,  7,
+    8,  -1, -1, -1, -1, -1, -1, -1, 9,  10, 11, 12, 13, 14, 15, 16, -1, 17, 18,
+    19, 20, 21, -1, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, -1, -1, -1, -1,
+    -1, -1, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, -1, 44, 45, 46, 47, 48,
+    49, 50, 51, 52, 53, 54, 55, 56, 57, -1, -1, -1, -1, -1,
 };
 
 /**
@@ -31,7 +35,8 @@ static const int8_t b58digits_map[] = {
  * @param binszp the size of the results buffer
  * @returns true(1) on success
  */
-int libp2p_crypto_encoding_base58_decode(const char *b58, size_t base58_size, unsigned char **bin, size_t *binszp) {
+int libp2p_crypto_encoding_base58_decode(const char *b58, size_t base58_size,
+                                         unsigned char **bin, size_t *binszp) {
     size_t binsz = *binszp;
     const unsigned char *b58u = (const void *)b58;
     unsigned char *binu = *bin;
@@ -123,7 +128,10 @@ int libp2p_crypto_encoding_base58_decode(const char *b58, size_t base58_size, un
  * @param base58_size the size of the results buffer
  * @returns true(1) on success
  */
-int libp2p_crypto_encoding_base58_encode(const unsigned char *binary_data, size_t binary_data_size, unsigned char **base58, size_t *base58_size) {
+int libp2p_crypto_encoding_base58_encode(const unsigned char *binary_data,
+                                         size_t binary_data_size,
+                                         unsigned char **base58,
+                                         size_t *base58_size) {
     const uint8_t *bin = binary_data;
     int carry;
     ssize_t i, j, high, zcount = 0;

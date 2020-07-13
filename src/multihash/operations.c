@@ -5,7 +5,8 @@
 
 // from https://github.com/multiformats/c-multihash/pull/6/files
 
-void xor_bin(const unsigned char *bin1, const unsigned char *bin2, unsigned char *dest) {
+void xor_bin(const unsigned char *bin1, const unsigned char *bin2,
+             unsigned char *dest) {
     size_t length1 = strlen((const char *)bin1);
     size_t length2 = strlen((const char *)bin2);
 

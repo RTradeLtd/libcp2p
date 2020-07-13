@@ -8,10 +8,14 @@
  * @param incoming the incoming bytes
  * @param incoming_length the length of the incoming bytes
  * @param results where to put the results
- * @param results_length the size of the buffer, and returns the actual length used
+ * @param results_length the size of the buffer, and returns the actual length
+ * used
  * @returns true(1) on success
  */
-int libp2p_crypto_encoding_base16_encode(const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t *results_length) {
+int libp2p_crypto_encoding_base16_encode(const unsigned char *incoming,
+                                         size_t incoming_length,
+                                         unsigned char *results,
+                                         size_t *results_length) {
     // the size will be 2x the size of incoming, so check that
     if (*results_length < incoming_length * 2)
         return 0;
@@ -43,12 +47,17 @@ int libp2p_crypto_encoding_base16_encode_size(size_t incoming_length) {
 /**
  * Decode from Base16 format
  * @param incoming the incoming base16 encoded string
- * @param incoming_length the length of the incoming string (no need to include null)
+ * @param incoming_length the length of the incoming string (no need to include
+ * null)
  * @param results where to put the results
- * @param results_length the size of the buffer, and returns the actual length used
+ * @param results_length the size of the buffer, and returns the actual length
+ * used
  * @returns true(1) on success
  */
-int libp2p_crypto_encoding_base16_decode(const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t *results_length) {
+int libp2p_crypto_encoding_base16_decode(const unsigned char *incoming,
+                                         size_t incoming_length,
+                                         unsigned char *results,
+                                         size_t *results_length) {
 
     // buffer too small
     if (*results_length < incoming_length / 2)

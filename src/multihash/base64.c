@@ -4,9 +4,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-static unsigned char b64[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
-                              'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
-                              's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/'};
+static unsigned char b64[] = {
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+    'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
+    'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+    'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/'};
 
 int mod(size_t octets) {
     if (!(octets % 5))
@@ -52,7 +54,8 @@ unsigned char *bin_to_b64(unsigned const char *bin) {
         for (int j = 0; j < 6; j++) {
             chunk[j] = in[(i * 6) + j];
         }
-        if ((i == (int)chunks - 1 || i == (int)chunks - 2) && bin_to_dec(chunk) == 0) {
+        if ((i == (int)chunks - 1 || i == (int)chunks - 2) &&
+            bin_to_dec(chunk) == 0) {
             out[i] = '=';
         } else {
             out[i] = b64[bin_to_dec(chunk)];

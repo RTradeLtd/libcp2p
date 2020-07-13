@@ -13,10 +13,10 @@
 
 #define uchar unsigned char // 8-bit byte
 #define juint unsigned int // 32-bit word
-// DBL_INT_ADD treats two unsigned ints a and b as one 64-bit integer and adds c to it
-#define DBL_INT_ADD(a,b,c) if (a > 0xffffffff - (c)) ++b; a += c;
-#define ROTLEFT(a,b) (((a) << (b)) | ((a) >> (32-(b))))
-#define ROTRIGHT(a,b) (((a) >> (b)) | ((a) << (32-(b))))
+// DBL_INT_ADD treats two unsigned ints a and b as one 64-bit integer and adds c
+to it #define DBL_INT_ADD(a,b,c) if (a > 0xffffffff - (c)) ++b; a += c; #define
+ROTLEFT(a,b) (((a) << (b)) | ((a) >> (32-(b)))) #define ROTRIGHT(a,b) (((a) >>
+(b)) | ((a) << (32-(b))))
 
 #define CH(x,y,z) (((x) & (y)) ^ (~(x) & (z)))
 #define MAJ(x,y,z) (((x) & (y)) ^ ((x) & (z)) ^ ((y) & (z)))
@@ -49,9 +49,9 @@ void sha256_transform(SHA256_CTX *ctx, uchar data[])
    juint a,b,c,d,e,f,g,h,i,j,t1,t2,m[64];
 
    for (i=0,j=0; i < 16; ++i, j += 4)
-      m[i] = (data[j] << 24) | (data[j+1] << 16) | (data[j+2] << 8) | (data[j+3]);
-   for ( ; i < 64; ++i)
-      m[i] = SIG1(m[i-2]) + m[i-7] + SIG0(m[i-15]) + m[i-16];
+      m[i] = (data[j] << 24) | (data[j+1] << 16) | (data[j+2] << 8) |
+(data[j+3]); for ( ; i < 64; ++i) m[i] = SIG1(m[i-2]) + m[i-7] + SIG0(m[i-15]) +
+m[i-16];
 
    a = ctx->state[0];
    b = ctx->state[1];
@@ -147,7 +147,8 @@ void sha256_final(SHA256_CTX *ctx, uchar hash[])
    ctx->data[56] = ctx->bitlen[1] >> 24;
    sha256_transform(ctx,ctx->data);
 
-   // Since this implementation uses little endian byte ordering and SHA uses big endian,
+   // Since this implementation uses little endian byte ordering and SHA uses
+big endian,
    // reverse all the bytes when copying the final state to the output hash.
    for (i=0; i < 4; ++i) {
       hash[i]    = (ctx->state[0] >> (24-i*8)) & 0x000000ff;
@@ -175,14 +176,17 @@ void a_store_hash(unsigned char * result,unsigned char hash[])
 */
 
 /**
- * base58 encode a string NOTE: this also puts the prefix 'Qm' in front as the ID is a multihash
+ * base58 encode a string NOTE: this also puts the prefix 'Qm' in front as the
+ * ID is a multihash
  * @param pointyaddr where the results will go
- * @param rezbuflen the length of the results buffer. It will also put how much was used here
+ * @param rezbuflen the length of the results buffer. It will also put how much
+ * was used here
  * @param ID_BUF the input text (usually a SHA256 hash)
  * @param ID_BUF_SIZE the input size (normally a SHA256, therefore 32 bytes)
  * @returns true(1) on success
  */
-int PrettyID(unsigned char *pointyaddr, size_t *rezbuflen, unsigned char *ID_BUF, size_t ID_BUF_SIZE); // b58 encoded ID buf
+int PrettyID(unsigned char *pointyaddr, size_t *rezbuflen, unsigned char *ID_BUF,
+             size_t ID_BUF_SIZE); // b58 encoded ID buf
 
 /****
  * Make a SHA256 hash of what is usually the DER formatted private key.
@@ -190,7 +194,8 @@ int PrettyID(unsigned char *pointyaddr, size_t *rezbuflen, unsigned char *ID_BUF
  * @param texttohash the text to hash
  * @param text_size the size of the text
  */
-void ID_FromPK_non_null_terminated(char *result, unsigned char *texttohash, size_t text_size);
+void ID_FromPK_non_null_terminated(char *result, unsigned char *texttohash,
+                                   size_t text_size);
 
 /****
  * Make a SHA256 hash of what is usually the DER formatted private key.

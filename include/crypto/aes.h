@@ -17,7 +17,8 @@ int libp2p_crypto_aes_key_generate(char *key);
  * @param output_size the length of the memory allocated for output
  * @returns true(1) on success, otherwise false(0)
  */
-int libp2p_crypto_aes_encrypt(char *key, char *iv, char *input, size_t input_size, unsigned char **output, size_t *output_size);
+int libp2p_crypto_aes_encrypt(char *key, char *iv, char *input, size_t input_size,
+                              unsigned char **output, size_t *output_size);
 
 /**
  * Decrypt a block of text
@@ -29,4 +30,5 @@ int libp2p_crypto_aes_encrypt(char *key, char *iv, char *input, size_t input_siz
  * @param output_size the length of the memory allocated for output
  * @returns true(1) on success, otherwise false(0)
  */
-int libp2p_crypto_aes_decrypt(char *key, char *iv, char *input, size_t input_size, unsigned char **output, size_t *output_size);
+int libp2p_crypto_aes_decrypt(char *key, char *iv, char *input, size_t input_size,
+                              unsigned char **output, size_t *output_size);

@@ -12,7 +12,10 @@
  * @param bytes_written the number of bytes written to output_data
  * @returns true(1) on success, otherwise false
  */
-int libp2p_crypto_encoding_base64_encode(const unsigned char *input_data, size_t input_length, unsigned char *output_data, size_t max_output_length,
+int libp2p_crypto_encoding_base64_encode(const unsigned char *input_data,
+                                         size_t input_length,
+                                         unsigned char *output_data,
+                                         size_t max_output_length,
                                          size_t *bytes_written);
 
 /**
@@ -31,7 +34,10 @@ size_t libp2p_crypto_encoding_base64_encode_size(size_t input_length);
  * @param bytes_written the number of bytes written to output_data
  * @returns a pointer to the decoded data
  */
-int libp2p_crypto_encoding_base64_decode(const unsigned char *input_data, size_t input_length, unsigned char *output_data, size_t max_output_length,
+int libp2p_crypto_encoding_base64_decode(const unsigned char *input_data,
+                                         size_t input_length,
+                                         unsigned char *output_data,
+                                         size_t max_output_length,
                                          size_t *bytes_written);
 
 /**

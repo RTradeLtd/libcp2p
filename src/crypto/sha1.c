@@ -108,11 +108,16 @@ void SHA1_Transform(uint32_t state[5], const uint8_t buffer[64]);
 #if (defined(__BYTE_ORDER__) && (__BYTE_ORDER__ == __ORDER_BIG_ENDIAN__))
 #define blk0(i) block->l[i]
 #elif (defined(__BYTE_ORDER__) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__))
-#define blk0(i) (block->l[i] = (rol(block->l[i], 24) & 0xFF00FF00) | (rol(block->l[i], 8) & 0x00FF00FF))
+#define blk0(i)    \
+    (block->l[i] = \
+         (rol(block->l[i], 24) & 0xFF00FF00) | (rol(block->l[i], 8) & 0x00FF00FF))
 #else
 #error "Cannot determine endianess."
 #endif
-#define blk(i) (block->l[i & 15] = rol(block->l[(i + 13) & 15] ^ block->l[(i + 8) & 15] ^ block->l[(i + 2) & 15] ^ block->l[i & 15], 1))
+#define blk(i)                                                                 \
+    (block->l[i & 15] = rol(block->l[(i + 13) & 15] ^ block->l[(i + 8) & 15] ^ \
+                                block->l[(i + 2) & 15] ^ block->l[i & 15],     \
+                            1))
 
 /* (R0+R1), R2, R3, R4 are the different operations used in SHA1 */
 #define R0(v, w, x, y, z, i)                                     \
@@ -133,8 +138,9 @@ void SHA1_Transform(uint32_t state[5], const uint8_t buffer[64]);
 
 #ifdef VERBOSE /* SAK */
 void SHAPrintContext(SHA1_CTX *context, char *msg) {
-    printf("%s (%d,%d) %x %x %x %x %x\n", msg, context->count[0], context->count[1], context->state[0], context->state[1], context->state[2], context->state[3],
-           context->state[4]);
+    printf("%s (%d,%d) %x %x %x %x %x\n", msg, context->count[0], context->count[1],
+           context->state[0], context->state[1], context->state[2],
+           context->state[3], context->state[4]);
 }
 #endif /* VERBOSE */
 
@@ -300,7 +306,9 @@ void SHA1_Final(SHA1_CTX *context, uint8_t digest[SHA1_DIGEST_SIZE]) {
     uint8_t finalcount[8];
 
     for (i = 0; i < 8; i++) {
-        finalcount[i] = (unsigned char)((context->count[(i >= 4 ? 0 : 1)] >> ((3 - (i & 3)) * 8)) & 255); /* Endian independent */
+        finalcount[i] = (unsigned char)((context->count[(i >= 4 ? 0 : 1)] >>
+                                         ((3 - (i & 3)) * 8)) &
+                                        255); /* Endian independent */
     }
     SHA1_Update(context, (uint8_t *)"\200", 1);
     while ((context->count[0] & 504) != 448) {
@@ -330,7 +338,8 @@ void SHA1_Final(SHA1_CTX *context, uint8_t digest[SHA1_DIGEST_SIZE]) {
  * @param output where the output is placed NOTE: mut be preallocated
  * @returns the number of bytes written, or 0 on error
  */
-int libp2p_crypto_hashing_sha1(const unsigned char *input, size_t input_length, unsigned char *output) {
+int libp2p_crypto_hashing_sha1(const unsigned char *input, size_t input_length,
+                               unsigned char *output) {
     SHA1_CTX ctx;
     SHA1_Init(&ctx);
     SHA1_Update(&ctx, input, input_length);

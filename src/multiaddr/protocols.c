@@ -66,10 +66,13 @@ int load_protocols(struct ProtocolListItem **head) {
     int num_protocols = 14;
     int dec_code[] = {4, 41, 6, 17, 33, 132, 301, 302, 42, 480, 443, 477, 444, 275};
     int size[] = {32, 128, 16, 16, 16, 16, 0, 0, -1, 0, 0, 0, 10, 0};
-    char *name[] = {"ip4", "ip6", "tcp", "udp", "dccp", "sctp", "udt", "utp", "ipfs", "http", "https", "ws", "onion", "libp2p-webrtc-star"};
+    char *name[] = {
+        "ip4", "ip6",  "tcp",  "udp",   "dccp", "sctp",  "udt",
+        "utp", "ipfs", "http", "https", "ws",   "onion", "libp2p-webrtc-star"};
     struct ProtocolListItem *last = NULL;
     for (int i = 0; i < num_protocols; i++) {
-        struct ProtocolListItem *current_item = (struct ProtocolListItem *)malloc(sizeof(struct ProtocolListItem));
+        struct ProtocolListItem *current_item =
+            (struct ProtocolListItem *)malloc(sizeof(struct ProtocolListItem));
         if (current_item == NULL) {
             return 0;
         }
@@ -162,8 +165,9 @@ SYSTEMS ADMIN!\n"); break;
 }
 */
 
-struct Protocol *proto_with_name(const struct ProtocolListItem *head,
-                                 const char *proto_w_name) // Search for Protocol with inputted name
+struct Protocol *
+proto_with_name(const struct ProtocolListItem *head,
+                const char *proto_w_name) // Search for Protocol with inputted name
 {
     const struct ProtocolListItem *current = head;
     while (current != NULL) {
@@ -175,8 +179,9 @@ struct Protocol *proto_with_name(const struct ProtocolListItem *head,
     return NULL;
 }
 
-struct Protocol *proto_with_deccode(const struct ProtocolListItem *head,
-                                    int proto_w_deccode) // Search for Protocol with inputted deccode
+struct Protocol *
+proto_with_deccode(const struct ProtocolListItem *head,
+                   int proto_w_deccode) // Search for Protocol with inputted deccode
 {
     const struct ProtocolListItem *current = head;
     while (current != NULL) {
@@ -216,7 +221,8 @@ void protocols_with_string(const struct ProtocolListItem *head, char *meee,
             printf("NEW WORD!\n");
             atword++;
             int currentsize = 0;
-            for (int j = i + 1; mestring[j] != '/' && j < (int)(sizeof(mestring) - 2); j++) {
+            for (int j = i + 1;
+                 mestring[j] != '/' && j < (int)(sizeof(mestring) - 2); j++) {
                 currentsize++;
             }
             char haay[20];
