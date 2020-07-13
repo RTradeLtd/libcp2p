@@ -10,8 +10,16 @@ void xor_bin(const unsigned char *bin1, const unsigned char *bin2, unsigned char
     size_t length2 = strlen((const char *)bin2);
 
     unsigned char *in1 = malloc(length1);
+    // TODO(bonedaddy): log or handler
+    if (in1 == NULL) {
+        return;
+    }
     unsigned char *in2 = malloc(length2);
-
+    // TODO(bonedaddy): log or handle
+    if (in2 == NULL) {
+        free(in1);
+        return;
+    }
     memcpy(in1, bin1, length1);
     memcpy(in2, bin2, length2);
 
