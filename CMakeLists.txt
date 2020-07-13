@@ -80,3 +80,5 @@ add_doxygen_doc(
     COMMENT
         "HTML documentation"
 )
+
+enable_testing()
