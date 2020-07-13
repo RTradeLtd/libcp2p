@@ -4,8 +4,8 @@
 #include "stdio.h"
 #include "string.h"
 #include <stdio.h>
-#include "libp2p/crypto/encoding/base58.h"
-#include "libp2p/crypto/sha256.h"
+#include "crypto/encoding/base58.h"
+#include "crypto/sha256.h"
 #include "mh/multihash.h"
 #include "mh/hashes.h"
 

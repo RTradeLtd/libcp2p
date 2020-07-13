@@ -1,5 +1,5 @@
 #include "mbedtls/sha512.h"
-#include "libp2p/crypto/sha512.h"
+#include "crypto/sha512.h"
 /***
  * hash a string using SHA512
  * @param input the input string

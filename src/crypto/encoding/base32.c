@@ -43,7 +43,7 @@
 
 /* Get bool. */
 # include <stdbool.h>
-# include "libp2p/crypto/encoding/base32.h"
+# include "crypto/encoding/base32.h"
 
 /* This uses that the expression (n+(k-1))/k means the smallest
    integer >= n/k, i.e., the ceiling of n/k.  */

@@ -9,7 +9,7 @@
 #include <math.h>
 #include <stdint.h>
 #include <sys/types.h>
-#include "libp2p/crypto/encoding/base58.h"
+#include "crypto/encoding/base58.h"
 
 static const char b58digits_ordered[] = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 

@@ -2,7 +2,7 @@
 #include <math.h>
 
 #include "mbedtls/base64.h"
-#include "libp2p/crypto/encoding/base64.h"
+#include "crypto/encoding/base64.h"
 
 /**
  * encode using base64

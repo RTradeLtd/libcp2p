@@ -5,7 +5,7 @@
 #include "mbedtls/ecdh.h"
 #include "mbedtls/entropy.h"
 #include "mbedtls/ctr_drbg.h"
-#include "libp2p/crypto/ephemeral.h"
+#include "crypto/ephemeral.h"
 
 struct StretchedKey* libp2p_crypto_ephemeral_stretched_key_new() {
 	struct StretchedKey* key = (struct StretchedKey*)malloc(sizeof(struct StretchedKey));

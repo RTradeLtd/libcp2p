@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "libp2p/crypto/key.h"
-#include "libp2p/crypto/rsa.h"
-#include "libp2p/crypto/sha256.h"
+#include "crypto/key.h"
+#include "crypto/rsa.h"
+#include "crypto/sha256.h"
 
 // mbedtls stuff
 #include "mbedtls/config.h"

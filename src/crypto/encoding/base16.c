@@ -1,7 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 
-#include "libp2p/crypto/encoding/base16.h"
+#include "crypto/encoding/base16.h"
 
 /**
  * Encode in Base16 format

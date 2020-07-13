@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "libp2p/crypto/key.h"
-#include "libp2p/crypto/sha256.h"
-#include "libp2p/crypto/peerutils.h"
+#include "crypto/key.h"
+#include "crypto/sha256.h"
+#include "crypto/peerutils.h"
 #include "protobuf.h"
 
 /**

@@ -6,7 +6,7 @@
 #include "mbedtls/pk.h"
 #include "mbedtls/ctr_drbg.h"
 
-#include "libp2p/crypto/encoding/x509.h"
+#include "crypto/encoding/x509.h"
 
 /**
  * public methods
