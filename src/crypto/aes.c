@@ -1,10 +1,10 @@
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
-#include "mbedtls/entropy.h"
-#include "mbedtls/ctr_drbg.h"
-#include "mbedtls/aes.h"
 #include "crypto/aes.h"
+#include "mbedtls/aes.h"
+#include "mbedtls/ctr_drbg.h"
+#include "mbedtls/entropy.h"
 
 /**
  * functions for aes encryption
@@ -15,25 +15,23 @@
  * @param key where to store the 32 byte key
  * @returns true(1) on success
  */
-int libp2p_crypto_aes_key_generate(char* key) {
-	mbedtls_entropy_context entropy;
-	mbedtls_ctr_drbg_context ctr_drbg;
+int libp2p_crypto_aes_key_generate(char *key) {
+    mbedtls_entropy_context entropy;
+    mbedtls_ctr_drbg_context ctr_drbg;
 
-	mbedtls_entropy_init(&entropy);
+    mbedtls_entropy_init(&entropy);
 
-	char* pers = "aes generate key";
+    char *pers = "aes generate key";
 
-	mbedtls_ctr_drbg_init(&ctr_drbg);
+    mbedtls_ctr_drbg_init(&ctr_drbg);
 
-	if (mbedtls_ctr_drbg_seed( &ctr_drbg, mbedtls_entropy_func, &entropy,
-									  (const unsigned char *) pers,
-									  strlen( pers )) != 0)
-		return 0;
+    if (mbedtls_ctr_drbg_seed(&ctr_drbg, mbedtls_entropy_func, &entropy, (const unsigned char *)pers, strlen(pers)) != 0)
+        return 0;
 
-	if (mbedtls_ctr_drbg_random(&ctr_drbg, (unsigned char*)key, 32) != 0)
-		return 0;
+    if (mbedtls_ctr_drbg_random(&ctr_drbg, (unsigned char *)key, 32) != 0)
+        return 0;
 
-	return 1;
+    return 1;
 }
 
 /**
@@ -46,28 +44,28 @@ int libp2p_crypto_aes_key_generate(char* key) {
  * @param output_size the length of the memory allocated for output
  * @returns true(1) on success, otherwise false(0)
  */
-int libp2p_crypto_aes_encrypt(char* key, char* iv, char* input, size_t input_size, unsigned char** output, size_t* output_size) {
-	int new_size = 0;
-	mbedtls_aes_context ctx;
-	mbedtls_aes_init(&ctx);
-	mbedtls_aes_setkey_enc(&ctx, (unsigned char*)key, 256);
-	// turn input into a multiple of 16
-	new_size = input_size;
-	if (new_size % 16 != 0) {
-		new_size += new_size % 16;
-	}
-	char* padded_input = malloc(new_size);
-	memcpy(padded_input, input, input_size);
-	if (new_size != (int)input_size)
-		memset(&padded_input[input_size], 0, new_size - input_size);
-	// make room for the output
-	*output = malloc(new_size);
-	*output_size = new_size;
-	int retVal = mbedtls_aes_crypt_cbc(&ctx, MBEDTLS_AES_ENCRYPT, new_size, (unsigned char*)iv, (unsigned char*)padded_input, *output);
-	free(padded_input);
-	if (retVal != 0)
-		free(output);
-	return retVal == 0;
+int libp2p_crypto_aes_encrypt(char *key, char *iv, char *input, size_t input_size, unsigned char **output, size_t *output_size) {
+    int new_size = 0;
+    mbedtls_aes_context ctx;
+    mbedtls_aes_init(&ctx);
+    mbedtls_aes_setkey_enc(&ctx, (unsigned char *)key, 256);
+    // turn input into a multiple of 16
+    new_size = input_size;
+    if (new_size % 16 != 0) {
+        new_size += new_size % 16;
+    }
+    char *padded_input = malloc(new_size);
+    memcpy(padded_input, input, input_size);
+    if (new_size != (int)input_size)
+        memset(&padded_input[input_size], 0, new_size - input_size);
+    // make room for the output
+    *output = malloc(new_size);
+    *output_size = new_size;
+    int retVal = mbedtls_aes_crypt_cbc(&ctx, MBEDTLS_AES_ENCRYPT, new_size, (unsigned char *)iv, (unsigned char *)padded_input, *output);
+    free(padded_input);
+    if (retVal != 0)
+        free(output);
+    return retVal == 0;
 }
 
 /**
@@ -80,14 +78,14 @@ int libp2p_crypto_aes_encrypt(char* key, char* iv, char* input, size_t input_siz
  * @param output_size the length of the memory allocated for output
  * @returns true(1) on success, otherwise false(0)
  */
-int libp2p_crypto_aes_decrypt(char* key, char* iv, char* input, size_t input_size, unsigned char** output, size_t* output_size) {
-	mbedtls_aes_context ctx;
-	mbedtls_aes_init(&ctx);
-	mbedtls_aes_setkey_dec(&ctx, (unsigned char*)key, 256);
-	// make room for the output
-	*output = malloc(input_size);
-	*output_size = input_size;
-	if (mbedtls_aes_crypt_cbc(&ctx, MBEDTLS_AES_DECRYPT, input_size, (unsigned char*)iv, (unsigned char*)input, *output) != 0)
-		return 0;
-	return 1;
+int libp2p_crypto_aes_decrypt(char *key, char *iv, char *input, size_t input_size, unsigned char **output, size_t *output_size) {
+    mbedtls_aes_context ctx;
+    mbedtls_aes_init(&ctx);
+    mbedtls_aes_setkey_dec(&ctx, (unsigned char *)key, 256);
+    // make room for the output
+    *output = malloc(input_size);
+    *output_size = input_size;
+    if (mbedtls_aes_crypt_cbc(&ctx, MBEDTLS_AES_DECRYPT, input_size, (unsigned char *)iv, (unsigned char *)input, *output) != 0)
+        return 0;
+    return 1;
 }

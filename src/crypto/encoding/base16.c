@@ -1,5 +1,5 @@
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "crypto/encoding/base16.h"
 
@@ -11,24 +11,24 @@
  * @param results_length the size of the buffer, and returns the actual length used
  * @returns true(1) on success
  */
-int libp2p_crypto_encoding_base16_encode(const unsigned char* incoming, size_t incoming_length, unsigned char* results, size_t* results_length) {
-	// the size will be 2x the size of incoming, so check that
-	if (*results_length < incoming_length * 2)
-		return 0;
+int libp2p_crypto_encoding_base16_encode(const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t *results_length) {
+    // the size will be 2x the size of incoming, so check that
+    if (*results_length < incoming_length * 2)
+        return 0;
 
-	// clear out the results variable
-	memset(results, 0, *results_length);
+    // clear out the results variable
+    memset(results, 0, *results_length);
 
-	*results_length = 0;
-	for(int i = 0; i < (int)incoming_length; i++) {
-		unsigned char buf[3];
-		sprintf((char*)buf, "%02x", incoming[i]);
-		results[i * 2] = buf[0];
-		results[i * 2 + 1] = buf[1];
-		*results_length += 2;
-	}
+    *results_length = 0;
+    for (int i = 0; i < (int)incoming_length; i++) {
+        unsigned char buf[3];
+        sprintf((char *)buf, "%02x", incoming[i]);
+        results[i * 2] = buf[0];
+        results[i * 2 + 1] = buf[1];
+        *results_length += 2;
+    }
 
-	return 1;
+    return 1;
 }
 
 /**
@@ -37,7 +37,7 @@ int libp2p_crypto_encoding_base16_encode(const unsigned char* incoming, size_t i
  * @returns the size of the buffer necessary to hold the encoded bytes
  */
 int libp2p_crypto_encoding_base16_encode_size(size_t incoming_length) {
-	return incoming_length * 2;
+    return incoming_length * 2;
 }
 
 /**
@@ -48,21 +48,21 @@ int libp2p_crypto_encoding_base16_encode_size(size_t incoming_length) {
  * @param results_length the size of the buffer, and returns the actual length used
  * @returns true(1) on success
  */
-int libp2p_crypto_encoding_base16_decode(const unsigned char* incoming, size_t incoming_length, unsigned char* results, size_t* results_length) {
+int libp2p_crypto_encoding_base16_decode(const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t *results_length) {
 
-	// buffer too small
-	if (*results_length < incoming_length / 2)
-		return 0;
+    // buffer too small
+    if (*results_length < incoming_length / 2)
+        return 0;
 
-	memset(results, 0, *results_length);
+    memset(results, 0, *results_length);
 
-	char* pos = (char*)incoming;
+    char *pos = (char *)incoming;
 
-	for(int i = 0; i < (int)incoming_length / 2; i++) {
-		sscanf(pos, "%2hhx", &results[i]);
-		pos += 2;
-	}
-	return 1;
+    for (int i = 0; i < (int)incoming_length / 2; i++) {
+        sscanf(pos, "%2hhx", &results[i]);
+        pos += 2;
+    }
+    return 1;
 }
 
 /**
@@ -71,6 +71,5 @@ int libp2p_crypto_encoding_base16_decode(const unsigned char* incoming, size_t i
  * @returns the size of the buffer necessary to hold the decoded bytes
  */
 int libp2p_crypto_encoding_base16_decode_size(size_t incoming_length) {
-	return incoming_length / 2;
+    return incoming_length / 2;
 }
-

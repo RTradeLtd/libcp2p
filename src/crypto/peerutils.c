@@ -1,11 +1,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "multihash/multihash.h"
-#include "multihash/hashes.h"
 #include "crypto/encoding/base58.h"
-#include "crypto/sha256.h"
 #include "crypto/peerutils.h"
+#include "crypto/sha256.h"
+#include "multihash/hashes.h"
+#include "multihash/multihash.h"
 
 /**
  * base58 encode a string NOTE: this also puts the prefix 'Qm' in front as the ID is a multihash
@@ -15,27 +15,26 @@
  * @param ID_BUF_SIZE the input size (normally a SHA256, therefore 32 bytes)
  * @returns true(1) on success
  */
-int PrettyID(unsigned char * pointyaddr, size_t* rezbuflen,unsigned char * ID_BUF, size_t ID_BUF_SIZE)//b58 encoded ID buf
+int PrettyID(unsigned char *pointyaddr, size_t *rezbuflen, unsigned char *ID_BUF, size_t ID_BUF_SIZE) // b58 encoded ID buf
 {
-	int returnstatus = 0;
+    int returnstatus = 0;
 
-	unsigned char temp_buffer[*rezbuflen];
+    unsigned char temp_buffer[*rezbuflen];
 
-	memset(temp_buffer, 0, *rezbuflen);
+    memset(temp_buffer, 0, *rezbuflen);
 
-	// wrap the base58 into a multihash
-	int retVal = mh_new(temp_buffer, MH_H_SHA2_256, ID_BUF, ID_BUF_SIZE);
-	if (retVal < 0)
-		return 0;
+    // wrap the base58 into a multihash
+    int retVal = mh_new(temp_buffer, MH_H_SHA2_256, ID_BUF, ID_BUF_SIZE);
+    if (retVal < 0)
+        return 0;
 
-	// base58 the multihash
-	returnstatus = libp2p_crypto_encoding_base58_encode(temp_buffer, strlen((char*)temp_buffer), &pointyaddr, rezbuflen);
-	if(returnstatus == 0)
-		return 0;
+    // base58 the multihash
+    returnstatus = libp2p_crypto_encoding_base58_encode(temp_buffer, strlen((char *)temp_buffer), &pointyaddr, rezbuflen);
+    if (returnstatus == 0)
+        return 0;
 
-	return 1;
+    return 1;
 }
-
 
 /****
  * Make a SHA256 hash of what is usually the DER formatted private key.
@@ -47,7 +46,7 @@ int PrettyID(unsigned char * pointyaddr, size_t* rezbuflen,unsigned char * ID_BU
 void ID_FromPK_non_null_terminated(char * result,unsigned char * texttohash, size_t text_size)
 {
 
-	libp2p_crypto_hashing_sha256(texttohash, text_size, (unsigned char*)result);
+        libp2p_crypto_hashing_sha256(texttohash, text_size, (unsigned char*)result);
 }
 */
 

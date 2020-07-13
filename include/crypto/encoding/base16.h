@@ -8,7 +8,7 @@
  * @param results_length the size of the buffer, and returns the actual length used
  * @returns true(1) on success
  */
-int libp2p_crypto_encoding_base16_encode(const unsigned char* incoming, size_t incoming_length, unsigned char* results, size_t* results_length);
+int libp2p_crypto_encoding_base16_encode(const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t *results_length);
 
 /**
  * Calculate the size of the buffer necessary to encode
@@ -25,7 +25,7 @@ int libp2p_crypto_encoding_base16_encode_size(size_t incoming_length);
  * @param results_length the size of the buffer, and returns the actual length used
  * @returns true(1) on success
  */
-int libp2p_crypto_encoding_base16_decode(const unsigned char* incoming, size_t incoming_length, unsigned char* results, size_t* results_length);
+int libp2p_crypto_encoding_base16_decode(const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t *results_length);
 
 /**
  * Calculate the size of the buffer necessary to decode
