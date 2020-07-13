@@ -19,8 +19,7 @@ endif()
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Release")
     # disable debug stuff, useful for disabling asserts
-    add_definitions(-DNDEBUG)
-    list(APPEND flags -std=c17 -Wall -Wextra -Werror -pedantic)
+    list(APPEND flags -std=c17 -Wall -Wextra -Werror -pedantic -g)
 endif()
 
 
@@ -46,6 +45,7 @@ add_library(libmultiaddr
 )
 target_compile_options(libmultiaddr PRIVATE ${flags})
 add_executable(libmultiaddr-test ./src/multiaddr/testing.c ./src/multiaddr/test_multiaddr.h)
+target_link_libraries(libmultiaddr-test cmocka)
 target_link_libraries(libmultiaddr-test libmultiaddr)
 
 add_library(libmultihash

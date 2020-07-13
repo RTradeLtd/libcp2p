@@ -2,6 +2,7 @@
 // #pragma GCC diagnostic ignored "-Wanalyzer-possible-null-argument"
 #include "multiaddr/multiaddr.h"
 #include "multiaddr/varhexutils.h"
+#include <assert.h>
 
 int test_new_like_libp2p() {
     int retVal = 0;
@@ -136,7 +137,8 @@ exit:
     return retVal;
 }
 
-int test_multiaddr_peer_id() {
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+void test_multiaddr_peer_id(void **state) {
     char *orig_address = "QmYwAPJzv5CZsnA625s3Xf2nemtYgPpHdWEz79ojWnPbdG";
     char full_string[255];
     char *result = NULL;
@@ -210,10 +212,10 @@ exit:
         free(result);
     if (bytes != NULL)
         free(bytes);
-    return retVal;
 }
 
-int test_multiaddr_get_peer_id() {
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+void test_multiaddr_get_peer_id(void **state) {
     const char *orig_address = "QmYwAPJzv5CZsnA625s3Xf2nemtYgPpHdWEz79ojWnPbdG";
     char full_string[255] = "";
     char *result = NULL;
@@ -223,21 +225,13 @@ int test_multiaddr_get_peer_id() {
     sprintf(full_string, "/ip4/127.0.0.1/tcp/4001/ipfs/%s/", orig_address);
 
     addr = multiaddress_new_from_string(full_string);
-
     result = multiaddress_get_peer_id(addr);
-
-    if (result == NULL)
-        goto exit;
-
-    if (strcmp(orig_address, result) != 0)
-        goto exit;
-
-    retVal = 1;
-exit:
+    assert(result != NULL);
+    int rc = strcmp(orig_address, result);
+    printf("%i\n", rc);
+    assert(rc == 1111);
     multiaddress_free(addr);
     free(result);
-    result = NULL;
-    return retVal;
 }
 
 int test_multiaddr_bytes() {

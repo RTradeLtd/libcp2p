@@ -1,4 +1,9 @@
 #include <stdio.h>
+#include <assert.h>
+#include <stdarg.h>
+#include <stddef.h>
+#include <setjmp.h>
+#include <cmocka.h>
 
 #include "test_multiaddr.h"
 
@@ -17,8 +22,8 @@ int (*funcs[])(void) = {test_new_from_string,
                         test_hex_to_var,
                         test_int_to_hex,
                         test_multiaddr_utils,
-                        test_multiaddr_peer_id,
-                        test_multiaddr_get_peer_id,
+                        // test_multiaddr_peer_id,
+                        // test_multiaddr_get_peer_id,
                         test_multiaddr_bytes,
                         test_new_like_libp2p};
 
@@ -34,6 +39,11 @@ int testit(const char *name, int (*func)(void)) {
 }
 
 int main(int argc, char **argv) {
+    const struct CMUnitTest tests[] = {
+        cmocka_unit_test(test_multiaddr_peer_id),
+        cmocka_unit_test(test_multiaddr_get_peer_id),
+    };
+    return cmocka_run_group_tests(tests, NULL, NULL);
     int counter = 0;
     int tests_ran = 0;
     char *test_wanted;
