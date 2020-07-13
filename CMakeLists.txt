@@ -41,6 +41,8 @@ include(${PROJECT_SOURCE_DIR}/cmake/pkgs/doxygen.cmake)
 # START COMPILE LIBRARIES #
 ###########################
 
+# multiaddr #
+
 add_library(libmultiaddr
     SHARED
         ./include/multiaddr/base58.h
@@ -65,6 +67,8 @@ target_link_libraries(libmultiaddr-test cmocka)
 target_link_libraries(libmultiaddr-test libmultiaddr)
 target_link_libraries(libmultiaddr-test m)
 
+# multihash #
+
 add_library(libmultihash
     SHARED
         ./include/multihash/errors.h
@@ -77,6 +81,12 @@ add_library(libmultihash
 )
 target_compile_options(libmultihash PRIVATE ${flags})
 
+add_executable(libmultihash-test ./src/multihash/multihash_test.c)
+target_link_libraries(libmultihash-test cmocka)
+target_link_libraries(libmultihash-test libmultihash)
+target_link_libraries(libmultihash-test m)
+
+# protobuf #
 
 add_library(libvarint
     SHARED
