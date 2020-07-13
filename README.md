@@ -9,7 +9,7 @@ A libp2p-like protocol written in C and designed to support embedded systems. Hi
 * Removal of built-in identify protocol
   * LibP2P is heavily reliant on the identify protocol and it is not possible to remove it
   * Redesigned so that identify is optional
-* Maybe other things
+* Protobuf replaced with cbor
 
 # roadmap
 
@@ -19,6 +19,10 @@ A libp2p-like protocol written in C and designed to support embedded systems. Hi
   * Protobuf
 * Get basic networking done
 * ....
+
+# protobuf
+
+* The `src/protobuf` code is being left here for the time being, but protobuf is being deprecated for cbor
 
 # installation
 
