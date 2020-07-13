@@ -41,10 +41,8 @@ int Test2_free(struct Test2 *test2) {
  * @param bytes_written the number of bytes used in encoding the stream
  * @returns true(1) on success
  */
-int Test2_protobuf_encode(struct Test2 *incoming, unsigned char *buffer,
-                          size_t max_buffer_length, size_t *bytes_written) {
-    if (protobuf_encode_string(1, Test2_message_fields[0], incoming->a, buffer,
-                               max_buffer_length, bytes_written) == 0)
+int Test2_protobuf_encode(struct Test2 *incoming, unsigned char *buffer, size_t max_buffer_length, size_t *bytes_written) {
+    if (protobuf_encode_string(1, Test2_message_fields[0], incoming->a, buffer, max_buffer_length, bytes_written) == 0)
         return 0;
     return 1;
 }
@@ -56,8 +54,7 @@ int Test2_protobuf_encode(struct Test2 *incoming, unsigned char *buffer,
  * @param output the resultant struct
  * @returns true(1) on success
  */
-int Test2_protobuf_decode(unsigned char *buffer, size_t buffer_length,
-                          struct Test2 **output) {
+int Test2_protobuf_decode(unsigned char *buffer, size_t buffer_length, struct Test2 **output) {
     int pos = 0;
     if (Test2_new(output) == 0)
         return 0;
@@ -66,14 +63,12 @@ int Test2_protobuf_decode(unsigned char *buffer, size_t buffer_length,
         size_t bytes_read;
         int field_no;
         enum WireType field_type;
-        protobuf_decode_field_and_type(&buffer[pos], buffer_length - pos,
-                                       &field_no, &field_type, &bytes_read);
+        protobuf_decode_field_and_type(&buffer[pos], buffer_length - pos, &field_no, &field_type, &bytes_read);
         pos += bytes_read;
         bytes_read = 0;
         switch (field_no) {
             case 1:
-                protobuf_decode_string(&buffer[pos], buffer_length - pos,
-                                       &((*output)->a), &bytes_read);
+                protobuf_decode_string(&buffer[pos], buffer_length - pos, &((*output)->a), &bytes_read);
                 break;
         }
         pos += bytes_read;

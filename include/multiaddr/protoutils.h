@@ -54,11 +54,8 @@ int bytes_to_string(char **results, const uint8_t *bytes, int bytes_size);
  * @param results_size the size of the results
  * @returns the results array
  */
-char *address_string_to_bytes(struct Protocol *protocol, const char *incoming,
-                              size_t incoming_size, char **results,
-                              int *results_size);
+char *address_string_to_bytes(struct Protocol *protocol, const char *incoming, size_t incoming_size, char **results, int *results_size);
 
-int string_to_bytes(uint8_t **finalbytes, size_t *realbbsize, const char *strx,
-                    size_t strsize);
+int string_to_bytes(uint8_t **finalbytes, size_t *realbbsize, const char *strx, size_t strsize);
 
 // #endif

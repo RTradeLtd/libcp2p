@@ -88,9 +88,7 @@ int main(int argc, char **argv) {
         size_t bytes_read = 0;
         int field_no = 0;
         enum WireType wire_type = WIRETYPE_64BIT;
-        if (protobuf_decode_field_and_type(&buffer[pos], numBytes - pos,
-                                           &field_no, &wire_type,
-                                           &bytes_read) == 0) {
+        if (protobuf_decode_field_and_type(&buffer[pos], numBytes - pos, &field_no, &wire_type, &bytes_read) == 0) {
             printf("Unexpected return value from "
                    "protobuf_decode_field_and_type at "
                    "pos %lu\n",
@@ -105,17 +103,14 @@ int main(int argc, char **argv) {
         switch (wire_type) {
             case (WIRETYPE_VARINT): {
                 unsigned long long varint = 0;
-                protobuf_decode_varint(&buffer[pos], numBytes - pos, &varint,
-                                       &bytes_read);
+                protobuf_decode_varint(&buffer[pos], numBytes - pos, &varint, &bytes_read);
                 pos += bytes_read;
-                printf(" Value: %llu. Next read position at %lu\n", varint,
-                       pos);
+                printf(" Value: %llu. Next read position at %lu\n", varint, pos);
                 break;
             }
             case (WIRETYPE_LENGTH_DELIMITED): {
                 unsigned long long varint = 0;
-                protobuf_decode_varint(&buffer[pos], numBytes - pos, &varint,
-                                       &bytes_read);
+                protobuf_decode_varint(&buffer[pos], numBytes - pos, &varint, &bytes_read);
                 pos += bytes_read;
                 printf(" Field width: %llu. Next read position "
                        "at %lu\n",

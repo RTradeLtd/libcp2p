@@ -13,13 +13,9 @@ static const struct hash_info {
     int hash;
     const char *name;
     int length;
-} hash_infos[] = {
-    {MH_H_SHA1, "sha1", 20},           {MH_H_SHA2_256, "sha2-256", 32},
-    {MH_H_SHA2_512, "sha2-512", 64},   {MH_H_SHA3_512, "sha3-512", 64},
-    {MH_H_SHA3_384, "sha3-384", 45},   {MH_H_SHA3_256, "sha3-256", 32},
-    {MH_H_SHA3_224, "sha3-224", 28},   {MH_H_SHAKE_128, "shake-128", 16},
-    {MH_H_SHAKE_256, "shake-256", 32}, {MH_H_BLAKE2B, "blake2b", 64},
-    {MH_H_BLAKE2S, "blake2s", 32}};
+} hash_infos[] = {{MH_H_SHA1, "sha1", 20},           {MH_H_SHA2_256, "sha2-256", 32}, {MH_H_SHA2_512, "sha2-512", 64}, {MH_H_SHA3_512, "sha3-512", 64},
+                  {MH_H_SHA3_384, "sha3-384", 45},   {MH_H_SHA3_256, "sha3-256", 32}, {MH_H_SHA3_224, "sha3-224", 28}, {MH_H_SHAKE_128, "shake-128", 16},
+                  {MH_H_SHAKE_256, "shake-256", 32}, {MH_H_BLAKE2B, "blake2b", 64},   {MH_H_BLAKE2S, "blake2s", 32}};
 
 mh_assert_static(sizeof(hash_infos) / sizeof(hash_infos[0]) == MH_H_COUNT);
 

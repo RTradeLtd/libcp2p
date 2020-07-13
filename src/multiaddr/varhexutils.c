@@ -180,10 +180,10 @@ void convert(char *convert_result,
         strcat(convert_result, conv_proc);
     }
 }
-char *Num_To_HexVar_64(uint64_t TOHVINPUT) // UINT64 TO HEXIFIED VAR
-{                                          // Code to varint - py
-    static char convert_result[800] =
-        "\0"; // Note that the hex resulted from this will differ from py
+char *Num_To_HexVar_64(uint64_t TOHVINPUT)  // UINT64 TO HEXIFIED VAR
+{                                           // Code to varint - py
+    static char convert_result[800] = "\0"; // Note that the hex resulted
+                                            // from this will differ from py
     /*! @todo TODO(bonedaddy): figure out the previous code did bzero before
      * memset */
     memset(convert_result, 0, 800);

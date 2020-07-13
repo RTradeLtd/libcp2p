@@ -14,13 +14,9 @@ int testit(const char *name, int (*func)(void)) {
     return retVal == 0;
 }
 
-const char *names[] = {"test_write_simple",     "test_write_negative",
-                       "test_write_string",     "test_rightshift",
-                       "test_complex_protobuf", "test_varint"};
+const char *names[] = {"test_write_simple", "test_write_negative", "test_write_string", "test_rightshift", "test_complex_protobuf", "test_varint"};
 
-int (*funcs[])(void) = {test_write_simple,     test_write_negative,
-                        test_write_string,     test_rightshift,
-                        test_complex_protobuf, test_varint};
+int (*funcs[])(void) = {test_write_simple, test_write_negative, test_write_string, test_rightshift, test_complex_protobuf, test_varint};
 
 /**
  * run 1 test or run all

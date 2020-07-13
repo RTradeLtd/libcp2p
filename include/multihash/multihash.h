@@ -47,8 +47,7 @@ int mh_multihash_length(const unsigned char *multihash, size_t len);
  * @param digest the results
  * @returns error if less than zero, otherwise 0
  */
-int mh_multihash_digest(const unsigned char *multihash, size_t len,
-                        unsigned char **digest, size_t *digest_len);
+int mh_multihash_digest(const unsigned char *multihash, size_t len, unsigned char **digest, size_t *digest_len);
 
 /**
  * determine the size of the multihash given the data size
@@ -65,7 +64,6 @@ int mh_new_length(int code, size_t digest_len);
  * @param digest the data within the multihash
  * @returns error (if < 0) or 0
  */
-int mh_new(unsigned char *buffer, int code, const unsigned char *digest,
-           size_t digest_len);
+int mh_new(unsigned char *buffer, int code, const unsigned char *digest, size_t digest_len);
 
 #endif /* end of include guard */

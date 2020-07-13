@@ -114,8 +114,7 @@ int is_valid_ipv4(char *ip_str) {
 #define MAX_HEX_NUMBER_COUNT 8
 
 int ishexdigit(char ch) {
-    if ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'f') ||
-        (ch >= 'A' && ch <= 'F'))
+    if ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'f') || (ch >= 'A' && ch <= 'F'))
         return (1);
     return (0);
 }
@@ -157,8 +156,7 @@ int is_valid_ipv6(char *str) {
                 else {
                     str++;
 
-                    if (ishexdigit(*str) ||
-                        (*str == 0 && hncount < MAX_HEX_NUMBER_COUNT)) {
+                    if (ishexdigit(*str) || (*str == 0 && hncount < MAX_HEX_NUMBER_COUNT)) {
                         packed = 1;
                         hncount++;
 
@@ -241,8 +239,7 @@ uint64_t ip2int(const char *ipconvertint) {
         }
         iproc = strtok(NULL, ".");
     }
-    final_result = ((ipat1 * pow(2, 24)) + (ipat2 * pow(2, 16)) +
-                    (ipat3 * pow(2, 8)) + ipat4 * 1);
+    final_result = ((ipat1 * pow(2, 24)) + (ipat2 * pow(2, 16)) + (ipat3 * pow(2, 8)) + ipat4 * 1);
     return final_result;
 }
 char *int2ip(int inputintip) {
@@ -353,12 +350,10 @@ NAX:
             unsigned char b58[b58_size];
             memset(b58, 0, b58_size);
             unsigned char *ptr_b58 = b58;
-            int returnstatus = multiaddr_encoding_base58_encode(
-                addrbuf, num_bytes, &ptr_b58, &b58_size);
+            int returnstatus = multiaddr_encoding_base58_encode(addrbuf, num_bytes, &ptr_b58, &b58_size);
             free(addrbuf);
             if (returnstatus == 0) {
-                fprintf(stderr, "Unable to base58 encode MultiAddress %s\n",
-                        IPFS_ADDR);
+                fprintf(stderr, "Unable to base58 encode MultiAddress %s\n", IPFS_ADDR);
                 unload_protocols(head);
                 return 0;
             }
@@ -383,9 +378,7 @@ NAX:
  * @param results_size the size of the results
  * @returns the results array
  */
-char *address_string_to_bytes(struct Protocol *protocol, const char *incoming,
-                              size_t incoming_size, char **results,
-                              int *results_size) {
+char *address_string_to_bytes(struct Protocol *protocol, const char *incoming, size_t incoming_size, char **results, int *results_size) {
     static char astb__stringy[800] = "\0";
     memset(astb__stringy, 0, 800);
 
@@ -511,16 +504,12 @@ char *address_string_to_bytes(struct Protocol *protocol, const char *incoming,
             char *incoming_copy = NULL;
             incoming_copy = (char *)incoming;
             size_t incoming_copy_size = strlen(incoming_copy);
-            size_t result_buffer_length =
-                multiaddr_encoding_base58_decode_max_size(
-                    (unsigned char *)incoming_copy);
+            size_t result_buffer_length = multiaddr_encoding_base58_decode_max_size((unsigned char *)incoming_copy);
             unsigned char result_buffer[result_buffer_length];
             unsigned char *ptr_to_result = result_buffer;
             memset(result_buffer, 0, result_buffer_length);
             // now get the decoded address
-            int return_value = multiaddr_encoding_base58_decode(
-                incoming_copy, incoming_copy_size, &ptr_to_result,
-                &result_buffer_length);
+            int return_value = multiaddr_encoding_base58_decode(incoming_copy, incoming_copy_size, &ptr_to_result, &result_buffer_length);
             if (return_value == 0) {
                 return "ERR";
             }
@@ -582,8 +571,7 @@ char *address_string_to_bytes(struct Protocol *protocol, const char *incoming,
  * @param strx the incoming string
  * @param strsize the string length
  */
-int string_to_bytes(uint8_t **finalbytes, size_t *realbbsize, const char *strx,
-                    size_t strsize) {
+int string_to_bytes(uint8_t **finalbytes, size_t *realbbsize, const char *strx, size_t strsize) {
     if (strx[0] != '/') {
         fprintf(stderr,
                 "multiaddr:string_to_bytes: Error, must start with '/' "
@@ -621,7 +609,8 @@ int string_to_bytes(uint8_t **finalbytes, size_t *realbbsize, const char *strx,
             protx = proto_with_name(head, wp);
             if (protx != NULL) {
                 strcat(processed, Int_To_Hex(protx->deccode));
-                firstorsecond = 2; // Since the next word will be an address
+                firstorsecond = 2; // Since the next word will
+                                   // be an address
             } else {
                 printf("\nNo such protocol!\n\n");
                 malf = 1;
@@ -631,9 +620,7 @@ int string_to_bytes(uint8_t **finalbytes, size_t *realbbsize, const char *strx,
         {
             char *s_to_b = NULL;
             int s_to_b_size = 0;
-            if (strcmp(address_string_to_bytes(protx, wp, strlen(wp), &s_to_b,
-                                               &s_to_b_size),
-                       "ERR") == 0) {
+            if (strcmp(address_string_to_bytes(protx, wp, strlen(wp), &s_to_b, &s_to_b_size), "ERR") == 0) {
                 malf = 1;
             } else {
                 int temp_size = strlen(processed);

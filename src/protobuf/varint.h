@@ -14,8 +14,7 @@
  * @param bytes the length written
  * @returns a pointer to the buf
  */
-unsigned char *varint_encode(const unsigned long long n, unsigned char *buf,
-                             int len, size_t *bytes);
+unsigned char *varint_encode(const unsigned long long n, unsigned char *buf, int len, size_t *bytes);
 
 /***
  * decode a varint
@@ -24,8 +23,7 @@ unsigned char *varint_encode(const unsigned long long n, unsigned char *buf,
  * @param bytes number of bytes processed
  * @returns the value decoded
  */
-unsigned long long varint_decode(const unsigned char *buf, int len,
-                                 size_t *bytes);
+unsigned long long varint_decode(const unsigned char *buf, int len, size_t *bytes);
 
 /**
  *
