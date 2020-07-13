@@ -126,7 +126,6 @@ void test_multiaddr_peer_id(void **state) {
     // fprintf(stderr, "Original Bytes: %s\n", result);
     free(result);
 
-   /* TODO(bonedaddy): fix as this has an error
     // make a new MultiAddress from bytes
     bytes = malloc(addr->bsize);
     memcpy(bytes, addr->bytes, addr->bsize);
@@ -154,9 +153,7 @@ void test_multiaddr_peer_id(void **state) {
     assert__(strcmp(result, orig_address) == 0) {
         printf("New peer id %s does not match %s\n", result, orig_address);
     }
- 
     free(result);
-    */
 }
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"

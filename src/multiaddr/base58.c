@@ -5,6 +5,9 @@
  * under the terms of the standard MIT license.  See COPYING for more details.
  */
 
+// required for proper multiaddr bytes conversion
+#pragma GCC diagnostic ignored "-Wimplicit-fallthrough"
+
 #include <math.h>
 #include <stdint.h>
 #include <string.h>
@@ -90,14 +93,11 @@ int multiaddr_encoding_base58_decode(const char *b58, size_t base58_size,
     switch (bytesleft) {
         case 3:
             *(binu++) = (outi[0] & 0xff0000) >> 16;
-            break; /*! <--- */
         case 2:
             *(binu++) = (outi[0] & 0xff00) >> 8;
-            break; /*! <--- */
         case 1:
             *(binu++) = (outi[0] & 0xff);
             ++j;
-            break; /*! <--- */
         default:
             break;
     }
