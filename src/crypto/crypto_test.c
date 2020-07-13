@@ -9,6 +9,7 @@
 #include "crypto/sha512.h"
 #include "crypto/sha256.h"
 #include "crypto/encoding/base64.h"
+#include "mbedtls/base64.h"
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
@@ -41,30 +42,13 @@ void test_libp2p_crypto_hashing_sha256(void **state) {
         output
     );
     assert(rc);
-    unsigned char *base64_output = malloc(sizeof(unsigned char *) * 4019);
-    size_t bytes_written;
-    rc = libp2p_crypto_encoding_base64_encode(
-        output,
-        sizeof(output),
-        base64_output,
-        (size_t)(sizeof(unsigned char) * 4019), 
-        &bytes_written       
-    );
-    printf("%lu\n", bytes_written);
-    assert(rc);
-    assert(strcmp((char *)base64_output, "ji9yp/oxA7s=") == 0);
-    unsigned char *base64_decode_out = malloc(sizeof(unsigned char *) * 4019);
-    rc = libp2p_crypto_encoding_base64_decode(
-        base64_output,
-        sizeof(base64_output),
-        base64_decode_out,
-        (size_t)(sizeof(unsigned char) * 4019), 
-        &bytes_written      
-    );
-    assert(rc);
-    printf("%lu\n", bytes_written);
+    assert(strlen((char *)output) == 32);
+    unsigned char base64_output[128];
+    size_t len;
 
-    printf("%s\n", base64_decode_out);
+    rc =mbedtls_base64_encode(base64_output, sizeof(base64_output), &len, output, 32);
+    assert(rc == 0);
+    assert(strcmp((char *)base64_output, "ji9yp/oxA7sMwGxGhI72ZY/HJYT8CroV2p4gDsbveJk=") == 0);
 }
 
 int main(void) {
