@@ -1,6 +1,6 @@
 file(GLOB_RECURSE MBEDTLS_SOURCES
     ./include/mbedtls/*.h
-    ./thirdparty/mbedtls/*.c
+    ./src/thirdparty/mbedtls/*.c
 )
 
 add_library(libmbedtls
