@@ -1,9 +1,10 @@
+#####################
+# START CMAKE SETUP #
+#####################
+
 cmake_minimum_required(VERSION 3.0)
 project(libcp2p LANGUAGES C)
 set(CMAKE_C_COMPILER gcc)
-
-# not having this in is causing asserts to fail
-
 
 
 # handle debug build type
@@ -30,6 +31,15 @@ list(APPEND flags -D_POSIX_C_SOURCE=201112L)
 set(CMAKE_C_FLAGS_RELEASE "")
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
+include(${PROJECT_SOURCE_DIR}/cmake/pkgs/doxygen.cmake)
+
+###################
+# END CMAKE SETUP #
+###################
+
+###########################
+# START COMPILE LIBRARIES #
+###########################
 
 add_library(libmultiaddr
     SHARED
@@ -88,7 +98,23 @@ target_link_libraries(libprotobuf-cli libvarint)
 target_link_libraries(libprotobuf-cli libprotobuf)
 target_compile_options(libprotobuf-cli PRIVATE ${flags})
 
-# add source files
-# file(GLOB_RECURSE LIBP2P_SOURCES
-#
-# )
+
+#########################
+# END COMPILE LIBRARIES #
+#########################
+
+##############
+# MISC TASKS #
+##############
+
+# build documentation
+add_doxygen_doc(
+    BUILD_DIR
+        ${PROJECT_SOURCE_DIR}/build
+    DOXY_FILE
+        ${PROJECT_SOURCE_DIR}/docs/Doxyfile.in
+    TARGET_NAME
+        doxygen-docs
+    COMMENT
+        "HTML documentation"
+)
