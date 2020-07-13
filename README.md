@@ -11,6 +11,7 @@ A libp2p-like protocol written in C and designed to support embedded systems. Hi
   * Redesigned so that identify is optional
 * Protobuf replaced with cbor
 
+
 # roadmap
 
 * Get basic multiformats working in C
@@ -73,3 +74,8 @@ int main(void) {
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
 ```
+
+# TODOs
+
+* Look into using glib for stuff like base64 decoding
+  * https://developer.gnome.org/glib/stable/glib-Base64-Encoding.html#g-base64-encode
