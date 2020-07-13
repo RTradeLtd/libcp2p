@@ -6,8 +6,8 @@
 #include <stdio.h>
 #include "crypto/encoding/base58.h"
 #include "crypto/sha256.h"
-#include "mh/multihash.h"
-#include "mh/hashes.h"
+#include "multihash/multihash.h"
+#include "multihash/hashes.h"
 
 /*
 

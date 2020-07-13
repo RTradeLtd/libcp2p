@@ -5,6 +5,9 @@
  * under the terms of the standard MIT license.  See COPYING for more details.
  */
 
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+#pragma GCC diagnostic ignored "-Wimplicit-fallthrough"
+
 #include <string.h>
 #include <math.h>
 #include <stdint.h>

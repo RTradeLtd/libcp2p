@@ -11,4 +11,6 @@ add_library(libcrypto
 )
 
 target_compile_options(libcrypto PRIVATE ${flags})
+target_link_libraries(libcrypto libvarint)
 target_link_libraries(libcrypto libprotobuf)
+target_link_libraries(libcrypto libmultihash)

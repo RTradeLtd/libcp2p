@@ -58,7 +58,7 @@ int libp2p_crypto_aes_encrypt(char* key, char* iv, char* input, size_t input_siz
 	}
 	char* padded_input = malloc(new_size);
 	memcpy(padded_input, input, input_size);
-	if (new_size != input_size)
+	if (new_size != (int)input_size)
 		memset(&padded_input[input_size], 0, new_size - input_size);
 	// make room for the output
 	*output = malloc(new_size);

@@ -7,6 +7,8 @@
 #include "mbedtls/ctr_drbg.h"
 #include "crypto/ephemeral.h"
 
+#pragma GCC diagnostic ignored "-Wunused-function"
+
 struct StretchedKey* libp2p_crypto_ephemeral_stretched_key_new() {
 	struct StretchedKey* key = (struct StretchedKey*)malloc(sizeof(struct StretchedKey));
 	if (key != NULL) {
@@ -124,7 +126,7 @@ static int libp2p_crypto_ephemeral_point_marshal(int bit_size, uint64_t x, uint6
 static int libp2p_crypto_ephemeral_point_unmarshal(int bit_size, unsigned char* buffer, size_t buffer_length, uint64_t* x, uint64_t* y) {
 	int byteLen = (bit_size + 7) >> 3;
 
-	if (buffer_length != 2 * byteLen + 1)
+	if ((int)buffer_length != 2 * byteLen + 1)
 		return 0;
 	if (buffer[0] != 4)
 		return 0;
