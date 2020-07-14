@@ -61,6 +61,10 @@ include(cmake/libraries/crypto.cmake)
 
 include(cmake/libraries/multibase.cmake)
 
+# cid #
+
+include(cmake/libraries/cid.cmake)
+
 #########################
 # END COMPILE LIBRARIES #
 #########################
