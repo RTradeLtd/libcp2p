@@ -52,6 +52,7 @@ int libp2p_crypto_ecdsa_free(ecdsa_private_key_t *pk) {
 
 /*! 
   * @brief returns the public key associated with the private key
+  * @warning caller must free returned data when no longer
   * @return the public key in PEM format
 */
 unsigned char *libp2p_crypto_ecdsa_keypair_public(ecdsa_private_key_t *pk) {
