@@ -38,6 +38,15 @@ A libp2p-like protocol written in C and designed to support embedded systems. Hi
 * doxygen (documentation generation)
 * pthreads
 
+
+## compiling mbedtls
+
+```shell
+$> make -j6 CFLAGS="-fPIC" # reduce -jX to suit your environment appropriately
+$> sudo make install CFLAGS="-fPIC"
+$> sudo ldconfig
+```
+
 # development
 
 * Code submitted in PRs must be formatted using `make format`
