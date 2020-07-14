@@ -35,11 +35,13 @@ void unload_protocols(struct ProtocolListItem *head);
  */
 int load_protocols(struct ProtocolListItem **head);
 
-struct Protocol *proto_with_name(const struct ProtocolListItem *head,
-                                 const char *proto_w_name); // Search for protocol with inputted name
+struct Protocol *
+proto_with_name(const struct ProtocolListItem *head,
+                const char *proto_w_name); // Search for protocol with inputted name
 
-struct Protocol *proto_with_deccode(const struct ProtocolListItem *head,
-                                    int proto_w_deccode); // Search for protocol with inputted deccode
+struct Protocol *
+proto_with_deccode(const struct ProtocolListItem *head,
+                   int proto_w_deccode); // Search for protocol with inputted deccode
 
 void protocols_with_string(const struct ProtocolListItem *head, char *meee,
                            int sizi); // NOT FINISHED, DO NOT USE!

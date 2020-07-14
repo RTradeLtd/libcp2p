@@ -1,15 +1,16 @@
-BasedOnStyle: LLVM
+# BasedOnStyle: LLVM
 Language: Cpp
 AlignTrailingComments: true
-BinPackParameters: true
 AlignEscapedNewlinesLeft: true
 BreakBeforeBraces: Attach
 ContinuationIndentWidth: 4
 IndentCaseLabels: true
 IndentWidth: 4
-ColumnLimit: 160
+ColumnLimit: 85
 AllowShortIfStatementsOnASingleLine: false
 AllowShortLoopsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: false
 SortIncludes: true
 SpaceBeforeParens: ControlStatements
+BinPackArguments: true
+BinPackParameters: true

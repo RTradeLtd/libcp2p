@@ -42,10 +42,12 @@ struct MultiAddress {
 
 int strpos(char *haystack, char *needle);
 
-struct MultiAddress *multiaddress_new_from_bytes(const uint8_t *byteaddress,
-                                                 int size); // Construct new address from bytes
+struct MultiAddress *
+multiaddress_new_from_bytes(const uint8_t *byteaddress,
+                            int size); // Construct new address from bytes
 
-struct MultiAddress *multiaddress_new_from_string(const char *straddress); // Construct new address from string
+struct MultiAddress *multiaddress_new_from_string(
+    const char *straddress); // Construct new address from string
 
 void multiaddress_free(struct MultiAddress *in);
 
@@ -104,6 +106,7 @@ int multiaddress_compare(const struct MultiAddress *a, const struct MultiAddress
  * @param b side B
  * @returns <0 if B > A; >0 if A > B; 0 if A == B
  */
-int multiaddress_compare_id(const struct MultiAddress *a, const struct MultiAddress *b);
+int multiaddress_compare_id(const struct MultiAddress *a,
+                            const struct MultiAddress *b);
 
 #endif

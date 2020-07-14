@@ -22,7 +22,8 @@ int strpos(char *haystack, char *needle) {
  * @returns an empty MultiAddress struct
  */
 struct MultiAddress *multiaddress_new() {
-    struct MultiAddress *out = (struct MultiAddress *)malloc(sizeof(struct MultiAddress));
+    struct MultiAddress *out =
+        (struct MultiAddress *)malloc(sizeof(struct MultiAddress));
     if (out != NULL) {
         out->bsize = 0;
         out->bytes = NULL;
@@ -38,8 +39,9 @@ struct MultiAddress *multiaddress_new() {
  * @returns a new MultiAddress struct filled in, or NULL on error
  * @warning this currently is failing tests
  */
-struct MultiAddress *multiaddress_new_from_bytes(const uint8_t *byteaddress,
-                                                 int size) // Construct new address from bytes
+struct MultiAddress *
+multiaddress_new_from_bytes(const uint8_t *byteaddress,
+                            int size) // Construct new address from bytes
 {
     struct MultiAddress *out = multiaddress_new();
     if (out != NULL) {
@@ -63,7 +65,8 @@ struct MultiAddress *multiaddress_new_from_bytes(const uint8_t *byteaddress,
     return out;
 }
 
-struct MultiAddress *multiaddress_new_from_string(const char *straddress) // Construct new address from string
+struct MultiAddress *multiaddress_new_from_string(
+    const char *straddress) // Construct new address from string
 {
     struct MultiAddress *out = multiaddress_new();
     if (out != NULL) {
@@ -74,7 +77,8 @@ struct MultiAddress *multiaddress_new_from_string(const char *straddress) // Con
         }
         strcpy(out->string, straddress);
 
-        if (string_to_bytes(&(out->bytes), &out->bsize, out->string, strlen(out->string)) == 0) {
+        if (string_to_bytes(&(out->bytes), &out->bsize, out->string,
+                            strlen(out->string)) == 0) {
             multiaddress_free(out);
             return NULL;
         }
@@ -117,7 +121,8 @@ int multiaddress_get_ip_family(const struct MultiAddress *in) {
  */
 int multiaddress_get_ip_address(const struct MultiAddress *in, char **ip) {
     // the incoming address is not what was expected
-    if (strncmp(in->string, "/ip4/", 5) != 0 && strncmp(in->string, "/ip6/", 5) != 0) {
+    if (strncmp(in->string, "/ip4/", 5) != 0 &&
+        strncmp(in->string, "/ip6/", 5) != 0) {
         return 0;
     }
     if (strstr(in->string, "/tcp/") == NULL && strstr(in->string, "/udp/") == NULL) {
@@ -270,7 +275,8 @@ int multiaddress_encapsulate(struct MultiAddress *result, char *string) {
         } else {
             strcat(result->string, string);
         }
-        if (string_to_bytes(&result->bytes, &result->bsize, result->string, strlen(result->string) + 1) == 0) {
+        if (string_to_bytes(&result->bytes, &result->bsize, result->string,
+                            strlen(result->string) + 1) == 0) {
             multiaddress_free(result);
             return 0;
         }
@@ -319,7 +325,8 @@ int multiaddress_decapsulate(struct MultiAddress *result, char *srci) {
                 free(result->bytes);
             result->bytes = NULL;
             result->bsize = 0;
-            if (string_to_bytes(&result->bytes, &result->bsize, result->string, strlen(result->string) + 1) == 0) {
+            if (string_to_bytes(&result->bytes, &result->bsize, result->string,
+                                strlen(result->string) + 1) == 0) {
                 multiaddress_free(result);
                 return 0;
             }
@@ -339,7 +346,8 @@ int multiaddress_decapsulate(struct MultiAddress *result, char *srci) {
  * @param b side B
  * @returns <0 if B > A; >0 if A > B; 0 if A == B
  */
-int multiaddress_compare(const struct MultiAddress *a, const struct MultiAddress *b) {
+int multiaddress_compare(const struct MultiAddress *a,
+                         const struct MultiAddress *b) {
     if (a == NULL && b == NULL)
         return 0;
     if (a == NULL && b != NULL)
@@ -364,7 +372,8 @@ int multiaddress_compare(const struct MultiAddress *a, const struct MultiAddress
  * @param b side B
  * @returns <0 if B > A; >0 if A > B; 0 if A == B
  */
-int multiaddress_compare_id(const struct MultiAddress *a, const struct MultiAddress *b) {
+int multiaddress_compare_id(const struct MultiAddress *a,
+                            const struct MultiAddress *b) {
     char *a_id = multiaddress_get_peer_id(a);
     char *b_id = multiaddress_get_peer_id(b);
     if (a_id == NULL && b_id == NULL)

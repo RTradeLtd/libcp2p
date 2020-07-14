@@ -9,7 +9,29 @@
 #pragma GCC diagnostic ignored "-Wpedantic"
 #pragma GCC diagnostic ignored "-Woverride-init"
 
-static const long value_table[] = {[0 ... 255] = -1, ['0'] = 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, ['A'] = 10, 11, 12, 13, 14, 15, ['a'] = 10, 11, 12, 13, 14, 15};
+static const long value_table[] = {[0 ... 255] = -1,
+                                   ['0'] = 0,
+                                   1,
+                                   2,
+                                   3,
+                                   4,
+                                   5,
+                                   6,
+                                   7,
+                                   8,
+                                   9,
+                                   ['A'] = 10,
+                                   11,
+                                   12,
+                                   13,
+                                   14,
+                                   15,
+                                   ['a'] = 10,
+                                   11,
+                                   12,
+                                   13,
+                                   14,
+                                   15};
 
 unsigned long long bin_to_dec(unsigned const char *bin) {
     unsigned long long dec = 0;

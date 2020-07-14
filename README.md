@@ -11,6 +11,7 @@ A libp2p-like protocol written in C and designed to support embedded systems. Hi
   * Redesigned so that identify is optional
 * Protobuf replaced with cbor
 
+
 # roadmap
 
 * Get basic multiformats working in C
@@ -44,4 +45,37 @@ A libp2p-like protocol written in C and designed to support embedded systems. Hi
 * All code must be documented with doxygen compatible comments
 * All code must be tested with valgrind
 
+## testing
 
+If starting a new test file, make sure the last part of the file name is `_test.c`, and that your actual tests have the following function signature:
+```C
+void test_your_test_name(void **state)
+```
+Use the following template to copy and paste when starting a new test file
+
+```C
+#include <stdio.h>
+#include <assert.h>
+#include <stdarg.h>
+#include <stddef.h>
+#include <setjmp.h>
+#include <cmocka.h>
+
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+
+/*
+  write your tests here
+*/
+
+int main(void) {
+    const struct CMUnitTest tests[] = {
+        cmocka_unit_test(/* your test here */)
+    };
+    return cmocka_run_group_tests(tests, NULL, NULL);
+}
+```
+
+# TODOs
+
+* Look into using glib for stuff like base64 decoding
+  * https://developer.gnome.org/glib/stable/glib-Base64-Encoding.html#g-base64-encode

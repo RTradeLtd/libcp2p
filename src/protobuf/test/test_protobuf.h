@@ -54,7 +54,8 @@ int test_complex_protobuf() {
 
     // view results
     if (strcmp(results->a_string, test3->a_string) != 0) {
-        printf("String a does not match: %s vs %s\n", test3->a_string, results->a_string);
+        printf("String a does not match: %s vs %s\n", test3->a_string,
+               results->a_string);
         Test3_free(test3);
         Test3_free(results);
         return 0;
@@ -68,7 +69,8 @@ int test_complex_protobuf() {
     }
 
     if (strcmp(results->test2->a, test3->test2->a) != 0) {
-        printf("String a does not match: %s vs %s\n", test3->test2->a, results->test2->a);
+        printf("String a does not match: %s vs %s\n", test3->test2->a,
+               results->test2->a);
         Test3_free(test3);
         Test3_free(results);
         return 0;
@@ -202,7 +204,8 @@ int test_write_negative() {
     unsigned int pos9 = buffer[9];
     unsigned int pos10 = buffer[10];
 
-    if (pos0 != 8 || pos1 != 234 || pos2 != 254 || pos3 != 255 || pos4 != 255 || pos5 != 255 || pos6 != 255 || pos7 != 255 || pos8 != 255 || pos9 != 255 ||
+    if (pos0 != 8 || pos1 != 234 || pos2 != 254 || pos3 != 255 || pos4 != 255 ||
+        pos5 != 255 || pos6 != 255 || pos7 != 255 || pos8 != 255 || pos9 != 255 ||
         pos10 != 1) {
         printf("Results not as expected\n");
         return 0;
