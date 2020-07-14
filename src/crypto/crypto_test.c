@@ -15,11 +15,16 @@
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
-
-void test_libp2p_crypto_ecdsa_generation_keypair(void **state) {
-    int rc = libp2p_crypto_ecdsa_generation_keypair(NULL);
-    printf("%i\n", rc);
+void test_libp2p_crypto_ecdsa_keypair_generation(void **state) {
+    unsigned char *output = malloc(sizeof(unsigned char) * 1024);
+    int rc = libp2p_crypto_ecdsa_keypair_generation(output, MBEDTLS_ECP_DP_SECP256R1);
     assert(rc == 1);
+    assert(strlen((char *)output) > 0);
+    printf("%s\n", output);
+    ecdsa_private_key_t *pk = libp2p_crypto_ecdsa_pem_to_private_key(output);
+    assert(pk != NULL);
+    rc = libp2p_crypto_ecdsa_free(pk);
+    assert(rc == 0);
 }
 
 void test_libp2p_crypto_hashing_sha1_hmac(void **state) {
@@ -107,7 +112,7 @@ void test_libp2p_crypto_hashing_sha256_hmac(void **state) {
         &len
     );
     assert(rc == 1);
-    assert(
+    assert( 
         strcmp(
             (char *)base64_encoded,
             "aVxNnFJUUB6I3NU+pXFhcmCRHAO8XLGuxQswxnVk7f0="
@@ -237,7 +242,7 @@ int main(void) {
         cmocka_unit_test(test_libp2p_crypto_hashing_sha256),
         cmocka_unit_test(test_libp2p_crypto_hashing_sha256_hmac),
         cmocka_unit_test(test_libp2p_crypto_hashing_sha1_hmac),
-        cmocka_unit_test(test_libp2p_crypto_ecdsa_generation_keypair)
+        cmocka_unit_test(test_libp2p_crypto_ecdsa_keypair_generation)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
