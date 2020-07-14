@@ -15,6 +15,23 @@
 #include "crypto/sha1.h"
 
 
+/***
+ * hash a string using SHA1
+ * @warning doesnt appear to work
+ * @param input the input string
+ * @param input_length the length of the input string
+ * @param output where to place the results, should be 20 bytes
+ * @returns 1
+ */
+int libp2p_crypto_hashing_sha1(const unsigned char *input, size_t input_length,
+                                 unsigned char *output) {
+    int rc = mbedtls_sha1_ret(input, input_length, output);
+    if (rc != 0) {
+        return 0;
+    }
+    return 1;
+}
+
 /**
  * Initialize a sha1 hmac process
  * @param ctx the context
