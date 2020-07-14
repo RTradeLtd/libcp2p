@@ -60,8 +60,10 @@ int libp2p_crypto_ecdsa_free(ecdsa_private_key_t *pk) {
 */
 unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
     unsigned char *public_key = libp2p_crypto_ecdsa_keypair_public(pk);
-    printf("%s\n", public_key);
-    unsigned char public_key_hash[1024];
+    unsigned char *public_key_hash = malloc(
+        sizeof(unsigned char) * 2048
+    );
+
     int rc = libp2p_crypto_hashing_sha256(
         public_key,
         strlen(
@@ -89,7 +91,7 @@ unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
     }
 
     unsigned char *peer_id = malloc(
-        sizeof(unsigned char)  * strlen((char *)temp_peer_id) + 1
+        sizeof(unsigned char)  * strlen((char *)temp_peer_id) + 10
     );
     strcpy(
         (char *)peer_id,
