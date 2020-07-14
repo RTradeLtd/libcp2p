@@ -45,13 +45,21 @@ int libp2p_crypto_ecdsa_keypair_generation(unsigned char *output, mbedtls_ecp_gr
 */
 ecdsa_private_key_t *libp2p_crypto_ecdsa_pem_to_private_key(unsigned char *pem_input);
 
-
 /*! 
   * @brief returns the public key associated with the private key
   * @param output a buffer to write the key into, ~256 bytes should suffice
   * @return 0 on success, otherwise returns the mbedtls errno
 */
 unsigned char *libp2p_crypto_ecdsa_keypair_public(ecdsa_private_key_t *pk);
+
+/*! @brief returns the peerid for the corresponding private key
+  * @warning caller must free returned pointer when no longer needed
+  * @details to get the peerid we take a sha256 hash of the public key file in PEM format
+  * @details we then generate a multihash of that sha256, and base58 encode it
+  * @param pk a loaded ecdsa_private_key_t instance
+  * @return pointer to an unsigned char peerID
+*/
+unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk);
 
 /*!
   * @brief frees up resources allocated for the private key

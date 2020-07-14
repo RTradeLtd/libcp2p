@@ -37,7 +37,7 @@
 #include <string.h>
 #include "crypto/ecdsa.h"
 #include "crypto/util.h"
-
+#include "crypto/peerutils.h"
 
 /*!
   * @brief frees up resources allocated for the private key
@@ -48,6 +48,54 @@ int libp2p_crypto_ecdsa_free(ecdsa_private_key_t *pk) {
     pthread_mutex_destroy(&pk->mutex);
     free(pk);
     return 0;
+}
+
+/*! @brief returns the peerid for the corresponding private key
+  * @warning currently has a bug and returns the wrongt data ~50% of the time
+  * @warning caller must free returned pointer when no longer needed
+  * @details to get the peerid we take a sha256 hash of the public key file in PEM format
+  * @details we then generate a multihash of that sha256, and base58 encode it
+  * @param pk a loaded ecdsa_private_key_t instance
+  * @return pointer to an unsigned char peerID
+*/
+unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
+    unsigned char *public_key = libp2p_crypto_ecdsa_keypair_public(pk);
+    printf("%s\n", public_key);
+    unsigned char public_key_hash[1024];
+    int rc = libp2p_crypto_hashing_sha256(
+        public_key,
+        strlen(
+            (char *)public_key
+        ),
+        public_key_hash
+    );
+    if (rc != 1) {
+        free(public_key);
+        print_mbedtls_error(rc);
+        return NULL;
+    }
+
+    unsigned char temp_peer_id[1024];
+    size_t len = (size_t)sizeof(unsigned char) * 1024;
+    rc = libp2p_new_peer_id(
+        temp_peer_id,
+        &len,
+        public_key_hash,
+        strlen((char *)public_key_hash)
+    );
+    if (rc != 1) {
+        print_mbedtls_error(rc);
+        return NULL;
+    }
+
+    unsigned char *peer_id = malloc(
+        sizeof(unsigned char)  * strlen((char *)temp_peer_id) + 1
+    );
+    strcpy(
+        (char *)peer_id,
+        (char *)temp_peer_id
+    );
+    return peer_id;
 }
 
 /*! 

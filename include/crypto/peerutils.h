@@ -185,7 +185,7 @@ void a_store_hash(unsigned char * result,unsigned char hash[])
  * @param ID_BUF_SIZE the input size (normally a SHA256, therefore 32 bytes)
  * @returns true(1) on success
  */
-int PrettyID(unsigned char *pointyaddr, size_t *rezbuflen, unsigned char *ID_BUF,
+int libp2p_new_peer_id(unsigned char *pointyaddr, size_t *rezbuflen, unsigned char *ID_BUF,
              size_t ID_BUF_SIZE); // b58 encoded ID buf
 
 /****

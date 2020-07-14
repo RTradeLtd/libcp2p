@@ -269,7 +269,7 @@ int libp2p_crypto_public_key_to_peer_id(struct PublicKey *public_key,
     unsigned char final_id[final_id_size];
     memset(final_id, 0, final_id_size);
     // turn it into a multihash and base58 it
-    if (!PrettyID(final_id, &final_id_size, hashed, 32))
+    if (!libp2p_new_peer_id(final_id, &final_id_size, hashed, 32))
         return 0;
     *peer_id = (char *)malloc(final_id_size + 1);
     if (*peer_id == NULL)

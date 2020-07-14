@@ -38,6 +38,27 @@ void test_libp2p_crypto_ecdsa_keypair_generation(void **state) {
     unsigned char *public_key = libp2p_crypto_ecdsa_keypair_public(pk);
     assert(public_key != NULL);
     printf("%s\n", public_key);
+
+    /*unsigned char *public_key_hash = malloc(sizeof(unsigned char) * 64);
+    rc = libp2p_crypto_hashing_sha256(public_key, strlen((char *)public_key), public_key_hash);
+
+    unsigned char *peer_id = malloc(sizeof(unsigned char) * 256);
+
+    size_t len = (size_t)sizeof(unsigned char) * 256;
+
+    libp2p_new_peer_id(
+        peer_id, 
+        &len,
+        public_key_hash,
+        strlen((char *)public_key_hash)
+    );
+    printf("%s\n", peer_id);
+    unsighed chlibp2p_crypto_ecdsa_keypair_peerid(pk);
+    */
+    unsigned char *peer_id = libp2p_crypto_ecdsa_keypair_peerid(pk);
+    assert(peer_id != NULL);
+    printf("%s\n", peer_id);
+    free(peer_id);
     free(public_key);
     rc = libp2p_crypto_ecdsa_free(pk);
     assert(rc == 0);
