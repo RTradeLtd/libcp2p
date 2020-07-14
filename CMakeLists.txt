@@ -4,7 +4,7 @@
 
 cmake_minimum_required(VERSION 3.0)
 project(libcp2p LANGUAGES C)
-set(CMAKE_C_COMPILER gcc)
+set(CMAKE_C_COMPILER /usr/bin/gcc)
 
 
 # handle debug build type
@@ -52,10 +52,6 @@ include(cmake/libraries/multihash.cmake)
 # protobuf #
 
 include(cmake/libraries/protobuf.cmake)
-
-# mbedtls #
-
-include(cmake/thirdparty/mbedtls.cmake)
 
 # crypto #
 
