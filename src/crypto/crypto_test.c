@@ -33,26 +33,7 @@ void test_libp2p_crypto_hashing_sha512(void **state) {
     free(base64_output);
 }
 
-
 void test_libp2p_crypto_hashing_sha256(void **state) {
-    unsigned char *input = (unsigned char *)"some input text";
-    unsigned char *output = malloc(sizeof(unsigned char *) * 32 + 1);
-    int rc = libp2p_crypto_hashing_sha256(
-        input, sizeof(input),
-        output
-    );
-    assert(rc);
-    assert(strlen((char *)output) == 32);
-    unsigned char base64_output[128];
-    size_t len;
-
-    rc =mbedtls_base64_encode(base64_output, sizeof(base64_output), &len, output, 32);
-    assert(rc == 0);
-    assert(strcmp((char *)base64_output, "ji9yp/oxA7sMwGxGhI72ZY/HJYT8CroV2p4gDsbveJk=") == 0);
-}
-
-
-void test_libp2p_crypto_hashing_sha256_2(void **state) {
     uint8_t input[] = "some input text";
     uint8_t *output = malloc(sizeof(uint8_t) * 256);
     // unsigned char *input = (unsigned char *)"some input text";
@@ -79,14 +60,14 @@ void test_libp2p_crypto_hashing_sha256_2(void **state) {
     uint8_t *decode_output = malloc(sizeof(uint8_t) * 256);
     rc = mbedtls_base64_decode(
         decode_output,
-        sizeof(decode_output),
+        sizeof(uint8_t) * 256,
         &len,
         // to_decode,
         // strlen(to_decode)
         base64_output,
         strlen((char *)base64_output)
     );
-    assert(rc);
+    assert(rc == 0);
     assert(
         memcmp(
             decode_output,
@@ -106,7 +87,7 @@ int main(void) {
     const struct CMUnitTest tests[] = {
         cmocka_unit_test(test_libp2p_crypto_hashing_sha512),
         cmocka_unit_test(test_libp2p_crypto_hashing_sha256),
-        cmocka_unit_test(test_libp2p_crypto_hashing_sha256_2)
+        cmocka_unit_test(test_libp2p_crypto_hashing_sha256)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
