@@ -1,29 +1,53 @@
+
+// Copyright 2020 RTrade Technologies Ltd
+//
+// licensed under GNU AFFERO GENERAL PUBLIC LICENSE;
+// you may not use this file except in compliance with the License;
+// You may obtain the license via the LICENSE file in the repository root;
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #ifndef _SHA1_H
 #define _SHA1_H
 
-#include <inttypes.h>
-#include <string.h>
+#include "mbedtls/sha1.h"
 
-typedef struct {
-    uint32_t state[5];
-    uint32_t count[2];
-    uint8_t buffer[64];
-} SHA1_CTX;
-
-#define SHA1_DIGEST_SIZE 20
-
-void SHA1_Init(SHA1_CTX *context);
-void SHA1_Update(SHA1_CTX *context, const uint8_t *data, const size_t len);
-void SHA1_Final(SHA1_CTX *context, uint8_t digest[SHA1_DIGEST_SIZE]);
-
-/***
- * Hash the input using SHA1
- * @param input the input to hash
- * @param input_length the length of the input
- * @param output where the output is placed, should be 40 bytes in width
- * @returns the number of bytes written, or 0 on error
+/**
+ * Initialize a sha1 hmac process
+ * @param ctx the context
+ * @returns true(1) on success, otherwise false(0)
  */
-int libp2p_crypto_hashing_sha1(const unsigned char *input, size_t input_length,
-                               unsigned char *output);
+int libp2p_crypto_hashing_sha1_init(mbedtls_sha1_context *ctx);
+
+/**
+ * Update a sha1 hmac process
+ * @param ctx the context
+ * @param input the data to add
+ * @param input_size the size of input
+ * @returns true(1) on success, otherwise false(0)
+ */
+int libp2p_crypto_hashing_sha1_update(mbedtls_sha1_context *ctx,
+                                        const unsigned char *input,
+                                        size_t input_size);
+
+/**
+ * finalize a sha1 hmac process
+ * @param ctx the context
+ * @param hash where to put the results (for sha1, should be 20 bytes long)
+ * @returns true(1) on success, otherwise false(0)
+ */
+int libp2p_crypto_hashing_sha1_finish(mbedtls_sha1_context *ctx,
+                                        unsigned char *hash);
+
+/**
+ * Clean up allocated memory
+ * @param ctx the context
+ * @returns true(1) on success, otherwise false(0)
+ */
+int libp2p_crypto_hashing_sha1_free(mbedtls_sha1_context *ctx);
 
 #endif /* _SHA1_H */
