@@ -44,7 +44,7 @@ void test_libp2p_crypto_hashing_sha256(void **state) {
     );
     assert(rc);
     assert(strlen((char *)output) == 32);
-    uint8_t *base64_output = malloc(sizeof(uint8_t) * 128 + 1);
+    uint8_t *base64_output = malloc(sizeof(uint8_t) * 64);
     size_t len;
 
     rc = mbedtls_base64_encode(
@@ -57,13 +57,11 @@ void test_libp2p_crypto_hashing_sha256(void **state) {
     assert(rc == 0);
     assert(strcmp((char *)base64_output, "ELK1zDN90JmPWKbSaORqMQ1B17AJHbDNx5DrcINHY28=") == 0);
 
-    uint8_t *decode_output = malloc(sizeof(uint8_t) * 256);
+    uint8_t *decode_output = malloc(sizeof(uint8_t) * 32);
     rc = mbedtls_base64_decode(
         decode_output,
-        sizeof(uint8_t) * 256,
+        sizeof(uint8_t) * 32,
         &len,
-        // to_decode,
-        // strlen(to_decode)
         base64_output,
         strlen((char *)base64_output)
     );
