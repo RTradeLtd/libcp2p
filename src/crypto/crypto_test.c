@@ -54,6 +54,12 @@ void test_libp2p_crypto_hashing_sha512(void **state) {
             strlen(output)
         ) == 0
     );
+    assert(
+        strcmp(
+            base64_decode,
+            output
+        ) == 0
+    );
 }
 
 void test_libp2p_crypto_hashing_sha256(void **state) {
