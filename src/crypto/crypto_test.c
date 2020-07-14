@@ -12,9 +12,11 @@
 #include "crypto/ecdsa.h"
 #include "crypto/encoding/base64.h"
 #include "mbedtls/base64.h"
+#include "crypto/peerutils.h"
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
+// also tests getting the associated public key
 void test_libp2p_crypto_ecdsa_keypair_generation(void **state) {
     unsigned char *output = malloc(sizeof(unsigned char) * 1024);
     int rc = libp2p_crypto_ecdsa_keypair_generation(output, MBEDTLS_ECP_DP_SECP256R1);
@@ -33,6 +35,10 @@ void test_libp2p_crypto_ecdsa_keypair_generation(void **state) {
             (char *)output
         ) == 0
     );
+    unsigned char *public_key = libp2p_crypto_ecdsa_keypair_public(pk);
+    assert(public_key != NULL);
+    printf("%s\n", public_key);
+    free(public_key);
     rc = libp2p_crypto_ecdsa_free(pk);
     assert(rc == 0);
 }

@@ -50,6 +50,29 @@ int libp2p_crypto_ecdsa_free(ecdsa_private_key_t *pk) {
     return 0;
 }
 
+/*! 
+  * @brief returns the public key associated with the private key
+  * @return the public key in PEM format
+*/
+unsigned char *libp2p_crypto_ecdsa_keypair_public(ecdsa_private_key_t *pk) {
+    unsigned char output_buf[1024];
+    int rc = mbedtls_pk_write_pubkey_pem(
+        &pk->pk_ctx,
+        output_buf,
+        1024
+    );
+    if (rc != 0) {
+        print_mbedtls_error(rc);
+        return NULL;
+    }
+    unsigned char *public_key = malloc(sizeof(unsigned char) * strlen((char *)output_buf) + 1);
+    strcpy(
+        (char *)public_key,
+        (char *)output_buf
+    );
+    return public_key;
+}
+
 /*!
   * @brief parses a PEM encoded private key and returns a struct for use
   * @details the returned mbedtls_*_context in the struct are not suitable for concurrent use, please access through mutex locks
@@ -89,8 +112,8 @@ ecdsa_private_key_t *libp2p_crypto_ecdsa_pem_to_private_key(unsigned char *pem_i
     pk->ecdsa_ctx = ecdsa_context;
     pk->pk_ctx = pk_context;
     pthread_mutex_init(&pk->mutex, NULL);
+
     return pk;
-    return NULL;
 }
 
 /*! @brief used to generate an ECDSA keypair

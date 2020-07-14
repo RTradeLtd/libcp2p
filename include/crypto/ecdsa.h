@@ -45,6 +45,14 @@ int libp2p_crypto_ecdsa_keypair_generation(unsigned char *output, mbedtls_ecp_gr
 */
 ecdsa_private_key_t *libp2p_crypto_ecdsa_pem_to_private_key(unsigned char *pem_input);
 
+
+/*! 
+  * @brief returns the public key associated with the private key
+  * @param output a buffer to write the key into, ~256 bytes should suffice
+  * @return 0 on success, otherwise returns the mbedtls errno
+*/
+unsigned char *libp2p_crypto_ecdsa_keypair_public(ecdsa_private_key_t *pk);
+
 /*!
   * @brief frees up resources allocated for the private key
 */
