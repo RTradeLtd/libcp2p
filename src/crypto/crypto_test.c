@@ -9,10 +9,18 @@
 #include "crypto/sha512.h"
 #include "crypto/sha256.h"
 #include "crypto/sha1.h"
+#include "crypto/ecdsa.h"
 #include "crypto/encoding/base64.h"
 #include "mbedtls/base64.h"
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
+
+
+void test_libp2p_crypto_ecdsa_generation_keypair(void **state) {
+    int rc = libp2p_crypto_ecdsa_generation_keypair(NULL);
+    printf("%i\n", rc);
+    assert(rc == 1);
+}
 
 void test_libp2p_crypto_hashing_sha1_hmac(void **state) {
     mbedtls_sha1_context ctx;
@@ -228,7 +236,8 @@ int main(void) {
         cmocka_unit_test(test_libp2p_crypto_hashing_sha512),
         cmocka_unit_test(test_libp2p_crypto_hashing_sha256),
         cmocka_unit_test(test_libp2p_crypto_hashing_sha256_hmac),
-        cmocka_unit_test(test_libp2p_crypto_hashing_sha1_hmac)
+        cmocka_unit_test(test_libp2p_crypto_hashing_sha1_hmac),
+        cmocka_unit_test(test_libp2p_crypto_ecdsa_generation_keypair)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
