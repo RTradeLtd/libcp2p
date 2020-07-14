@@ -23,6 +23,16 @@ void test_libp2p_crypto_ecdsa_keypair_generation(void **state) {
     printf("%s\n", output);
     ecdsa_private_key_t *pk = libp2p_crypto_ecdsa_pem_to_private_key(output);
     assert(pk != NULL);
+
+    unsigned char *output2 = malloc(sizeof(unsigned char) * 1024);
+    rc = mbedtls_pk_write_key_pem(&pk->pk_ctx, output2, 1024);
+    assert(rc == 0);
+    assert(
+        strcmp(
+            (char *)output2,
+            (char *)output
+        ) == 0
+    );
     rc = libp2p_crypto_ecdsa_free(pk);
     assert(rc == 0);
 }
