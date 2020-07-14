@@ -13,6 +13,62 @@
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
+void test_libp2p_crypto_hashing_sha256_hmac(void **state) {
+    mbedtls_sha256_context ctx;
+    int rc = libp2p_crypto_hashing_sha256_init(&ctx);
+    assert(rc == 1);
+    uint8_t msg[] ="this is a test message";
+    rc = libp2p_crypto_hashing_sha256_update(
+        &ctx,
+        msg,
+        strlen(msg)
+    );
+    assert(rc == 1);
+    uint8_t *output = malloc(sizeof(uint8_t) * 32 + 1);
+    rc = libp2p_crypto_hashing_sha256_finish(
+        &ctx,
+        output
+    );
+    assert(strlen(output) == 32);
+    assert(rc == 1);
+
+    uint8_t *base64_encoded = malloc(sizeof(uint8_t) * 64 + 1);
+    size_t len;
+    rc = libp2p_crypto_encoding_base64_encode(
+        output,
+        strlen(output),
+        base64_encoded,
+        sizeof(uint8_t) * 64 + 1,
+        &len
+    );
+    assert(rc == 1);
+    assert(
+        strcmp(
+            base64_encoded,
+            "aVxNnFJUUB6I3NU+pXFhcmCRHAO8XLGuxQswxnVk7f0="
+        ) == 0
+    );
+
+    uint8_t *base64_decoded = malloc(sizeof(uint8_t) * 32 + 1);
+    rc = libp2p_crypto_encoding_base64_decode(
+        base64_encoded,
+        strlen(base64_encoded),
+        base64_decoded,
+        sizeof(uint8_t) * 32 + 1,
+        &len
+    );
+    assert(rc == 1);
+    assert(
+        memcmp(
+            base64_decoded,
+            output,
+            strlen(output)
+        ) == 0
+    );
+    rc = libp2p_crypto_hashing_sha256_free(&ctx);
+    assert(rc == 1);
+}
+
 void test_libp2p_crypto_hashing_sha512(void **state) {
     uint8_t input[] = "some input text";
     uint8_t *output = malloc(sizeof(uint8_t) * 256);
@@ -113,7 +169,8 @@ void test_libp2p_crypto_hashing_sha256(void **state) {
 int main(void) {
     const struct CMUnitTest tests[] = {
         cmocka_unit_test(test_libp2p_crypto_hashing_sha512),
-        cmocka_unit_test(test_libp2p_crypto_hashing_sha256)
+        cmocka_unit_test(test_libp2p_crypto_hashing_sha256),
+        cmocka_unit_test(test_libp2p_crypto_hashing_sha256_hmac)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
