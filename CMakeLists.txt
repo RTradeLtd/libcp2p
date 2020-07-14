@@ -57,6 +57,10 @@ include(cmake/libraries/protobuf.cmake)
 
 include(cmake/libraries/crypto.cmake)
 
+# multibase #
+
+include(cmake/libraries/multibase.cmake)
+
 #########################
 # END COMPILE LIBRARIES #
 #########################
