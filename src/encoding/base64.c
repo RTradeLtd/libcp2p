@@ -1,7 +1,7 @@
 #include <math.h>
 #include <stdio.h>
 
-#include "crypto/encoding/base64.h"
+#include "encoding/base64.h"
 #include "mbedtls/base64.h"
 
 /**

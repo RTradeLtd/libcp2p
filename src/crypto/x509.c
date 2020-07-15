@@ -6,7 +6,7 @@
 #include "mbedtls/pk.h"
 #include "mbedtls/rsa.h"
 
-#include "crypto/encoding/x509.h"
+#include "crypto/x509.h"
 
 /**
  * public methods

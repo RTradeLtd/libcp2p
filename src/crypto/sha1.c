@@ -14,7 +14,6 @@
 #include "mbedtls/sha1.h"
 #include "crypto/sha1.h"
 
-
 /***
  * hash a string using SHA1
  * @warning doesnt appear to work
@@ -24,7 +23,7 @@
  * @returns 1
  */
 int libp2p_crypto_hashing_sha1(const unsigned char *input, size_t input_length,
-                                 unsigned char *output) {
+                               unsigned char *output) {
     int rc = mbedtls_sha1_ret(input, input_length, output);
     if (rc != 0) {
         return 0;
@@ -50,8 +49,8 @@ int libp2p_crypto_hashing_sha1_init(mbedtls_sha1_context *ctx) {
  * @returns true(1) on success, otherwise false(0)
  */
 int libp2p_crypto_hashing_sha1_update(mbedtls_sha1_context *ctx,
-                                        const unsigned char *input,
-                                        size_t input_size) {
+                                      const unsigned char *input,
+                                      size_t input_size) {
     mbedtls_sha1_update(ctx, input, input_size);
     return 1;
 }
@@ -63,7 +62,7 @@ int libp2p_crypto_hashing_sha1_update(mbedtls_sha1_context *ctx,
  * @returns true(1) on success, otherwise false(0)
  */
 int libp2p_crypto_hashing_sha1_finish(mbedtls_sha1_context *ctx,
-                                        unsigned char *hash) {
+                                      unsigned char *hash) {
     mbedtls_sha1_finish(ctx, hash);
     return 1;
 }

@@ -42,7 +42,7 @@
 #include <stddef.h>
 
 /* Get bool. */
-#include "crypto/encoding/base32.h"
+#include "encoding/base32.h"
 #include <stdbool.h>
 
 /* This uses that the expression (n+(k-1))/k means the smallest

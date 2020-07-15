@@ -24,7 +24,7 @@
  * @returns 1
  */
 int libp2p_crypto_hashing_sha1(const unsigned char *input, size_t input_length,
-                                 unsigned char *output);
+                               unsigned char *output);
 
 /**
  * Initialize a sha1 hmac process
@@ -41,8 +41,7 @@ int libp2p_crypto_hashing_sha1_init(mbedtls_sha1_context *ctx);
  * @returns true(1) on success, otherwise false(0)
  */
 int libp2p_crypto_hashing_sha1_update(mbedtls_sha1_context *ctx,
-                                        const unsigned char *input,
-                                        size_t input_size);
+                                      const unsigned char *input, size_t input_size);
 
 /**
  * finalize a sha1 hmac process
@@ -51,7 +50,7 @@ int libp2p_crypto_hashing_sha1_update(mbedtls_sha1_context *ctx,
  * @returns true(1) on success, otherwise false(0)
  */
 int libp2p_crypto_hashing_sha1_finish(mbedtls_sha1_context *ctx,
-                                        unsigned char *hash);
+                                      unsigned char *hash);
 
 /**
  * Clean up allocated memory

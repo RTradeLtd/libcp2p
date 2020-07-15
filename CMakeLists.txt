@@ -65,6 +65,10 @@ include(cmake/libraries/multibase.cmake)
 
 include(cmake/libraries/cid.cmake)
 
+# encoding #
+
+include(cmake/libraries/encoding.cmake)
+
 #########################
 # END COMPILE LIBRARIES #
 #########################

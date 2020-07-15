@@ -8,7 +8,7 @@
 #include <string.h>
 #include <strings.h>
 
-#include "multiaddr/base58.h"
+#include "encoding/base58.h"
 #include "multiaddr/protocols.h"
 #include "multiaddr/varhexutils.h"
 
@@ -354,8 +354,8 @@ NAX:
             unsigned char b58[b58_size];
             memset(b58, 0, b58_size);
             unsigned char *ptr_b58 = b58;
-            int returnstatus = multiaddr_encoding_base58_encode(addrbuf, num_bytes,
-                                                                &ptr_b58, &b58_size);
+            int returnstatus = libp2p_crypto_encoding_base58_encode(
+                addrbuf, num_bytes, &ptr_b58, &b58_size);
             free(addrbuf);
             if (returnstatus == 0) {
                 fprintf(stderr, "Unable to base58 encode MultiAddress %s\n",
@@ -512,13 +512,14 @@ char *address_string_to_bytes(struct Protocol *protocol, const char *incoming,
             char *incoming_copy = NULL;
             incoming_copy = (char *)incoming;
             size_t incoming_copy_size = strlen(incoming_copy);
-            size_t result_buffer_length = multiaddr_encoding_base58_decode_max_size(
-                (unsigned char *)incoming_copy);
+            size_t result_buffer_length =
+                libp2p_crypto_encoding_base58_decode_max_size(
+                    (unsigned char *)incoming_copy);
             unsigned char result_buffer[result_buffer_length];
             unsigned char *ptr_to_result = result_buffer;
             memset(result_buffer, 0, result_buffer_length);
             // now get the decoded address
-            int return_value = multiaddr_encoding_base58_decode(
+            int return_value = libp2p_crypto_encoding_base58_decode(
                 incoming_copy, incoming_copy_size, &ptr_to_result,
                 &result_buffer_length);
             if (return_value == 0) {

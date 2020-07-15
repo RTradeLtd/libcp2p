@@ -24,7 +24,9 @@
  * @param results_length the size of the results after being encoded
  * @returns true(1) on success
  */
-int multibase_encode(const char base, const unsigned char* incoming, size_t incoming_length, unsigned char* results, size_t results_max_length, size_t* results_length);
+int multibase_encode(const char base, const unsigned char *incoming,
+                     size_t incoming_length, unsigned char *results,
+                     size_t results_max_length, size_t *results_length);
 
 /***
  * Calculates the size of the buffer neccessary to encode the incoming byte array
@@ -33,7 +35,8 @@ int multibase_encode(const char base, const unsigned char* incoming, size_t inco
  * @param incoming_length the length of the array in bytes
  * @returns the appropriate size of the buffer
  */
-int multibase_encode_size(const char base, const unsigned char* incoming, size_t incoming_length);
+int multibase_encode_size(const char base, const unsigned char *incoming,
+                          size_t incoming_length);
 
 /**
  * Decode data that was encoded in multibase format
@@ -44,6 +47,8 @@ int multibase_encode_size(const char base, const unsigned char* incoming, size_t
  * @param results_length the size of the results after being encoded
  * @returns true(1) on success
  */
-int multibase_decode(const unsigned char* incoming, size_t incoming_length, unsigned char* results, size_t results_max_length, size_t* results_length);
+int multibase_decode(const unsigned char *incoming, size_t incoming_length,
+                     unsigned char *results, size_t results_max_length,
+                     size_t *results_length);
 
 #endif

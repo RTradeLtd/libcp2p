@@ -5,15 +5,10 @@
  * under the terms of the standard MIT license.  See COPYING for more details.
  */
 
-/*!
- * @author bonedaddy
- * @note required for proper multiaddr bytes conversion otherwise switch
- * statements below cause errors when compiling
- * @note I tried to the code passing the diagnostic, but that broke
- * multiaddress_new_from_bytes during testing
- */
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 #pragma GCC diagnostic ignored "-Wimplicit-fallthrough"
 
+#include "encoding/base58.h"
 #include <math.h>
 #include <stdint.h>
 #include <string.h>
@@ -32,17 +27,16 @@ static const int8_t b58digits_map[] = {
     49, 50, 51, 52, 53, 54, 55, 56, 57, -1, -1, -1, -1, -1,
 };
 
-#pragma GCC diagnostic ignored "-Wunused-parameter"
 /**
  * convert a base58 encoded string into a binary array
  * @param b58 the base58 encoded string
  * @param base58_size the size of the encoded string
- * @param bin the results buffer
+ * @param bin the results buffer (Q: Why ptr to ptr when nothing allocated?)
  * @param binszp the size of the results buffer
  * @returns true(1) on success
  */
-int multiaddr_encoding_base58_decode(const char *b58, size_t base58_size,
-                                     unsigned char **bin, size_t *binszp) {
+int libp2p_crypto_encoding_base58_decode(const char *b58, size_t base58_size,
+                                         unsigned char **bin, size_t *binszp) {
     size_t binsz = *binszp;
     const unsigned char *b58u = (const void *)b58;
     unsigned char *binu = *bin;
@@ -91,10 +85,7 @@ int multiaddr_encoding_base58_decode(const char *b58, size_t base58_size,
             return 0;
         }
     }
-    /*!
-     * @note NOTE(bonedaddy) compiler warns about fall through so I added
-     * the breaks
-     */
+
     j = 0;
     switch (bytesleft) {
         case 3:
@@ -137,22 +128,24 @@ int multiaddr_encoding_base58_decode(const char *b58, size_t base58_size,
  * @param base58_size the size of the results buffer
  * @returns true(1) on success
  */
-int multiaddr_encoding_base58_encode(const unsigned char *data, size_t binsz,
-                                     unsigned char **b58, size_t *b58sz) {
-    const uint8_t *bin = data;
+int libp2p_crypto_encoding_base58_encode(const unsigned char *binary_data,
+                                         size_t binary_data_size,
+                                         unsigned char **base58,
+                                         size_t *base58_size) {
+    const uint8_t *bin = binary_data;
     int carry;
     ssize_t i, j, high, zcount = 0;
     size_t size;
 
-    while (zcount < (ssize_t)binsz && !bin[zcount]) {
+    while (zcount < (ssize_t)binary_data_size && !bin[zcount]) {
         ++zcount;
     }
 
-    size = (binsz - zcount) * 138 / 100 + 1;
+    size = (binary_data_size - zcount) * 138 / 100 + 1;
     uint8_t buf[size];
     memset(buf, 0, size);
 
-    for (i = zcount, high = size - 1; i < (ssize_t)binsz; ++i, high = j) {
+    for (i = zcount, high = size - 1; i < (ssize_t)binary_data_size; ++i, high = j) {
         for (carry = bin[i], j = size - 1; (j > high) || carry; --j) {
             carry += 256 * buf[j];
             buf[j] = carry % 58;
@@ -163,38 +156,48 @@ int multiaddr_encoding_base58_encode(const unsigned char *data, size_t binsz,
     for (j = 0; j < (ssize_t)size && !buf[j]; ++j)
         ;
 
-    if (*b58sz <= zcount + size - j) {
-        *b58sz = zcount + size - j + 1;
+    if (*base58_size <= zcount + size - j) {
+        *base58_size = zcount + size - j + 1;
         memset(buf, 0, size);
         return 0;
     }
 
     if (zcount) {
-        memset(b58, '1', zcount);
+        memset(base58, '1', zcount);
     }
     for (i = zcount; j < (ssize_t)size; ++i, ++j) {
-        (*b58)[i] = b58digits_ordered[buf[j]];
+        (*base58)[i] = b58digits_ordered[buf[j]];
     }
-    (*b58)[i] = '\0';
-    *b58sz = i + 1;
+    (*base58)[i] = '\0';
+    *base58_size = i + 1;
 
     memset(buf, 0, size);
     return 1;
 }
 
-/***
- * calculate the size of the binary results based on an incoming base58 string
- * @param base58_string the string
- * @returns the size in bytes had the string been decoded
+/**
+ * calculate the max length in bytes of an encoding of n source bytes
+ * @param encoded_size the size of the encoded string
+ * @returns the maximum size in bytes had the string been decoded
  */
-size_t multiaddr_encoding_base58_decode_size(const unsigned char *base58_string) {
-    size_t string_length = strlen((char *)base58_string);
-    size_t decoded_length = 0;
+size_t libp2p_crypto_encoding_base58_decode_size(size_t encoded_size) {
+    size_t radix = strlen(b58digits_ordered);
+    double bits_per_digit = log2(radix); // each char represents about 6 bits
+
+    return ceil(encoded_size * bits_per_digit / 8);
+}
+
+/**
+ * calculate the max length in bytes of a decoding of n source bytes
+ * @param decoded_size the size of the incoming string to be encoded
+ * @returns the maximum size in bytes had the string been encoded
+ */
+size_t libp2p_crypto_encoding_base58_encode_size(size_t decoded_size) {
     size_t radix = strlen(b58digits_ordered);
     double bits_per_digit = log2(radix);
+    // each character
 
-    decoded_length = floor(string_length * bits_per_digit / 8);
-    return decoded_length;
+    return ceil(8 / bits_per_digit * decoded_size);
 }
 
 /**
@@ -203,7 +206,7 @@ size_t multiaddr_encoding_base58_decode_size(const unsigned char *base58_string)
  * @returns the maximum size in bytes had the string been decoded
  */
 size_t
-multiaddr_encoding_base58_decode_max_size(const unsigned char *base58_string) {
+libp2p_crypto_encoding_base58_decode_max_size(const unsigned char *base58_string) {
     size_t string_length = strlen((char *)base58_string);
     size_t decoded_length = 0;
     size_t radix = strlen(b58digits_ordered);
