@@ -44,11 +44,14 @@ void test_libp2p_crypto_ecdsa_keypair_generation(void **state) {
     unsigned char *peer_id = libp2p_crypto_ecdsa_keypair_peerid(pk);
     assert(peer_id != NULL);
     printf("%s\n", peer_id);
-    free(peer_id);
-    free(public_key);
     
     rc = libp2p_crypto_ecdsa_free(pk);
     assert(rc == 0);
+
+    free(output);
+    free(output2);
+    free(peer_id);
+    free(public_key);
 }
 
 void test_libp2p_crypto_hashing_sha1_hmac(void **state) {
@@ -62,7 +65,7 @@ void test_libp2p_crypto_hashing_sha1_hmac(void **state) {
         strlen((char *)msg)
     );
     assert(rc == 1);
-    uint8_t *output = malloc(sizeof(uint8_t) * 32 + 1);
+    uint8_t *output = calloc(sizeof(uint8_t), sizeof(uint8_t) * 32 + 1);
     rc = libp2p_crypto_hashing_sha1_finish(
         &ctx,
         output
@@ -70,7 +73,7 @@ void test_libp2p_crypto_hashing_sha1_hmac(void **state) {
     assert(strlen((char *)output) == 20);
     assert(rc == 1);
 
-    uint8_t *base64_encoded = malloc(sizeof(uint8_t) * 64 + 1);
+    uint8_t *base64_encoded = calloc(sizeof(uint8_t), sizeof(uint8_t) * 64 + 1);
     size_t len;
     rc = libp2p_encoding_base64_encode(
         output,
@@ -87,7 +90,7 @@ void test_libp2p_crypto_hashing_sha1_hmac(void **state) {
         ) == 0
     );
 
-    uint8_t *base64_decoded = malloc(sizeof(uint8_t) * 32 + 1);
+    uint8_t *base64_decoded = calloc(sizeof(uint8_t), sizeof(uint8_t) * 32 + 1);
     rc = libp2p_encoding_base64_decode(
         base64_encoded,
         strlen((char *)base64_encoded),
@@ -105,6 +108,9 @@ void test_libp2p_crypto_hashing_sha1_hmac(void **state) {
     );
     rc = libp2p_crypto_hashing_sha1_free(&ctx);
     assert(rc == 1);
+    free(output);
+    free(base64_encoded);
+    free(base64_decoded);
 }
 
 void test_libp2p_crypto_hashing_sha256_hmac(void **state) {
@@ -118,7 +124,7 @@ void test_libp2p_crypto_hashing_sha256_hmac(void **state) {
         strlen((char *)msg)
     );
     assert(rc == 1);
-    uint8_t *output = malloc(sizeof(uint8_t) * 32 + 1);
+    uint8_t *output = calloc(sizeof(uint8_t), sizeof(uint8_t) * 32 + 1);
     rc = libp2p_crypto_hashing_sha256_finish(
         &ctx,
         output
@@ -126,7 +132,7 @@ void test_libp2p_crypto_hashing_sha256_hmac(void **state) {
     assert(strlen((char *)output) == 32);
     assert(rc == 1);
 
-    uint8_t *base64_encoded = malloc(sizeof(uint8_t) * 64 + 1);
+    uint8_t *base64_encoded = calloc(sizeof(uint8_t), sizeof(uint8_t) * 64 + 1);
     size_t len;
     rc = libp2p_encoding_base64_encode(
         output,
@@ -143,7 +149,7 @@ void test_libp2p_crypto_hashing_sha256_hmac(void **state) {
         ) == 0
     );
 
-    uint8_t *base64_decoded = malloc(sizeof(uint8_t) * 32 + 1);
+    uint8_t *base64_decoded = calloc(sizeof(uint8_t), sizeof(uint8_t) * 32 + 1);
     rc = libp2p_encoding_base64_decode(
         base64_encoded,
         strlen((char *)base64_encoded),
@@ -161,18 +167,21 @@ void test_libp2p_crypto_hashing_sha256_hmac(void **state) {
     );
     rc = libp2p_crypto_hashing_sha256_free(&ctx);
     assert(rc == 1);
+    free(output);
+    free(base64_encoded);
+    free(base64_decoded);
 }
 
 void test_libp2p_crypto_hashing_sha512(void **state) {
     uint8_t input[] = "some input text";
-    uint8_t *output = malloc(sizeof(uint8_t) * 256);
+    uint8_t *output = calloc(sizeof(uint8_t), sizeof(uint8_t) * 256);
     int rc = libp2p_crypto_hashing_sha512(
         input, strlen((char *)input),
         output
     );
     assert(rc == 64);
     assert(strlen((char *)output) == 64);
-    uint8_t *base64_output = malloc(sizeof(unsigned char) * 512);
+    uint8_t *base64_output = calloc(sizeof(unsigned char), sizeof(unsigned char) * 512);
     size_t len;
     rc = libp2p_encoding_base64_encode(
         output,
@@ -188,7 +197,7 @@ void test_libp2p_crypto_hashing_sha512(void **state) {
             "/3SZKSbv6ZRZfi/hTh3q3nSyr4XrexgicQqQF56fsG5M1YFSc2OdbXcsmVxFdFSZTKz9sOKJt2Z7YfYlSlIKGg=="
         ) == 0
     );
-    uint8_t *base64_decode = malloc(sizeof(unsigned char) * 512);
+    uint8_t *base64_decode = calloc(sizeof(unsigned char), sizeof(unsigned char) * 512);
     rc = libp2p_encoding_base64_decode(
         base64_output,
         strlen((char *)base64_output),
@@ -210,11 +219,14 @@ void test_libp2p_crypto_hashing_sha512(void **state) {
             (char *)output
         ) == 0
     );
+    free(output);
+    free(base64_output);
+    free(base64_decode);
 }
 
 void test_libp2p_crypto_hashing_sha256(void **state) {
     uint8_t input[] = "some input text";
-    uint8_t *output = malloc(sizeof(uint8_t) * 256);
+    uint8_t *output = calloc(sizeof(uint8_t), sizeof(uint8_t) * 256);
     // unsigned char *input = (unsigned char *)"some input text";
     // unsigned char *output = malloc(sizeof(unsigned char *) * 256 + 1);
     int rc = libp2p_crypto_hashing_sha256(
@@ -223,7 +235,7 @@ void test_libp2p_crypto_hashing_sha256(void **state) {
     );
     assert(rc);
     assert(strlen((char *)output) == 32);
-    uint8_t *base64_output = malloc(sizeof(uint8_t) * 512);
+    uint8_t *base64_output = calloc(sizeof(uint8_t), sizeof(uint8_t) * 512);
     size_t len;
 
     rc = libp2p_encoding_base64_encode(
@@ -236,7 +248,7 @@ void test_libp2p_crypto_hashing_sha256(void **state) {
     assert(rc == 1);
     assert(strcmp((char *)base64_output, "ELK1zDN90JmPWKbSaORqMQ1B17AJHbDNx5DrcINHY28=") == 0);
 
-    uint8_t *decode_output = malloc(sizeof(uint8_t) * 512);
+    uint8_t *decode_output = calloc(sizeof(uint8_t), sizeof(uint8_t) * 512);
     rc = libp2p_encoding_base64_decode(
         base64_output,
         strlen((char *)base64_output),
@@ -258,6 +270,9 @@ void test_libp2p_crypto_hashing_sha256(void **state) {
             (char *)output
         ) == 0
     );
+    free(output);
+    free(base64_output);
+    free(decode_output);
 }
 
 int main(void) {

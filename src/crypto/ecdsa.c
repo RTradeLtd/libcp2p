@@ -61,12 +61,13 @@ int libp2p_crypto_ecdsa_free(ecdsa_private_key_t *pk) {
  */
 unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
     unsigned char *public_key = libp2p_crypto_ecdsa_keypair_public(pk);
-    unsigned char *public_key_hash = malloc(sizeof(unsigned char) * 2048);
+    unsigned char *public_key_hash = calloc(sizeof(unsigned char), sizeof(unsigned char) * 2048);
 
     int rc = libp2p_crypto_hashing_sha256(public_key, strlen((char *)public_key),
                                           public_key_hash);
     if (rc != 1) {
         free(public_key);
+        free(public_key_hash);
         print_mbedtls_error(rc);
         return NULL;
     }
@@ -76,6 +77,8 @@ unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
     rc = libp2p_new_peer_id(temp_peer_id, &len, public_key_hash,
                             strlen((char *)public_key_hash));
     if (rc != 1) {
+        free(public_key);
+        free(public_key_hash);
         print_mbedtls_error(rc);
         return NULL;
     }
@@ -83,6 +86,8 @@ unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
     unsigned char *peer_id =
         malloc(sizeof(unsigned char) * strlen((char *)temp_peer_id) + 10);
     strcpy((char *)peer_id, (char *)temp_peer_id);
+    free(public_key);
+    free(public_key_hash);
     return peer_id;
 }
 
