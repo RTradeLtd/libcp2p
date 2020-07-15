@@ -1,4 +1,4 @@
-#include "../multicodec/multicodec.h"
+#include "multicodec/multicodec.h"
 
 #include <stdio.h>
 
