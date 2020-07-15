@@ -5,7 +5,7 @@
 #ifndef __LIBP2P_CRYPTO_ENCODING_X509_H__
 #define __LIBP2P_CRYPTO_ENCODING_X509_H__
 
-#include "crypto/rsa.h"
+#include "rsa.h"
 
 /**
  * Turn an RsaPrivateKey struct into a DER formatted array of bytes

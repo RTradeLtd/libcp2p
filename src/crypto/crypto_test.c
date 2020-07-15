@@ -10,7 +10,7 @@
 #include "crypto/sha256.h"
 #include "crypto/sha1.h"
 #include "crypto/ecdsa.h"
-#include "crypto/encoding/base64.h"
+#include "encoding/base64.h"
 #include "mbedtls/base64.h"
 #include "crypto/peerutils.h"
 

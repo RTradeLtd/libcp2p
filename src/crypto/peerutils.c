@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "crypto/encoding/base58.h"
+#include "encoding/base58.h"
 #include "crypto/peerutils.h"
 #include "crypto/sha256.h"
 #include "multihash/hashes.h"

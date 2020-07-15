@@ -2,10 +2,10 @@
 #include <string.h>
 
 #include "multibase/multibase.h"
-#include "crypto/encoding/base64.h"
-#include "crypto/encoding/base58.h"
-#include "crypto/encoding/base32.h"
-#include "crypto/encoding/base16.h"
+#include "encoding/base64.h"
+#include "encoding/base58.h"
+#include "encoding/base32.h"
+#include "encoding/base16.h"
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 

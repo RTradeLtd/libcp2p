@@ -1,7 +1,7 @@
 #ifndef PEERDEP
 #define PEERDEP
 
-#include "crypto/encoding/base58.h"
+#include "encoding/base58.h"
 #include "crypto/sha256.h"
 #include "multihash/hashes.h"
 #include "multihash/multihash.h"

@@ -7,7 +7,7 @@
 #include <string.h>
 
 #include "cid/cid.h"
-#include "crypto/encoding/base58.h"
+#include "encoding/base58.h"
 #include "multibase/multibase.h"
 #include "multihash/hashes.h"
 #include "multihash/multihash.h"
