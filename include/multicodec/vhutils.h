@@ -9,16 +9,10 @@
 #include <string.h>
 
 /*
-HEADER TEST: int header_from_string(char *dest, size_t destsize, char *src, size_t srcsize) {
-    char result[destsize + 2];
-    bzero(result, destsize + 2);
-    strcpy(result, Int_To_Hex(srcsize - 1));
-    printf("SZ: %s\n", result);
-    char srchex[((srcsize - 1) * 2) + 1];
-    str2hex(srchex, src);
-    strcat(result, srchex);
-    strcpy(dest, result);
-    return 1;
+HEADER TEST: int header_from_string(char *dest, size_t destsize, char *src, size_t
+srcsize) { char result[destsize + 2]; bzero(result, destsize + 2); strcpy(result,
+Int_To_Hex(srcsize - 1)); printf("SZ: %s\n", result); char srchex[((srcsize - 1) * 2)
++ 1]; str2hex(srchex, src); strcat(result, srchex); strcpy(dest, result); return 1;
     char A[] = "/lol/meow";
     char B[((sizeof(A) - 1) * 2) + 3];
     bzero(B, sizeof(B));
@@ -85,7 +79,6 @@ int header(unsigned char *dest, unsigned char *src);
  * 	printf("header_path - Result: %s\n",header_path_result);
  */
 int header_path(unsigned char *dest, unsigned char *src);
-
 
 void hex2str(const char *h, char *s, int sizs);
 void str2hex(unsigned char *hexstring, unsigned char *string);

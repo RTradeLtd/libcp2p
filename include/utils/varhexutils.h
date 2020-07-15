@@ -1,3 +1,7 @@
+/*! @file varhexutils.h
+ * @brief provides utilities for manipulating hexadecimal data
+ */
+
 #pragma once
 
 #include <inttypes.h>

@@ -1,3 +1,7 @@
+/*! @file varint.h
+ * @brief provides utilities for manipulating varints
+ */
+
 #pragma once
 
 #include <stddef.h> /* size_t */
