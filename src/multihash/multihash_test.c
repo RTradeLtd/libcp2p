@@ -5,15 +5,25 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <string.h>
+#include <stdlib.h>
 #include "multihash/errors.h"
 #include "multihash/hashes.h"
 #include "multihash/multihash.h"
-#include "multihash/base64.h"
+#include "encoding/base64.h"
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
 void test_bin_to_64(void **state) {
-    unsigned char *p = bin_to_b64("123456781234567812345678");
+    unsigned char *p = malloc(sizeof(unsigned char) * 256);
+    size_t len;
+    int rc = libp2p_crypto_encoding_base64_encode(
+        "123456781234567812345678",
+        strlen("123456781234567812345678"),
+        p,
+        256,
+        &len
+    );
+    assert(rc == 1);
     assert(
         strcmp(
             p, "BBB="
