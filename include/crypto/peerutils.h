@@ -1,8 +1,8 @@
 #ifndef PEERDEP
 #define PEERDEP
 
-#include "encoding/base58.h"
 #include "crypto/sha256.h"
+#include "encoding/base58.h"
 #include "multihash/hashes.h"
 #include "multihash/multihash.h"
 #include "stdio.h"
@@ -185,8 +185,9 @@ void a_store_hash(unsigned char * result,unsigned char hash[])
  * @param ID_BUF_SIZE the input size (normally a SHA256, therefore 32 bytes)
  * @returns true(1) on success
  */
-int libp2p_new_peer_id(unsigned char *pointyaddr, size_t *rezbuflen, unsigned char *ID_BUF,
-             size_t ID_BUF_SIZE); // b58 encoded ID buf
+int libp2p_new_peer_id(unsigned char *pointyaddr, size_t *rezbuflen,
+                       unsigned char *ID_BUF,
+                       size_t ID_BUF_SIZE); // b58 encoded ID buf
 
 /****
  * Make a SHA256 hash of what is usually the DER formatted private key.

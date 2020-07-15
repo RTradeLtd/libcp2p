@@ -16,11 +16,13 @@
  * @param codecName a standard name of the codec
  * @param inData the incoming data to be encoded
  * @param inDataLength the length of the inData
- * @param outData a place to store the outgoing data that is at least maxOutDataLength in size
+ * @param outData a place to store the outgoing data that is at least
+ * maxOutDataLength in size
  * @param maxOutDataLength the max size for the output
  * @returns an error code or 0 if all is well
  */
-int multicodec_encode(const char* codecName, char* inData, size_t inDataLength, char* outData, size_t maxOutDataLength);
+int multicodec_encode(const char *codecName, char *inData, size_t inDataLength,
+                      char *outData, size_t maxOutDataLength);
 
 /**
  * Decode a multicodec encoded data array
@@ -30,6 +32,7 @@ int multicodec_encode(const char* codecName, char* inData, size_t inDataLength, 
  * @param maxOutDataLength the maximum size of the data
  * @returns an error code or 0 if all is well
  */
-int multicodec_decode(char* inData, size_t inDataLength, char* outData, size_t maxOutDataLength);
+int multicodec_decode(char *inData, size_t inDataLength, char *outData,
+                      size_t maxOutDataLength);
 
 #endif // __MULTICODEC_H__

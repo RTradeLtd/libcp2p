@@ -1,14 +1,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "encoding/base58.h"
 #include "crypto/peerutils.h"
 #include "crypto/sha256.h"
+#include "encoding/base58.h"
 #include "multihash/hashes.h"
 #include "multihash/multihash.h"
 
 /**
- * @brief returns a libp2p peerid from the sha256 hash of a public key 
+ * @brief returns a libp2p peerid from the sha256 hash of a public key
  * base58 encode a string NOTE: this also puts the prefix 'Qm' in front as the
  * ID is a multihash
  * @param pointyaddr where the results will go
@@ -18,8 +18,9 @@
  * @param ID_BUF_SIZE the input size (normally a SHA256, therefore 32 bytes)
  * @returns true(1) on success
  */
-int libp2p_new_peer_id(unsigned char *pointyaddr, size_t *rezbuflen, unsigned char *ID_BUF,
-             size_t ID_BUF_SIZE) // b58 encoded ID buf
+int libp2p_new_peer_id(unsigned char *pointyaddr, size_t *rezbuflen,
+                       unsigned char *ID_BUF,
+                       size_t ID_BUF_SIZE) // b58 encoded ID buf
 {
     int returnstatus = 0;
 

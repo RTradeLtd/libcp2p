@@ -45,6 +45,7 @@ size_t libp2p_crypto_encoding_base58_decode_size(size_t encoded_length);
  * @param base58_string the string
  * @returns the maximum size in bytes had the string been decoded
  */
-size_t libp2p_crypto_encoding_base58_decode_max_size(const unsigned char *base58_string);
+size_t
+libp2p_crypto_encoding_base58_decode_max_size(const unsigned char *base58_string);
 
 #endif /* base58_h */

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "encoding/base16.h" 
+#include "encoding/base16.h"
 
 /**
  * Encode in Base16 format
