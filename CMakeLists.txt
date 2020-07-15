@@ -10,7 +10,7 @@ set(CMAKE_C_COMPILER /usr/bin/gcc)
 # handle debug build type
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     # -g indicates to include debug symbols
-    list(APPEND flags -std=c17 -Wall -Wextra -Werror -pedantic -g -fanalyzer)
+    list(APPEND flags -std=c17 -Wall -Wextra -Werror -pedantic -g)
 endif()
 
 if(CMAKE_BUILD_TYPE STREQUAL "Analyze")
