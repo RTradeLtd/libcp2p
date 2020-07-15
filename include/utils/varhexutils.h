@@ -1,5 +1,8 @@
-#ifndef VARHEXUTILS
-#define VARHEXUTILS
+/*! @file varhexutils.h
+ * @brief provides utilities for manipulating hexadecimal data
+ */
+
+#pragma once
 
 #include <inttypes.h>
 #include <stdio.h>
@@ -35,7 +38,7 @@ uint64_t Hex_To_Int(char *hax);
  * @param incoming_size the size of the incoming array
  * @returns the allocated array
  */
-unsigned char *Var_To_Hex(const char *incoming, int incoming_size);
+unsigned char *Var_To_Hex(const unsigned char *incoming, size_t incoming_size);
 
 /**
  * Turn a hex string into a byte array
@@ -43,7 +46,7 @@ unsigned char *Var_To_Hex(const char *incoming, int incoming_size);
  * @param num_bytes the size of the result
  * @returns a pointer to the converted value
  */
-unsigned char *Hex_To_Var(char *Hexstr, size_t *num_bytes);
+unsigned char *Hex_To_Var(const char *Hexstr, size_t *num_bytes);
 
 //
 void convert(char *convert_result,
@@ -58,5 +61,3 @@ char *Num_To_HexVar_32(uint32_t TOHVINPUT); // UINT32 TO HEXIFIED VAR
 uint64_t HexVar_To_Num_64(char *theHEXstring); // HEXIFIED VAR TO UINT64_T
 
 uint32_t HexVar_To_Num_32(char theHEXstring[]); // HEXIFIED VAR TO UINT32_T
-
-#endif

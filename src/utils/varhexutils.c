@@ -1,6 +1,3 @@
-#ifndef VARHEXUTILS
-#define VARHEXUTILS
-
 /*!
  * @warning suffers a string truncation bug from `stringoptruncation`
  * /usr/include/x86_64-linux-gnu/bits/string_fortified.h:106:10: error:
@@ -11,7 +8,7 @@
 */
 #pragma GCC diagnostic ignored "-Wstringop-truncation"
 
-#include "multiaddr/varhexutils.h"
+#include "utils/varhexutils.h"
 
 #include <inttypes.h>
 #include <stdio.h>
@@ -19,7 +16,7 @@
 #include <string.h>
 #include <strings.h>
 
-#include "multiaddr/varint.h"
+#include "utils/varint.h"
 
 /*uint8_t * encode_big_endian_32(uint32_t ebex32)
 {
@@ -129,7 +126,7 @@ void vthconvert(const unsigned char *in, int in_size, unsigned char **out) {
  * @param incoming_size the size of the incoming array
  * @returns the allocated array
  */
-unsigned char *Var_To_Hex(const unsigned char *incoming, int incoming_size) {
+unsigned char *Var_To_Hex(const unsigned char *incoming, size_t incoming_size) {
     if (incoming != NULL) {
         unsigned char *retVal = NULL;
         // this does the real work
@@ -281,4 +278,3 @@ uint32_t HexVar_To_Num_32(char theHEXstring[]) // HEXIFIED VAR TO UINT32_T
     uvarint_decode32(buffy, 10, &decoded);
     return decoded;
 }
-#endif

@@ -1,5 +1,5 @@
-#ifndef __LIBP2P_CRYPTO_ENCODING_BASE32_H__
-#define __LIBP2P_CRYPTO_ENCODING_BASE32_H__
+#ifndef __libp2p_encoding_BASE32_H__
+#define __libp2p_encoding_BASE32_H__
 
 #include <string.h>
 
@@ -12,17 +12,16 @@
  * used
  * @returns true(1) on success
  */
-int libp2p_crypto_encoding_base32_encode(const unsigned char *incoming,
-                                         size_t incoming_length,
-                                         unsigned char *results,
-                                         size_t *results_length);
+int libp2p_encoding_base32_encode(const unsigned char *incoming,
+                                  size_t incoming_length, unsigned char *results,
+                                  size_t *results_length);
 
 /**
  * Calculate the size of the buffer necessary to encode
  * @param incoming_length the length of the incoming value
  * @returns the size of the buffer necessary to hold the encoded bytes
  */
-size_t libp2p_crypto_encoding_base32_encode_size(size_t incoming_length);
+size_t libp2p_encoding_base32_encode_size(size_t incoming_length);
 
 /**
  * Decode from Base16 format
@@ -34,16 +33,15 @@ size_t libp2p_crypto_encoding_base32_encode_size(size_t incoming_length);
  * used
  * @returns true(1) on success
  */
-int libp2p_crypto_encoding_base32_decode(const unsigned char *incoming,
-                                         size_t incoming_length,
-                                         unsigned char *results,
-                                         size_t *results_length);
+int libp2p_encoding_base32_decode(const unsigned char *incoming,
+                                  size_t incoming_length, unsigned char *results,
+                                  size_t *results_length);
 
 /**
  * Calculate the size of the buffer necessary to decode
  * @param incoming_length the length of the incoming value
  * @returns the size of the buffer necessary to hold the decoded bytes
  */
-size_t libp2p_crypto_encoding_base32_decode_size(size_t incoming_length);
+size_t libp2p_encoding_base32_decode_size(size_t incoming_length);
 
 #endif

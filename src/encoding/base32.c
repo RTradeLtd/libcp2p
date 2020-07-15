@@ -554,10 +554,9 @@ bool base32_decode_alloc_ctx(struct base32_decode_context *ctx, const char *in,
  * used
  * @returns true(1) on success
  */
-int libp2p_crypto_encoding_base32_encode(const unsigned char *incoming,
-                                         size_t incoming_length,
-                                         unsigned char *results,
-                                         size_t *results_length) {
+int libp2p_encoding_base32_encode(const unsigned char *incoming,
+                                  size_t incoming_length, unsigned char *results,
+                                  size_t *results_length) {
     memset(results, 0, *results_length);
     base32_encode((char *)incoming, incoming_length, (char *)results,
                   *results_length);
@@ -571,7 +570,7 @@ int libp2p_crypto_encoding_base32_encode(const unsigned char *incoming,
  * @param incoming_length the length of the incoming value
  * @returns the size of the buffer necessary to hold the encoded bytes
  */
-size_t libp2p_crypto_encoding_base32_encode_size(size_t incoming_length) {
+size_t libp2p_encoding_base32_encode_size(size_t incoming_length) {
     incoming_length -= 5;
     incoming_length /= 5;
     return incoming_length * 8 + 1;
@@ -587,10 +586,9 @@ size_t libp2p_crypto_encoding_base32_encode_size(size_t incoming_length) {
  * used
  * @returns true(1) on success
  */
-int libp2p_crypto_encoding_base32_decode(const unsigned char *incoming,
-                                         size_t incoming_length,
-                                         unsigned char *results,
-                                         size_t *results_length) {
+int libp2p_encoding_base32_decode(const unsigned char *incoming,
+                                  size_t incoming_length, unsigned char *results,
+                                  size_t *results_length) {
     int retVal = base32_decode_ctx(NULL, (char *)incoming, incoming_length,
                                    (char *)results, results_length);
 
@@ -610,6 +608,6 @@ int libp2p_crypto_encoding_base32_decode(const unsigned char *incoming,
  * @param incoming_length the length of the incoming value
  * @returns the size of the buffer necessary to hold the decoded bytes
  */
-size_t libp2p_crypto_encoding_base32_decode_size(size_t incoming_length) {
+size_t libp2p_encoding_base32_decode_size(size_t incoming_length) {
     return 5 * (incoming_length / 8) + 5;
 }

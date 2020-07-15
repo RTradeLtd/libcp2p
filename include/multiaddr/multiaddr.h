@@ -4,8 +4,8 @@
 
 #include "protocols.h"
 #include "protoutils.h"
-#include "varhexutils.h"
-#include "varint.h"
+#include "utils/varhexutils.h"
+#include "utils/varint.h"
 
 /**
  * Normally, addresses have been represented using string addresses, like:

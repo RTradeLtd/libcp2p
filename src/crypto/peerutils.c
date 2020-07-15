@@ -34,7 +34,7 @@ int libp2p_new_peer_id(unsigned char *pointyaddr, size_t *rezbuflen,
         return 0;
     printf("%s\n", temp_buffer);
     // base58 the multihash
-    returnstatus = libp2p_crypto_encoding_base58_encode(
+    returnstatus = libp2p_encoding_base58_encode(
         temp_buffer, strlen((char *)temp_buffer), &pointyaddr, rezbuflen);
     if (returnstatus == 0)
         return 0;

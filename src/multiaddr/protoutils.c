@@ -10,7 +10,7 @@
 
 #include "encoding/base58.h"
 #include "multiaddr/protocols.h"
-#include "multiaddr/varhexutils.h"
+#include "utils/varhexutils.h"
 
 #pragma GCC diagnostic ignored "-Wunused-variable"
 #pragma GCC diagnostic ignored "-Wunused-parameter"
@@ -279,7 +279,7 @@ int bytes_to_string(char **buffer, const uint8_t *in_bytes, int in_bytes_size) {
     // set up variables
     load_protocols(&head);
     memset(hex, 0, (in_bytes_size * 2) + 1);
-    char *tmp = (char *)Var_To_Hex((char *)in_bytes, size);
+    char *tmp = (char *)Var_To_Hex(in_bytes, size);
     memcpy(hex, tmp, in_bytes_size * 2);
     free(tmp);
     pid[2] = 0;
@@ -354,8 +354,8 @@ NAX:
             unsigned char b58[b58_size];
             memset(b58, 0, b58_size);
             unsigned char *ptr_b58 = b58;
-            int returnstatus = libp2p_crypto_encoding_base58_encode(
-                addrbuf, num_bytes, &ptr_b58, &b58_size);
+            int returnstatus = libp2p_encoding_base58_encode(addrbuf, num_bytes,
+                                                             &ptr_b58, &b58_size);
             free(addrbuf);
             if (returnstatus == 0) {
                 fprintf(stderr, "Unable to base58 encode MultiAddress %s\n",
@@ -512,16 +512,15 @@ char *address_string_to_bytes(struct Protocol *protocol, const char *incoming,
             char *incoming_copy = NULL;
             incoming_copy = (char *)incoming;
             size_t incoming_copy_size = strlen(incoming_copy);
-            size_t result_buffer_length =
-                libp2p_crypto_encoding_base58_decode_max_size(
-                    (unsigned char *)incoming_copy);
+            size_t result_buffer_length = libp2p_encoding_base58_decode_max_size(
+                (unsigned char *)incoming_copy);
             unsigned char result_buffer[result_buffer_length];
             unsigned char *ptr_to_result = result_buffer;
             memset(result_buffer, 0, result_buffer_length);
             // now get the decoded address
-            int return_value = libp2p_crypto_encoding_base58_decode(
-                incoming_copy, incoming_copy_size, &ptr_to_result,
-                &result_buffer_length);
+            int return_value =
+                libp2p_encoding_base58_decode(incoming_copy, incoming_copy_size,
+                                              &ptr_to_result, &result_buffer_length);
             if (return_value == 0) {
                 return "ERR";
             }

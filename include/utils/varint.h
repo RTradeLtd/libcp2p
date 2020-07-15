@@ -1,5 +1,9 @@
-#ifndef VARINT
-#define VARINT
+/*! @file varint.h
+ * @brief provides utilities for manipulating varints
+ */
+
+#pragma once
+
 #include <stddef.h> /* size_t */
 #include <stdint.h> /* uint8_t, uint64_t */
 
@@ -40,4 +44,3 @@ DECL_DECODER(32)
 
 DECL_ENCODER(64)
 DECL_DECODER(64)
-#endif

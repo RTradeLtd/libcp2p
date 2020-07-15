@@ -1,9 +1,9 @@
 #ifndef VARHEXUTILS
 #define VARHEXUTILS
 
+#include "multicodec/vhutils.h"
 #include "endian.h"
 #include "multicodec/varint.h"
-#include "multicodec/vhutils.h"
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>

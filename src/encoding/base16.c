@@ -12,10 +12,9 @@
  * used
  * @returns true(1) on success
  */
-int libp2p_crypto_encoding_base16_encode(const unsigned char *incoming,
-                                         size_t incoming_length,
-                                         unsigned char *results,
-                                         size_t *results_length) {
+int libp2p_encoding_base16_encode(const unsigned char *incoming,
+                                  size_t incoming_length, unsigned char *results,
+                                  size_t *results_length) {
     // the size will be 2x the size of incoming, so check that
     if (*results_length < incoming_length * 2)
         return 0;
@@ -40,7 +39,7 @@ int libp2p_crypto_encoding_base16_encode(const unsigned char *incoming,
  * @param incoming_length the length of the incoming value
  * @returns the size of the buffer necessary to hold the encoded bytes
  */
-int libp2p_crypto_encoding_base16_encode_size(size_t incoming_length) {
+int libp2p_encoding_base16_encode_size(size_t incoming_length) {
     return incoming_length * 2;
 }
 
@@ -54,10 +53,9 @@ int libp2p_crypto_encoding_base16_encode_size(size_t incoming_length) {
  * used
  * @returns true(1) on success
  */
-int libp2p_crypto_encoding_base16_decode(const unsigned char *incoming,
-                                         size_t incoming_length,
-                                         unsigned char *results,
-                                         size_t *results_length) {
+int libp2p_encoding_base16_decode(const unsigned char *incoming,
+                                  size_t incoming_length, unsigned char *results,
+                                  size_t *results_length) {
 
     // buffer too small
     if (*results_length < incoming_length / 2)
@@ -79,6 +77,6 @@ int libp2p_crypto_encoding_base16_decode(const unsigned char *incoming,
  * @param incoming_length the length of the incoming value
  * @returns the size of the buffer necessary to hold the decoded bytes
  */
-int libp2p_crypto_encoding_base16_decode_size(size_t incoming_length) {
+int libp2p_encoding_base16_decode_size(size_t incoming_length) {
     return incoming_length / 2;
 }
