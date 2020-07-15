@@ -61,7 +61,7 @@ int libp2p_crypto_ecdsa_free(ecdsa_private_key_t *pk) {
  */
 unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
     unsigned char *public_key = libp2p_crypto_ecdsa_keypair_public(pk);
-    unsigned char *public_key_hash = calloc(sizeof(unsigned char), sizeof(unsigned char) * 2048);
+    unsigned char *public_key_hash = calloc(sizeof(unsigned char), sizeof(unsigned char) * 64);
 
     int rc = libp2p_crypto_hashing_sha256(public_key, strlen((char *)public_key),
                                           public_key_hash);
