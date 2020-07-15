@@ -5,7 +5,7 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include "multiaddr/multiaddr.h"
-#include "multiaddr/varhexutils.h"
+#include "utils/varhexutils.h"
 
 #define assert__(x) for ( ; !(x) ; assert(x) )
 

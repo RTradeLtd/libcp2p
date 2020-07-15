@@ -69,6 +69,10 @@ include(cmake/libraries/cid.cmake)
 
 include(cmake/libraries/encoding.cmake)
 
+# utils #
+
+include(cmake/libraries/utils.cmake)
+
 #########################
 # END COMPILE LIBRARIES #
 #########################

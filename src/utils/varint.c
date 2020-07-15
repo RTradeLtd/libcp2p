@@ -1,4 +1,4 @@
-#include "multiaddr/varint.h"
+#include "utils/varint.h"
 
 DEFN_ENCODER(32)
 DEFN_DECODER(32)

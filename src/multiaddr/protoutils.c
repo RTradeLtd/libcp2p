@@ -10,7 +10,7 @@
 
 #include "encoding/base58.h"
 #include "multiaddr/protocols.h"
-#include "multiaddr/varhexutils.h"
+#include "utils/varhexutils.h"
 
 #pragma GCC diagnostic ignored "-Wunused-variable"
 #pragma GCC diagnostic ignored "-Wunused-parameter"
@@ -279,7 +279,7 @@ int bytes_to_string(char **buffer, const uint8_t *in_bytes, int in_bytes_size) {
     // set up variables
     load_protocols(&head);
     memset(hex, 0, (in_bytes_size * 2) + 1);
-    char *tmp = (char *)Var_To_Hex((char *)in_bytes, size);
+    char *tmp = (char *)Var_To_Hex(in_bytes, size);
     memcpy(hex, tmp, in_bytes_size * 2);
     free(tmp);
     pid[2] = 0;

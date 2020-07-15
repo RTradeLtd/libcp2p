@@ -5,8 +5,8 @@
 
 #include "multiaddr/protocols.h"
 #include "multiaddr/protoutils.h"
-#include "multiaddr/varhexutils.h"
-#include "multiaddr/varint.h"
+#include "utils/varhexutils.h"
+#include "utils/varint.h"
 
 int strpos(char *haystack, char *needle) {
     char *p = strstr(haystack, needle);

@@ -7,7 +7,7 @@
 #include <string.h>
 #include <strings.h>
 
-#include "multiaddr/varhexutils.h"
+#include "utils/varhexutils.h"
 
 /*
 int protocol_REMOVE_id(struct ProtocolListItem* protocol_P, int remid)//Function

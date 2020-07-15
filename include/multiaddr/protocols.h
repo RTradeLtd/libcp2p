@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "varhexutils.h"
+#include "utils/varhexutils.h"
 
 struct Protocol {
     // char hexcode[21];

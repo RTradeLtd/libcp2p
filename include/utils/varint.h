@@ -1,5 +1,5 @@
-#ifndef VARINT
-#define VARINT
+#pragma once
+
 #include <stddef.h> /* size_t */
 #include <stdint.h> /* uint8_t, uint64_t */
 
@@ -40,4 +40,3 @@ DECL_DECODER(32)
 
 DECL_ENCODER(64)
 DECL_DECODER(64)
-#endif
