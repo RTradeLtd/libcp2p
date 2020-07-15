@@ -2,8 +2,8 @@
  * Wrappers around the x509 stuff
  */
 
-#ifndef __LIBP2P_CRYPTO_ENCODING_X509_H__
-#define __LIBP2P_CRYPTO_ENCODING_X509_H__
+#ifndef __libp2p_encoding_X509_H__
+#define __libp2p_encoding_X509_H__
 
 #include "rsa.h"
 
@@ -13,8 +13,8 @@
  * @param bytes an array of 1600 bytes to hold the DER formatted data
  * @returns true(1) on success
  */
-int libp2p_crypto_encoding_x509_private_key_to_der(struct RsaPrivateKey *private_key,
-                                                   unsigned char *bytes[1600]);
+int libp2p_encoding_x509_private_key_to_der(struct RsaPrivateKey *private_key,
+                                            unsigned char *bytes[1600]);
 
 /**
  * Take a DER formatted char array and turn it into an RsaPrivateKey
@@ -24,7 +24,7 @@ int libp2p_crypto_encoding_x509_private_key_to_der(struct RsaPrivateKey *private
  * been allocated for the struct.
  * @returns true(1) on success
  */
-int libp2p_crypto_encoding_x509_der_to_private_key(
-    unsigned char *der, size_t der_length, struct RsaPrivateKey *private_key);
+int libp2p_encoding_x509_der_to_private_key(unsigned char *der, size_t der_length,
+                                            struct RsaPrivateKey *private_key);
 
 #endif /* x509_h */

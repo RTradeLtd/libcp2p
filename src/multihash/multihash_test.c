@@ -16,7 +16,7 @@
 void test_bin_to_64(void **state) {
     unsigned char *p = malloc(sizeof(unsigned char) * 256);
     size_t len;
-    int rc = libp2p_crypto_encoding_base64_encode(
+    int rc = libp2p_encoding_base64_encode(
         "123456781234567812345678",
         strlen("123456781234567812345678"),
         p,

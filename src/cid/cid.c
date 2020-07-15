@@ -206,12 +206,11 @@ int ipfs_cid_decode_hash_from_base58(const unsigned char *incoming,
 
     // is this a sha_256 multihash?
     if (incoming_length == 46 && incoming[0] == 'Q' && incoming[1] == 'm') {
-        size_t hash_length =
-            libp2p_crypto_encoding_base58_decode_size(incoming_length);
+        size_t hash_length = libp2p_encoding_base58_decode_size(incoming_length);
         unsigned char hash[hash_length];
         unsigned char *ptr = hash;
-        retVal = libp2p_crypto_encoding_base58_decode(
-            (char *)incoming, incoming_length, &ptr, &hash_length);
+        retVal = libp2p_encoding_base58_decode((char *)incoming, incoming_length,
+                                               &ptr, &hash_length);
         if (retVal == 0)
             return 0;
         // now we have the hash, build the object
@@ -255,13 +254,13 @@ int ipfs_cid_hash_to_base58(const unsigned char *hash, size_t hash_length,
     }
 
     // base58
-    size_t b58_size = libp2p_crypto_encoding_base58_encode_size(multihash_len);
+    size_t b58_size = libp2p_encoding_base58_encode_size(multihash_len);
 
     if (b58_size > max_buffer_length) // buffer too small
         return 0;
 
-    if (libp2p_crypto_encoding_base58_encode(multihash, multihash_len, &buffer,
-                                             &max_buffer_length) == 0) {
+    if (libp2p_encoding_base58_encode(multihash, multihash_len, &buffer,
+                                      &max_buffer_length) == 0) {
         return 0;
     }
 
@@ -275,12 +274,12 @@ int ipfs_cid_hash_to_base58(const unsigned char *hash, size_t hash_length,
  * @returns a pointer to the string (*result) or NULL if there was a problem
  */
 char *ipfs_cid_to_string(const struct Cid *cid, char **result) {
-    size_t str_len = libp2p_crypto_encoding_base58_encode_size(cid->hash_length) + 1;
+    size_t str_len = libp2p_encoding_base58_encode_size(cid->hash_length) + 1;
     char *str = (char *)malloc(str_len);
     *result = str;
     if (str != NULL) {
-        if (!libp2p_crypto_encoding_base58_encode(
-                cid->hash, cid->hash_length, (unsigned char **)&str, &str_len)) {
+        if (!libp2p_encoding_base58_encode(cid->hash, cid->hash_length,
+                                           (unsigned char **)&str, &str_len)) {
             free(str);
             str = NULL;
         }
