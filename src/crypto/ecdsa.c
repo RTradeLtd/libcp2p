@@ -40,6 +40,15 @@
 #include <string.h>
 
 /*!
+ * @brief frees up resources allocated for the public key
+ */
+int libp2p_crypto_ecdsa_free_public(ecdsa_public_key_t *pk) {
+    free(pk->data);
+    free(pk);
+    return 0;
+}
+
+/*!
  * @brief frees up resources allocated for the private key
  */
 int libp2p_crypto_ecdsa_free(ecdsa_private_key_t *pk) {
@@ -62,12 +71,12 @@ int libp2p_crypto_ecdsa_free(ecdsa_private_key_t *pk) {
 unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
     ecdsa_public_key_t *public_key = libp2p_crypto_ecdsa_keypair_public(pk);
     unsigned char *public_key_hash =
-        calloc(sizeof(unsigned char), sizeof(unsigned char) * 32);
+        calloc(sizeof(unsigned char), sizeof(unsigned char) * 32 + 2);
     printf("public key length: %i\n", public_key->len);
     int rc = libp2p_crypto_hashing_sha256(public_key->data, public_key->len,
                                           public_key_hash);
     if (rc != 1) {
-        free(public_key);
+        libp2p_crypto_ecdsa_free_public(public_key);
         free(public_key_hash);
         print_mbedtls_error(rc);
         return NULL;
@@ -84,7 +93,7 @@ unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
     size_t len = (size_t)sizeof(unsigned char) * 1024;
     rc = libp2p_new_peer_id(temp_peer_id, &len, public_key_hash, key_len);
     if (rc != 1) {
-        free(public_key);
+        libp2p_crypto_ecdsa_free_public(public_key);
         free(public_key_hash);
         print_mbedtls_error(rc);
         return NULL;
@@ -93,8 +102,8 @@ unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
     unsigned char *peer_id =
         malloc(sizeof(unsigned char) * strlen((char *)temp_peer_id) + 10);
     strcpy((char *)peer_id, (char *)temp_peer_id);
-    free(public_key);
     free(public_key_hash);
+    libp2p_crypto_ecdsa_free_public(public_key);
     return peer_id;
 }
 
@@ -118,7 +127,7 @@ ecdsa_public_key_t *libp2p_crypto_ecdsa_keypair_public(ecdsa_private_key_t *pk) 
         }
     }
     ecdsa_public_key_t *pub_key =
-        calloc(sizeof(ecdsa_public_key_t), sizeof(ecdsa_public_key_t));
+        calloc(sizeof(ecdsa_public_key_t), sizeof(ecdsa_public_key_t) + sizeof(unsigned char) * len);
     pub_key->data = calloc(sizeof(unsigned char), len);
     pub_key->len = len;
     memcpy(pub_key->data, output_buf, len);

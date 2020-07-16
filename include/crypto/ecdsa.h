@@ -74,3 +74,8 @@ unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk);
  * @brief frees up resources allocated for the private key
  */
 int libp2p_crypto_ecdsa_free(ecdsa_private_key_t *pk);
+
+/*!
+ * @brief frees up resources allocated for the public key
+ */
+int libp2p_crypto_ecdsa_free_public(ecdsa_public_key_t *pk);
