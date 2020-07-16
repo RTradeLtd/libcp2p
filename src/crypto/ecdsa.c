@@ -127,7 +127,7 @@ ecdsa_public_key_t *libp2p_crypto_ecdsa_keypair_public(ecdsa_private_key_t *pk) 
         }
     }
     ecdsa_public_key_t *pub_key =
-        calloc(sizeof(ecdsa_public_key_t), sizeof(ecdsa_public_key_t) + sizeof(unsigned char) * len);
+        calloc(sizeof(ecdsa_public_key_t), sizeof(ecdsa_public_key_t));
     pub_key->data = calloc(sizeof(unsigned char), len);
     pub_key->len = len;
     memcpy(pub_key->data, output_buf, len);
