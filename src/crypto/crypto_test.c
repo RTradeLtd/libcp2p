@@ -19,39 +19,30 @@
 // also tests getting the associated public key
 void test_libp2p_crypto_ecdsa_keypair_generation(void **state) {
     unsigned char *output = malloc(sizeof(unsigned char) * 1024);
-    int rc = libp2p_crypto_ecdsa_keypair_generation(output, MBEDTLS_ECP_DP_SECP256R1);
+    int rc =
+        libp2p_crypto_ecdsa_keypair_generation(output, MBEDTLS_ECP_DP_SECP256R1);
     assert(rc == 1);
     assert(strlen((char *)output) > 0);
     printf("%s\n", output);
-    
+
     ecdsa_private_key_t *pk = libp2p_crypto_ecdsa_pem_to_private_key(output);
     assert(pk != NULL);
 
     unsigned char *output2 = malloc(sizeof(unsigned char) * 1024);
     rc = mbedtls_pk_write_key_pem(&pk->pk_ctx, output2, 1024);
     assert(rc == 0);
-    assert(
-        strcmp(
-            (char *)output2,
-            (char *)output
-        ) == 0
-    );
-    
-    unsigned char *public_key = libp2p_crypto_ecdsa_keypair_public(pk);
-    assert(public_key != NULL);
-    printf("%s\n", public_key);
+    assert(strcmp((char *)output2, (char *)output) == 0);
 
     unsigned char *peer_id = libp2p_crypto_ecdsa_keypair_peerid(pk);
     assert(peer_id != NULL);
     printf("%s\n", peer_id);
-    
+
     rc = libp2p_crypto_ecdsa_free(pk);
     assert(rc == 0);
 
     free(output);
     free(output2);
     free(peer_id);
-    free(public_key);
 }
 
 void test_libp2p_crypto_hashing_sha1_hmac(void **state) {

@@ -1,11 +1,11 @@
 #include "multihash/multihash.h"
 
-#include <stdlib.h>
-#include <string.h>
-
 #include "multihash/errors.h"
 #include "multihash/generic.h"
 #include "multihash/hashes.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #define VARINT_MASK (1 << 7)
 
@@ -121,7 +121,7 @@ int mh_new(unsigned char *buffer, int code, const unsigned char *digest,
         return MH_E_VARINT_NOT_SUPPORTED;
     if (digest_len > 127)
         return MH_E_DIGSET_TOO_LONG;
-
+    printf("digest length: %lu\n", strlen((char *)digest));
     buffer[0] = (unsigned char)((unsigned int)code) & 255;
     buffer[1] = (unsigned char)digest_len;
     memcpy(buffer + 2, digest, digest_len);

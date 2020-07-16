@@ -60,10 +60,11 @@ int libp2p_crypto_ecdsa_free(ecdsa_private_key_t *pk) {
  * @return pointer to an unsigned char peerID
  */
 unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
-    unsigned char *public_key = libp2p_crypto_ecdsa_keypair_public(pk);
-    unsigned char *public_key_hash = calloc(sizeof(unsigned char), sizeof(unsigned char) * 64);
-
-    int rc = libp2p_crypto_hashing_sha256(public_key, strlen((char *)public_key),
+    ecdsa_public_key_t *public_key = libp2p_crypto_ecdsa_keypair_public(pk);
+    unsigned char *public_key_hash =
+        calloc(sizeof(unsigned char), sizeof(unsigned char) * 32);
+    printf("public key length: %i\n", public_key->len);
+    int rc = libp2p_crypto_hashing_sha256(public_key->data, public_key->len,
                                           public_key_hash);
     if (rc != 1) {
         free(public_key);
@@ -71,11 +72,17 @@ unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
         print_mbedtls_error(rc);
         return NULL;
     }
-
+    int key_len;
+    for (int i = 0; i < 64; i++) {
+        if (public_key_hash[i] == '\0') {
+            key_len = i;
+            break;
+        }
+    }
+    printf("public key hash length: %i\n", key_len);
     unsigned char temp_peer_id[1024];
     size_t len = (size_t)sizeof(unsigned char) * 1024;
-    rc = libp2p_new_peer_id(temp_peer_id, &len, public_key_hash,
-                            strlen((char *)public_key_hash));
+    rc = libp2p_new_peer_id(temp_peer_id, &len, public_key_hash, key_len);
     if (rc != 1) {
         free(public_key);
         free(public_key_hash);
@@ -96,17 +103,26 @@ unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
  * @warning caller must free returned data when no longer
  * @return the public key in PEM format
  */
-unsigned char *libp2p_crypto_ecdsa_keypair_public(ecdsa_private_key_t *pk) {
+ecdsa_public_key_t *libp2p_crypto_ecdsa_keypair_public(ecdsa_private_key_t *pk) {
     unsigned char output_buf[1024];
     int rc = mbedtls_pk_write_pubkey_pem(&pk->pk_ctx, output_buf, 1024);
     if (rc != 0) {
         print_mbedtls_error(rc);
         return NULL;
     }
-    unsigned char *public_key =
-        malloc(sizeof(unsigned char) * strlen((char *)output_buf) + 1);
-    strcpy((char *)public_key, (char *)output_buf);
-    return public_key;
+    int len;
+    for (int i = 0; i < 1024; i++) {
+        if (output_buf[i] == '\0') {
+            len = i;
+            break;
+        }
+    }
+    ecdsa_public_key_t *pub_key =
+        calloc(sizeof(ecdsa_public_key_t), sizeof(ecdsa_public_key_t));
+    pub_key->data = calloc(sizeof(unsigned char), len);
+    pub_key->len = len;
+    memcpy(pub_key->data, output_buf, len);
+    return pub_key;
 }
 
 /*!
