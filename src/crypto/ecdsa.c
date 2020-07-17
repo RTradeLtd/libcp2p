@@ -90,6 +90,7 @@ unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
     }
     printf("public key hash length: %i\n", key_len);
     unsigned char temp_peer_id[1024];
+    memset(temp_peer_id, 0, 1024);
     size_t len = (size_t)sizeof(unsigned char) * 1024;
     rc = libp2p_new_peer_id(temp_peer_id, &len, public_key_hash, key_len);
     if (rc != 1) {
