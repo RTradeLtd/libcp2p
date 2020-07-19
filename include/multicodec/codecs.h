@@ -11,11 +11,12 @@
 // limitations under the License.
 
 /*! @file codecs.h.h
-  * @author Bonedaddy
-  * @brief macro definitions of all supported codecs
-  * @details for actual multicodec functions see multicodec.h
-  * @note the 0xCert-imprint-256 codec is not supported as it is an invalid variable name
-*/
+ * @author Bonedaddy
+ * @brief macro definitions of all supported codecs
+ * @details for actual multicodec functions see multicodec.h
+ * @note the 0xCert-imprint-256 codec is not supported as it is an invalid variable
+ * name
+ */
 
 #pragma once
 

@@ -1,5 +1,6 @@
 /*!
- * @warning likely contains multiple bugs due to heavy usage of `str___` builtins and operating on unsigned char pointers
+ * @warning likely contains multiple bugs due to heavy usage of `str___` builtins and
+ operating on unsigned char pointers
  * @warning suffers a string truncation bug from `stringoptruncation`
  * @warning /usr/include/x86_64-linux-gnu/bits/string_fortified.h:106:10: error:
  ‘__builtin_strncpy’ output may be truncated copying 1 byte from a string of
@@ -281,7 +282,6 @@ uint32_t HexVar_To_Num_32(char theHEXstring[]) // HEXIFIED VAR TO UINT32_T
     return decoded;
 }
 
-
 void hex2str(const char *h, char *s, int sizs) {
     static char hex[] = "0123456789ABCDEF";
     int i = 0;
@@ -400,7 +400,8 @@ int header(unsigned char *dest, unsigned char *src) {
     memset(size, 0, 3);
     // this likely contains a bug as we cant be sure `src` is null terminated
     strcpy(size, Int_To_Hex((strlen((char *)src) / 2) - 1));
-    // this likely contains a bug as we cant be sure `src` or `dest` is null terminated
+    // this likely contains a bug as we cant be sure `src` or `dest` is null
+    // terminated
     strcat((char *)dest, size);
     strcat((char *)dest, (char *)src);
     return 1;
@@ -451,7 +452,6 @@ int add_header(unsigned char *dest, unsigned char *header, size_t headersize,
     strcat((char *)dest, (char *)content);
     return 1;
 }
-
 
 /*//Remove Header - Usage Example:
  *  char remove_hdr_dst[1000]; //Much bigger than needed tbh..
@@ -514,7 +514,6 @@ int get_header(char *dest, unsigned char *src) {
  *  printf("get_header - Result: %s\n", geth_dest);
  */
 int get_header(char *dest, unsigned char *src);
-
 
 /*
  *  //getcontent
