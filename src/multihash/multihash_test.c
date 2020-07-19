@@ -72,6 +72,7 @@ void test_bin_to_64(void **state) {
             p, "MTIzNDU2NzgxMjM0NTY3ODEyMzQ1Njc4"
         ) == 0
     );
+    free(p);
 }
 
 void test_error_messages_exist(void **state) {

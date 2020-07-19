@@ -25,6 +25,7 @@ void test_hex_to_var(void **state) {
     assert(d == 1);
     assert(result != NULL);
     assert(result[0] == 4);
+    free(result);
 }
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
@@ -153,6 +154,8 @@ void test_multiaddr_peer_id(void **state) {
         printf("New peer id %s does not match %s\n", result, orig_address);
     }
     free(result);
+    multiaddress_free(addr2);
+    multiaddress_free(addr);
 }
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
