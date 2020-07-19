@@ -1,4 +1,3 @@
-#define NAME "code"
 #define IDENTITY "0x00"
 #define IP4 "0x04"
 #define TCP "0x06"
