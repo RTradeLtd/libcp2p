@@ -108,7 +108,11 @@ int multibase_decode(const unsigned char *incoming, size_t incoming_length,
     const char base = incoming[0];
     
     // parse the actual encoded data fro mthe base identifier
-    unsigned char *rest = calloc(sizeof(unsigned char), incoming_length - 1);
+    unsigned char *rest = calloc(sizeof(unsigned char), incoming_length);
+    if (rest == NULL) {
+        return 0;
+    }
+    
     // copy incoming offset 1 to `rest`
     // we need to do this as the first value of `incoming` is the base identifier
     // which will cause an error if we feed it into the decoder
@@ -134,8 +138,10 @@ int multibase_decode(const unsigned char *incoming, size_t incoming_length,
                                               results_max_length, results_length);
             break;
         default: // unsupported format
-            return 0;
+            retVal = 0;
+            break;
     }
+    free(rest);
     // check to see if there was a problem
     if (retVal == 0)
         return 0;

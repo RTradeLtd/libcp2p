@@ -39,6 +39,9 @@ void test_multibase_encode_decode_base16(void **state) {
             (char *)decoded_output
         ) == 0
     );
+
+    free(output);
+    free(decoded_output);
 }
 
 void test_multibase_encode_decode_base32(void **state) {
@@ -77,6 +80,9 @@ void test_multibase_encode_decode_base32(void **state) {
             (char *)decoded_output
         ) == 0
     );
+
+    free(output);
+    free(decoded_output);
 }
 
 void test_multibase_encode_decode_base58(void **state) {
@@ -99,6 +105,7 @@ void test_multibase_encode_decode_base58(void **state) {
             "zStV1DL6CwTryKyV"
         ) == 0
     );
+    free(output);
     /* base58 decode is broken
     unsigned char *decoded_output = calloc(sizeof(unsigned char), len);
     size_t res;
@@ -116,7 +123,7 @@ void test_multibase_encode_decode_base58(void **state) {
             (char *)input,
             (char *)decoded_output
         ) == 0
-    );*/
+    ); */
 }
 
 void test_multibase_encode_decode_base64(void **state) {
@@ -156,6 +163,9 @@ void test_multibase_encode_decode_base64(void **state) {
             (char *)decoded_output
         ) == 0
     );
+
+    free(output);
+    free(decoded_output);
 }
 
 
