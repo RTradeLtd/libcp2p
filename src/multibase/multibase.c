@@ -142,11 +142,7 @@ int multibase_decode(const unsigned char *incoming, size_t incoming_length,
             break;
     }
     free(rest);
-    // check to see if there was a problem
-    if (retVal == 0)
-        return 0;
-
-    return 1;
+    return retVal;
 }
 
 /***
