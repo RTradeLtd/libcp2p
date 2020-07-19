@@ -7,8 +7,6 @@
 
 #include <stdlib.h>
 #include <stdbool.h>
-#include "codecs.h"
-
 
 #define MULTICODEC_RAW_BINARY 0x052f6269632f
 #define MULTICODEC_ASCII_BASE_2 0x042f62322f

@@ -9,3 +9,10 @@ add_library(libmulticodec
 )
 
 target_compile_options(libmulticodec PRIVATE ${flags})
+
+add_executable(libmulticodec-test ./src/multicodec/multicodec_test.c)
+target_compile_options(libmulticodec-test PRIVATE ${flags})
+target_link_libraries(libmulticodec-test libmulticodec)
+target_link_libraries(libmulticodec-test cmocka)
+
+add_test(NAME LibMultiCodecTest COMMAND libmulticodec-test)
