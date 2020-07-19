@@ -51,7 +51,7 @@ int libp2p_crypto_ecdsa_free(ecdsa_private_key_t *pk) {
 }
 
 /*! @brief returns the peerid for the corresponding private key
- * @warning currently has a bug and returns the wrongt data ~50% of the time
+ * @warning if hash of public key contains a 0, the output will be incorrect
  * @warning caller must free returned pointer when no longer needed
  * @details to get the peerid we take a sha256 hash of the public key file in PEM
  * format
@@ -61,8 +61,7 @@ int libp2p_crypto_ecdsa_free(ecdsa_private_key_t *pk) {
  */
 unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
     unsigned char *public_key = libp2p_crypto_ecdsa_keypair_public(pk);
-    unsigned char *public_key_hash =
-        calloc(sizeof(unsigned char), sizeof(unsigned char) * 64);
+    unsigned char *public_key_hash = calloc(sizeof(unsigned char), 64);
 
     int rc = libp2p_crypto_hashing_sha256(public_key, strlen((char *)public_key),
                                           public_key_hash);
@@ -74,9 +73,8 @@ unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
     }
 
     unsigned char temp_peer_id[1024];
-    size_t len = (size_t)sizeof(unsigned char) * 1024;
-    rc = libp2p_new_peer_id(temp_peer_id, &len, public_key_hash,
-                            strlen((char *)public_key_hash));
+    size_t len = (size_t)1024;
+    rc = libp2p_new_peer_id(temp_peer_id, &len, public_key_hash, 32);
     if (rc != 1) {
         free(public_key);
         free(public_key_hash);
@@ -84,20 +82,25 @@ unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
         return NULL;
     }
 
-    unsigned char *peer_id =
-        malloc(sizeof(unsigned char) * strlen((char *)temp_peer_id) + 10);
+    size_t tpid_size = strlen((char *)temp_peer_id);
+    unsigned char *peer_id = calloc(sizeof(unsigned char), tpid_size + 2);
     strcpy((char *)peer_id, (char *)temp_peer_id);
+
     free(public_key);
     free(public_key_hash);
+
     return peer_id;
 }
 
 /*!
  * @brief returns the public key associated with the private key
+ * @note returned value has a null terminating byte at the end
  * @warning caller must free returned data when no longer
  * @return the public key in PEM format
  */
 unsigned char *libp2p_crypto_ecdsa_keypair_public(ecdsa_private_key_t *pk) {
+    // we use `strcpy` and `strlen` as mbedtls_pk_write_pubkey_pem includes null
+    // terminating byte
     unsigned char output_buf[1024];
     int rc = mbedtls_pk_write_pubkey_pem(&pk->pk_ctx, output_buf, 1024);
     if (rc != 0) {

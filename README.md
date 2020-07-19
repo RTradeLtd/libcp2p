@@ -10,6 +10,8 @@ A libp2p-like protocol written in C and designed to support embedded systems. Hi
   * LibP2P is heavily reliant on the identify protocol and it is not possible to remove it
   * Redesigned so that identify is optional
 * Protobuf replaced with cbor
+* first class support for embedded systems
+* higher level languages will use FFI instead of a language specific implementation
 
 # features
 
@@ -27,7 +29,10 @@ A libp2p-like protocol written in C and designed to support embedded systems. Hi
 
 ## Misc
 
+* cid
+  * basic support only
 * protobuf support
+  * basic support only
 * cryptography
   * ecdsa key management
   * rsa key management
@@ -104,6 +109,15 @@ int main(void) {
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
+```
+
+
+## valgrind
+
+Valgrind is integrated with CMake, so if you have valgrind locally you can run memory checks with:
+
+```shell
+$> ctest -T memcheck
 ```
 
 # TODOs

@@ -1,0 +1,5 @@
+macro(define_setup_valgrind)
+    find_program(MEMORYCHECK_COMMAND NAMES valgrind)
+    set(MEMORYCHECK_COMMAND_OPTIONS "--tool=massif --leak-check=full --tool=memcheck")
+    include(CTest)
+endmacro()

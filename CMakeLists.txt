@@ -73,6 +73,10 @@ include(cmake/libraries/encoding.cmake)
 
 include(cmake/libraries/utils.cmake)
 
+# valgrind #
+
+include(cmake/pkgs/valgrind.cmake)
+
 #########################
 # END COMPILE LIBRARIES #
 #########################
@@ -92,5 +96,11 @@ add_doxygen_doc(
     COMMENT
         "HTML documentation"
 )
+
+#################
+# TESTING SETUP #
+#################
+
+define_setup_valgrind()
 
 enable_testing()
