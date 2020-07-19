@@ -81,13 +81,11 @@ int multibase_encode_size(const char base, const unsigned char *incoming,
         case (MULTIBASE_BASE16):
             return libp2p_encoding_base16_encode_size(incoming_length) + 1;
         case (MULTIBASE_BASE32):
-            return libp2p_encoding_base32_encode_size(
-                incoming_length) + 1;
+            return libp2p_encoding_base32_encode_size(incoming_length) + 1;
         case (MULTIBASE_BASE58_BTC):
             return libp2p_encoding_base58_encode_size(incoming_length) + 1;
         case (MULTIBASE_BASE64):
-            return libp2p_encoding_base64_encode_size(
-                incoming_length) + 1;
+            return libp2p_encoding_base64_encode_size(incoming_length) + 1;
     }
     return 0;
 }
@@ -108,19 +106,20 @@ int multibase_decode(const unsigned char *incoming, size_t incoming_length,
     int retVal = 0;
     // the base we are decoding
     const char base = incoming[0];
-    
+
     // parse the actual encoded data fro mthe base identifier
     unsigned char *rest = calloc(sizeof(unsigned char), incoming_length);
     if (rest == NULL) {
         return 0;
     }
-    
+
     // copy incoming offset 1 to `rest`
     // we need to do this as the first value of `incoming` is the base identifier
     // which will cause an error if we feed it into the decoder
-    memcpy(rest, incoming+1, incoming_length-1);
+    memcpy(rest, incoming + 1, incoming_length - 1);
 
-    // (incoming_length - 1) is done because incoming_length includes the base identifier
+    // (incoming_length - 1) is done because incoming_length includes the base
+    // identifier
     switch (base) {
         case (MULTIBASE_BASE16):
             retVal = libp2p_encoding_base16_decode(rest, incoming_length - 1,
@@ -131,12 +130,12 @@ int multibase_decode(const unsigned char *incoming, size_t incoming_length,
                                                    results, results_length);
             break;
         case (MULTIBASE_BASE58_BTC):
-            retVal = libp2p_encoding_base58_decode(
-                (char *)rest, incoming_length - 1, &results, results_length);
+            retVal = libp2p_encoding_base58_decode((char *)rest, incoming_length - 1,
+                                                   &results, results_length);
             break;
         case (MULTIBASE_BASE64):
             retVal =
-                libp2p_encoding_base64_decode(rest, incoming_length -1, results,
+                libp2p_encoding_base64_decode(rest, incoming_length - 1, results,
                                               results_max_length, results_length);
             break;
         default: // unsupported format

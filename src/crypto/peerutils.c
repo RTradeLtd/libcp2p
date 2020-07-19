@@ -32,7 +32,7 @@ int libp2p_new_peer_id(unsigned char *pointyaddr, size_t *rezbuflen,
     int retVal = mh_new(temp_buffer, MH_H_SHA2_256, ID_BUF, ID_BUF_SIZE);
     if (retVal < 0)
         return 0;
-        
+
     // base58 the multihash
     returnstatus = libp2p_encoding_base58_encode(
         temp_buffer, strlen((char *)temp_buffer), &pointyaddr, rezbuflen);
