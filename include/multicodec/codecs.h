@@ -10,6 +10,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/*! @file codecs.h.h
+  * @author Bonedaddy
+  * @brief macro definitions of all supported codecs
+  * @details for actual multicodec functions see multicodec.h
+  * @note the 0xCert-imprint-256 codec is not supported as it is an invalid variable name
+*/
+
+#pragma once
+
 #define IDENTITY "0x00"
 #define IP4 "0x04"
 #define TCP "0x06"
@@ -456,3 +465,6 @@
 #define HOLOCHAIN_KEY_V1 "0x957124"
 #define HOLOCHAIN_SIG_V0 "0xa27124"
 #define HOLOCHAIN_SIG_V1 "0xa37124"
+#define CODECS_COUNT 446
+
+extern const char *CODECS_LIST[];

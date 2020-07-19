@@ -77,6 +77,10 @@ include(cmake/libraries/utils.cmake)
 
 include(cmake/pkgs/valgrind.cmake)
 
+# multicodec #
+
+include(cmake/libraries/multicodec.cmake)
+
 #########################
 # END COMPILE LIBRARIES #
 #########################
