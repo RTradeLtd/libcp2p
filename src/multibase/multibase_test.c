@@ -12,14 +12,21 @@
 
 void test_multibase_encode_decode_base16(void **state) {
     unsigned char *input = "hello world";
-    unsigned char *output = calloc(sizeof(unsigned char), 1024);
+    int esize = multibase_encode_size(
+        MULTIBASE_BASE16,
+        input,
+        12
+    );
+    assert(esize > 0);
+
+    unsigned char *output = calloc(sizeof(unsigned char), esize);
     size_t len;
     int rc = multibase_encode(
         MULTIBASE_BASE16, 
         input,
         strlen((char *)input),
         output,
-        1024,
+        esize,
         &len
     );
     assert(rc == 1);
@@ -29,9 +36,12 @@ void test_multibase_encode_decode_base16(void **state) {
         strcmp((char *)output, "f68656c6c6f20776f726c64") == 0
     );
 
-    unsigned char *decoded_output = calloc(sizeof(unsigned char), len);
+    int dsize = multibase_decode_size(MULTIBASE_BASE16, output, len);
+    assert(dsize > 0);
+
+    unsigned char *decoded_output = calloc(sizeof(unsigned char), dsize);
     size_t written;
-    rc = multibase_decode(output, len, decoded_output, len, &written);
+    rc = multibase_decode(output, len, decoded_output, dsize, &written);
     assert(rc == 1);
     assert(
         strcmp(
@@ -46,14 +56,17 @@ void test_multibase_encode_decode_base16(void **state) {
 
 void test_multibase_encode_decode_base32(void **state) {
     unsigned char *input = "hello world";
-    unsigned char *output = calloc(sizeof(unsigned char), 1024);
+    int esize = multibase_encode_size(MULTIBASE_BASE32, input, 12);
+    assert(esize > 0);
+    
+    unsigned char *output = calloc(sizeof(unsigned char), esize);
     size_t len;
     int rc = multibase_encode(
         MULTIBASE_BASE32,
         input,
         strlen((char *)input),
         output,
-        1024,
+        esize,
         &len
     );
     assert(rc == 1);
@@ -64,13 +77,17 @@ void test_multibase_encode_decode_base32(void **state) {
             "bNBSWY3DPEB3W64TMMQ======"
         ) == 0
     );
-    unsigned char *decoded_output = calloc(sizeof(unsigned char), len);
+
+    int dsize = multibase_decode_size(MULTIBASE_BASE16, output, len);
+    assert(dsize > 0);
+
+    unsigned char *decoded_output = calloc(sizeof(unsigned char), dsize);
     size_t res;
     rc = multibase_decode(
         output,
         len,
         decoded_output,
-        len,
+        dsize,
         &res
     );
     assert(rc == 1);
@@ -87,14 +104,17 @@ void test_multibase_encode_decode_base32(void **state) {
 
 void test_multibase_encode_decode_base58(void **state) {
     unsigned char *input = "hello world";
-    unsigned char *output = calloc(sizeof(unsigned char), 1024);
+    int esize = multibase_encode_size(MULTIBASE_BASE58_BTC, input, 12);
+    assert(esize > 0);
+
+    unsigned char *output = calloc(sizeof(unsigned char), esize);
     size_t len;
     int rc = multibase_encode(
         MULTIBASE_BASE58_BTC,
         input,
         strlen((char *)input),
         output,
-        1024,
+        esize,
         &len
     );
     assert(rc == 1);
@@ -105,7 +125,12 @@ void test_multibase_encode_decode_base58(void **state) {
             "zStV1DL6CwTryKyV"
         ) == 0
     );
+    // this is coming back with 14 as opposed to 12
+    int dsize = multibase_decode_size(MULTIBASE_BASE58_BTC, output, len);
+    assert(dsize > 0);
     free(output);
+
+
     /* base58 decode is broken
     unsigned char *decoded_output = calloc(sizeof(unsigned char), len);
     size_t res;
@@ -128,14 +153,17 @@ void test_multibase_encode_decode_base58(void **state) {
 
 void test_multibase_encode_decode_base64(void **state) {
     unsigned char *input = "hello world";
-    unsigned char *output = calloc(sizeof(unsigned char), 1024);
+    int esize = multibase_encode_size(MULTIBASE_BASE64, input, 12);
+    assert(esize > 0);
+
+    unsigned char *output = calloc(sizeof(unsigned char), esize);
     size_t len;
     int rc = multibase_encode(
         MULTIBASE_BASE64,
         input,
         strlen((char *)input),
         output,
-        1024,
+        esize,
         &len
     );
     assert(rc == 1);
@@ -147,13 +175,16 @@ void test_multibase_encode_decode_base64(void **state) {
         ) == 0
     );
 
-    unsigned char *decoded_output = calloc(sizeof(unsigned char), len);
+    int dsize = multibase_encode_size(MULTIBASE_BASE64, output, len);
+    assert(dsize > 0);
+
+    unsigned char *decoded_output = calloc(sizeof(unsigned char), dsize);
     size_t res;
     rc = multibase_decode(
         output,
         len,
         decoded_output,
-        len,
+        dsize,
         &res
     );
     assert(rc == 1);

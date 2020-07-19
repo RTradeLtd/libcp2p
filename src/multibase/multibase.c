@@ -161,6 +161,8 @@ int multibase_decode_size(const char base, const unsigned char *incoming,
             return libp2p_encoding_base32_decode_size(
                 incoming_length); // do we need +1 like base58
         case (MULTIBASE_BASE58_BTC):
+            // do we really need +1?
+            // in the test this is reporting 2 extra bytes than needed
             return libp2p_encoding_base58_decode_size(incoming_length) + 1;
         case (MULTIBASE_BASE64):
             return libp2p_encoding_base64_decode_size(
