@@ -7,6 +7,7 @@
 #include "multicodec/codecs.h"
 #include "multicodec/multicodec.h"
 #include <stdbool.h>
+#include <string.h>
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
@@ -15,11 +16,63 @@ void test_valide_codecs(void **state) {
         bool is_valid = multicodec_is_valid((char *)CODECS_LIST[i]);
         assert(is_valid == true);
     }
+    // test a random string to ensure its not a codec
+    bool is_valid = multicodec_is_valid("this is not a real codec");
+    assert(is_valid == false);
+}
+
+void test_multicodec_encode_decode(void **state) {
+    for (int i = 0; i < CODECS_COUNT; i++) {
+        const char *codec = CODECS_LIST[i];
+        char *in_data = "hello world";
+        size_t in_data_len = 12;
+        char *out_data = calloc(
+            sizeof(char),
+            in_data_len + strlen(codec)
+        );
+        size_t max_out_data_len = sizeof(char) * (in_data_len + strlen(codec));
+        char want_out[max_out_data_len];
+        memset(want_out, 0, max_out_data_len);
+        sprintf(want_out, "%s%s", codec, in_data);
+
+        multicodec_encoded_t *encoded = multicodec_encode(
+            (char *)codec,
+            in_data,
+            in_data_len,
+            out_data,
+            max_out_data_len
+        );
+        assert(encoded != NULL);
+        assert(
+            strcmp(
+                encoded->data,
+                want_out
+            ) == 0
+        );
+
+        char *decoded_out = calloc(sizeof(char), 12); 
+        int rc = multicodec_decode(
+            encoded,
+            decoded_out,
+            12
+        );
+        assert(rc == 0);
+        assert(
+            strcmp(
+                decoded_out,
+                in_data
+            ) == 0
+        );
+        multicodec_free_encoded(encoded);
+        free(decoded_out);
+    }
+
 }
 
 int main(void) {
     const struct CMUnitTest tests[] = {
-        cmocka_unit_test(test_valide_codecs)
+        cmocka_unit_test(test_valide_codecs),
+        cmocka_unit_test(test_multicodec_encode_decode)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
