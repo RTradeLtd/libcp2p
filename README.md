@@ -20,7 +20,7 @@ A libp2p-like protocol written in C with first class support for embedded system
 ## multiformats
 
 * multicodec
-  * largely not working
+  * full encode/decode support for all codecs except 0xcert-imprint-256
 * multiaddr
   * full multiaddr functionality
 * multihash
