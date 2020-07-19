@@ -44,9 +44,10 @@ void test_multibase_encode_decode_base16(void **state) {
     rc = multibase_decode(output, len, decoded_output, dsize, &written);
     assert(rc == 1);
     assert(
-        strcmp(
-            (char *)input,
-            (char *)decoded_output
+        memcmp(
+            input,
+            decoded_output,
+            written
         ) == 0
     );
 
@@ -92,9 +93,10 @@ void test_multibase_encode_decode_base32(void **state) {
     );
     assert(rc == 1);
     assert(
-        strcmp(
-            (char *)input,
-            (char *)decoded_output
+        memcmp(
+            input,
+            decoded_output,
+            res
         ) == 0
     );
 
@@ -144,11 +146,13 @@ void test_multibase_encode_decode_base58(void **state) {
     printf("%s\n", decoded_output);
     assert(rc == 1);
     assert(
-        strcmp(
-            (char *)input,
-            (char *)decoded_output
+        memcmp(
+            input,
+            decoded_output,
+            res
         ) == 0
-    ); */
+    );
+     */
 }
 
 void test_multibase_encode_decode_base64(void **state) {
@@ -189,9 +193,10 @@ void test_multibase_encode_decode_base64(void **state) {
     );
     assert(rc == 1);
     assert(
-        strcmp(
-            (char *)input,
-            (char *)decoded_output
+        memcmp(
+            input,
+            decoded_output,
+            res
         ) == 0
     );
 

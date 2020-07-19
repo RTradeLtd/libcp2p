@@ -75,17 +75,19 @@ int multibase_encode(const char base, const unsigned char *incoming,
  */
 int multibase_encode_size(const char base, const unsigned char *incoming,
                           size_t incoming_length) {
+
+    // we return + 1 to account for the multibase identifier
     switch (base) {
         case (MULTIBASE_BASE16):
-            return libp2p_encoding_base16_encode_size(incoming_length);
+            return libp2p_encoding_base16_encode_size(incoming_length) + 1;
         case (MULTIBASE_BASE32):
             return libp2p_encoding_base32_encode_size(
-                incoming_length); // do we need +1 like base58
+                incoming_length) + 1;
         case (MULTIBASE_BASE58_BTC):
             return libp2p_encoding_base58_encode_size(incoming_length) + 1;
         case (MULTIBASE_BASE64):
             return libp2p_encoding_base64_encode_size(
-                incoming_length); // do we need + 1 like base58
+                incoming_length) + 1;
     }
     return 0;
 }
