@@ -31,7 +31,12 @@ void multicodec_free_encoded(multicodec_encoded_t *encoded) {
  */
 multicodec_encoded_t *multicodec_encode(char *codec, char *inData, size_t inDataLength,
                       char *outData, size_t maxOutDataLength) {
-                        
+    
+    // make sure the codec is supported
+    if (multicodec_is_valid(codec) == false) {
+        return NULL;   
+    }
+
     multicodec_encoded_t *encoded = calloc(
         sizeof(multicodec_encoded_t),
         sizeof(multicodec_encoded_t)  
@@ -63,9 +68,11 @@ multicodec_encoded_t *multicodec_encode(char *codec, char *inData, size_t inData
  */
 int multicodec_decode(multicodec_encoded_t *encoded, char *outData,
                       size_t maxOutDataLength) {
-    /*!
-      * @todo determine a better way of parsing the multicodec as this is not exactly "fast"
-    */
+    
+    // make sure the codec is supported
+    if (multicodec_is_valid(encoded->codec) == false) {
+        return 1;   
+    }
 
     memcpy(
         outData,

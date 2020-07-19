@@ -66,6 +66,11 @@ void test_multicodec_encode_decode(void **state) {
         multicodec_free_encoded(encoded);
         free(decoded_out);
     }
+    multicodec_encoded_t *enc = multicodec_encode("not a real codec", NULL, 0, NULL, 0);
+    assert(enc == NULL);
+    multicodec_encoded_t test_enc = {.codec = "not a real codec"};
+    int rc = multicodec_decode(&test_enc, NULL, 0);
+    assert(rc == 1);
 
 }
 
