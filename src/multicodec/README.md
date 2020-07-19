@@ -38,3 +38,7 @@ then at the end of the file add the following (note you may need to increase the
 
 * `RAW` is the IPLD raw format
 * `0XCERT_IMPRINT_256` is incompatible as a variable name
+
+# license
+
+by and large this library has been completely overhauled from the original version in `Agorise/libp2p` however for historical purposes the license of the original version can be found [here](https://github.com/Agorise/c-multicodec/blob/master/LICENSE)
