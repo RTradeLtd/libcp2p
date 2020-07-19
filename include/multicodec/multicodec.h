@@ -10,10 +10,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the Licens
 
-/**
- * An implementation of multicodec
- * See https://github.com/multiformats/multicodec
- */
+/*! @file multicodec.h
+  * @author Bonedaddy
+  * @brief an implemention of multicodec
+  * @details enables self describing data encoding methods, for the actual codec definitions see codecs.h
+  * @note for more information on multicodecs see https://github.com/multiformats/multicodec
+*/
 
 #pragma once
 
@@ -35,6 +37,7 @@ typedef struct multicodec_encoded {
 
 
 /*! @brief free up resources allocated for multicodec_encoded_t
+  * @param encoded the isntance of multicodec_encoded_t we are freeing
 */
 void multicodec_free_encoded(multicodec_encoded_t *encoded);
 

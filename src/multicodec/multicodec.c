@@ -10,6 +10,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the Licens
 
+/*! @file multicodec.h
+  * @author Bonedaddy
+  * @brief an implemention of multicodec
+  * @details enables self describing data encoding methods, for the actual codec definitions see codecs.h
+  * @note for more information on multicodecs see https://github.com/multiformats/multicodec
+*/
+
 #include "multicodec/multicodec.h"
 #include "multicodec/codecs.h"
 #include <string.h>
@@ -21,6 +28,7 @@ const char *CODECS_LIST[CODECS_COUNT] = {IDENTITY, IP4, TCP, SHA1, SHA2_256, SHA
 
 
 /*! @brief free up resources allocated for multicodec_encoded_t
+  * @param encoded the isntance of multicodec_encoded_t we are freeing
 */
 void multicodec_free_encoded(multicodec_encoded_t *encoded) {
     /*!
