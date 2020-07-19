@@ -1,4 +1,3 @@
-
 // Copyright 2020 RTrade Technologies Ltd
 //
 // licensed under GNU AFFERO GENERAL PUBLIC LICENSE;
