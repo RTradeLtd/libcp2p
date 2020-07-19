@@ -11,6 +11,28 @@ A libp2p-like protocol written in C and designed to support embedded systems. Hi
   * Redesigned so that identify is optional
 * Protobuf replaced with cbor
 
+# features
+
+## Multiformats
+
+* multicodec
+  * largely not working
+* multiaddr
+  * full multiaddr functionality
+* multihash
+  * basic multihash functionality, only supports SHAX-XXX, and Blake2B
+* multibase
+  * supports base16, base32, base58, base64
+  * note: base58 encoding/decoding is partially broken
+
+## Misc
+
+* protobuf support
+* cryptography
+  * ecdsa key management
+  * rsa key management
+  * sha1, sha256, sha512 hashing
+  * misc other crypto functionality
 
 # roadmap
 
