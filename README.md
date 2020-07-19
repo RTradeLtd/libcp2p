@@ -15,7 +15,7 @@ A libp2p-like protocol written in C and designed to support embedded systems. Hi
 
 # features
 
-## Multiformats
+## multiformats
 
 * multicodec
   * largely not working
@@ -27,12 +27,13 @@ A libp2p-like protocol written in C and designed to support embedded systems. Hi
   * supports base16, base32, base58, base64
   * note: base58 encoding/decoding is partially broken
 
-## Misc
+## misc
 
 * cid
   * basic support only
 * protobuf support
   * basic support only
+  * this will eventually be removed in favor of CBOR
 * cryptography
   * ecdsa key management
   * rsa key management
@@ -47,10 +48,6 @@ A libp2p-like protocol written in C and designed to support embedded systems. Hi
   * Protobuf
 * Get basic networking done
 * ....
-
-# protobuf
-
-* The `src/protobuf` code is being left here for the time being, but protobuf is being deprecated for cbor
 
 # installation
 
@@ -119,3 +116,8 @@ Valgrind is integrated with CMake, so if you have valgrind locally you can run m
 ```shell
 $> ctest -T memcheck
 ```
+
+
+# license
+
+Certain libraries are copy&pasted from other open sources repositories are explicitly licensed under MIT or GPLv3. The code written for this lbirary specifically is licensed under AGPLv3. [According to this stack overflow post](https://opensource.stackexchange.com/questions/5909/is-every-license-that-is-gplv3-compatible-also-agplv3-compatible/6785#6785) this is acceptable. If you think this is not acceptable please open a github issue and we will make ammends
