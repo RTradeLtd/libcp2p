@@ -571,9 +571,9 @@ int libp2p_encoding_base32_encode(const unsigned char *incoming,
  * @returns the size of the buffer necessary to hold the encoded bytes
  */
 size_t libp2p_encoding_base32_encode_size(size_t incoming_length) {
-    incoming_length -= 5;
-    incoming_length /= 5;
-    return incoming_length * 8 + 1;
+    // https://stackoverflow.com/questions/23636240/how-do-i-predict-the-required-size-of-a-base32-decode-output
+    incoming_length = ((double)incoming_length * (double)1.6);
+    return incoming_length + 8; // +8 due to rounding
 }
 
 /**
