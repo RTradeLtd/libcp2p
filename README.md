@@ -119,8 +119,3 @@ Valgrind is integrated with CMake, so if you have valgrind locally you can run m
 ```shell
 $> ctest -T memcheck
 ```
-
-# TODOs
-
-* Look into using glib for stuff like base64 decoding
-  * https://developer.gnome.org/glib/stable/glib-Base64-Encoding.html#g-base64-encode
