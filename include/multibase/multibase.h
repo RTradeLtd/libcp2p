@@ -1,7 +1,6 @@
 #include <stdio.h>
 
-#ifndef __IPFS_MULTIBASE_MULTIBASE_H__
-#define __IPFS_MULTIBASE_MULTIBASE_H__
+#pragma once
 
 // the first digit of data, to determine the encoding used or using
 #define MULTIBASE_BASE1 '1'
@@ -60,5 +59,3 @@ int multibase_decode(const unsigned char *incoming, size_t incoming_length,
  */
 int multibase_decode_size(const char base, const unsigned char *incoming,
                           size_t incoming_length);
-
-#endif
