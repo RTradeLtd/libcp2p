@@ -1,11 +1,13 @@
 /*!
+ * @warning likely contains multiple bugs due to heavy usage of `str___` builtins and operating on unsigned char pointers
  * @warning suffers a string truncation bug from `stringoptruncation`
- * /usr/include/x86_64-linux-gnu/bits/string_fortified.h:106:10: error:
+ * @warning /usr/include/x86_64-linux-gnu/bits/string_fortified.h:106:10: error:
  ‘__builtin_strncpy’ output may be truncated copying 1 byte from a string of
  length 799 [-Werror=stringop-truncation] 106 |   return __builtin___strncpy_chk
  (__dest, __src, __len, __bos (__dest));
-  * temporarily ignored
+  * @warning temporarily ignored
 */
+
 #pragma GCC diagnostic ignored "-Wstringop-truncation"
 
 #include "utils/varhexutils.h"
@@ -312,10 +314,10 @@ void str2hex(unsigned char *hexstring, unsigned char *string) {
     for (i = 0, j = 0; i < len; i++, j += 2) {
         ch = string[i];
 
-        if (ch >= 0 && ch <= 0x0F) {
+        if (ch <= 0x0F) {
             hexstring[j] = 0x30;
 
-            if (ch >= 0 && ch <= 9)
+            if (ch <= 9)
                 hexstring[j + 1] = 0x30 + ch;
             else
                 hexstring[j + 1] = 0x37 + ch;
@@ -323,7 +325,7 @@ void str2hex(unsigned char *hexstring, unsigned char *string) {
             hexstring[j] = 0x31;
             ch -= 0x10;
 
-            if (ch >= 0 && ch <= 9)
+            if (ch <= 9)
                 hexstring[j + 1] = 0x30 + ch;
             else
                 hexstring[j + 1] = 0x37 + ch;
@@ -331,7 +333,7 @@ void str2hex(unsigned char *hexstring, unsigned char *string) {
             hexstring[j] = 0x32;
             ch -= 0x20;
 
-            if (ch >= 0 && ch <= 9)
+            if (ch <= 9)
                 hexstring[j + 1] = 0x30 + ch;
             else
                 hexstring[j + 1] = 0x37 + ch;
@@ -339,7 +341,7 @@ void str2hex(unsigned char *hexstring, unsigned char *string) {
             hexstring[j] = 0x33;
             ch -= 0x30;
 
-            if (ch >= 0 && ch <= 9)
+            if (ch <= 9)
                 hexstring[j + 1] = 0x30 + ch;
             else
                 hexstring[j + 1] = 0x37 + ch;
@@ -347,7 +349,7 @@ void str2hex(unsigned char *hexstring, unsigned char *string) {
             hexstring[j] = 0x34;
             ch -= 0x40;
 
-            if (ch >= 0 && ch <= 9)
+            if (ch <= 9)
                 hexstring[j + 1] = 0x30 + ch;
             else
                 hexstring[j + 1] = 0x37 + ch;
@@ -355,7 +357,7 @@ void str2hex(unsigned char *hexstring, unsigned char *string) {
             hexstring[j] = 0x35;
             ch -= 0x50;
 
-            if (ch >= 0 && ch <= 9)
+            if (ch <= 9)
                 hexstring[j + 1] = 0x30 + ch;
             else
                 hexstring[j + 1] = 0x37 + ch;
@@ -363,7 +365,7 @@ void str2hex(unsigned char *hexstring, unsigned char *string) {
             hexstring[j] = 0x36;
             ch -= 0x60;
 
-            if (ch >= 0 && ch <= 9)
+            if (ch <= 9)
                 hexstring[j + 1] = 0x30 + ch;
             else
                 hexstring[j + 1] = 0x37 + ch;
@@ -371,7 +373,7 @@ void str2hex(unsigned char *hexstring, unsigned char *string) {
             hexstring[j] = 0x37;
             ch -= 0x70;
 
-            if (ch >= 0 && ch <= 9)
+            if (ch <= 9)
                 hexstring[j + 1] = 0x30 + ch;
             else
                 hexstring[j + 1] = 0x37 + ch;
@@ -395,10 +397,12 @@ int header(unsigned char *dest, unsigned char *src) {
         return 0;
     }
     char size[3];
-    bzero(size, 3);
-    strcpy(size, Int_To_Hex((strlen(src) / 2) - 1));
-    strcat(dest, size);
-    strcat(dest, src);
+    memset(size, 0, 3);
+    // this likely contains a bug as we cant be sure `src` is null terminated
+    strcpy(size, Int_To_Hex((strlen((char *)src) / 2) - 1));
+    // this likely contains a bug as we cant be sure `src` or `dest` is null terminated
+    strcat((char *)dest, size);
+    strcat((char *)dest, (char *)src);
     return 1;
 }
 
@@ -411,7 +415,8 @@ int header_path(unsigned char *dest, unsigned char *src) {
     if (!src) {
         return 0;
     }
-    sprintf(dest, "%s", src + 2);
+    // this likely contains a bug as we cant be surce dest or src is null terminated
+    sprintf((char *)dest, "%s", src + 2);
     return 1;
 }
 
@@ -439,11 +444,11 @@ int add_header(unsigned char *dest, unsigned char *header, size_t headersize,
     }
     int realsize = (headersize - 1 + contentsize - 1) / 2;
     char szhex[3];
-    bzero(szhex, 3);
+    memset(szhex, 0, 3);
     strcat(szhex, Int_To_Hex(realsize));
-    strcat(dest, szhex);
-    strcat(dest, header);
-    strcat(dest, content);
+    strcat((char *)dest, szhex);
+    strcat((char *)dest, (char *)header);
+    strcat((char *)dest, (char *)content);
     return 1;
 }
 
@@ -458,10 +463,10 @@ int remove_header(unsigned char *dest, unsigned char *lel) {
     if (!lel) {
         return 0;
     }
-    int init = 0;
-    char s[(strlen(lel) / 2) + 1];
-    int sizs = strlen(lel) / 2 + 1;
-    hex2str(lel, s, sizs);
+    // int init = 0;
+    char s[(strlen((char *)lel) / 2) + 1];
+    int sizs = strlen((char *)lel) / 2 + 1;
+    hex2str((char *)lel, s, sizs);
     sprintf(s, "%s", s + 1);
     char *pch;
     char *end;
@@ -470,7 +475,7 @@ int remove_header(unsigned char *dest, unsigned char *lel) {
     while (pch) {
         // printf("PCH: %s\n", pch);
         if (pos == 1) {
-            str2hex(dest, pch);
+            str2hex(dest, (unsigned char *)pch);
         }
         // sprintf(dest,"%s",pch);
         pch = strtok_r(NULL, "/", &end);
@@ -489,8 +494,8 @@ int get_header(char *dest, unsigned char *src) {
     if (!src) {
         return 0;
     }
-    char ascii[strlen(src) / 2];
-    hex2str(src, ascii, strlen(src) / 2);
+    char ascii[strlen((char *)src) / 2];
+    hex2str((char *)src, ascii, strlen((char *)src) / 2);
     sprintf(ascii, "%s", ascii + 1);
     char *pch;
     char *end;
@@ -522,8 +527,8 @@ int get_content(char *dest, unsigned char *src) {
     if (!src) {
         return 0;
     }
-    char ascii[strlen(src) / 2];
-    hex2str(src, ascii, strlen(src) / 2);
+    char ascii[strlen((char *)src) / 2];
+    hex2str((char *)src, ascii, strlen((char *)src) / 2);
     sprintf(ascii, "%s", ascii + 1);
     char *pch;
     char *end;
