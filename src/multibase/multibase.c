@@ -104,27 +104,33 @@ int multibase_decode(const unsigned char *incoming, size_t incoming_length,
                      size_t *results_length) {
     *results_length = results_max_length;
     int retVal = 0;
-
+    // the base we are decoding
     const char base = incoming[0];
+    
+    // parse the actual encoded data fro mthe base identifier
+    unsigned char *rest = calloc(sizeof(unsigned char), incoming_length - 1);
+    // copy incoming offset 1 to `rest`
+    // we need to do this as the first value of `incoming` is the base identifier
+    // which will cause an error if we feed it into the decoder
+    memcpy(rest, incoming+1, incoming_length-1);
 
+    // (incoming_length - 1) is done because incoming_length includes the base identifier
     switch (base) {
         case (MULTIBASE_BASE16):
-            retVal = libp2p_encoding_base16_decode(incoming, incoming_length - 1,
+            retVal = libp2p_encoding_base16_decode(rest, incoming_length - 1,
                                                    results, results_length);
             break;
         case (MULTIBASE_BASE32):
-            // TODO(bonedaddy): do we need -1 on incoming length
-            retVal = libp2p_encoding_base32_decode(incoming, incoming_length,
+            retVal = libp2p_encoding_base32_decode(rest, incoming_length - 1,
                                                    results, results_length);
             break;
         case (MULTIBASE_BASE58_BTC):
             retVal = libp2p_encoding_base58_decode(
-                (char *)incoming, incoming_length - 1, &results, results_length);
+                (char *)rest, incoming_length - 1, &results, results_length);
             break;
         case (MULTIBASE_BASE64):
-            // TODO(bonedaddy): do we need -1 on incoming length?
             retVal =
-                libp2p_encoding_base64_decode(incoming, incoming_length, results,
+                libp2p_encoding_base64_decode(rest, incoming_length -1, results,
                                               results_max_length, results_length);
             break;
         default: // unsupported format
