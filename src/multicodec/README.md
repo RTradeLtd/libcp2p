@@ -12,6 +12,28 @@ $> sed -i 's/DEFINE/define/g' codecs.h
 
 after you'll want to manually edit the file to remove the final line and `0XCERT_IMPRINT_256` declaration as it is not a valid variable name. Additionally you'll want to remove the first line of the file.
 
+To regenerate the array of codecs you'll want to run the following:
+
+```shell
+#! /bin/bash
+
+OUT="[ "
+
+while IFS= read -r line; do
+        OUT="$OUT, $line"
+        echo "$OUT"
+done < vars.txt
+OUT="$OUT ]"
+
+echo "$OUT" >> codecs.h
+```
+
+then at the end of the file add the following (note you may need to increase the count)
+
+```C
+#define CODECS_COUNT 445
+```
+
 # notes
 
 * `RAW` is the IPLD raw format

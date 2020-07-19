@@ -3,10 +3,12 @@
  * See https://github.com/multiformats/multicodec
  */
 
-#ifndef __MULTICODEC_H__
-#define __MULTICODEC_H__
+#pragma once
 
 #include <stdlib.h>
+#include <stdbool.h>
+#include "codecs.h"
+
 
 #define MULTICODEC_RAW_BINARY 0x052f6269632f
 #define MULTICODEC_ASCII_BASE_2 0x042f62322f
@@ -35,4 +37,11 @@ int multicodec_encode(char *codec, char *inData, size_t inDataLength,
 int multicodec_decode(char *inData, size_t inDataLength, char *outData,
                       size_t maxOutDataLength);
 
-#endif // __MULTICODEC_H__
+
+/*!
+  * @brief used to check if the provided codec is a valid codec
+  * @param codec the codec value to check
+  * @returns Success: true
+  * @returns Failure: false
+*/
+bool multicodec_is_valid(char *codec);
