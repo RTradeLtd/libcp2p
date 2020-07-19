@@ -1,6 +1,8 @@
 # libcp2p
 
-A libp2p-like protocol written in C and designed to support embedded systems. High level language bindings will use FFI. Heavy WIP
+> **this is a work in progress**
+
+A libp2p-like protocol written in C with first class support for embedded systems. Goal is to be able to run in your fridge, arduinos, and any embedded system. Higher level languages will be done using FFI.
 
 # difference between libcp2p and libp2p
 

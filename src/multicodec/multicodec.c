@@ -1,6 +1,9 @@
 #include "multicodec/multicodec.h"
+#include <string.h>
 
-int multicodec_encode(const char *codecName, char *inData, size_t inDataLength,
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+
+int multicodec_encode(char *codec, char *inData, size_t inDataLength,
                       char *outData, size_t maxOutDataLength) {
     return 0;
 }

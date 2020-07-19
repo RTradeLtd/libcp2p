@@ -21,7 +21,7 @@
  * @param maxOutDataLength the max size for the output
  * @returns an error code or 0 if all is well
  */
-int multicodec_encode(const char *codecName, char *inData, size_t inDataLength,
+int multicodec_encode(char *codec, char *inData, size_t inDataLength,
                       char *outData, size_t maxOutDataLength);
 
 /**
