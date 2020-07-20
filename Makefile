@@ -3,7 +3,7 @@ build:
 	(./.scripts/build.sh)
 
 .PHONY: build-ci
-build:
+build-ci:
 	(./.scripts/build.sh ci)
 
 .PHONY: build-debug
