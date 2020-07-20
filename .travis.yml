@@ -34,4 +34,4 @@ script:
   # build project in release mode
   - make build-ci
   # change to builddir and run tests
-  - cd build && ctest
+  - cd build && ctest --extra-verbose
