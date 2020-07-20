@@ -2,6 +2,10 @@
 build:
 	(./.scripts/build.sh)
 
+.PHONY: build-ci
+build:
+	(./.scripts/build.sh ci)
+
 .PHONY: build-debug
 build-debug:
 	(./.scripts/build.sh debug)

@@ -25,6 +25,6 @@ script:
   # install doxygen
   - sudo apt install doxygen -y
   # build project in release mode
-  - make
+  - make build-ci
   # change to builddir and run tests
   - cd build && ctest
