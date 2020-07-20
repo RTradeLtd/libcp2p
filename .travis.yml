@@ -22,6 +22,8 @@ script:
   - export CXX=/usr/bin/g++-9
   # Check versions of gcc, g++ and cmake
   - gcc -v && g++ -v && cmake --version
+  # install doxygen
+  - sudo apt install doxygen -y
   # build project in release mode
   - make
   # change to builddir and run tests
