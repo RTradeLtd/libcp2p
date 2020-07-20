@@ -18,7 +18,10 @@ build-analysis:
 docs:
 	(cd build; cmake --build . --target doxygen-docs)
 
-
+.PHONY: install-mbedtls
+install-mbedtls:
+	(./.scripts/install_mbedtls.sh)
+	
 .PHONY: clean
 clean:
 	(./.scripts/clean.sh)

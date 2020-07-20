@@ -24,6 +24,8 @@ script:
   - gcc -v && g++ -v && cmake --version
   # install doxygen
   - sudo apt install doxygen -y
+  # install mbed tls
+  - make install-mbedtls
   # build project in release mode
   - make build-ci
   # change to builddir and run tests
