@@ -31,7 +31,7 @@ script:
   # Check versions of gcc, g++ and cmake
   - gcc -v && g++ -v && cmake --version
   # install doxygen and dot
-  - sudo apt install doxygen dot -y
+  - sudo apt install doxygen graphviz -y
   # install cmocka
   - sudo apt install libcmocka0 libcmocka-dev -y
   # - make install-cmocka
