@@ -33,3 +33,9 @@ script:
   - make build-ci
   # change to builddir and run tests
   - cd build && ctest --extra-verbose
+
+deploy:
+  provider: script
+  script: .scripts/valgrind.sh
+  on:
+    branch: master
