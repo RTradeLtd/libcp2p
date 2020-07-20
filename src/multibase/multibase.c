@@ -62,7 +62,7 @@ int multibase_encode(const char base, const unsigned char *incoming,
     /*!
       * @note: memcpy can't handle overlapping bytes so use memmove
     */
-    memmove(&results[1], results, *results_length);
+    memmove(results + 1, results, *results_length);
     // memcpy(&results[1], results, *results_length);
     results[0] = base;
     *results_length += 1;
