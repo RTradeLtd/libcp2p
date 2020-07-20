@@ -30,7 +30,7 @@ jobs:
 
   link:
     docker:
-      - image: gcc:8.2
+      - image: gcc:9.3
     steps:
       # instead of checking out, restore workspace (will merge all parallel containers from previous job)
       - attach_workspace:
