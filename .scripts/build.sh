@@ -44,7 +44,7 @@ function ci_build() {
         echo "detecting different build mode, recreating build dir"
         rm -rf build && mkdir build
     fi
-    echo "building libcp2p in static analysis mode"
+    echo "building libcp2p in ci mode"
     cd build
     cmake -D CMAKE_BUILD_TYPE=CI ..
     cmake -D CMAKE_BUILD_TYPE=CI -build . 

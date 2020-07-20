@@ -21,7 +21,15 @@ docs:
 .PHONY: install-mbedtls
 install-mbedtls:
 	(./.scripts/install_mbedtls.sh)
-	
+
+.PHONY: install-deps-ubuntu
+install-deps-ubuntu: deps-ubuntu install-mbedtls
+
+.PHONY: deps-ubuntu
+deps-ubuntu:
+	sudo apt install doxygen -y
+	sudo apt install libcmocka0 libcmocka-dev -y
+
 .PHONY: clean
 clean:
 	(./.scripts/clean.sh)
