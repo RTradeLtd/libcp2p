@@ -6,6 +6,7 @@
 #include "encoding/base58.h"
 #include "multihash/hashes.h"
 #include "multihash/multihash.h"
+#include "multibase/multibase.h"
 
 /**
  * @brief returns a libp2p peerid from the sha256 hash of a public key
@@ -22,10 +23,7 @@ int libp2p_new_peer_id(unsigned char *pointyaddr, size_t *rezbuflen,
                        unsigned char *ID_BUF,
                        size_t ID_BUF_SIZE) // b58 encoded ID buf
 {
-    int returnstatus = 0;
-
     unsigned char temp_buffer[*rezbuflen];
-
     memset(temp_buffer, 0, *rezbuflen);
 
     // wrap the base58 into a multihash
@@ -33,13 +31,14 @@ int libp2p_new_peer_id(unsigned char *pointyaddr, size_t *rezbuflen,
     if (retVal < 0)
         return 0;
 
-    // base58 the multihash
-    returnstatus = libp2p_encoding_base58_encode(
-        temp_buffer, strlen((char *)temp_buffer), &pointyaddr, rezbuflen);
-    if (returnstatus == 0)
-        return 0;
-
-    return 1;
+    return multibase_encode(
+        MULTIBASE_BASE58_BTC,
+        temp_buffer,
+        ID_BUF_SIZE + 2, // 2 (1 for code, 1 for digest_len)
+        pointyaddr,
+        *rezbuflen,
+        rezbuflen
+    );
 }
 
 /****
