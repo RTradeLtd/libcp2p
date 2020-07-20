@@ -20,6 +20,13 @@ env:
     - LD_LIBRARY_PATH="${DESTDIR}${PREFIX}/lib:${LD_LIBRARY_PATH}"
     - CMOCKA_LIBS="-L${DESTDIR}${PREFIX}/lib -lcmocka"
    
+before_install:
+  # install doxygen and dot
+  - sudo apt install doxygen graphviz -y
+  # install cmocka
+  # - sudo apt install libcmocka0 libcmocka-dev -y
+  - make install-cmocka
+  - make install-mbedtls
 
 script:
   # Link gcc-9 and g++-9 to their standard commands
@@ -30,13 +37,6 @@ script:
   - export CXX=/usr/bin/g++-9
   # Check versions of gcc, g++ and cmake
   - gcc -v && g++ -v && cmake --version
-  # install doxygen and dot
-  - sudo apt install doxygen graphviz -y
-  # install cmocka
-  - sudo apt install libcmocka0 libcmocka-dev -y
-  # - make install-cmocka
-  # install mbed tls
-  - make install-mbedtls
   # build project in release mode
   - make build-ci
   # change to builddir and run tests
