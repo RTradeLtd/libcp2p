@@ -54,6 +54,8 @@ $> make build-analysis # builds in static analysis mode
 
 ## dependencies
 
+### list
+
 * CMake >= 3.0
 * GCC with support for C17
   * If you want to run static analysis, GCC-10 installed
@@ -63,7 +65,16 @@ $> make build-analysis # builds in static analysis mode
 * doxygen (documentation generation)
 * pthreads
 
-## compiling mbedtls
+### ubuntu installation
+
+If you want to install the dependencies on ubuntu you can do this via a single make target:
+```shell
+$> make install-deps-ubuntu
+```
+
+### compiling mbedtls
+
+if you want to install mbedtls manually make sure you use teh following commands
 
 ```shell
 $> make -j6 CFLAGS="-fPIC" # reduce -jX to suit your environment appropriately

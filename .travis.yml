@@ -1,0 +1,37 @@
+dist: trusty
+sudo: required
+language:
+  - cpp
+  - c
+compiler:
+  - gcc
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-9
+      - g++-9
+      - cmake
+   
+before_install:
+  # install doxygen and dot
+  - sudo apt install doxygen graphviz -y
+  # install cmocka
+  # - sudo apt install libcmocka0 libcmocka-dev -y
+  - make install-cmocka
+  - make install-mbedtls
+
+script:
+  # Link gcc-9 and g++-9 to their standard commands
+  - sudo ln -s /usr/bin/gcc-9 /usr/local/bin/gcc
+  - sudo ln -s /usr/bin/g++-9 /usr/local/bin/g++
+  # Export CC and CXX to tell cmake which compiler to use
+  - export CC=/usr/bin/gcc-9
+  - export CXX=/usr/bin/g++-9
+  # Check versions of gcc, g++ and cmake
+  - gcc -v && g++ -v && cmake --version
+  # build project in release mode
+  - make build-ci
+  # change to builddir and run tests
+  - cd build && ctest --extra-verbose

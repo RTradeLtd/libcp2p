@@ -20,6 +20,15 @@ if(CMAKE_BUILD_TYPE STREQUAL "Analyze")
     message(STATUS "enabling static analysis")
 endif()
 
+# handle ci build type
+if(CMAKE_BUILD_TYPE STREQUAL "CI")
+    set(CMAKE_BUILD_TYPE "Release")
+    list(APPEND flags -std=c17 -Wall -Wextra -Werror -pedantic -I/home/travis/build/RTradeLtd/libcp2p/destdir/usr/include/)
+    # override the previous C compiler choice
+    set(CMAKE_C_COMPILER /usr/bin/gcc-9)
+endif()
+
+
 # handle no build type
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Release")

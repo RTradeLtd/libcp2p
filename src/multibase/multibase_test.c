@@ -30,6 +30,7 @@ void test_multibase_encode_decode_base16(void **state) {
         &len
     );
     assert(rc == 1);
+    printf("base16: %s\n", output);
     // assert that the first element is the base16 identifier
     assert(output[0] == MULTIBASE_BASE16);
     assert(

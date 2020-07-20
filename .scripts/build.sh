@@ -39,12 +39,28 @@ function analyze_build() {
     echo "analyze" > .last_build
 }
 
+function ci_build() {
+    if [[ $(cat build/.last_build) != "ci" ]]; then
+        echo "detecting different build mode, recreating build dir"
+        rm -rf build && mkdir build
+    fi
+    echo "building libcp2p in ci mode"
+    cd build
+    cmake -D CMAKE_BUILD_TYPE=CI ..
+    cmake -D CMAKE_BUILD_TYPE=CI -build . 
+    make
+    echo "ci" > .last_build    
+}
+
 if [[ ! -d "build" ]]; then
     mkdir build
 fi
 
 
 case "$1" in
+    ci)
+        ci_build
+        ;;
     debug)
         debug_build
         ;;
