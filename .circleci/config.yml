@@ -1,0 +1,48 @@
+version: 2
+
+workflows:
+  version: 2
+  dist-compile:
+    jobs:
+      - compile
+      - link:
+          requires: 
+            - compile
+
+
+jobs:
+  compile:
+    docker:
+      - image: gcc:9.3
+    steps:
+      - checkout
+      - run:
+         name: install cmake
+         command: sudo apt install cmake -y
+      #split all c files based on the index ID we're running on, pass subset to gcc compile
+      - run: circleci tests glob "**/*.c" | circleci tests split --split-by=filesize | xargs gcc -c 
+      # move compiled files to specific folder and persist to workspace
+      - run: mkdir output && mv *.o output
+      - persist_to_workspace:
+          root: output
+          paths:
+            - "*.o"
+
+  link:
+    docker:
+      - image: gcc:8.2
+    steps:
+      # instead of checking out, restore workspace (will merge all parallel containers from previous job)
+      - attach_workspace:
+          at: output
+      - run: ls -la output
+      - run: mv output/* .
+      # link the compiled files into an executable
+      - run: gcc -o program *.o
+      # confirm program exists and is executable
+      - run: ls -la
+      - run: ./program
+      # persist as artifact
+      - store_artifacts:
+          path: program
+
