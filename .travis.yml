@@ -13,6 +13,14 @@ addons:
       - gcc-9
       - g++-9
       - cmake
+env:
+  global:
+    - DESTDIR="${TRAVIS_BUILD_DIR}/destdir"
+    - PKG_CONFIG_PATH="${DESTDIR}${PREFIX}/lib/pkgconfig:${PKG_CONFIG_PATH}"
+    - LD_LIBRARY_PATH="${DESTDIR}${PREFIX}/lib:${LD_LIBRARY_PATH}"
+    - CFLAGS="-I${DESTDIR}${PREFIX}/include"
+    - CMOCKA_LIBS="-L${DESTDIR}${PREFIX}/lib -lcmocka"
+
 script:
   # Link gcc-9 and g++-9 to their standard commands
   - sudo ln -s /usr/bin/gcc-9 /usr/local/bin/gcc
@@ -25,7 +33,12 @@ script:
   # install doxygen
   - sudo apt install doxygen -y
   # install cmocka
-  - sudo apt install libcmocka0 libcmocka-dev -y
+  # - sudo apt install libcmocka0 libcmocka-dev -y
+  - wget https://cmocka.org/files/1.0/cmocka-1.0.1.tar.xz
+  - tar -Jxvf cmocka-1.0.1.tar.xz
+  - mkdir cmocka-1.0.1/build && pushd cmocka-1.0.1/build
+  - cmake ../ -DCMAKE_INSTALL_PREFIX=${PREFIX} -DCMAKE_BUILD_TYPE=Release
+  - make -j$(nproc) install
   # install mbed tls
   - make install-mbedtls
   # build project in release mode
