@@ -15,10 +15,8 @@ addons:
       - cmake
    
 before_install:
-  # install doxygen and dot
   - sudo apt install doxygen graphviz -y
-  # install cmocka
-  # - sudo apt install libcmocka0 libcmocka-dev -y
+  - sudo apt install valgrind -y
   - make install-cmocka
   - make install-mbedtls
 
