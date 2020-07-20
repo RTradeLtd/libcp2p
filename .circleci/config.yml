@@ -13,9 +13,12 @@ workflows:
 jobs:
   compile:
     docker:
-      - image: gcc:9.3
+      - image: image: cimg/base:2020.01
     steps:
       - checkout
+      - run:
+         name: install gcc
+         command: gcc-9-x86-64-linux-gnu-base
       - run:
          name: install cmake
          command: sudo apt install cmake -y
