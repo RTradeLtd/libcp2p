@@ -16,10 +16,6 @@ addons:
 env:
   global:
     - DESTDIR="${TRAVIS_BUILD_DIR}/destdir"
-    - PKG_CONFIG_PATH="${DESTDIR}${PREFIX}/lib/pkgconfig:${PKG_CONFIG_PATH}"
-    - LD_LIBRARY_PATH="${DESTDIR}${PREFIX}/lib:${LD_LIBRARY_PATH}"
-    - CFLAGS="-I${DESTDIR}${PREFIX}/include"
-    - CMOCKA_LIBS="-L${DESTDIR}${PREFIX}/lib -lcmocka"
 
 script:
   # Link gcc-9 and g++-9 to their standard commands
