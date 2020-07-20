@@ -16,7 +16,8 @@ addons:
 env:
   global:
     - DESTDIR="${TRAVIS_BUILD_DIR}/destdir"
-
+    - LD_LIBRARY_PATH="${DESTDIR}${PREFIX}/lib:${LD_LIBRARY_PATH}"
+    
 script:
   # Link gcc-9 and g++-9 to their standard commands
   - sudo ln -s /usr/bin/gcc-9 /usr/local/bin/gcc
