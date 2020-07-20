@@ -13,8 +13,6 @@ addons:
       - gcc-9
       - g++-9
       - cmake
-      - libcmocka0
-      - libcmocka-dev
 env:
   global:
     - DESTDIR="${TRAVIS_BUILD_DIR}/destdir"
@@ -32,9 +30,10 @@ script:
   - export CXX=/usr/bin/g++-9
   # Check versions of gcc, g++ and cmake
   - gcc -v && g++ -v && cmake --version
-  # install doxygen
-  - sudo apt install doxygen -y
+  # install doxygen and dot
+  - sudo apt install doxygen dot -y
   # install cmocka
+  - sudo apt install libcmocka0 libcmocka-dev -y
   # - make install-cmocka
   # install mbed tls
   - make install-mbedtls
