@@ -18,7 +18,7 @@ jobs:
       - checkout
       - run:
          name: install gcc
-         command: gcc-9-x86-64-linux-gnu-base
+         command: sudo apt install gcc-9 -y
       - run:
          name: install cmake
          command: sudo apt install cmake -y
