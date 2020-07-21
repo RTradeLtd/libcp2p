@@ -82,7 +82,7 @@ void test_multiaddr_utils(void **state) {
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 void test_multiaddr_get_peer_id(void **state) {
-    const char *orig_address = "QmYwAPJzv5CZsnA625s3Xf2nemtYgPpHdWEz79ojWnPbdG";
+    const char *orig_address = "CIQKAFXKNLNOTSYX4XXER2AXMVZHINJF7AGJPYNCV2D4F7GPEJEW3TA=";
     char full_string[255] = "";
     char *result = NULL;
     int retVal = 0;
@@ -91,6 +91,7 @@ void test_multiaddr_get_peer_id(void **state) {
     sprintf(full_string, "/ip4/127.0.0.1/tcp/4001/ipfs/%s/", orig_address);
 
     addr = multiaddress_new_from_string(full_string);
+    assert(addr != NULL);
     result = multiaddress_get_peer_id(addr);
     assert(result != NULL);
     int rc = strcmp(orig_address, result);
@@ -101,7 +102,7 @@ void test_multiaddr_get_peer_id(void **state) {
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 void test_multiaddr_peer_id(void **state) {
-    char *orig_address = "QmYwAPJzv5CZsnA625s3Xf2nemtYgPpHdWEz79ojWnPbdG";
+    char *orig_address = "CIQKAFXKNLNOTSYX4XXER2AXMVZHINJF7AGJPYNCV2D4F7GPEJEW3TA=";
     char full_string[255];
     char *result = NULL;
     char *bytes = NULL;
@@ -203,7 +204,7 @@ void test_full(void **state) {
     multiaddress_encapsulate(a, "/udp/3333/");
     //  printf("A STRING ENCAPSULATED UDP: %s\n", a->string);
     multiaddress_encapsulate(
-        a, "/ipfs/QmYwAPJzv5CZsnA625s3Xf2nemtYgPpHdWEz79ojWnPbdG");
+        a, "/ipfs/CIQKAFXKNLNOTSYX4XXER2AXMVZHINJF7AGJPYNCV2D4F7GPEJEW3TA=");
     //  printf("A STRING ENCAPSULATED IPFS:%s\n", a->string);
     tmp = Var_To_Hex((char *)a->bytes, a->bsize);
     //  printf("TEST BYTES: %s\n", tmp);

@@ -10,3 +10,8 @@ To construct a Peer Identifier (aka PeerID, peerID, etc..), you take the hash of
 # Supported Algorithms
 
 In theory any hashing and base encoding algorithm can be used as long as they are supported by the multihash and multibase standards, collectively grouped under the multiformats umbrella. At the moment libcp2p uses SHA256, and base32. This is currently hard coded into the codebase, but will be made flexible later on
+
+
+# NOTE
+
+Currently multiaddr parsing doesn't support multibase encoded strings, so you must ensure the peerID has the multibase identifier removed
