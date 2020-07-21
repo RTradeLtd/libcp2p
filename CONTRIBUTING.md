@@ -1,4 +1,4 @@
-# Development Guidelines
+# Contribution Guidelines
 
 The following is a short summary on development guidelines:
 
