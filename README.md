@@ -71,9 +71,9 @@ $> cd build && ctest -T memcheck # runs valgrind
 * pthreads
 
 
-# development
+# development/contribution
 
-* see [DEVELOPMENT.md](./DEVELOPMENT.md)
+For instructions on development and contribution practices please see [CONTRIBUTING.md](CONTRIBUTING.md)
 
 # license
 
