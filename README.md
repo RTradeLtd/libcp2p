@@ -28,9 +28,8 @@ A libp2p-like protocol written in C with first class support for embedded system
 * multihash
   * basic multihash functionality, only supports SHAX-XXX, and Blake2B
 * multibase
-  * supports base16, base32, base58, base64
-  * note: base58 encoding/decoding is partially broken
-
+  * supports base16, base32, base64
+  
 ## misc
 
 * cid
