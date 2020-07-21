@@ -8,7 +8,7 @@
 #include <string.h>
 #include <strings.h>
 
-#include "encoding/base58.h"
+#include "encoding/base32.h"
 #include "multiaddr/protocols.h"
 #include "utils/varhexutils.h"
 
@@ -350,15 +350,15 @@ NAX:
             // convert the address from hex values to a binary array
             size_t num_bytes = 0;
             unsigned char *addrbuf = Hex_To_Var((char *)IPFS_ADDR, &num_bytes);
-            size_t b58_size = strlen((char *)IPFS_ADDR);
-            unsigned char b58[b58_size];
-            memset(b58, 0, b58_size);
-            unsigned char *ptr_b58 = b58;
-            int returnstatus = libp2p_encoding_base58_encode(addrbuf, num_bytes,
-                                                             &ptr_b58, &b58_size);
+            size_t b32_size = strlen((char *)IPFS_ADDR);
+            unsigned char b32[b32_size];
+            memset(b32, 0, b32_size);
+            unsigned char *ptr_b32 = b32;
+            int returnstatus = libp2p_encoding_base32_encode(addrbuf, num_bytes,
+                                                             ptr_b32, &b32_size);
             free(addrbuf);
             if (returnstatus == 0) {
-                fprintf(stderr, "Unable to base58 encode MultiAddress %s\n",
+                fprintf(stderr, "Unable to base32 encode MultiAddress %s\n",
                         IPFS_ADDR);
                 unload_protocols(head);
                 return 0;
@@ -366,7 +366,7 @@ NAX:
             strcat(results, "/");
             strcat(results, protocol->name);
             strcat(results, "/");
-            strcat(results, (char *)b58);
+            strcat(results, (char *)b32);
         }
     }
     strcat(results, "/");
@@ -508,19 +508,19 @@ char *address_string_to_bytes(struct Protocol *protocol, const char *incoming,
         }
         case 42: // IPFS - !!!
         {
-            // decode the base58 to bytes
+            // decode the base32 to bytes
             char *incoming_copy = NULL;
             incoming_copy = (char *)incoming;
             size_t incoming_copy_size = strlen(incoming_copy);
-            size_t result_buffer_length = libp2p_encoding_base58_decode_max_size(
-                (unsigned char *)incoming_copy);
+            size_t result_buffer_length =
+                libp2p_encoding_base32_decode_size(incoming_copy_size);
             unsigned char result_buffer[result_buffer_length];
             unsigned char *ptr_to_result = result_buffer;
             memset(result_buffer, 0, result_buffer_length);
             // now get the decoded address
-            int return_value =
-                libp2p_encoding_base58_decode(incoming_copy, incoming_copy_size,
-                                              &ptr_to_result, &result_buffer_length);
+            int return_value = libp2p_encoding_base32_decode(
+                (unsigned char *)incoming_copy, incoming_copy_size, ptr_to_result,
+                &result_buffer_length);
             if (return_value == 0) {
                 return "ERR";
             }

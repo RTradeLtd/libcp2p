@@ -9,7 +9,7 @@ A libp2p-like protocol written in C with first class support for embedded system
 # difference between libcp2p and libp2p
 
 * Written in C
-* Uses mbedtls 
+* Base58 replaced with base32
 * Removal of built-in identify protocol
   * LibP2P is heavily reliant on the identify protocol and it is not possible to remove it
   * Redesigned so that identify is optional

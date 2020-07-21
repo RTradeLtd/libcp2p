@@ -32,7 +32,7 @@
 /***
  * A note about CID versions:
  * Version 0 only contained the multihash address. The extra parameters of multibase,
- * multicodec, cid-version were implied (base58btc, protobuf-mdag, and cidv0
+ * multicodec, cid-version were implied (base32btc, protobuf-mdag, and cidv0
  * respectively) are implied.
  */
 
@@ -109,7 +109,7 @@ struct Cid *ipfs_cid_copy(const struct Cid *original);
  * @cid the Cid struct to fill
  * @return true(1) on success
  */
-int ipfs_cid_decode_hash_from_base58(const unsigned char *incoming,
+int ipfs_cid_decode_hash_from_base32(const unsigned char *incoming,
                                      size_t incoming_length, struct Cid **cid);
 
 /***
@@ -128,7 +128,7 @@ int ipfs_cid_decode_hash_from_ipfs_ipns_string(const char *incoming,
  * @param max_buffer_length the maximum space reserved for the results
  * @returns true(1) on success
  */
-int ipfs_cid_hash_to_base58(const unsigned char *hash, size_t hash_length,
+int ipfs_cid_hash_to_base32(const unsigned char *hash, size_t hash_length,
                             unsigned char *buffer, size_t max_buffer_length);
 
 /***

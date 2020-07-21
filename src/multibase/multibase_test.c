@@ -105,57 +105,6 @@ void test_multibase_encode_decode_base32(void **state) {
     free(decoded_output);
 }
 
-void test_multibase_encode_decode_base58(void **state) {
-    unsigned char *input = "hello world";
-    int esize = multibase_encode_size(MULTIBASE_BASE58_BTC, input, 12);
-    assert(esize > 0);
-
-    unsigned char *output = calloc(sizeof(unsigned char), esize);
-    size_t len;
-    int rc = multibase_encode(
-        MULTIBASE_BASE58_BTC,
-        input,
-        strlen((char *)input),
-        output,
-        esize,
-        &len
-    );
-    assert(rc == 1);
-    assert(output[0] == MULTIBASE_BASE58_BTC);
-    assert(
-        strcmp(
-            (char *)output,
-            "zStV1DL6CwTryKyV"
-        ) == 0
-    );
-    // this is coming back with 14 as opposed to 12
-    int dsize = multibase_decode_size(MULTIBASE_BASE58_BTC, output, len);
-    assert(dsize > 0);
-    free(output);
-
-
-    /* base58 decode is broken
-    unsigned char *decoded_output = calloc(sizeof(unsigned char), len);
-    size_t res;
-    rc = multibase_decode(
-        output,
-        len,
-        decoded_output,
-        len,
-        &res
-    );
-    printf("%s\n", decoded_output);
-    assert(rc == 1);
-    assert(
-        memcmp(
-            input,
-            decoded_output,
-            res
-        ) == 0
-    );
-     */
-}
-
 void test_multibase_encode_decode_base64(void **state) {
     unsigned char *input = "hello world";
     int esize = multibase_encode_size(MULTIBASE_BASE64, input, 12);
@@ -210,7 +159,6 @@ int main(void) {
     const struct CMUnitTest tests[] = {
         cmocka_unit_test(test_multibase_encode_decode_base16),
         cmocka_unit_test(test_multibase_encode_decode_base32),
-        cmocka_unit_test(test_multibase_encode_decode_base58),
         cmocka_unit_test(test_multibase_encode_decode_base64)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
