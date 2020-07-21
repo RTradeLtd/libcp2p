@@ -90,23 +90,15 @@ socket_server_t *new_socket_server(thread_logger *thl,
     // setup udp socket
     if (udp_set == true) {
 
-        rc = getaddrinfo(0, config.tcp_port_number, &udp_hints, &udp_bind_address);
+        rc = getaddrinfo(0, config.udp_port_number, &udp_hints, &udp_bind_address);
         if (rc != 0) {
             thl->log(thl, 0, "failed to get udp addr info", LOG_LEVELS_ERROR);
             goto EXIT;
         }
 
-        udp_socket_num = get_new_socket(thl, udp_bind_address, opts, 2);
+        udp_socket_num = get_new_socket(thl, udp_bind_address, NULL, 0);
         if (udp_socket_num == -1) {
             thl->log(thl, 0, "failed to get new udp socket", LOG_LEVELS_ERROR);
-            goto EXIT;
-        }
-
-        listen(udp_socket_num, config.max_connections);
-        if (errno != 0) {
-            thl->logf(thl, 0, LOG_LEVELS_ERROR,
-                      "failed to start listening on udp socket with error %s",
-                      strerror(errno));
             goto EXIT;
         }
 
@@ -156,7 +148,7 @@ EXIT:
 void free_socket_server(socket_server_t *srv) {
     if (srv->tcp_socket_number > 0) {
         close(srv->tcp_socket_number);
-        srv->thl->log(srv->thl, 0, "shut down udp socket", LOG_LEVELS_INFO);
+        srv->thl->log(srv->thl, 0, "shut down tcp socket", LOG_LEVELS_INFO);
     }
     if (srv->udp_socket_number > 0) {
         close(srv->udp_socket_number);
@@ -166,5 +158,4 @@ void free_socket_server(socket_server_t *srv) {
     srv->thl->log(srv->thl, 0, "server shutdown, goodbye", LOG_LEVELS_INFO);
     clear_thread_logger(srv->thl);
     free(srv);
-    srv = NULL;
 }

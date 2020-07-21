@@ -31,8 +31,6 @@ void test_new_socket_server(void **state) {
     socket_server_t *server = new_socket_server(thl, config);
     assert(server != NULL);
     free_socket_server(server);
-    assert(server == NULL);
-
 }
 
 int main(void) {
