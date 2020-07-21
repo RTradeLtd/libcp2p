@@ -36,6 +36,6 @@ script:
 
 deploy:
   provider: script
-  script: .scripts/valgrind.sh
+  script: make run-valgrind
   on:
     branch: master
