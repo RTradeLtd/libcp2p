@@ -34,6 +34,10 @@ deps-ubuntu:
 	sudo apt install doxygen -y
 	sudo apt install libcmocka0 libcmocka-dev -y
 
+.PHONY: run-valgrind
+run-valgrind:
+	(./.scripts/valgrind.sh)
+
 .PHONY: clean
 clean:
 	(./.scripts/clean.sh)
