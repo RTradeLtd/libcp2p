@@ -9,8 +9,6 @@
 #define MULTIBASE_BASE10 '9'
 #define MULTIBASE_BASE16 'f'
 #define MULTIBASE_BASE32 'b'
-#define MULTIBASE_BASE58_FLICKR 'Z'
-#define MULTIBASE_BASE58_BTC 'z'
 #define MULTIBASE_BASE64 'm'
 
 /**

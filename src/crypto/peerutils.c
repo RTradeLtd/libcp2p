@@ -3,7 +3,6 @@
 
 #include "crypto/peerutils.h"
 #include "crypto/sha256.h"
-#include "encoding/base58.h"
 #include "multihash/hashes.h"
 #include "multihash/multihash.h"
 #include "multibase/multibase.h"
@@ -21,7 +20,7 @@
  */
 int libp2p_new_peer_id(unsigned char *pointyaddr, size_t *rezbuflen,
                        unsigned char *ID_BUF,
-                       size_t ID_BUF_SIZE) // b58 encoded ID buf
+                       size_t ID_BUF_SIZE) // b32 encoded ID buf
 {
     unsigned char temp_buffer[*rezbuflen];
     memset(temp_buffer, 0, *rezbuflen);

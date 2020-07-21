@@ -7,7 +7,7 @@
 #include <string.h>
 
 #include "cid/cid.h"
-#include "encoding/base58.h"
+#include "encoding/base32.h"
 #include "multibase/multibase.h"
 #include "multihash/hashes.h"
 #include "multihash/multihash.h"
@@ -182,11 +182,11 @@ int ipfs_cid_decode_hash_from_ipfs_ipns_string(const char *incoming,
     if (strstr(incoming, "/ipfs/") != incoming &&
         strstr(incoming, "/ipns/") != incoming)
         return 0;
-    const char *base58 = &incoming[6];
+    const char *base32 = &incoming[6];
     char *slash = strstr(incoming, "/");
     if (slash != NULL)
         slash[0] = '\0';
-    return ipfs_cid_decode_hash_from_base58((unsigned char *)base58, strlen(base58),
+    return ipfs_cid_decode_hash_from_base32((unsigned char *)base32, strlen(base32),
                                             cid);
 }
 
@@ -197,7 +197,7 @@ int ipfs_cid_decode_hash_from_ipfs_ipns_string(const char *incoming,
  * @cid the Cid struct to fill
  * @return true(1) on success
  */
-int ipfs_cid_decode_hash_from_base58(const unsigned char *incoming,
+int ipfs_cid_decode_hash_from_base32(const unsigned char *incoming,
                                      size_t incoming_length, struct Cid **cid) {
     int retVal = 0;
 
@@ -206,11 +206,11 @@ int ipfs_cid_decode_hash_from_base58(const unsigned char *incoming,
 
     // is this a sha_256 multihash?
     if (incoming_length == 46 && incoming[0] == 'Q' && incoming[1] == 'm') {
-        size_t hash_length = libp2p_encoding_base58_decode_size(incoming_length);
+        size_t hash_length = libp2p_encoding_base32_decode_size(incoming_length);
         unsigned char hash[hash_length];
         unsigned char *ptr = hash;
-        retVal = libp2p_encoding_base58_decode((char *)incoming, incoming_length,
-                                               &ptr, &hash_length);
+        retVal = libp2p_encoding_base32_decode(incoming, incoming_length,
+                                               ptr, &hash_length);
         if (retVal == 0)
             return 0;
         // now we have the hash, build the object
@@ -244,7 +244,7 @@ int ipfs_cid_decode_hash_from_base58(const unsigned char *incoming,
  * @param max_buffer_length the maximum space reserved for the results
  * @returns true(1) on success
  */
-int ipfs_cid_hash_to_base58(const unsigned char *hash, size_t hash_length,
+int ipfs_cid_hash_to_base32(const unsigned char *hash, size_t hash_length,
                             unsigned char *buffer, size_t max_buffer_length) {
 
     int multihash_len = hash_length + 2;
@@ -253,13 +253,13 @@ int ipfs_cid_hash_to_base58(const unsigned char *hash, size_t hash_length,
         return 0;
     }
 
-    // base58
-    size_t b58_size = libp2p_encoding_base58_encode_size(multihash_len);
+    // base32
+    size_t b32_size = libp2p_encoding_base32_encode_size(multihash_len);
 
-    if (b58_size > max_buffer_length) // buffer too small
+    if (b32_size > max_buffer_length) // buffer too small
         return 0;
 
-    if (libp2p_encoding_base58_encode(multihash, multihash_len, &buffer,
+    if (libp2p_encoding_base32_encode(multihash, multihash_len, buffer,
                                       &max_buffer_length) == 0) {
         return 0;
     }
@@ -274,12 +274,12 @@ int ipfs_cid_hash_to_base58(const unsigned char *hash, size_t hash_length,
  * @returns a pointer to the string (*result) or NULL if there was a problem
  */
 char *ipfs_cid_to_string(const struct Cid *cid, char **result) {
-    size_t str_len = libp2p_encoding_base58_encode_size(cid->hash_length) + 1;
+    size_t str_len = libp2p_encoding_base32_encode_size(cid->hash_length) + 1;
     char *str = (char *)malloc(str_len);
     *result = str;
     if (str != NULL) {
-        if (!libp2p_encoding_base58_encode(cid->hash, cid->hash_length,
-                                           (unsigned char **)&str, &str_len)) {
+        if (!libp2p_encoding_base32_encode(cid->hash, cid->hash_length,
+                                           (unsigned char *)str, &str_len)) {
             free(str);
             str = NULL;
         }
