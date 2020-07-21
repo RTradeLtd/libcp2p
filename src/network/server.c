@@ -1,0 +1,85 @@
+/*! @file server.c
+  * @brief provides a TCP/UDP socket server used for accepting libcp2p connections
+*/
+
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <unistd.h>
+#include <errno.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+// sys/time.h is needed for the timeval
+//  #include <time.h>
+#include <stdbool.h>
+#include <pthread.h>
+#include <signal.h>
+#include <fcntl.h>
+#include <sys/time.h>
+#include "network/socket.h"
+#include "utils/logger.h"
+
+/*! @brief  gets an available socket attached to bind_address
+  * @return Success: file descriptor socket number greater than 0
+  * @return Failure: -1
+  * initializers a socket attached to bind_address with sock_opts, and binds the address
+*/
+int get_new_socket(thread_logger *thl, addr_info *bind_address, SOCKET_OPTS sock_opts[], int num_opts) {
+     // creates the socket and gets us its file descriptor
+    int listen_socket_num = socket(
+        bind_address->ai_family,
+        bind_address->ai_socktype,
+        bind_address->ai_protocol
+    );
+    int one;
+    int rc;
+    bool passed;
+    for (int i = 0; i < num_opts; i++) {
+        switch (sock_opts[i]) {
+            case REUSEADDR:
+                one = 1;
+                // set socket options before doing anything else
+                // i tried setting it after listen, but I don't think that works
+                rc = setsockopt(listen_socket_num, SOL_SOCKET, SO_REUSEADDR, &one, sizeof(int));
+                if (rc != 0) {
+                    thl->log(thl, 0, "failed to set socket reuse addr", LOG_LEVELS_ERROR);
+                    return -1;
+                }
+                thl->log(thl, 0, "set socket opt REUSEADDR", LOG_LEVELS_INFO);
+                break;
+            case BLOCK:
+                passed = set_socket_blocking_status(listen_socket_num, true);
+                if (passed == false) {
+                    thl->log(thl, 0, "failed to set socket blocking mode", LOG_LEVELS_ERROR);
+                    return -1;
+                }
+                thl->log(thl, 0, "set socket opt BLOCK", LOG_LEVELS_INFO);
+                break;
+            case NOBLOCK:
+                passed = set_socket_blocking_status(listen_socket_num, false);
+                if (passed == false) {
+                    thl->log(thl, 0, "failed to set socket blocking mode", LOG_LEVELS_ERROR);
+                    return -1;
+                }
+                thl->log(thl, 0, "set socket opt NOBLOCK", LOG_LEVELS_INFO);
+                break;
+            default:
+                thl->log(thl, 0, "invalid socket option", LOG_LEVELS_ERROR);
+                return -1;
+        }
+    }
+    // binds the address to the socket
+    bind(
+        listen_socket_num,
+        bind_address->ai_addr,
+        bind_address->ai_addrlen
+    );
+    if (errno != 0) {
+        thl->logf(thl, 0, LOG_LEVELS_ERROR, "socket bind failed with error %s", strerror(errno));
+        return -1;
+    }
+    return listen_socket_num;
+}

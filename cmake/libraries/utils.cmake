@@ -9,3 +9,4 @@ add_library(libutils
 )
 
 target_compile_options(libutils PRIVATE ${flags})
+target_link_libraries(libutils pthread)

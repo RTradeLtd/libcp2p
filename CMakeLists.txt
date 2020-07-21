@@ -90,6 +90,10 @@ include(cmake/pkgs/valgrind.cmake)
 
 include(cmake/libraries/multicodec.cmake)
 
+# networking #
+
+include(cmake/libraries/network.cmake)
+
 #########################
 # END COMPILE LIBRARIES #
 #########################
