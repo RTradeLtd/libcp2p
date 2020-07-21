@@ -1,29 +1,30 @@
 /*! @file socket_client.c
-  * @brief client socket related tooling
-*/
+ * @brief client socket related tooling
+ */
 
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <netdb.h>
-#include <unistd.h>
-#include <errno.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdbool.h>
-#include <pthread.h>
-#include <signal.h>
-#include <fcntl.h>
-#include <sys/time.h>
 #include "network/socket_client.h"
 #include "utils/logger.h"
+#include <arpa/inet.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <pthread.h>
+#include <signal.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 /*! @brief returns a new socket client connected to `addr:port`
-*/
-socket_client_t *new_socket_client(thread_logger *thl, addr_info hints, char *addr, char *port) {
+ */
+socket_client_t *new_socket_client(thread_logger *thl, addr_info hints, char *addr,
+                                   char *port) {
     addr_info *peer_address;
     int rc = getaddrinfo(addr, port, NULL, &peer_address);
     if (rc != 0) {
@@ -31,15 +32,8 @@ socket_client_t *new_socket_client(thread_logger *thl, addr_info hints, char *ad
     }
     char address_buffer[100];
     char service_buffer[100];
-    getnameinfo(
-        peer_address->ai_addr,
-        peer_address->ai_addrlen,
-        address_buffer,
-        sizeof(address_buffer),
-        service_buffer,
-        sizeof(service_buffer),
-        0
-    );
+    getnameinfo(peer_address->ai_addr, peer_address->ai_addrlen, address_buffer,
+                sizeof(address_buffer), service_buffer, sizeof(service_buffer), 0);
     printf("address buff: %s\n", address_buffer);
     printf("service buffer: %s\n", service_buffer);
     int client_socket_num = get_new_socket(thl, peer_address, NULL, 0);
