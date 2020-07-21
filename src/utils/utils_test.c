@@ -9,6 +9,7 @@
 #include <pthread.h>
 #include "utils/logger.h"
 #include "utils/colors.h"
+#include "utils/thread_pool.h"
 
 void *test_thread_log(void *data) {
     thread_logger *thl = (thread_logger *)data;
@@ -45,7 +46,6 @@ void *test_file_log(void *data) {
     // pthread_exit(NULL);
     return NULL;
 }
-
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 void test_thread_logger(void **state) {
@@ -186,11 +186,28 @@ void test_get_ansi_color_scheme(void **state) {
     }
 }
 
+void thread_pool_task_ex(void *arg) {
+    printf("Thread #%u working on %lu\n", (int)pthread_self(), (uintptr_t)arg);
+}
+
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+void test_thread_pool(void **state) {
+    threadpool thpool = thpool_init(4);
+    for (int i = 0; i < 40; i++) {
+        int j = i;
+        uintptr_t jj = j;
+        thpool_add_work(thpool, thread_pool_task_ex, (void *)jj);
+    }
+    thpool_wait(thpool);
+    thpool_destroy(thpool);
+}
+
 int main(void) {
     const struct CMUnitTest tests[] = {
         cmocka_unit_test(test_thread_logger),
         cmocka_unit_test(test_file_logger),
-        cmocka_unit_test(test_get_ansi_color_scheme)
+        cmocka_unit_test(test_get_ansi_color_scheme),
+        cmocka_unit_test(test_thread_pool)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
