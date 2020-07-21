@@ -3,7 +3,6 @@
 
 #include "encoding/base16.h"
 #include "encoding/base32.h"
-#include "encoding/base58.h"
 #include "encoding/base64.h"
 #include "multibase/multibase.h"
 
@@ -25,7 +24,7 @@ int multibase_encode(const char base, const unsigned char *incoming,
                      size_t results_max_length, size_t *results_length) {
     *results_length = results_max_length;
     int retVal = 0;
-    
+
     switch (base) {
         case (MULTIBASE_BASE16):
             retVal = libp2p_encoding_base16_encode(incoming, incoming_length,
@@ -34,10 +33,6 @@ int multibase_encode(const char base, const unsigned char *incoming,
         case (MULTIBASE_BASE32):
             retVal = libp2p_encoding_base32_encode(incoming, incoming_length,
                                                    results, results_length);
-            break;
-        case (MULTIBASE_BASE58_BTC):
-            retVal = libp2p_encoding_base58_encode(incoming, incoming_length,
-                                                   &results, results_length);
             break;
         case (MULTIBASE_BASE64):
             retVal =
@@ -58,10 +53,10 @@ int multibase_encode(const char base, const unsigned char *incoming,
                               // just in case.
         return 0;             // buffer isn't big enough
     }
-    
+
     /*!
-      * @note: memcpy can't handle overlapping bytes so use memmove
-    */
+     * @note: memcpy can't handle overlapping bytes so use memmove
+     */
     memmove(results + 1, results, *results_length);
     // memcpy(&results[1], results, *results_length);
     results[0] = base;
@@ -86,8 +81,6 @@ int multibase_encode_size(const char base, const unsigned char *incoming,
             return libp2p_encoding_base16_encode_size(incoming_length) + 1;
         case (MULTIBASE_BASE32):
             return libp2p_encoding_base32_encode_size(incoming_length) + 1;
-        case (MULTIBASE_BASE58_BTC):
-            return libp2p_encoding_base58_encode_size(incoming_length) + 1;
         case (MULTIBASE_BASE64):
             return libp2p_encoding_base64_encode_size(incoming_length) + 1;
     }
@@ -133,10 +126,6 @@ int multibase_decode(const unsigned char *incoming, size_t incoming_length,
             retVal = libp2p_encoding_base32_decode(rest, incoming_length - 1,
                                                    results, results_length);
             break;
-        case (MULTIBASE_BASE58_BTC):
-            retVal = libp2p_encoding_base58_decode((char *)rest, incoming_length - 1,
-                                                   &results, results_length);
-            break;
         case (MULTIBASE_BASE64):
             retVal =
                 libp2p_encoding_base64_decode(rest, incoming_length - 1, results,
@@ -165,10 +154,6 @@ int multibase_decode_size(const char base, const unsigned char *incoming,
         case (MULTIBASE_BASE32):
             return libp2p_encoding_base32_decode_size(
                 incoming_length); // do we need +1 like base58
-        case (MULTIBASE_BASE58_BTC):
-            // do we really need +1?
-            // in the test this is reporting 2 extra bytes than needed
-            return libp2p_encoding_base58_decode_size(incoming_length) + 1;
         case (MULTIBASE_BASE64):
             return libp2p_encoding_base64_decode_size(
                 incoming_length); // do we need + 1 like base58
