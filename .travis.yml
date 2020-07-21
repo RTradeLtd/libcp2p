@@ -35,7 +35,11 @@ script:
   - cd build && ctest --extra-verbose
 
 deploy:
+  skip_cleanup: true
   provider: script
-  script: make run-valgrind
+  script: .scripts/valgrind
   on:
     branch: master
+
+notifications:
+  email: false
