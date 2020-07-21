@@ -209,8 +209,8 @@ int ipfs_cid_decode_hash_from_base32(const unsigned char *incoming,
         size_t hash_length = libp2p_encoding_base32_decode_size(incoming_length);
         unsigned char hash[hash_length];
         unsigned char *ptr = hash;
-        retVal = libp2p_encoding_base32_decode(incoming, incoming_length,
-                                               ptr, &hash_length);
+        retVal = libp2p_encoding_base32_decode(incoming, incoming_length, ptr,
+                                               &hash_length);
         if (retVal == 0)
             return 0;
         // now we have the hash, build the object

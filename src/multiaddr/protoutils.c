@@ -512,14 +512,15 @@ char *address_string_to_bytes(struct Protocol *protocol, const char *incoming,
             char *incoming_copy = NULL;
             incoming_copy = (char *)incoming;
             size_t incoming_copy_size = strlen(incoming_copy);
-            size_t result_buffer_length = libp2p_encoding_base32_decode_size(incoming_copy_size);
+            size_t result_buffer_length =
+                libp2p_encoding_base32_decode_size(incoming_copy_size);
             unsigned char result_buffer[result_buffer_length];
             unsigned char *ptr_to_result = result_buffer;
             memset(result_buffer, 0, result_buffer_length);
             // now get the decoded address
-            int return_value =
-                libp2p_encoding_base32_decode((unsigned char *)incoming_copy, incoming_copy_size,
-                                              ptr_to_result, &result_buffer_length);
+            int return_value = libp2p_encoding_base32_decode(
+                (unsigned char *)incoming_copy, incoming_copy_size, ptr_to_result,
+                &result_buffer_length);
             if (return_value == 0) {
                 return "ERR";
             }

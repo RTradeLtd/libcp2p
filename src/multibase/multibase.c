@@ -24,7 +24,7 @@ int multibase_encode(const char base, const unsigned char *incoming,
                      size_t results_max_length, size_t *results_length) {
     *results_length = results_max_length;
     int retVal = 0;
-    
+
     switch (base) {
         case (MULTIBASE_BASE16):
             retVal = libp2p_encoding_base16_encode(incoming, incoming_length,
@@ -53,10 +53,10 @@ int multibase_encode(const char base, const unsigned char *incoming,
                               // just in case.
         return 0;             // buffer isn't big enough
     }
-    
+
     /*!
-      * @note: memcpy can't handle overlapping bytes so use memmove
-    */
+     * @note: memcpy can't handle overlapping bytes so use memmove
+     */
     memmove(results + 1, results, *results_length);
     // memcpy(&results[1], results, *results_length);
     results[0] = base;

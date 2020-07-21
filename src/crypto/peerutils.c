@@ -3,9 +3,9 @@
 
 #include "crypto/peerutils.h"
 #include "crypto/sha256.h"
+#include "multibase/multibase.h"
 #include "multihash/hashes.h"
 #include "multihash/multihash.h"
-#include "multibase/multibase.h"
 
 /**
  * @brief returns a libp2p peerid from the sha256 hash of a public key
@@ -30,14 +30,9 @@ int libp2p_new_peer_id(unsigned char *pointyaddr, size_t *rezbuflen,
     if (retVal < 0)
         return 0;
 
-    return multibase_encode(
-        MULTIBASE_BASE32,
-        temp_buffer,
-        ID_BUF_SIZE + 2, // 2 (1 for code, 1 for digest_len)
-        pointyaddr,
-        *rezbuflen,
-        rezbuflen
-    );
+    return multibase_encode(MULTIBASE_BASE32, temp_buffer,
+                            ID_BUF_SIZE + 2, // 2 (1 for code, 1 for digest_len)
+                            pointyaddr, *rezbuflen, rezbuflen);
 }
 
 /****
