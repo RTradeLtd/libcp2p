@@ -1,5 +1,7 @@
 # libcp2p
 
+[![Build Status](https://travis-ci.com/RTradeLtd/libcp2p.svg?branch=master)](https://travis-ci.com/RTradeLtd/libcp2p)
+
 > **this is a work in progress**
 
 A libp2p-like protocol written in C with first class support for embedded systems. Goal is to be able to run in your fridge, arduinos, and any embedded system. Higher level languages will be done using FFI.
@@ -51,10 +53,14 @@ $> make # builds in release mode
 $> make build-debug # builds in debug mode
 $> make build-analysis # builds in static analysis mode
 ```
+## testing
+
+```shell
+$> cd build && ctest # runs regular tests
+$> cd build && ctest -T memcheck # runs valgrind 
+```
 
 ## dependencies
-
-### list
 
 * CMake >= 3.0
 * GCC with support for C17
@@ -65,29 +71,6 @@ $> make build-analysis # builds in static analysis mode
 * doxygen (documentation generation)
 * pthreads
 
-### ubuntu installation
-
-If you want to install the dependencies on ubuntu you can do this via a single make target:
-```shell
-$> make install-deps-ubuntu
-```
-
-### compiling mbedtls
-
-if you want to install mbedtls manually make sure you use teh following commands
-
-```shell
-$> make -j6 CFLAGS="-fPIC" # reduce -jX to suit your environment appropriately
-$> sudo make install CFLAGS="-fPIC"
-$> sudo ldconfig
-```
-
-## testing
-
-```shell
-$> cd build && ctest # runs regular tests
-$> cd build && ctest -T memcheck # runs valgrind 
-```
 
 # development
 
