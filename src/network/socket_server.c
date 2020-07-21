@@ -159,3 +159,64 @@ void free_socket_server(socket_server_t *srv) {
     clear_thread_logger(srv->thl);
     free(srv);
 }
+
+/*!
+  * @brief starts the socket server which processes new connections
+  * @details when a new connection is accepted (tcp) OR we can receive data on a udp socket, the given handle_conn_func is used to process that client connection
+  * @param srv an instance of a socket_server_t that has been initialized through new_socket_server
+  * @param fn the function use to handle new connections
+*/
+void start_socket_socker(socket_server_t *srv, handle_conn_func *fn) {
+    pthread_create(&srv->thread, NULL, fn, srv);
+}
+
+/*!
+  * @brief an example function show cases how to use handle_conn_func
+  * @details showcases how to use start_socket_server and handle_conn_func to create a TCP/UDP socket server that echos data back to client
+  * @warning should not be used for actual production uses
+*/
+void *example_handle_conn_func(void *data) {
+    
+    socket_server_t *srv = (socket_server_t *)data;
+    fd_set socket_list;
+    int max_socket_number;
+
+    // initialize the fd_set
+    FD_ZERO(&socket_list);
+
+    if (srv->tcp_socket_number > 0 && srv->tcp_socket_number > srv->udp_socket_number) {
+        max_socket_number = srv->tcp_socket_number + 1;
+    } else if (srv->udp_socket_number > 0 && srv->udp_socket_number > srv->tcp_socket_number) {
+        max_socket_number = srv->udp_socket_number + 1;
+    }
+    
+    
+    if (srv->tcp_socket_number > 0) {
+        FD_SET(srv->tcp_socket_number, &socket_list);
+    }
+    if (srv->udp_socket_number > 0) {
+        FD_SET(srv->udp_socket_number, &socket_list);
+    }
+
+   for (;;) {
+        /*!
+         * @todo enable customizable timeout
+        */
+        timeout tmt;
+        tmt.tv_sec = 3;
+        tmt.tv_usec = 0;
+        // create a temporary working copy copy of socket_list
+        fd_set working_copy = socket_list;
+        int rc = select(max_socket_number, &working_copy, NULL, NULL, &tmt);
+        switch (rc) {
+            case 0:
+                srv->thl->log(srv->thl, 0, "no sockets are ready for processing, sleeping", LOG_LEVELS_DEBUG);
+                sleep(0.50);
+                break;
+            case -1:
+                srv->thl->logf(srv->thl, 0, LOG_LEVELS_ERROR, "an error occured while running select: %s", strerror(errno));
+                sleep(0.50);
+                break;
+        }
+   }
+}

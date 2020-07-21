@@ -49,6 +49,12 @@ typedef struct conn_handle_data {
     client_conn_t *conn;
 } conn_handle_data_t;
 
+/*!
+  * @brief defines a function signature that is used for processing new connections
+*/
+typedef void *(handle_conn_func)(void *data);
+
+
 /*! @brief returns a new socket server bound to the port number and ready to accept
  * connections
  */
@@ -64,17 +70,6 @@ socket_server_t *new_socket_server(thread_logger *thl,
  */
 void *async_listen_func(void *data);
 
-/*! @brief handles connections in a dedicated pthread
- * is laucnched in a pthread by async_listen_func when any new connection is received
- * @param data `void *` to a conn_handle_data object
- * @note uses `select` to determine if we can read data from the connection
- * @note select runs for 3 seconds before timing out and releasing resources with the
- * connection
- * @warning currently implements an example echo client
- * @warning you will want to adapt to your specific use case
- */
-void *async_handle_conn_func(void *data);
-
 /*! @brief helper function for accepting client connections
  * times out new attempts if they take 3 seconds or more
  * @return Failure: NULL client conn failed
@@ -85,3 +80,18 @@ client_conn_t *accept_client_conn(socket_server_t *srv);
 /*! @brief terminates a server and frees up resources associated with it
  */
 void free_socket_server(socket_server_t *srv);
+
+/*!
+  * @brief starts the socket server which processes new connections
+  * @details when a new connection is accepted (tcp) OR we can receive data on a udp socket, the given handle_conn_func is used to process that client connection
+  * @param srv an instance of a socket_server_t that has been initialized through new_socket_server
+  * @param fn the function use to handle new connections
+*/
+void start_socket_socker(socket_server_t *srv, handle_conn_func *fn);
+
+/*!
+  * @brief an example function show cases how to use handle_conn_func
+  * @details showcases how to use start_socket_server and handle_conn_func to create a TCP/UDP socket server that echos data back to client
+  * @warning should not be used for actual production uses
+*/
+void *example_handle_conn_func(void *data);

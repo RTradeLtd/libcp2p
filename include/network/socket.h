@@ -9,6 +9,14 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#include <sys/time.h>
+
+/*! 
+  * @struct timeval
+  * @typedef timeout
+  * @brief used to specify timeouts for function calls such as select
+*/
+typedef struct timeval timeout;
 
 /*! @typedef addr_info
  * @struct addrinfo
