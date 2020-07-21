@@ -32,7 +32,7 @@ int libp2p_new_peer_id(unsigned char *pointyaddr, size_t *rezbuflen,
         return 0;
 
     return multibase_encode(
-        MULTIBASE_BASE58_BTC,
+        MULTIBASE_BASE32,
         temp_buffer,
         ID_BUF_SIZE + 2, // 2 (1 for code, 1 for digest_len)
         pointyaddr,
