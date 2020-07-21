@@ -34,12 +34,17 @@ script:
   # change to builddir and run tests
   - cd build && ctest --extra-verbose
 
-deploy:
+before_deploy:
+  - make run-valgrind
+
+deploy: # this is a hacky workaround as script provider is causing problems
   skip_cleanup: true
-  provider: script
+  provider: releases
   script: .scripts/valgrind
   on:
     branch: master
+    tags: true
+    repo: RTradeLtd/libcp2p
 
 notifications:
   email: false
