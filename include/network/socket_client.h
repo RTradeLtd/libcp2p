@@ -12,7 +12,7 @@
 #include <pthread.h>
 #include <stdbool.h>
 #include "socket.h"
-
+#include "utils/logger.h"
 
 /*! @typedef socket_client
   * @struct socket_client
@@ -25,4 +25,4 @@ typedef struct socket_client {
 
 /*! @brief returns a new socket client connected to `addr:port`
 */
-socket_client_t *new_socket_client(addr_info hints, char *addr, char *port);
+socket_client_t *new_socket_client(thread_logger *thl, addr_info hints, char *addr, char *port);

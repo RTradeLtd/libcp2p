@@ -1,5 +1,5 @@
-/*! @file server.c
-  * @brief provides a TCP/UDP socket server used for accepting libcp2p connections
+/*! @file socket.c
+  * @brief general socket related tooling
 */
 
 #include <sys/types.h>
@@ -82,4 +82,59 @@ int get_new_socket(thread_logger *thl, addr_info *bind_address, SOCKET_OPTS sock
         return -1;
     }
     return listen_socket_num;
+}
+
+
+/*! @brief used to enable/disable blocking sockets
+  * @return Failure: false
+  * @return Success: true
+  * @note see https://stackoverflow.com/questions/1543466/how-do-i-change-a-tcp-socket-to-be-non-blocking/1549344#1549344
+*/
+bool set_socket_blocking_status(int fd, bool blocking) {
+    if (fd < 0) {
+        return false;
+    } else {
+        int flags = fcntl(fd, F_GETFL, 0);
+        if (flags == -1) {
+            return false;
+        }
+        flags = blocking ? (flags & ~O_NONBLOCK) : (flags | O_NONBLOCK);
+        return (fcntl(fd, F_SETFL, flags) == 0) ? true : false;
+    }
+}
+
+/*! @brief returns the address the client is connecting from
+*/
+char  *get_name_info(sock_addr *client_address) {
+    char address_info[256]; // destroy when function returns
+    getnameinfo(
+        client_address,
+        sizeof(*client_address),
+        address_info, // output buffer
+        sizeof(address_info), // size of the output buffer
+        0, // second buffer which outputs service name
+        0, // length of the second buffer
+        NI_NUMERICHOST    // want to see hostnmae as an ip address
+    );
+    char *addr = malloc(sizeof(address_info));
+    if (addr == NULL) {
+        return NULL;
+    }
+    strcpy(addr, address_info);
+    return addr;
+}
+
+/*! @brief generates an addr_info struct with defaults
+  * defaults is IPv4, TCP, and AI_PASSIVE flags
+*/
+addr_info default_hints() {
+    addr_info hints;
+    memset(&hints, 0, sizeof(hints));
+    // change to AF_INET6 to use IPv6
+    hints.ai_family = AF_INET;
+    // indicates TCP, if you want UDP use SOCKT_DGRAM
+    hints.ai_socktype = SOCK_STREAM;
+    // indicates to getaddrinfo we want to bind to the wildcard address
+    hints.ai_flags = AI_PASSIVE;
+    return hints;
 }

@@ -11,7 +11,8 @@
 #include <sys/time.h>
 #include <pthread.h>
 #include <stdbool.h>
-#include "socket_client.h" // this also imports socket.h
+#include "network/socket_client.h" // this also imports socket.h
+#include "utils/logger.h"
 
 typedef struct socket_server_config {
     char *udp_port_number;
@@ -24,6 +25,7 @@ typedef struct socket_server {
     int udp_socket_number;
     int tcp_socket_number;
     pthread_t thread;
+    thread_logger *thl;
 } socket_server_t;
 
 /*! @typedef client_conn
@@ -49,7 +51,7 @@ typedef struct conn_handle_data {
 
 /*! @brief returns a new socket server bound to the port number and ready to accept connections
 */
-socket_server_t *new_socket_server(addr_info hints, socket_server_config_t config);
+socket_server_t *new_socket_server(thread_logger *thl, socket_server_config_t config);
 
 /*! @brief listens for new connections and spawns a thread to process the connection
   * thread that is created to process the connection runs as a detached thread
@@ -76,3 +78,7 @@ void *async_handle_conn_func(void *data);
   * @return Success: non-NULL populated client_conn object
 */
 client_conn_t *accept_client_conn(socket_server_t *srv);
+
+/*! @brief terminates a server and frees up resources associated with it
+*/
+void free_socket_server(socket_server_t *srv);
