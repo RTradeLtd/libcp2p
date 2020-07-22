@@ -25,11 +25,9 @@
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
-void *start_socker_server_wrapper(void *data) {
+void start_socker_server_wrapper(void *data) {
     socket_server_t *server = (socket_server_t *)data;
     start_socket_server(server);
-    printf("server stopped\n");
-    pthread_exit(NULL);
 }
 
 void test_new_socket_server(void **state) {
@@ -37,32 +35,32 @@ void test_new_socket_server(void **state) {
     socket_server_config_t config = {.listen_address = "127.0.0.1", .max_connections = 100, .tcp_port_number = "9090", .udp_port_number = "9091", .num_threads = 6, .fn_tcp = example_task_func_tcp, .fn_udp = example_task_func_udp };
     socket_server_t *server = new_socket_server(thl, config);
     assert(server != NULL);
-    pthread_t thread;
-    pthread_create(&thread, NULL, start_socker_server_wrapper, server);
+
+    thpool_add_work(server->thpool, start_socker_server_wrapper, server);
 
     addr_info hint;
     memset(&hint, 0, sizeof(hint));
     hint.ai_socktype = SOCK_DGRAM;
-    
-    addr_info *peer_address = calloc(sizeof(addr_info), sizeof(addr_info));
-    int rc = getaddrinfo("127.0.0.1", "9091", &hint, &peer_address);
-    assert(rc == 0);
-    
-    char *addr = get_name_info(peer_address);
-    printf("client addr: %s\n", addr);
-    free(addr);
 
     socket_client_t *client = new_socket_client(thl, hint, "127.0.0.1", "9091");
     assert(client != NULL);
+
+    addr_info *peer_address;
+    int rc = getaddrinfo("127.0.0.1", "9091", &hint, &peer_address);
+    assert(rc == 0);
+
+    char *addr = get_name_info(peer_address);
+    printf("client addr: %s\n", addr);
+    free(addr);
 
     socket_client_sendto(client, peer_address, "hello world\n");
     sleep(2);
     close(client->socket_number);
     free(client);
-    signal_shutdown();
-    pthread_join(thread, NULL);
-    free_socket_server(server);
     freeaddrinfo(peer_address);
+    signal_shutdown();
+    sleep(5);
+    free_socket_server(server);
 }
 
 int main(void) {

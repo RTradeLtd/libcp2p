@@ -40,15 +40,17 @@ socket_client_t *new_socket_client(thread_logger *thl, addr_info hints, char *ad
         return NULL;
     }
 
+    freeaddrinfo(peer_address);
+
     socket_client_t *sock_client = calloc(sizeof(sock_client), sizeof(sock_client));
     if (sock_client == NULL) {
         thl->log(thl, 0, "failed to calloc socket_client_t", LOG_LEVELS_ERROR);
-        freeaddrinfo(peer_address);
         return NULL;
     }
     sock_client->socket_number = client_socket_num;
+    
     thl->log(thl, 0, "client successfully created", LOG_LEVELS_INFO);
-    freeaddrinfo(peer_address);
+    
     return sock_client;
 }
 

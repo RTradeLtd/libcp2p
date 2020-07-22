@@ -99,7 +99,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
             goto EXIT;
         }
 
-        udp_socket_num = get_new_socket(thl, udp_bind_address, NULL, 0, false);
+        udp_socket_num = get_new_socket(thl, udp_bind_address, opts, 2, false);
         if (udp_socket_num == -1) {
             thl->log(thl, 0, "failed to get new udp socket", LOG_LEVELS_ERROR);
             goto EXIT;
@@ -122,8 +122,6 @@ socket_server_t *new_socket_server(thread_logger *thl,
     server->tcp_socket_number = tcp_socket_num;
     server->thl = thl;
     server->thl->log(server->thl, 0, "initialized server", LOG_LEVELS_INFO);
-
-    
 
     freeaddrinfo(tcp_bind_address);
     freeaddrinfo(udp_bind_address);
@@ -165,10 +163,7 @@ void free_socket_server(socket_server_t *srv) {
     /*!
       * @todo should we wait before destroy?
     */
-    printf("destroying\n");
-    printf("%i\n", thpool_num_threads_working(srv->thpool));
     thpool_destroy(srv->thpool);
-    printf("destroyed\n");
     srv->thl->log(srv->thl, 0, "server shutdown, goodbye", LOG_LEVELS_INFO);
     clear_thread_logger(srv->thl);
     free(srv);
@@ -284,14 +279,9 @@ void example_task_func_udp(void *data) {
         &len
     );
     if (bytes_received == -1) {
-        hdata->srv->thl->logf(
-            hdata->srv->thl,
-            0,
-            LOG_LEVELS_ERROR,
-            "failed to receive message %s",
-            strerror(errno)
-        );
-        goto EXIT;
+        free(hdata->conn);
+        free(hdata);
+        return;
     }
     hdata->srv->thl->logf(
         hdata->srv->thl,
@@ -300,7 +290,6 @@ void example_task_func_udp(void *data) {
         "received message from client %s",
         buffer
     );
-EXIT:
    free(hdata->conn);
    free(hdata);
 }
