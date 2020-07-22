@@ -174,7 +174,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
     return server;
 
 EXIT:
-
+    free(ip);
     for (int i = 0; i < 65536; i++) {
         if (FD_ISSET(i, &tcp_socket_set)) {
             close(i);
