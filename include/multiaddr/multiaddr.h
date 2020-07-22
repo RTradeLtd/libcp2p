@@ -83,8 +83,6 @@ int multiaddress_get_ip_address(const struct MultiAddress *in, char **ip);
  */
 int multiaddress_get_ip_port(const struct MultiAddress *in);
 
-char *multiaddress_get_ip_port_c(const struct MultiAddress *in);
-
 /**
  * Pulls the peer ID out of a multiaddress struct
  * @param in the MultiAddress

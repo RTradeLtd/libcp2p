@@ -53,8 +53,10 @@ socket_server_t *new_socket_server(thread_logger *thl,
     FD_ZERO(&grouped_socket_set);
 
     char *ip = calloc(sizeof(char), 1024);
+    char *cport = calloc(sizeof(char), 10);
     for (int i = 0; i < config.num_addrs; i++) {
         memset(ip, 0, 1024);
+        memset(cport, 0, 10);
         rc = multiaddress_get_ip_address(&config.addrs[i], &ip);
         if (rc != 1) {
             thl->log(thl, 0, "failed to get ip address from multiaddr",
@@ -69,6 +71,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
             free(ip);
             goto EXIT;
         }
+        sprintf(cport, "%i", port);
         bool is_tcp = false;
         bool is_udp = false;
         if (strstr((&config.addrs[i])->string, "/tcp/") != NULL) {
@@ -82,7 +85,6 @@ socket_server_t *new_socket_server(thread_logger *thl,
             free(ip);
             goto EXIT;
         }
-        char *cport = multiaddress_get_ip_port_c(&config.addrs[i]);
         if (is_tcp) {
             addr_info *tcp_bind_address = NULL;
             memset(&tcp_hints, 0, sizeof(tcp_hints));
@@ -152,6 +154,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
         }
     }
     free(ip);
+    free(cport);
     socket_server_t *server =
         calloc(sizeof(socket_server_t), sizeof(socket_server_t));
     if (server == NULL) {
@@ -174,6 +177,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
     return server;
 
 EXIT:
+    free(cport);
     free(ip);
     for (int i = 0; i < 65536; i++) {
         if (FD_ISSET(i, &tcp_socket_set)) {
