@@ -26,7 +26,7 @@
 socket_client_t *new_socket_client(thread_logger *thl, addr_info hints, char *addr,
                                    char *port) {
     addr_info *peer_address;
-    int rc = getaddrinfo(addr, port, NULL, &peer_address);
+    int rc = getaddrinfo(addr, port, &hints, &peer_address);
     if (rc != 0) {
         return NULL;
     }
