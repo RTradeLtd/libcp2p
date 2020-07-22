@@ -173,11 +173,10 @@ void free_socket_server(socket_server_t *srv) {
         close(srv->udp_socket_number);
         srv->thl->log(srv->thl, 0, "shut down udp socket", LOG_LEVELS_INFO);
     }
-    /*!
-     * @todo should we wait before destroy?
-     */
+    srv->thl->log(srv->thl, 0, "waiting for existing tasks to exit",
+                  LOG_LEVELS_INFO);
     thpool_destroy(srv->thpool);
-    srv->thl->log(srv->thl, 0, "server shutdown, goodbye", LOG_LEVELS_INFO);
+    srv->thl->log(srv->thl, 0, "all taskes exited, goodbye", LOG_LEVELS_INFO);
     clear_thread_logger(srv->thl);
     free(srv);
 }
