@@ -21,6 +21,10 @@
 typedef void (threadpool_task_func)(void *data);
 
 typedef struct socket_server_config {
+    /*! @brief the thread pool task function to use for processing tcp connections */
+    threadpool_task_func *fn_tcp;
+    /*! @brief the thread pool task function to use for processing tcp connections */
+    threadpool_task_func *fn_udp;
     char *udp_port_number;
     char *tcp_port_number;
     char *listen_address;
@@ -89,10 +93,10 @@ void free_socket_server(socket_server_t *srv);
   * @brief starts the socket server which processes new connections
   * @details when a new connection is accepted (tcp) OR we can receive data on a udp socket, the given handle_conn_func is used to process that client connection
   * @param srv an instance of a socket_server_t that has been initialized through new_socket_server
-  * @param fn_tcp the thread pool task function to use for processing tcp connections
-  * @param fn_udp the thread pool task function to use for processing tcp connections
+  * @param fn_tcp 
+  * @param fn_udp 
 */
-void start_socket_server(socket_server_t *srv, threadpool_task_func *fn_tcp, threadpool_task_func *fn_udp);
+void start_socket_server(socket_server_t *srv);
 
 /*!
   * @brief dedicated function for accepting and handling new connections

@@ -114,6 +114,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
     }
 
     server->thpool = thpool_init(config.num_threads);
+    server->task_func_tcp = config.fn_tcp;
+    server->task_func_udp = config.fn_udp;
     server->udp_socket_number = udp_socket_num;
     server->tcp_socket_number = tcp_socket_num;
     server->thl = thl;
@@ -172,13 +174,8 @@ void free_socket_server(socket_server_t *srv) {
   * @brief starts the socket server which processes new connections
   * @details when a new connection is accepted (tcp) OR we can receive data on a udp socket, the given handle_conn_func is used to process that client connection
   * @param srv an instance of a socket_server_t that has been initialized through new_socket_server
-  * @param fn_tcp the thread pool task function to use for processing tcp connections
-  * @param fn_udp the thread pool task function to use for processing tcp connections
 */
-void start_socket_server(socket_server_t *srv, threadpool_task_func *fn_tcp, threadpool_task_func *fn_udp) {
-    // set the task function to process new connections
-    srv->task_func_tcp = fn_tcp;
-    srv->task_func_udp = fn_udp;
+void start_socket_server(socket_server_t *srv) {
     fd_set socket_list;
     int max_socket_number;
 
