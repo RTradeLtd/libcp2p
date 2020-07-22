@@ -111,19 +111,17 @@ bool set_socket_blocking_status(int fd, bool blocking) {
 }
 
 /*! @brief returns the address the client is connecting from
-  * @note this only works with tcp
-  * @todo enable udp
+ * @note this only works with tcp
+ * @todo enable udp
  */
 char *get_name_info(sock_addr *client_address) {
     char address_info[256]; // destroy when function returns
-    getnameinfo(
-        client_address,
-        sizeof(*client_address),
-        address_info, // output buffer
-        sizeof(address_info), // size of the output buffer
-        0, // second buffer which outputs service name
-        0, // length of the second buffer
-        NI_NUMERICHOST    // want to see hostnmae as an ip address
+    getnameinfo(client_address, sizeof(*client_address),
+                address_info,         // output buffer
+                sizeof(address_info), // size of the output buffer
+                0,                    // second buffer which outputs service name
+                0,                    // length of the second buffer
+                NI_NUMERICHOST        // want to see hostnmae as an ip address
     );
     char *addr = malloc(sizeof(address_info));
     if (addr == NULL) {

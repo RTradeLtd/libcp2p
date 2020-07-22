@@ -67,8 +67,8 @@ int get_new_socket(thread_logger *thl, addr_info *bind_address,
 bool set_socket_blocking_status(int fd, bool blocking);
 
 /*!
-  * @note this only works with tcp
-  * @todo enable udp
+ * @note this only works with tcp
+ * @todo enable udp
  */
 char *get_name_info(sock_addr *client_address);
 

@@ -55,12 +55,14 @@ socket_server_t *new_socket_server(thread_logger *thl,
         char *ip = calloc(sizeof(unsigned char), 1024);
         rc = multiaddress_get_ip_address(&config.addrs[i], &ip);
         if (rc != 1) {
-            thl->log(thl, 0, "failed to get ip address from multiaddr", LOG_LEVELS_ERROR);
+            thl->log(thl, 0, "failed to get ip address from multiaddr",
+                     LOG_LEVELS_ERROR);
             return NULL; /*! @todo free up existing sockets */
         }
         int port = multiaddress_get_ip_port(&config.addrs[i]);
         if (port == -1) {
-            thl->log(thl, 0, "failed to get ip port from multiaddr", LOG_LEVELS_ERROR);
+            thl->log(thl, 0, "failed to get ip port from multiaddr",
+                     LOG_LEVELS_ERROR);
             return NULL; /*! @todo free up existing sockets */
         }
         bool is_tcp = false;
@@ -81,15 +83,16 @@ socket_server_t *new_socket_server(thread_logger *thl,
             tcp_hints.ai_family = AF_INET;
             tcp_hints.ai_socktype = SOCK_STREAM;
             /*! @warning support non wildcard
-            * @todo support non wildcard
-            */
+             * @todo support non wildcard
+             */
             tcp_hints.ai_flags = AI_PASSIVE;
             rc = getaddrinfo(ip, cport, &tcp_hints, &tcp_bind_address);
             if (rc != 0) {
                 thl->log(thl, 0, "failed to get tcp addr info", LOG_LEVELS_ERROR);
                 return NULL; /*! @todo free up existing sockets */
             }
-            int tcp_socket_num = get_new_socket(thl, tcp_bind_address, opts, 2, false);
+            int tcp_socket_num =
+                get_new_socket(thl, tcp_bind_address, opts, 2, false);
             if (tcp_socket_num == -1) {
                 thl->log(thl, 0, "failed to get new tcp socket", LOG_LEVELS_ERROR);
                 return NULL; /*! @todo free up existing sockets */
@@ -98,35 +101,36 @@ socket_server_t *new_socket_server(thread_logger *thl,
             listen(tcp_socket_num, config.max_connections);
             if (errno != 0) {
                 thl->logf(thl, 0, LOG_LEVELS_ERROR,
-                        "failed to start listening on tcp socket with error %s",
-                        strerror(errno));
+                          "failed to start listening on tcp socket with error %s",
+                          strerror(errno));
                 return NULL; /*! @todo free up existing sockets */
             }
             FD_SET(tcp_socket_num, &tcp_socket_set);
             free(ip);
-            //free(cport);
+            // free(cport);
         }
         if (is_udp) {
             memset(&udp_hints, 0, sizeof(udp_hints));
             udp_hints.ai_family = AF_INET;
             udp_hints.ai_socktype = SOCK_DGRAM;
             /*! @warning support non wildcard
-            * @todo support non wildcard
-            */
+             * @todo support non wildcard
+             */
             udp_hints.ai_flags = AI_PASSIVE;
             rc = getaddrinfo(ip, cport, &udp_hints, &udp_bind_address);
             if (rc != 0) {
                 thl->log(thl, 0, "failed to get udp addr info", LOG_LEVELS_ERROR);
                 return NULL; /*! @todo free up existing sockets */
             }
-            int udp_socket_num = get_new_socket(thl, udp_bind_address, opts, 2, false);
+            int udp_socket_num =
+                get_new_socket(thl, udp_bind_address, opts, 2, false);
             if (udp_socket_num == -1) {
                 thl->log(thl, 0, "failed to get new udp socket", LOG_LEVELS_ERROR);
                 return NULL; /*! @todo free up existing sockets */
             }
             FD_SET(udp_socket_num, &udp_socket_set);
             free(ip);
-            //free(cport);
+            // free(cport);
         }
     }
 
@@ -202,20 +206,23 @@ void free_socket_server(socket_server_t *srv) {
  * new_socket_server
  */
 void start_socket_server(socket_server_t *srv) {
-
+    fd_set socket_set;
+    FD_ZERO(&socket_set);
     int max_socket_number = 0;
 
     for (int i = 0; i < 65536; i++) {
         if (FD_ISSET(i, &srv->tcp_socket_set)) {
+            FD_SET(i, &socket_set);
             if (i > max_socket_number) {
                 max_socket_number = i;
             }
         }
-        /*if (FD_ISSET(i, &srv->udp_socket_set)) {
+        if (FD_ISSET(i, &srv->udp_socket_set)) {
+            FD_SET(i, &socket_set);
             if (i > max_socket_number) {
                 max_socket_number = i;
             }
-        }*/
+        }
     }
     max_socket_number += 1;
     /*!
@@ -233,8 +240,8 @@ void start_socket_server(socket_server_t *srv) {
         }
         // create a temporary working copy copy of socket_list
         /*! @todo enable udp socket
-        */
-        fd_set working_copy = srv->tcp_socket_set;
+         */
+        fd_set working_copy = socket_set;
 
         int rc = select(max_socket_number, &working_copy, NULL, NULL, &tmt);
 
@@ -253,18 +260,43 @@ void start_socket_server(socket_server_t *srv) {
                 return;
         }
 
-        for (int i = 0; i < 65536; i++) {
+        for (int i = 0; i < max_socket_number; i++) {
             if (FD_ISSET(i, &working_copy)) {
-                client_conn_t *conn = accept_client_conn(srv, i);
-                if (conn == NULL) {
-                    sleep(0.50);
-                    continue;
+                if (FD_ISSET(i, &srv->tcp_socket_set)) {
+                    client_conn_t *conn = accept_client_conn(srv, i);
+                    if (conn == NULL) {
+                        sleep(0.50);
+                        continue;
+                    }
+                    conn_handle_data_t *chdata = calloc(sizeof(conn_handle_data_t),
+                                                        sizeof(conn_handle_data_t));
+                    chdata->srv = srv;
+                    chdata->conn = conn;
+                    thpool_add_work(srv->thpool, srv->task_func_tcp, chdata);
                 }
-                conn_handle_data_t *chdata =
-                    calloc(sizeof(conn_handle_data_t), sizeof(conn_handle_data_t));
-                chdata->srv = srv;
-                chdata->conn = conn;
-                thpool_add_work(srv->thpool, srv->task_func_tcp, chdata);
+                if (FD_ISSET(i, &srv->udp_socket_set)) {
+                    client_conn_t *conn =
+                        calloc(sizeof(client_conn_t), sizeof(client_conn_t));
+                    if (conn == NULL) {
+                        srv->thl->log(srv->thl, 0, "failed to calloc client_t",
+                                      LOG_LEVELS_ERROR);
+                        sleep(0.50);
+                        continue;
+                    }
+                    conn->socket_number = i;
+                    conn_handle_data_t *chdata = calloc(sizeof(conn_handle_data_t),
+                                                        sizeof(conn_handle_data_t));
+                    if (chdata == NULL) {
+                        free(conn);
+                        srv->thl->log(srv->thl, 0, "failed to calloc client_t",
+                                      LOG_LEVELS_ERROR);
+                        sleep(0.50);
+                        continue;
+                    }
+                    chdata->srv = srv;
+                    chdata->conn = conn;
+                    thpool_add_work(srv->thpool, srv->task_func_udp, chdata);
+                }
             }
         }
         // sleep before looping again
@@ -294,11 +326,7 @@ client_conn_t *accept_client_conn(socket_server_t *srv, int socket_num) {
     // i tried doing `(sock_addr *)&sizeof(addr_temp)
     // in the `accept` function call but it didnt work
     socklen_t client_len = sizeof(addr_temp);
-    int client_socket_num = accept(
-        socket_num,
-        (sock_addr *)&addr_temp,
-        &client_len
-    );
+    int client_socket_num = accept(socket_num, (sock_addr *)&addr_temp, &client_len);
     // socket number less than 0 is an error
     if (client_socket_num < 0) {
         return NULL;
@@ -310,7 +338,8 @@ client_conn_t *accept_client_conn(socket_server_t *srv, int socket_num) {
     connection->address = &addr_temp;
     connection->socket_number = client_socket_num;
     char *addr_inf = get_name_info((sock_addr *)connection->address);
-    srv->thl->logf(srv->thl, 0, LOG_LEVELS_INFO, "accepted new connection: %s", addr_inf);
+    srv->thl->logf(srv->thl, 0, LOG_LEVELS_INFO, "accepted new connection: %s",
+                   addr_inf);
     free(addr_inf);
-    return connection;    
+    return connection;
 }
