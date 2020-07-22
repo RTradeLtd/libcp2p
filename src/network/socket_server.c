@@ -220,8 +220,12 @@ void start_socket_socker(socket_server_t *srv, threadpool_task_func *fn) {
                 break;
         }
 
+        /*!
+         * @todo figure out why select isn't handling the udp connection
+         * @warning does not work with udp
+        */
         if (FD_ISSET(srv->udp_socket_number, &working_copy)) {
-            printf("udp available\n");
+            printf("udp connection available\n");
         }
 
         // accept tcp connections if they are available

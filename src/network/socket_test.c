@@ -32,7 +32,6 @@ void test_new_socket_server(void **state) {
     socket_server_t *server = new_socket_server(thl, config);
     assert(server != NULL);
     start_socket_socker(server, example_task_func);
-    pthread_join(server->main_thread, NULL);
     free_socket_server(server);
 }
 
