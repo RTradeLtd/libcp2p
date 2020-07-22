@@ -109,8 +109,9 @@ void test_new_socket_server(void **state) {
     // multi_addr_t *addrs[2] = {tcp_addr, udp_addr};
     config.addrs = malloc(sizeof(multi_addr_t) * sizeof(tcp_addr) + sizeof(udp_addr));
     config.addrs[0] = *tcp_addr;
-    config.addrs[1] = *udp_addr;
-    config.num_addrs = 2;
+    // config.addrs[1] = *udp_addr;
+    // config.num_addrs = 2;
+    config.num_addrs = 1;
 
     //   .num_threads = 6, .fn_tcp = example_task_func_tcp, .fn_udp = example_task_func_udp };
     socket_server_t *server = new_socket_server(thl, config);

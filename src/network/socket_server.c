@@ -224,6 +224,23 @@ void start_socket_server(socket_server_t *srv) {
                 sleep(0.50);
                 return;
         }
+
+        for (int i = 0; i < 65536; i++) {
+            if (FD_ISSET(i, &working_copy)) {
+                client_conn_t *conn = accept_client_conn(srv, i);
+                if (conn == NULL) {
+                    srv->thl->log(srv->thl, 0, "failed to accept client connection",
+                                LOG_LEVELS_ERROR);
+                    sleep(0.50);
+                    continue;
+                }
+                conn_handle_data_t *chdata =
+                    calloc(sizeof(conn_handle_data_t), sizeof(conn_handle_data_t));
+                chdata->srv = srv;
+                chdata->conn = conn;
+                thpool_add_work(srv->thpool, srv->task_func_tcp, chdata);
+            }
+        }
         // sleep before looping again
         sleep(0.50);
     }
@@ -237,4 +254,37 @@ void signal_shutdown() {
     pthread_mutex_lock(&shutdown_mutex);
     do_shutdown = true;
     pthread_mutex_unlock(&shutdown_mutex);
+}
+
+/*! @brief helper function for accepting client connections
+ * times out new attempts if they take 3 seconds or more
+ * @return Failure: NULL client conn failed
+ * @return Success: non-NULL populated client_conn object
+ */
+client_conn_t *accept_client_conn(socket_server_t *srv, int socket_num) {
+    // temporary variable for storing socket address
+    sock_addr_storage addr_temp;
+    // set client_len
+    // i tried doing `(sock_addr *)&sizeof(addr_temp)
+    // in the `accept` function call but it didnt work
+    socklen_t client_len = sizeof(addr_temp);
+    int client_socket_num = accept(
+        socket_num,
+        (sock_addr *)&addr_temp,
+        &client_len
+    );
+    // socket number less than 0 is an error
+    if (client_socket_num < 0) {
+        return NULL;
+    }
+    client_conn_t *connection = malloc(sizeof(client_conn_t));
+    if (connection == NULL) {
+        return NULL;
+    }
+    connection->address = &addr_temp;
+    connection->socket_number = client_socket_num;
+    char *addr_inf = get_name_info((addr_info *)connection->address);
+    srv->thl->logf(srv->thl, 0, LOG_LEVELS_INFO, "accepted new connection: %s", addr_inf);
+    free(addr_inf);
+    return connection;    
 }

@@ -103,7 +103,7 @@ void *async_listen_func(void *data);
  * @return Failure: NULL client conn failed
  * @return Success: non-NULL populated client_conn object
  */
-client_conn_t *accept_client_conn(socket_server_t *srv);
+client_conn_t *accept_client_conn(socket_server_t *srv, int socket_num);
 
 /*! @brief terminates a server and frees up resources associated with it
  */
