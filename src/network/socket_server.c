@@ -40,19 +40,21 @@ socket_server_t *new_socket_server(thread_logger *thl,
 
     addr_info tcp_hints;
     addr_info udp_hints;
-    addr_info *tcp_bind_address = NULL;
-    addr_info *udp_bind_address = NULL;
 
+    int max_socket_num = 0;
     int rc = 0;
 
+    fd_set grouped_socket_set;
     fd_set tcp_socket_set;
     fd_set udp_socket_set;
 
     FD_ZERO(&tcp_socket_set);
     FD_ZERO(&udp_socket_set);
+    FD_ZERO(&grouped_socket_set);
 
+    char *ip = calloc(sizeof(char), 1024);
     for (int i = 0; i < config.num_addrs; i++) {
-        char *ip = calloc(sizeof(unsigned char), 1024);
+        memset(ip, 0, 1024);
         rc = multiaddress_get_ip_address(&config.addrs[i], &ip);
         if (rc != 1) {
             thl->log(thl, 0, "failed to get ip address from multiaddr",
@@ -82,6 +84,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
         }
         char *cport = multiaddress_get_ip_port_c(&config.addrs[i]);
         if (is_tcp) {
+            addr_info *tcp_bind_address = NULL;
             memset(&tcp_hints, 0, sizeof(tcp_hints));
             tcp_hints.ai_family = AF_INET;
             tcp_hints.ai_socktype = SOCK_STREAM;
@@ -112,10 +115,14 @@ socket_server_t *new_socket_server(thread_logger *thl,
                 goto EXIT;
             }
             FD_SET(tcp_socket_num, &tcp_socket_set);
-            free(ip);
-            // free(cport);
+            FD_SET(tcp_socket_num, &grouped_socket_set);
+            if (tcp_socket_num > max_socket_num) {
+                max_socket_num = tcp_socket_num;
+            }
+            free(tcp_bind_address);
         }
         if (is_udp) {
+            addr_info *udp_bind_address = NULL;
             memset(&udp_hints, 0, sizeof(udp_hints));
             udp_hints.ai_family = AF_INET;
             udp_hints.ai_socktype = SOCK_DGRAM;
@@ -137,19 +144,24 @@ socket_server_t *new_socket_server(thread_logger *thl,
                 goto EXIT;
             }
             FD_SET(udp_socket_num, &udp_socket_set);
-            free(ip);
-            // free(cport);
+            FD_SET(udp_socket_num, &grouped_socket_set);
+            if (udp_socket_num > max_socket_num) {
+                max_socket_num = udp_socket_num;
+            }
+            free(udp_bind_address);
         }
     }
-
+    free(ip);
     socket_server_t *server =
         calloc(sizeof(socket_server_t), sizeof(socket_server_t));
     if (server == NULL) {
         thl->log(thl, 0, "failed to calloc socket server", LOG_LEVELS_ERROR);
         goto EXIT;
     }
-
+    max_socket_num += 1;
     server->thpool = thpool_init(config.num_threads);
+    server->max_socket_num = max_socket_num;
+    server->grouped_socket_set = grouped_socket_set;
     server->tcp_socket_set = tcp_socket_set;
     server->udp_socket_set = udp_socket_set;
     server->task_func_tcp = config.fn_tcp;
@@ -157,22 +169,11 @@ socket_server_t *new_socket_server(thread_logger *thl,
     server->thl = thl;
     server->thl->log(server->thl, 0, "initialized server", LOG_LEVELS_INFO);
 
-    freeaddrinfo(tcp_bind_address);
-    freeaddrinfo(udp_bind_address);
-
     pthread_mutex_init(&shutdown_mutex, NULL);
 
     return server;
 
 EXIT:
-
-    if (tcp_bind_address != NULL) {
-        freeaddrinfo(tcp_bind_address);
-    }
-
-    if (udp_bind_address != NULL) {
-        freeaddrinfo(udp_bind_address);
-    }
 
     for (int i = 0; i < 65536; i++) {
         if (FD_ISSET(i, &tcp_socket_set)) {
@@ -190,7 +191,7 @@ EXIT:
  */
 void free_socket_server(socket_server_t *srv) {
     srv->thl->log(srv->thl, 0, "closing sockets", LOG_LEVELS_INFO);
-    for (int i = 0; i < 65536; i++) {
+    for (int i = 0; i < srv->max_socket_num; i++) {
         if (FD_ISSET(i, &srv->tcp_socket_set)) {
             close(i);
         }
@@ -214,25 +215,6 @@ void free_socket_server(socket_server_t *srv) {
  * new_socket_server
  */
 void start_socket_server(socket_server_t *srv) {
-    fd_set socket_set;
-    FD_ZERO(&socket_set);
-    int max_socket_number = 0;
-
-    for (int i = 0; i < 65536; i++) {
-        if (FD_ISSET(i, &srv->tcp_socket_set)) {
-            FD_SET(i, &socket_set);
-            if (i > max_socket_number) {
-                max_socket_number = i;
-            }
-        }
-        if (FD_ISSET(i, &srv->udp_socket_set)) {
-            FD_SET(i, &socket_set);
-            if (i > max_socket_number) {
-                max_socket_number = i;
-            }
-        }
-    }
-    max_socket_number += 1;
     /*!
      * @todo enable customizable timeout
      */
@@ -249,9 +231,9 @@ void start_socket_server(socket_server_t *srv) {
         // create a temporary working copy copy of socket_list
         /*! @todo enable udp socket
          */
-        fd_set working_copy = socket_set;
+        fd_set working_copy = srv->grouped_socket_set;
 
-        int rc = select(max_socket_number, &working_copy, NULL, NULL, &tmt);
+        int rc = select(srv->max_socket_num, &working_copy, NULL, NULL, &tmt);
 
         switch (rc) {
             case 0:
@@ -268,7 +250,7 @@ void start_socket_server(socket_server_t *srv) {
                 return;
         }
 
-        for (int i = 0; i < max_socket_number; i++) {
+        for (int i = 0; i < srv->max_socket_num; i++) {
             if (FD_ISSET(i, &working_copy)) {
                 if (FD_ISSET(i, &srv->tcp_socket_set)) {
                     client_conn_t *conn = accept_client_conn(srv, i);
@@ -350,4 +332,14 @@ client_conn_t *accept_client_conn(socket_server_t *srv, int socket_num) {
                    addr_inf);
     free(addr_inf);
     return connection;
+}
+
+/*!
+ * @brief frees up resources allocated with config
+ * @param config an instance of socket_server_config_t
+ */
+void free_socket_server_config(socket_server_config_t *config) {
+    for (int i = 0; i < config->num_addrs; i++) {
+        multiaddress_free(&config->addrs[i]);
+    }
 }

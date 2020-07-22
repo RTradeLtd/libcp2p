@@ -50,6 +50,8 @@ typedef struct socket_server_config {
  * of socket numbers)
  */
 typedef struct socket_server {
+    int max_socket_num;
+    fd_set grouped_socket_set;
     fd_set tcp_socket_set;
     fd_set udp_socket_set;
     thread_logger *thl;
@@ -132,3 +134,9 @@ void *accept_connections(void *data);
  * @note this is only useful if you launch start_socket_server in a thread
  */
 void signal_shutdown();
+
+/*!
+ * @brief frees up resources allocated with config
+ * @param config an instance of socket_server_config_t
+ */
+void free_socket_server_config(socket_server_config_t *config);

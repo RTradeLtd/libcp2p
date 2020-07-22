@@ -107,7 +107,7 @@ void test_new_socket_server(void **state) {
     multi_addr_t *tcp_addr = multiaddress_new_from_string("/ip4/127.0.0.1/tcp/9090");
     multi_addr_t *udp_addr = multiaddress_new_from_string("/ip4/127.0.0.1/udp/9091");
     // multi_addr_t *addrs[2] = {tcp_addr, udp_addr};
-    config.addrs = malloc(sizeof(multi_addr_t) * sizeof(tcp_addr) + sizeof(udp_addr));
+    config.addrs = calloc(sizeof(multi_addr_t), sizeof(tcp_addr) + sizeof(udp_addr));
     config.addrs[0] = *tcp_addr;
     config.addrs[1] = *udp_addr;
     config.num_addrs = 2;
@@ -129,10 +129,6 @@ void test_new_socket_server(void **state) {
     int rc = getaddrinfo("127.0.0.1", "9091", &hint, &peer_address);
     assert(rc == 0);
 
-    char *addr = get_name_info((sock_addr *)peer_address);
-    printf("client addr: %s\n", addr);
-    free(addr);
-
     socket_client_sendto(client, peer_address, "hello world\n");
     sleep(2);
     close(client->socket_number);
@@ -141,6 +137,7 @@ void test_new_socket_server(void **state) {
     signal_shutdown();
     sleep(5);
     free_socket_server(server);
+    free_socket_server_config(&config);
 }
 
 int main(void) {

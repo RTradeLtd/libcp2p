@@ -123,23 +123,22 @@ int multiaddress_get_ip_address(const struct MultiAddress *in, char **ip) {
     // the incoming address is not what was expected
     if (strncmp(in->string, "/ip4/", 5) != 0 &&
         strncmp(in->string, "/ip6/", 5) != 0) {
+        printf("invalid ip\n");
         return 0;
     }
     if (strstr(in->string, "/tcp/") == NULL && strstr(in->string, "/udp/") == NULL) {
+        printf("neither tcp nor udp\n");
         return 0;
     }
     // ip
-    char *str = malloc(strlen(in->string));
+    char *str = malloc(strlen(in->string) + 1);
     if (str == NULL) {
+        printf("failed to malloc str\n");
         return 0;
     }
     strcpy(str, &in->string[5]); // gets rid of /ip4/
     char *pos = strchr(str, '/');
     pos[0] = 0;
-    *ip = malloc(strlen(str) + 1);
-    if (*ip == NULL) {
-        return 0;
-    }
     strcpy(*ip, str);
     free(str);
     return 1;
