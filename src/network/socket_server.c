@@ -51,29 +51,29 @@ socket_server_t *new_socket_server(thread_logger *thl,
 
     for (int i = 0; i < config.num_addrs; i++) {
         char *ip = calloc(sizeof(unsigned char), 1024);
-        rc = multiaddress_get_ip_address(config.addrs[i], &ip);
+        rc = multiaddress_get_ip_address(&config.addrs[i], &ip);
         if (rc != 1) {
             thl->log(thl, 0, "failed to get ip address from multiaddr", LOG_LEVELS_ERROR);
             return NULL; /*! @todo free up existing sockets */
         }
-        int port = multiaddress_get_ip_port(config.addrs[i]);
+        int port = multiaddress_get_ip_port(&config.addrs[i]);
         if (port == -1) {
             thl->log(thl, 0, "failed to get ip port from multiaddr", LOG_LEVELS_ERROR);
             return NULL; /*! @todo free up existing sockets */
         }
         bool is_tcp;
         bool is_udp;
-        if (strstr(config.addrs[i]->string, "/tcp/") != NULL) {
+        if (strstr((&config.addrs[i])->string, "/tcp/") != NULL) {
             is_tcp = true;
         }
-        if (strstr(config.addrs[i]->string, "/udp/") != NULL) {
+        if (strstr((&config.addrs[i])->string, "/udp/") != NULL) {
             is_udp = true;
         }
         if (is_tcp == false && is_udp == false) {
             thl->log(thl, 0, "invalid multiaddress provided", LOG_LEVELS_ERROR);
             return NULL; /*! @todo free up existing sockets */
         }
-        char *cport = multiaddress_get_ip_port_c(config.addrs[i]);
+        char *cport = multiaddress_get_ip_port_c(&config.addrs[i]);
         if (is_tcp) {
             rc = getaddrinfo(ip, cport, &tcp_hints, &tcp_bind_address);
             if (rc != 0) {

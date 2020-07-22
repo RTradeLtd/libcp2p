@@ -1,5 +1,6 @@
 #include "utils/logger.h"
 #include "network/socket_server.h"
+#include "multiaddr/multiaddr.h"
 #include <arpa/inet.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -97,7 +98,20 @@ void start_socker_server_wrapper(void *data) {
 */
 void test_new_socket_server(void **state) {
     thread_logger *thl = new_thread_logger(false);
-    socket_server_config_t config = {.listen_address = "127.0.0.1", .max_connections = 100, .tcp_port_number = "9090", .udp_port_number = "9091", .num_threads = 6, .fn_tcp = example_task_func_tcp, .fn_udp = example_task_func_udp };
+    socket_server_config_t config;
+    config.max_connections = 100;
+    config.num_addrs = 6;
+    config.fn_tcp = example_task_func_tcp;
+    config.fn_udp = example_task_func_udp;
+
+    multi_addr_t *tcp_addr = multiaddress_new_from_string("/ip4/127.0.0.1/tcp/9090");
+    multi_addr_t *udp_addr = multiaddress_new_from_string("/ip4/127.0.0.1/udp/9091");
+    // multi_addr_t *addrs[2] = {tcp_addr, udp_addr};
+    config.addrs = malloc(sizeof(multi_addr_t) * sizeof(tcp_addr) + sizeof(udp_addr));
+    config.addrs[0] = *tcp_addr;
+    config.addrs[1] = *udp_addr;
+
+    //   .num_threads = 6, .fn_tcp = example_task_func_tcp, .fn_udp = example_task_func_udp };
     socket_server_t *server = new_socket_server(thl, config);
     assert(server != NULL);
 
