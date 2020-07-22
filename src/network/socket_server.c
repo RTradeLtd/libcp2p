@@ -57,21 +57,21 @@ socket_server_t *new_socket_server(thread_logger *thl,
     FD_ZERO(&udp_socket_set);
     FD_ZERO(&grouped_socket_set);
 
-    // allocate memory
+    // allocate memory for ip and port
     char *ip = malloc(sizeof(char) * 1024);
-    char *cport = malloc(sizeof(char) * 10);
+    // 7 because the maximum number size is 6 digits, and 1 for the null terminator
+    char *cport = malloc(sizeof(char) * 7);
     for (int i = 0; i < config.num_addrs; i++) {
 
         // zero ip and cport, overwriting previous data
         memset(ip, 0, 1024);
-        memset(cport, 0, 10);
+        memset(cport, 0, 7);
 
         // get the ip address associated with the multiaddr
         rc = multiaddress_get_ip_address(config.addrs[i], &ip);
         if (rc != 1) {
             thl->log(thl, 0, "failed to get ip address from multiaddr",
                      LOG_LEVELS_ERROR);
-            free(ip);
             goto EXIT;
         }
 
@@ -80,7 +80,6 @@ socket_server_t *new_socket_server(thread_logger *thl,
         if (port == -1) {
             thl->log(thl, 0, "failed to get ip port from multiaddr",
                      LOG_LEVELS_ERROR);
-            free(ip);
             goto EXIT;
         }
         // store port number as a char *
@@ -100,7 +99,6 @@ socket_server_t *new_socket_server(thread_logger *thl,
         // if the multiaddr has neither a tcp or udp protocol, exit
         if (is_tcp == false && is_udp == false) {
             thl->log(thl, 0, "invalid multiaddress provided", LOG_LEVELS_ERROR);
-            free(ip);
             goto EXIT;
         }
 
@@ -120,7 +118,6 @@ socket_server_t *new_socket_server(thread_logger *thl,
             rc = getaddrinfo(ip, cport, &tcp_hints, &tcp_bind_address);
             if (rc != 0) {
                 thl->log(thl, 0, "failed to get tcp addr info", LOG_LEVELS_ERROR);
-                free(ip);
                 goto EXIT;
             }
 
@@ -128,7 +125,6 @@ socket_server_t *new_socket_server(thread_logger *thl,
                 get_new_socket(thl, tcp_bind_address, opts, 2, false);
             if (tcp_socket_num == -1) {
                 thl->log(thl, 0, "failed to get new tcp socket", LOG_LEVELS_ERROR);
-                free(ip);
                 goto EXIT;
             }
 
@@ -137,7 +133,6 @@ socket_server_t *new_socket_server(thread_logger *thl,
                 thl->logf(thl, 0, LOG_LEVELS_ERROR,
                           "failed to start listening on tcp socket with error %s",
                           strerror(errno));
-                free(ip);
                 goto EXIT;
             }
 
@@ -167,7 +162,6 @@ socket_server_t *new_socket_server(thread_logger *thl,
             rc = getaddrinfo(ip, cport, &udp_hints, &udp_bind_address);
             if (rc != 0) {
                 thl->log(thl, 0, "failed to get udp addr info", LOG_LEVELS_ERROR);
-                free(ip);
                 goto EXIT;
             }
 
@@ -175,7 +169,6 @@ socket_server_t *new_socket_server(thread_logger *thl,
                 get_new_socket(thl, udp_bind_address, opts, 2, false);
             if (udp_socket_num == -1) {
                 thl->log(thl, 0, "failed to get new udp socket", LOG_LEVELS_ERROR);
-                free(ip);
                 goto EXIT;
             }
 
@@ -251,6 +244,7 @@ void free_socket_server(socket_server_t *srv) {
                   LOG_LEVELS_INFO);
     thpool_destroy(srv->thpool);
     srv->thl->log(srv->thl, 0, "all taskes exited, goodbye", LOG_LEVELS_INFO);
+    pthread_mutex_destroy(&shutdown_mutex);
     clear_thread_logger(srv->thl);
     free(srv);
 }
@@ -402,7 +396,7 @@ client_conn_t *accept_client_conn(socket_server_t *srv, int socket_num) {
 
 /*!
   * @brief used to free up resources allocated for socket_server_config_t
-  * @param an 
+  * @param config an instance of socket_server_config_t initialized with new_socket_server_config 
 */
 void free_socket_server_config(socket_server_config_t *config) {
     for (int i = 0; i < config->num_addrs; i++) {
@@ -414,17 +408,19 @@ void free_socket_server_config(socket_server_config_t *config) {
 
 /*!
   * @brief used to initialize a socket_server_config_t object
+  * @param num_addrs the number of multi_addr_t objects the addrs member will contain
   * @return Success: pointer to an initialized block of memory for socket_server_config_t
   * @return Failure: NULL pointer
 */
 socket_server_config_t *new_socket_server_config(int num_addrs) {
     socket_server_config_t *config = calloc(
         sizeof(socket_server_config_t), 
-        sizeof(socket_server_config_t) + (sizeof(multi_addr_t) * num_addrs)    
+        sizeof(socket_server_config_t)    
     );
     if (config == NULL) {
         return NULL;
     }
+    config->addrs = calloc(sizeof(multi_addr_t), sizeof(multi_addr_t) * 2);
     config->num_addrs = num_addrs;
     return config;
 }

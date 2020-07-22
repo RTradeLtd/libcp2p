@@ -132,12 +132,13 @@ void signal_shutdown();
 
 /*!
   * @brief used to free up resources allocated for socket_server_config_t
-  * @param an 
+  * @param config an instance of socket_server_config_t initialized with new_socket_server_config 
 */
 void free_socket_server_config(socket_server_config_t *config);
 
 /*!
   * @brief used to initialize a socket_server_config_t object
+  * @param num_addrs the number of multi_addr_t objects the addrs member will contain
   * @return Success: pointer to an initialized block of memory for socket_server_config_t
   * @return Failure: NULL pointer
 */

@@ -44,10 +44,8 @@ void example_task_func_udp(void *data) {
         &client_address,
         &len
     );
-    if (bytes_received == -1) {
-        free(hdata->conn);
-        free(hdata);
-        return;
+    if (bytes_received == -1 || bytes_received == 0) {
+        goto EXIT;
     }
     hdata->srv->thl->logf(
         hdata->srv->thl,
@@ -56,6 +54,7 @@ void example_task_func_udp(void *data) {
         "received message from client %s",
         buffer
     );
+EXIT:
    free(hdata->conn);
    free(hdata);
 }
@@ -106,8 +105,6 @@ void test_new_socket_server(void **state) {
 
     multi_addr_t *tcp_addr = multiaddress_new_from_string("/ip4/127.0.0.1/tcp/9090");
     multi_addr_t *udp_addr = multiaddress_new_from_string("/ip4/127.0.0.1/udp/9091");
-    // multi_addr_t *addrs[2] = {tcp_addr, udp_addr};
-    config->addrs = calloc(sizeof(multi_addr_t), sizeof(tcp_addr) + sizeof(udp_addr));
     config->addrs[0] = tcp_addr;
     config->addrs[1] = udp_addr;
     config->num_addrs = 2;
