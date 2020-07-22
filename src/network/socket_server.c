@@ -65,7 +65,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
     // setup tcp socket
     if (tcp_set == true) {
 
-        rc = getaddrinfo(0, config.tcp_port_number, &tcp_hints, &tcp_bind_address);
+        rc = getaddrinfo(config.listen_address, config.tcp_port_number, &tcp_hints, &tcp_bind_address);
         if (rc != 0) {
             thl->log(thl, 0, "failed to get tcp addr info", LOG_LEVELS_ERROR);
             goto EXIT;
@@ -91,7 +91,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
     // setup udp socket
     if (udp_set == true) {
 
-        rc = getaddrinfo(0, config.udp_port_number, &udp_hints, &udp_bind_address);
+        rc = getaddrinfo(config.listen_address, config.udp_port_number, &udp_hints, &udp_bind_address);
         if (rc != 0) {
             thl->log(thl, 0, "failed to get udp addr info", LOG_LEVELS_ERROR);
             goto EXIT;
