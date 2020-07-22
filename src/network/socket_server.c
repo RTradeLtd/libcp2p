@@ -67,7 +67,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
         memset(cport, 0, 10);
 
         // get the ip address associated with the multiaddr
-        rc = multiaddress_get_ip_address(&config.addrs[i], &ip);
+        rc = multiaddress_get_ip_address(config.addrs[i], &ip);
         if (rc != 1) {
             thl->log(thl, 0, "failed to get ip address from multiaddr",
                      LOG_LEVELS_ERROR);
@@ -76,7 +76,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
         }
 
         // get the port for the address
-        int port = multiaddress_get_ip_port(&config.addrs[i]);
+        int port = multiaddress_get_ip_port(config.addrs[i]);
         if (port == -1) {
             thl->log(thl, 0, "failed to get ip port from multiaddr",
                      LOG_LEVELS_ERROR);
@@ -90,10 +90,10 @@ socket_server_t *new_socket_server(thread_logger *thl,
         bool is_udp = false;
 
         // determine whether or not we support tcp and udp
-        if (strstr((&config.addrs[i])->string, "/tcp/") != NULL) {
+        if (strstr(config.addrs[i]->string, "/tcp/") != NULL) {
             is_tcp = true;
         }
-        if (strstr((&config.addrs[i])->string, "/udp/") != NULL) {
+        if (strstr(config.addrs[i]->string, "/udp/") != NULL) {
             is_udp = true;
         }
 
@@ -398,4 +398,33 @@ client_conn_t *accept_client_conn(socket_server_t *srv, int socket_num) {
                    addr_inf);
     free(addr_inf);
     return connection;
+}
+
+/*!
+  * @brief used to free up resources allocated for socket_server_config_t
+  * @param an 
+*/
+void free_socket_server_config(socket_server_config_t *config) {
+    for (int i = 0; i < config->num_addrs; i++) {
+        multiaddress_free(config->addrs[i]);
+    }
+    free(config->addrs);
+    free(config);
+}
+
+/*!
+  * @brief used to initialize a socket_server_config_t object
+  * @return Success: pointer to an initialized block of memory for socket_server_config_t
+  * @return Failure: NULL pointer
+*/
+socket_server_config_t *new_socket_server_config(int num_addrs) {
+    socket_server_config_t *config = calloc(
+        sizeof(socket_server_config_t), 
+        sizeof(socket_server_config_t) + (sizeof(multi_addr_t) * num_addrs)    
+    );
+    if (config == NULL) {
+        return NULL;
+    }
+    config->num_addrs = num_addrs;
+    return config;
 }

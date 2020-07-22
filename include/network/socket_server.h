@@ -38,7 +38,7 @@ typedef struct socket_server_config {
     int max_connections;
     int num_threads;
     int num_addrs;
-    multi_addr_t *addrs;
+    multi_addr_t **addrs;
 } socket_server_config_t;
 
 /*!
@@ -129,3 +129,16 @@ void *accept_connections(void *data);
  * @note this is only useful if you launch start_socket_server in a thread
  */
 void signal_shutdown();
+
+/*!
+  * @brief used to free up resources allocated for socket_server_config_t
+  * @param an 
+*/
+void free_socket_server_config(socket_server_config_t *config);
+
+/*!
+  * @brief used to initialize a socket_server_config_t object
+  * @return Success: pointer to an initialized block of memory for socket_server_config_t
+  * @return Failure: NULL pointer
+*/
+socket_server_config_t *new_socket_server_config();

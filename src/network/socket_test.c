@@ -98,24 +98,24 @@ void start_socker_server_wrapper(void *data) {
 */
 void test_new_socket_server(void **state) {
     thread_logger *thl = new_thread_logger(false);
-    socket_server_config_t config;
-    config.max_connections = 100;
-    config.num_threads = 6;
-    config.fn_tcp = example_task_func_tcp;
-    config.fn_udp = example_task_func_udp;
+    socket_server_config_t *config = new_socket_server_config(2);
+    config->max_connections = 100;
+    config->num_threads = 6;
+    config->fn_tcp = example_task_func_tcp;
+    config->fn_udp = example_task_func_udp;
 
     multi_addr_t *tcp_addr = multiaddress_new_from_string("/ip4/127.0.0.1/tcp/9090");
     multi_addr_t *udp_addr = multiaddress_new_from_string("/ip4/127.0.0.1/udp/9091");
     // multi_addr_t *addrs[2] = {tcp_addr, udp_addr};
-    config.addrs = calloc(sizeof(multi_addr_t), sizeof(tcp_addr) + sizeof(udp_addr));
-    config.addrs[0] = *tcp_addr;
-    config.addrs[1] = *udp_addr;
-    config.num_addrs = 2;
+    config->addrs = calloc(sizeof(multi_addr_t), sizeof(tcp_addr) + sizeof(udp_addr));
+    config->addrs[0] = tcp_addr;
+    config->addrs[1] = udp_addr;
+    config->num_addrs = 2;
 
     //   .num_threads = 6, .fn_tcp = example_task_func_tcp, .fn_udp = example_task_func_udp };
-    socket_server_t *server = new_socket_server(thl, config);
+    socket_server_t *server = new_socket_server(thl, *config);
     assert(server != NULL);
-
+    free_socket_server_config(config);
     thpool_add_work(server->thpool, start_socker_server_wrapper, server);
 
     addr_info hint;
@@ -137,9 +137,7 @@ void test_new_socket_server(void **state) {
     signal_shutdown();
     sleep(5);
     free_socket_server(server);
-    multiaddress_free(tcp_addr);
-    multiaddress_free(udp_addr);
-    free(config.addrs);
+    // free(config.addrs);
 }
 
 int main(void) {
