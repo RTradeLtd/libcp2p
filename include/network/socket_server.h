@@ -38,7 +38,7 @@ typedef struct socket_server_config {
     int max_connections;
     int num_threads;
     int num_addrs;
-    multi_addr_t addrs[MAX_ADDRS];
+    multi_addr_t *addrs[MAX_ADDRS];
 } socket_server_config_t;
 
 /*!
