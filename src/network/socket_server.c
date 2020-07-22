@@ -20,6 +20,13 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+/*!
+  * @brief internal mutex lock used for signalling shutdown in async start_socket_server function calls
+*/
+pthread_mutex_t shutdown_mutex;
+/*!
+  * @brief internal boolean variable used to signal async start_socket_server function calls
+*/
 bool do_shutdown = false;
 
 /*! @brief returns a new socket server bound to the port number and ready to accept
@@ -126,6 +133,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
     freeaddrinfo(tcp_bind_address);
     freeaddrinfo(udp_bind_address);
 
+    pthread_mutex_init(&shutdown_mutex, NULL);
+
     return server;
 
 EXIT:
@@ -194,17 +203,18 @@ void start_socket_server(socket_server_t *srv) {
         FD_SET(srv->udp_socket_number, &socket_list);
     }
 
+    /*!
+     * @todo enable customizable timeout
+    */
+    timeout tmt;
+    tmt.tv_sec = 3;
+    tmt.tv_usec = 0;
+    
    for (;;) {
         if (do_shutdown == true) {
             srv->thl->log(srv->thl, 0, "shutdown signal received, exiting", LOG_LEVELS_INFO);
             return;
         }
-        /*!
-         * @todo enable customizable timeout
-        */
-        timeout tmt;
-        tmt.tv_sec = 3;
-        tmt.tv_usec = 0;
         // create a temporary working copy copy of socket_list
         fd_set working_copy = socket_list;
 
@@ -214,7 +224,7 @@ void start_socket_server(socket_server_t *srv) {
             case 0:
                 srv->thl->log(srv->thl, 0, "no sockets are ready for processing, sleeping", LOG_LEVELS_DEBUG);
                 sleep(0.50);
-                break;
+                continue;
             case -1:
                 srv->thl->logf(srv->thl, 0, LOG_LEVELS_ERROR, "an error occured while running select: %s", strerror(errno));
                 sleep(0.50);
@@ -229,6 +239,7 @@ void start_socket_server(socket_server_t *srv) {
             client_conn_t *conn = calloc(sizeof(client_conn_t), sizeof(client_conn_t));
             if (conn == NULL) {
                 srv->thl->log(srv->thl, 0, "failed to calloc client_t", LOG_LEVELS_ERROR);
+                sleep(0.50);
                 continue;
             }
             conn->socket_number = srv->udp_socket_number;
@@ -236,6 +247,7 @@ void start_socket_server(socket_server_t *srv) {
             if (chdata == NULL) {
                 free(conn);
                 srv->thl->log(srv->thl, 0, "failed to calloc client_t", LOG_LEVELS_ERROR);
+                sleep(0.50);
                 continue;
             }
             chdata->srv = srv;
@@ -248,6 +260,7 @@ void start_socket_server(socket_server_t *srv) {
             client_conn_t *conn = accept_client_conn(srv);
             if (conn == NULL) {
                 srv->thl->log(srv->thl, 0, "failed to accept client connection", LOG_LEVELS_ERROR);
+                sleep(0.50);
                 continue;
             }
             conn_handle_data_t *chdata = calloc(sizeof(conn_handle_data_t), sizeof(conn_handle_data_t));
@@ -256,70 +269,9 @@ void start_socket_server(socket_server_t *srv) {
             thpool_add_work(srv->thpool, srv->task_func_tcp, chdata);
         }
         
-        /*! @todo process udp connections */
+        // sleep before looping again
+        sleep(0.50);
    }
-}
-
-
-/*!
- * @brief example function used to showcase how you can udp connections
- * @note in general should accept a conn_handle_data_t type but this is implementation defined
-*/
-void example_task_func_udp(void *data) {
-    conn_handle_data_t *hdata = (conn_handle_data_t *)data;
-    sock_addr client_address;
-    socklen_t len = sizeof(client_address);
-    char buffer[2048];
-    int bytes_received = recvfrom(
-        hdata->conn->socket_number,
-        buffer,
-        2048,
-        0,
-        &client_address,
-        &len
-    );
-    if (bytes_received == -1) {
-        free(hdata->conn);
-        free(hdata);
-        return;
-    }
-    hdata->srv->thl->logf(
-        hdata->srv->thl,
-        0,
-        LOG_LEVELS_INFO,
-        "received message from client %s",
-        buffer
-    );
-   free(hdata->conn);
-   free(hdata);
-}
-
-/*!
- * @brief example function used to showcase how you can handle connections
- * @note in general should accept a conn_handle_data_t type but this is implementation define
-*/
-void example_task_func_tcp(void *data) {
-    conn_handle_data_t *hdata = (conn_handle_data_t *)data;
-    char buffer[2048];
-    int rc = read(hdata->conn->socket_number, buffer, 2048);
-    switch (rc) {
-        case 0:
-            hdata->srv->thl->log(hdata->srv->thl, 0, "client disconnected", LOG_LEVELS_DEBUG);
-            goto EXIT;
-        case -1:
-            hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR, "error encountered during read %s", strerror(errno));
-            goto EXIT;
-        default:
-            // connection was successful and we read some data
-            goto EXIT;
-    }
-    send(hdata->conn->socket_number, buffer, (size_t)rc, 0);
-    /*! @todo figure out proper close procedures
-    */
-EXIT:
-   close(hdata->conn->socket_number);
-   free(hdata->conn);
-   free(hdata);
 }
 
 /*! @brief helper function for accepting client connections
@@ -354,6 +306,13 @@ client_conn_t *accept_client_conn(socket_server_t *srv) {
     free(addr_inf);
     return connection;
 }
+
+/*!
+  * @brief used to signal that we should exit the main start_socket_server function
+  * @note this is only useful if you launch start_socket_server in a thread
+*/
 void signal_shutdown() {
+    pthread_mutex_lock(&shutdown_mutex);
     do_shutdown = true;
+    pthread_mutex_unlock(&shutdown_mutex);
 }

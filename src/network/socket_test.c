@@ -25,11 +25,76 @@
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
+
+/*!
+ * @brief example function used to showcase how you can udp connections
+ * @note in general should accept a conn_handle_data_t type but this is implementation defined
+*/
+void example_task_func_udp(void *data) {
+    conn_handle_data_t *hdata = (conn_handle_data_t *)data;
+    sock_addr client_address;
+    socklen_t len = sizeof(client_address);
+    char buffer[2048];
+    int bytes_received = recvfrom(
+        hdata->conn->socket_number,
+        buffer,
+        2048,
+        0,
+        &client_address,
+        &len
+    );
+    if (bytes_received == -1) {
+        free(hdata->conn);
+        free(hdata);
+        return;
+    }
+    hdata->srv->thl->logf(
+        hdata->srv->thl,
+        0,
+        LOG_LEVELS_INFO,
+        "received message from client %s",
+        buffer
+    );
+   free(hdata->conn);
+   free(hdata);
+}
+
+/*!
+ * @brief example function used to showcase how you can handle connections
+ * @note in general should accept a conn_handle_data_t type but this is implementation define
+*/
+void example_task_func_tcp(void *data) {
+    conn_handle_data_t *hdata = (conn_handle_data_t *)data;
+    char buffer[2048];
+    int rc = read(hdata->conn->socket_number, buffer, 2048);
+    switch (rc) {
+        case 0:
+            hdata->srv->thl->log(hdata->srv->thl, 0, "client disconnected", LOG_LEVELS_DEBUG);
+            goto EXIT;
+        case -1:
+            hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR, "error encountered during read %s", strerror(errno));
+            goto EXIT;
+        default:
+            // connection was successful and we read some data
+            goto EXIT;
+    }
+    send(hdata->conn->socket_number, buffer, (size_t)rc, 0);
+    /*! @todo figure out proper close procedures
+    */
+EXIT:
+   close(hdata->conn->socket_number);
+   free(hdata->conn);
+   free(hdata);
+}
+
 void start_socker_server_wrapper(void *data) {
     socket_server_t *server = (socket_server_t *)data;
     start_socket_server(server);
 }
 
+/*!
+  * @brief in this we reuse the thread pool to start the socket server listening process, but you will likely want to do this from your main thread
+*/
 void test_new_socket_server(void **state) {
     thread_logger *thl = new_thread_logger(false);
     socket_server_config_t config = {.listen_address = "127.0.0.1", .max_connections = 100, .tcp_port_number = "9090", .udp_port_number = "9091", .num_threads = 6, .fn_tcp = example_task_func_tcp, .fn_udp = example_task_func_udp };

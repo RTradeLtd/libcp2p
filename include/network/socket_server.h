@@ -105,15 +105,7 @@ void start_socket_server(socket_server_t *srv);
 void *accept_connections(void *data);
 
 /*!
- * @brief example function used to showcase how you can handle  tcp connections
- * @note in general should accept a conn_handle_data_t type but this is implementation define
+  * @brief used to signal that we should exit the main start_socket_server function
+  * @note this is only useful if you launch start_socket_server in a thread
 */
-void example_task_func_tcp(void *data);
-
-/*!
- * @brief example function used to showcase how you can udp connections
- * @note in general should accept a conn_handle_data_t type but this is implementation defined
-*/
-void example_task_func_udp(void *data);
-
 void signal_shutdown();
