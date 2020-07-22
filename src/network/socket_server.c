@@ -95,7 +95,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
             }
             FD_SET(tcp_socket_num, &socket_set);
             free(ip);
-            free(cport);
+            //free(cport);
         }
         if (is_udp) {
             rc = getaddrinfo(ip, cport, &udp_hints, &udp_bind_address);
@@ -110,7 +110,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
             }
             FD_SET(udp_socket_num, &socket_set);
             free(ip);
-            free(cport);
+            //free(cport);
         }
     }
 
