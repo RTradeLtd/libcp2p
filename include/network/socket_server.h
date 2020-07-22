@@ -89,7 +89,7 @@ void free_socket_server(socket_server_t *srv);
   * @param srv an instance of a socket_server_t that has been initialized through new_socket_server
   * @param fn the main task to submit to our thread pool, it should be responsible for accepting new connections and procesing them
 */
-void start_socket_socker(socket_server_t *srv, threadpool_task_func *fn);
+void start_socket_server(socket_server_t *srv, threadpool_task_func *fn);
 
 /*!
   * @brief dedicated function for accepting and handling new connections

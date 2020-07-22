@@ -106,21 +106,28 @@ bool set_socket_blocking_status(int fd, bool blocking) {
 
 /*! @brief returns the address the client is connecting from
  */
-char *get_name_info(sock_addr *client_address) {
-    char address_info[256]; // destroy when function returns
-    getnameinfo(client_address, sizeof(*client_address),
-                address_info,         // output buffer
-                sizeof(address_info), // size of the output buffer
-                0,                    // second buffer which outputs service name
-                0,                    // length of the second buffer
-                NI_NUMERICHOST        // want to see hostnmae as an ip address
+char *get_name_info(addr_info *client_address) {
+    char address_buffer[256]; // destroy when function returns
+    char service_buffer[256];
+
+    getnameinfo(
+                client_address->ai_addr,
+                client_address->ai_addrlen,
+                address_buffer,         // output buffer
+                sizeof(address_buffer), // size of the output buffer
+                service_buffer,                    // second buffer which outputs service name
+                sizeof(service_buffer),                    // length of the second buffer
+                NI_NUMERICHOST | NI_NUMERICSERV        // want to see hostnmae as an ip address
     );
-    char *addr = malloc(sizeof(address_info));
-    if (addr == NULL) {
+    char *info = calloc(
+        sizeof(char),
+        sizeof(address_buffer) + sizeof(service_buffer) + 2
+    );
+    if (info == NULL) {
         return NULL;
     }
-    strcpy(addr, address_info);
-    return addr;
+    sprintf(info, "addr: %s\tservice: %s\n", address_buffer, service_buffer);
+    return info;
 }
 
 /*! @brief generates an addr_info struct with defaults

@@ -34,14 +34,13 @@ socket_client_t *new_socket_client(thread_logger *thl, addr_info hints, char *ad
     char service_buffer[100];
     getnameinfo(peer_address->ai_addr, peer_address->ai_addrlen, address_buffer,
                 sizeof(address_buffer), service_buffer, sizeof(service_buffer), 0);
-    printf("address buff: %s\n", address_buffer);
-    printf("service buffer: %s\n", service_buffer);
+
     int client_socket_num = get_new_socket(thl, peer_address, NULL, 0);
     if (client_socket_num == -1) {
         thl->log(thl, 0, "failed to get_new_socket", LOG_LEVELS_ERROR);
         return NULL;
     }
-    printf("socket num: %i\n", client_socket_num);
+    
     socket_client_t *sock_client = malloc(sizeof(sock_client));
     if (sock_client == NULL) {
         return NULL;

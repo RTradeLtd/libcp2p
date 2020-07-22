@@ -175,7 +175,7 @@ void free_socket_server(socket_server_t *srv) {
   * @param fn the function use to handle new connections
   * @note this is a blocking call, if you want it to be non blocking launch it in a pthread
 */
-void start_socket_socker(socket_server_t *srv, threadpool_task_func *fn) {
+void start_socket_server(socket_server_t *srv, threadpool_task_func *fn) {
     // set the task function to process new connections
     srv->task_func = fn;
     fd_set socket_list;
@@ -300,8 +300,8 @@ client_conn_t *accept_client_conn(socket_server_t *srv) {
     }
     connection->address = &addr_temp;
     connection->socket_number = client_socket_num;
-    char *addr_info = get_name_info((sock_addr *)connection->address);
-    srv->thl->logf(srv->thl, 0, LOG_LEVELS_INFO, "accepted new connection: %s", addr_info);
-    free(addr_info);
+    char *addr_inf = get_name_info((addr_info *)connection->address);
+    srv->thl->logf(srv->thl, 0, LOG_LEVELS_INFO, "accepted new connection: %s", addr_inf);
+    free(addr_inf);
     return connection;
 }

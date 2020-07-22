@@ -67,7 +67,7 @@ bool set_socket_blocking_status(int fd, bool blocking);
 
 /*! @brief returns the address the client is connecting from
  */
-char *get_name_info(sock_addr *client_address);
+char *get_name_info(addr_info *client_address);
 
 /*! @brief generates an addr_info struct with defaults
  * defaults is IPv4, TCP, and AI_PASSIVE flags

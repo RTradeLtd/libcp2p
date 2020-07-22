@@ -25,14 +25,31 @@
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
+void *start_socker_server_wrapper(void *data) {
+    socket_server_t *server = (socket_server_t *)data;
+    start_socket_server(server, example_task_func);
+    pthread_exit(NULL);
+}
 
 void test_new_socket_server(void **state) {
     thread_logger *thl = new_thread_logger(false);
     socket_server_config_t config = {.listen_address = "127.0.0.1", .max_connections = 100, .tcp_port_number = "9090", .udp_port_number = "9091", .num_threads = 6 };
     socket_server_t *server = new_socket_server(thl, config);
     assert(server != NULL);
-    start_socket_socker(server, example_task_func);
-    free_socket_server(server);
+    pthread_t thread;
+    pthread_create(&thread, NULL, start_socker_server_wrapper, server);
+
+    addr_info hint;
+    addr_info *peer_address = calloc(sizeof(addr_info), sizeof(addr_info));
+    memset(&hint, 0, sizeof(hint));
+    hint.ai_socktype = SOCK_DGRAM;
+    int rc = getaddrinfo("127.0.0.1", "9091", &hint, &peer_address);
+    assert(rc == 0);
+    char *addr = get_name_info(peer_address);
+    printf("client addr: %s\n", addr);
+
+    pthread_join(thread, NULL);
+    // free_socket_server(server);
 }
 
 int main(void) {
