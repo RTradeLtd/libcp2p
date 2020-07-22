@@ -1,0 +1,4 @@
+<map id="write_colored" name="write_colored">
+<area shape="rect" id="node1" title="writes a message to fh with the given color For &quot;sync writes&quot; and to always flush logs to disk immedi..." alt="" coords="5,5,116,32"/>
+<area shape="rect" id="node2" href="$d3/d13/colors_8c.html#ad8d5f1e1278b0284c4edf5cd254a39c6" title="returns an ansi color string to be used with printf" alt="" coords="164,5,339,32"/>
+</map>

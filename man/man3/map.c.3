@@ -1,0 +1,115 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/utils/map.c" 3 "Tue Jul 21 2020" "c-template" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/utils/map.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'utils/map\&.h'\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBmap_node_t\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "static unsigned \fBmap_hash\fP (const char *str)"
+.br
+.ti -1c
+.RI "static \fBmap_node_t\fP * \fBmap_newnode\fP (const char *key, void *value, int vsize)"
+.br
+.ti -1c
+.RI "static int \fBmap_bucketidx\fP (\fBmap_base_t\fP *m, unsigned hash)"
+.br
+.ti -1c
+.RI "static void \fBmap_addnode\fP (\fBmap_base_t\fP *m, \fBmap_node_t\fP *node)"
+.br
+.ti -1c
+.RI "static int \fBmap_resize\fP (\fBmap_base_t\fP *m, int nbuckets)"
+.br
+.ti -1c
+.RI "static \fBmap_node_t\fP ** \fBmap_getref\fP (\fBmap_base_t\fP *m, const char *key)"
+.br
+.ti -1c
+.RI "void \fBmap_deinit_\fP (\fBmap_base_t\fP *m)"
+.br
+.ti -1c
+.RI "void * \fBmap_get_\fP (\fBmap_base_t\fP *m, const char *key)"
+.br
+.ti -1c
+.RI "int \fBmap_set_\fP (\fBmap_base_t\fP *m, const char *key, void *value, int vsize)"
+.br
+.ti -1c
+.RI "void \fBmap_remove_\fP (\fBmap_base_t\fP *m, const char *key)"
+.br
+.ti -1c
+.RI "\fBmap_iter_t\fP \fBmap_iter_\fP (void)"
+.br
+.ti -1c
+.RI "const char * \fBmap_next_\fP (\fBmap_base_t\fP *m, \fBmap_iter_t\fP *iter)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "static void map_addnode (\fBmap_base_t\fP * m, \fBmap_node_t\fP * node)\fC [static]\fP"
+
+.PP
+Definition at line 48 of file map\&.c\&.
+.SS "static int map_bucketidx (\fBmap_base_t\fP * m, unsigned hash)\fC [static]\fP"
+
+.PP
+Definition at line 42 of file map\&.c\&.
+.SS "void map_deinit_ (\fBmap_base_t\fP * m)"
+
+.PP
+Definition at line 105 of file map\&.c\&.
+.SS "void* map_get_ (\fBmap_base_t\fP * m, const char * key)"
+
+.PP
+Definition at line 120 of file map\&.c\&.
+.SS "static \fBmap_node_t\fP** map_getref (\fBmap_base_t\fP * m, const char * key)\fC [static]\fP"
+
+.PP
+Definition at line 90 of file map\&.c\&.
+.SS "static unsigned map_hash (const char * str)\fC [static]\fP"
+
+.PP
+Definition at line 20 of file map\&.c\&.
+.SS "\fBmap_iter_t\fP map_iter_ (void)"
+
+.PP
+Definition at line 164 of file map\&.c\&.
+.SS "static \fBmap_node_t\fP* map_newnode (const char * key, void * value, int vsize)\fC [static]\fP"
+
+.PP
+Definition at line 28 of file map\&.c\&.
+.SS "const char* map_next_ (\fBmap_base_t\fP * m, \fBmap_iter_t\fP * iter)"
+
+.PP
+Definition at line 171 of file map\&.c\&.
+.SS "void map_remove_ (\fBmap_base_t\fP * m, const char * key)"
+
+.PP
+Definition at line 153 of file map\&.c\&.
+.SS "static int map_resize (\fBmap_base_t\fP * m, int nbuckets)\fC [static]\fP"
+
+.PP
+Definition at line 54 of file map\&.c\&.
+.SS "int map_set_ (\fBmap_base_t\fP * m, const char * key, void * value, int vsize)"
+
+.PP
+Definition at line 125 of file map\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for c-template from the source code\&.

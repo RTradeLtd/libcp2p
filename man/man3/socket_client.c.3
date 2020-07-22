@@ -1,0 +1,107 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/network/socket_client.c" 3 "Tue Jul 21 2020" "c-template" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/network/socket_client.c \- client socket related tooling  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'network/socket_client\&.h'\fP
+.br
+\fC#include 'utils/logger\&.h'\fP
+.br
+\fC#include <arpa/inet\&.h>\fP
+.br
+\fC#include <errno\&.h>\fP
+.br
+\fC#include <fcntl\&.h>\fP
+.br
+\fC#include <netdb\&.h>\fP
+.br
+\fC#include <netinet/in\&.h>\fP
+.br
+\fC#include <pthread\&.h>\fP
+.br
+\fC#include <signal\&.h>\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <sys/socket\&.h>\fP
+.br
+\fC#include <sys/time\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBsocket_client_t\fP * \fBnew_socket_client\fP (\fBthread_logger\fP *thl, \fBaddr_info\fP hints, char *addr, char *port)"
+.br
+.RI "returns a new socket client connected to \fCaddr:port\fP "
+.ti -1c
+.RI "int \fBsocket_client_sendto\fP (\fBsocket_client_t\fP *client, \fBaddr_info\fP *peer_address, char *message)"
+.br
+.RI "used to send a message through the connected socket number "
+.in -1c
+.SH "Detailed Description"
+.PP 
+client socket related tooling 
+
+
+.PP
+Definition in file \fBsocket_client\&.c\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "\fBsocket_client_t\fP* new_socket_client (\fBthread_logger\fP * thl, \fBaddr_info\fP hints, char * addr, char * port)"
+
+.PP
+returns a new socket client connected to \fCaddr:port\fP 
+.PP
+Definition at line 26 of file socket_client\&.c\&.
+.SS "int socket_client_sendto (\fBsocket_client_t\fP * client, \fBaddr_info\fP * peer_address, char * message)"
+
+.PP
+used to send a message through the connected socket number 
+.PP
+\fBParameters\fP
+.RS 4
+\fIclient\fP an instance of socket_client_t created with new_socket_client 
+.br
+\fIpeer_address\fP the target address to connect to through the socket 
+.br
+\fImessage\fP a null terminated pointer to a char 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Success: 1 
+.PP
+Failure: 0 
+.RE
+.PP
+
+.IP "\(bu" 2
+\fBTodo\fP
+.RS 4
+if we sent less than total size, send remaining 
+.RE
+.PP
+
+.PP
+
+.PP
+Definition at line 64 of file socket_client\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for c-template from the source code\&.

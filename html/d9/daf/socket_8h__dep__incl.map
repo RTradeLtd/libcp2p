@@ -1,0 +1,9 @@
+<map id="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/network/socket.h" name="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/network/socket.h">
+<area shape="rect" id="node1" title="general socket related tooling" alt="" coords="100,5,288,61"/>
+<area shape="rect" id="node2" href="$d5/df8/socket_8c.html" title="general socket related tooling" alt="" coords="5,117,183,173"/>
+<area shape="rect" id="node3" href="$d0/d3b/socket__client_8h.html" title="stuff related to socket clients (ie, connecting to socket servers)" alt="" coords="207,109,384,180"/>
+<area shape="rect" id="node4" href="$d4/d39/socket__client_8c.html" title="client socket related tooling" alt="" coords="86,235,289,291"/>
+<area shape="rect" id="node5" href="$d9/d26/socket__server_8h.html" title="used to create a tcp/udp socket server listening on multiaddrs" alt="" coords="313,228,491,299"/>
+<area shape="rect" id="node6" href="$d1/dfc/socket__server_8c.html" title="used to create a tcp/udp socket server listening on multiaddrs" alt="" coords="187,347,393,403"/>
+<area shape="rect" id="node7" href="$d2/d09/socket__test_8c.html" title=" " alt="" coords="417,347,608,403"/>
+</map>

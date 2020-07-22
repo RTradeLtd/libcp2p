@@ -1,0 +1,300 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/utils/logger.c" 3 "Tue Jul 21 2020" "c-template" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/utils/logger.c \- a thread safe logger with optional printf style logging  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'utils/logger\&.h'\fP
+.br
+\fC#include <fcntl\&.h>\fP
+.br
+\fC#include <pthread\&.h>\fP
+.br
+\fC#include <stdarg\&.h>\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <sys/stat\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "char * \fBget_time_string\fP ()"
+.br
+.RI "private function that returns a timestamp of format \fCJul 06 10:12:20 PM\fP "
+.ti -1c
+.RI "\fBthread_logger\fP * \fBnew_thread_logger\fP (bool with_debug)"
+.br
+.RI "returns a new thread safe logger if with_debug is false, then all debug_log calls will be ignored "
+.ti -1c
+.RI "\fBfile_logger\fP * \fBnew_file_logger\fP (char *output_file, bool with_debug)"
+.br
+.RI "returns a new \fBfile_logger\fP Calls new_thread_logger internally "
+.ti -1c
+.RI "int \fBwrite_file_log\fP (int file_descriptor, char *message)"
+.br
+.RI "used to write a log message to file "
+.ti -1c
+.RI "void \fBlogf_func\fP (\fBthread_logger\fP *thl, int file_descriptor, \fBLOG_LEVELS\fP level, char *message,\&.\&.\&.)"
+.br
+.RI "like log_func but for formatted logs "
+.ti -1c
+.RI "void \fBlog_func\fP (\fBthread_logger\fP *thl, int file_descriptor, char *message, \fBLOG_LEVELS\fP level)"
+.br
+.RI "main function you should call, which will delegate to the appopriate *_log function "
+.ti -1c
+.RI "void \fBinfo_log\fP (\fBthread_logger\fP *thl, int file_descriptor, char *message)"
+.br
+.RI "logs an info styled message - called by log_fn "
+.ti -1c
+.RI "void \fBwarn_log\fP (\fBthread_logger\fP *thl, int file_descriptor, char *message)"
+.br
+.RI "logs a warned styled message - called by log_fn "
+.ti -1c
+.RI "void \fBerror_log\fP (\fBthread_logger\fP *thl, int file_descriptor, char *message)"
+.br
+.RI "logs an error styled message - called by log_fn "
+.ti -1c
+.RI "void \fBdebug_log\fP (\fBthread_logger\fP *thl, int file_descriptor, char *message)"
+.br
+.RI "logs a debug styled message - called by log_fn "
+.ti -1c
+.RI "void \fBclear_thread_logger\fP (\fBthread_logger\fP *thl)"
+.br
+.RI "free resources for the threaded logger "
+.ti -1c
+.RI "void \fBclear_file_logger\fP (\fBfile_logger\fP *fhl)"
+.br
+.RI "free resources for the file ogger "
+.in -1c
+.SH "Detailed Description"
+.PP 
+a thread safe logger with optional printf style logging 
+
+allows writing color coded logs to stdout, with optional file output as well\&. timestamps all logs, and provides optional printf style logging 
+.PP
+\fBNote\fP
+.RS 4
+logf_func has a bug where some format is respected and others are not, consider the following from a \fCss\fP format:
+.IP "\(bu" 2
+[error - Jul 06 10:01:07 PM] one<insert-tab-here>two
+.IP "\(bu" 2
+[warn - Jul 06 10:01:07 PM] one two 
+.PP
+.PP
+warn, and info appear to not respect format, while debug and error do 
+.RE
+.PP
+\fBTodo\fP
+.RS 4
+.IP "\(bu" 2
+buffer logs and use a dedicated thread for writing (avoid blocking locks)
+.IP "\(bu" 2
+handling system signals (exit, kill, etc\&.\&.\&.) 
+.PP
+.RE
+.PP
+
+.PP
+Definition in file \fBlogger\&.c\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "void clear_file_logger (\fBfile_logger\fP * fhl)"
+
+.PP
+free resources for the file ogger 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfhl\fP the \fBfile_logger\fP instance to free memory for\&. also frees memory for the embedded \fBthread_logger\fP and closes the open file 
+.RE
+.PP
+
+.PP
+Definition at line 239 of file logger\&.c\&.
+.SS "void clear_thread_logger (\fBthread_logger\fP * thl)"
+
+.PP
+free resources for the threaded logger 
+.PP
+\fBParameters\fP
+.RS 4
+\fIthl\fP the \fBthread_logger\fP instance to free memory for 
+.RE
+.PP
+
+.PP
+Definition at line 235 of file logger\&.c\&.
+.SS "void debug_log (\fBthread_logger\fP * thl, int file_descriptor, char * message)"
+
+.PP
+logs a debug styled message - called by log_fn 
+.PP
+\fBParameters\fP
+.RS 4
+\fIthl\fP pointer to an instance of \fBthread_logger\fP 
+.br
+\fIfile_descriptor\fP file descriptor to write log messages to in addition to stdout logging\&. if 0 only stdout is used 
+.br
+\fImessage\fP the actuall message to log 
+.RE
+.PP
+
+.PP
+Definition at line 211 of file logger\&.c\&.
+.SS "void error_log (\fBthread_logger\fP * thl, int file_descriptor, char * message)"
+
+.PP
+logs an error styled message - called by log_fn 
+.PP
+\fBParameters\fP
+.RS 4
+\fIthl\fP pointer to an instance of \fBthread_logger\fP 
+.br
+\fIfile_descriptor\fP file descriptor to write log messages to in addition to stdout logging\&. if 0 only stdout is used 
+.br
+\fImessage\fP the actuall message to log 
+.RE
+.PP
+
+.PP
+Definition at line 192 of file logger\&.c\&.
+.SS "char * get_time_string ()"
+
+.PP
+private function that returns a timestamp of format \fCJul 06 10:12:20 PM\fP 
+.PP
+Definition at line 245 of file logger\&.c\&.
+.SS "void info_log (\fBthread_logger\fP * thl, int file_descriptor, char * message)"
+
+.PP
+logs an info styled message - called by log_fn 
+.PP
+\fBParameters\fP
+.RS 4
+\fIthl\fP pointer to an instance of \fBthread_logger\fP 
+.br
+\fIfile_descriptor\fP file descriptor to write log messages to in addition to stdout logging\&. if 0 only stdout is used 
+.br
+\fImessage\fP the actuall message to log 
+.RE
+.PP
+
+.PP
+Definition at line 150 of file logger\&.c\&.
+.SS "void log_func (\fBthread_logger\fP * thl, int file_descriptor, char * message, \fBLOG_LEVELS\fP level)"
+
+.PP
+main function you should call, which will delegate to the appopriate *_log function 
+.PP
+\fBParameters\fP
+.RS 4
+\fIthl\fP pointer to an instance of \fBthread_logger\fP 
+.br
+\fIfile_descriptor\fP file descriptor to write log messages to, if 0 then only stdout is used 
+.br
+\fImessage\fP the actual message we want to log 
+.br
+\fIlevel\fP the log level to use (effects color used) 
+.RE
+.PP
+
+.PP
+Definition at line 118 of file logger\&.c\&.
+.SS "void logf_func (\fBthread_logger\fP * thl, int file_descriptor, \fBLOG_LEVELS\fP level, char * message,  \&.\&.\&.)"
+
+.PP
+like log_func but for formatted logs 
+.PP
+\fBParameters\fP
+.RS 4
+\fIthl\fP pointer to an instance of \fBthread_logger\fP 
+.br
+\fIfile_descriptor\fP file descriptor to write log messages to, if 0 then only stdout is used 
+.br
+\fIlevel\fP the log level to use (effects color used) 
+.br
+\fImessage\fP format string like \fC<percent-sign>sFOO<percent-sign>sBAR\fP 
+.br
+\fI\&.\&.\&.\fP values to supply to message 
+.RE
+.PP
+
+.PP
+Definition at line 100 of file logger\&.c\&.
+.SS "\fBfile_logger\fP* new_file_logger (char * output_file, bool with_debug)"
+
+.PP
+returns a new \fBfile_logger\fP Calls new_thread_logger internally 
+.PP
+\fBParameters\fP
+.RS 4
+\fIoutput_file\fP the file we will dump logs to\&. created if not exists and is appended to 
+.RE
+.PP
+
+.PP
+Definition at line 45 of file logger\&.c\&.
+.SS "\fBthread_logger\fP* new_thread_logger (bool with_debug)"
+
+.PP
+returns a new thread safe logger if with_debug is false, then all debug_log calls will be ignored 
+.PP
+\fBParameters\fP
+.RS 4
+\fIwith_debug\fP whether to enable debug logging, if false debug log calls will be ignored 
+.RE
+.PP
+
+.PP
+Definition at line 30 of file logger\&.c\&.
+.SS "void warn_log (\fBthread_logger\fP * thl, int file_descriptor, char * message)"
+
+.PP
+logs a warned styled message - called by log_fn 
+.PP
+\fBParameters\fP
+.RS 4
+\fIthl\fP pointer to an instance of \fBthread_logger\fP 
+.br
+\fIfile_descriptor\fP file descriptor to write log messages to in addition to stdout logging\&. if 0 only stdout is used 
+.br
+\fImessage\fP the actuall message to log 
+.RE
+.PP
+
+.PP
+Definition at line 169 of file logger\&.c\&.
+.SS "int write_file_log (int file_descriptor, char * message)"
+
+.PP
+used to write a log message to file 
+.PP
+\fBParameters\fP
+.RS 4
+\fIthl\fP pointer to an instance of \fBthread_logger\fP 
+.br
+\fIfile_descriptor\fP file descriptor to write log messages to in addition to stdout logging\&. if 0 only stdout is used 
+.br
+\fImessage\fP the actuall message to log 
+.RE
+.PP
+
+.PP
+Definition at line 77 of file logger\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for c-template from the source code\&.

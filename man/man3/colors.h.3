@@ -1,0 +1,165 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/utils/colors.h" 3 "Tue Jul 21 2020" "c-template" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/utils/colors.h \- macros and utilities for printing color to stdout from https://www.quora.com/How-do-I-print-a-colored-output-in-C Pass a \fCCOLORS_x\fP enum value into \fCprint_colored\fP and the color will be printed on stdout Note that if you want to disable printing of that color you'll have to send the \fCCOLORS_RESET\fP enum value through to make non-bold change 0->1 (0;31m red) vs (1;31m bold red)  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdbool\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBANSI_COLOR_RED\fP   '\\x1b[1;31m'"
+.br
+.ti -1c
+.RI "#define \fBANSI_COLOR_SOFT_RED\fP   '\\x1b[1;38;5;210m'"
+.br
+.ti -1c
+.RI "#define \fBANSI_COLOR_GREEN\fP   '\\x1b[1;32m'"
+.br
+.ti -1c
+.RI "#define \fBANSI_COLOR_YELLOW\fP   '\\x1b[1;33m'"
+.br
+.ti -1c
+.RI "#define \fBANSI_COLOR_BLUE\fP   '\\x1b[1;34m'"
+.br
+.ti -1c
+.RI "#define \fBANSI_COLOR_MAGENTA\fP   '\\x1b[1;35m'"
+.br
+.ti -1c
+.RI "#define \fBANSI_COLOR_CYAN\fP   '\\x1b[1;36m'"
+.br
+.ti -1c
+.RI "#define \fBANSI_COLOR_RESET\fP   '\\x1b[1;0m'"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBCOLORS\fP { \fBCOLORS_RED\fP, \fBCOLORS_SOFT_RED\fP, \fBCOLORS_GREEN\fP, \fBCOLORS_YELLOW\fP, \fBCOLORS_BLUE\fP, \fBCOLORS_MAGENTA\fP, \fBCOLORS_CYAN\fP, \fBCOLORS_RESET\fP }"
+.br
+.RI "allows short-handed references to ANSI color schemes, and enables easier color selection anytime you want to extend the available colors with an additional enum, add a switch case in get_ansi_color_scheme "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "char * \fBformat_colored\fP (\fBCOLORS\fP color, char *message)"
+.br
+.RI "returns a \fCchar *\fP with the message formatted with ansi colors "
+.ti -1c
+.RI "char * \fBget_ansi_color_scheme\fP (\fBCOLORS\fP color)"
+.br
+.RI "returns an ansi color string to be used with printf "
+.ti -1c
+.RI "void \fBprint_colored\fP (\fBCOLORS\fP color, char *message)"
+.br
+.RI "prints message to stdout with the given color "
+.ti -1c
+.RI "int \fBwrite_colored\fP (\fBCOLORS\fP color, int file_descriptor, char *message)"
+.br
+.RI "writes a message to fh with the given color For 'sync writes' and to always flush logs to disk immediately set do_flush to true returns 0 if no error, returns 1 if error "
+.in -1c
+.SH "Detailed Description"
+.PP 
+macros and utilities for printing color to stdout from https://www.quora.com/How-do-I-print-a-colored-output-in-C Pass a \fCCOLORS_x\fP enum value into \fCprint_colored\fP and the color will be printed on stdout Note that if you want to disable printing of that color you'll have to send the \fCCOLORS_RESET\fP enum value through to make non-bold change 0->1 (0;31m red) vs (1;31m bold red) 
+
+
+.PP
+Definition in file \fBcolors\&.h\fP\&.
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define ANSI_COLOR_BLUE   '\\x1b[1;34m'"
+
+.PP
+Definition at line 18 of file colors\&.h\&.
+.SS "#define ANSI_COLOR_CYAN   '\\x1b[1;36m'"
+
+.PP
+Definition at line 20 of file colors\&.h\&.
+.SS "#define ANSI_COLOR_GREEN   '\\x1b[1;32m'"
+
+.PP
+Definition at line 16 of file colors\&.h\&.
+.SS "#define ANSI_COLOR_MAGENTA   '\\x1b[1;35m'"
+
+.PP
+Definition at line 19 of file colors\&.h\&.
+.SS "#define ANSI_COLOR_RED   '\\x1b[1;31m'"
+
+.PP
+Definition at line 14 of file colors\&.h\&.
+.SS "#define ANSI_COLOR_RESET   '\\x1b[1;0m'"
+
+.PP
+Definition at line 21 of file colors\&.h\&.
+.SS "#define ANSI_COLOR_SOFT_RED   '\\x1b[1;38;5;210m'"
+
+.PP
+Definition at line 15 of file colors\&.h\&.
+.SS "#define ANSI_COLOR_YELLOW   '\\x1b[1;33m'"
+
+.PP
+Definition at line 17 of file colors\&.h\&.
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBCOLORS\fP"
+
+.PP
+allows short-handed references to ANSI color schemes, and enables easier color selection anytime you want to extend the available colors with an additional enum, add a switch case in get_ansi_color_scheme 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fICOLORS_RED \fP\fP
+.TP
+\fB\fICOLORS_SOFT_RED \fP\fP
+.TP
+\fB\fICOLORS_GREEN \fP\fP
+.TP
+\fB\fICOLORS_YELLOW \fP\fP
+.TP
+\fB\fICOLORS_BLUE \fP\fP
+.TP
+\fB\fICOLORS_MAGENTA \fP\fP
+.TP
+\fB\fICOLORS_CYAN \fP\fP
+.TP
+\fB\fICOLORS_RESET \fP\fP
+.PP
+Definition at line 27 of file colors\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "char* format_colored (\fBCOLORS\fP color, char * message)"
+
+.PP
+returns a \fCchar *\fP with the message formatted with ansi colors 
+.PP
+Definition at line 31 of file colors\&.c\&.
+.SS "char* get_ansi_color_scheme (\fBCOLORS\fP color)"
+
+.PP
+returns an ansi color string to be used with printf 
+.PP
+Definition at line 8 of file colors\&.c\&.
+.SS "void print_colored (\fBCOLORS\fP color, char * message)"
+
+.PP
+prints message to stdout with the given color 
+.PP
+Definition at line 43 of file colors\&.c\&.
+.SS "int write_colored (\fBCOLORS\fP color, int file_descriptor, char * message)"
+
+.PP
+writes a message to fh with the given color For 'sync writes' and to always flush logs to disk immediately set do_flush to true returns 0 if no error, returns 1 if error 
+.PP
+Definition at line 47 of file colors\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for c-template from the source code\&.

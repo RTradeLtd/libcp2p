@@ -1,0 +1,278 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/utils/varhexutils.c" 3 "Tue Jul 21 2020" "c-template" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/utils/varhexutils.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'utils/varhexutils\&.h'\fP
+.br
+\fC#include <inttypes\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <strings\&.h>\fP
+.br
+\fC#include 'utils/varint\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int8_t \fBVar_Bytes_Count\fP (uint8_t *countbytesofthis)"
+.br
+.ti -1c
+.RI "uint8_t * \fBNum_To_Varint_64\fP (uint64_t TOV64INPUT)"
+.br
+.ti -1c
+.RI "uint8_t * \fBNum_To_Varint_32\fP (uint32_t TOV32INPUT)"
+.br
+.ti -1c
+.RI "uint64_t * \fBVarint_To_Num_64\fP (uint8_t TON64INPUT[60])"
+.br
+.ti -1c
+.RI "uint32_t * \fBVarint_To_Num_32\fP (uint8_t TON32INPUT[60])"
+.br
+.ti -1c
+.RI "char * \fBInt_To_Hex\fP (uint64_t int2hex)"
+.br
+.ti -1c
+.RI "uint64_t \fBHex_To_Int\fP (char *hax)"
+.br
+.ti -1c
+.RI "void \fBvthconvert\fP (const unsigned char *in, int in_size, unsigned char **out)"
+.br
+.ti -1c
+.RI "unsigned char * \fBVar_To_Hex\fP (const unsigned char *incoming, size_t incoming_size)"
+.br
+.ti -1c
+.RI "unsigned char * \fBHex_To_Var\fP (const char *incoming, size_t *num_bytes)"
+.br
+.ti -1c
+.RI "void \fBconvert\fP (char *convert_result, uint8_t *buf)"
+.br
+.ti -1c
+.RI "char * \fBNum_To_HexVar_64\fP (uint64_t TOHVINPUT)"
+.br
+.ti -1c
+.RI "void \fBconvert2\fP (char *convert_result2, uint8_t *bufhx)"
+.br
+.ti -1c
+.RI "char * \fBNum_To_HexVar_32\fP (uint32_t TOHVINPUT)"
+.br
+.ti -1c
+.RI "uint64_t \fBHexVar_To_Num_64\fP (char *theHEXstring)"
+.br
+.ti -1c
+.RI "uint32_t \fBHexVar_To_Num_32\fP (char theHEXstring[])"
+.br
+.ti -1c
+.RI "void \fBhex2str\fP (const char *h, char *s, int sizs)"
+.br
+.ti -1c
+.RI "void \fBstr2hex\fP (unsigned char *hexstring, unsigned char *string)"
+.br
+.ti -1c
+.RI "int \fBheader\fP (unsigned char *dest, unsigned char *src)"
+.br
+.ti -1c
+.RI "int \fBheader_path\fP (unsigned char *dest, unsigned char *src)"
+.br
+.ti -1c
+.RI "int \fBadd_header\fP (unsigned char *dest, unsigned char *\fBheader\fP, size_t headersize, unsigned char *content, size_t contentsize)"
+.br
+.ti -1c
+.RI "int \fBremove_header\fP (unsigned char *dest, unsigned char *lel)"
+.br
+.ti -1c
+.RI "int \fBget_header\fP (char *dest, unsigned char *src)"
+.br
+.ti -1c
+.RI "int \fBget_content\fP (char *dest, unsigned char *src)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int add_header (unsigned char * dest, unsigned char * header, size_t headersize, unsigned char * content, size_t contentsize)"
+
+.PP
+Definition at line 441 of file varhexutils\&.c\&.
+.SS "void convert (char * convert_result, uint8_t * buf)"
+
+.PP
+Definition at line 172 of file varhexutils\&.c\&.
+.SS "void convert2 (char * convert_result2, uint8_t * bufhx)"
+
+.PP
+Definition at line 203 of file varhexutils\&.c\&.
+.SS "int get_content (char * dest, unsigned char * src)"
+
+.PP
+Definition at line 525 of file varhexutils\&.c\&.
+.SS "int get_header (char * dest, unsigned char * src)"
+
+.PP
+Definition at line 493 of file varhexutils\&.c\&.
+.SS "int header (unsigned char * dest, unsigned char * src)"
+
+.PP
+Definition at line 395 of file varhexutils\&.c\&.
+.SS "int header_path (unsigned char * dest, unsigned char * src)"
+
+.PP
+Definition at line 415 of file varhexutils\&.c\&.
+.SS "void hex2str (const char * h, char * s, int sizs)"
+
+.PP
+Definition at line 285 of file varhexutils\&.c\&.
+.SS "uint64_t Hex_To_Int (char * hax)"
+
+.PP
+Definition at line 83 of file varhexutils\&.c\&.
+.SS "unsigned char* Hex_To_Var (const char * incoming, size_t * num_bytes)"
+Turn a hex string into a byte array 
+.PP
+\fBParameters\fP
+.RS 4
+\fIincoming\fP a string of hex values 
+.br
+\fInum_bytes\fP the size of the result 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a pointer to the converted value 
+.RE
+.PP
+
+.PP
+Definition at line 150 of file varhexutils\&.c\&.
+.SS "uint32_t HexVar_To_Num_32 (char theHEXstring[])"
+
+.PP
+Definition at line 256 of file varhexutils\&.c\&.
+.SS "uint64_t HexVar_To_Num_64 (char * theHEXstring)"
+
+.PP
+Definition at line 233 of file varhexutils\&.c\&.
+.SS "char* Int_To_Hex (uint64_t int2hex)"
+Converts a 64 bit integer into a hex string 
+.PP
+\fBParameters\fP
+.RS 4
+\fIint2hex\fP the 64 bit integer 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a hex representation as a string (leading zero if necessary) 
+.RE
+.PP
+
+.PP
+Definition at line 68 of file varhexutils\&.c\&.
+.SS "char* Num_To_HexVar_32 (uint32_t TOHVINPUT)"
+
+.PP
+Definition at line 218 of file varhexutils\&.c\&.
+.SS "char* Num_To_HexVar_64 (uint64_t TOHVINPUT)"
+
+.PP
+\fBTodo\fP
+.RS 4
+TODO(bonedaddy): figure out the previous code did bzero before memset 
+.RE
+.PP
+
+.PP
+Definition at line 185 of file varhexutils\&.c\&.
+.SS "uint8_t* Num_To_Varint_32 (uint32_t TOV32INPUT)"
+
+.PP
+Definition at line 45 of file varhexutils\&.c\&.
+.SS "uint8_t* Num_To_Varint_64 (uint64_t TOV64INPUT)"
+
+.PP
+Definition at line 39 of file varhexutils\&.c\&.
+.SS "int remove_header (unsigned char * dest, unsigned char * lel)"
+
+.PP
+Definition at line 462 of file varhexutils\&.c\&.
+.SS "void str2hex (unsigned char * hexstring, unsigned char * string)"
+
+.PP
+Definition at line 309 of file varhexutils\&.c\&.
+.SS "int8_t Var_Bytes_Count (uint8_t * countbytesofthis)"
+
+.PP
+\fBWarning\fP
+.RS 4
+likely contains multiple bugs due to heavy usage of \fCstr___\fP builtins and operating on unsigned char pointers 
+.PP
+suffers a string truncation bug from \fCstringoptruncation\fP 
+.PP
+/usr/include/x86_64-linux-gnu/bits/string_fortified\&.h:106:10: error: ‘__builtin_strncpy’ output may be truncated copying 1 byte from a string of length 799 [-Werror=stringop-truncation] 106 | return __builtin___strncpy_chk (__dest, __src, __len, __bos (__dest)); 
+.PP
+temporarily ignored 
+.RE
+.PP
+
+.PP
+Definition at line 30 of file varhexutils\&.c\&.
+.SS "unsigned char* Var_To_Hex (const unsigned char * incoming, size_t incoming_size)"
+Convert binary array to array of hex values 
+.PP
+\fBParameters\fP
+.RS 4
+\fIincoming\fP the binary array 
+.br
+\fIincoming_size\fP the size of the incoming array 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the allocated array 
+.RE
+.PP
+
+.PP
+Definition at line 132 of file varhexutils\&.c\&.
+.SS "uint32_t* Varint_To_Num_32 (uint8_t TON32INPUT[60])"
+
+.PP
+Definition at line 57 of file varhexutils\&.c\&.
+.SS "uint64_t* Varint_To_Num_64 (uint8_t TON64INPUT[60])"
+
+.PP
+Definition at line 51 of file varhexutils\&.c\&.
+.SS "void vthconvert (const unsigned char * in, int in_size, unsigned char ** out)"
+Convert a byte array into a hex byte array 
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP the incoming byte array 
+.br
+\fIin_size\fP the size of in 
+.br
+\fIout\fP the resultant array of hex bytes 
+.RE
+.PP
+
+.PP
+\fBTodo\fP
+.RS 4
+TODO(bonedaddy): figure out best way to error here 
+.RE
+.PP
+
+.PP
+Definition at line 111 of file varhexutils\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for c-template from the source code\&.

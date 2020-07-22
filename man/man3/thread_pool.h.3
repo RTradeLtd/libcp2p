@@ -1,0 +1,71 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/utils/thread_pool.h" 3 "Tue Jul 21 2020" "c-template" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/utils/thread_pool.h
+.SH SYNOPSIS
+.br
+.PP
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBthpool_\fP * \fBthreadpool\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBthreadpool\fP \fBthpool_init\fP (int num_threads)"
+.br
+.ti -1c
+.RI "int \fBthpool_add_work\fP (\fBthreadpool\fP, void(*function_p)(void *), void *arg_p)"
+.br
+.ti -1c
+.RI "void \fBthpool_wait\fP (\fBthreadpool\fP)"
+.br
+.ti -1c
+.RI "void \fBthpool_pause\fP (\fBthreadpool\fP)"
+.br
+.ti -1c
+.RI "void \fBthpool_resume\fP (\fBthreadpool\fP)"
+.br
+.ti -1c
+.RI "void \fBthpool_destroy\fP (\fBthreadpool\fP)"
+.br
+.ti -1c
+.RI "int \fBthpool_num_threads_working\fP (\fBthreadpool\fP)"
+.br
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fBthpool_\fP* \fBthreadpool\fP"
+
+.PP
+\fBExamples\fP
+.in +1c
+\fB/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/utils/thread_pool\&.h\fP\&.
+.PP
+Definition at line 16 of file thread_pool\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "int thpool_add_work (\fBthreadpool\fP, void(*)(void *) function_p, void * arg_p)"
+
+.SS "void thpool_destroy (\fBthreadpool\fP)"
+
+.SS "\fBthreadpool\fP thpool_init (int num_threads)"
+
+.PP
+Definition at line 109 of file thread_pool\&.c\&.
+.SS "int thpool_num_threads_working (\fBthreadpool\fP)"
+
+.SS "void thpool_pause (\fBthreadpool\fP)"
+
+.SS "void thpool_resume (\fBthreadpool\fP)"
+
+.SS "void thpool_wait (\fBthreadpool\fP)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for c-template from the source code\&.

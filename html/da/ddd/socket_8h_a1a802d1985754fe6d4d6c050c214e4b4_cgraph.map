@@ -1,0 +1,4 @@
+<map id="get_new_socket" name="get_new_socket">
+<area shape="rect" id="node1" title="gets an available socket attached to bind_address" alt="" coords="5,13,132,39"/>
+<area shape="rect" id="node2" href="$d5/df8/socket_8c.html#add0cf15976a6dd3a21d81320a5fbf0cf" title="used to enable/disable blocking sockets" alt="" coords="180,5,333,47"/>
+</map>

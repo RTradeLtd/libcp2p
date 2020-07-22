@@ -1,0 +1,112 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/utils/varint.h" 3 "Tue Jul 21 2020" "c-template" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/utils/varint.h \- provides utilities for manipulating varints  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stddef\&.h>\fP
+.br
+\fC#include <stdint\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBDEFN_ENCODER\fP(SIZE)"
+.br
+.ti -1c
+.RI "#define \fBDEFN_DECODER\fP(SIZE)"
+.br
+.ti -1c
+.RI "#define \fBDECL_ENCODER\fP(SIZE)   size_t uvarint_encode##SIZE(uint##SIZE##_t val, uint8_t buf[], size_t bufsize);"
+.br
+.ti -1c
+.RI "#define \fBDECL_DECODER\fP(SIZE)   size_t uvarint_decode##SIZE(uint8_t buf[], size_t bufsize, uint##SIZE##_t *val);"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "size_t \fBuvarint_encode32\fP (uint32_t val, uint8_t buf[], size_t bufsize)"
+.br
+.ti -1c
+.RI "size_t \fBuvarint_decode32\fP (uint8_t buf[], size_t bufsize, uint32_t *val)"
+.br
+.ti -1c
+.RI "size_t \fBuvarint_encode64\fP (uint64_t val, uint8_t buf[], size_t bufsize)"
+.br
+.ti -1c
+.RI "size_t \fBuvarint_decode64\fP (uint8_t buf[], size_t bufsize, uint64_t *val)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+provides utilities for manipulating varints 
+
+
+.PP
+Definition in file \fBvarint\&.h\fP\&.
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define DECL_DECODER(SIZE)   size_t uvarint_decode##SIZE(uint8_t buf[], size_t bufsize, uint##SIZE##_t *val);"
+
+.PP
+Definition at line 39 of file varint\&.h\&.
+.SS "#define DECL_ENCODER(SIZE)   size_t uvarint_encode##SIZE(uint##SIZE##_t val, uint8_t buf[], size_t bufsize);"
+
+.PP
+Definition at line 36 of file varint\&.h\&.
+.SS "#define DEFN_DECODER(SIZE)"
+\fBValue:\fP
+.PP
+.nf
+    size_t uvarint_decode##SIZE(uint8_t buf[], size_t bufsize, \
+                                uint##SIZE##_t *val) {         \
+        *val = 0;                                              \
+        size_t i = 0;                                          \
+        for (; i < (SIZE / 8) && i < bufsize; i++) {           \
+            *val |= ((buf[i] & 0x7f) << (7 * i));              \
+            if (!(buf[i] & 0x80))                              \
+                return i + 1;                                  \
+        }                                                      \
+        return -1;                                             \
+    }
+.fi
+.PP
+Definition at line 23 of file varint\&.h\&.
+.SS "#define DEFN_ENCODER(SIZE)"
+\fBValue:\fP
+.PP
+.nf
+    size_t uvarint_encode##SIZE(uint##SIZE##_t val, uint8_t buf[], \
+                                size_t bufsize) {                  \
+        size_t i = 0;                                              \
+        for (; i < (SIZE / 8) && i < bufsize; i++) {               \
+            buf[i] = (uint8_t)((val & 0xFF) | 0x80);               \
+            val >>= 7;                                             \
+            if (!val)                                              \
+                return i + 1;                                      \
+        }                                                          \
+        return -1;                                                 \
+    }
+.fi
+.PP
+Definition at line 10 of file varint\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "size_t uvarint_decode32 (uint8_t buf[], size_t bufsize, uint32_t * val)"
+
+.SS "size_t uvarint_decode64 (uint8_t buf[], size_t bufsize, uint64_t * val)"
+
+.SS "size_t uvarint_encode32 (uint32_t val, uint8_t buf[], size_t bufsize)"
+
+.SS "size_t uvarint_encode64 (uint64_t val, uint8_t buf[], size_t bufsize)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for c-template from the source code\&.

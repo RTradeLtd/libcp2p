@@ -1,0 +1,12 @@
+<map id="conn_handle_data" name="conn_handle_data">
+<area shape="rect" id="node1" title="struct containing arguments passed into pthread" alt="" coords="78,380,218,407"/>
+<area shape="rect" id="node2" href="$d5/de2/structclient__conn.html" title="a structure containing a file descriptor and address information" alt="" coords="36,291,132,317"/>
+<area shape="rect" id="node3" href="$d0/d6d/structsockaddr__storage.html" title="alias for struct sockaddr_storage" alt="" coords="5,200,141,227"/>
+<area shape="rect" id="node4" href="$d7/d8d/structsocket__server.html" title=" " alt="" coords="165,291,277,317"/>
+<area shape="rect" id="node5" href="$da/da5/structthread__logger.html" title=" " alt="" coords="165,200,277,227"/>
+<area shape="rect" id="node6" href="$d4/d05/structthpool__.html" title=" " alt="" coords="355,200,426,227"/>
+<area shape="rect" id="node7" href="$d3/dc5/structthread.html" title=" " alt="" coords="393,291,457,317"/>
+<area shape="rect" id="node8" href="$d7/dd0/structjobqueue.html" title=" " alt="" coords="349,109,432,136"/>
+<area shape="rect" id="node9" href="$d5/d93/structbsem.html" title=" " alt="" coords="316,5,375,32"/>
+<area shape="rect" id="node10" href="$d3/d8c/structjob.html" title=" " alt="" coords="416,5,459,32"/>
+</map>

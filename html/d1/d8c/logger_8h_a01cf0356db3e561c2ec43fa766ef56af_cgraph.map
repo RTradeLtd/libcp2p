@@ -1,0 +1,11 @@
+<map id="log_func" name="log_func">
+<area shape="rect" id="node1" title="main function you should call, which will delegate to the appopriate *_log function" alt="" coords="5,107,83,133"/>
+<area shape="rect" id="node2" href="$d1/d22/logger_8c.html#adbd079d224c0a17760bd34be2b94d4d4" title="logs a debug styled message &#45; called by log_fn" alt="" coords="148,56,237,83"/>
+<area shape="rect" id="node6" href="$d1/d22/logger_8c.html#a86974eb20c3c2a9b8528cca2bfd1526b" title="logs an error styled message &#45; called by log_fn" alt="" coords="153,107,233,133"/>
+<area shape="rect" id="node7" href="$d1/d22/logger_8c.html#a26fa286bf91c5bdead18c3e06ba8b5de" title="private function that returns a timestamp of format Jul 06 10:12:20 PM" alt="" coords="131,208,255,235"/>
+<area shape="rect" id="node8" href="$d1/d22/logger_8c.html#acb4bc62c4f5124145fdd7813a8eff213" title="logs an info styled message &#45; called by log_fn" alt="" coords="155,157,230,184"/>
+<area shape="rect" id="node9" href="$d1/d22/logger_8c.html#a1979109bb7f9b3fccd5d35ab62af76b0" title="logs a warned styled message &#45; called by log_fn" alt="" coords="152,5,233,32"/>
+<area shape="rect" id="node3" href="$d3/d13/colors_8c.html#a9b86c057290aefcc15b20231f9cabe9e" title="prints message to stdout with the given color" alt="" coords="304,56,411,83"/>
+<area shape="rect" id="node5" href="$d1/d22/logger_8c.html#a6362ea8a304cd179fbd42e2971ed71f3" title="used to write a log message to file" alt="" coords="303,107,412,133"/>
+<area shape="rect" id="node4" href="$d3/d13/colors_8c.html#ad8d5f1e1278b0284c4edf5cd254a39c6" title="returns an ansi color string to be used with printf" alt="" coords="460,56,635,83"/>
+</map>

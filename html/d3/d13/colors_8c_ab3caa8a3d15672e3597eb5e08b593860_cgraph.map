@@ -1,0 +1,4 @@
+<map id="format_colored" name="format_colored">
+<area shape="rect" id="node1" title="returns a char * with the message formatted with ansi colors" alt="" coords="5,5,127,32"/>
+<area shape="rect" id="node2" href="$d3/d13/colors_8c.html#ad8d5f1e1278b0284c4edf5cd254a39c6" title="returns an ansi color string to be used with printf" alt="" coords="175,5,349,32"/>
+</map>

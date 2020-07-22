@@ -1,0 +1,127 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/network/socket_test.c" 3 "Tue Jul 21 2020" "c-template" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/network/socket_test.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'utils/logger\&.h'\fP
+.br
+\fC#include 'network/socket_server\&.h'\fP
+.br
+\fC#include <arpa/inet\&.h>\fP
+.br
+\fC#include <errno\&.h>\fP
+.br
+\fC#include <fcntl\&.h>\fP
+.br
+\fC#include <netdb\&.h>\fP
+.br
+\fC#include <netinet/in\&.h>\fP
+.br
+\fC#include <pthread\&.h>\fP
+.br
+\fC#include <signal\&.h>\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <sys/socket\&.h>\fP
+.br
+\fC#include <sys/time\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include <assert\&.h>\fP
+.br
+\fC#include <stdarg\&.h>\fP
+.br
+\fC#include <stddef\&.h>\fP
+.br
+\fC#include <setjmp\&.h>\fP
+.br
+\fC#include <cmocka\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBexample_task_func_udp\fP (void *data)"
+.br
+.RI "example function used to showcase how you can udp connections "
+.ti -1c
+.RI "void \fBexample_task_func_tcp\fP (void *data)"
+.br
+.RI "example function used to showcase how you can handle connections "
+.ti -1c
+.RI "void \fBstart_socker_server_wrapper\fP (void *data)"
+.br
+.ti -1c
+.RI "void \fBtest_new_socket_server\fP (void **state)"
+.br
+.RI "in this we reuse the thread pool to start the socket server listening process, but you will likely want to do this from your main thread "
+.ti -1c
+.RI "int \fBmain\fP (void)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void example_task_func_tcp (void * data)"
+
+.PP
+example function used to showcase how you can handle connections 
+.PP
+\fBNote\fP
+.RS 4
+in general should accept a conn_handle_data_t type but this is implementation define 
+.RE
+.PP
+
+.PP
+\fBTodo\fP
+.RS 4
+figure out proper close procedures 
+.RE
+.PP
+
+.PP
+Definition at line 66 of file socket_test\&.c\&.
+.SS "void example_task_func_udp (void * data)"
+
+.PP
+example function used to showcase how you can udp connections 
+.PP
+\fBNote\fP
+.RS 4
+in general should accept a conn_handle_data_t type but this is implementation defined 
+.RE
+.PP
+
+.PP
+Definition at line 33 of file socket_test\&.c\&.
+.SS "int main (void)"
+
+.PP
+Definition at line 131 of file socket_test\&.c\&.
+.SS "void start_socker_server_wrapper (void * data)"
+
+.PP
+Definition at line 90 of file socket_test\&.c\&.
+.SS "void test_new_socket_server (void ** state)"
+
+.PP
+in this we reuse the thread pool to start the socket server listening process, but you will likely want to do this from your main thread 
+.PP
+Definition at line 98 of file socket_test\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for c-template from the source code\&.

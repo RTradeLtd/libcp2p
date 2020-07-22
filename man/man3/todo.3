@@ -1,0 +1,44 @@
+.TH "todo" 3 "Tue Jul 21 2020" "c-template" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+todo \- Todo List 
+
+.IP "\fBClass \fBclient_conn\fP \fP" 1c
+.IP "\(bu" 2
+enable a queue/list of these  
+.PP
+.IP "\fBGlobal \fBexample_task_func_tcp\fP (void *data)\fP" 1c
+figure out proper close procedures  
+.IP "\fBFile \fBlogger\&.c\fP \fP" 1c
+.IP "\(bu" 2
+buffer logs and use a dedicated thread for writing (avoid blocking locks)
+.IP "\(bu" 2
+handling system signals (exit, kill, etc\&.\&.\&.)  
+.PP
+.IP "\fBFile \fBlogger\&.h\fP \fP" 1c
+.IP "\(bu" 2
+buffer logs and use a dedicated thread for writing (avoid blocking locks)
+.IP "\(bu" 2
+handling system signals (exit, kill, etc\&.\&.\&.)  
+.PP
+.IP "\fBGlobal \fBnew_socket_server\fP (\fBthread_logger\fP *thl, socket_server_config_t config)\fP" 1c
+support non wildcard 
+.PP
+support non wildcard  
+.IP "\fBGlobal \fBNum_To_HexVar_64\fP (uint64_t TOHVINPUT)\fP" 1c
+TODO(bonedaddy): figure out the previous code did bzero before memset  
+.IP "\fBGlobal \fBsocket_client_sendto\fP (socket_client_t *client, addr_info *peer_address, char *message)\fP" 1c
+if we sent less than total size, send remaining  
+.IP "\fBGlobal \fBsocket_server_config_t\fP \fP" 1c
+switch to multiaddresses  
+.IP "\fBGlobal \fBsocket_server_t\fP \fP" 1c
+dont limit to two sockets (this will requiring using multiaddrs and an array of socket numbers)  
+.IP "\fBGlobal \fBstart_socket_server\fP (socket_server_t *srv)\fP" 1c
+enable customizable timeout 
+.PP
+figure out why select isn't handling the udp connection  
+.IP "\fBGlobal \fBvthconvert\fP (const unsigned char *in, int in_size, unsigned char **out)\fP" 1c
+TODO(bonedaddy): figure out best way to error here 
+.PP
+

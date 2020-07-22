@@ -1,0 +1,9 @@
+<map id="debug_log" name="debug_log">
+<area shape="rect" id="node1" title="logs a debug styled message &#45; called by log_fn" alt="" coords="785,31,875,57"/>
+<area shape="rect" id="node2" href="$d1/d8c/logger_8h.html#a01cf0356db3e561c2ec43fa766ef56af" title="main function you should call, which will delegate to the appopriate *_log function" alt="" coords="660,31,737,57"/>
+<area shape="rect" id="node3" href="$d1/d8c/logger_8h.html#ad4ca0f60df17abc4a0cfcbd71049aef9" title="like log_func but for formatted logs" alt="" coords="529,5,612,32"/>
+<area shape="rect" id="node4" href="$d1/d8c/logger_8h.html#aba435ba2ea5433b4dc792c5d8038a0d1" title="returns a new thread safe logger if with_debug is false, then all debug_log calls will be ignored" alt="" coords="335,31,481,57"/>
+<area shape="rect" id="node5" href="$d1/d8c/logger_8h.html#a346f22d0e57a25484ee39115185ef609" title="returns a new file_logger Calls new_thread_logger internally" alt="" coords="135,5,259,32"/>
+<area shape="rect" id="node6" href="$d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="108,56,287,83"/>
+<area shape="rect" id="node7" href="$d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,56,60,83"/>
+</map>

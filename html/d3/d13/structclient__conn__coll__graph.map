@@ -1,0 +1,4 @@
+<map id="client_conn" name="client_conn">
+<area shape="rect" id="node1" title="a structure containing a file descriptor and address information" alt="" coords="25,95,121,121"/>
+<area shape="rect" id="node2" href="$d0/d6d/structsockaddr__storage.html" title="alias for struct sockaddr_storage" alt="" coords="5,5,141,32"/>
+</map>

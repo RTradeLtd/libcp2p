@@ -1,0 +1,6 @@
+<map id="debug_log" name="debug_log">
+<area shape="rect" id="node1" title="logs a debug styled message &#45; called by log_fn" alt="" coords="5,31,95,57"/>
+<area shape="rect" id="node2" href="$d3/d13/colors_8c.html#a9b86c057290aefcc15b20231f9cabe9e" title="prints message to stdout with the given color" alt="" coords="144,5,251,32"/>
+<area shape="rect" id="node4" href="$d1/d22/logger_8c.html#a6362ea8a304cd179fbd42e2971ed71f3" title="used to write a log message to file" alt="" coords="143,56,252,83"/>
+<area shape="rect" id="node3" href="$d3/d13/colors_8c.html#ad8d5f1e1278b0284c4edf5cd254a39c6" title="returns an ansi color string to be used with printf" alt="" coords="300,5,475,32"/>
+</map>

@@ -1,0 +1,70 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/utils/colors.c" 3 "Tue Jul 21 2020" "c-template" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/utils/colors.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'utils/colors\&.h'\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "char * \fBget_ansi_color_scheme\fP (\fBCOLORS\fP color)"
+.br
+.RI "returns an ansi color string to be used with printf "
+.ti -1c
+.RI "char * \fBformat_colored\fP (\fBCOLORS\fP color, char *message)"
+.br
+.RI "returns a \fCchar *\fP with the message formatted with ansi colors "
+.ti -1c
+.RI "void \fBprint_colored\fP (\fBCOLORS\fP color, char *message)"
+.br
+.RI "prints message to stdout with the given color "
+.ti -1c
+.RI "int \fBwrite_colored\fP (\fBCOLORS\fP color, int file_descriptor, char *message)"
+.br
+.RI "writes a message to fh with the given color For 'sync writes' and to always flush logs to disk immediately set do_flush to true returns 0 if no error, returns 1 if error "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "char* format_colored (\fBCOLORS\fP color, char * message)"
+
+.PP
+returns a \fCchar *\fP with the message formatted with ansi colors 
+.PP
+Definition at line 31 of file colors\&.c\&.
+.SS "char* get_ansi_color_scheme (\fBCOLORS\fP color)"
+
+.PP
+returns an ansi color string to be used with printf 
+.PP
+Definition at line 8 of file colors\&.c\&.
+.SS "void print_colored (\fBCOLORS\fP color, char * message)"
+
+.PP
+prints message to stdout with the given color 
+.PP
+Definition at line 43 of file colors\&.c\&.
+.SS "int write_colored (\fBCOLORS\fP color, int file_descriptor, char * message)"
+
+.PP
+writes a message to fh with the given color For 'sync writes' and to always flush logs to disk immediately set do_flush to true returns 0 if no error, returns 1 if error 
+.PP
+Definition at line 47 of file colors\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for c-template from the source code\&.

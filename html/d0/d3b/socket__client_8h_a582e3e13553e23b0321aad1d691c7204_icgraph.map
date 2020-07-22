@@ -1,0 +1,5 @@
+<map id="new_socket_client" name="new_socket_client">
+<area shape="rect" id="node1" title="returns a new socket client connected to addr:port" alt="" coords="335,5,476,32"/>
+<area shape="rect" id="node2" href="$d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="108,5,287,32"/>
+<area shape="rect" id="node3" href="$d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,5,60,32"/>
+</map>

@@ -1,0 +1,74 @@
+.TH "socket_server" 3 "Tue Jul 21 2020" "c-template" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+socket_server
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <socket_server\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "int \fBudp_socket_number\fP"
+.br
+.ti -1c
+.RI "int \fBtcp_socket_number\fP"
+.br
+.ti -1c
+.RI "\fBthread_logger\fP * \fBthl\fP"
+.br
+.ti -1c
+.RI "\fBthreadpool\fP \fBthpool\fP"
+.br
+.RI "a thread pool that allows submitting worker tasks to a pool of threads "
+.ti -1c
+.RI "\fBthreadpool_task_func\fP * \fBtask_func_tcp\fP"
+.br
+.RI "used for submitting a task to the thread pool for processing a tcp connection "
+.ti -1c
+.RI "\fBthreadpool_task_func\fP * \fBtask_func_udp\fP"
+.br
+.RI "used for submitting a task to the thread pool for processing a udp connection "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 50 of file socket_server\&.h\&.
+.SH "Field Documentation"
+.PP 
+.SS "\fBthreadpool_task_func\fP* socket_server::task_func_tcp"
+
+.PP
+used for submitting a task to the thread pool for processing a tcp connection 
+.PP
+Definition at line 59 of file socket_server\&.h\&.
+.SS "\fBthreadpool_task_func\fP* socket_server::task_func_udp"
+
+.PP
+used for submitting a task to the thread pool for processing a udp connection 
+.PP
+Definition at line 62 of file socket_server\&.h\&.
+.SS "int socket_server::tcp_socket_number"
+
+.PP
+Definition at line 52 of file socket_server\&.h\&.
+.SS "\fBthread_logger\fP* socket_server::thl"
+
+.PP
+Definition at line 53 of file socket_server\&.h\&.
+.SS "\fBthreadpool\fP socket_server::thpool"
+
+.PP
+a thread pool that allows submitting worker tasks to a pool of threads 
+.PP
+Definition at line 56 of file socket_server\&.h\&.
+.SS "int socket_server::udp_socket_number"
+
+.PP
+Definition at line 51 of file socket_server\&.h\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for c-template from the source code\&.

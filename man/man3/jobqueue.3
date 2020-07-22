@@ -1,0 +1,56 @@
+.TH "jobqueue" 3 "Tue Jul 21 2020" "c-template" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+jobqueue
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "pthread_mutex_t \fBrwmutex\fP"
+.br
+.ti -1c
+.RI "\fBjob\fP * \fBfront\fP"
+.br
+.ti -1c
+.RI "\fBjob\fP * \fBrear\fP"
+.br
+.ti -1c
+.RI "\fBbsem\fP * \fBhas_jobs\fP"
+.br
+.ti -1c
+.RI "int \fBlen\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 62 of file thread_pool\&.c\&.
+.SH "Field Documentation"
+.PP 
+.SS "\fBjob\fP* jobqueue::front"
+
+.PP
+Definition at line 64 of file thread_pool\&.c\&.
+.SS "\fBbsem\fP* jobqueue::has_jobs"
+
+.PP
+Definition at line 66 of file thread_pool\&.c\&.
+.SS "int jobqueue::len"
+
+.PP
+Definition at line 67 of file thread_pool\&.c\&.
+.SS "\fBjob\fP* jobqueue::rear"
+
+.PP
+Definition at line 65 of file thread_pool\&.c\&.
+.SS "pthread_mutex_t jobqueue::rwmutex"
+
+.PP
+Definition at line 63 of file thread_pool\&.c\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for c-template from the source code\&.

@@ -1,0 +1,200 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/network/socket_server.c" 3 "Tue Jul 21 2020" "c-template" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/network/socket_server.c \- used to create a tcp/udp socket server listening on multiaddrs  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'network/socket_server\&.h'\fP
+.br
+\fC#include 'utils/thread_pool\&.h'\fP
+.br
+\fC#include <arpa/inet\&.h>\fP
+.br
+\fC#include <errno\&.h>\fP
+.br
+\fC#include <fcntl\&.h>\fP
+.br
+\fC#include <netdb\&.h>\fP
+.br
+\fC#include <netinet/in\&.h>\fP
+.br
+\fC#include <pthread\&.h>\fP
+.br
+\fC#include <signal\&.h>\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <sys/socket\&.h>\fP
+.br
+\fC#include <sys/time\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBsocket_server_t\fP * \fBnew_socket_server\fP (\fBthread_logger\fP *thl, \fBsocket_server_config_t\fP config)"
+.br
+.RI "returns a new socket server bound to the port number and ready to accept connections "
+.ti -1c
+.RI "void \fBfree_socket_server\fP (\fBsocket_server_t\fP *srv)"
+.br
+.RI "terminates a server and frees up resources associated with it "
+.ti -1c
+.RI "void \fBstart_socket_server\fP (\fBsocket_server_t\fP *srv)"
+.br
+.RI "starts the socket server which processes new connections "
+.ti -1c
+.RI "\fBclient_conn_t\fP * \fBaccept_client_conn\fP (\fBsocket_server_t\fP *srv)"
+.br
+.RI "helper function for accepting client connections times out new attempts if they take 3 seconds or more "
+.ti -1c
+.RI "void \fBsignal_shutdown\fP ()"
+.br
+.RI "used to signal that we should exit the main start_socket_server function "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "pthread_mutex_t \fBshutdown_mutex\fP"
+.br
+.RI "internal mutex lock used for signalling shutdown in async start_socket_server function calls "
+.ti -1c
+.RI "bool \fBdo_shutdown\fP = false"
+.br
+.RI "internal boolean variable used to signal async start_socket_server function calls "
+.in -1c
+.SH "Detailed Description"
+.PP 
+used to create a tcp/udp socket server listening on multiaddrs 
+
+
+.PP
+Definition in file \fBsocket_server\&.c\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "\fBclient_conn_t\fP* accept_client_conn (\fBsocket_server_t\fP * srv)"
+
+.PP
+helper function for accepting client connections times out new attempts if they take 3 seconds or more 
+.PP
+\fBReturns\fP
+.RS 4
+Failure: NULL client conn failed 
+.PP
+Success: non-NULL populated \fBclient_conn\fP object 
+.RE
+.PP
+
+.PP
+Definition at line 300 of file socket_server\&.c\&.
+.SS "void free_socket_server (\fBsocket_server_t\fP * srv)"
+
+.PP
+terminates a server and frees up resources associated with it 
+.PP
+Definition at line 167 of file socket_server\&.c\&.
+.SS "\fBsocket_server_t\fP* new_socket_server (\fBthread_logger\fP * thl, \fBsocket_server_config_t\fP config)"
+
+.PP
+returns a new socket server bound to the port number and ready to accept connections 
+.PP
+\fBWarning\fP
+.RS 4
+support non wildcard 
+.RE
+.PP
+\fBTodo\fP
+.RS 4
+support non wildcard 
+.RE
+.PP
+.PP
+\fBWarning\fP
+.RS 4
+support non wildcard 
+.RE
+.PP
+\fBTodo\fP
+.RS 4
+support non wildcard 
+.RE
+.PP
+
+.PP
+Definition at line 37 of file socket_server\&.c\&.
+.SS "void signal_shutdown ()"
+
+.PP
+used to signal that we should exit the main start_socket_server function 
+.PP
+\fBNote\fP
+.RS 4
+this is only useful if you launch start_socket_server in a thread 
+.RE
+.PP
+
+.PP
+Definition at line 330 of file socket_server\&.c\&.
+.SS "void start_socket_server (\fBsocket_server_t\fP * srv)"
+
+.PP
+starts the socket server which processes new connections when a new connection is accepted (tcp) OR we can receive data on a udp socket, the given handle_conn_func is used to process that client connection 
+.PP
+\fBParameters\fP
+.RS 4
+\fIsrv\fP an instance of a socket_server_t that has been initialized through new_socket_server 
+.RE
+.PP
+
+.PP
+\fBTodo\fP
+.RS 4
+enable customizable timeout 
+.RE
+.PP
+.PP
+\fBTodo\fP
+.RS 4
+figure out why select isn't handling the udp connection 
+.RE
+.PP
+\fBWarning\fP
+.RS 4
+does not work with udp
+.RE
+.PP
+
+.PP
+Definition at line 191 of file socket_server\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "bool do_shutdown = false"
+
+.PP
+internal boolean variable used to signal async start_socket_server function calls 
+.PP
+Definition at line 32 of file socket_server\&.c\&.
+.SS "pthread_mutex_t shutdown_mutex"
+
+.PP
+internal mutex lock used for signalling shutdown in async start_socket_server function calls 
+.PP
+Definition at line 27 of file socket_server\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for c-template from the source code\&.
