@@ -50,8 +50,7 @@ typedef struct socket_server_config {
  * of socket numbers)
  */
 typedef struct socket_server {
-    int udp_socket_number;
-    int tcp_socket_number;
+    fd_set socket_set;
     thread_logger *thl;
     /*! @brief a thread pool that allows submitting worker tasks to a pool of threads
      */
