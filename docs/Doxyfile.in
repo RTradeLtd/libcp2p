@@ -4,9 +4,9 @@
 # Project related configuration options
 #---------------------------------------------------------------------------
 DOXYFILE_ENCODING      = UTF-8
-PROJECT_NAME           = c-template
+PROJECT_NAME           = libcp2p
 PROJECT_NUMBER         =
-PROJECT_BRIEF          =
+PROJECT_BRIEF          = A libp2p-like protocol with first class support for embedded systems. End goal is a protocol that can run on anything from your fridge, embedded systems, and anything else. Higher level languages bindings will be done via FFI. Heavy WIP 
 PROJECT_LOGO           =
 OUTPUT_DIRECTORY       = ../docs-build
 CREATE_SUBDIRS         = YES
