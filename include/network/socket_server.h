@@ -115,3 +115,5 @@ void example_task_func_tcp(void *data);
  * @note in general should accept a conn_handle_data_t type but this is implementation defined
 */
 void example_task_func_udp(void *data);
+
+void signal_shutdown();

@@ -20,7 +20,6 @@
  */
 typedef struct socket_client {
     int socket_number;
-    thread_logger *thl;
 } socket_client_t;
 
 /*! @brief returns a new socket client connected to `addr:port`

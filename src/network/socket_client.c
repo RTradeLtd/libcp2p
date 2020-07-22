@@ -29,23 +29,26 @@ socket_client_t *new_socket_client(thread_logger *thl, addr_info hints, char *ad
     addr_info *peer_address;
     int rc = getaddrinfo(addr, port, &hints, &peer_address);
     if (rc != 0) {
+        freeaddrinfo(peer_address);
         return NULL;
     }
 
     int client_socket_num = get_new_socket(thl, peer_address, NULL, 0, true);
     if (client_socket_num == -1) {
         thl->log(thl, 0, "failed to get_new_socket", LOG_LEVELS_ERROR);
+        freeaddrinfo(peer_address);
         return NULL;
     }
 
     socket_client_t *sock_client = calloc(sizeof(sock_client), sizeof(sock_client));
     if (sock_client == NULL) {
         thl->log(thl, 0, "failed to calloc socket_client_t", LOG_LEVELS_ERROR);
+        freeaddrinfo(peer_address);
         return NULL;
     }
     sock_client->socket_number = client_socket_num;
-    sock_client->thl=thl;
     thl->log(thl, 0, "client successfully created", LOG_LEVELS_INFO);
+    freeaddrinfo(peer_address);
     return sock_client;
 }
 
@@ -67,7 +70,6 @@ int socket_client_sendto(socket_client_t *client, addr_info *peer_address, char 
         peer_address->ai_addrlen
     );
     if (bytes_sent == -1) {
-        client->thl->logf(client->thl, 0, LOG_LEVELS_ERROR, "client failed to send message with error %s", strerror(errno));
         return 0;
     }
     /*! *@todo if we sent less than total size, send remaining

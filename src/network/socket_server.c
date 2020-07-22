@@ -20,6 +20,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+bool do_shutdown = false;
+
 /*! @brief returns a new socket server bound to the port number and ready to accept
  * connections
  */
@@ -163,8 +165,10 @@ void free_socket_server(socket_server_t *srv) {
     /*!
       * @todo should we wait before destroy?
     */
-    // thpool_wait(srv->thpool);
+    printf("destroying\n");
+    printf("%i\n", thpool_num_threads_working(srv->thpool));
     thpool_destroy(srv->thpool);
+    printf("destroyed\n");
     srv->thl->log(srv->thl, 0, "server shutdown, goodbye", LOG_LEVELS_INFO);
     clear_thread_logger(srv->thl);
     free(srv);
@@ -196,6 +200,10 @@ void start_socket_server(socket_server_t *srv) {
     }
 
    for (;;) {
+        if (do_shutdown == true) {
+            srv->thl->log(srv->thl, 0, "shutdown signal received, exiting", LOG_LEVELS_INFO);
+            return;
+        }
         /*!
          * @todo enable customizable timeout
         */
@@ -215,7 +223,7 @@ void start_socket_server(socket_server_t *srv) {
             case -1:
                 srv->thl->logf(srv->thl, 0, LOG_LEVELS_ERROR, "an error occured while running select: %s", strerror(errno));
                 sleep(0.50);
-                break;
+                return;
         }
 
         /*!
@@ -230,6 +238,11 @@ void start_socket_server(socket_server_t *srv) {
             }
             conn->socket_number = srv->udp_socket_number;
             conn_handle_data_t *chdata = calloc(sizeof(conn_handle_data_t), sizeof(conn_handle_data_t));
+            if (chdata == NULL) {
+                free(conn);
+                srv->thl->log(srv->thl, 0, "failed to calloc client_t", LOG_LEVELS_ERROR);
+                continue;
+            }
             chdata->srv = srv;
             chdata->conn = conn;
             thpool_add_work(srv->thpool, srv->task_func_udp, chdata);
@@ -303,17 +316,18 @@ void example_task_func_tcp(void *data) {
     switch (rc) {
         case 0:
             hdata->srv->thl->log(hdata->srv->thl, 0, "client disconnected", LOG_LEVELS_DEBUG);
-            return;
+            goto EXIT;
         case -1:
             hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR, "error encountered during read %s", strerror(errno));
-            return;
+            goto EXIT;
         default:
             // connection was successful and we read some data
-            break;
+            goto EXIT;
     }
     send(hdata->conn->socket_number, buffer, (size_t)rc, 0);
     /*! @todo figure out proper close procedures
     */
+EXIT:
    close(hdata->conn->socket_number);
    free(hdata->conn);
    free(hdata);
@@ -350,4 +364,7 @@ client_conn_t *accept_client_conn(socket_server_t *srv) {
     srv->thl->logf(srv->thl, 0, LOG_LEVELS_INFO, "accepted new connection: %s", addr_inf);
     free(addr_inf);
     return connection;
+}
+void signal_shutdown() {
+    do_shutdown = true;
 }
