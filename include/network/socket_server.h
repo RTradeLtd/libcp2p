@@ -21,6 +21,12 @@
  */
 typedef void(threadpool_task_func)(void *data);
 
+/*!
+ * @struct socket_server_config
+ * @typedef socket_server_config_t
+ * @brief used for configuring a socket_server_t instance
+ * @todo switch to multiaddresses
+ */
 typedef struct socket_server_config {
     /*! @brief the thread pool task function to use for processing tcp connections */
     threadpool_task_func *fn_tcp;
@@ -33,10 +39,20 @@ typedef struct socket_server_config {
     int num_threads;
 } socket_server_config_t;
 
+/*!
+ * @struct socket_server
+ * @typedef socket_server_t
+ * @brief a TCP/UDP socket server
+ * @details provides a thread pool can be used for handling new connections
+ * @todo dont limit to two sockets (this will requiring using multiaddrs and an array
+ * of socket numbers)
+ */
 typedef struct socket_server {
     int udp_socket_number;
     int tcp_socket_number;
     thread_logger *thl;
+    /*! @brief a thread pool that allows submitting worker tasks to a pool of threads
+     */
     threadpool thpool;
     /*! @brief used for submitting a task to the thread pool for processing a tcp
      * connection */
