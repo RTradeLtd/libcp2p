@@ -19,7 +19,6 @@
 #include <sys/time.h>
 #include <sys/types.h>
 #include <unistd.h>
-
 /*!
  * @brief internal mutex lock used for signalling shutdown in async
  * start_socket_server function calls
@@ -47,76 +46,77 @@ socket_server_t *new_socket_server(thread_logger *thl,
     bool tcp_set = false;
     bool udp_set = false;
 
-    int tcp_socket_num = 0;
-    int udp_socket_num = 0;
+    int tcp_socket_numbers[MAX_ADDRS];
+    int num_tcp_sockets;
+    int udp_socket_numbers[MAX_ADDRS];
+    int num_udp_sockets;
     int rc = 0;
 
-    if (config.tcp_port_number != NULL) {
-        memset(&tcp_hints, 0, sizeof(tcp_hints));
-        tcp_hints.ai_family = AF_INET;
-        tcp_hints.ai_socktype = SOCK_STREAM;
-        /*! @warning support non wildcard
-         * @todo support non wildcard
-         */
-        tcp_hints.ai_flags = AI_PASSIVE;
-        tcp_set = true;
-    }
-
-    if (config.udp_port_number != NULL) {
-        memset(&udp_hints, 0, sizeof(udp_hints));
-        udp_hints.ai_family = AF_INET;
-        udp_hints.ai_socktype = SOCK_DGRAM;
-        /*! @warning support non wildcard
-         * @todo support non wildcard
-         */
-        udp_hints.ai_flags = AI_PASSIVE;
-        udp_set = true;
-    }
-
-    // setup tcp socket
-    if (tcp_set == true) {
-
-        rc = getaddrinfo(config.listen_address, config.tcp_port_number, &tcp_hints,
-                         &tcp_bind_address);
-        if (rc != 0) {
-            thl->log(thl, 0, "failed to get tcp addr info", LOG_LEVELS_ERROR);
-            goto EXIT;
+    for (int i = 0; i < config.num_addrs; i++) {
+        char *ip = calloc(sizeof(unsigned char), 1024);
+        int rc = multiaddress_get_ip_address(&config.addrs[i], ip);
+        if (rc != 1) {
+            thl->log(thl, 0, "failed to get ip address from multiaddr", LOG_LEVELS_ERROR);
+            return NULL; /*! @todo free up existing sockets */
         }
-
-        tcp_socket_num = get_new_socket(thl, tcp_bind_address, opts, 2, false);
-        if (tcp_socket_num == -1) {
-            thl->log(thl, 0, "failed to get new tcp socket", LOG_LEVELS_ERROR);
-            goto EXIT;
+        int port = multiaddress_get_ip_port(&config.addrs[i]);
+        if (port == -1) {
+            thl->log(thl, 0, "failed to get ip port from multiaddr", LOG_LEVELS_ERROR);
+            return NULL; /*! @todo free up existing sockets */
         }
-
-        listen(tcp_socket_num, config.max_connections);
-        if (errno != 0) {
-            thl->logf(thl, 0, LOG_LEVELS_ERROR,
-                      "failed to start listening on tcp socket with error %s",
-                      strerror(errno));
-            goto EXIT;
+        bool is_tcp;
+        bool is_udp;
+        if (strstr(config.addrs[i].string, "/tcp/") != NULL) {
+            is_tcp = true;
         }
-
-        thl->log(thl, 0, "accepting tcp connections", LOG_LEVELS_INFO);
-    }
-
-    // setup udp socket
-    if (udp_set == true) {
-
-        rc = getaddrinfo(config.listen_address, config.udp_port_number, &udp_hints,
-                         &udp_bind_address);
-        if (rc != 0) {
-            thl->log(thl, 0, "failed to get udp addr info", LOG_LEVELS_ERROR);
-            goto EXIT;
+        if (strstr(config.addrs[i].string, "/udp/") != NULL) {
+            is_udp = true;
         }
-
-        udp_socket_num = get_new_socket(thl, udp_bind_address, opts, 2, false);
-        if (udp_socket_num == -1) {
-            thl->log(thl, 0, "failed to get new udp socket", LOG_LEVELS_ERROR);
-            goto EXIT;
+        if (is_tcp == false && is_udp == false) {
+            thl->log(thl, 0, "invalid multiaddress provided", LOG_LEVELS_ERROR);
+            return NULL; /*! @todo free up existing sockets */
         }
+        char *cport = multiaddress_get_ip_port_c(&config.addrs[i]);
+        if (is_tcp) {
+            rc = getaddrinfo(ip, cport, &tcp_hints, &tcp_bind_address);
+            if (rc != 0) {
+                thl->log(thl, 0, "failed to get tcp addr info", LOG_LEVELS_ERROR);
+                return NULL; /*! @todo free up existing sockets */
+            }
+            int tcp_socket_num = get_new_socket(thl, tcp_bind_address, opts, 2, false);
+            if (tcp_socket_num == -1) {
+                thl->log(thl, 0, "failed to get new tcp socket", LOG_LEVELS_ERROR);
+                return NULL; /*! @todo free up existing sockets */
+            }
 
-        thl->log(thl, 0, "accepting udp connections", LOG_LEVELS_INFO);
+            listen(tcp_socket_num, config.max_connections);
+            if (errno != 0) {
+                thl->logf(thl, 0, LOG_LEVELS_ERROR,
+                        "failed to start listening on tcp socket with error %s",
+                        strerror(errno));
+                return NULL; /*! @todo free up existing sockets */
+            }
+            tcp_socket_numbers[num_tcp_sockets] = tcp_socket_num;
+            num_tcp_sockets += 1;
+            free(ip);
+            free(cport);
+        }
+        if (is_udp) {
+            rc = getaddrinfo(ip, cport, &udp_hints, &udp_bind_address);
+            if (rc != 0) {
+                thl->log(thl, 0, "failed to get udp addr info", LOG_LEVELS_ERROR);
+                return NULL; /*! @todo free up existing sockets */
+            }
+            int udp_socket_num = get_new_socket(thl, udp_bind_address, opts, 2, false);
+            if (udp_socket_num == -1) {
+                thl->log(thl, 0, "failed to get new udp socket", LOG_LEVELS_ERROR);
+                return NULL; /*! @todo free up existing sockets */
+            }
+            udp_socket_numbers[num_udp_sockets] = udp_socket_num;
+            num_udp_sockets += 1;
+            free(ip);
+            free(cport);
+        }
     }
 
     socket_server_t *server =

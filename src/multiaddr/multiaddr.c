@@ -145,6 +145,27 @@ int multiaddress_get_ip_address(const struct MultiAddress *in, char **ip) {
     return 1;
 }
 
+char *multiaddress_get_ip_port_c(const struct MultiAddress *in) {
+    char *ptr = strstr(in->string, "/tcp/");
+    if (ptr == NULL) {
+        ptr = strstr(in->string, "/udp/");
+    }
+    if (ptr == NULL) {
+        return NULL;
+    }
+    ptr += 5;
+    char *end_ptr = strstr(ptr, "/");
+    if (end_ptr == NULL) {
+        return ptr;
+    }
+    char str[end_ptr - ptr + 1];
+    memcpy(str, ptr, end_ptr - ptr);
+    str[end_ptr - ptr] = '\0';
+    char *ret_str = calloc(sizeof(char), strlen(str));
+    memcpy(ret_str, str, strlen(str));
+    return ret_str;
+}
+
 /***
  * Pulls the IP port from a multiaddress
  * @param in the multiaddress

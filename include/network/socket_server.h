@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include "multiaddr/multiaddr.h"
 #include "network/socket_client.h" // this also imports socket.h
 #include "utils/logger.h"
 #include "utils/thread_pool.h"
@@ -14,6 +15,8 @@
 #include <sys/socket.h>
 #include <sys/time.h>
 #include <sys/types.h>
+
+#define MAX_ADDRS 100
 
 /*!
  * @brief defines a function signature that is used for submitting tasks to our
@@ -32,11 +35,10 @@ typedef struct socket_server_config {
     threadpool_task_func *fn_tcp;
     /*! @brief the thread pool task function to use for processing tcp connections */
     threadpool_task_func *fn_udp;
-    char *udp_port_number;
-    char *tcp_port_number;
-    char *listen_address;
     int max_connections;
     int num_threads;
+    int num_addrs;
+    multi_addr_t addrs[MAX_ADDRS];
 } socket_server_config_t;
 
 /*!

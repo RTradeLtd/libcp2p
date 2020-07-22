@@ -29,7 +29,7 @@
         /ip6/<ipv6 str addr>/tcp/<tcp int port>
  */
 
-struct MultiAddress {
+typedef struct MultiAddress {
     // A MultiAddress represented as a string
     char *string;
     // A MultiAddress represented as an array of bytes
@@ -38,7 +38,7 @@ struct MultiAddress {
     // byte ipv6 address><1 byte tcp/udp code><2 byte port>
     uint8_t *bytes;
     size_t bsize;
-};
+} multi_addr_t;
 
 int strpos(char *haystack, char *needle);
 
@@ -82,6 +82,8 @@ int multiaddress_get_ip_address(const struct MultiAddress *in, char **ip);
  * @returns the port, or a negative number for an error
  */
 int multiaddress_get_ip_port(const struct MultiAddress *in);
+
+char *multiaddress_get_ip_port_c(const struct MultiAddress *in);
 
 /**
  * Pulls the peer ID out of a multiaddress struct
