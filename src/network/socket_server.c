@@ -45,9 +45,11 @@ socket_server_t *new_socket_server(thread_logger *thl,
 
     int rc = 0;
 
-    fd_set socket_set;
+    fd_set tcp_socket_set;
+    fd_set udp_socket_set;
 
-    FD_ZERO(&socket_set);
+    FD_ZERO(&tcp_socket_set);
+    FD_ZERO(&udp_socket_set);
 
     for (int i = 0; i < config.num_addrs; i++) {
         char *ip = calloc(sizeof(unsigned char), 1024);
@@ -61,8 +63,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
             thl->log(thl, 0, "failed to get ip port from multiaddr", LOG_LEVELS_ERROR);
             return NULL; /*! @todo free up existing sockets */
         }
-        bool is_tcp;
-        bool is_udp;
+        bool is_tcp = false;
+        bool is_udp = false;
         if (strstr((&config.addrs[i])->string, "/tcp/") != NULL) {
             is_tcp = true;
         }
@@ -75,6 +77,13 @@ socket_server_t *new_socket_server(thread_logger *thl,
         }
         char *cport = multiaddress_get_ip_port_c(&config.addrs[i]);
         if (is_tcp) {
+            memset(&tcp_hints, 0, sizeof(tcp_hints));
+            tcp_hints.ai_family = AF_INET;
+            tcp_hints.ai_socktype = SOCK_STREAM;
+            /*! @warning support non wildcard
+            * @todo support non wildcard
+            */
+            tcp_hints.ai_flags = AI_PASSIVE;
             rc = getaddrinfo(ip, cport, &tcp_hints, &tcp_bind_address);
             if (rc != 0) {
                 thl->log(thl, 0, "failed to get tcp addr info", LOG_LEVELS_ERROR);
@@ -93,11 +102,18 @@ socket_server_t *new_socket_server(thread_logger *thl,
                         strerror(errno));
                 return NULL; /*! @todo free up existing sockets */
             }
-            FD_SET(tcp_socket_num, &socket_set);
+            FD_SET(tcp_socket_num, &tcp_socket_set);
             free(ip);
             //free(cport);
         }
         if (is_udp) {
+            memset(&udp_hints, 0, sizeof(udp_hints));
+            udp_hints.ai_family = AF_INET;
+            udp_hints.ai_socktype = SOCK_DGRAM;
+            /*! @warning support non wildcard
+            * @todo support non wildcard
+            */
+            udp_hints.ai_flags = AI_PASSIVE;
             rc = getaddrinfo(ip, cport, &udp_hints, &udp_bind_address);
             if (rc != 0) {
                 thl->log(thl, 0, "failed to get udp addr info", LOG_LEVELS_ERROR);
@@ -108,7 +124,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
                 thl->log(thl, 0, "failed to get new udp socket", LOG_LEVELS_ERROR);
                 return NULL; /*! @todo free up existing sockets */
             }
-            FD_SET(udp_socket_num, &socket_set);
+            FD_SET(udp_socket_num, &udp_socket_set);
             free(ip);
             //free(cport);
         }
@@ -122,7 +138,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
     }
 
     server->thpool = thpool_init(config.num_threads);
-    server->socket_set = socket_set;
+    server->tcp_socket_set = tcp_socket_set;
+    server->udp_socket_set = udp_socket_set;
     server->task_func_tcp = config.fn_tcp;
     server->task_func_udp = config.fn_udp;
     server->thl = thl;
@@ -146,7 +163,10 @@ EXIT:
     }
 
     for (int i = 0; i < 65536; i++) {
-        if (FD_ISSET(i, &socket_set)) {
+        if (FD_ISSET(i, &tcp_socket_set)) {
+            close(i);
+        }
+        if (FD_ISSET(i, &udp_socket_set)) {
             close(i);
         }
     }
@@ -159,7 +179,10 @@ EXIT:
 void free_socket_server(socket_server_t *srv) {
     srv->thl->log(srv->thl, 0, "closing sockets", LOG_LEVELS_INFO);
     for (int i = 0; i < 65536; i++) {
-        if (FD_ISSET(i, &srv->socket_set)) {
+        if (FD_ISSET(i, &srv->tcp_socket_set)) {
+            close(i);
+        }
+        if (FD_ISSET(i, &srv->udp_socket_set)) {
             close(i);
         }
     }
@@ -179,17 +202,20 @@ void free_socket_server(socket_server_t *srv) {
  * new_socket_server
  */
 void start_socket_server(socket_server_t *srv) {
-    fd_set socket_list;
-    int max_socket_number;
 
-    // initialize the fd_set
-    FD_ZERO(&socket_list);
+    int max_socket_number = 0;
+
     for (int i = 0; i < 65536; i++) {
-        if (FD_ISSET(i, &srv->socket_set)) {
+        if (FD_ISSET(i, &srv->tcp_socket_set)) {
             if (i > max_socket_number) {
                 max_socket_number = i;
             }
         }
+        /*if (FD_ISSET(i, &srv->udp_socket_set)) {
+            if (i > max_socket_number) {
+                max_socket_number = i;
+            }
+        }*/
     }
     max_socket_number += 1;
     /*!
@@ -206,7 +232,9 @@ void start_socket_server(socket_server_t *srv) {
             return;
         }
         // create a temporary working copy copy of socket_list
-        fd_set working_copy = srv->socket_set;
+        /*! @todo enable udp socket
+        */
+        fd_set working_copy = srv->tcp_socket_set;
 
         int rc = select(max_socket_number, &working_copy, NULL, NULL, &tmt);
 
@@ -229,8 +257,6 @@ void start_socket_server(socket_server_t *srv) {
             if (FD_ISSET(i, &working_copy)) {
                 client_conn_t *conn = accept_client_conn(srv, i);
                 if (conn == NULL) {
-                    srv->thl->log(srv->thl, 0, "failed to accept client connection",
-                                LOG_LEVELS_ERROR);
                     sleep(0.50);
                     continue;
                 }
@@ -277,13 +303,13 @@ client_conn_t *accept_client_conn(socket_server_t *srv, int socket_num) {
     if (client_socket_num < 0) {
         return NULL;
     }
-    client_conn_t *connection = malloc(sizeof(client_conn_t));
+    client_conn_t *connection = calloc(sizeof(client_conn_t), sizeof(client_conn_t));
     if (connection == NULL) {
         return NULL;
     }
     connection->address = &addr_temp;
     connection->socket_number = client_socket_num;
-    char *addr_inf = get_name_info((addr_info *)connection->address);
+    char *addr_inf = get_name_info((sock_addr *)connection->address);
     srv->thl->logf(srv->thl, 0, LOG_LEVELS_INFO, "accepted new connection: %s", addr_inf);
     free(addr_inf);
     return connection;    

@@ -100,7 +100,7 @@ void test_new_socket_server(void **state) {
     thread_logger *thl = new_thread_logger(false);
     socket_server_config_t config;
     config.max_connections = 100;
-    config.num_addrs = 6;
+    config.num_threads = 6;
     config.fn_tcp = example_task_func_tcp;
     config.fn_udp = example_task_func_udp;
 
@@ -109,9 +109,8 @@ void test_new_socket_server(void **state) {
     // multi_addr_t *addrs[2] = {tcp_addr, udp_addr};
     config.addrs = malloc(sizeof(multi_addr_t) * sizeof(tcp_addr) + sizeof(udp_addr));
     config.addrs[0] = *tcp_addr;
-    // config.addrs[1] = *udp_addr;
-    // config.num_addrs = 2;
-    config.num_addrs = 1;
+    config.addrs[1] = *udp_addr;
+    config.num_addrs = 2;
 
     //   .num_threads = 6, .fn_tcp = example_task_func_tcp, .fn_udp = example_task_func_udp };
     socket_server_t *server = new_socket_server(thl, config);
@@ -130,7 +129,7 @@ void test_new_socket_server(void **state) {
     int rc = getaddrinfo("127.0.0.1", "9091", &hint, &peer_address);
     assert(rc == 0);
 
-    char *addr = get_name_info(peer_address);
+    char *addr = get_name_info((sock_addr *)peer_address);
     printf("client addr: %s\n", addr);
     free(addr);
 

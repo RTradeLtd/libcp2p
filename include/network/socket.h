@@ -66,9 +66,11 @@ int get_new_socket(thread_logger *thl, addr_info *bind_address,
  */
 bool set_socket_blocking_status(int fd, bool blocking);
 
-/*! @brief returns the address the client is connecting from
+/*!
+  * @note this only works with tcp
+  * @todo enable udp
  */
-char *get_name_info(addr_info *client_address);
+char *get_name_info(sock_addr *client_address);
 
 /*! @brief generates an addr_info struct with defaults
  * defaults is IPv4, TCP, and AI_PASSIVE flags
