@@ -86,20 +86,15 @@ typedef struct conn_handle_data {
     client_conn_t *conn;
 } conn_handle_data_t;
 
-/*! @brief returns a new socket server bound to the port number and ready to accept
- * connections
+/*!
+ * @brief used to create a TCP/UDP socket server ready to accept connections
+ * @param thl an instance of a thread_logger
+ * @param config the configuration settings used for the tcp/udp server
+ * @return Success: pointer to a socket_server_t instance
+ * @return Failure: NULL pointer
  */
 socket_server_t *new_socket_server(thread_logger *thl,
                                    socket_server_config_t config);
-
-/*! @brief listens for new connections and spawns a thread to process the connection
- * thread that is created to process the connection runs as a detached thread
- * will poll for new connections to accept every 500 miliseconds
- * @param data void pointer to a socket_server struct
- * @note detached thread created calling async_handle_conn_func
- * @warning may change the 500 milisecond sleep
- */
-void *async_listen_func(void *data);
 
 /*! @brief helper function for accepting client connections
  * times out new attempts if they take 3 seconds or more
@@ -134,9 +129,3 @@ void *accept_connections(void *data);
  * @note this is only useful if you launch start_socket_server in a thread
  */
 void signal_shutdown();
-
-/*!
- * @brief frees up resources allocated with config
- * @param config an instance of socket_server_config_t
- */
-void free_socket_server_config(socket_server_config_t *config);

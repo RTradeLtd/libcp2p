@@ -30,8 +30,12 @@ pthread_mutex_t shutdown_mutex;
  */
 bool do_shutdown = false;
 
-/*! @brief returns a new socket server bound to the port number and ready to accept
- * connections
+/*!
+ * @brief used to create a TCP/UDP socket server ready to accept connections
+ * @param thl an instance of a thread_logger
+ * @param config the configuration settings used for the tcp/udp server
+ * @return Success: pointer to a socket_server_t instance
+ * @return Failure: NULL pointer
  */
 socket_server_t *new_socket_server(thread_logger *thl,
                                    socket_server_config_t config) {
@@ -48,15 +52,21 @@ socket_server_t *new_socket_server(thread_logger *thl,
     fd_set tcp_socket_set;
     fd_set udp_socket_set;
 
+    // initialize the file descriptor groups
     FD_ZERO(&tcp_socket_set);
     FD_ZERO(&udp_socket_set);
     FD_ZERO(&grouped_socket_set);
 
-    char *ip = calloc(sizeof(char), 1024);
-    char *cport = calloc(sizeof(char), 10);
+    // allocate memory
+    char *ip = malloc(sizeof(char) * 1024);
+    char *cport = malloc(sizeof(char) * 10);
     for (int i = 0; i < config.num_addrs; i++) {
+
+        // zero ip and cport, overwriting previous data
         memset(ip, 0, 1024);
         memset(cport, 0, 10);
+
+        // get the ip address associated with the multiaddr
         rc = multiaddress_get_ip_address(&config.addrs[i], &ip);
         if (rc != 1) {
             thl->log(thl, 0, "failed to get ip address from multiaddr",
@@ -64,6 +74,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
             free(ip);
             goto EXIT;
         }
+
+        // get the port for the address
         int port = multiaddress_get_ip_port(&config.addrs[i]);
         if (port == -1) {
             thl->log(thl, 0, "failed to get ip port from multiaddr",
@@ -71,22 +83,32 @@ socket_server_t *new_socket_server(thread_logger *thl,
             free(ip);
             goto EXIT;
         }
+        // store port number as a char *
         sprintf(cport, "%i", port);
+
         bool is_tcp = false;
         bool is_udp = false;
+
+        // determine whether or not we support tcp and udp
         if (strstr((&config.addrs[i])->string, "/tcp/") != NULL) {
             is_tcp = true;
         }
         if (strstr((&config.addrs[i])->string, "/udp/") != NULL) {
             is_udp = true;
         }
+
+        // if the multiaddr has neither a tcp or udp protocol, exit
         if (is_tcp == false && is_udp == false) {
             thl->log(thl, 0, "invalid multiaddress provided", LOG_LEVELS_ERROR);
             free(ip);
             goto EXIT;
         }
+
+        // handle a tcp multiaddress
         if (is_tcp) {
+
             addr_info *tcp_bind_address = NULL;
+
             memset(&tcp_hints, 0, sizeof(tcp_hints));
             tcp_hints.ai_family = AF_INET;
             tcp_hints.ai_socktype = SOCK_STREAM;
@@ -94,12 +116,14 @@ socket_server_t *new_socket_server(thread_logger *thl,
              * @todo support non wildcard
              */
             tcp_hints.ai_flags = AI_PASSIVE;
+
             rc = getaddrinfo(ip, cport, &tcp_hints, &tcp_bind_address);
             if (rc != 0) {
                 thl->log(thl, 0, "failed to get tcp addr info", LOG_LEVELS_ERROR);
                 free(ip);
                 goto EXIT;
             }
+
             int tcp_socket_num =
                 get_new_socket(thl, tcp_bind_address, opts, 2, false);
             if (tcp_socket_num == -1) {
@@ -116,15 +140,22 @@ socket_server_t *new_socket_server(thread_logger *thl,
                 free(ip);
                 goto EXIT;
             }
+
             FD_SET(tcp_socket_num, &tcp_socket_set);
             FD_SET(tcp_socket_num, &grouped_socket_set);
+
             if (tcp_socket_num > max_socket_num) {
                 max_socket_num = tcp_socket_num;
             }
+
             free(tcp_bind_address);
         }
+
+        // handle a udp multiaddress
         if (is_udp) {
+
             addr_info *udp_bind_address = NULL;
+
             memset(&udp_hints, 0, sizeof(udp_hints));
             udp_hints.ai_family = AF_INET;
             udp_hints.ai_socktype = SOCK_DGRAM;
@@ -132,12 +163,14 @@ socket_server_t *new_socket_server(thread_logger *thl,
              * @todo support non wildcard
              */
             udp_hints.ai_flags = AI_PASSIVE;
+
             rc = getaddrinfo(ip, cport, &udp_hints, &udp_bind_address);
             if (rc != 0) {
                 thl->log(thl, 0, "failed to get udp addr info", LOG_LEVELS_ERROR);
                 free(ip);
                 goto EXIT;
             }
+
             int udp_socket_num =
                 get_new_socket(thl, udp_bind_address, opts, 2, false);
             if (udp_socket_num == -1) {
@@ -145,23 +178,33 @@ socket_server_t *new_socket_server(thread_logger *thl,
                 free(ip);
                 goto EXIT;
             }
+
             FD_SET(udp_socket_num, &udp_socket_set);
             FD_SET(udp_socket_num, &grouped_socket_set);
+
             if (udp_socket_num > max_socket_num) {
                 max_socket_num = udp_socket_num;
             }
+
             free(udp_bind_address);
         }
     }
+
+    // free the memory allocated here as it is no longer needed
     free(ip);
     free(cport);
+
     socket_server_t *server =
         calloc(sizeof(socket_server_t), sizeof(socket_server_t));
     if (server == NULL) {
         thl->log(thl, 0, "failed to calloc socket server", LOG_LEVELS_ERROR);
         goto EXIT;
     }
+
+    // increase max socket number by 1 for select usage
     max_socket_num += 1;
+
+    // setup the server
     server->thpool = thpool_init(config.num_threads);
     server->max_socket_num = max_socket_num;
     server->grouped_socket_set = grouped_socket_set;
@@ -171,14 +214,15 @@ socket_server_t *new_socket_server(thread_logger *thl,
     server->task_func_udp = config.fn_udp;
     server->thl = thl;
     server->thl->log(server->thl, 0, "initialized server", LOG_LEVELS_INFO);
-
     pthread_mutex_init(&shutdown_mutex, NULL);
 
     return server;
 
 EXIT:
+
     free(cport);
     free(ip);
+
     for (int i = 0; i < 65536; i++) {
         if (FD_ISSET(i, &tcp_socket_set)) {
             close(i);
@@ -232,8 +276,8 @@ void start_socket_server(socket_server_t *srv) {
                           LOG_LEVELS_INFO);
             return;
         }
-        // create a temporary working copy copy of socket_list
-        /*! @todo enable udp socket
+
+        /*! * @note copy the main socket list containing both tcp and udp sockets
          */
         fd_set working_copy = srv->grouped_socket_set;
 
@@ -254,21 +298,36 @@ void start_socket_server(socket_server_t *srv) {
                 return;
         }
 
+        /*!
+         * @brief iterate over all known sockets
+         * @note this will likely search a few extra sockets, but the overhead should
+         * be neglibie
+         */
         for (int i = 0; i < srv->max_socket_num; i++) {
+
+            // check to see whether or not we have a socket with this number
             if (FD_ISSET(i, &working_copy)) {
+
+                // if it is a tcp socket, handle it with the tcp worker func
                 if (FD_ISSET(i, &srv->tcp_socket_set)) {
+
                     client_conn_t *conn = accept_client_conn(srv, i);
                     if (conn == NULL) {
                         sleep(0.50);
                         continue;
                     }
+
                     conn_handle_data_t *chdata = calloc(sizeof(conn_handle_data_t),
                                                         sizeof(conn_handle_data_t));
                     chdata->srv = srv;
                     chdata->conn = conn;
+
                     thpool_add_work(srv->thpool, srv->task_func_tcp, chdata);
                 }
+
+                // if it is a udp socket, handle it with the udp worker func
                 if (FD_ISSET(i, &srv->udp_socket_set)) {
+
                     client_conn_t *conn =
                         calloc(sizeof(client_conn_t), sizeof(client_conn_t));
                     if (conn == NULL) {
@@ -278,6 +337,7 @@ void start_socket_server(socket_server_t *srv) {
                         continue;
                     }
                     conn->socket_number = i;
+
                     conn_handle_data_t *chdata = calloc(sizeof(conn_handle_data_t),
                                                         sizeof(conn_handle_data_t));
                     if (chdata == NULL) {
@@ -287,13 +347,15 @@ void start_socket_server(socket_server_t *srv) {
                         sleep(0.50);
                         continue;
                     }
+
                     chdata->srv = srv;
                     chdata->conn = conn;
+
                     thpool_add_work(srv->thpool, srv->task_func_udp, chdata);
                 }
             }
         }
-        // sleep before looping again
+        // sleep bfor 500 miliseconds before looping again
         sleep(0.50);
     }
 }
