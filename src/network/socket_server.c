@@ -71,7 +71,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
             goto EXIT;
         }
 
-        tcp_socket_num = get_new_socket(thl, tcp_bind_address, opts, 2);
+        tcp_socket_num = get_new_socket(thl, tcp_bind_address, opts, 2, false);
         if (tcp_socket_num == -1) {
             thl->log(thl, 0, "failed to get new tcp socket", LOG_LEVELS_ERROR);
             goto EXIT;
@@ -97,7 +97,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
             goto EXIT;
         }
 
-        udp_socket_num = get_new_socket(thl, udp_bind_address, opts, 2);
+        udp_socket_num = get_new_socket(thl, udp_bind_address, NULL, 0, false);
         if (udp_socket_num == -1) {
             thl->log(thl, 0, "failed to get new udp socket", LOG_LEVELS_ERROR);
             goto EXIT;
@@ -170,14 +170,15 @@ void free_socket_server(socket_server_t *srv) {
 
 /*!
   * @brief starts the socket server which processes new connections
-  * @details when a new connection is accepted (tcp) OR we can receive data on a udp socket, the given threadpool_task_func is used to process that client connection
+  * @details when a new connection is accepted (tcp) OR we can receive data on a udp socket, the given handle_conn_func is used to process that client connection
   * @param srv an instance of a socket_server_t that has been initialized through new_socket_server
-  * @param fn the function use to handle new connections
-  * @note this is a blocking call, if you want it to be non blocking launch it in a pthread
+  * @param fn_tcp the thread pool task function to use for processing tcp connections
+  * @param fn_udp the thread pool task function to use for processing tcp connections
 */
-void start_socket_server(socket_server_t *srv, threadpool_task_func *fn) {
+void start_socket_server(socket_server_t *srv, threadpool_task_func *fn_tcp, threadpool_task_func *fn_udp) {
     // set the task function to process new connections
-    srv->task_func = fn;
+    srv->task_func_tcp = fn_tcp;
+    srv->task_func_udp = fn_udp;
     fd_set socket_list;
     int max_socket_number;
 
@@ -225,33 +226,81 @@ void start_socket_server(socket_server_t *srv, threadpool_task_func *fn) {
          * @warning does not work with udp
         */
         if (FD_ISSET(srv->udp_socket_number, &working_copy)) {
-            printf("udp connection available\n");
+            client_conn_t *conn = calloc(sizeof(client_conn_t), sizeof(client_conn_t));
+            if (conn == NULL) {
+                srv->thl->log(srv->thl, 0, "failed to calloc client_t", LOG_LEVELS_ERROR);
+                continue;
+            }
+            conn->socket_number = srv->udp_socket_number;
+            conn_handle_data_t *chdata = calloc(sizeof(conn_handle_data_t), sizeof(conn_handle_data_t));
+            chdata->srv = srv;
+            chdata->conn = conn;
+            thpool_add_work(srv->thpool, srv->task_func_udp, chdata);
         }
 
         // accept tcp connections if they are available
         if (FD_ISSET(srv->tcp_socket_number, &working_copy)) {
             client_conn_t *conn = accept_client_conn(srv);
             if (conn == NULL) {
-                printf("failed to accept connection\n");
+                srv->thl->log(srv->thl, 0, "failed to accept client connection", LOG_LEVELS_ERROR);
                 continue;
             }
             conn_handle_data_t *chdata = calloc(sizeof(conn_handle_data_t), sizeof(conn_handle_data_t));
             chdata->srv = srv;
             chdata->conn = conn;
-            thpool_add_work(srv->thpool, srv->task_func, chdata);
+            thpool_add_work(srv->thpool, srv->task_func_tcp, chdata);
         }
         
         /*! @todo process udp connections */
    }
 }
 
+
+/*!
+ * @brief example function used to showcase how you can udp connections
+ * @note in general should accept a conn_handle_data_t type but this is implementation defined
+*/
+void example_task_func_udp(void *data) {
+    conn_handle_data_t *hdata = (conn_handle_data_t *)data;
+    sock_addr client_address;
+    socklen_t len = sizeof(client_address);
+    char buffer[2048];
+    int bytes_received = recvfrom(
+        hdata->conn->socket_number,
+        buffer,
+        2048,
+        0,
+        &client_address,
+        &len
+    );
+    if (bytes_received == -1) {
+        hdata->srv->thl->logf(
+            hdata->srv->thl,
+            0,
+            LOG_LEVELS_ERROR,
+            "failed to receive message %s",
+            strerror(errno)
+        );
+        goto EXIT;
+    }
+    hdata->srv->thl->logf(
+        hdata->srv->thl,
+        0,
+        LOG_LEVELS_INFO,
+        "received message from client %s",
+        buffer
+    );
+EXIT:
+   free(hdata->conn);
+   free(hdata);
+}
+
 /*!
  * @brief example function used to showcase how you can handle connections
  * @note in general should accept a conn_handle_data_t type but this is implementation define
 */
-void example_task_func(void *data) {
+void example_task_func_tcp(void *data) {
     conn_handle_data_t *hdata = (conn_handle_data_t *)data;
-    hdata->srv->thl->log(hdata->srv->thl, 0, "waiting to receive data", LOG_LEVELS_INFO);
     char buffer[2048];
     int rc = read(hdata->conn->socket_number, buffer, 2048);
     switch (rc) {

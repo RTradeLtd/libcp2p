@@ -27,7 +27,7 @@
 
 void *start_socker_server_wrapper(void *data) {
     socket_server_t *server = (socket_server_t *)data;
-    start_socket_server(server, example_task_func);
+    start_socket_server(server, example_task_func_tcp, example_task_func_udp);
     pthread_exit(NULL);
 }
 
@@ -47,6 +47,11 @@ void test_new_socket_server(void **state) {
     assert(rc == 0);
     char *addr = get_name_info(peer_address);
     printf("client addr: %s\n", addr);
+
+    socket_client_t *client = new_socket_client(thl, hint, "127.0.0.1", "9091");
+    assert(client != NULL);
+
+    socket_client_sendto(client, peer_address, "hello world\n");
 
     pthread_join(thread, NULL);
     // free_socket_server(server);

@@ -10,6 +10,7 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <sys/time.h>
+#include <stdbool.h>
 
 /*! 
   * @struct timeval
@@ -55,7 +56,7 @@ typedef enum {
  * address
  */
 int get_new_socket(thread_logger *thl, addr_info *bind_address,
-                   SOCKET_OPTS sock_opts[], int num_opts);
+                   SOCKET_OPTS sock_opts[], int num_opts, bool is_client);
 
 /*! @brief used to enable/disable blocking sockets
  * @return Failure: false

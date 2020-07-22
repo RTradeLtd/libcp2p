@@ -32,9 +32,11 @@ typedef struct socket_server {
     int udp_socket_number;
     int tcp_socket_number;
     thread_logger *thl;
-    pthread_t main_thread; /*! @note main thread responsible for processing all connections */
     threadpool thpool;
-    threadpool_task_func *task_func;
+    /*! @brief used for submitting a task to the thread pool for processing a tcp connection */
+    threadpool_task_func *task_func_tcp;
+    /*! @brief used for submitting a task to the thread pool for processing a udp connection */
+    threadpool_task_func *task_func_udp; 
 } socket_server_t;
 
 /*! @typedef client_conn
@@ -87,9 +89,10 @@ void free_socket_server(socket_server_t *srv);
   * @brief starts the socket server which processes new connections
   * @details when a new connection is accepted (tcp) OR we can receive data on a udp socket, the given handle_conn_func is used to process that client connection
   * @param srv an instance of a socket_server_t that has been initialized through new_socket_server
-  * @param fn the main task to submit to our thread pool, it should be responsible for accepting new connections and procesing them
+  * @param fn_tcp the thread pool task function to use for processing tcp connections
+  * @param fn_udp the thread pool task function to use for processing tcp connections
 */
-void start_socket_server(socket_server_t *srv, threadpool_task_func *fn);
+void start_socket_server(socket_server_t *srv, threadpool_task_func *fn_tcp, threadpool_task_func *fn_udp);
 
 /*!
   * @brief dedicated function for accepting and handling new connections
@@ -98,7 +101,13 @@ void start_socket_server(socket_server_t *srv, threadpool_task_func *fn);
 void *accept_connections(void *data);
 
 /*!
- * @brief example function used to showcase how you can handle connections
+ * @brief example function used to showcase how you can handle  tcp connections
  * @note in general should accept a conn_handle_data_t type but this is implementation define
 */
-void example_task_func(void *data);
+void example_task_func_tcp(void *data);
+
+/*!
+ * @brief example function used to showcase how you can udp connections
+ * @note in general should accept a conn_handle_data_t type but this is implementation defined
+*/
+void example_task_func_udp(void *data);

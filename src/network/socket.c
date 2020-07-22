@@ -29,7 +29,7 @@
  * address
  */
 int get_new_socket(thread_logger *thl, addr_info *bind_address,
-                   SOCKET_OPTS sock_opts[], int num_opts) {
+                   SOCKET_OPTS sock_opts[], int num_opts, bool is_client) {
     // creates the socket and gets us its file descriptor
     int listen_socket_num =
         socket(bind_address->ai_family, bind_address->ai_socktype,
@@ -75,6 +75,12 @@ int get_new_socket(thread_logger *thl, addr_info *bind_address,
                 return -1;
         }
     }
+
+    // if client skip bind
+    if (is_client == true) {
+        return listen_socket_num;
+    }
+
     // binds the address to the socket
     bind(listen_socket_num, bind_address->ai_addr, bind_address->ai_addrlen);
     if (errno != 0) {

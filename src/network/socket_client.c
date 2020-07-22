@@ -19,6 +19,7 @@
 #include <sys/time.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <string.h>
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 /*! @brief returns a new socket client connected to `addr:port`
@@ -30,21 +31,46 @@ socket_client_t *new_socket_client(thread_logger *thl, addr_info hints, char *ad
     if (rc != 0) {
         return NULL;
     }
-    char address_buffer[100];
-    char service_buffer[100];
-    getnameinfo(peer_address->ai_addr, peer_address->ai_addrlen, address_buffer,
-                sizeof(address_buffer), service_buffer, sizeof(service_buffer), 0);
 
-    int client_socket_num = get_new_socket(thl, peer_address, NULL, 0);
+    int client_socket_num = get_new_socket(thl, peer_address, NULL, 0, true);
     if (client_socket_num == -1) {
         thl->log(thl, 0, "failed to get_new_socket", LOG_LEVELS_ERROR);
         return NULL;
     }
-    
-    socket_client_t *sock_client = malloc(sizeof(sock_client));
+
+    socket_client_t *sock_client = calloc(sizeof(sock_client), sizeof(sock_client));
     if (sock_client == NULL) {
+        thl->log(thl, 0, "failed to calloc socket_client_t", LOG_LEVELS_ERROR);
         return NULL;
     }
     sock_client->socket_number = client_socket_num;
+    sock_client->thl=thl;
+    thl->log(thl, 0, "client successfully created", LOG_LEVELS_INFO);
     return sock_client;
+}
+
+/*!
+  * @brief used to send a message through the connected socket number
+  * @param client an instance of socket_client_t created with new_socket_client
+  * @param peer_address the target address to connect to through the socket
+  * @param message a null terminated pointer to a char
+  * @returns Success: 1
+  * @returns Failure: 0
+*/
+int socket_client_sendto(socket_client_t *client, addr_info *peer_address, char *message) {
+    int bytes_sent = sendto(
+        client->socket_number,
+        message,
+        strlen(message),
+        0,
+        peer_address->ai_addr,
+        peer_address->ai_addrlen
+    );
+    if (bytes_sent == -1) {
+        client->thl->logf(client->thl, 0, LOG_LEVELS_ERROR, "client failed to send message with error %s", strerror(errno));
+        return 0;
+    }
+    /*! *@todo if we sent less than total size, send remaining
+    */
+   return 0;
 }
