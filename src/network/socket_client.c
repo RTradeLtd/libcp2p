@@ -19,7 +19,6 @@
 #include <sys/time.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include <string.h>
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 /*! @brief returns a new socket client connected to `addr:port`
@@ -48,33 +47,28 @@ socket_client_t *new_socket_client(thread_logger *thl, addr_info hints, char *ad
         return NULL;
     }
     sock_client->socket_number = client_socket_num;
-    
+
     thl->log(thl, 0, "client successfully created", LOG_LEVELS_INFO);
-    
+
     return sock_client;
 }
 
 /*!
-  * @brief used to send a message through the connected socket number
-  * @param client an instance of socket_client_t created with new_socket_client
-  * @param peer_address the target address to connect to through the socket
-  * @param message a null terminated pointer to a char
-  * @returns Success: 1
-  * @returns Failure: 0
-*/
-int socket_client_sendto(socket_client_t *client, addr_info *peer_address, char *message) {
-    int bytes_sent = sendto(
-        client->socket_number,
-        message,
-        strlen(message),
-        0,
-        peer_address->ai_addr,
-        peer_address->ai_addrlen
-    );
+ * @brief used to send a message through the connected socket number
+ * @param client an instance of socket_client_t created with new_socket_client
+ * @param peer_address the target address to connect to through the socket
+ * @param message a null terminated pointer to a char
+ * @returns Success: 1
+ * @returns Failure: 0
+ */
+int socket_client_sendto(socket_client_t *client, addr_info *peer_address,
+                         char *message) {
+    int bytes_sent = sendto(client->socket_number, message, strlen(message), 0,
+                            peer_address->ai_addr, peer_address->ai_addrlen);
     if (bytes_sent == -1) {
         return 0;
     }
     /*! *@todo if we sent less than total size, send remaining
-    */
-   return 0;
+     */
+    return 0;
 }

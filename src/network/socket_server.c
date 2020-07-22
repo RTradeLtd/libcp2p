@@ -2,8 +2,8 @@
  * @brief used to create a tcp/udp socket server listening on multiaddrs
  */
 
-#include "utils/thread_pool.h"
 #include "network/socket_server.h"
+#include "utils/thread_pool.h"
 #include <arpa/inet.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -21,12 +21,14 @@
 #include <unistd.h>
 
 /*!
-  * @brief internal mutex lock used for signalling shutdown in async start_socket_server function calls
-*/
+ * @brief internal mutex lock used for signalling shutdown in async
+ * start_socket_server function calls
+ */
 pthread_mutex_t shutdown_mutex;
 /*!
-  * @brief internal boolean variable used to signal async start_socket_server function calls
-*/
+ * @brief internal boolean variable used to signal async start_socket_server function
+ * calls
+ */
 bool do_shutdown = false;
 
 /*! @brief returns a new socket server bound to the port number and ready to accept
@@ -74,7 +76,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
     // setup tcp socket
     if (tcp_set == true) {
 
-        rc = getaddrinfo(config.listen_address, config.tcp_port_number, &tcp_hints, &tcp_bind_address);
+        rc = getaddrinfo(config.listen_address, config.tcp_port_number, &tcp_hints,
+                         &tcp_bind_address);
         if (rc != 0) {
             thl->log(thl, 0, "failed to get tcp addr info", LOG_LEVELS_ERROR);
             goto EXIT;
@@ -100,7 +103,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
     // setup udp socket
     if (udp_set == true) {
 
-        rc = getaddrinfo(config.listen_address, config.udp_port_number, &udp_hints, &udp_bind_address);
+        rc = getaddrinfo(config.listen_address, config.udp_port_number, &udp_hints,
+                         &udp_bind_address);
         if (rc != 0) {
             thl->log(thl, 0, "failed to get udp addr info", LOG_LEVELS_ERROR);
             goto EXIT;
@@ -170,8 +174,8 @@ void free_socket_server(socket_server_t *srv) {
         srv->thl->log(srv->thl, 0, "shut down udp socket", LOG_LEVELS_INFO);
     }
     /*!
-      * @todo should we wait before destroy?
-    */
+     * @todo should we wait before destroy?
+     */
     thpool_destroy(srv->thpool);
     srv->thl->log(srv->thl, 0, "server shutdown, goodbye", LOG_LEVELS_INFO);
     clear_thread_logger(srv->thl);
@@ -179,10 +183,12 @@ void free_socket_server(socket_server_t *srv) {
 }
 
 /*!
-  * @brief starts the socket server which processes new connections
-  * @details when a new connection is accepted (tcp) OR we can receive data on a udp socket, the given handle_conn_func is used to process that client connection
-  * @param srv an instance of a socket_server_t that has been initialized through new_socket_server
-*/
+ * @brief starts the socket server which processes new connections
+ * @details when a new connection is accepted (tcp) OR we can receive data on a udp
+ * socket, the given handle_conn_func is used to process that client connection
+ * @param srv an instance of a socket_server_t that has been initialized through
+ * new_socket_server
+ */
 void start_socket_server(socket_server_t *srv) {
     fd_set socket_list;
     int max_socket_number;
@@ -190,9 +196,11 @@ void start_socket_server(socket_server_t *srv) {
     // initialize the fd_set
     FD_ZERO(&socket_list);
 
-    if (srv->tcp_socket_number > 0 && srv->tcp_socket_number > srv->udp_socket_number) {
+    if (srv->tcp_socket_number > 0 &&
+        srv->tcp_socket_number > srv->udp_socket_number) {
         max_socket_number = srv->tcp_socket_number + 1;
-    } else if (srv->udp_socket_number > 0 && srv->udp_socket_number > srv->tcp_socket_number) {
+    } else if (srv->udp_socket_number > 0 &&
+               srv->udp_socket_number > srv->tcp_socket_number) {
         max_socket_number = srv->udp_socket_number + 1;
     }
 
@@ -205,28 +213,33 @@ void start_socket_server(socket_server_t *srv) {
 
     /*!
      * @todo enable customizable timeout
-    */
+     */
     timeout tmt;
     tmt.tv_sec = 3;
     tmt.tv_usec = 0;
-    
-   for (;;) {
+
+    for (;;) {
         if (do_shutdown == true) {
-            srv->thl->log(srv->thl, 0, "shutdown signal received, exiting", LOG_LEVELS_INFO);
+            srv->thl->log(srv->thl, 0, "shutdown signal received, exiting",
+                          LOG_LEVELS_INFO);
             return;
         }
         // create a temporary working copy copy of socket_list
         fd_set working_copy = socket_list;
 
         int rc = select(max_socket_number, &working_copy, NULL, NULL, &tmt);
-        
+
         switch (rc) {
             case 0:
-                srv->thl->log(srv->thl, 0, "no sockets are ready for processing, sleeping", LOG_LEVELS_DEBUG);
+                srv->thl->log(srv->thl, 0,
+                              "no sockets are ready for processing, sleeping",
+                              LOG_LEVELS_DEBUG);
                 sleep(0.50);
                 continue;
             case -1:
-                srv->thl->logf(srv->thl, 0, LOG_LEVELS_ERROR, "an error occured while running select: %s", strerror(errno));
+                srv->thl->logf(srv->thl, 0, LOG_LEVELS_ERROR,
+                               "an error occured while running select: %s",
+                               strerror(errno));
                 sleep(0.50);
                 return;
         }
@@ -234,19 +247,23 @@ void start_socket_server(socket_server_t *srv) {
         /*!
          * @todo figure out why select isn't handling the udp connection
          * @warning does not work with udp
-        */
+         */
         if (FD_ISSET(srv->udp_socket_number, &working_copy)) {
-            client_conn_t *conn = calloc(sizeof(client_conn_t), sizeof(client_conn_t));
+            client_conn_t *conn =
+                calloc(sizeof(client_conn_t), sizeof(client_conn_t));
             if (conn == NULL) {
-                srv->thl->log(srv->thl, 0, "failed to calloc client_t", LOG_LEVELS_ERROR);
+                srv->thl->log(srv->thl, 0, "failed to calloc client_t",
+                              LOG_LEVELS_ERROR);
                 sleep(0.50);
                 continue;
             }
             conn->socket_number = srv->udp_socket_number;
-            conn_handle_data_t *chdata = calloc(sizeof(conn_handle_data_t), sizeof(conn_handle_data_t));
+            conn_handle_data_t *chdata =
+                calloc(sizeof(conn_handle_data_t), sizeof(conn_handle_data_t));
             if (chdata == NULL) {
                 free(conn);
-                srv->thl->log(srv->thl, 0, "failed to calloc client_t", LOG_LEVELS_ERROR);
+                srv->thl->log(srv->thl, 0, "failed to calloc client_t",
+                              LOG_LEVELS_ERROR);
                 sleep(0.50);
                 continue;
             }
@@ -259,26 +276,28 @@ void start_socket_server(socket_server_t *srv) {
         if (FD_ISSET(srv->tcp_socket_number, &working_copy)) {
             client_conn_t *conn = accept_client_conn(srv);
             if (conn == NULL) {
-                srv->thl->log(srv->thl, 0, "failed to accept client connection", LOG_LEVELS_ERROR);
+                srv->thl->log(srv->thl, 0, "failed to accept client connection",
+                              LOG_LEVELS_ERROR);
                 sleep(0.50);
                 continue;
             }
-            conn_handle_data_t *chdata = calloc(sizeof(conn_handle_data_t), sizeof(conn_handle_data_t));
+            conn_handle_data_t *chdata =
+                calloc(sizeof(conn_handle_data_t), sizeof(conn_handle_data_t));
             chdata->srv = srv;
             chdata->conn = conn;
             thpool_add_work(srv->thpool, srv->task_func_tcp, chdata);
         }
-        
+
         // sleep before looping again
         sleep(0.50);
-   }
+    }
 }
 
 /*! @brief helper function for accepting client connections
-  * times out new attempts if they take 3 seconds or more
-  * @return Failure: NULL client conn failed
-  * @return Success: non-NULL populated client_conn object
-*/
+ * times out new attempts if they take 3 seconds or more
+ * @return Failure: NULL client conn failed
+ * @return Success: non-NULL populated client_conn object
+ */
 client_conn_t *accept_client_conn(socket_server_t *srv) {
     // temporary variable for storing socket address
     sock_addr_storage addr_temp;
@@ -286,11 +305,8 @@ client_conn_t *accept_client_conn(socket_server_t *srv) {
     // i tried doing `(sock_addr *)&sizeof(addr_temp)
     // in the `accept` function call but it didnt work
     socklen_t client_len = sizeof(addr_temp);
-    int client_socket_num = accept(
-        srv->tcp_socket_number,
-        (sock_addr *)&addr_temp,
-        &client_len
-    );
+    int client_socket_num =
+        accept(srv->tcp_socket_number, (sock_addr *)&addr_temp, &client_len);
     // socket number less than 0 is an error
     if (client_socket_num < 0) {
         return NULL;
@@ -302,15 +318,16 @@ client_conn_t *accept_client_conn(socket_server_t *srv) {
     connection->address = &addr_temp;
     connection->socket_number = client_socket_num;
     char *addr_inf = get_name_info((addr_info *)connection->address);
-    srv->thl->logf(srv->thl, 0, LOG_LEVELS_INFO, "accepted new connection: %s", addr_inf);
+    srv->thl->logf(srv->thl, 0, LOG_LEVELS_INFO, "accepted new connection: %s",
+                   addr_inf);
     free(addr_inf);
     return connection;
 }
 
 /*!
-  * @brief used to signal that we should exit the main start_socket_server function
-  * @note this is only useful if you launch start_socket_server in a thread
-*/
+ * @brief used to signal that we should exit the main start_socket_server function
+ * @note this is only useful if you launch start_socket_server in a thread
+ */
 void signal_shutdown() {
     pthread_mutex_lock(&shutdown_mutex);
     do_shutdown = true;

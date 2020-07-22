@@ -117,18 +117,15 @@ char *get_name_info(addr_info *client_address) {
     char service_buffer[256];
 
     getnameinfo(
-                client_address->ai_addr,
-                client_address->ai_addrlen,
-                address_buffer,         // output buffer
-                sizeof(address_buffer), // size of the output buffer
-                service_buffer,                    // second buffer which outputs service name
-                sizeof(service_buffer),                    // length of the second buffer
-                NI_NUMERICHOST | NI_NUMERICSERV        // want to see hostnmae as an ip address
+        client_address->ai_addr, client_address->ai_addrlen,
+        address_buffer,                 // output buffer
+        sizeof(address_buffer),         // size of the output buffer
+        service_buffer,                 // second buffer which outputs service name
+        sizeof(service_buffer),         // length of the second buffer
+        NI_NUMERICHOST | NI_NUMERICSERV // want to see hostnmae as an ip address
     );
-    char *info = calloc(
-        sizeof(char),
-        sizeof(address_buffer) + sizeof(service_buffer) + 2
-    );
+    char *info =
+        calloc(sizeof(char), sizeof(address_buffer) + sizeof(service_buffer) + 2);
     if (info == NULL) {
         return NULL;
     }

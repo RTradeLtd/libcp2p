@@ -16,9 +16,10 @@
 #include <sys/types.h>
 
 /*!
-  * @brief defines a function signature that is used for submitting tasks to our thread pool
-*/
-typedef void (threadpool_task_func)(void *data);
+ * @brief defines a function signature that is used for submitting tasks to our
+ * thread pool
+ */
+typedef void(threadpool_task_func)(void *data);
 
 typedef struct socket_server_config {
     /*! @brief the thread pool task function to use for processing tcp connections */
@@ -37,10 +38,12 @@ typedef struct socket_server {
     int tcp_socket_number;
     thread_logger *thl;
     threadpool thpool;
-    /*! @brief used for submitting a task to the thread pool for processing a tcp connection */
+    /*! @brief used for submitting a task to the thread pool for processing a tcp
+     * connection */
     threadpool_task_func *task_func_tcp;
-    /*! @brief used for submitting a task to the thread pool for processing a udp connection */
-    threadpool_task_func *task_func_udp; 
+    /*! @brief used for submitting a task to the thread pool for processing a udp
+     * connection */
+    threadpool_task_func *task_func_udp;
 } socket_server_t;
 
 /*! @typedef client_conn
@@ -90,22 +93,24 @@ client_conn_t *accept_client_conn(socket_server_t *srv);
 void free_socket_server(socket_server_t *srv);
 
 /*!
-  * @brief starts the socket server which processes new connections
-  * @details when a new connection is accepted (tcp) OR we can receive data on a udp socket, the given handle_conn_func is used to process that client connection
-  * @param srv an instance of a socket_server_t that has been initialized through new_socket_server
-  * @param fn_tcp 
-  * @param fn_udp 
-*/
+ * @brief starts the socket server which processes new connections
+ * @details when a new connection is accepted (tcp) OR we can receive data on a udp
+ * socket, the given handle_conn_func is used to process that client connection
+ * @param srv an instance of a socket_server_t that has been initialized through
+ * new_socket_server
+ * @param fn_tcp
+ * @param fn_udp
+ */
 void start_socket_server(socket_server_t *srv);
 
 /*!
-  * @brief dedicated function for accepting and handling new connections
-  * @note processes new connections by launching them 
-*/
+ * @brief dedicated function for accepting and handling new connections
+ * @note processes new connections by launching them
+ */
 void *accept_connections(void *data);
 
 /*!
-  * @brief used to signal that we should exit the main start_socket_server function
-  * @note this is only useful if you launch start_socket_server in a thread
-*/
+ * @brief used to signal that we should exit the main start_socket_server function
+ * @note this is only useful if you launch start_socket_server in a thread
+ */
 void signal_shutdown();
