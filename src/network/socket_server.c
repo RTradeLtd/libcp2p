@@ -68,7 +68,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
         memset(cport, 0, 7);
 
         // get the ip address associated with the multiaddr
-        rc = multiaddress_get_ip_address(config.addrs[i], &ip);
+        rc = multiaddress_get_ip_address(config.addrs[i], ip);
         if (rc != 1) {
             thl->log(thl, 0, "failed to get ip address from multiaddr",
                      LOG_LEVELS_ERROR);

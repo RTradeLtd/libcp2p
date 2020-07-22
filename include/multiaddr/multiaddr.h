@@ -73,7 +73,7 @@ int multiaddress_get_ip_family(const struct MultiAddress *in);
  * @param ip where to put the ip address
  * @returns true(1) on success, otherwise 0
  */
-int multiaddress_get_ip_address(const struct MultiAddress *in, char **ip);
+int multiaddress_get_ip_address(const struct MultiAddress *in, char *ip);
 
 /***
  * Pulls the IP port from a multiaddress
