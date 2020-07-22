@@ -333,13 +333,3 @@ client_conn_t *accept_client_conn(socket_server_t *srv, int socket_num) {
     free(addr_inf);
     return connection;
 }
-
-/*!
- * @brief frees up resources allocated with config
- * @param config an instance of socket_server_config_t
- */
-void free_socket_server_config(socket_server_config_t *config) {
-    for (int i = 0; i < config->num_addrs; i++) {
-        multiaddress_free(&config->addrs[i]);
-    }
-}

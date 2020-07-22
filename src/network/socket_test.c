@@ -137,7 +137,9 @@ void test_new_socket_server(void **state) {
     signal_shutdown();
     sleep(5);
     free_socket_server(server);
-    free_socket_server_config(&config);
+    multiaddress_free(tcp_addr);
+    multiaddress_free(udp_addr);
+    free(config.addrs);
 }
 
 int main(void) {
