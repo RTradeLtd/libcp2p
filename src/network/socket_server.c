@@ -97,7 +97,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
             goto EXIT;
         }
 
-        udp_socket_num = get_new_socket(thl, udp_bind_address, NULL, 0);
+        udp_socket_num = get_new_socket(thl, udp_bind_address, opts, 2);
         if (udp_socket_num == -1) {
             thl->log(thl, 0, "failed to get new udp socket", LOG_LEVELS_ERROR);
             goto EXIT;
@@ -170,9 +170,10 @@ void free_socket_server(socket_server_t *srv) {
 
 /*!
   * @brief starts the socket server which processes new connections
-  * @details when a new connection is accepted (tcp) OR we can receive data on a udp socket, the given handle_conn_func is used to process that client connection
+  * @details when a new connection is accepted (tcp) OR we can receive data on a udp socket, the given threadpool_task_func is used to process that client connection
   * @param srv an instance of a socket_server_t that has been initialized through new_socket_server
   * @param fn the function use to handle new connections
+  * @note this is a blocking call, if you want it to be non blocking launch it in a pthread
 */
 void start_socket_socker(socket_server_t *srv, threadpool_task_func *fn) {
     // set the task function to process new connections
@@ -210,13 +211,17 @@ void start_socket_socker(socket_server_t *srv, threadpool_task_func *fn) {
         
         switch (rc) {
             case 0:
-                srv->thl->log(srv->thl, 0, "no sockets are ready for processing, sleeping", LOG_LEVELS_INFO);
+                srv->thl->log(srv->thl, 0, "no sockets are ready for processing, sleeping", LOG_LEVELS_DEBUG);
                 sleep(0.50);
                 break;
             case -1:
                 srv->thl->logf(srv->thl, 0, LOG_LEVELS_ERROR, "an error occured while running select: %s", strerror(errno));
                 sleep(0.50);
                 break;
+        }
+
+        if (FD_ISSET(srv->udp_socket_number, &working_copy)) {
+            printf("udp available\n");
         }
 
         // accept tcp connections if they are available
@@ -226,8 +231,12 @@ void start_socket_socker(socket_server_t *srv, threadpool_task_func *fn) {
                 printf("failed to accept connection\n");
                 continue;
             }
-            thpool_add_work(srv->thpool, srv->task_func, conn);
+            conn_handle_data_t *chdata = calloc(sizeof(conn_handle_data_t), sizeof(conn_handle_data_t));
+            chdata->srv = srv;
+            chdata->conn = conn;
+            thpool_add_work(srv->thpool, srv->task_func, chdata);
         }
+        
         /*! @todo process udp connections */
    }
 }
