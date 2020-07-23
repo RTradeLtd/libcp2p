@@ -1,6 +1,6 @@
 /*! @file base16.h
-  * @brief provides base 16 encoding/decoding functions
-*/
+ * @brief provides base 16 encoding/decoding functions
+ */
 #include <stddef.h>
 
 /**

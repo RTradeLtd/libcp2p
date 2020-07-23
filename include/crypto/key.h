@@ -55,5 +55,4 @@ int libp2p_crypto_private_key_protobuf_encode(const struct PrivateKey *in,
  * @param peer_id the results, in a null-terminated string
  * @returns true(1) on success, otherwise false(0)
  */
-int libp2p_crypto_public_key_to_peer_id(struct PublicKey *public_key,
-                                        char **peer_id);
+int libp2p_crypto_public_key_to_peer_id(struct PublicKey *public_key, char *peer_id);

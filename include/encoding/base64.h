@@ -1,6 +1,6 @@
 /*! @file base64.h
-  * @brief provides base 64 encoding/decoding functions
-*/
+ * @brief provides base 64 encoding/decoding functions
+ */
 
 #pragma once
 

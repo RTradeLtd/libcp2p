@@ -27,7 +27,8 @@ struct multi_address *multi_address_new() {
     if (out != NULL) {
         out->bsize = 0;
         out->bytes = NULL;
-        out->string = NULL;
+        /*! @todo figure out a better way of estimating size */
+        out->string = calloc(sizeof(char), 800);
     }
     return out;
 }
@@ -41,7 +42,7 @@ struct multi_address *multi_address_new() {
  */
 struct multi_address *
 multi_address_new_from_bytes(const uint8_t *byteaddress,
-                            int size) // Construct new address from bytes
+                             int size) // Construct new address from bytes
 {
     struct multi_address *out = multi_address_new();
     if (out != NULL) {
@@ -53,7 +54,7 @@ multi_address_new_from_bytes(const uint8_t *byteaddress,
             }
             out->bsize = size;
             memcpy(out->bytes, byteaddress, size);
-            if (!bytes_to_string(&out->string, byteaddress, size)) {
+            if (!bytes_to_string(out->string, byteaddress, size)) {
                 multi_address_free(out);
                 return NULL;
             }
@@ -70,7 +71,6 @@ struct multi_address *multi_address_new_from_string(
 {
     struct multi_address *out = multi_address_new();
     if (out != NULL) {
-        out->string = malloc(strlen(straddress) + 1);
         if (out->string == NULL) {
             multi_address_free(out);
             return NULL;
@@ -343,7 +343,7 @@ int multi_address_decapsulate(struct multi_address *result, char *srci) {
  * @returns <0 if B > A; >0 if A > B; 0 if A == B
  */
 int multi_address_compare(const struct multi_address *a,
-                         const struct multi_address *b) {
+                          const struct multi_address *b) {
     if (a == NULL && b == NULL)
         return 0;
     if (a == NULL && b != NULL)
@@ -369,7 +369,7 @@ int multi_address_compare(const struct multi_address *a,
  * @returns <0 if B > A; >0 if A > B; 0 if A == B
  */
 int multi_address_compare_id(const struct multi_address *a,
-                            const struct multi_address *b) {
+                             const struct multi_address *b) {
     char *a_id = multi_address_get_peer_id(a);
     char *b_id = multi_address_get_peer_id(b);
     if (a_id == NULL && b_id == NULL)

@@ -1,6 +1,6 @@
 /*! @file generic.h
-  * @brief generic definitions for multihashes
-*/
+ * @brief generic definitions for multihashes
+ */
 
 #pragma once
 

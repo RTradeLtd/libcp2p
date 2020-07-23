@@ -317,6 +317,13 @@ void start_socket_server(socket_server_t *srv) {
 
                     conn_handle_data_t *chdata = calloc(sizeof(conn_handle_data_t),
                                                         sizeof(conn_handle_data_t));
+                    if (chdata == NULL) {
+                        close(conn->socket_number);
+                        free(conn->address);
+                        free(conn);
+                        sleep(0.50);
+                        continue;
+                    }
                     chdata->srv = srv;
                     chdata->conn = conn;
 

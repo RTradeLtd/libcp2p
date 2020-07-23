@@ -1,6 +1,6 @@
 /*! @file peerutils.h
-  * @brief provides utilities for managing peer identifiers
-*/
+ * @brief provides utilities for managing peer identifiers
+ */
 
 #pragma once
 

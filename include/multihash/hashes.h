@@ -1,6 +1,6 @@
 /*! @file hashes.h
-  * @brief multihash definitions
-*/
+ * @brief multihash definitions
+ */
 #pragma once
 
 #include "errors.h"

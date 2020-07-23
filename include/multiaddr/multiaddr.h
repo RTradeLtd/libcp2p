@@ -30,9 +30,9 @@
  */
 
 /*! @struct multi_address
-  * @typedef multi_addr_t
-  * @brief a structure composing a multiaddress
-*/
+ * @typedef multi_addr_t
+ * @brief a structure composing a multiaddress
+ */
 typedef struct multi_address {
     // A multi_address represented as a string
     char *string;
@@ -48,7 +48,7 @@ int strpos(char *haystack, char *needle);
 
 struct multi_address *
 multi_address_new_from_bytes(const uint8_t *byteaddress,
-                            int size); // Construct new address from bytes
+                             int size); // Construct new address from bytes
 
 struct multi_address *multi_address_new_from_string(
     const char *straddress); // Construct new address from string
@@ -101,7 +101,8 @@ char *multi_address_get_peer_id(const struct multi_address *in);
  * @param b side B
  * @returns <0 if B > A; >0 if A > B; 0 if A == B
  */
-int multi_address_compare(const struct multi_address *a, const struct multi_address *b);
+int multi_address_compare(const struct multi_address *a,
+                          const struct multi_address *b);
 
 /**
  * @brief Check to see how these two addresses compare, ignoring IP address, only
@@ -111,4 +112,4 @@ int multi_address_compare(const struct multi_address *a, const struct multi_addr
  * @returns <0 if B > A; >0 if A > B; 0 if A == B
  */
 int multi_address_compare_id(const struct multi_address *a,
-                            const struct multi_address *b);
+                             const struct multi_address *b);
