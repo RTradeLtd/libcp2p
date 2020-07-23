@@ -6,45 +6,63 @@
  * Utilities for public keys
  */
 
-enum KeyType { KEYTYPE_RSA, KEYTYPE_ED25519, KEYTYPE_INVALID };
+typedef enum { KEYTYPE_ECDSA, KEYTYPE_INVALID } key_type_t;
 
-struct PublicKey {
-    enum KeyType type;
+typedef struct public_key {
+    key_type_t type;
     unsigned char *data;
+    unsigned char *curve;
     size_t data_size;
-};
+    size_t curve_size;
+} public_key_t;
 
-struct PrivateKey {
-    enum KeyType type;
+typedef struct private_key {
+    key_type_t type;
     unsigned char *data;
+    unsigned char *curve;
     size_t data_size;
-};
+    size_t curve_size;
+} private_key_t;
 
-struct PublicKey *libp2p_crypto_public_key_new(void);
-void libp2p_crypto_public_key_free(struct PublicKey *in);
+public_key_t *libp2p_crypto_public_key_new(void);
+void libp2p_crypto_public_key_free(public_key_t *in);
 
-struct PrivateKey *libp2p_crypto_private_key_new(void);
-void libp2p_crypto_private_key_free(struct PrivateKey *in);
-int libp2p_crypto_private_key_copy(const struct PrivateKey *source,
-                                   struct PrivateKey *destination);
+private_key_t *libp2p_crypto_private_key_new(void);
+void libp2p_crypto_private_key_free(private_key_t *in);
+int libp2p_crypto_private_key_copy(const private_key_t *source,
+                                   private_key_t *destination);
+
+/*!
+  * @brief used to cbor encode a public_key_t object
+*/
+int libp2p_crypto_public_key_cbor_encode(
+    public_key_t *pub_key,
+    unsigned char *buffer,
+    size_t buffer_length,
+    size_t *bytes_written
+);
 
 /**
  * @brief Unmarshal a public key from a protobuf
  */
 int libp2p_crypto_public_key_protobuf_decode(unsigned char *buffer,
                                              size_t buffer_length,
-                                             struct PublicKey **out);
-size_t libp2p_crypto_public_key_protobuf_encode_size(const struct PublicKey *in);
-int libp2p_crypto_public_key_protobuf_encode(const struct PublicKey *in,
+                                             public_key_t **out);
+
+size_t libp2p_crypto_public_key_protobuf_encode_size(const public_key_t *in);
+
+int libp2p_crypto_public_key_protobuf_encode(const public_key_t *in,
                                              unsigned char *buffer,
                                              size_t max_buffer_length,
                                              size_t *bytes_written);
 // private key
 int libp2p_crypto_private_key_protobuf_decode(unsigned char *buffer,
                                               size_t buffer_length,
-                                              struct PrivateKey **out);
-size_t libp2p_crypto_private_key_protobuf_encode_size(const struct PrivateKey *in);
-int libp2p_crypto_private_key_protobuf_encode(const struct PrivateKey *in,
+                                              private_key_t **out);
+
+size_t libp2p_crypto_private_key_protobuf_encode_size(const private_key_t *in);
+
+int libp2p_crypto_private_key_protobuf_encode(const private_key_t *in,
                                               unsigned char *buffer,
                                               size_t max_buffer_length,
                                               size_t *bytes_written);
@@ -55,4 +73,4 @@ int libp2p_crypto_private_key_protobuf_encode(const struct PrivateKey *in,
  * @param peer_id the results, in a null-terminated string
  * @returns true(1) on success, otherwise false(0)
  */
-int libp2p_crypto_public_key_to_peer_id(struct PublicKey *public_key, char *peer_id);
+int libp2p_crypto_public_key_to_peer_id(public_key_t *public_key, char *peer_id);
