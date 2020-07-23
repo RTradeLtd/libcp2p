@@ -384,8 +384,8 @@ NAX:
  * @param results_size the size of the results
  * @returns the results array
  */
-char *address_string_to_bytes(struct Protocol *protocol, const char *incoming,
-                              size_t incoming_size, char **results,
+int address_string_to_bytes(struct Protocol *protocol, const char *incoming,
+                              size_t incoming_size, char *results,
                               int *results_size) {
     static char astb__stringy[800] = "\0";
     memset(astb__stringy, 0, 800);
@@ -404,18 +404,17 @@ char *address_string_to_bytes(struct Protocol *protocol, const char *incoming,
                 uint64_t iip = ip2int(incoming);
                 strcpy(astb__stringy, Int_To_Hex(iip));
                 protocol = NULL;
-                *results = malloc(strlen(astb__stringy));
-                memcpy(*results, astb__stringy, strlen(astb__stringy));
+                memcpy(results, astb__stringy, strlen(astb__stringy));
                 *results_size = strlen(astb__stringy);
-                return *results;
+                return 0;
             } else {
-                return "ERR";
+                return 1;
             }
             break;
         }
         case 41: // IPv6 Must be done
         {
-            return "ERR";
+            return 1;
             break;
         }
         case 6: // Tcp
@@ -445,12 +444,11 @@ char *address_string_to_bytes(struct Protocol *protocol, const char *incoming,
                     himm_woot[3] = swap3;
                 }
                 himm_woot[4] = '\0';
-                *results = malloc(5);
                 *results_size = 5;
-                memcpy(*results, himm_woot, 5);
-                return *results;
+                memcpy(results, himm_woot, 5);
+                return 0;
             } else {
-                return "ERR";
+                return 1;
             }
             break;
         }
@@ -481,30 +479,29 @@ char *address_string_to_bytes(struct Protocol *protocol, const char *incoming,
                     himm_woot2[3] = swap3;
                 }
                 himm_woot2[4] = '\0';
-                *results = malloc(5);
                 *results_size = 5;
-                memcpy(*results, himm_woot2, 5);
-                return *results;
+                memcpy(results, himm_woot2, 5);
+                return 0;
             } else {
-                return "ERR";
+                return 1;
             }
             break;
         }
         case 33: // dccp
         {
-            return "ERR";
+            return 1;
         }
         case 132: // sctp
         {
-            return "ERR";
+            return 1;
         }
         case 301: // udt
         {
-            return "ERR";
+            return 1;
         }
         case 302: // utp
         {
-            return "ERR";
+            return 1;
         }
         case 42: // IPFS - !!!
         {
@@ -522,7 +519,7 @@ char *address_string_to_bytes(struct Protocol *protocol, const char *incoming,
                 (unsigned char *)incoming_copy, incoming_copy_size, ptr_to_result,
                 &result_buffer_length);
             if (return_value == 0) {
-                return "ERR";
+                return 1;
             }
 
             // throw everything in a hex string so we can debug the
@@ -541,36 +538,34 @@ char *address_string_to_bytes(struct Protocol *protocol, const char *incoming,
             memset(prefixed, 0, 3);
             strcpy(prefixed, Num_To_HexVar_32(ilen));
             *results_size = ilen + 3;
-            *results = malloc(*results_size);
-            memset(*results, 0, *results_size);
-            strcat(*results, prefixed); // 2 bytes
-            strcat(*results,
-                   addr_encoded); // ilen bytes + null terminator
-            return *results;
+            memset(results, 0, *results_size);
+            strcat(results, prefixed); // 2 bytes
+            strcat(results, addr_encoded); // ilen bytes + null terminator
+            return 0;
         }
         case 480: // http
         {
-            return "ERR";
+            return 1;
         }
         case 443: // https
         {
-            return "ERR";
+            return 1;
         }
         case 477: // ws
         {
-            return "ERR";
+            return 1;
         }
         case 444: // onion
         {
-            return "ERR";
+            return 1;
         }
         case 275: // libp2p-webrtc-star
         {
-            return "ERR";
+            return 1;
         }
         default: {
             printf("NO SUCH PROTOCOL!\n");
-            return "ERR";
+            return 1;
         }
     }
 }
@@ -613,6 +608,8 @@ int string_to_bytes(uint8_t **finalbytes, size_t *realbbsize, const char *strx,
     // Starting to extract words and process them:
     char *wp;
     char *end;
+    char s_to_b[2048]; /*! @todo figure out a better size */
+    int s_to_b_size = 2048;
     wp = strtok_r(pstring, "/", &end);
     struct Protocol *protx;
     while (wp) {
@@ -630,17 +627,14 @@ int string_to_bytes(uint8_t **finalbytes, size_t *realbbsize, const char *strx,
             }
         } else // This is the address
         {
-            char *s_to_b = NULL;
-            int s_to_b_size = 0;
-            if (strcmp(address_string_to_bytes(protx, wp, strlen(wp), &s_to_b,
-                                               &s_to_b_size),
-                       "ERR") == 0) {
+            memset(s_to_b, 0, 2048);
+            int rc = address_string_to_bytes(protx, wp, strlen(wp), s_to_b, &s_to_b_size);
+            if (rc == 1) {
                 malf = 1;
             } else {
                 int temp_size = strlen(processed);
                 strncat(processed, s_to_b, s_to_b_size);
                 processed[temp_size + s_to_b_size] = 0;
-                free(s_to_b);
             }
             protx = NULL;      // Since right now it doesn't need that
                                // assignment anymore.
