@@ -317,6 +317,13 @@ void start_socket_server(socket_server_t *srv) {
 
                     conn_handle_data_t *chdata = calloc(sizeof(conn_handle_data_t),
                                                         sizeof(conn_handle_data_t));
+                    if (chdata == NULL) {
+                        close(conn->socket_number);
+                        free(conn->address);
+                        free(conn);
+                        sleep(0.50);
+                        continue;
+                    }
                     chdata->srv = srv;
                     chdata->conn = conn;
 
@@ -418,6 +425,7 @@ void free_socket_server_config(socket_server_config_t *config) {
  * socket_server_config_t
  * @return Failure: NULL pointer
  */
+#pragma GCC diagnostic ignored "-Wanalyzer-malloc-leak"
 socket_server_config_t *new_socket_server_config(int num_addrs) {
     socket_server_config_t *config =
         calloc(sizeof(socket_server_config_t), sizeof(socket_server_config_t));

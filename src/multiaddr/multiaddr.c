@@ -21,6 +21,7 @@ int strpos(char *haystack, char *needle) {
  * Construct a new multi_address struct
  * @returns an empty multi_address struct
  */
+#pragma GCC diagnostic ignored "-Wanalyzer-malloc-leak" // this seems to be a false positive
 struct multi_address *multi_address_new() {
     struct multi_address *out =
         (struct multi_address *)malloc(sizeof(struct multi_address));
