@@ -29,7 +29,7 @@ struct multi_address *multi_address_new() {
         out->bsize = 0;
         out->bytes = NULL;
         /*! @todo figure out a better way of estimating size */
-        out->string = calloc(sizeof(char), 2048);
+        out->string = calloc(sizeof(char), 800);
     }
     return out;
 }

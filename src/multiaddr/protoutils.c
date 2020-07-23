@@ -602,8 +602,8 @@ int string_to_bytes(uint8_t **finalbytes, size_t *realbbsize, const char *strx,
     // Starting to extract words and process them:
     char *wp;
     char *end;
-    char s_to_b[2048]; /*! @todo figure out a better size */
-    int s_to_b_size = 2048;
+    char s_to_b[800]; /*! @todo figure out a better size */
+    int s_to_b_size = 800;
     wp = strtok_r(pstring, "/", &end);
     struct Protocol *protx;
     while (wp) {
@@ -621,7 +621,7 @@ int string_to_bytes(uint8_t **finalbytes, size_t *realbbsize, const char *strx,
             }
         } else // This is the address
         {
-            memset(s_to_b, 0, 2048);
+            memset(s_to_b, 0, 800);
             int rc = address_string_to_bytes(protx, wp, strlen(wp), s_to_b, &s_to_b_size);
             if (rc == 1) {
                 malf = 1;
