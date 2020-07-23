@@ -16,8 +16,8 @@ uint8_t * bytes; // uint8_t * that contains the enecoded address
 .IP "\(bu" 2
 size_t bsize; //size_t that contains the real bytes size (Use it whenever using the bytes so you don't input trash!)
 .PP
-.SS "New Multi Address From String(multiaddress_new_from_string)"
-struct MultiAddress* a = multiaddress_new_from_string('/ip4/127\&.0\&.0\&.1/tcp/8080/');
+.SS "New Multi Address From String(multi_address_new_from_string)"
+struct multi_address* a = multi_address_new_from_string('/ip4/127\&.0\&.0\&.1/tcp/8080/');
 .SS "Obtaining the byte buffer(\&.bytes, \&.bsize[0]):"
 printf('TEST BYTES: %s\\n',Var_To_Hex(a->bsize, a->bytes)); Var_To_Hex = Byte Buffer to Hex String Hex_To_Var = Hex String to Byte Buffer
 .SS "Encapsulation & Decapsulation(m_encapsulate, m_decapsulate)"
@@ -25,24 +25,24 @@ printf('TEST BYTES: %s\\n',Var_To_Hex(a->bsize, a->bytes)); Var_To_Hex = Byte Bu
 .IP "\(bu" 2
 Now the string is: /ip4/192\&.168\&.1\&.1/
 .IP "\(bu" 2
-multiaddress_encapsulate(a,'/udp/3333/'); //Adds udp/3333/
+multi_address_encapsulate(a,'/udp/3333/'); //Adds udp/3333/
 .IP "\(bu" 2
 Now the string is: /ip4/192\&.168\&.1\&.1/udp/3333/
 .IP "\(bu" 2
-multiaddress_decapsulate(a,'udp'); //Removes udp protocol and its address
+multi_address_decapsulate(a,'udp'); //Removes udp protocol and its address
 .IP "\(bu" 2
 Now the string is: /ip4/192\&.168\&.1\&.1/
 .IP "\(bu" 2
-multiaddress_encapsulate(a,'/tcp/8080');
+multi_address_encapsulate(a,'/tcp/8080');
 .IP "\(bu" 2
 Now the string is: /ip4/192\&.168\&.1\&.1/tcp/8080/
 .PP
-.SH "Constructing a multiaddress from bytes:"
+.SH "Constructing a multi_address from bytes:"
 .PP
 .IP "\(bu" 2
-struct MultiAddress* beta;
+struct multi_address* beta;
 .IP "\(bu" 2
-beta = multiaddress_new_from_bytes(a->bytes,a->bsize); //This will already construct back to the string too!
+beta = multi_address_new_from_bytes(a->bytes,a->bsize); //This will already construct back to the string too!
 .IP "\(bu" 2
 printf('B STRING: %s\\n',beta->string); //So after encapsulation and decapsulation atm this string would
 .IP "\(bu" 2

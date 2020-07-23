@@ -1,5 +1,5 @@
 <map id="libp2p_crypto_rsa_generate_keypair" name="libp2p_crypto_rsa_generate_keypair">
-<area shape="rect" id="node1" title=" " alt="" coords="5,71,208,112"/>
+<area shape="rect" id="node1" title="generate a new private key" alt="" coords="5,71,208,112"/>
 <area shape="rect" id="node2" href="$d1/d81/rsa_8c.html#a75caf4877292278d01445fe4c0a5b0b0" title=" " alt="" coords="256,5,447,47"/>
 <area shape="rect" id="node4" href="$d1/d81/rsa_8c.html#a963f15a55d71670cbc814e63ce8942c0" title=" " alt="" coords="269,71,433,112"/>
 <area shape="rect" id="node5" href="$d1/d81/rsa_8c.html#a5e1e4f6dfbc5e7f3c95400036d235f8f" title=" " alt="" coords="263,136,440,177"/>

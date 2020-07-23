@@ -1,5 +1,5 @@
 <map id="libp2p_encoding_base32_decode" name="libp2p_encoding_base32_decode">
-<area shape="rect" id="node1" title=" " alt="" coords="5,49,188,90"/>
+<area shape="rect" id="node1" title="Decode from Base16 format." alt="" coords="5,49,188,90"/>
 <area shape="rect" id="node2" href="$db/d08/base32_8c.html#a202f50cce9f077cd2d0b91e8243c1074" title=" " alt="" coords="236,56,387,83"/>
 <area shape="rect" id="node3" href="$db/d08/base32_8c.html#a99b207232c9ea9fcf8126ba306331fa8" title=" " alt="" coords="435,31,519,57"/>
 <area shape="rect" id="node6" href="$db/d08/base32_8c.html#a491bf1cfe5311f551cc3036f6119557a" title=" " alt="" coords="447,81,506,108"/>

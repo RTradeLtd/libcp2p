@@ -1,7 +1,7 @@
 <map id="/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/multicodec/multicodec.c" name="/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/multicodec/multicodec.c">
 <area shape="rect" id="node1" title=" " alt="" coords="253,5,461,61"/>
 <area shape="rect" id="node2" href="$d2/da6/multicodec_8h.html" title="an implemention of multicodec" alt="" coords="6,109,189,136"/>
-<area shape="rect" id="node5" href="$d7/ded/codecs_8h.html" title=" " alt="" coords="213,109,368,136"/>
+<area shape="rect" id="node5" href="$d7/ded/codecs_8h.html" title="macro definitions of all supported codecs" alt="" coords="213,109,368,136"/>
 <area shape="rect" id="node6" title=" " alt="" coords="392,109,459,136"/>
 <area shape="rect" id="node7" title=" " alt="" coords="483,109,554,136"/>
 <area shape="rect" id="node3" title=" " alt="" coords="5,184,88,211"/>

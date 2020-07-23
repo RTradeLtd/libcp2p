@@ -25,9 +25,11 @@
 .ti -1c
 .RI "\fBmulticodec_encoded_t\fP * \fBmulticodec_encode\fP (char *codec, char *inData, size_t inDataLength, char *outData, size_t maxOutDataLength)"
 .br
+.RI "Encode a char array using the specified encoding\&. "
 .ti -1c
 .RI "int \fBmulticodec_decode\fP (\fBmulticodec_encoded_t\fP *encoded, char *outData, size_t maxOutDataLength)"
 .br
+.RI "Decode a multicodec encoded data array\&. "
 .ti -1c
 .RI "bool \fBmulticodec_is_valid\fP (char *codec)"
 .br
@@ -43,7 +45,9 @@
 .SH "Function Documentation"
 .PP 
 .SS "int multicodec_decode (\fBmulticodec_encoded_t\fP * encoded, char * outData, size_t maxOutDataLength)"
-Decode a multicodec encoded data array 
+
+.PP
+Decode a multicodec encoded data array\&. Decode a multicodec encoded data array 
 .PP
 \fBParameters\fP
 .RS 4
@@ -74,7 +78,9 @@ and thus the next I value is the start of the actual data, whereas if we simply 
 .PP
 Definition at line 531 of file multicodec\&.c\&.
 .SS "\fBmulticodec_encoded_t\fP* multicodec_encode (char * codec, char * inData, size_t inDataLength, char * outData, size_t maxOutDataLength)"
-Encode a char array using the specified encoding 
+
+.PP
+Encode a char array using the specified encoding\&. Encode a char array using the specified encoding 
 .PP
 \fBParameters\fP
 .RS 4

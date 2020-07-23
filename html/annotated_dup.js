@@ -24,7 +24,7 @@ var annotated_dup =
     [ "map_node_t", "d7/d1e/structmap__node__t.html", "d7/d1e/structmap__node__t" ],
     [ "map_str_t", "d1/d3e/structmap__str__t.html", "d1/d3e/structmap__str__t" ],
     [ "map_void_t", "da/d2c/structmap__void__t.html", "da/d2c/structmap__void__t" ],
-    [ "MultiAddress", "da/d83/struct_multi_address.html", "da/d83/struct_multi_address" ],
+    [ "multi_address", "d4/dc4/structmulti__address.html", "d4/dc4/structmulti__address" ],
     [ "multicodec_encoded", "d1/d8e/structmulticodec__encoded.html", "d1/d8e/structmulticodec__encoded" ],
     [ "PrivateKey", "d9/dc0/struct_private_key.html", "d9/dc0/struct_private_key" ],
     [ "Protocol", "d8/dde/struct_protocol.html", "d8/dde/struct_protocol" ],

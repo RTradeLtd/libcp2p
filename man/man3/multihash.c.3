@@ -38,15 +38,18 @@
 .ti -1c
 .RI "int \fBmh_multihash_hash\fP (const unsigned char *mh, size_t len)"
 .br
+.RI "returns hash code or error (which is < 0) "
 .ti -1c
 .RI "int \fBmh_multihash_length\fP (const unsigned char *mh, size_t len)"
 .br
 .ti -1c
 .RI "int \fBmh_multihash_digest\fP (const unsigned char *multihash, size_t len, unsigned char **digest, size_t *digest_len)"
 .br
+.RI "gives access to raw digest inside multihash buffer "
 .ti -1c
 .RI "int \fBmh_new_length\fP (int code, size_t hash_len)"
 .br
+.RI "determine the size of the multihash given the data size "
 .ti -1c
 .RI "int \fBmh_new\fP (unsigned char *buffer, int code, const unsigned char *digest, size_t digest_len)"
 .br
@@ -94,7 +97,9 @@ errors or \fBMH_E_NO_ERROR(0)\fP
 .PP
 Definition at line 32 of file multihash\&.c\&.
 .SS "int mh_multihash_digest (const unsigned char * multihash, size_t len, unsigned char ** digest, size_t * digest_len)"
-gives access to raw digest inside multihash buffer 
+
+.PP
+gives access to raw digest inside multihash buffer gives access to raw digest inside multihash buffer 
 .PP
 \fBParameters\fP
 .RS 4
@@ -114,7 +119,9 @@ error if less than zero, otherwise 0
 .PP
 Definition at line 86 of file multihash\&.c\&.
 .SS "int mh_multihash_hash (const unsigned char * mh, size_t len)"
-returns hash code or error (which is < 0) 
+
+.PP
+returns hash code or error (which is < 0) returns hash code or error (which is < 0) 
 .PP
 \fBParameters\fP
 .RS 4
@@ -140,7 +147,9 @@ Definition at line 71 of file multihash\&.c\&.
 .PP
 Definition at line 118 of file multihash\&.c\&.
 .SS "int mh_new_length (int code, size_t hash_len)"
-determine the size of the multihash given the data size 
+
+.PP
+determine the size of the multihash given the data size determine the size of the multihash given the data size 
 .PP
 \fBParameters\fP
 .RS 4

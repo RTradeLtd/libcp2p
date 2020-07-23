@@ -1,0 +1,7 @@
+<map id="multi_address_get_peer_id" name="multi_address_get_peer_id">
+<area shape="rect" id="node1" title="Pulls the peer ID out of a multi_address struct." alt="" coords="353,64,551,91"/>
+<area shape="rect" id="node2" href="$da/de0/multiaddr_8h.html#acbccc0cd009eefa4a89cf85d774c0c7b" title="Check to see how these two addresses compare, ignoring IP address, only." alt="" coords="108,5,305,32"/>
+<area shape="rect" id="node3" href="$d8/dca/multiaddr__test_8c.html#ab6f37289be2984e112614397fc44996c" title=" " alt="" coords="134,57,279,98"/>
+<area shape="rect" id="node5" href="$d8/dca/multiaddr__test_8c.html#a125eea8e927949eceff7c1395b6e9bbe" title=" " alt="" coords="121,123,293,149"/>
+<area shape="rect" id="node4" href="$d8/dca/multiaddr__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,93,60,120"/>
+</map>

@@ -25,17 +25,22 @@
 .ti -1c
 .RI "int \fBlibp2p_crypto_aes_key_generate\fP (char *key)"
 .br
+.RI "Generate a new AES key\&. "
 .ti -1c
 .RI "int \fBlibp2p_crypto_aes_encrypt\fP (char *key, char *iv, char *input, size_t input_size, unsigned char **output, size_t *output_size)"
 .br
+.RI "Encrypt a block of text\&. "
 .ti -1c
 .RI "int \fBlibp2p_crypto_aes_decrypt\fP (char *key, char *iv, char *input, size_t input_size, unsigned char **output, size_t *output_size)"
 .br
+.RI "Decrypt a block of text\&. "
 .in -1c
 .SH "Function Documentation"
 .PP 
 .SS "int libp2p_crypto_aes_decrypt (char * key, char * iv, char * input, size_t input_size, unsigned char ** output, size_t * output_size)"
-Decrypt a block of text 
+
+.PP
+Decrypt a block of text\&. Decrypt a block of text 
 .PP
 \fBParameters\fP
 .RS 4
@@ -61,7 +66,9 @@ true(1) on success, otherwise false(0)
 .PP
 Definition at line 85 of file aes\&.c\&.
 .SS "int libp2p_crypto_aes_encrypt (char * key, char * iv, char * input, size_t input_size, unsigned char ** output, size_t * output_size)"
-Encrypt a block of text 
+
+.PP
+Encrypt a block of text\&. Encrypt a block of text 
 .PP
 \fBParameters\fP
 .RS 4
@@ -87,7 +94,9 @@ true(1) on success, otherwise false(0)
 .PP
 Definition at line 48 of file aes\&.c\&.
 .SS "int libp2p_crypto_aes_key_generate (char * key)"
-functions for aes encryption Generate a new AES key 
+
+.PP
+Generate a new AES key\&. functions for aes encryption Generate a new AES key 
 .PP
 \fBParameters\fP
 .RS 4

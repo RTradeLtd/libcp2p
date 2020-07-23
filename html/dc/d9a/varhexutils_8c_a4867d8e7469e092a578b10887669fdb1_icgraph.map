@@ -1,13 +1,13 @@
 <map id="Int_To_Hex" name="Int_To_Hex">
-<area shape="rect" id="node1" title=" " alt="" coords="975,325,1068,352"/>
-<area shape="rect" id="node2" href="$d1/d17/varhexutils_8h.html#a6801d8b4c1ed8ec917b973ee2b5a872a" title=" " alt="" coords="588,249,687,276"/>
-<area shape="rect" id="node3" href="$df/d48/protoutils_8h.html#ae34375388f37361264489ac38b5ef8d6" title=" " alt="" coords="747,325,927,352"/>
-<area shape="rect" id="node4" href="$df/d48/protoutils_8h.html#a07260974981a08120ce7d210952aa0b9" title=" " alt="" coords="576,325,699,352"/>
-<area shape="rect" id="node18" href="$d1/d17/varhexutils_8h.html#a57369e005f30cc43e06d5f4c7a706f68" title=" " alt="" coords="803,275,870,301"/>
-<area shape="rect" id="node19" href="$d8/dca/multiaddr__test_8c.html#a3d79cea66e379027864392b1092286de" title=" " alt="" coords="576,427,699,453"/>
-<area shape="rect" id="node5" href="$da/de0/multiaddr_8h.html#a814628aed39afb12c98af9cb55e2f52c" title=" " alt="" coords="335,325,528,352"/>
-<area shape="rect" id="node8" href="$da/de0/multiaddr_8h.html#ab927e4ebe737f8b079843b12fbab06cb" title=" " alt="" coords="335,376,528,403"/>
-<area shape="rect" id="node9" href="$da/de0/multiaddr_8h.html#a8823478810318162fff2537edbcf698b" title=" " alt="" coords="342,217,521,258"/>
+<area shape="rect" id="node1" title=" " alt="" coords="981,325,1075,352"/>
+<area shape="rect" id="node2" href="$d1/d17/varhexutils_8h.html#a6801d8b4c1ed8ec917b973ee2b5a872a" title=" " alt="" coords="595,249,693,276"/>
+<area shape="rect" id="node3" href="$df/d48/protoutils_8h.html#ae34375388f37361264489ac38b5ef8d6" title="Convert an address string to a byte representation." alt="" coords="753,325,933,352"/>
+<area shape="rect" id="node4" href="$df/d48/protoutils_8h.html#a07260974981a08120ce7d210952aa0b9" title=" " alt="" coords="583,325,705,352"/>
+<area shape="rect" id="node18" href="$d1/d17/varhexutils_8h.html#a57369e005f30cc43e06d5f4c7a706f68" title=" " alt="" coords="810,275,877,301"/>
+<area shape="rect" id="node19" href="$d8/dca/multiaddr__test_8c.html#a3d79cea66e379027864392b1092286de" title=" " alt="" coords="583,427,705,453"/>
+<area shape="rect" id="node5" href="$da/de0/multiaddr_8h.html#a3292b7d06b491d71303cb0b9ae10fd0b" title=" " alt="" coords="335,325,535,352"/>
+<area shape="rect" id="node8" href="$da/de0/multiaddr_8h.html#ad3ee5cbe47bd239e6b308f367afb1726" title=" " alt="" coords="335,376,535,403"/>
+<area shape="rect" id="node9" href="$da/de0/multiaddr_8h.html#af237ac393bd1a84840760647189d9633" title=" " alt="" coords="341,217,528,258"/>
 <area shape="rect" id="node6" href="$d8/dca/multiaddr__test_8c.html#ad1e7c139c6cb28364f2b46fb50574d74" title=" " alt="" coords="160,376,235,403"/>
 <area shape="rect" id="node7" href="$d8/dca/multiaddr__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,249,60,276"/>
 <area shape="rect" id="node10" href="$d8/dca/multiaddr__test_8c.html#a812e26f1859f9c8a120e9874f37dd83a" title=" " alt="" coords="117,107,277,133"/>

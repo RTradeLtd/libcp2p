@@ -107,8 +107,8 @@ Include dependency graph for x509.c:</div>
 <area shape="rect" title=" " alt="" coords="287,109,431,136"/>
 <area shape="rect" title=" " alt="" coords="455,109,561,136"/>
 <area shape="rect" title=" " alt="" coords="586,109,697,136"/>
-<area shape="rect" href="../../d6/d90/x509_8h.html" title=" " alt="" coords="721,109,831,136"/>
-<area shape="rect" href="../../df/dc3/rsa_8h.html" title=" " alt="" coords="749,184,803,211"/>
+<area shape="rect" href="../../d6/d90/x509_8h.html" title="provides x509 cert management tooling" alt="" coords="721,109,831,136"/>
+<area shape="rect" href="../../df/dc3/rsa_8h.html" title="provides RSA cryptography support" alt="" coords="749,184,803,211"/>
 <area shape="rect" title=" " alt="" coords="739,259,813,285"/>
 </map>
 </div>
@@ -118,8 +118,10 @@ Include dependency graph for x509.c:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a4167ee9bd2a450096050bd39433cde1f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d1a/x509_8c.html#a4167ee9bd2a450096050bd39433cde1f">libp2p_encoding_x509_private_key_to_der</a> (struct <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a> *private_key, unsigned char *bytes[1600])</td></tr>
+<tr class="memdesc:a4167ee9bd2a450096050bd39433cde1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turn an <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a> struct into a DER formatted array of bytes.  <a href="../../d1/d1a/x509_8c.html#a4167ee9bd2a450096050bd39433cde1f">More...</a><br /></td></tr>
 <tr class="separator:a4167ee9bd2a450096050bd39433cde1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5ac751943f07e9c2477918545def1e8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d1a/x509_8c.html#aa5ac751943f07e9c2477918545def1e8">libp2p_encoding_x509_der_to_private_key</a> (unsigned char *der, size_t der_length, struct <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a> *private_key)</td></tr>
+<tr class="memdesc:aa5ac751943f07e9c2477918545def1e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Take a DER formatted char array and turn it into an <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a>.  <a href="../../d1/d1a/x509_8c.html#aa5ac751943f07e9c2477918545def1e8">More...</a><br /></td></tr>
 <tr class="separator:aa5ac751943f07e9c2477918545def1e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -154,7 +156,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Take a DER formatted char array and turn it into an <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a> </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Take a DER formatted char array and turn it into an <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">der</td><td>the DER formatted char array </td></tr>
     <tr><td class="paramname">der_length</td><td>the number of bytes in the char array </td></tr>
@@ -193,6 +197,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Turn an <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a> struct into a DER formatted array of bytes. </p>
 <p>public methods convert a RSA Private Key to an array of bytes in DER format </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">private_key</td><td>the private key </td></tr>

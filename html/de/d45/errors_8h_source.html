@@ -86,21 +86,22 @@ $(document).ready(function(){initNavTree('de/d45/errors_8h_source.html','../../'
 <div class="title">errors.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="../../de/d45/errors_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef ERROR_H</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define ERROR_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno"><a class="line" href="../../de/d45/errors_8h.html#afbf714fdc2c2d1918260ea6a3cea6f56">    4</a></span>&#160;<span class="preprocessor">#define MH_E_NO_ERROR 0</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="../../de/d45/errors_8h.html#ab0075dfcb9a57d9ecb15e498bdec200d">    5</a></span>&#160;<span class="preprocessor">#define MH_E_UNKNOWN_CODE -1</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="../../de/d45/errors_8h.html#a9992100bc41c30533108cbb9a0ae33ec">    6</a></span>&#160;<span class="preprocessor">#define MH_E_TOO_SHORT -2</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="../../de/d45/errors_8h.html#aae94b6644011b9f44577b5ecc952daa1">    7</a></span>&#160;<span class="preprocessor">#define MH_E_TOO_LONG -3</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="../../de/d45/errors_8h.html#a5b18434d7a520b0a61e0bf873cc69c40">    8</a></span>&#160;<span class="preprocessor">#define MH_E_VARINT_NOT_SUPPORTED -4</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="../../de/d45/errors_8h.html#ac465e2740ea9e5e091ae0be4541a1812">    9</a></span>&#160;<span class="preprocessor">#define MH_E_DIGSET_TOO_LONG -5</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="../../de/d45/errors_8h.html#af4110527567e0bc393f22c18899ed139">   11</a></span>&#160;<span class="preprocessor">#define MH_E_LAST -5</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="../../de/d45/errors_8h.html#a0183fe13656cd02f9c7776a194f0e538">mh_error_string</a>(<span class="keywordtype">int</span> code);</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* end of include guard */</span><span class="preprocessor"></span></div>
+<a href="../../de/d45/errors_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*! @file errors.h</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  * @brief helpers for working with multihash errors</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="../../de/d45/errors_8h.html#afbf714fdc2c2d1918260ea6a3cea6f56">    7</a></span>&#160;<span class="preprocessor">#define MH_E_NO_ERROR 0</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="../../de/d45/errors_8h.html#ab0075dfcb9a57d9ecb15e498bdec200d">    8</a></span>&#160;<span class="preprocessor">#define MH_E_UNKNOWN_CODE -1</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="../../de/d45/errors_8h.html#a9992100bc41c30533108cbb9a0ae33ec">    9</a></span>&#160;<span class="preprocessor">#define MH_E_TOO_SHORT -2</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="../../de/d45/errors_8h.html#aae94b6644011b9f44577b5ecc952daa1">   10</a></span>&#160;<span class="preprocessor">#define MH_E_TOO_LONG -3</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="../../de/d45/errors_8h.html#a5b18434d7a520b0a61e0bf873cc69c40">   11</a></span>&#160;<span class="preprocessor">#define MH_E_VARINT_NOT_SUPPORTED -4</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="../../de/d45/errors_8h.html#ac465e2740ea9e5e091ae0be4541a1812">   12</a></span>&#160;<span class="preprocessor">#define MH_E_DIGSET_TOO_LONG -5</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="../../de/d45/errors_8h.html#af4110527567e0bc393f22c18899ed139">   14</a></span>&#160;<span class="preprocessor">#define MH_E_LAST -5</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="../../de/d45/errors_8h.html#a0183fe13656cd02f9c7776a194f0e538">mh_error_string</a>(<span class="keywordtype">int</span> code);</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aerrors_8h_html_a0183fe13656cd02f9c7776a194f0e538"><div class="ttname"><a href="../../de/d45/errors_8h.html#a0183fe13656cd02f9c7776a194f0e538">mh_error_string</a></div><div class="ttdeci">const char * mh_error_string(int code)</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d15/errors_8c_source.html#l00008">errors.c:8</a></div></div>

@@ -81,15 +81,19 @@
 .ti -1c
 .RI "int \fBlibp2p_encoding_base32_encode\fP (const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t *results_length)"
 .br
+.RI "Encode in Base32 format\&. "
 .ti -1c
 .RI "size_t \fBlibp2p_encoding_base32_encode_size\fP (size_t incoming_length)"
 .br
+.RI "Calculate the size of the buffer necessary to encode\&. "
 .ti -1c
 .RI "int \fBlibp2p_encoding_base32_decode\fP (const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t *results_length)"
 .br
+.RI "Decode from Base16 format\&. "
 .ti -1c
 .RI "size_t \fBlibp2p_encoding_base32_decode_size\fP (size_t incoming_length)"
 .br
+.RI "Calculate the size of the buffer necessary to decode\&. "
 .in -1c
 .SS "Variables"
 
@@ -166,7 +170,9 @@ Definition at line 301 of file base32\&.c\&.
 .PP
 Definition at line 285 of file base32\&.c\&.
 .SS "int libp2p_encoding_base32_decode (const unsigned char * incoming, size_t incoming_length, unsigned char * results, size_t * results_length)"
-Decode from Base16 format 
+
+.PP
+Decode from Base16 format\&. Decode from Base16 format 
 .PP
 \fBParameters\fP
 .RS 4
@@ -188,7 +194,9 @@ true(1) on success
 .PP
 Definition at line 589 of file base32\&.c\&.
 .SS "size_t libp2p_encoding_base32_decode_size (size_t incoming_length)"
-Calculate the size of the buffer necessary to decode 
+
+.PP
+Calculate the size of the buffer necessary to decode\&. Calculate the size of the buffer necessary to decode 
 .PP
 \fBParameters\fP
 .RS 4
@@ -204,7 +212,9 @@ the size of the buffer necessary to hold the decoded bytes
 .PP
 Definition at line 611 of file base32\&.c\&.
 .SS "int libp2p_encoding_base32_encode (const unsigned char * incoming, size_t incoming_length, unsigned char * results, size_t * results_length)"
-Public functions Encode in Base32 format 
+
+.PP
+Encode in Base32 format\&. Public functions Encode in Base32 format 
 .PP
 \fBParameters\fP
 .RS 4
@@ -226,7 +236,9 @@ true(1) on success
 .PP
 Definition at line 557 of file base32\&.c\&.
 .SS "size_t libp2p_encoding_base32_encode_size (size_t incoming_length)"
-Calculate the size of the buffer necessary to encode 
+
+.PP
+Calculate the size of the buffer necessary to encode\&. Calculate the size of the buffer necessary to encode 
 .PP
 \fBParameters\fP
 .RS 4

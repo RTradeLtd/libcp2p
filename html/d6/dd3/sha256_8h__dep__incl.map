@@ -1,10 +1,10 @@
 <map id="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/sha256.h" name="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/sha256.h">
-<area shape="rect" id="node1" title=" " alt="" coords="407,5,588,61"/>
+<area shape="rect" id="node1" title="provides sha256 hashing support" alt="" coords="407,5,588,61"/>
 <area shape="rect" id="node2" href="$d5/d29/crypto__test_8c.html" title=" " alt="" coords="5,213,184,269"/>
 <area shape="rect" id="node3" href="$db/dfd/key_8c.html" title=" " alt="" coords="209,213,386,269"/>
 <area shape="rect" id="node4" href="$dc/d82/peerutils_8c.html" title=" " alt="" coords="611,213,789,269"/>
 <area shape="rect" id="node5" href="$d1/d81/rsa_8c.html" title=" " alt="" coords="602,109,779,165"/>
 <area shape="rect" id="node6" href="$da/d01/sha256_8c.html" title=" " alt="" coords="803,109,981,165"/>
-<area shape="rect" id="node7" href="$d7/dee/peerutils_8h.html" title=" " alt="" coords="335,109,526,165"/>
+<area shape="rect" id="node7" href="$d7/dee/peerutils_8h.html" title="provides utilities for managing peer identifiers" alt="" coords="335,109,526,165"/>
 <area shape="rect" id="node8" href="$dc/d09/ecdsa_8c.html" title=" " alt="" coords="410,213,587,269"/>
 </map>

@@ -1,5 +1,5 @@
 <map id="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/peerutils.h" name="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/peerutils.h">
-<area shape="rect" id="node1" title=" " alt="" coords="302,5,493,61"/>
+<area shape="rect" id="node1" title="provides utilities for managing peer identifiers" alt="" coords="302,5,493,61"/>
 <area shape="rect" id="node2" href="$d5/d29/crypto__test_8c.html" title=" " alt="" coords="5,109,184,165"/>
 <area shape="rect" id="node3" href="$dc/d09/ecdsa_8c.html" title=" " alt="" coords="209,109,386,165"/>
 <area shape="rect" id="node4" href="$db/dfd/key_8c.html" title=" " alt="" coords="410,109,587,165"/>

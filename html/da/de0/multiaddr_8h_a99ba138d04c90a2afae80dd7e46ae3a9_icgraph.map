@@ -1,0 +1,10 @@
+<map id="multi_address_get_ip_port" name="multi_address_get_ip_port">
+<area shape="rect" id="node1" title=" " alt="" coords="555,81,749,108"/>
+<area shape="rect" id="node2" href="$d0/d3b/socket__client_8h.html#acddf96d2dea8f47ea2d0555c8500630d" title="returns a new socket client connected to addr:port" alt="" coords="350,5,491,32"/>
+<area shape="rect" id="node5" href="$d9/d26/socket__server_8h.html#abdfa0f6886955caae3b71928592e0301" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="347,56,494,83"/>
+<area shape="rect" id="node6" href="$d8/dca/multiaddr__test_8c.html#a125eea8e927949eceff7c1395b6e9bbe" title=" " alt="" coords="335,107,507,133"/>
+<area shape="rect" id="node8" href="$d8/dca/multiaddr__test_8c.html#aee40afdb51557effdf6dfa847855283e" title=" " alt="" coords="345,157,497,184"/>
+<area shape="rect" id="node3" href="$d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="108,44,287,71"/>
+<area shape="rect" id="node4" href="$d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,44,60,71"/>
+<area shape="rect" id="node7" href="$d8/dca/multiaddr__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="170,120,225,147"/>
+</map>

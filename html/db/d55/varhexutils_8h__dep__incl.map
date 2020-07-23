@@ -5,9 +5,9 @@
 <area shape="rect" id="node4" href="$de/db7/protocols_8c.html" title=" " alt="" coords="479,213,666,269"/>
 <area shape="rect" id="node5" href="$dc/d80/protoutils_8c.html" title=" " alt="" coords="26,317,215,373"/>
 <area shape="rect" id="node6" href="$dc/d9a/varhexutils_8c.html" title=" " alt="" coords="509,109,686,165"/>
-<area shape="rect" id="node7" href="$d5/dca/protocols_8h.html" title=" " alt="" coords="218,109,434,165"/>
+<area shape="rect" id="node7" href="$d5/dca/protocols_8h.html" title="functions for managing multiaddr protocols" alt="" coords="218,109,434,165"/>
 <area shape="rect" id="node8" href="$da/de0/multiaddr_8h.html" title=" " alt="" coords="428,317,647,373"/>
-<area shape="rect" id="node14" href="$df/d48/protoutils_8h.html" title=" " alt="" coords="135,213,354,269"/>
+<area shape="rect" id="node14" href="$df/d48/protoutils_8h.html" title="utility functions for working with multiaddrs and protocols" alt="" coords="135,213,354,269"/>
 <area shape="rect" id="node9" href="$d2/d09/socket__test_8c.html" title=" " alt="" coords="354,659,545,715"/>
 <area shape="rect" id="node10" href="$d0/d3b/socket__client_8h.html" title="stuff related to socket clients (ie, connecting to socket servers)" alt="" coords="434,421,612,492"/>
 <area shape="rect" id="node12" href="$d9/d26/socket__server_8h.html" title="used to create a tcp/udp socket server listening on multiaddrs" alt="" coords="649,540,826,611"/>

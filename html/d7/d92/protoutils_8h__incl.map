@@ -1,8 +1,8 @@
 <map id="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/multiaddr/protoutils.h" name="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/multiaddr/protoutils.h">
-<area shape="rect" id="node1" title=" " alt="" coords="268,5,487,61"/>
+<area shape="rect" id="node1" title="utility functions for working with multiaddrs and protocols" alt="" coords="268,5,487,61"/>
 <area shape="rect" id="node2" title=" " alt="" coords="211,333,286,360"/>
 <area shape="rect" id="node3" title=" " alt="" coords="453,333,524,360"/>
-<area shape="rect" id="node4" href="$d5/dca/protocols_8h.html" title=" " alt="" coords="330,109,425,136"/>
+<area shape="rect" id="node4" href="$d5/dca/protocols_8h.html" title="functions for managing multiaddr protocols" alt="" coords="330,109,425,136"/>
 <area shape="rect" id="node5" title=" " alt="" coords="520,184,590,211"/>
 <area shape="rect" id="node6" title=" " alt="" coords="112,184,180,211"/>
 <area shape="rect" id="node7" title=" " alt="" coords="428,259,495,285"/>

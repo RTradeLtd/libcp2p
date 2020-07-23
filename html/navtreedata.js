@@ -27,20 +27,19 @@ var NAVTREE =
       [ "Usage:", "d3/d47/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multiaddr__r_e_a_d_m_e.html#autotoc_md2", [
         [ "Multiaddr provides easy networking protocols nesting, easy encapsulation of extra protocols, easy tunneling, etc.", "d3/d47/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multiaddr__r_e_a_d_m_e.html#autotoc_md1", null ],
         [ "Maddr struct:", "d3/d47/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multiaddr__r_e_a_d_m_e.html#autotoc_md4", null ],
-        [ "New Multi Address From String(multiaddress_new_from_string)", "d3/d47/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multiaddr__r_e_a_d_m_e.html#autotoc_md5", null ],
+        [ "New Multi Address From String(multi_address_new_from_string)", "d3/d47/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multiaddr__r_e_a_d_m_e.html#autotoc_md5", null ],
         [ "Obtaining the byte buffer(.bytes, .bsize[0]):", "d3/d47/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multiaddr__r_e_a_d_m_e.html#autotoc_md6", null ],
         [ "Encapsulation & Decapsulation(m_encapsulate, m_decapsulate)", "d3/d47/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multiaddr__r_e_a_d_m_e.html#autotoc_md7", null ]
       ] ],
-      [ "Constructing a multiaddress from bytes:", "d3/d47/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multiaddr__r_e_a_d_m_e.html#autotoc_md9", null ]
+      [ "Constructing a multi_address from bytes:", "d3/d47/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multiaddr__r_e_a_d_m_e.html#autotoc_md9", null ]
     ] ],
     [ "multicodec list regeneration", "de/db4/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multicodec__r_e_a_d_m_e.html", [
       [ "notes", "de/db4/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multicodec__r_e_a_d_m_e.html#autotoc_md11", null ],
       [ "license", "de/db4/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multicodec__r_e_a_d_m_e.html#autotoc_md12", null ]
     ] ],
-    [ "NOTE", "d8/de9/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multihash__r_e_a_d_m_e.html", null ],
     [ "Peer Identifiers", "d3/d1f/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s.html", [
-      [ "Supported Algorithms", "d3/d1f/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s.html#autotoc_md17", null ],
-      [ "NOTE", "d3/d1f/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s.html#autotoc_md18", null ]
+      [ "Supported Algorithms", "d3/d1f/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s.html#autotoc_md16", null ],
+      [ "NOTE", "d3/d1f/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s.html#autotoc_md17", null ]
     ] ],
     [ "Todo List", "dd/da0/todo.html", null ],
     [ "Namespaces", "namespaces.html", [
@@ -78,11 +77,11 @@ var NAVTREEINDEX =
 [
 "annotated.html",
 "d3/d7a/map_8c.html",
-"d7/d04/struct_ephemeral_public_key.html#afbe726004591b93c9074efc7e8e950c9",
-"d7/ded/codecs_8h.html#a6e845bdf72e5fc3c921ca2980fbccb5e",
-"d7/dee/peerutils_8h_source.html",
-"db/d36/base64_8c.html#a9f243fbc238603a23ba5055551a41f0f",
-"de/de0/cid_8c.html#a2013ad348ce900ca01012efdd865f6f9"
+"d7/d04/struct_ephemeral_public_key.html#a42788c9b35b422c0c241c09577f3a33b",
+"d7/ded/codecs_8h.html#a6af972f6bf62b8b7881a0de14fee3a05",
+"d7/dee/peerutils_8h.html",
+"db/d36/base64_8c.html#aea46a16b6182e1de01ed7ab17300a6d4",
+"de/de0/cid_8c.html#a2326002b59461e22dd98a93f35c9113a"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

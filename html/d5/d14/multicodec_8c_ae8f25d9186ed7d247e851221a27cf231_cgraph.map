@@ -1,4 +1,4 @@
 <map id="multicodec_encode" name="multicodec_encode">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,153,32"/>
+<area shape="rect" id="node1" title="Encode a char array using the specified encoding." alt="" coords="5,5,153,32"/>
 <area shape="rect" id="node2" href="$d5/d14/multicodec_8c.html#a6b087e50afc90c43fbc2a5b464291840" title="used to check if the provided codec is a valid codec" alt="" coords="201,5,352,32"/>
 </map>

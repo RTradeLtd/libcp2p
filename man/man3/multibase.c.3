@@ -25,12 +25,14 @@
 .ti -1c
 .RI "int \fBmultibase_encode\fP (const char \fBbase\fP, const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t results_max_length, size_t *results_length)"
 .br
+.RI "Encode data in multibase format\&. "
 .ti -1c
 .RI "int \fBmultibase_encode_size\fP (const char \fBbase\fP, const unsigned char *incoming, size_t incoming_length)"
 .br
 .ti -1c
 .RI "int \fBmultibase_decode\fP (const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t results_max_length, size_t *results_length)"
 .br
+.RI "Decode data that was encoded in multibase format\&. "
 .ti -1c
 .RI "int \fBmultibase_decode_size\fP (const char \fBbase\fP, const unsigned char *incoming, size_t incoming_length)"
 .br
@@ -38,7 +40,9 @@
 .SH "Function Documentation"
 .PP 
 .SS "int multibase_decode (const unsigned char * incoming, size_t incoming_length, unsigned char * results, size_t results_max_length, size_t * results_length)"
-Decode data that was encoded in multibase format 
+
+.PP
+Decode data that was encoded in multibase format\&. Decode data that was encoded in multibase format 
 .PP
 \fBParameters\fP
 .RS 4
@@ -66,7 +70,9 @@ Definition at line 99 of file multibase\&.c\&.
 .PP
 Definition at line 149 of file multibase\&.c\&.
 .SS "int multibase_encode (const char base, const unsigned char * incoming, size_t incoming_length, unsigned char * results, size_t results_max_length, size_t * results_length)"
-Encode data in multibase format\&. NOTE: currently only supports MULTIBASE_BASE58_BTC and MULTIBASE_BASE16 
+
+.PP
+Encode data in multibase format\&. Encode data in multibase format\&. NOTE: currently only supports MULTIBASE_BASE58_BTC and MULTIBASE_BASE16 
 .PP
 \fBParameters\fP
 .RS 4

@@ -2,7 +2,8 @@
 .ad l
 .nh
 .SH NAME
-/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/multiaddr/protoutils.h
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/multiaddr/protoutils.h \- utility functions for working with multiaddrs and protocols  
+
 .SH SYNOPSIS
 .br
 .PP
@@ -59,26 +60,57 @@
 .ti -1c
 .RI "int \fBbytes_to_string\fP (char **results, const uint8_t *bytes, int bytes_size)"
 .br
+.RI "Unserialize the bytes into a string\&. "
 .ti -1c
 .RI "char * \fBaddress_string_to_bytes\fP (struct \fBProtocol\fP *protocol, const char *incoming, size_t incoming_size, char **results, int *results_size)"
 .br
+.RI "Convert an address string to a byte representation\&. "
 .ti -1c
 .RI "int \fBstring_to_bytes\fP (uint8_t **finalbytes, size_t *realbbsize, const char *strx, size_t strsize)"
 .br
 .in -1c
+.SH "Detailed Description"
+.PP 
+utility functions for working with multiaddrs and protocols 
+
+
+.PP
+Definition in file \fBprotoutils\&.h\fP\&.
 .SH "Macro Definition Documentation"
 .PP 
 .SS "#define DELIM   '\&.'"
 
 .PP
-Definition at line 22 of file protoutils\&.h\&.
+Definition at line 25 of file protoutils\&.h\&.
 .SS "#define MAX_HEX_NUMBER_COUNT   8"
 
 .PP
-Definition at line 31 of file protoutils\&.h\&.
+Definition at line 34 of file protoutils\&.h\&.
 .SH "Function Documentation"
 .PP 
 .SS "char* address_string_to_bytes (struct \fBProtocol\fP * protocol, const char * incoming, size_t incoming_size, char ** results, int * results_size)"
+
+.PP
+Convert an address string to a byte representation\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIprotocol\fP the protocol to use 
+.br
+\fIincoming\fP the byte array 
+.br
+\fIincoming_size\fP the size of the byte array 
+.br
+\fIresults\fP the results 
+.br
+\fIresults_size\fP the size of the results 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the results array
+.RE
+.PP
 Convert an address string to a byte representation 
 .PP
 \fBParameters\fP
@@ -115,7 +147,9 @@ Definition at line 48 of file protoutils\&.c\&.
 .PP
 Definition at line 39 of file protoutils\&.c\&.
 .SS "int bytes_to_string (char ** buffer, const uint8_t * in_bytes, int in_bytes_size)"
-Unserialize the bytes into a string 
+
+.PP
+Unserialize the bytes into a string\&. 
 .PP
 \fBParameters\fP
 .RS 4

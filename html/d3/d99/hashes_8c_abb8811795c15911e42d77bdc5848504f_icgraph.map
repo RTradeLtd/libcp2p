@@ -1,7 +1,7 @@
 <map id="find_hash" name="find_hash">
 <area shape="rect" id="node1" title=" " alt="" coords="569,177,653,203"/>
-<area shape="rect" id="node2" href="$d6/df9/hashes_8h.html#a70713299e5149f9e08c6917132562bd7" title=" " alt="" coords="339,111,521,138"/>
-<area shape="rect" id="node7" href="$d6/df9/hashes_8h.html#a70b1117400bc8fb43f5b1d83815ac7d0" title=" " alt="" coords="367,209,493,235"/>
+<area shape="rect" id="node2" href="$d6/df9/hashes_8h.html#a70713299e5149f9e08c6917132562bd7" title="Given the id, return the default length." alt="" coords="339,111,521,138"/>
+<area shape="rect" id="node7" href="$d6/df9/hashes_8h.html#a70b1117400bc8fb43f5b1d83815ac7d0" title="Given the id, return the hash name." alt="" coords="367,209,493,235"/>
 <area shape="rect" id="node3" href="$d6/dab/multihash__test_8c.html#a705704337f7f14838966e620c670a79a" title=" " alt="" coords="118,5,281,47"/>
 <area shape="rect" id="node5" href="$d6/dab/multihash__test_8c.html#aeece0c07d5d880b83cd49acf0467ad1e" title=" " alt="" coords="122,71,277,112"/>
 <area shape="rect" id="node6" href="$d6/dab/multihash__test_8c.html#af86a335c228100550b3fac721c38762f" title=" " alt="" coords="116,136,283,177"/>

@@ -103,14 +103,14 @@ Include dependency graph for key.c:</div>
 <area shape="rect" title=" " alt="" coords="5,184,76,211"/>
 <area shape="rect" title=" " alt="" coords="104,184,175,211"/>
 <area shape="rect" href="../../de/de5/key_8h.html" title=" " alt="" coords="73,109,173,136"/>
-<area shape="rect" href="../../d7/dee/peerutils_8h.html" title=" " alt="" coords="299,109,435,136"/>
-<area shape="rect" href="../../d5/de3/sha256_8h.html" title=" " alt="" coords="199,184,325,211"/>
+<area shape="rect" href="../../d7/dee/peerutils_8h.html" title="provides utilities for managing peer identifiers" alt="" coords="299,109,435,136"/>
+<area shape="rect" href="../../d5/de3/sha256_8h.html" title="provides sha256 hashing support" alt="" coords="199,184,325,211"/>
 <area shape="rect" title=" " alt="" coords="459,109,606,136"/>
-<area shape="rect" href="../../d6/df9/hashes_8h.html" title=" " alt="" coords="350,184,499,211"/>
-<area shape="rect" href="../../d3/d12/multihash_8h.html" title=" " alt="" coords="523,184,691,211"/>
+<area shape="rect" href="../../d6/df9/hashes_8h.html" title="multihash definitions" alt="" coords="350,184,499,211"/>
+<area shape="rect" href="../../d3/d12/multihash_8h.html" title="functions for working with multihashes" alt="" coords="523,184,691,211"/>
 <area shape="rect" title=" " alt="" coords="715,184,782,211"/>
 <area shape="rect" title=" " alt="" coords="193,259,331,285"/>
-<area shape="rect" href="../../de/d45/errors_8h.html" title=" " alt="" coords="389,259,461,285"/>
+<area shape="rect" href="../../de/d45/errors_8h.html" title="helpers for working with multihash errors" alt="" coords="389,259,461,285"/>
 <area shape="rect" title=" " alt="" coords="570,259,645,285"/>
 </map>
 </div>
@@ -128,6 +128,7 @@ Functions</h2></td></tr>
 <tr class="memitem:a6e78380678c6f00fdd220d668bfb4bde"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dfd/key_8c.html#a6e78380678c6f00fdd220d668bfb4bde">libp2p_crypto_public_key_protobuf_encode</a> (const struct <a class="el" href="../../d5/dd7/struct_public_key.html">PublicKey</a> *in, unsigned char *buffer, size_t max_buffer_length, size_t *bytes_written)</td></tr>
 <tr class="separator:a6e78380678c6f00fdd220d668bfb4bde"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a3e3a966f33e5aeb930001fb45ddd03"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dfd/key_8c.html#a4a3e3a966f33e5aeb930001fb45ddd03">libp2p_crypto_public_key_protobuf_decode</a> (unsigned char *buffer, size_t buffer_length, struct <a class="el" href="../../d5/dd7/struct_public_key.html">PublicKey</a> **out)</td></tr>
+<tr class="memdesc:a4a3e3a966f33e5aeb930001fb45ddd03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unmarshal a public key from a protobuf.  <a href="../../db/dfd/key_8c.html#a4a3e3a966f33e5aeb930001fb45ddd03">More...</a><br /></td></tr>
 <tr class="separator:a4a3e3a966f33e5aeb930001fb45ddd03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac058cf71ca1188147d8a6bf369806322"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../d9/dc0/struct_private_key.html">PrivateKey</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dfd/key_8c.html#ac058cf71ca1188147d8a6bf369806322">libp2p_crypto_private_key_new</a> (void)</td></tr>
 <tr class="separator:ac058cf71ca1188147d8a6bf369806322"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,6 +143,7 @@ Functions</h2></td></tr>
 <tr class="memitem:a7c56539d28743850e7d8663d763cfee2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dfd/key_8c.html#a7c56539d28743850e7d8663d763cfee2">libp2p_crypto_private_key_protobuf_decode</a> (unsigned char *buffer, size_t buffer_length, struct <a class="el" href="../../d9/dc0/struct_private_key.html">PrivateKey</a> **out)</td></tr>
 <tr class="separator:a7c56539d28743850e7d8663d763cfee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae44209ca99fb2a0a4facc7eea04a98c2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dfd/key_8c.html#ae44209ca99fb2a0a4facc7eea04a98c2">libp2p_crypto_public_key_to_peer_id</a> (struct <a class="el" href="../../d5/dd7/struct_public_key.html">PublicKey</a> *public_key, char **peer_id)</td></tr>
+<tr class="memdesc:ae44209ca99fb2a0a4facc7eea04a98c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert a public key into a peer id  <a href="../../db/dfd/key_8c.html#ae44209ca99fb2a0a4facc7eea04a98c2">More...</a><br /></td></tr>
 <tr class="separator:ae44209ca99fb2a0a4facc7eea04a98c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -209,7 +211,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect" title=" " alt="" coords="221,71,384,112"/>
 <area shape="rect" href="../../de/de5/key_8h.html#a468c65592f3cb01a35fa7e20003aaa2a" title=" " alt="" coords="8,5,171,47"/>
 <area shape="rect" href="../../de/de5/key_8h.html#a7c56539d28743850e7d8663d763cfee2" title=" " alt="" coords="5,71,173,112"/>
-<area shape="rect" href="../../df/dc3/rsa_8h.html#aeef680898c1c49df8a65701ad64ae146" title=" " alt="" coords="11,136,168,177"/>
+<area shape="rect" href="../../df/dc3/rsa_8h.html#aeef680898c1c49df8a65701ad64ae146" title="Convert a struct RsaPrivateKey to a struct PrivateKey." alt="" coords="11,136,168,177"/>
 </map>
 </div>
 
@@ -239,7 +241,7 @@ Here is the caller graph for this function:</div>
 <map name="db/dfd/key_8c_ac058cf71ca1188147d8a6bf369806322_icgraph" id="db/dfd/key_8c_ac058cf71ca1188147d8a6bf369806322_icgraph">
 <area shape="rect" title=" " alt="" coords="221,39,384,80"/>
 <area shape="rect" href="../../de/de5/key_8h.html#a7c56539d28743850e7d8663d763cfee2" title=" " alt="" coords="5,5,173,47"/>
-<area shape="rect" href="../../df/dc3/rsa_8h.html#aeef680898c1c49df8a65701ad64ae146" title=" " alt="" coords="11,71,168,112"/>
+<area shape="rect" href="../../df/dc3/rsa_8h.html#aeef680898c1c49df8a65701ad64ae146" title="Convert a struct RsaPrivateKey to a struct PrivateKey." alt="" coords="11,71,168,112"/>
 </map>
 </div>
 
@@ -400,7 +402,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="../../db/dfd/key_8c_ab5f5391ac4101f380b7a144e7e6a5ff9_icgraph.png" border="0" usemap="#db/dfd/key_8c_ab5f5391ac4101f380b7a144e7e6a5ff9_icgraph" alt=""/></div>
 <map name="db/dfd/key_8c_ab5f5391ac4101f380b7a144e7e6a5ff9_icgraph" id="db/dfd/key_8c_ab5f5391ac4101f380b7a144e7e6a5ff9_icgraph">
 <area shape="rect" title=" " alt="" coords="221,5,377,47"/>
-<area shape="rect" href="../../de/de5/key_8h.html#a4a3e3a966f33e5aeb930001fb45ddd03" title=" " alt="" coords="5,5,173,47"/>
+<area shape="rect" href="../../de/de5/key_8h.html#a4a3e3a966f33e5aeb930001fb45ddd03" title="Unmarshal a public key from a protobuf." alt="" coords="5,5,173,47"/>
 </map>
 </div>
 
@@ -430,7 +432,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="../../db/dfd/key_8c_aaae23c3d5302352d3de26fb6be1e9cca_icgraph.png" border="0" usemap="#db/dfd/key_8c_aaae23c3d5302352d3de26fb6be1e9cca_icgraph" alt=""/></div>
 <map name="db/dfd/key_8c_aaae23c3d5302352d3de26fb6be1e9cca_icgraph" id="db/dfd/key_8c_aaae23c3d5302352d3de26fb6be1e9cca_icgraph">
 <area shape="rect" title=" " alt="" coords="221,5,377,47"/>
-<area shape="rect" href="../../de/de5/key_8h.html#a4a3e3a966f33e5aeb930001fb45ddd03" title=" " alt="" coords="5,5,173,47"/>
+<area shape="rect" href="../../de/de5/key_8h.html#a4a3e3a966f33e5aeb930001fb45ddd03" title="Unmarshal a public key from a protobuf." alt="" coords="5,5,173,47"/>
 </map>
 </div>
 
@@ -467,6 +469,8 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Unmarshal a public key from a protobuf. </p>
 <p>Unmarshal a public key from a protobuf </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">buffer</td><td>the protobuf </td></tr>
@@ -483,7 +487,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../db/dfd/key_8c_a4a3e3a966f33e5aeb930001fb45ddd03_cgraph.png" border="0" usemap="#db/dfd/key_8c_a4a3e3a966f33e5aeb930001fb45ddd03_cgraph" alt=""/></div>
 <map name="db/dfd/key_8c_a4a3e3a966f33e5aeb930001fb45ddd03_cgraph" id="db/dfd/key_8c_a4a3e3a966f33e5aeb930001fb45ddd03_cgraph">
-<area shape="rect" title=" " alt="" coords="5,136,173,177"/>
+<area shape="rect" title="Unmarshal a public key from a protobuf." alt="" coords="5,136,173,177"/>
 <area shape="rect" href="../../db/dfd/key_8c.html#ab5f5391ac4101f380b7a144e7e6a5ff9" title=" " alt="" coords="233,5,389,47"/>
 <area shape="rect" href="../../db/dfd/key_8c.html#aaae23c3d5302352d3de26fb6be1e9cca" title=" " alt="" coords="233,71,389,112"/>
 <area shape="rect" href="../../d5/da8/protobuf_8c.html#a688679dacaa4dbb2bf3d69cef71c5a81" title=" " alt="" coords="227,136,394,177"/>
@@ -551,7 +555,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="../../db/dfd/key_8c_a6e78380678c6f00fdd220d668bfb4bde_icgraph.png" border="0" usemap="#db/dfd/key_8c_a6e78380678c6f00fdd220d668bfb4bde_icgraph" alt=""/></div>
 <map name="db/dfd/key_8c_a6e78380678c6f00fdd220d668bfb4bde_icgraph" id="db/dfd/key_8c_a6e78380678c6f00fdd220d668bfb4bde_icgraph">
 <area shape="rect" title=" " alt="" coords="209,5,377,47"/>
-<area shape="rect" href="../../de/de5/key_8h.html#ae44209ca99fb2a0a4facc7eea04a98c2" title=" " alt="" coords="5,5,161,47"/>
+<area shape="rect" href="../../de/de5/key_8h.html#ae44209ca99fb2a0a4facc7eea04a98c2" title="convert a public key into a peer id" alt="" coords="5,5,161,47"/>
 </map>
 </div>
 
@@ -580,7 +584,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="../../db/dfd/key_8c_a43090ff5e4b9bf01c58c191709833d6b_icgraph.png" border="0" usemap="#db/dfd/key_8c_a43090ff5e4b9bf01c58c191709833d6b_icgraph" alt=""/></div>
 <map name="db/dfd/key_8c_a43090ff5e4b9bf01c58c191709833d6b_icgraph" id="db/dfd/key_8c_a43090ff5e4b9bf01c58c191709833d6b_icgraph">
 <area shape="rect" title=" " alt="" coords="209,5,411,47"/>
-<area shape="rect" href="../../de/de5/key_8h.html#ae44209ca99fb2a0a4facc7eea04a98c2" title=" " alt="" coords="5,5,161,47"/>
+<area shape="rect" href="../../de/de5/key_8h.html#ae44209ca99fb2a0a4facc7eea04a98c2" title="convert a public key into a peer id" alt="" coords="5,5,161,47"/>
 </map>
 </div>
 
@@ -611,6 +615,8 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>convert a public key into a peer id </p>
 <p>convert a public key into a peer id </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">public_key</td><td>the public key struct </td></tr>
@@ -627,7 +633,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../db/dfd/key_8c_ae44209ca99fb2a0a4facc7eea04a98c2_cgraph.png" border="0" usemap="#db/dfd/key_8c_ae44209ca99fb2a0a4facc7eea04a98c2_cgraph" alt=""/></div>
 <map name="db/dfd/key_8c_ae44209ca99fb2a0a4facc7eea04a98c2_cgraph" id="db/dfd/key_8c_ae44209ca99fb2a0a4facc7eea04a98c2_cgraph">
-<area shape="rect" title=" " alt="" coords="5,104,161,145"/>
+<area shape="rect" title="convert a public key into a peer id" alt="" coords="5,104,161,145"/>
 <area shape="rect" href="../../da/d01/sha256_8c.html#abec2cc9b75a7053f0b5db97881857712" title=" " alt="" coords="226,5,394,47"/>
 <area shape="rect" href="../../db/dfd/key_8c.html#a6e78380678c6f00fdd220d668bfb4bde" title=" " alt="" coords="226,71,394,112"/>
 <area shape="rect" href="../../db/dfd/key_8c.html#a43090ff5e4b9bf01c58c191709833d6b" title=" " alt="" coords="209,136,411,177"/>
@@ -636,10 +642,10 @@ Here is the call graph for this function:</div>
 <area shape="rect" href="../../d5/da8/protobuf_8c.html#a03c4f436d3a783edd0d12668a2a7f479" title=" " alt="" coords="460,98,636,125"/>
 <area shape="rect" href="../../d4/d08/protobuf_2varint_8c.html#acc6541bc9f1fe04e9ac93f958a2bb948" title=" " alt="" coords="719,67,834,94"/>
 <area shape="rect" href="../../d4/da0/multihash_8c.html#a91aa646ac4a3a60ece14436b8123a1b0" title=" " alt="" coords="509,169,587,195"/>
-<area shape="rect" href="../../dc/db3/multibase_8c.html#a5f8db468b8b2ead762ff750b3e57b424" title=" " alt="" coords="477,219,619,246"/>
-<area shape="rect" href="../../de/df5/base16_8c.html#acd96e587c59cf9bc953e4ee8f7031fc6" title=" " alt="" coords="685,147,868,188"/>
-<area shape="rect" href="../../db/d08/base32_8c.html#a78acce42d5c859aea4c19508c1aaa1c5" title=" " alt="" coords="685,212,868,253"/>
-<area shape="rect" href="../../db/d36/base64_8c.html#a15d5a6ed9df11e87ac4aa0cf3975aa75" title=" " alt="" coords="685,277,868,319"/>
+<area shape="rect" href="../../dc/db3/multibase_8c.html#a5f8db468b8b2ead762ff750b3e57b424" title="Encode data in multibase format." alt="" coords="477,219,619,246"/>
+<area shape="rect" href="../../de/df5/base16_8c.html#acd96e587c59cf9bc953e4ee8f7031fc6" title="Encode in Base16 format." alt="" coords="685,147,868,188"/>
+<area shape="rect" href="../../db/d08/base32_8c.html#a78acce42d5c859aea4c19508c1aaa1c5" title="Encode in Base32 format." alt="" coords="685,212,868,253"/>
+<area shape="rect" href="../../db/d36/base64_8c.html#a15d5a6ed9df11e87ac4aa0cf3975aa75" title="encode using base64" alt="" coords="685,277,868,319"/>
 <area shape="rect" href="../../db/d08/base32_8c.html#a7b03b543c865173ec643b3c2ee4fb08f" title=" " alt="" coords="916,219,1039,246"/>
 <area shape="rect" href="../../db/d08/base32_8c.html#a3c0c1964c1c1a0c1d499ff6edf8a68b5" title=" " alt="" coords="1087,219,1165,246"/>
 </map>

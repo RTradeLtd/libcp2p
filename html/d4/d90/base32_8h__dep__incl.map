@@ -1,5 +1,5 @@
 <map id="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/encoding/base32.h" name="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/encoding/base32.h">
-<area shape="rect" id="node1" title=" " alt="" coords="300,5,499,61"/>
+<area shape="rect" id="node1" title="provides base 32 encoding/decoding functions" alt="" coords="300,5,499,61"/>
 <area shape="rect" id="node2" href="$de/de0/cid_8c.html" title=" " alt="" coords="5,109,183,165"/>
 <area shape="rect" id="node3" href="$db/d08/base32_8c.html" title=" " alt="" coords="207,109,384,165"/>
 <area shape="rect" id="node4" href="$dc/d80/protoutils_8c.html" title=" " alt="" coords="409,109,598,165"/>

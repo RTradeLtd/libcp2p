@@ -86,84 +86,84 @@ $(document).ready(function(){initNavTree('d3/d12/multihash_8h_source.html','../.
 <div class="title">multihash.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="../../d3/d12/multihash_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef MH_HULTIHASH_H</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define MH_HULTIHASH_H</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * Functions for working with a multihash.</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * A multihash is a hash with a prefix &quot;code&quot; that</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * helps determine what type of hash this is.</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> * code name</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> * 0x00 identity</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> * 0x11 sha1</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> * 0x12 sha2-256</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> * 0x13 sha2-512</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> * 0x14 sha3-512</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> * 0x15 sha3-384</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> * 0x16 sha3-256</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> * 0x17 sha3-224</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"> * 0x18 shake-128</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"> * 0x19 shake-256</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"> * 0x40 blake2b</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"> * 0x41 blake2s</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"> * # 0x0400-0x040f reserved for application specific functions</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"> * # 0x14 formerly had the name &quot;sha3&quot;, now deprecated</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"> * returns hash code or error (which is &lt; 0)</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"> * @param mh the multihash</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"> * @param len the length of the multihash</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"> * @returns errors ( &lt; 0 ) or the multihash</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d3/d12/multihash_8h.html#abfd22bb7674a43657750ccab247afc8d">mh_multihash_hash</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *multihash, <span class="keywordtype">size_t</span> len);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">/***</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * returns the length of the multihash&#39;s data section</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> * @param mh the multihash</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> * @param len the length of the multihash</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"> * @returns the length of the data section, or an error if &lt; 0</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d3/d12/multihash_8h.html#ad2f0a24ec0c72b2ddee80b1e029f022a">mh_multihash_length</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *multihash, <span class="keywordtype">size_t</span> len);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"> * gives access to raw digest inside multihash buffer</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"> * @param multihash the multihash</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"> * @param len the length</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"> * @param digest the results</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"> * @returns error if less than zero, otherwise 0</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d3/d12/multihash_8h.html#a073592d04197de860390a466503349d5">mh_multihash_digest</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *multihash, <span class="keywordtype">size_t</span> len,</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> **digest, <span class="keywordtype">size_t</span> *digest_len);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"> * determine the size of the multihash given the data size</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"> * @param code currently not used</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"> * @param hash_len the data size</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"> * @returns hash_len + 2 (until the code parameter (varint) is added</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d3/d12/multihash_8h.html#a83beb651e79d9e853368dcf5b70a4e9f">mh_new_length</a>(<span class="keywordtype">int</span> code, <span class="keywordtype">size_t</span> digest_len);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">/***</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"> * create a multihash based on some data</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"> * @param buffer where to put the multihash</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"> * @param code the code</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"> * @param digest the data within the multihash</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"> * @returns error (if &lt; 0) or 0</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d3/d12/multihash_8h.html#a91aa646ac4a3a60ece14436b8123a1b0">mh_new</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *buffer, <span class="keywordtype">int</span> code, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *digest,</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;           <span class="keywordtype">size_t</span> digest_len);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* end of include guard */</span><span class="preprocessor"></span></div>
+<a href="../../d3/d12/multihash_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*! @file multihash.h</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  * @brief functions for working with multihashes</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * Functions for working with a multihash.</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> * A multihash is a hash with a prefix &quot;code&quot; that</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> * helps determine what type of hash this is.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> * code name</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> * 0x00 identity</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> * 0x11 sha1</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> * 0x12 sha2-256</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> * 0x13 sha2-512</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> * 0x14 sha3-512</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> * 0x15 sha3-384</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"> * 0x16 sha3-256</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"> * 0x17 sha3-224</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"> * 0x18 shake-128</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"> * 0x19 shake-256</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"> * 0x40 blake2b</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"> * 0x41 blake2s</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"> * # 0x0400-0x040f reserved for application specific functions</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"> * # 0x14 formerly had the name &quot;sha3&quot;, now deprecated</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"> * @brief returns hash code or error (which is &lt; 0)</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"> * @param mh the multihash</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> * @param len the length of the multihash</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> * @returns errors ( &lt; 0 ) or the multihash</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d3/d12/multihash_8h.html#abfd22bb7674a43657750ccab247afc8d">mh_multihash_hash</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *multihash, <span class="keywordtype">size_t</span> len);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">/***</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> * @brief returns the length of the multihash&#39;s data section</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"> * @param mh the multihash</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"> * @param len the length of the multihash</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"> * @returns the length of the data section, or an error if &lt; 0</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d3/d12/multihash_8h.html#ad2f0a24ec0c72b2ddee80b1e029f022a">mh_multihash_length</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *multihash, <span class="keywordtype">size_t</span> len);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"> * @brief gives access to raw digest inside multihash buffer</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"> * @param multihash the multihash</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"> * @param len the length</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"> * @param digest the results</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> * @returns error if less than zero, otherwise 0</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d3/d12/multihash_8h.html#a073592d04197de860390a466503349d5">mh_multihash_digest</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *multihash, <span class="keywordtype">size_t</span> len,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> **digest, <span class="keywordtype">size_t</span> *digest_len);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"> * @brief determine the size of the multihash given the data size</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"> * @param code currently not used</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"> * @param hash_len the data size</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"> * @returns hash_len + 2 (until the code parameter (varint) is added</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d3/d12/multihash_8h.html#a83beb651e79d9e853368dcf5b70a4e9f">mh_new_length</a>(<span class="keywordtype">int</span> code, <span class="keywordtype">size_t</span> digest_len);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">/***</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"> * @brief create a multihash based on some data</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"> * @param buffer where to put the multihash</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"> * @param code the code</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"> * @param digest the data within the multihash</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"> * @returns error (if &lt; 0) or 0</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d3/d12/multihash_8h.html#a91aa646ac4a3a60ece14436b8123a1b0">mh_new</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *buffer, <span class="keywordtype">int</span> code, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *digest,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;           <span class="keywordtype">size_t</span> digest_len);</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="amultihash_8h_html_ad2f0a24ec0c72b2ddee80b1e029f022a"><div class="ttname"><a href="../../d3/d12/multihash_8h.html#ad2f0a24ec0c72b2ddee80b1e029f022a">mh_multihash_length</a></div><div class="ttdeci">int mh_multihash_length(const unsigned char *multihash, size_t len)</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/da0/multihash_8c_source.html#l00071">multihash.c:71</a></div></div>
 <div class="ttc" id="amultihash_8h_html_a91aa646ac4a3a60ece14436b8123a1b0"><div class="ttname"><a href="../../d3/d12/multihash_8h.html#a91aa646ac4a3a60ece14436b8123a1b0">mh_new</a></div><div class="ttdeci">int mh_new(unsigned char *buffer, int code, const unsigned char *digest, size_t digest_len)</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/da0/multihash_8c_source.html#l00118">multihash.c:118</a></div></div>
-<div class="ttc" id="amultihash_8h_html_a83beb651e79d9e853368dcf5b70a4e9f"><div class="ttname"><a href="../../d3/d12/multihash_8h.html#a83beb651e79d9e853368dcf5b70a4e9f">mh_new_length</a></div><div class="ttdeci">int mh_new_length(int code, size_t digest_len)</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/da0/multihash_8c_source.html#l00104">multihash.c:104</a></div></div>
-<div class="ttc" id="amultihash_8h_html_abfd22bb7674a43657750ccab247afc8d"><div class="ttname"><a href="../../d3/d12/multihash_8h.html#abfd22bb7674a43657750ccab247afc8d">mh_multihash_hash</a></div><div class="ttdeci">int mh_multihash_hash(const unsigned char *multihash, size_t len)</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/da0/multihash_8c_source.html#l00057">multihash.c:57</a></div></div>
-<div class="ttc" id="amultihash_8h_html_a073592d04197de860390a466503349d5"><div class="ttname"><a href="../../d3/d12/multihash_8h.html#a073592d04197de860390a466503349d5">mh_multihash_digest</a></div><div class="ttdeci">int mh_multihash_digest(const unsigned char *multihash, size_t len, unsigned char **digest, size_t *digest_len)</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/da0/multihash_8c_source.html#l00086">multihash.c:86</a></div></div>
+<div class="ttc" id="amultihash_8h_html_a83beb651e79d9e853368dcf5b70a4e9f"><div class="ttname"><a href="../../d3/d12/multihash_8h.html#a83beb651e79d9e853368dcf5b70a4e9f">mh_new_length</a></div><div class="ttdeci">int mh_new_length(int code, size_t digest_len)</div><div class="ttdoc">determine the size of the multihash given the data size</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/da0/multihash_8c_source.html#l00104">multihash.c:104</a></div></div>
+<div class="ttc" id="amultihash_8h_html_abfd22bb7674a43657750ccab247afc8d"><div class="ttname"><a href="../../d3/d12/multihash_8h.html#abfd22bb7674a43657750ccab247afc8d">mh_multihash_hash</a></div><div class="ttdeci">int mh_multihash_hash(const unsigned char *multihash, size_t len)</div><div class="ttdoc">returns hash code or error (which is &lt; 0)</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/da0/multihash_8c_source.html#l00057">multihash.c:57</a></div></div>
+<div class="ttc" id="amultihash_8h_html_a073592d04197de860390a466503349d5"><div class="ttname"><a href="../../d3/d12/multihash_8h.html#a073592d04197de860390a466503349d5">mh_multihash_digest</a></div><div class="ttdeci">int mh_multihash_digest(const unsigned char *multihash, size_t len, unsigned char **digest, size_t *digest_len)</div><div class="ttdoc">gives access to raw digest inside multihash buffer</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/da0/multihash_8c_source.html#l00086">multihash.c:86</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

@@ -86,45 +86,49 @@ $(document).ready(function(){initNavTree('db/dcb/aes_8h_source.html','../../'); 
 <div class="title">aes.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="../../db/dcb/aes_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * Generate a new AES key</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * @param key where to store the 32 byte key</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * @returns true(1) on success</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../db/dcb/aes_8h.html#a7b7d926d2ee5b7ab99c07714c9b62138">libp2p_crypto_aes_key_generate</a>(<span class="keywordtype">char</span> *key);</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> * Encrypt a block of text</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> * @param key the aes key (32 bytes)</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> * @param iv the random part of encryption (16 bytes)</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> * @param input the text to encrypt</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> * @param input_size the length of the array</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> * @param output where the output will be placed</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> * @param output_size the length of the memory allocated for output</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> * @returns true(1) on success, otherwise false(0)</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../db/dcb/aes_8h.html#afd685288a33798a8caf4218ddb729cee">libp2p_crypto_aes_encrypt</a>(<span class="keywordtype">char</span> *key, <span class="keywordtype">char</span> *iv, <span class="keywordtype">char</span> *input, <span class="keywordtype">size_t</span> input_size,</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;                              <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> **output, <span class="keywordtype">size_t</span> *output_size);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"> * Decrypt a block of text</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"> * @param key the aes key (32 bytes)</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"> * @param iv the random part of encryption (16 bytes)</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"> * @param input the text to encrypt</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"> * @param input_size the length of the array</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"> * @param output where the output will be placed</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"> * @param output_size the length of the memory allocated for output</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"> * @returns true(1) on success, otherwise false(0)</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../db/dcb/aes_8h.html#a7637a5c4b2b30eb5a99a0079282e794c">libp2p_crypto_aes_decrypt</a>(<span class="keywordtype">char</span> *key, <span class="keywordtype">char</span> *iv, <span class="keywordtype">char</span> *input, <span class="keywordtype">size_t</span> input_size,</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                              <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> **output, <span class="keywordtype">size_t</span> *output_size);</div>
+<a href="../../db/dcb/aes_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*! @file aes.h</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  * @brief proivides aes encryption/decryption functions</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * @brief Generate a new AES key</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * @param key where to store the 32 byte key</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> * @returns true(1) on success</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../db/dcb/aes_8h.html#a7b7d926d2ee5b7ab99c07714c9b62138">libp2p_crypto_aes_key_generate</a>(<span class="keywordtype">char</span> *key);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> * @brief Encrypt a block of text</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> * @param key the aes key (32 bytes)</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> * @param iv the random part of encryption (16 bytes)</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> * @param input the text to encrypt</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"> * @param input_size the length of the array</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"> * @param output where the output will be placed</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"> * @param output_size the length of the memory allocated for output</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"> * @returns true(1) on success, otherwise false(0)</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../db/dcb/aes_8h.html#afd685288a33798a8caf4218ddb729cee">libp2p_crypto_aes_encrypt</a>(<span class="keywordtype">char</span> *key, <span class="keywordtype">char</span> *iv, <span class="keywordtype">char</span> *input, <span class="keywordtype">size_t</span> input_size,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                              <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> **output, <span class="keywordtype">size_t</span> *output_size);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"> * @brief Decrypt a block of text</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"> * @param key the aes key (32 bytes)</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"> * @param iv the random part of encryption (16 bytes)</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"> * @param input the text to encrypt</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> * @param input_size the length of the array</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> * @param output where the output will be placed</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> * @param output_size the length of the memory allocated for output</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> * @returns true(1) on success, otherwise false(0)</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../db/dcb/aes_8h.html#a7637a5c4b2b30eb5a99a0079282e794c">libp2p_crypto_aes_decrypt</a>(<span class="keywordtype">char</span> *key, <span class="keywordtype">char</span> *iv, <span class="keywordtype">char</span> *input, <span class="keywordtype">size_t</span> input_size,</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                              <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> **output, <span class="keywordtype">size_t</span> *output_size);</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aaes_8h_html_a7637a5c4b2b30eb5a99a0079282e794c"><div class="ttname"><a href="../../db/dcb/aes_8h.html#a7637a5c4b2b30eb5a99a0079282e794c">libp2p_crypto_aes_decrypt</a></div><div class="ttdeci">int libp2p_crypto_aes_decrypt(char *key, char *iv, char *input, size_t input_size, unsigned char **output, size_t *output_size)</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d34/aes_8c_source.html#l00085">aes.c:85</a></div></div>
-<div class="ttc" id="aaes_8h_html_a7b7d926d2ee5b7ab99c07714c9b62138"><div class="ttname"><a href="../../db/dcb/aes_8h.html#a7b7d926d2ee5b7ab99c07714c9b62138">libp2p_crypto_aes_key_generate</a></div><div class="ttdeci">int libp2p_crypto_aes_key_generate(char *key)</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d34/aes_8c_source.html#l00018">aes.c:18</a></div></div>
-<div class="ttc" id="aaes_8h_html_afd685288a33798a8caf4218ddb729cee"><div class="ttname"><a href="../../db/dcb/aes_8h.html#afd685288a33798a8caf4218ddb729cee">libp2p_crypto_aes_encrypt</a></div><div class="ttdeci">int libp2p_crypto_aes_encrypt(char *key, char *iv, char *input, size_t input_size, unsigned char **output, size_t *output_size)</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d34/aes_8c_source.html#l00048">aes.c:48</a></div></div>
+<div class="ttc" id="aaes_8h_html_a7637a5c4b2b30eb5a99a0079282e794c"><div class="ttname"><a href="../../db/dcb/aes_8h.html#a7637a5c4b2b30eb5a99a0079282e794c">libp2p_crypto_aes_decrypt</a></div><div class="ttdeci">int libp2p_crypto_aes_decrypt(char *key, char *iv, char *input, size_t input_size, unsigned char **output, size_t *output_size)</div><div class="ttdoc">Decrypt a block of text.</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d34/aes_8c_source.html#l00085">aes.c:85</a></div></div>
+<div class="ttc" id="aaes_8h_html_a7b7d926d2ee5b7ab99c07714c9b62138"><div class="ttname"><a href="../../db/dcb/aes_8h.html#a7b7d926d2ee5b7ab99c07714c9b62138">libp2p_crypto_aes_key_generate</a></div><div class="ttdeci">int libp2p_crypto_aes_key_generate(char *key)</div><div class="ttdoc">Generate a new AES key.</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d34/aes_8c_source.html#l00018">aes.c:18</a></div></div>
+<div class="ttc" id="aaes_8h_html_afd685288a33798a8caf4218ddb729cee"><div class="ttname"><a href="../../db/dcb/aes_8h.html#afd685288a33798a8caf4218ddb729cee">libp2p_crypto_aes_encrypt</a></div><div class="ttdeci">int libp2p_crypto_aes_encrypt(char *key, char *iv, char *input, size_t input_size, unsigned char **output, size_t *output_size)</div><div class="ttdoc">Encrypt a block of text.</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d34/aes_8c_source.html#l00048">aes.c:48</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

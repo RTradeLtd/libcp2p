@@ -1,6 +1,6 @@
 <map id="multibase_encode_size" name="multibase_encode_size">
 <area shape="rect" id="node1" title=" " alt="" coords="5,78,180,105"/>
-<area shape="rect" id="node2" href="$de/df5/base16_8c.html#a30128f81926d0ae74876be026ec2f35b" title=" " alt="" coords="228,5,411,47"/>
-<area shape="rect" id="node3" href="$db/d08/base32_8c.html#a37dc6aec5c9e10f4f7775d5db0fc1b63" title=" " alt="" coords="228,71,411,112"/>
-<area shape="rect" id="node4" href="$db/d36/base64_8c.html#aea46a16b6182e1de01ed7ab17300a6d4" title=" " alt="" coords="228,136,411,177"/>
+<area shape="rect" id="node2" href="$de/df5/base16_8c.html#a30128f81926d0ae74876be026ec2f35b" title="Calculate the size of the buffer necessary to encode." alt="" coords="228,5,411,47"/>
+<area shape="rect" id="node3" href="$db/d08/base32_8c.html#a37dc6aec5c9e10f4f7775d5db0fc1b63" title="Calculate the size of the buffer necessary to encode." alt="" coords="228,71,411,112"/>
+<area shape="rect" id="node4" href="$db/d36/base64_8c.html#aea46a16b6182e1de01ed7ab17300a6d4" title="calculate the max length in bytes of an encoding of n source bytes" alt="" coords="228,136,411,177"/>
 </map>

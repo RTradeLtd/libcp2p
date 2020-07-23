@@ -1,7 +1,7 @@
 <map id="check_multihash" name="check_multihash">
 <area shape="rect" id="node1" title=" " alt="" coords="756,111,888,138"/>
-<area shape="rect" id="node2" href="$d3/d12/multihash_8h.html#a073592d04197de860390a466503349d5" title=" " alt="" coords="333,17,495,43"/>
-<area shape="rect" id="node6" href="$d3/d12/multihash_8h.html#abfd22bb7674a43657750ccab247afc8d" title=" " alt="" coords="550,191,703,218"/>
+<area shape="rect" id="node2" href="$d3/d12/multihash_8h.html#a073592d04197de860390a466503349d5" title="gives access to raw digest inside multihash buffer" alt="" coords="333,17,495,43"/>
+<area shape="rect" id="node6" href="$d3/d12/multihash_8h.html#abfd22bb7674a43657750ccab247afc8d" title="returns hash code or error (which is &lt; 0)" alt="" coords="550,191,703,218"/>
 <area shape="rect" id="node9" href="$d3/d12/multihash_8h.html#ad2f0a24ec0c72b2ddee80b1e029f022a" title=" " alt="" coords="545,111,708,138"/>
 <area shape="rect" id="node3" href="$dc/d13/cid_8h.html#a5824fd470e4528d04f75fca3eeaac774" title=" " alt="" coords="142,71,249,98"/>
 <area shape="rect" id="node4" href="$d6/dab/multihash__test_8c.html#abf0468aaa72be7d1a3f8a3f1a5e655c8" title=" " alt="" coords="108,5,283,47"/>

@@ -1,5 +1,5 @@
 <map id="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/encoding/base64.h" name="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/encoding/base64.h">
-<area shape="rect" id="node1" title=" " alt="" coords="303,5,502,61"/>
+<area shape="rect" id="node1" title="provides base 64 encoding/decoding functions" alt="" coords="303,5,502,61"/>
 <area shape="rect" id="node2" href="$d5/d29/crypto__test_8c.html" title=" " alt="" coords="5,109,184,165"/>
 <area shape="rect" id="node3" href="$db/d36/base64_8c.html" title=" " alt="" coords="209,109,386,165"/>
 <area shape="rect" id="node4" href="$dc/db3/multibase_8c.html" title=" " alt="" coords="411,109,605,165"/>

@@ -2,7 +2,8 @@
 .ad l
 .nh
 .SH NAME
-/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/multibase/multibase.h
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/multibase/multibase.h \- functions for managing multibase identifiers  
+
 .SH SYNOPSIS
 .br
 .PP
@@ -40,49 +41,80 @@
 .ti -1c
 .RI "int \fBmultibase_encode\fP (const char \fBbase\fP, const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t results_max_length, size_t *results_length)"
 .br
+.RI "Encode data in multibase format\&. "
 .ti -1c
 .RI "int \fBmultibase_encode_size\fP (const char \fBbase\fP, const unsigned char *incoming, size_t incoming_length)"
 .br
 .ti -1c
 .RI "int \fBmultibase_decode\fP (const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t results_max_length, size_t *results_length)"
 .br
+.RI "Decode data that was encoded in multibase format\&. "
 .ti -1c
 .RI "int \fBmultibase_decode_size\fP (const char \fBbase\fP, const unsigned char *incoming, size_t incoming_length)"
 .br
 .in -1c
+.SH "Detailed Description"
+.PP 
+functions for managing multibase identifiers 
+
+
+.PP
+Definition in file \fBmultibase\&.h\fP\&.
 .SH "Macro Definition Documentation"
 .PP 
 .SS "#define MULTIBASE_BASE1   '1'"
 
 .PP
-Definition at line 6 of file multibase\&.h\&.
+Definition at line 10 of file multibase\&.h\&.
 .SS "#define MULTIBASE_BASE10   '9'"
 
 .PP
-Definition at line 9 of file multibase\&.h\&.
+Definition at line 13 of file multibase\&.h\&.
 .SS "#define MULTIBASE_BASE16   'f'"
 
 .PP
-Definition at line 10 of file multibase\&.h\&.
+Definition at line 14 of file multibase\&.h\&.
 .SS "#define MULTIBASE_BASE2   '0'"
 
 .PP
-Definition at line 7 of file multibase\&.h\&.
+Definition at line 11 of file multibase\&.h\&.
 .SS "#define MULTIBASE_BASE32   'b'"
 
 .PP
-Definition at line 11 of file multibase\&.h\&.
+Definition at line 15 of file multibase\&.h\&.
 .SS "#define MULTIBASE_BASE64   'm'"
 
 .PP
-Definition at line 12 of file multibase\&.h\&.
+Definition at line 16 of file multibase\&.h\&.
 .SS "#define MULTIBASE_BASE8   '7'"
 
 .PP
-Definition at line 8 of file multibase\&.h\&.
+Definition at line 12 of file multibase\&.h\&.
 .SH "Function Documentation"
 .PP 
 .SS "int multibase_decode (const unsigned char * incoming, size_t incoming_length, unsigned char * results, size_t results_max_length, size_t * results_length)"
+
+.PP
+Decode data that was encoded in multibase format\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIincoming\fP the data to decode 
+.br
+\fIincoming_length\fP the length of the data to decode 
+.br
+\fIresults\fP where to put the results 
+.br
+\fIresults_max_length\fP the size of the results buffer 
+.br
+\fIresults_length\fP the size of the results after being encoded 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success
+.RE
+.PP
 Decode data that was encoded in multibase format 
 .PP
 \fBParameters\fP
@@ -111,7 +143,9 @@ Definition at line 99 of file multibase\&.c\&.
 .PP
 Definition at line 149 of file multibase\&.c\&.
 .SS "int multibase_encode (const char base, const unsigned char * incoming, size_t incoming_length, unsigned char * results, size_t results_max_length, size_t * results_length)"
-Encode data in multibase format 
+
+.PP
+Encode data in multibase format\&. 
 .PP
 \fBParameters\fP
 .RS 4

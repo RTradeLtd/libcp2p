@@ -88,12 +88,15 @@ $(document).ready(function(){initNavTree('db/dcb/aes_8h.html','../../'); initRes
 <div class="title">aes.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>proivides aes encryption/decryption functions  
+<a href="#details">More...</a></p>
 <div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d5/da0/aes_8h__dep__incl.png" border="0" usemap="#_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2aes_8hdep" alt=""/></div>
 <map name="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2aes_8hdep" id="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2aes_8hdep">
-<area shape="rect" title=" " alt="" coords="5,5,183,61"/>
+<area shape="rect" title="proivides aes encryption/decryption functions" alt="" coords="5,5,183,61"/>
 <area shape="rect" href="../../dd/d34/aes_8c.html" title=" " alt="" coords="5,109,183,165"/>
 </map>
 </div>
@@ -103,13 +106,20 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a7b7d926d2ee5b7ab99c07714c9b62138"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dcb/aes_8h.html#a7b7d926d2ee5b7ab99c07714c9b62138">libp2p_crypto_aes_key_generate</a> (char *key)</td></tr>
+<tr class="memdesc:a7b7d926d2ee5b7ab99c07714c9b62138"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a new AES key.  <a href="../../db/dcb/aes_8h.html#a7b7d926d2ee5b7ab99c07714c9b62138">More...</a><br /></td></tr>
 <tr class="separator:a7b7d926d2ee5b7ab99c07714c9b62138"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd685288a33798a8caf4218ddb729cee"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dcb/aes_8h.html#afd685288a33798a8caf4218ddb729cee">libp2p_crypto_aes_encrypt</a> (char *key, char *iv, char *input, size_t input_size, unsigned char **output, size_t *output_size)</td></tr>
+<tr class="memdesc:afd685288a33798a8caf4218ddb729cee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypt a block of text.  <a href="../../db/dcb/aes_8h.html#afd685288a33798a8caf4218ddb729cee">More...</a><br /></td></tr>
 <tr class="separator:afd685288a33798a8caf4218ddb729cee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7637a5c4b2b30eb5a99a0079282e794c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dcb/aes_8h.html#a7637a5c4b2b30eb5a99a0079282e794c">libp2p_crypto_aes_decrypt</a> (char *key, char *iv, char *input, size_t input_size, unsigned char **output, size_t *output_size)</td></tr>
+<tr class="memdesc:a7637a5c4b2b30eb5a99a0079282e794c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypt a block of text.  <a href="../../db/dcb/aes_8h.html#a7637a5c4b2b30eb5a99a0079282e794c">More...</a><br /></td></tr>
 <tr class="separator:a7637a5c4b2b30eb5a99a0079282e794c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>proivides aes encryption/decryption functions </p>
+
+<p class="definition">Definition in file <a class="el" href="../../db/dcb/aes_8h_source.html">aes.h</a>.</p>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="a7637a5c4b2b30eb5a99a0079282e794c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7637a5c4b2b30eb5a99a0079282e794c">&#9670;&nbsp;</a></span>libp2p_crypto_aes_decrypt()</h2>
 
@@ -159,6 +169,20 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Decrypt a block of text. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>the aes key (32 bytes) </td></tr>
+    <tr><td class="paramname">iv</td><td>the random part of encryption (16 bytes) </td></tr>
+    <tr><td class="paramname">input</td><td>the text to encrypt </td></tr>
+    <tr><td class="paramname">input_size</td><td>the length of the array </td></tr>
+    <tr><td class="paramname">output</td><td>where the output will be placed </td></tr>
+    <tr><td class="paramname">output_size</td><td>the length of the memory allocated for output </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true(1) on success, otherwise false(0)</dd></dl>
 <p>Decrypt a block of text </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">key</td><td>the aes key (32 bytes) </td></tr>
@@ -225,6 +249,20 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Encrypt a block of text. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>the aes key (32 bytes) </td></tr>
+    <tr><td class="paramname">iv</td><td>the random part of encryption (16 bytes) </td></tr>
+    <tr><td class="paramname">input</td><td>the text to encrypt </td></tr>
+    <tr><td class="paramname">input_size</td><td>the length of the array </td></tr>
+    <tr><td class="paramname">output</td><td>where the output will be placed </td></tr>
+    <tr><td class="paramname">output_size</td><td>the length of the memory allocated for output </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true(1) on success, otherwise false(0)</dd></dl>
 <p>Encrypt a block of text </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">key</td><td>the aes key (32 bytes) </td></tr>
@@ -257,7 +295,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Generate a new AES key </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Generate a new AES key. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">key</td><td>where to store the 32 byte key </td></tr>
   </table>

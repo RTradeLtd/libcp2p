@@ -1,6 +1,6 @@
 <map id="libp2p_encoding_base64_decode" name="libp2p_encoding_base64_decode">
-<area shape="rect" id="node1" title=" " alt="" coords="555,195,737,236"/>
-<area shape="rect" id="node2" href="$d4/d43/multibase_8h.html#a29045b9a6ab1fdf18b9097270db442c7" title=" " alt="" coords="347,78,489,105"/>
+<area shape="rect" id="node1" title="decode something that was encoded as base64" alt="" coords="555,195,737,236"/>
+<area shape="rect" id="node2" href="$d4/d43/multibase_8h.html#a29045b9a6ab1fdf18b9097270db442c7" title="Decode data that was encoded in multibase format." alt="" coords="347,78,489,105"/>
 <area shape="rect" id="node7" href="$d5/d29/crypto__test_8c.html#afa005ffd3cb333bcc7404c32a8ded7ab" title=" " alt="" coords="337,129,499,171"/>
 <area shape="rect" id="node9" href="$d5/d29/crypto__test_8c.html#afe42ae6e62a08bff21956adcfcb56a6d" title=" " alt="" coords="347,195,489,236"/>
 <area shape="rect" id="node10" href="$d5/d29/crypto__test_8c.html#a4af69d1c57c166dd3449b927f56e45db" title=" " alt="" coords="329,260,507,301"/>

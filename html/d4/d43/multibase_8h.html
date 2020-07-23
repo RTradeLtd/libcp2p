@@ -89,13 +89,16 @@ $(document).ready(function(){initNavTree('d4/d43/multibase_8h.html','../../'); i
 <div class="title">multibase.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>functions for managing multibase identifiers  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for multibase.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d2/d5a/multibase_8h__incl.png" border="0" usemap="#_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2multibase_2multibase_8h" alt=""/></div>
 <map name="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2multibase_2multibase_8h" id="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2multibase_2multibase_8h">
-<area shape="rect" title=" " alt="" coords="5,5,228,61"/>
+<area shape="rect" title="functions for managing multibase identifiers" alt="" coords="5,5,228,61"/>
 <area shape="rect" title=" " alt="" coords="83,109,150,136"/>
 </map>
 </div>
@@ -104,7 +107,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d1/da7/multibase_8h__dep__incl.png" border="0" usemap="#_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2multibase_2multibase_8hdep" alt=""/></div>
 <map name="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2multibase_2multibase_8hdep" id="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2multibase_2multibase_8hdep">
-<area shape="rect" title=" " alt="" coords="289,5,512,61"/>
+<area shape="rect" title="functions for managing multibase identifiers" alt="" coords="289,5,512,61"/>
 <area shape="rect" href="../../de/de0/cid_8c.html" title=" " alt="" coords="5,109,183,165"/>
 <area shape="rect" href="../../dc/d82/peerutils_8c.html" title=" " alt="" coords="207,109,384,165"/>
 <area shape="rect" href="../../dc/db3/multibase_8c.html" title=" " alt="" coords="409,109,603,165"/>
@@ -134,15 +137,21 @@ Macros</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a5f8db468b8b2ead762ff750b3e57b424"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d43/multibase_8h.html#a5f8db468b8b2ead762ff750b3e57b424">multibase_encode</a> (const char <a class="el" href="../../d4/d87/structbase.html">base</a>, const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t results_max_length, size_t *results_length)</td></tr>
+<tr class="memdesc:a5f8db468b8b2ead762ff750b3e57b424"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encode data in multibase format.  <a href="../../d4/d43/multibase_8h.html#a5f8db468b8b2ead762ff750b3e57b424">More...</a><br /></td></tr>
 <tr class="separator:a5f8db468b8b2ead762ff750b3e57b424"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87879636fb4a1f49493a1ebd9b342863"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d43/multibase_8h.html#a87879636fb4a1f49493a1ebd9b342863">multibase_encode_size</a> (const char <a class="el" href="../../d4/d87/structbase.html">base</a>, const unsigned char *incoming, size_t incoming_length)</td></tr>
 <tr class="separator:a87879636fb4a1f49493a1ebd9b342863"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29045b9a6ab1fdf18b9097270db442c7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d43/multibase_8h.html#a29045b9a6ab1fdf18b9097270db442c7">multibase_decode</a> (const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t results_max_length, size_t *results_length)</td></tr>
+<tr class="memdesc:a29045b9a6ab1fdf18b9097270db442c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decode data that was encoded in multibase format.  <a href="../../d4/d43/multibase_8h.html#a29045b9a6ab1fdf18b9097270db442c7">More...</a><br /></td></tr>
 <tr class="separator:a29045b9a6ab1fdf18b9097270db442c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accefe23bf6cdf404302a63663f3d09cd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d43/multibase_8h.html#accefe23bf6cdf404302a63663f3d09cd">multibase_decode_size</a> (const char <a class="el" href="../../d4/d87/structbase.html">base</a>, const unsigned char *incoming, size_t incoming_length)</td></tr>
 <tr class="separator:accefe23bf6cdf404302a63663f3d09cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>functions for managing multibase identifiers </p>
+
+<p class="definition">Definition in file <a class="el" href="../../d4/d43/multibase_8h_source.html">multibase.h</a>.</p>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="afa6ee5f32b934c7327b90c02d9cf5ed6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afa6ee5f32b934c7327b90c02d9cf5ed6">&#9670;&nbsp;</a></span>MULTIBASE_BASE1</h2>
 
@@ -155,7 +164,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d43/multibase_8h_source.html#l00006">6</a> of file <a class="el" href="../../d4/d43/multibase_8h_source.html">multibase.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d43/multibase_8h_source.html#l00010">10</a> of file <a class="el" href="../../d4/d43/multibase_8h_source.html">multibase.h</a>.</p>
 
 </div>
 </div>
@@ -171,7 +180,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d43/multibase_8h_source.html#l00009">9</a> of file <a class="el" href="../../d4/d43/multibase_8h_source.html">multibase.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d43/multibase_8h_source.html#l00013">13</a> of file <a class="el" href="../../d4/d43/multibase_8h_source.html">multibase.h</a>.</p>
 
 </div>
 </div>
@@ -187,7 +196,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d43/multibase_8h_source.html#l00010">10</a> of file <a class="el" href="../../d4/d43/multibase_8h_source.html">multibase.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d43/multibase_8h_source.html#l00014">14</a> of file <a class="el" href="../../d4/d43/multibase_8h_source.html">multibase.h</a>.</p>
 
 </div>
 </div>
@@ -203,7 +212,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d43/multibase_8h_source.html#l00007">7</a> of file <a class="el" href="../../d4/d43/multibase_8h_source.html">multibase.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d43/multibase_8h_source.html#l00011">11</a> of file <a class="el" href="../../d4/d43/multibase_8h_source.html">multibase.h</a>.</p>
 
 </div>
 </div>
@@ -219,7 +228,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d43/multibase_8h_source.html#l00011">11</a> of file <a class="el" href="../../d4/d43/multibase_8h_source.html">multibase.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d43/multibase_8h_source.html#l00015">15</a> of file <a class="el" href="../../d4/d43/multibase_8h_source.html">multibase.h</a>.</p>
 
 </div>
 </div>
@@ -235,7 +244,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d43/multibase_8h_source.html#l00012">12</a> of file <a class="el" href="../../d4/d43/multibase_8h_source.html">multibase.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d43/multibase_8h_source.html#l00016">16</a> of file <a class="el" href="../../d4/d43/multibase_8h_source.html">multibase.h</a>.</p>
 
 </div>
 </div>
@@ -251,7 +260,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d43/multibase_8h_source.html#l00008">8</a> of file <a class="el" href="../../d4/d43/multibase_8h_source.html">multibase.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d43/multibase_8h_source.html#l00012">12</a> of file <a class="el" href="../../d4/d43/multibase_8h_source.html">multibase.h</a>.</p>
 
 </div>
 </div>
@@ -299,6 +308,19 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Decode data that was encoded in multibase format. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">incoming</td><td>the data to decode </td></tr>
+    <tr><td class="paramname">incoming_length</td><td>the length of the data to decode </td></tr>
+    <tr><td class="paramname">results</td><td>where to put the results </td></tr>
+    <tr><td class="paramname">results_max_length</td><td>the size of the results buffer </td></tr>
+    <tr><td class="paramname">results_length</td><td>the size of the results after being encoded </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true(1) on success</dd></dl>
 <p>Decode data that was encoded in multibase format </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">incoming</td><td>the data to decode </td></tr>
@@ -317,10 +339,10 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d4/d43/multibase_8h_a29045b9a6ab1fdf18b9097270db442c7_cgraph.png" border="0" usemap="#d4/d43/multibase_8h_a29045b9a6ab1fdf18b9097270db442c7_cgraph" alt=""/></div>
 <map name="d4/d43/multibase_8h_a29045b9a6ab1fdf18b9097270db442c7_cgraph" id="d4/d43/multibase_8h_a29045b9a6ab1fdf18b9097270db442c7_cgraph">
-<area shape="rect" title=" " alt="" coords="5,78,147,105"/>
-<area shape="rect" href="../../de/df5/base16_8c.html#a6f39fa2f42d4442ffa9e3648d338504c" title=" " alt="" coords="195,5,377,47"/>
-<area shape="rect" href="../../db/d08/base32_8c.html#abdbe99d44b5208ff21cbe18c11c12465" title=" " alt="" coords="195,71,377,112"/>
-<area shape="rect" href="../../db/d36/base64_8c.html#a9f243fbc238603a23ba5055551a41f0f" title=" " alt="" coords="195,136,377,177"/>
+<area shape="rect" title="Decode data that was encoded in multibase format." alt="" coords="5,78,147,105"/>
+<area shape="rect" href="../../de/df5/base16_8c.html#a6f39fa2f42d4442ffa9e3648d338504c" title="Decode from Base16 format." alt="" coords="195,5,377,47"/>
+<area shape="rect" href="../../db/d08/base32_8c.html#abdbe99d44b5208ff21cbe18c11c12465" title="Decode from Base16 format." alt="" coords="195,71,377,112"/>
+<area shape="rect" href="../../db/d36/base64_8c.html#a9f243fbc238603a23ba5055551a41f0f" title="decode something that was encoded as base64" alt="" coords="195,136,377,177"/>
 <area shape="rect" href="../../db/d08/base32_8c.html#a202f50cce9f077cd2d0b91e8243c1074" title=" " alt="" coords="425,78,576,105"/>
 <area shape="rect" href="../../db/d08/base32_8c.html#a99b207232c9ea9fcf8126ba306331fa8" title=" " alt="" coords="624,53,708,79"/>
 <area shape="rect" href="../../db/d08/base32_8c.html#a491bf1cfe5311f551cc3036f6119557a" title=" " alt="" coords="637,103,695,130"/>
@@ -333,7 +355,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d4/d43/multibase_8h_a29045b9a6ab1fdf18b9097270db442c7_icgraph.png" border="0" usemap="#d4/d43/multibase_8h_a29045b9a6ab1fdf18b9097270db442c7_icgraph" alt=""/></div>
 <map name="d4/d43/multibase_8h_a29045b9a6ab1fdf18b9097270db442c7_icgraph" id="d4/d43/multibase_8h_a29045b9a6ab1fdf18b9097270db442c7_icgraph">
-<area shape="rect" title=" " alt="" coords="329,78,471,105"/>
+<area shape="rect" title="Decode data that was encoded in multibase format." alt="" coords="329,78,471,105"/>
 <area shape="rect" href="../../df/da0/multibase__test_8c.html#ad55c632c06c1269b39f88275cd5144ad" title=" " alt="" coords="108,5,281,47"/>
 <area shape="rect" href="../../df/da0/multibase__test_8c.html#a5a0521264cc8d45f64fda4f54d900e73" title=" " alt="" coords="108,71,281,112"/>
 <area shape="rect" href="../../df/da0/multibase__test_8c.html#a0703fbf6e97c6c9b68ddf86dbcf998ea" title=" " alt="" coords="108,136,281,177"/>
@@ -382,9 +404,9 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="../../d4/d43/multibase_8h_accefe23bf6cdf404302a63663f3d09cd_cgraph.png" border="0" usemap="#d4/d43/multibase_8h_accefe23bf6cdf404302a63663f3d09cd_cgraph" alt=""/></div>
 <map name="d4/d43/multibase_8h_accefe23bf6cdf404302a63663f3d09cd_cgraph" id="d4/d43/multibase_8h_accefe23bf6cdf404302a63663f3d09cd_cgraph">
 <area shape="rect" title=" " alt="" coords="5,78,180,105"/>
-<area shape="rect" href="../../de/df5/base16_8c.html#a5e34bb8f29acf9b65c1c8a8610b35063" title=" " alt="" coords="228,5,411,47"/>
-<area shape="rect" href="../../db/d08/base32_8c.html#aa5e9ce21e2e63e68515f76c19a49aeed" title=" " alt="" coords="228,71,411,112"/>
-<area shape="rect" href="../../db/d36/base64_8c.html#aea6033fa6d71cd0fba3a05929ed3f1e2" title=" " alt="" coords="228,136,411,177"/>
+<area shape="rect" href="../../de/df5/base16_8c.html#a5e34bb8f29acf9b65c1c8a8610b35063" title="Calculate the size of the buffer necessary to decode." alt="" coords="228,5,411,47"/>
+<area shape="rect" href="../../db/d08/base32_8c.html#aa5e9ce21e2e63e68515f76c19a49aeed" title="Calculate the size of the buffer necessary to decode." alt="" coords="228,71,411,112"/>
+<area shape="rect" href="../../db/d36/base64_8c.html#aea6033fa6d71cd0fba3a05929ed3f1e2" title="calculate the max length in bytes of a decoding of n source bytes" alt="" coords="228,136,411,177"/>
 </map>
 </div>
 <div class="dynheader">
@@ -450,7 +472,9 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Encode data in multibase format </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Encode data in multibase format. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">base</td><td>the format to use (i.e. MULTIBASE_BASE58_BTC) </td></tr>
     <tr><td class="paramname">incoming</td><td>the data to encode </td></tr>
@@ -482,10 +506,10 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d4/d43/multibase_8h_a5f8db468b8b2ead762ff750b3e57b424_cgraph.png" border="0" usemap="#d4/d43/multibase_8h_a5f8db468b8b2ead762ff750b3e57b424_cgraph" alt=""/></div>
 <map name="d4/d43/multibase_8h_a5f8db468b8b2ead762ff750b3e57b424_cgraph" id="d4/d43/multibase_8h_a5f8db468b8b2ead762ff750b3e57b424_cgraph">
-<area shape="rect" title=" " alt="" coords="5,78,147,105"/>
-<area shape="rect" href="../../de/df5/base16_8c.html#acd96e587c59cf9bc953e4ee8f7031fc6" title=" " alt="" coords="195,5,377,47"/>
-<area shape="rect" href="../../db/d08/base32_8c.html#a78acce42d5c859aea4c19508c1aaa1c5" title=" " alt="" coords="195,71,377,112"/>
-<area shape="rect" href="../../db/d36/base64_8c.html#a15d5a6ed9df11e87ac4aa0cf3975aa75" title=" " alt="" coords="195,136,377,177"/>
+<area shape="rect" title="Encode data in multibase format." alt="" coords="5,78,147,105"/>
+<area shape="rect" href="../../de/df5/base16_8c.html#acd96e587c59cf9bc953e4ee8f7031fc6" title="Encode in Base16 format." alt="" coords="195,5,377,47"/>
+<area shape="rect" href="../../db/d08/base32_8c.html#a78acce42d5c859aea4c19508c1aaa1c5" title="Encode in Base32 format." alt="" coords="195,71,377,112"/>
+<area shape="rect" href="../../db/d36/base64_8c.html#a15d5a6ed9df11e87ac4aa0cf3975aa75" title="encode using base64" alt="" coords="195,136,377,177"/>
 <area shape="rect" href="../../db/d08/base32_8c.html#a7b03b543c865173ec643b3c2ee4fb08f" title=" " alt="" coords="425,78,548,105"/>
 <area shape="rect" href="../../db/d08/base32_8c.html#a3c0c1964c1c1a0c1d499ff6edf8a68b5" title=" " alt="" coords="596,78,675,105"/>
 </map>
@@ -495,13 +519,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d4/d43/multibase_8h_a5f8db468b8b2ead762ff750b3e57b424_icgraph.png" border="0" usemap="#d4/d43/multibase_8h_a5f8db468b8b2ead762ff750b3e57b424_icgraph" alt=""/></div>
 <map name="d4/d43/multibase_8h_a5f8db468b8b2ead762ff750b3e57b424_icgraph" id="d4/d43/multibase_8h_a5f8db468b8b2ead762ff750b3e57b424_icgraph">
-<area shape="rect" title=" " alt="" coords="780,137,921,163"/>
+<area shape="rect" title="Encode data in multibase format." alt="" coords="780,137,921,163"/>
 <area shape="rect" href="../../d7/dee/peerutils_8h.html#af28758e71406b9bf461a7d56481746fc" title="returns a libp2p peerid from the sha256 hash of a public key base58 encode a string NOTE: this also p..." alt="" coords="570,45,721,71"/>
 <area shape="rect" href="../../df/da0/multibase__test_8c.html#ad55c632c06c1269b39f88275cd5144ad" title=" " alt="" coords="559,96,732,137"/>
 <area shape="rect" href="../../df/da0/multibase__test_8c.html#a5a0521264cc8d45f64fda4f54d900e73" title=" " alt="" coords="559,161,732,203"/>
 <area shape="rect" href="../../df/da0/multibase__test_8c.html#a0703fbf6e97c6c9b68ddf86dbcf998ea" title=" " alt="" coords="559,227,732,268"/>
 <area shape="rect" href="../../d5/d5d/ecdsa_8h.html#afab4ce5b8e4bde2be242ad28bf9f1474" title="returns the peerid for the corresponding private key" alt="" coords="355,5,510,47"/>
-<area shape="rect" href="../../de/de5/key_8h.html#ae44209ca99fb2a0a4facc7eea04a98c2" title=" " alt="" coords="355,71,511,112"/>
+<area shape="rect" href="../../de/de5/key_8h.html#ae44209ca99fb2a0a4facc7eea04a98c2" title="convert a public key into a peer id" alt="" coords="355,71,511,112"/>
 <area shape="rect" href="../../d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="108,5,307,47"/>
 <area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
 <area shape="rect" href="../../df/da0/multibase__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="405,169,460,195"/>
@@ -549,9 +573,9 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="../../d4/d43/multibase_8h_a87879636fb4a1f49493a1ebd9b342863_cgraph.png" border="0" usemap="#d4/d43/multibase_8h_a87879636fb4a1f49493a1ebd9b342863_cgraph" alt=""/></div>
 <map name="d4/d43/multibase_8h_a87879636fb4a1f49493a1ebd9b342863_cgraph" id="d4/d43/multibase_8h_a87879636fb4a1f49493a1ebd9b342863_cgraph">
 <area shape="rect" title=" " alt="" coords="5,78,180,105"/>
-<area shape="rect" href="../../de/df5/base16_8c.html#a30128f81926d0ae74876be026ec2f35b" title=" " alt="" coords="228,5,411,47"/>
-<area shape="rect" href="../../db/d08/base32_8c.html#a37dc6aec5c9e10f4f7775d5db0fc1b63" title=" " alt="" coords="228,71,411,112"/>
-<area shape="rect" href="../../db/d36/base64_8c.html#aea46a16b6182e1de01ed7ab17300a6d4" title=" " alt="" coords="228,136,411,177"/>
+<area shape="rect" href="../../de/df5/base16_8c.html#a30128f81926d0ae74876be026ec2f35b" title="Calculate the size of the buffer necessary to encode." alt="" coords="228,5,411,47"/>
+<area shape="rect" href="../../db/d08/base32_8c.html#a37dc6aec5c9e10f4f7775d5db0fc1b63" title="Calculate the size of the buffer necessary to encode." alt="" coords="228,71,411,112"/>
+<area shape="rect" href="../../db/d36/base64_8c.html#aea46a16b6182e1de01ed7ab17300a6d4" title="calculate the max length in bytes of an encoding of n source bytes" alt="" coords="228,136,411,177"/>
 </map>
 </div>
 <div class="dynheader">

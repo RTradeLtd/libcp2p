@@ -20,12 +20,15 @@
 .ti -1c
 .RI "int \fBlibp2p_crypto_hashing_sha1_init\fP (mbedtls_sha1_context *ctx)"
 .br
+.RI "Initialize a sha1 hmac process\&. "
 .ti -1c
 .RI "int \fBlibp2p_crypto_hashing_sha1_update\fP (mbedtls_sha1_context *ctx, const unsigned char *input, size_t input_size)"
 .br
+.RI "Update a sha1 hmac process\&. "
 .ti -1c
 .RI "int \fBlibp2p_crypto_hashing_sha1_finish\fP (mbedtls_sha1_context *ctx, unsigned char *hash)"
 .br
+.RI "finalize a sha1 hmac process "
 .ti -1c
 .RI "int \fBlibp2p_crypto_hashing_sha1_free\fP (mbedtls_sha1_context *ctx)"
 .br
@@ -37,7 +40,9 @@
 .PP
 Definition at line 25 of file sha1\&.c\&.
 .SS "int libp2p_crypto_hashing_sha1_finish (mbedtls_sha1_context * ctx, unsigned char * hash)"
-finalize a sha1 hmac process 
+
+.PP
+finalize a sha1 hmac process finalize a sha1 hmac process 
 .PP
 \fBParameters\fP
 .RS 4
@@ -71,7 +76,9 @@ true(1) on success, otherwise false(0)
 .PP
 Definition at line 75 of file sha1\&.c\&.
 .SS "int libp2p_crypto_hashing_sha1_init (mbedtls_sha1_context * ctx)"
-Initialize a sha1 hmac process 
+
+.PP
+Initialize a sha1 hmac process\&. Initialize a sha1 hmac process 
 .PP
 \fBParameters\fP
 .RS 4
@@ -87,7 +94,9 @@ true(1) on success, otherwise false(0)
 .PP
 Definition at line 39 of file sha1\&.c\&.
 .SS "int libp2p_crypto_hashing_sha1_update (mbedtls_sha1_context * ctx, const unsigned char * input, size_t input_size)"
-Update a sha1 hmac process 
+
+.PP
+Update a sha1 hmac process\&. Update a sha1 hmac process 
 .PP
 \fBParameters\fP
 .RS 4

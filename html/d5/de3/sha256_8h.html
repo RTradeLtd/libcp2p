@@ -88,13 +88,16 @@ $(document).ready(function(){initNavTree('d5/de3/sha256_8h.html','../../'); init
 <div class="title">sha256.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>provides sha256 hashing support  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;mbedtls/sha256.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for sha256.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d2/d28/sha256_8h__incl.png" border="0" usemap="#_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2sha256_8h" alt=""/></div>
 <map name="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2sha256_8h" id="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2sha256_8h">
-<area shape="rect" title=" " alt="" coords="5,5,187,61"/>
+<area shape="rect" title="provides sha256 hashing support" alt="" coords="5,5,187,61"/>
 <area shape="rect" title=" " alt="" coords="27,109,165,136"/>
 </map>
 </div>
@@ -103,13 +106,13 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d6/dd3/sha256_8h__dep__incl.png" border="0" usemap="#_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2sha256_8hdep" alt=""/></div>
 <map name="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2sha256_8hdep" id="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2sha256_8hdep">
-<area shape="rect" title=" " alt="" coords="407,5,588,61"/>
+<area shape="rect" title="provides sha256 hashing support" alt="" coords="407,5,588,61"/>
 <area shape="rect" href="../../d5/d29/crypto__test_8c.html" title=" " alt="" coords="5,213,184,269"/>
 <area shape="rect" href="../../db/dfd/key_8c.html" title=" " alt="" coords="209,213,386,269"/>
 <area shape="rect" href="../../dc/d82/peerutils_8c.html" title=" " alt="" coords="611,213,789,269"/>
 <area shape="rect" href="../../d1/d81/rsa_8c.html" title=" " alt="" coords="602,109,779,165"/>
 <area shape="rect" href="../../da/d01/sha256_8c.html" title=" " alt="" coords="803,109,981,165"/>
-<area shape="rect" href="../../d7/dee/peerutils_8h.html" title=" " alt="" coords="335,109,526,165"/>
+<area shape="rect" href="../../d7/dee/peerutils_8h.html" title="provides utilities for managing peer identifiers" alt="" coords="335,109,526,165"/>
 <area shape="rect" href="../../dc/d09/ecdsa_8c.html" title=" " alt="" coords="410,213,587,269"/>
 </map>
 </div>
@@ -121,15 +124,23 @@ Functions</h2></td></tr>
 <tr class="memitem:abec2cc9b75a7053f0b5db97881857712"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/de3/sha256_8h.html#abec2cc9b75a7053f0b5db97881857712">libp2p_crypto_hashing_sha256</a> (const unsigned char *input, size_t input_length, unsigned char *output)</td></tr>
 <tr class="separator:abec2cc9b75a7053f0b5db97881857712"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1f662d5f63efde79710cd861300147d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/de3/sha256_8h.html#ae1f662d5f63efde79710cd861300147d">libp2p_crypto_hashing_sha256_init</a> (mbedtls_sha256_context *ctx)</td></tr>
+<tr class="memdesc:ae1f662d5f63efde79710cd861300147d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a sha256 hmac process.  <a href="../../d5/de3/sha256_8h.html#ae1f662d5f63efde79710cd861300147d">More...</a><br /></td></tr>
 <tr class="separator:ae1f662d5f63efde79710cd861300147d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a453f0944a96a906a5ca2f8f8545b4fb4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/de3/sha256_8h.html#a453f0944a96a906a5ca2f8f8545b4fb4">libp2p_crypto_hashing_sha256_update</a> (mbedtls_sha256_context *ctx, const unsigned char *input, size_t input_size)</td></tr>
+<tr class="memdesc:a453f0944a96a906a5ca2f8f8545b4fb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update a sha256 hmac process.  <a href="../../d5/de3/sha256_8h.html#a453f0944a96a906a5ca2f8f8545b4fb4">More...</a><br /></td></tr>
 <tr class="separator:a453f0944a96a906a5ca2f8f8545b4fb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59435a44e5e1ce17c3ae07af1e8cf460"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/de3/sha256_8h.html#a59435a44e5e1ce17c3ae07af1e8cf460">libp2p_crypto_hashing_sha256_finish</a> (mbedtls_sha256_context *ctx, unsigned char *hash)</td></tr>
+<tr class="memdesc:a59435a44e5e1ce17c3ae07af1e8cf460"><td class="mdescLeft">&#160;</td><td class="mdescRight">finalize a sha256 hmac process  <a href="../../d5/de3/sha256_8h.html#a59435a44e5e1ce17c3ae07af1e8cf460">More...</a><br /></td></tr>
 <tr class="separator:a59435a44e5e1ce17c3ae07af1e8cf460"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace71fc6728bc01b1cca38c0c6459639b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/de3/sha256_8h.html#ace71fc6728bc01b1cca38c0c6459639b">libp2p_crypto_hashing_sha256_free</a> (mbedtls_sha256_context *ctx)</td></tr>
+<tr class="memdesc:ace71fc6728bc01b1cca38c0c6459639b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clean up allocated memory.  <a href="../../d5/de3/sha256_8h.html#ace71fc6728bc01b1cca38c0c6459639b">More...</a><br /></td></tr>
 <tr class="separator:ace71fc6728bc01b1cca38c0c6459639b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>provides sha256 hashing support </p>
+
+<p class="definition">Definition in file <a class="el" href="../../d5/de3/sha256_8h_source.html">sha256.h</a>.</p>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="abec2cc9b75a7053f0b5db97881857712"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abec2cc9b75a7053f0b5db97881857712">&#9670;&nbsp;</a></span>libp2p_crypto_hashing_sha256()</h2>
 
@@ -170,8 +181,8 @@ Here is the caller graph for this function:</div>
 <map name="d5/de3/sha256_8h_abec2cc9b75a7053f0b5db97881857712_icgraph" id="d5/de3/sha256_8h_abec2cc9b75a7053f0b5db97881857712_icgraph">
 <area shape="rect" title=" " alt="" coords="584,129,752,171"/>
 <area shape="rect" href="../../d5/d5d/ecdsa_8h.html#afab4ce5b8e4bde2be242ad28bf9f1474" title="returns the peerid for the corresponding private key" alt="" coords="368,5,523,47"/>
-<area shape="rect" href="../../de/de5/key_8h.html#ae44209ca99fb2a0a4facc7eea04a98c2" title=" " alt="" coords="367,71,523,112"/>
-<area shape="rect" href="../../df/dc3/rsa_8h.html#af02e0a7caa4821c1ab14374f0573e6b2" title=" " alt="" coords="360,137,531,163"/>
+<area shape="rect" href="../../de/de5/key_8h.html#ae44209ca99fb2a0a4facc7eea04a98c2" title="convert a public key into a peer id" alt="" coords="367,71,523,112"/>
+<area shape="rect" href="../../df/dc3/rsa_8h.html#af02e0a7caa4821c1ab14374f0573e6b2" title="sign a message" alt="" coords="360,137,531,163"/>
 <area shape="rect" href="../../df/dc3/rsa_8h.html#a5bf2403ea84e8c5033bef1c4b5b9c213" title=" " alt="" coords="355,187,536,214"/>
 <area shape="rect" href="../../d5/d29/crypto__test_8c.html#afe42ae6e62a08bff21956adcfcb56a6d" title=" " alt="" coords="136,151,279,192"/>
 <area shape="rect" href="../../d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="108,45,307,87"/>
@@ -206,6 +217,16 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>finalize a sha256 hmac process </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>the context </td></tr>
+    <tr><td class="paramname">hash</td><td>where to put the results (for SHA256, should be 32 bytes long) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true(1) on success, otherwise false(0)</dd></dl>
 <p>finalize a sha256 hmac process </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ctx</td><td>the context </td></tr>
@@ -221,7 +242,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d5/de3/sha256_8h_a59435a44e5e1ce17c3ae07af1e8cf460_icgraph.png" border="0" usemap="#d5/de3/sha256_8h_a59435a44e5e1ce17c3ae07af1e8cf460_icgraph" alt=""/></div>
 <map name="d5/de3/sha256_8h_a59435a44e5e1ce17c3ae07af1e8cf460_icgraph" id="d5/de3/sha256_8h_a59435a44e5e1ce17c3ae07af1e8cf460_icgraph">
-<area shape="rect" title=" " alt="" coords="333,5,501,47"/>
+<area shape="rect" title="finalize a sha256 hmac process" alt="" coords="333,5,501,47"/>
 <area shape="rect" href="../../d5/d29/crypto__test_8c.html#a4af69d1c57c166dd3449b927f56e45db" title=" " alt="" coords="108,5,285,47"/>
 <area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
 </map>
@@ -244,6 +265,15 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Clean up allocated memory. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>the context </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true(1) on success, otherwise false(0)</dd></dl>
 <p>Clean up allocated memory </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ctx</td><td>the context </td></tr>
@@ -258,7 +288,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d5/de3/sha256_8h_ace71fc6728bc01b1cca38c0c6459639b_icgraph.png" border="0" usemap="#d5/de3/sha256_8h_ace71fc6728bc01b1cca38c0c6459639b_icgraph" alt=""/></div>
 <map name="d5/de3/sha256_8h_ace71fc6728bc01b1cca38c0c6459639b_icgraph" id="d5/de3/sha256_8h_ace71fc6728bc01b1cca38c0c6459639b_icgraph">
-<area shape="rect" title=" " alt="" coords="333,5,501,47"/>
+<area shape="rect" title="Clean up allocated memory." alt="" coords="333,5,501,47"/>
 <area shape="rect" href="../../d5/d29/crypto__test_8c.html#a4af69d1c57c166dd3449b927f56e45db" title=" " alt="" coords="108,5,285,47"/>
 <area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
 </map>
@@ -281,6 +311,15 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initialize a sha256 hmac process. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>the context </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true(1) on success, otherwise false(0)</dd></dl>
 <p>Initialize a sha256 hmac process </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ctx</td><td>the context </td></tr>
@@ -295,7 +334,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d5/de3/sha256_8h_ae1f662d5f63efde79710cd861300147d_icgraph.png" border="0" usemap="#d5/de3/sha256_8h_ae1f662d5f63efde79710cd861300147d_icgraph" alt=""/></div>
 <map name="d5/de3/sha256_8h_ae1f662d5f63efde79710cd861300147d_icgraph" id="d5/de3/sha256_8h_ae1f662d5f63efde79710cd861300147d_icgraph">
-<area shape="rect" title=" " alt="" coords="333,5,501,47"/>
+<area shape="rect" title="Initialize a sha256 hmac process." alt="" coords="333,5,501,47"/>
 <area shape="rect" href="../../d5/d29/crypto__test_8c.html#a4af69d1c57c166dd3449b927f56e45db" title=" " alt="" coords="108,5,285,47"/>
 <area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
 </map>
@@ -334,6 +373,17 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Update a sha256 hmac process. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>the context </td></tr>
+    <tr><td class="paramname">input</td><td>the data to add </td></tr>
+    <tr><td class="paramname">input_size</td><td>the size of input </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true(1) on success, otherwise false(0)</dd></dl>
 <p>Update a sha256 hmac process </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ctx</td><td>the context </td></tr>
@@ -350,7 +400,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d5/de3/sha256_8h_a453f0944a96a906a5ca2f8f8545b4fb4_icgraph.png" border="0" usemap="#d5/de3/sha256_8h_a453f0944a96a906a5ca2f8f8545b4fb4_icgraph" alt=""/></div>
 <map name="d5/de3/sha256_8h_a453f0944a96a906a5ca2f8f8545b4fb4_icgraph" id="d5/de3/sha256_8h_a453f0944a96a906a5ca2f8f8545b4fb4_icgraph">
-<area shape="rect" title=" " alt="" coords="333,5,501,47"/>
+<area shape="rect" title="Update a sha256 hmac process." alt="" coords="333,5,501,47"/>
 <area shape="rect" href="../../d5/d29/crypto__test_8c.html#a4af69d1c57c166dd3449b927f56e45db" title=" " alt="" coords="108,5,285,47"/>
 <area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
 </map>

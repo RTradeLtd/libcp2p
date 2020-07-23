@@ -11,16 +11,16 @@
 <area shape="rect" id="node19" href="$d6/dab/multihash__test_8c.html#abf0468aaa72be7d1a3f8a3f1a5e655c8" title=" " alt="" coords="112,332,287,373"/>
 <area shape="rect" id="node22" href="$d6/dab/multihash__test_8c.html#ad4497dba4dbf111a7f4252195de4f22c" title=" " alt="" coords="123,397,276,439"/>
 <area shape="rect" id="node24" href="$d6/dab/multihash__test_8c.html#a2c20d844927bb90cdf5b3e1c954636e4" title=" " alt="" coords="108,267,291,308"/>
-<area shape="rect" id="node3" href="$d3/d99/hashes_8c.html#a70713299e5149f9e08c6917132562bd7" title=" " alt="" coords="339,90,521,117"/>
+<area shape="rect" id="node3" href="$d3/d99/hashes_8c.html#a70713299e5149f9e08c6917132562bd7" title="Given the id, return the default length." alt="" coords="339,90,521,117"/>
 <area shape="rect" id="node4" href="$d3/d99/hashes_8c.html#abb8811795c15911e42d77bdc5848504f" title=" " alt="" coords="609,150,693,177"/>
-<area shape="rect" id="node6" href="$d3/d99/hashes_8c.html#a70b1117400bc8fb43f5b1d83815ac7d0" title=" " alt="" coords="367,209,493,235"/>
-<area shape="rect" id="node8" href="$db/d36/base64_8c.html#a15d5a6ed9df11e87ac4aa0cf3975aa75" title=" " alt="" coords="339,521,521,563"/>
+<area shape="rect" id="node6" href="$d3/d99/hashes_8c.html#a70b1117400bc8fb43f5b1d83815ac7d0" title="Given the id, return the hash name." alt="" coords="367,209,493,235"/>
+<area shape="rect" id="node8" href="$db/d36/base64_8c.html#a15d5a6ed9df11e87ac4aa0cf3975aa75" title="encode using base64" alt="" coords="339,521,521,563"/>
 <area shape="rect" id="node10" href="$d0/d15/errors_8c.html#a0183fe13656cd02f9c7776a194f0e538" title=" " alt="" coords="367,587,493,614"/>
-<area shape="rect" id="node14" href="$d4/da0/multihash_8c.html#a1a6e02df13490424bfb9a79d6fb62aa3" title=" " alt="" coords="353,470,507,497"/>
+<area shape="rect" id="node14" href="$d4/da0/multihash_8c.html#a1a6e02df13490424bfb9a79d6fb62aa3" title="returns hash code or error (which is &lt; 0)" alt="" coords="353,470,507,497"/>
 <area shape="rect" id="node15" href="$d4/da0/multihash_8c.html#a4cff69af97262261f68eea45db71cecf" title=" " alt="" coords="780,318,912,345"/>
 <area shape="rect" id="node16" href="$d4/da0/multihash_8c.html#a43d5a3ca704c5f18ea2fcd5194ff51c3" title=" " alt="" coords="960,318,1047,345"/>
 <area shape="rect" id="node18" href="$d4/da0/multihash_8c.html#a94b46993bbc3602a1032421847f0e9bf" title=" " alt="" coords="569,318,732,345"/>
-<area shape="rect" id="node20" href="$d4/da0/multihash_8c.html#a073592d04197de860390a466503349d5" title=" " alt="" coords="349,267,511,294"/>
+<area shape="rect" id="node20" href="$d4/da0/multihash_8c.html#a073592d04197de860390a466503349d5" title="gives access to raw digest inside multihash buffer" alt="" coords="349,267,511,294"/>
 <area shape="rect" id="node21" href="$d4/da0/multihash_8c.html#a91aa646ac4a3a60ece14436b8123a1b0" title=" " alt="" coords="391,318,469,345"/>
-<area shape="rect" id="node23" href="$d4/da0/multihash_8c.html#af0c42f15b7173409b76c705053643346" title=" " alt="" coords="367,419,493,446"/>
+<area shape="rect" id="node23" href="$d4/da0/multihash_8c.html#af0c42f15b7173409b76c705053643346" title="determine the size of the multihash given the data size" alt="" coords="367,419,493,446"/>
 </map>

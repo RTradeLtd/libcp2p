@@ -131,11 +131,11 @@ var searchData=
   ['bsem_5fpost_5fall_153',['bsem_post_all',['../db/d84/thread__pool_8c.html#ae6e1dd79d442233da83062562ee6972c',1,'thread_pool.c']]],
   ['bsem_5freset_154',['bsem_reset',['../db/d84/thread__pool_8c.html#a142c7c2ae2e4668b79c118be9ac821d9',1,'thread_pool.c']]],
   ['bsem_5fwait_155',['bsem_wait',['../db/d84/thread__pool_8c.html#a8894df9ca292ef8e6aa02bce59417a83',1,'thread_pool.c']]],
-  ['bsize_156',['bsize',['../da/d83/struct_multi_address.html#ad4aa916f7b88d4b9072f8ad9e6eeed59',1,'MultiAddress']]],
+  ['bsize_156',['bsize',['../d4/dc4/structmulti__address.html#a70541e1a7696770e95f272ec10cf360a',1,'multi_address']]],
   ['bucketidx_157',['bucketidx',['../d8/d90/structmap__iter__t.html#aa47122a2afdc5c82e079d20d972875c2',1,'map_iter_t']]],
   ['buckets_158',['buckets',['../db/d57/structmap__base__t.html#a9660647804043ca5c191b74b44ca133e',1,'map_base_t']]],
   ['buf_159',['buf',['../d3/d2c/structbase32__decode__context.html#a9842181a9377602c2e6d70333fc6720b',1,'base32_decode_context']]],
-  ['bytes_160',['bytes',['../d7/d04/struct_ephemeral_public_key.html#a71b50fc1986865e2102dc9ebdb8a069b',1,'EphemeralPublicKey::bytes()'],['../da/d83/struct_multi_address.html#aa5563155eb19110b87b02685b0142e21',1,'MultiAddress::bytes()']]],
+  ['bytes_160',['bytes',['../d7/d04/struct_ephemeral_public_key.html#a71b50fc1986865e2102dc9ebdb8a069b',1,'EphemeralPublicKey::bytes()'],['../d4/dc4/structmulti__address.html#aff159dae2923c8843a98ead65e98b496',1,'multi_address::bytes()']]],
   ['bytes_5fsize_161',['bytes_size',['../d7/d04/struct_ephemeral_public_key.html#aa871abd35b34e2f753d1455990f8d5e5',1,'EphemeralPublicKey']]],
   ['bytes_5fto_5fstring_162',['bytes_to_string',['../dc/d80/protoutils_8c.html#a2e141f4b7c1f8ec0c977baa284194617',1,'bytes_to_string(char **buffer, const uint8_t *in_bytes, int in_bytes_size):&#160;protoutils.c'],['../df/d48/protoutils_8h.html#abe2819b830ec57bbae6e54677296aebd',1,'bytes_to_string(char **results, const uint8_t *bytes, int bytes_size):&#160;protoutils.c']]]
 ];

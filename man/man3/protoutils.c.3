@@ -78,9 +78,11 @@
 .ti -1c
 .RI "int \fBbytes_to_string\fP (char **buffer, const uint8_t *in_bytes, int in_bytes_size)"
 .br
+.RI "Unserialize the bytes into a string\&. "
 .ti -1c
 .RI "char * \fBaddress_string_to_bytes\fP (struct \fBProtocol\fP *protocol, const char *incoming, size_t incoming_size, char **results, int *results_size)"
 .br
+.RI "Convert an address string to a byte representation\&. "
 .ti -1c
 .RI "int \fBstring_to_bytes\fP (uint8_t **finalbytes, size_t *realbbsize, const char *strx, size_t strsize)"
 .br
@@ -98,7 +100,9 @@ Definition at line 115 of file protoutils\&.c\&.
 .SH "Function Documentation"
 .PP 
 .SS "char* address_string_to_bytes (struct \fBProtocol\fP * protocol, const char * incoming, size_t incoming_size, char ** results, int * results_size)"
-Convert an address string to a byte representation 
+
+.PP
+Convert an address string to a byte representation\&. Convert an address string to a byte representation 
 .PP
 \fBParameters\fP
 .RS 4
@@ -134,7 +138,9 @@ Definition at line 48 of file protoutils\&.c\&.
 .PP
 Definition at line 39 of file protoutils\&.c\&.
 .SS "int bytes_to_string (char ** buffer, const uint8_t * in_bytes, int in_bytes_size)"
-Unserialize the bytes into a string 
+
+.PP
+Unserialize the bytes into a string\&. Unserialize the bytes into a string 
 .PP
 \fBParameters\fP
 .RS 4

@@ -47,9 +47,11 @@
 .ti -1c
 .RI "\fBmulticodec_encoded_t\fP * \fBmulticodec_encode\fP (char *codec, char *inData, size_t inDataLength, char *outData, size_t maxOutDataLength)"
 .br
+.RI "Encode a char array using the specified encoding\&. "
 .ti -1c
 .RI "int \fBmulticodec_decode\fP (\fBmulticodec_encoded_t\fP *encoded, char *outData, size_t maxOutDataLength)"
 .br
+.RI "Decode a multicodec encoded data array\&. "
 .ti -1c
 .RI "bool \fBmulticodec_is_valid\fP (char *codec)"
 .br
@@ -95,6 +97,24 @@ holds a multicodec encoded data primarily used for easy multicodec decoded
 .SH "Function Documentation"
 .PP 
 .SS "int multicodec_decode (\fBmulticodec_encoded_t\fP * encoded, char * outData, size_t maxOutDataLength)"
+
+.PP
+Decode a multicodec encoded data array\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIencoded\fP an instance of multicodec_encoded_t holding the encoded data and codec used 
+.br
+\fIoutData\fP the array to put the results in 
+.br
+\fImaxOutDataLength\fP the maximum size of the data 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+an error code or 0 if all is well
+.RE
+.PP
 Decode a multicodec encoded data array 
 .PP
 \fBParameters\fP
@@ -126,6 +146,30 @@ and thus the next I value is the start of the actual data, whereas if we simply 
 .PP
 Definition at line 531 of file multicodec\&.c\&.
 .SS "\fBmulticodec_encoded_t\fP* multicodec_encode (char * codec, char * inData, size_t inDataLength, char * outData, size_t maxOutDataLength)"
+
+.PP
+Encode a char array using the specified encoding\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcodecName\fP a standard name of the codec 
+.br
+\fIinData\fP the incoming data to be encoded 
+.br
+\fIinDataLength\fP the length of the inData 
+.br
+\fIoutData\fP a place to store the outgoing data that is at least maxOutDataLength in size 
+.br
+\fImaxOutDataLength\fP the max size for the output 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Success: pointer to an instance of multicodec_encoded_t 
+.PP
+Failure: NULL pointer
+.RE
+.PP
 Encode a char array using the specified encoding 
 .PP
 \fBParameters\fP

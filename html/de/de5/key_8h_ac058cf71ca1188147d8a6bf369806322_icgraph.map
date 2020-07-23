@@ -1,5 +1,5 @@
 <map id="libp2p_crypto_private_key_new" name="libp2p_crypto_private_key_new">
 <area shape="rect" id="node1" title=" " alt="" coords="221,39,384,80"/>
 <area shape="rect" id="node2" href="$de/de5/key_8h.html#a7c56539d28743850e7d8663d763cfee2" title=" " alt="" coords="5,5,173,47"/>
-<area shape="rect" id="node3" href="$df/dc3/rsa_8h.html#aeef680898c1c49df8a65701ad64ae146" title=" " alt="" coords="11,71,168,112"/>
+<area shape="rect" id="node3" href="$df/dc3/rsa_8h.html#aeef680898c1c49df8a65701ad64ae146" title="Convert a struct RsaPrivateKey to a struct PrivateKey." alt="" coords="11,71,168,112"/>
 </map>

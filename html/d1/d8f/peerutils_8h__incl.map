@@ -1,11 +1,11 @@
 <map id="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/peerutils.h" name="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/peerutils.h">
-<area shape="rect" id="node1" title=" " alt="" coords="325,5,515,61"/>
-<area shape="rect" id="node2" href="$d5/de3/sha256_8h.html" title=" " alt="" coords="11,109,138,136"/>
-<area shape="rect" id="node4" href="$d6/df9/hashes_8h.html" title=" " alt="" coords="163,109,312,136"/>
-<area shape="rect" id="node6" href="$d3/d12/multihash_8h.html" title=" " alt="" coords="336,109,504,136"/>
+<area shape="rect" id="node1" title="provides utilities for managing peer identifiers" alt="" coords="325,5,515,61"/>
+<area shape="rect" id="node2" href="$d5/de3/sha256_8h.html" title="provides sha256 hashing support" alt="" coords="11,109,138,136"/>
+<area shape="rect" id="node4" href="$d6/df9/hashes_8h.html" title="multihash definitions" alt="" coords="163,109,312,136"/>
+<area shape="rect" id="node6" href="$d3/d12/multihash_8h.html" title="functions for working with multihashes" alt="" coords="336,109,504,136"/>
 <area shape="rect" id="node8" title=" " alt="" coords="528,109,595,136"/>
 <area shape="rect" id="node9" title=" " alt="" coords="619,109,690,136"/>
 <area shape="rect" id="node3" title=" " alt="" coords="5,184,144,211"/>
-<area shape="rect" id="node5" href="$de/d45/errors_8h.html" title=" " alt="" coords="201,184,273,211"/>
+<area shape="rect" id="node5" href="$de/d45/errors_8h.html" title="helpers for working with multihash errors" alt="" coords="201,184,273,211"/>
 <area shape="rect" id="node7" title=" " alt="" coords="383,184,457,211"/>
 </map>

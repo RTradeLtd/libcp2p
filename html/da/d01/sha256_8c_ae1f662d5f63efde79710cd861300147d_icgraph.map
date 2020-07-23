@@ -1,5 +1,5 @@
 <map id="libp2p_crypto_hashing_sha256_init" name="libp2p_crypto_hashing_sha256_init">
-<area shape="rect" id="node1" title=" " alt="" coords="333,5,501,47"/>
+<area shape="rect" id="node1" title="Initialize a sha256 hmac process." alt="" coords="333,5,501,47"/>
 <area shape="rect" id="node2" href="$d5/d29/crypto__test_8c.html#a4af69d1c57c166dd3449b927f56e45db" title=" " alt="" coords="108,5,285,47"/>
 <area shape="rect" id="node3" href="$d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
 </map>

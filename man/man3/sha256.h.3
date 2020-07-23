@@ -2,7 +2,8 @@
 .ad l
 .nh
 .SH NAME
-/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/sha256.h
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/sha256.h \- provides sha256 hashing support  
+
 .SH SYNOPSIS
 .br
 .PP
@@ -18,16 +19,27 @@
 .ti -1c
 .RI "int \fBlibp2p_crypto_hashing_sha256_init\fP (mbedtls_sha256_context *ctx)"
 .br
+.RI "Initialize a sha256 hmac process\&. "
 .ti -1c
 .RI "int \fBlibp2p_crypto_hashing_sha256_update\fP (mbedtls_sha256_context *ctx, const unsigned char *input, size_t input_size)"
 .br
+.RI "Update a sha256 hmac process\&. "
 .ti -1c
 .RI "int \fBlibp2p_crypto_hashing_sha256_finish\fP (mbedtls_sha256_context *ctx, unsigned char *hash)"
 .br
+.RI "finalize a sha256 hmac process "
 .ti -1c
 .RI "int \fBlibp2p_crypto_hashing_sha256_free\fP (mbedtls_sha256_context *ctx)"
 .br
+.RI "Clean up allocated memory\&. "
 .in -1c
+.SH "Detailed Description"
+.PP 
+provides sha256 hashing support 
+
+
+.PP
+Definition in file \fBsha256\&.h\fP\&.
 .SH "Function Documentation"
 .PP 
 .SS "int libp2p_crypto_hashing_sha256 (const unsigned char * input, size_t input_length, unsigned char * output)"
@@ -35,6 +47,22 @@
 .PP
 Definition at line 11 of file sha256\&.c\&.
 .SS "int libp2p_crypto_hashing_sha256_finish (mbedtls_sha256_context * ctx, unsigned char * hash)"
+
+.PP
+finalize a sha256 hmac process 
+.PP
+\fBParameters\fP
+.RS 4
+\fIctx\fP the context 
+.br
+\fIhash\fP where to put the results (for SHA256, should be 32 bytes long) 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success, otherwise false(0)
+.RE
+.PP
 finalize a sha256 hmac process 
 .PP
 \fBParameters\fP
@@ -53,6 +81,20 @@ true(1) on success, otherwise false(0)
 .PP
 Definition at line 47 of file sha256\&.c\&.
 .SS "int libp2p_crypto_hashing_sha256_free (mbedtls_sha256_context * ctx)"
+
+.PP
+Clean up allocated memory\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIctx\fP the context 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success, otherwise false(0)
+.RE
+.PP
 Clean up allocated memory 
 .PP
 \fBParameters\fP
@@ -69,6 +111,20 @@ true(1) on success, otherwise false(0)
 .PP
 Definition at line 58 of file sha256\&.c\&.
 .SS "int libp2p_crypto_hashing_sha256_init (mbedtls_sha256_context * ctx)"
+
+.PP
+Initialize a sha256 hmac process\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIctx\fP the context 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success, otherwise false(0)
+.RE
+.PP
 Initialize a sha256 hmac process 
 .PP
 \fBParameters\fP
@@ -85,6 +141,24 @@ true(1) on success, otherwise false(0)
 .PP
 Definition at line 22 of file sha256\&.c\&.
 .SS "int libp2p_crypto_hashing_sha256_update (mbedtls_sha256_context * ctx, const unsigned char * input, size_t input_size)"
+
+.PP
+Update a sha256 hmac process\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIctx\fP the context 
+.br
+\fIinput\fP the data to add 
+.br
+\fIinput_size\fP the size of input 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success, otherwise false(0)
+.RE
+.PP
 Update a sha256 hmac process 
 .PP
 \fBParameters\fP

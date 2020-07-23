@@ -86,58 +86,59 @@ $(document).ready(function(){initNavTree('d2/d6f/base64_8h_source.html','../../'
 <div class="title">base64.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="../../d2/d6f/base64_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef base64_h</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define base64_h</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * encode using base64</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * @param input_data the data to be encoded</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * @param input_length the length of the input data</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> * @param output_data where the data is to be stored</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> * @param max_output_length the max size of the output_data</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> * @param bytes_written the number of bytes written to output_data</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> * @returns true(1) on success, otherwise false</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d2/d6f/base64_8h.html#a15d5a6ed9df11e87ac4aa0cf3975aa75">libp2p_encoding_base64_encode</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *input_data,</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;                                  <span class="keywordtype">size_t</span> input_length, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *output_data,</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;                                  <span class="keywordtype">size_t</span> max_output_length, <span class="keywordtype">size_t</span> *bytes_written);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"> * calculate the max length in bytes of an encoding of n source bytes</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"> * @param encoded_size the size of the encoded string</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"> * @returns the maximum size in bytes had the string been decoded</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="../../d2/d6f/base64_8h.html#a20c9cb8939c78f7b1ae172ac894a50d8">libp2p_encoding_base64_encode_size</a>(<span class="keywordtype">size_t</span> input_length);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"> * decode something that was encoded as base64</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"> * @param input_data the data to decode</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"> * @param input_length the length of the input data</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"> * @param output_data the buffer to store the output</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"> * @param max_output_length the length of the output buffer</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> * @param bytes_written the number of bytes written to output_data</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> * @returns true(1) on success, otherwise 0</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d2/d6f/base64_8h.html#a9f243fbc238603a23ba5055551a41f0f">libp2p_encoding_base64_decode</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *input_data,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                                  <span class="keywordtype">size_t</span> input_length, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *output_data,</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                                  <span class="keywordtype">size_t</span> max_output_length, <span class="keywordtype">size_t</span> *bytes_written);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"> * calculate the max length in bytes of a decoding of n source bytes</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"> * @param decoded_size the size of the incoming string to be encoded</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"> * @returns the maximum size in bytes had the string been encoded</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="../../d2/d6f/base64_8h.html#a5f4d6e1363e8b20ef88ca52525481bce">libp2p_encoding_base64_decode_size</a>(<span class="keywordtype">size_t</span> input_length);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* base64_h */</span><span class="preprocessor"></span></div>
+<a href="../../d2/d6f/base64_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*! @file base64.h</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  * @brief provides base 64 encoding/decoding functions</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> * @brief encode using base64</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> * @param input_data the data to be encoded</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> * @param input_length the length of the input data</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> * @param output_data where the data is to be stored</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> * @param max_output_length the max size of the output_data</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> * @param bytes_written the number of bytes written to output_data</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> * @returns true(1) on success, otherwise false</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d2/d6f/base64_8h.html#a15d5a6ed9df11e87ac4aa0cf3975aa75">libp2p_encoding_base64_encode</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *input_data,</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;                                  <span class="keywordtype">size_t</span> input_length, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *output_data,</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;                                  <span class="keywordtype">size_t</span> max_output_length, <span class="keywordtype">size_t</span> *bytes_written);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"> * @brief calculate the max length in bytes of an encoding of n source bytes</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"> * @param encoded_size the size of the encoded string</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"> * @returns the maximum size in bytes had the string been decoded</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="../../d2/d6f/base64_8h.html#a20c9cb8939c78f7b1ae172ac894a50d8">libp2p_encoding_base64_encode_size</a>(<span class="keywordtype">size_t</span> input_length);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"> * @brief decode something that was encoded as base64</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"> * @param input_data the data to decode</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> * @param input_length the length of the input data</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> * @param output_data the buffer to store the output</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> * @param max_output_length the length of the output buffer</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> * @param bytes_written the number of bytes written to output_data</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * @returns true(1) on success, otherwise 0</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d2/d6f/base64_8h.html#a9f243fbc238603a23ba5055551a41f0f">libp2p_encoding_base64_decode</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *input_data,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                                  <span class="keywordtype">size_t</span> input_length, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *output_data,</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                                  <span class="keywordtype">size_t</span> max_output_length, <span class="keywordtype">size_t</span> *bytes_written);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"> * @brief calculate the max length in bytes of a decoding of n source bytes</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"> * @param decoded_size the size of the incoming string to be encoded</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"> * @returns the maximum size in bytes had the string been encoded</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="../../d2/d6f/base64_8h.html#a5f4d6e1363e8b20ef88ca52525481bce">libp2p_encoding_base64_decode_size</a>(<span class="keywordtype">size_t</span> input_length);</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="abase64_8h_html_a20c9cb8939c78f7b1ae172ac894a50d8"><div class="ttname"><a href="../../d2/d6f/base64_8h.html#a20c9cb8939c78f7b1ae172ac894a50d8">libp2p_encoding_base64_encode_size</a></div><div class="ttdeci">size_t libp2p_encoding_base64_encode_size(size_t input_length)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d36/base64_8c_source.html#l00058">base64.c:58</a></div></div>
-<div class="ttc" id="abase64_8h_html_a15d5a6ed9df11e87ac4aa0cf3975aa75"><div class="ttname"><a href="../../d2/d6f/base64_8h.html#a15d5a6ed9df11e87ac4aa0cf3975aa75">libp2p_encoding_base64_encode</a></div><div class="ttdeci">int libp2p_encoding_base64_encode(const unsigned char *input_data, size_t input_length, unsigned char *output_data, size_t max_output_length, size_t *bytes_written)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d36/base64_8c_source.html#l00016">base64.c:16</a></div></div>
-<div class="ttc" id="abase64_8h_html_a5f4d6e1363e8b20ef88ca52525481bce"><div class="ttname"><a href="../../d2/d6f/base64_8h.html#a5f4d6e1363e8b20ef88ca52525481bce">libp2p_encoding_base64_decode_size</a></div><div class="ttdeci">size_t libp2p_encoding_base64_decode_size(size_t input_length)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d36/base64_8c_source.html#l00046">base64.c:46</a></div></div>
-<div class="ttc" id="abase64_8h_html_a9f243fbc238603a23ba5055551a41f0f"><div class="ttname"><a href="../../d2/d6f/base64_8h.html#a9f243fbc238603a23ba5055551a41f0f">libp2p_encoding_base64_decode</a></div><div class="ttdeci">int libp2p_encoding_base64_decode(const unsigned char *input_data, size_t input_length, unsigned char *output_data, size_t max_output_length, size_t *bytes_written)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d36/base64_8c_source.html#l00033">base64.c:33</a></div></div>
+<div class="ttc" id="abase64_8h_html_a20c9cb8939c78f7b1ae172ac894a50d8"><div class="ttname"><a href="../../d2/d6f/base64_8h.html#a20c9cb8939c78f7b1ae172ac894a50d8">libp2p_encoding_base64_encode_size</a></div><div class="ttdeci">size_t libp2p_encoding_base64_encode_size(size_t input_length)</div><div class="ttdoc">calculate the max length in bytes of an encoding of n source bytes</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d36/base64_8c_source.html#l00058">base64.c:58</a></div></div>
+<div class="ttc" id="abase64_8h_html_a15d5a6ed9df11e87ac4aa0cf3975aa75"><div class="ttname"><a href="../../d2/d6f/base64_8h.html#a15d5a6ed9df11e87ac4aa0cf3975aa75">libp2p_encoding_base64_encode</a></div><div class="ttdeci">int libp2p_encoding_base64_encode(const unsigned char *input_data, size_t input_length, unsigned char *output_data, size_t max_output_length, size_t *bytes_written)</div><div class="ttdoc">encode using base64</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d36/base64_8c_source.html#l00016">base64.c:16</a></div></div>
+<div class="ttc" id="abase64_8h_html_a5f4d6e1363e8b20ef88ca52525481bce"><div class="ttname"><a href="../../d2/d6f/base64_8h.html#a5f4d6e1363e8b20ef88ca52525481bce">libp2p_encoding_base64_decode_size</a></div><div class="ttdeci">size_t libp2p_encoding_base64_decode_size(size_t input_length)</div><div class="ttdoc">calculate the max length in bytes of a decoding of n source bytes</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d36/base64_8c_source.html#l00046">base64.c:46</a></div></div>
+<div class="ttc" id="abase64_8h_html_a9f243fbc238603a23ba5055551a41f0f"><div class="ttname"><a href="../../d2/d6f/base64_8h.html#a9f243fbc238603a23ba5055551a41f0f">libp2p_encoding_base64_decode</a></div><div class="ttdeci">int libp2p_encoding_base64_decode(const unsigned char *input_data, size_t input_length, unsigned char *output_data, size_t max_output_length, size_t *bytes_written)</div><div class="ttdoc">decode something that was encoded as base64</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d36/base64_8c_source.html#l00033">base64.c:33</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

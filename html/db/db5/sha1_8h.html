@@ -88,13 +88,16 @@ $(document).ready(function(){initNavTree('db/db5/sha1_8h.html','../../'); initRe
 <div class="title">sha1.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>provides sha1 hashing support  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;mbedtls/sha1.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for sha1.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../db/d99/sha1_8h__incl.png" border="0" usemap="#_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2sha1_8h" alt=""/></div>
 <map name="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2sha1_8h" id="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2sha1_8h">
-<area shape="rect" title=" " alt="" coords="5,5,183,61"/>
+<area shape="rect" title="provides sha1 hashing support" alt="" coords="5,5,183,61"/>
 <area shape="rect" title=" " alt="" coords="33,109,155,136"/>
 </map>
 </div>
@@ -103,7 +106,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d5/dbd/sha1_8h__dep__incl.png" border="0" usemap="#_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2sha1_8hdep" alt=""/></div>
 <map name="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2sha1_8hdep" id="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2sha1_8hdep">
-<area shape="rect" title=" " alt="" coords="107,5,285,61"/>
+<area shape="rect" title="provides sha1 hashing support" alt="" coords="107,5,285,61"/>
 <area shape="rect" href="../../d5/d29/crypto__test_8c.html" title=" " alt="" coords="5,109,184,165"/>
 <area shape="rect" href="../../d2/d24/sha1_8c.html" title=" " alt="" coords="209,109,386,165"/>
 </map>
@@ -116,15 +119,22 @@ Functions</h2></td></tr>
 <tr class="memitem:abba9337a4560e37cb9c0a3db251572de"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/db5/sha1_8h.html#abba9337a4560e37cb9c0a3db251572de">libp2p_crypto_hashing_sha1</a> (const unsigned char *input, size_t input_length, unsigned char *output)</td></tr>
 <tr class="separator:abba9337a4560e37cb9c0a3db251572de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd8d880ca10724ff7a8988e0a15f3661"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/db5/sha1_8h.html#acd8d880ca10724ff7a8988e0a15f3661">libp2p_crypto_hashing_sha1_init</a> (mbedtls_sha1_context *ctx)</td></tr>
+<tr class="memdesc:acd8d880ca10724ff7a8988e0a15f3661"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a sha1 hmac process.  <a href="../../db/db5/sha1_8h.html#acd8d880ca10724ff7a8988e0a15f3661">More...</a><br /></td></tr>
 <tr class="separator:acd8d880ca10724ff7a8988e0a15f3661"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72daaa79999248d2653c66ae2e88fa11"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/db5/sha1_8h.html#a72daaa79999248d2653c66ae2e88fa11">libp2p_crypto_hashing_sha1_update</a> (mbedtls_sha1_context *ctx, const unsigned char *input, size_t input_size)</td></tr>
+<tr class="memdesc:a72daaa79999248d2653c66ae2e88fa11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update a sha1 hmac process.  <a href="../../db/db5/sha1_8h.html#a72daaa79999248d2653c66ae2e88fa11">More...</a><br /></td></tr>
 <tr class="separator:a72daaa79999248d2653c66ae2e88fa11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aafaf694a258e83a59b3edcd3b6f5112c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/db5/sha1_8h.html#aafaf694a258e83a59b3edcd3b6f5112c">libp2p_crypto_hashing_sha1_finish</a> (mbedtls_sha1_context *ctx, unsigned char *hash)</td></tr>
+<tr class="memdesc:aafaf694a258e83a59b3edcd3b6f5112c"><td class="mdescLeft">&#160;</td><td class="mdescRight">finalize a sha1 hmac process  <a href="../../db/db5/sha1_8h.html#aafaf694a258e83a59b3edcd3b6f5112c">More...</a><br /></td></tr>
 <tr class="separator:aafaf694a258e83a59b3edcd3b6f5112c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4af1f487322d07eaf0eac8c40a9ca47c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/db5/sha1_8h.html#a4af1f487322d07eaf0eac8c40a9ca47c">libp2p_crypto_hashing_sha1_free</a> (mbedtls_sha1_context *ctx)</td></tr>
 <tr class="separator:a4af1f487322d07eaf0eac8c40a9ca47c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>provides sha1 hashing support </p>
+
+<p class="definition">Definition in file <a class="el" href="../../db/db5/sha1_8h_source.html">sha1.h</a>.</p>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="abba9337a4560e37cb9c0a3db251572de"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abba9337a4560e37cb9c0a3db251572de">&#9670;&nbsp;</a></span>libp2p_crypto_hashing_sha1()</h2>
 
@@ -186,6 +196,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>finalize a sha1 hmac process </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>the context </td></tr>
+    <tr><td class="paramname">hash</td><td>where to put the results (for sha1, should be 20 bytes long) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true(1) on success, otherwise false(0)</dd></dl>
 <p>finalize a sha1 hmac process </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ctx</td><td>the context </td></tr>
@@ -201,7 +221,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../db/db5/sha1_8h_aafaf694a258e83a59b3edcd3b6f5112c_icgraph.png" border="0" usemap="#db/db5/sha1_8h_aafaf694a258e83a59b3edcd3b6f5112c_icgraph" alt=""/></div>
 <map name="db/db5/sha1_8h_aafaf694a258e83a59b3edcd3b6f5112c_icgraph" id="db/db5/sha1_8h_aafaf694a258e83a59b3edcd3b6f5112c_icgraph">
-<area shape="rect" title=" " alt="" coords="317,5,485,47"/>
+<area shape="rect" title="finalize a sha1 hmac process" alt="" coords="317,5,485,47"/>
 <area shape="rect" href="../../d5/d29/crypto__test_8c.html#afa005ffd3cb333bcc7404c32a8ded7ab" title=" " alt="" coords="108,5,269,47"/>
 <area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
 </map>
@@ -261,6 +281,15 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initialize a sha1 hmac process. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>the context </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true(1) on success, otherwise false(0)</dd></dl>
 <p>Initialize a sha1 hmac process </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ctx</td><td>the context </td></tr>
@@ -275,7 +304,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../db/db5/sha1_8h_acd8d880ca10724ff7a8988e0a15f3661_icgraph.png" border="0" usemap="#db/db5/sha1_8h_acd8d880ca10724ff7a8988e0a15f3661_icgraph" alt=""/></div>
 <map name="db/db5/sha1_8h_acd8d880ca10724ff7a8988e0a15f3661_icgraph" id="db/db5/sha1_8h_acd8d880ca10724ff7a8988e0a15f3661_icgraph">
-<area shape="rect" title=" " alt="" coords="317,5,485,47"/>
+<area shape="rect" title="Initialize a sha1 hmac process." alt="" coords="317,5,485,47"/>
 <area shape="rect" href="../../d5/d29/crypto__test_8c.html#afa005ffd3cb333bcc7404c32a8ded7ab" title=" " alt="" coords="108,5,269,47"/>
 <area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
 </map>
@@ -314,6 +343,17 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Update a sha1 hmac process. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>the context </td></tr>
+    <tr><td class="paramname">input</td><td>the data to add </td></tr>
+    <tr><td class="paramname">input_size</td><td>the size of input </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true(1) on success, otherwise false(0)</dd></dl>
 <p>Update a sha1 hmac process </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ctx</td><td>the context </td></tr>
@@ -330,7 +370,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../db/db5/sha1_8h_a72daaa79999248d2653c66ae2e88fa11_icgraph.png" border="0" usemap="#db/db5/sha1_8h_a72daaa79999248d2653c66ae2e88fa11_icgraph" alt=""/></div>
 <map name="db/db5/sha1_8h_a72daaa79999248d2653c66ae2e88fa11_icgraph" id="db/db5/sha1_8h_a72daaa79999248d2653c66ae2e88fa11_icgraph">
-<area shape="rect" title=" " alt="" coords="317,5,485,47"/>
+<area shape="rect" title="Update a sha1 hmac process." alt="" coords="317,5,485,47"/>
 <area shape="rect" href="../../d5/d29/crypto__test_8c.html#afa005ffd3cb333bcc7404c32a8ded7ab" title=" " alt="" coords="108,5,269,47"/>
 <area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
 </map>

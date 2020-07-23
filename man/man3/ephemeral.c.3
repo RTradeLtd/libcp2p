@@ -27,6 +27,7 @@
 .ti -1c
 .RI "struct \fBStretchedKey\fP * \fBlibp2p_crypto_ephemeral_stretched_key_new\fP ()"
 .br
+.RI "Routines to help with the \fBStretchedKey\fP struct\&. "
 .ti -1c
 .RI "void \fBlibp2p_crypto_ephemeral_stretched_key_free\fP (struct \fBStretchedKey\fP *key)"
 .br
@@ -51,17 +52,21 @@
 .ti -1c
 .RI "int \fBlibp2p_crypto_ephemeral_keypair_generate\fP (char *curve, struct \fBEphemeralPrivateKey\fP **private_key_ptr)"
 .br
+.RI "Generate a Ephemeral Public Key as well as a shared key\&. "
 .ti -1c
 .RI "static int \fBlibp2p_crypto_ephemeral_keypair_to_public_bytes\fP (struct \fBEphemeralPublicKey\fP *public_key, unsigned char **results, size_t *bytes_written)"
 .br
 .ti -1c
 .RI "int \fBlibp2p_crypto_ephemeral_generate_shared_secret\fP (struct \fBEphemeralPrivateKey\fP *private_key, const unsigned char *remote_public_key, size_t remote_public_key_size)"
 .br
+.RI "Generate a shared secret\&. "
 .in -1c
 .SH "Function Documentation"
 .PP 
 .SS "int libp2p_crypto_ephemeral_generate_shared_secret (struct \fBEphemeralPrivateKey\fP * private_key, const unsigned char * remote_public_key, size_t remote_public_key_size)"
-Generate a shared secret 
+
+.PP
+Generate a shared secret\&. Generate a shared secret 
 .PP
 \fBParameters\fP
 .RS 4
@@ -84,7 +89,9 @@ Definition at line 62 of file ephemeral\&.c\&.
 .PP
 Definition at line 38 of file ephemeral\&.c\&.
 .SS "int libp2p_crypto_ephemeral_keypair_generate (char * curve, struct \fBEphemeralPrivateKey\fP ** private_key_ptr)"
-Generate a Ephemeral keypair 
+
+.PP
+Generate a Ephemeral Public Key as well as a shared key\&. Generate a Ephemeral keypair 
 .PP
 \fBParameters\fP
 .RS 4
@@ -133,8 +140,10 @@ Definition at line 131 of file ephemeral\&.c\&.
 
 .PP
 Definition at line 26 of file ephemeral\&.c\&.
-.SS "struct \fBStretchedKey\fP* libp2p_crypto_ephemeral_stretched_key_new (void)"
-Routines to help with the \fBStretchedKey\fP struct 
+.SS "struct \fBStretchedKey\fP* libp2p_crypto_ephemeral_stretched_key_new ()"
+
+.PP
+Routines to help with the \fBStretchedKey\fP struct\&. 
 .PP
 Definition at line 12 of file ephemeral\&.c\&.
 .SS "static void serialize_uint64 (const uint64_t in, unsigned char out[8])\fC [static]\fP"

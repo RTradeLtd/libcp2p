@@ -112,8 +112,8 @@ Include dependency graph for rsa.c:</div>
 <area shape="rect" title=" " alt="" coords="5,109,72,136"/>
 <area shape="rect" title=" " alt="" coords="97,109,167,136"/>
 <area shape="rect" href="../../de/de5/key_8h.html" title=" " alt="" coords="191,109,291,136"/>
-<area shape="rect" href="../../df/dc3/rsa_8h.html" title=" " alt="" coords="316,109,415,136"/>
-<area shape="rect" href="../../d5/de3/sha256_8h.html" title=" " alt="" coords="439,109,566,136"/>
+<area shape="rect" href="../../df/dc3/rsa_8h.html" title="provides RSA cryptography support" alt="" coords="316,109,415,136"/>
+<area shape="rect" href="../../d5/de3/sha256_8h.html" title="provides sha256 hashing support" alt="" coords="439,109,566,136"/>
 <area shape="rect" title=" " alt="" coords="591,109,745,136"/>
 <area shape="rect" title=" " alt="" coords="770,109,910,136"/>
 <area shape="rect" title=" " alt="" coords="935,109,1065,136"/>
@@ -135,6 +135,7 @@ Include dependency graph for rsa.c:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:aeef680898c1c49df8a65701ad64ae146"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../d9/dc0/struct_private_key.html">PrivateKey</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d81/rsa_8c.html#aeef680898c1c49df8a65701ad64ae146">libp2p_crypto_rsa_to_private_key</a> (struct <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a> *in)</td></tr>
+<tr class="memdesc:aeef680898c1c49df8a65701ad64ae146"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a struct <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a> to a struct <a class="el" href="../../d9/dc0/struct_private_key.html">PrivateKey</a>.  <a href="../../d1/d81/rsa_8c.html#aeef680898c1c49df8a65701ad64ae146">More...</a><br /></td></tr>
 <tr class="separator:aeef680898c1c49df8a65701ad64ae146"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6390e627b0bb1450a487e13e5c909ba3"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d81/rsa_8c.html#a6390e627b0bb1450a487e13e5c909ba3">libp2p_crypto_private_key_to_rsa</a> (struct <a class="el" href="../../d9/dc0/struct_private_key.html">PrivateKey</a> *in)</td></tr>
 <tr class="separator:a6390e627b0bb1450a487e13e5c909ba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -143,6 +144,7 @@ Functions</h2></td></tr>
 <tr class="memitem:a3032a3a2ac64d76b89d06b9c8cb5b8a0"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d81/rsa_8c.html#a3032a3a2ac64d76b89d06b9c8cb5b8a0">libp2p_crypto_rsa_write_public_key_der</a> (mbedtls_pk_context *key, unsigned char *buf, size_t *size)</td></tr>
 <tr class="separator:a3032a3a2ac64d76b89d06b9c8cb5b8a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b84dd0ccd8b34cb57b248a93c9e8e23"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d81/rsa_8c.html#a8b84dd0ccd8b34cb57b248a93c9e8e23">libp2p_crypto_rsa_generate_keypair</a> (struct <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a> *private_key, unsigned long num_bits_for_keypair)</td></tr>
+<tr class="memdesc:a8b84dd0ccd8b34cb57b248a93c9e8e23"><td class="mdescLeft">&#160;</td><td class="mdescRight">generate a new private key  <a href="../../d1/d81/rsa_8c.html#a8b84dd0ccd8b34cb57b248a93c9e8e23">More...</a><br /></td></tr>
 <tr class="separator:a8b84dd0ccd8b34cb57b248a93c9e8e23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75caf4877292278d01445fe4c0a5b0b0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d81/rsa_8c.html#a75caf4877292278d01445fe4c0a5b0b0">libp2p_crypto_rsa_private_key_fill_public_key</a> (struct <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a> *private_key)</td></tr>
 <tr class="separator:a75caf4877292278d01445fe4c0a5b0b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -151,6 +153,7 @@ Functions</h2></td></tr>
 <tr class="memitem:a963f15a55d71670cbc814e63ce8942c0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d81/rsa_8c.html#a963f15a55d71670cbc814e63ce8942c0">libp2p_crypto_rsa_rsa_private_key_free</a> (struct <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a> *private_key)</td></tr>
 <tr class="separator:a963f15a55d71670cbc814e63ce8942c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af02e0a7caa4821c1ab14374f0573e6b2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d81/rsa_8c.html#af02e0a7caa4821c1ab14374f0573e6b2">libp2p_crypto_rsa_sign</a> (struct <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a> *private_key, const char *message, size_t message_length, unsigned char **result, size_t *result_size)</td></tr>
+<tr class="memdesc:af02e0a7caa4821c1ab14374f0573e6b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">sign a message  <a href="../../d1/d81/rsa_8c.html#af02e0a7caa4821c1ab14374f0573e6b2">More...</a><br /></td></tr>
 <tr class="separator:af02e0a7caa4821c1ab14374f0573e6b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bf2403ea84e8c5033bef1c4b5b9c213"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d81/rsa_8c.html#a5bf2403ea84e8c5033bef1c4b5b9c213">libp2p_crypto_rsa_verify</a> (struct <a class="el" href="../../d1/d94/struct_rsa_public_key.html">RsaPublicKey</a> *public_key, const unsigned char *message, size_t message_length, const unsigned char *signature)</td></tr>
 <tr class="separator:a5bf2403ea84e8c5033bef1c4b5b9c213"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -213,7 +216,9 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>generate a new private key </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>generate a new private key </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">private_key</td><td>the new private key </td></tr>
     <tr><td class="paramname">num_bits_for_keypair</td><td>the size of the key (1024 minimum) </td></tr>
@@ -228,7 +233,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d1/d81/rsa_8c_a8b84dd0ccd8b34cb57b248a93c9e8e23_cgraph.png" border="0" usemap="#d1/d81/rsa_8c_a8b84dd0ccd8b34cb57b248a93c9e8e23_cgraph" alt=""/></div>
 <map name="d1/d81/rsa_8c_a8b84dd0ccd8b34cb57b248a93c9e8e23_cgraph" id="d1/d81/rsa_8c_a8b84dd0ccd8b34cb57b248a93c9e8e23_cgraph">
-<area shape="rect" title=" " alt="" coords="5,71,208,112"/>
+<area shape="rect" title="generate a new private key" alt="" coords="5,71,208,112"/>
 <area shape="rect" href="../../d1/d81/rsa_8c.html#a75caf4877292278d01445fe4c0a5b0b0" title=" " alt="" coords="256,5,447,47"/>
 <area shape="rect" href="../../d1/d81/rsa_8c.html#a963f15a55d71670cbc814e63ce8942c0" title=" " alt="" coords="269,71,433,112"/>
 <area shape="rect" href="../../d1/d81/rsa_8c.html#a5e1e4f6dfbc5e7f3c95400036d235f8f" title=" " alt="" coords="263,136,440,177"/>
@@ -277,7 +282,7 @@ Here is the caller graph for this function:</div>
 <map name="d1/d81/rsa_8c_a75caf4877292278d01445fe4c0a5b0b0_icgraph" id="d1/d81/rsa_8c_a75caf4877292278d01445fe4c0a5b0b0_icgraph">
 <area shape="rect" title=" " alt="" coords="256,39,447,80"/>
 <area shape="rect" href="../../df/dc3/rsa_8h.html#a6390e627b0bb1450a487e13e5c909ba3" title=" " alt="" coords="25,5,188,47"/>
-<area shape="rect" href="../../df/dc3/rsa_8h.html#a8b84dd0ccd8b34cb57b248a93c9e8e23" title=" " alt="" coords="5,71,208,112"/>
+<area shape="rect" href="../../df/dc3/rsa_8h.html#a8b84dd0ccd8b34cb57b248a93c9e8e23" title="generate a new private key" alt="" coords="5,71,208,112"/>
 </map>
 </div>
 
@@ -307,7 +312,7 @@ Here is the caller graph for this function:</div>
 <map name="d1/d81/rsa_8c_a963f15a55d71670cbc814e63ce8942c0_icgraph" id="d1/d81/rsa_8c_a963f15a55d71670cbc814e63ce8942c0_icgraph">
 <area shape="rect" title=" " alt="" coords="256,39,420,80"/>
 <area shape="rect" href="../../df/dc3/rsa_8h.html#a6390e627b0bb1450a487e13e5c909ba3" title=" " alt="" coords="25,5,188,47"/>
-<area shape="rect" href="../../df/dc3/rsa_8h.html#a8b84dd0ccd8b34cb57b248a93c9e8e23" title=" " alt="" coords="5,71,208,112"/>
+<area shape="rect" href="../../df/dc3/rsa_8h.html#a8b84dd0ccd8b34cb57b248a93c9e8e23" title="generate a new private key" alt="" coords="5,71,208,112"/>
 </map>
 </div>
 
@@ -385,6 +390,8 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>sign a message </p>
 <p>sign a message </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">private_key</td><td>the private key </td></tr>
@@ -402,7 +409,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d1/d81/rsa_8c_af02e0a7caa4821c1ab14374f0573e6b2_cgraph.png" border="0" usemap="#d1/d81/rsa_8c_af02e0a7caa4821c1ab14374f0573e6b2_cgraph" alt=""/></div>
 <map name="d1/d81/rsa_8c_af02e0a7caa4821c1ab14374f0573e6b2_cgraph" id="d1/d81/rsa_8c_af02e0a7caa4821c1ab14374f0573e6b2_cgraph">
-<area shape="rect" title=" " alt="" coords="5,13,176,39"/>
+<area shape="rect" title="sign a message" alt="" coords="5,13,176,39"/>
 <area shape="rect" href="../../da/d01/sha256_8c.html#abec2cc9b75a7053f0b5db97881857712" title=" " alt="" coords="224,5,392,47"/>
 </map>
 </div>
@@ -424,7 +431,9 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Convert a struct <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a> to a struct <a class="el" href="../../d9/dc0/struct_private_key.html">PrivateKey</a> </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Convert a struct <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a> to a struct <a class="el" href="../../d9/dc0/struct_private_key.html">PrivateKey</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">in</td><td>the <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a> </td></tr>
   </table>
@@ -438,7 +447,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d1/d81/rsa_8c_aeef680898c1c49df8a65701ad64ae146_cgraph.png" border="0" usemap="#d1/d81/rsa_8c_aeef680898c1c49df8a65701ad64ae146_cgraph" alt=""/></div>
 <map name="d1/d81/rsa_8c_aeef680898c1c49df8a65701ad64ae146_cgraph" id="d1/d81/rsa_8c_aeef680898c1c49df8a65701ad64ae146_cgraph">
-<area shape="rect" title=" " alt="" coords="5,39,163,80"/>
+<area shape="rect" title="Convert a struct RsaPrivateKey to a struct PrivateKey." alt="" coords="5,39,163,80"/>
 <area shape="rect" href="../../db/dfd/key_8c.html#aa08f9672efcc5a8f51f1c24a702be0fd" title=" " alt="" coords="211,5,373,47"/>
 <area shape="rect" href="../../db/dfd/key_8c.html#ac058cf71ca1188147d8a6bf369806322" title=" " alt="" coords="211,71,373,112"/>
 </map>
@@ -563,7 +572,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="../../d1/d81/rsa_8c_a5e1e4f6dfbc5e7f3c95400036d235f8f_icgraph.png" border="0" usemap="#d1/d81/rsa_8c_a5e1e4f6dfbc5e7f3c95400036d235f8f_icgraph" alt=""/></div>
 <map name="d1/d81/rsa_8c_a5e1e4f6dfbc5e7f3c95400036d235f8f_icgraph" id="d1/d81/rsa_8c_a5e1e4f6dfbc5e7f3c95400036d235f8f_icgraph">
 <area shape="rect" title=" " alt="" coords="256,5,433,47"/>
-<area shape="rect" href="../../df/dc3/rsa_8h.html#a8b84dd0ccd8b34cb57b248a93c9e8e23" title=" " alt="" coords="5,5,208,47"/>
+<area shape="rect" href="../../df/dc3/rsa_8h.html#a8b84dd0ccd8b34cb57b248a93c9e8e23" title="generate a new private key" alt="" coords="5,5,208,47"/>
 </map>
 </div>
 
@@ -627,7 +636,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect" title=" " alt="" coords="495,39,672,80"/>
 <area shape="rect" href="../../df/dc3/rsa_8h.html#a75caf4877292278d01445fe4c0a5b0b0" title=" " alt="" coords="256,39,447,80"/>
 <area shape="rect" href="../../df/dc3/rsa_8h.html#a6390e627b0bb1450a487e13e5c909ba3" title=" " alt="" coords="25,5,188,47"/>
-<area shape="rect" href="../../df/dc3/rsa_8h.html#a8b84dd0ccd8b34cb57b248a93c9e8e23" title=" " alt="" coords="5,71,208,112"/>
+<area shape="rect" href="../../df/dc3/rsa_8h.html#a8b84dd0ccd8b34cb57b248a93c9e8e23" title="generate a new private key" alt="" coords="5,71,208,112"/>
 </map>
 </div>
 

@@ -2,10 +2,10 @@
 <area shape="rect" id="node1" title=" " alt="" coords="210,5,405,61"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,109,76,136"/>
 <area shape="rect" id="node3" title=" " alt="" coords="133,184,204,211"/>
-<area shape="rect" id="node4" href="$d2/dcf/base16_8h.html" title=" " alt="" coords="319,109,463,136"/>
-<area shape="rect" id="node6" href="$d8/d33/base32_8h.html" title=" " alt="" coords="151,109,295,136"/>
-<area shape="rect" id="node7" href="$d2/d6f/base64_8h.html" title=" " alt="" coords="487,109,631,136"/>
-<area shape="rect" id="node9" href="$d4/d43/multibase_8h.html" title=" " alt="" coords="655,109,823,136"/>
+<area shape="rect" id="node4" href="$d2/dcf/base16_8h.html" title="provides base 16 encoding/decoding functions" alt="" coords="319,109,463,136"/>
+<area shape="rect" id="node6" href="$d8/d33/base32_8h.html" title="provides base 32 encoding/decoding functions" alt="" coords="151,109,295,136"/>
+<area shape="rect" id="node7" href="$d2/d6f/base64_8h.html" title="provides base 64 encoding/decoding functions" alt="" coords="487,109,631,136"/>
+<area shape="rect" id="node9" href="$d4/d43/multibase_8h.html" title="functions for managing multibase identifiers" alt="" coords="655,109,823,136"/>
 <area shape="rect" id="node5" title=" " alt="" coords="354,184,429,211"/>
 <area shape="rect" id="node8" title=" " alt="" coords="615,184,682,211"/>
 </map>

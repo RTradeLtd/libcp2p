@@ -88,14 +88,17 @@ $(document).ready(function(){initNavTree('d6/d90/x509_8h.html','../../'); initRe
 <div class="title">x509.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>provides x509 cert management tooling  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="../../df/dc3/rsa_8h_source.html">rsa.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for x509.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../dd/d1a/x509_8h__incl.png" border="0" usemap="#_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2x509_8h" alt=""/></div>
 <map name="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2x509_8h" id="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2x509_8h">
-<area shape="rect" title=" " alt="" coords="5,5,183,61"/>
-<area shape="rect" href="../../df/dc3/rsa_8h.html" title=" " alt="" coords="67,109,121,136"/>
+<area shape="rect" title="provides x509 cert management tooling" alt="" coords="5,5,183,61"/>
+<area shape="rect" href="../../df/dc3/rsa_8h.html" title="provides RSA cryptography support" alt="" coords="67,109,121,136"/>
 <area shape="rect" title=" " alt="" coords="57,184,131,211"/>
 </map>
 </div>
@@ -104,7 +107,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../da/df0/x509_8h__dep__incl.png" border="0" usemap="#_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2x509_8hdep" alt=""/></div>
 <map name="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2x509_8hdep" id="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2x509_8hdep">
-<area shape="rect" title=" " alt="" coords="5,5,183,61"/>
+<area shape="rect" title="provides x509 cert management tooling" alt="" coords="5,5,183,61"/>
 <area shape="rect" href="../../d1/d1a/x509_8c.html" title=" " alt="" coords="5,109,183,165"/>
 </map>
 </div>
@@ -114,11 +117,17 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a4167ee9bd2a450096050bd39433cde1f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d90/x509_8h.html#a4167ee9bd2a450096050bd39433cde1f">libp2p_encoding_x509_private_key_to_der</a> (struct <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a> *private_key, unsigned char *bytes[1600])</td></tr>
+<tr class="memdesc:a4167ee9bd2a450096050bd39433cde1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turn an <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a> struct into a DER formatted array of bytes.  <a href="../../d6/d90/x509_8h.html#a4167ee9bd2a450096050bd39433cde1f">More...</a><br /></td></tr>
 <tr class="separator:a4167ee9bd2a450096050bd39433cde1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5ac751943f07e9c2477918545def1e8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/d90/x509_8h.html#aa5ac751943f07e9c2477918545def1e8">libp2p_encoding_x509_der_to_private_key</a> (unsigned char *der, size_t der_length, struct <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a> *private_key)</td></tr>
+<tr class="memdesc:aa5ac751943f07e9c2477918545def1e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Take a DER formatted char array and turn it into an <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a>.  <a href="../../d6/d90/x509_8h.html#aa5ac751943f07e9c2477918545def1e8">More...</a><br /></td></tr>
 <tr class="separator:aa5ac751943f07e9c2477918545def1e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>provides x509 cert management tooling </p>
+
+<p class="definition">Definition in file <a class="el" href="../../d6/d90/x509_8h_source.html">x509.h</a>.</p>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="aa5ac751943f07e9c2477918545def1e8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa5ac751943f07e9c2477918545def1e8">&#9670;&nbsp;</a></span>libp2p_encoding_x509_der_to_private_key()</h2>
 
@@ -150,7 +159,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Take a DER formatted char array and turn it into an <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a> </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Take a DER formatted char array and turn it into an <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">der</td><td>the DER formatted char array </td></tr>
     <tr><td class="paramname">der_length</td><td>the number of bytes in the char array </td></tr>
@@ -189,7 +200,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Wrappers around the x509 stuff Turn an <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a> struct into a DER formatted array of bytes </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Turn an <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a> struct into a DER formatted array of bytes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">private_key</td><td>the <a class="el" href="../../d8/d11/struct_rsa_private_key.html">RsaPrivateKey</a> struct </td></tr>
     <tr><td class="paramname">bytes</td><td>an array of 1600 bytes to hold the DER formatted data </td></tr>

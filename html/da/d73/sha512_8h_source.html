@@ -86,17 +86,21 @@ $(document).ready(function(){initNavTree('da/d73/sha512_8h_source.html','../../'
 <div class="title">sha512.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="../../da/d73/sha512_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">/***</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * hash a string using SHA512</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> * @param input the input string</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * @param input_length the length of the input string</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> * @param output where to place the results, should be 64 bytes</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * @returns number of bytes written, or 0</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../da/d73/sha512_8h.html#ac144f8abf370f4967769a72afdbc71d7">libp2p_crypto_hashing_sha512</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *input, <span class="keywordtype">size_t</span> input_length,</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;                                 <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *output);</div>
+<a href="../../da/d73/sha512_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*! @file sha512.h</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  * @brief provides sha512 hashing support</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">/***</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * @brief hash a string using SHA512</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * @param input the input string</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> * @param input_length the length of the input string</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> * @param output where to place the results, should be 64 bytes</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> * @returns number of bytes written, or 0</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../da/d73/sha512_8h.html#ac144f8abf370f4967769a72afdbc71d7">libp2p_crypto_hashing_sha512</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *input, <span class="keywordtype">size_t</span> input_length,</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;                                 <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *output);</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="asha512_8h_html_ac144f8abf370f4967769a72afdbc71d7"><div class="ttname"><a href="../../da/d73/sha512_8h.html#ac144f8abf370f4967769a72afdbc71d7">libp2p_crypto_hashing_sha512</a></div><div class="ttdeci">int libp2p_crypto_hashing_sha512(const unsigned char *input, size_t input_length, unsigned char *output)</div><div class="ttdef"><b>Definition:</b> <a href="../../df/dd2/sha512_8c_source.html#l00010">sha512.c:10</a></div></div>

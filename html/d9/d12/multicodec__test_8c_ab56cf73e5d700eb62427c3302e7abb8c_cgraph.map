@@ -1,7 +1,7 @@
 <map id="test_multicodec_encode_decode" name="test_multicodec_encode_decode">
 <area shape="rect" id="node1" title=" " alt="" coords="5,49,185,90"/>
-<area shape="rect" id="node2" href="$d5/d14/multicodec_8c.html#a0dd345326afee00217e02d18e891b763" title=" " alt="" coords="254,5,402,32"/>
-<area shape="rect" id="node4" href="$d5/d14/multicodec_8c.html#ae8f25d9186ed7d247e851221a27cf231" title=" " alt="" coords="254,56,402,83"/>
+<area shape="rect" id="node2" href="$d5/d14/multicodec_8c.html#a0dd345326afee00217e02d18e891b763" title="Decode a multicodec encoded data array." alt="" coords="254,5,402,32"/>
+<area shape="rect" id="node4" href="$d5/d14/multicodec_8c.html#ae8f25d9186ed7d247e851221a27cf231" title="Encode a char array using the specified encoding." alt="" coords="254,56,402,83"/>
 <area shape="rect" id="node5" href="$d5/d14/multicodec_8c.html#aed61275944cb3475683e0cb4e2f1fc2d" title="free up resources allocated for multicodec_encoded_t" alt="" coords="233,107,423,133"/>
 <area shape="rect" id="node3" href="$d5/d14/multicodec_8c.html#a6b087e50afc90c43fbc2a5b464291840" title="used to check if the provided codec is a valid codec" alt="" coords="471,31,621,57"/>
 </map>

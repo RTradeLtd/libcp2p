@@ -1,7 +1,7 @@
 <map id="mh_multihash_length" name="mh_multihash_length">
 <area shape="rect" id="node1" title=" " alt="" coords="541,91,704,117"/>
 <area shape="rect" id="node2" href="$dc/d13/cid_8h.html#a5824fd470e4528d04f75fca3eeaac774" title=" " alt="" coords="142,5,249,32"/>
-<area shape="rect" id="node3" href="$d3/d12/multihash_8h.html#a073592d04197de860390a466503349d5" title=" " alt="" coords="331,64,493,91"/>
+<area shape="rect" id="node3" href="$d3/d12/multihash_8h.html#a073592d04197de860390a466503349d5" title="gives access to raw digest inside multihash buffer" alt="" coords="331,64,493,91"/>
 <area shape="rect" id="node6" href="$d6/dab/multihash__test_8c.html#af86a335c228100550b3fac721c38762f" title=" " alt="" coords="112,122,279,163"/>
 <area shape="rect" id="node7" href="$d6/dab/multihash__test_8c.html#ad4497dba4dbf111a7f4252195de4f22c" title=" " alt="" coords="335,174,489,215"/>
 <area shape="rect" id="node4" href="$d6/dab/multihash__test_8c.html#abf0468aaa72be7d1a3f8a3f1a5e655c8" title=" " alt="" coords="108,57,283,98"/>

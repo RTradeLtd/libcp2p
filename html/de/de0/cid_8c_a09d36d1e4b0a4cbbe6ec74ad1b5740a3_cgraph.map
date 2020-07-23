@@ -1,7 +1,7 @@
 <map id="ipfs_cid_hash_to_base32" name="ipfs_cid_hash_to_base32">
 <area shape="rect" id="node1" title=" " alt="" coords="5,78,189,105"/>
-<area shape="rect" id="node2" href="$db/d08/base32_8c.html#a78acce42d5c859aea4c19508c1aaa1c5" title=" " alt="" coords="237,5,420,47"/>
-<area shape="rect" id="node5" href="$db/d08/base32_8c.html#a37dc6aec5c9e10f4f7775d5db0fc1b63" title=" " alt="" coords="237,71,420,112"/>
+<area shape="rect" id="node2" href="$db/d08/base32_8c.html#a78acce42d5c859aea4c19508c1aaa1c5" title="Encode in Base32 format." alt="" coords="237,5,420,47"/>
+<area shape="rect" id="node5" href="$db/d08/base32_8c.html#a37dc6aec5c9e10f4f7775d5db0fc1b63" title="Calculate the size of the buffer necessary to encode." alt="" coords="237,71,420,112"/>
 <area shape="rect" id="node6" href="$d4/da0/multihash_8c.html#a91aa646ac4a3a60ece14436b8123a1b0" title=" " alt="" coords="290,137,367,163"/>
 <area shape="rect" id="node3" href="$db/d08/base32_8c.html#a7b03b543c865173ec643b3c2ee4fb08f" title=" " alt="" coords="468,13,591,39"/>
 <area shape="rect" id="node4" href="$db/d08/base32_8c.html#a3c0c1964c1c1a0c1d499ff6edf8a68b5" title=" " alt="" coords="639,13,717,39"/>

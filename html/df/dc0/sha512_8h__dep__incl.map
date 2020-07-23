@@ -1,5 +1,5 @@
 <map id="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/sha512.h" name="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/sha512.h">
-<area shape="rect" id="node1" title=" " alt="" coords="105,5,287,61"/>
+<area shape="rect" id="node1" title="provides sha512 hashing support" alt="" coords="105,5,287,61"/>
 <area shape="rect" id="node2" href="$d5/d29/crypto__test_8c.html" title=" " alt="" coords="5,109,184,165"/>
 <area shape="rect" id="node3" href="$df/dd2/sha512_8c.html" title=" " alt="" coords="209,109,386,165"/>
 </map>

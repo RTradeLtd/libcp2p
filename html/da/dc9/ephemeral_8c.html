@@ -117,6 +117,7 @@ Include dependency graph for ephemeral.c:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a220be6362bc94899955a9e46cc1b5490"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../dd/d9a/struct_stretched_key.html">StretchedKey</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc9/ephemeral_8c.html#a220be6362bc94899955a9e46cc1b5490">libp2p_crypto_ephemeral_stretched_key_new</a> ()</td></tr>
+<tr class="memdesc:a220be6362bc94899955a9e46cc1b5490"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routines to help with the <a class="el" href="../../dd/d9a/struct_stretched_key.html">StretchedKey</a> struct.  <a href="../../da/dc9/ephemeral_8c.html#a220be6362bc94899955a9e46cc1b5490">More...</a><br /></td></tr>
 <tr class="separator:a220be6362bc94899955a9e46cc1b5490"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c4b1a63dc7391d8769552142fbfdd2e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc9/ephemeral_8c.html#a5c4b1a63dc7391d8769552142fbfdd2e">libp2p_crypto_ephemeral_stretched_key_free</a> (struct <a class="el" href="../../dd/d9a/struct_stretched_key.html">StretchedKey</a> *key)</td></tr>
 <tr class="separator:a5c4b1a63dc7391d8769552142fbfdd2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,10 +134,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a59adca48a4d9c249593797ca2743a517"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc9/ephemeral_8c.html#a59adca48a4d9c249593797ca2743a517">libp2p_crypto_ephemeral_point_unmarshal</a> (int bit_size, unsigned char *buffer, size_t buffer_length, uint64_t *x, uint64_t *y)</td></tr>
 <tr class="separator:a59adca48a4d9c249593797ca2743a517"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65ed903b5260e35022b42a4fe176a7f1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc9/ephemeral_8c.html#a65ed903b5260e35022b42a4fe176a7f1">libp2p_crypto_ephemeral_keypair_generate</a> (char *curve, struct <a class="el" href="../../d0/d5b/struct_ephemeral_private_key.html">EphemeralPrivateKey</a> **private_key_ptr)</td></tr>
+<tr class="memdesc:a65ed903b5260e35022b42a4fe176a7f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a Ephemeral Public Key as well as a shared key.  <a href="../../da/dc9/ephemeral_8c.html#a65ed903b5260e35022b42a4fe176a7f1">More...</a><br /></td></tr>
 <tr class="separator:a65ed903b5260e35022b42a4fe176a7f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea991b272dae2486b47b8a69571d7d4d"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc9/ephemeral_8c.html#aea991b272dae2486b47b8a69571d7d4d">libp2p_crypto_ephemeral_keypair_to_public_bytes</a> (struct <a class="el" href="../../d7/d04/struct_ephemeral_public_key.html">EphemeralPublicKey</a> *public_key, unsigned char **results, size_t *bytes_written)</td></tr>
 <tr class="separator:aea991b272dae2486b47b8a69571d7d4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a275c41cbe0489b9f5199461c80d85d3c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc9/ephemeral_8c.html#a275c41cbe0489b9f5199461c80d85d3c">libp2p_crypto_ephemeral_generate_shared_secret</a> (struct <a class="el" href="../../d0/d5b/struct_ephemeral_private_key.html">EphemeralPrivateKey</a> *private_key, const unsigned char *remote_public_key, size_t remote_public_key_size)</td></tr>
+<tr class="memdesc:a275c41cbe0489b9f5199461c80d85d3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a shared secret.  <a href="../../da/dc9/ephemeral_8c.html#a275c41cbe0489b9f5199461c80d85d3c">More...</a><br /></td></tr>
 <tr class="separator:a275c41cbe0489b9f5199461c80d85d3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -171,6 +174,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Generate a shared secret. </p>
 <p>Generate a shared secret </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">private_key</td><td>the context, also where it puts the shared secret </td></tr>
@@ -235,7 +240,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="../../da/dc9/ephemeral_8c_ad765fc171667f71bd51ebf8a22f3c0ad_icgraph.png" border="0" usemap="#da/dc9/ephemeral_8c_ad765fc171667f71bd51ebf8a22f3c0ad_icgraph" alt=""/></div>
 <map name="da/dc9/ephemeral_8c_ad765fc171667f71bd51ebf8a22f3c0ad_icgraph" id="da/dc9/ephemeral_8c_ad765fc171667f71bd51ebf8a22f3c0ad_icgraph">
 <area shape="rect" title=" " alt="" coords="240,5,427,47"/>
-<area shape="rect" href="../../d9/d01/ephemeral_8h.html#a47e5aad937ee9402a5f759a2404629cb" title=" " alt="" coords="5,5,192,47"/>
+<area shape="rect" href="../../d9/d01/ephemeral_8h.html#a47e5aad937ee9402a5f759a2404629cb" title="Generate a Ephemeral Public Key as well as a shared key." alt="" coords="5,5,192,47"/>
 </map>
 </div>
 
@@ -266,6 +271,8 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Generate a Ephemeral Public Key as well as a shared key. </p>
 <p>Generate a Ephemeral keypair </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">curve</td><td>the curve to use (P-256, P-384, or P-521) </td></tr>
@@ -281,7 +288,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../da/dc9/ephemeral_8c_a65ed903b5260e35022b42a4fe176a7f1_cgraph.png" border="0" usemap="#da/dc9/ephemeral_8c_a65ed903b5260e35022b42a4fe176a7f1_cgraph" alt=""/></div>
 <map name="da/dc9/ephemeral_8c_a65ed903b5260e35022b42a4fe176a7f1_cgraph" id="da/dc9/ephemeral_8c_a65ed903b5260e35022b42a4fe176a7f1_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,192,47"/>
+<area shape="rect" title="Generate a Ephemeral Public Key as well as a shared key." alt="" coords="5,5,192,47"/>
 <area shape="rect" href="../../da/dc9/ephemeral_8c.html#ad765fc171667f71bd51ebf8a22f3c0ad" title=" " alt="" coords="240,5,427,47"/>
 </map>
 </div>
@@ -519,13 +526,13 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">struct <a class="el" href="../../dd/d9a/struct_stretched_key.html">StretchedKey</a>* libp2p_crypto_ephemeral_stretched_key_new </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Routines to help with the <a class="el" href="../../dd/d9a/struct_stretched_key.html">StretchedKey</a> struct </p>
+
+<p>Routines to help with the <a class="el" href="../../dd/d9a/struct_stretched_key.html">StretchedKey</a> struct. </p>
 
 <p class="definition">Definition at line <a class="el" href="../../da/dc9/ephemeral_8c_source.html#l00012">12</a> of file <a class="el" href="../../da/dc9/ephemeral_8c_source.html">ephemeral.c</a>.</p>
 

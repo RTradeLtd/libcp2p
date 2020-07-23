@@ -102,7 +102,7 @@ Include dependency graph for aes.c:</div>
 <area shape="rect" title=" " alt="" coords="224,5,401,61"/>
 <area shape="rect" title=" " alt="" coords="5,109,76,136"/>
 <area shape="rect" title=" " alt="" coords="100,109,171,136"/>
-<area shape="rect" href="../../db/dcb/aes_8h.html" title=" " alt="" coords="195,109,297,136"/>
+<area shape="rect" href="../../db/dcb/aes_8h.html" title="proivides aes encryption/decryption functions" alt="" coords="195,109,297,136"/>
 <area shape="rect" title=" " alt="" coords="322,109,437,136"/>
 <area shape="rect" title=" " alt="" coords="461,109,605,136"/>
 <area shape="rect" title=" " alt="" coords="629,109,767,136"/>
@@ -114,10 +114,13 @@ Include dependency graph for aes.c:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a7b7d926d2ee5b7ab99c07714c9b62138"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d34/aes_8c.html#a7b7d926d2ee5b7ab99c07714c9b62138">libp2p_crypto_aes_key_generate</a> (char *key)</td></tr>
+<tr class="memdesc:a7b7d926d2ee5b7ab99c07714c9b62138"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a new AES key.  <a href="../../dd/d34/aes_8c.html#a7b7d926d2ee5b7ab99c07714c9b62138">More...</a><br /></td></tr>
 <tr class="separator:a7b7d926d2ee5b7ab99c07714c9b62138"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd685288a33798a8caf4218ddb729cee"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d34/aes_8c.html#afd685288a33798a8caf4218ddb729cee">libp2p_crypto_aes_encrypt</a> (char *key, char *iv, char *input, size_t input_size, unsigned char **output, size_t *output_size)</td></tr>
+<tr class="memdesc:afd685288a33798a8caf4218ddb729cee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encrypt a block of text.  <a href="../../dd/d34/aes_8c.html#afd685288a33798a8caf4218ddb729cee">More...</a><br /></td></tr>
 <tr class="separator:afd685288a33798a8caf4218ddb729cee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7637a5c4b2b30eb5a99a0079282e794c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/d34/aes_8c.html#a7637a5c4b2b30eb5a99a0079282e794c">libp2p_crypto_aes_decrypt</a> (char *key, char *iv, char *input, size_t input_size, unsigned char **output, size_t *output_size)</td></tr>
+<tr class="memdesc:a7637a5c4b2b30eb5a99a0079282e794c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrypt a block of text.  <a href="../../dd/d34/aes_8c.html#a7637a5c4b2b30eb5a99a0079282e794c">More...</a><br /></td></tr>
 <tr class="separator:a7637a5c4b2b30eb5a99a0079282e794c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -170,6 +173,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Decrypt a block of text. </p>
 <p>Decrypt a block of text </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">key</td><td>the aes key (32 bytes) </td></tr>
@@ -236,6 +241,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Encrypt a block of text. </p>
 <p>Encrypt a block of text </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">key</td><td>the aes key (32 bytes) </td></tr>
@@ -268,6 +275,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Generate a new AES key. </p>
 <p>functions for aes encryption Generate a new AES key </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">key</td><td>where to store the 32 byte key </td></tr>

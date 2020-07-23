@@ -2,7 +2,8 @@
 .ad l
 .nh
 .SH NAME
-/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/multiaddr/protocols.h
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/multiaddr/protocols.h \- functions for managing multiaddr protocols  
+
 .SH SYNOPSIS
 .br
 .PP
@@ -41,6 +42,7 @@
 .ti -1c
 .RI "int \fBload_protocols\fP (struct \fBProtocolListItem\fP **head)"
 .br
+.RI "load the available protocols into the global protocol_P "
 .ti -1c
 .RI "struct \fBProtocol\fP * \fBproto_with_name\fP (const struct \fBProtocolListItem\fP *head, const char *proto_w_name)"
 .br
@@ -51,9 +53,25 @@
 .RI "void \fBprotocols_with_string\fP (const struct \fBProtocolListItem\fP *head, char *meee, int sizi)"
 .br
 .in -1c
+.SH "Detailed Description"
+.PP 
+functions for managing multiaddr protocols 
+
+
+.PP
+Definition in file \fBprotocols\&.h\fP\&.
 .SH "Function Documentation"
 .PP 
 .SS "int load_protocols (struct \fBProtocolListItem\fP ** head)"
+
+.PP
+load the available protocols into the global protocol_P 
+.PP
+\fBReturns\fP
+.RS 4
+True(1) on success, otherwise 0
+.RE
+.PP
 load the available protocols into the global protocol_P 
 .PP
 \fBReturns\fP

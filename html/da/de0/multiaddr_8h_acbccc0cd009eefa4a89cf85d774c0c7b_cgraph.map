@@ -1,0 +1,4 @@
+<map id="multi_address_compare_id" name="multi_address_compare_id">
+<area shape="rect" id="node1" title="Check to see how these two addresses compare, ignoring IP address, only." alt="" coords="5,5,203,32"/>
+<area shape="rect" id="node2" href="$d8/d26/multiaddr_8c.html#a4f32a4c81ffb56cf5aef8eb3b1d4a559" title="Pulls the peer ID out of a multi_address struct." alt="" coords="251,5,448,32"/>
+</map>

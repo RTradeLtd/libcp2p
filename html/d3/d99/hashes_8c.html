@@ -100,10 +100,10 @@ Include dependency graph for hashes.c:</div>
 <div class="center"><img src="../../d2/d18/hashes_8c__incl.png" border="0" usemap="#_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2src_2multihash_2hashes_8c" alt=""/></div>
 <map name="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2src_2multihash_2hashes_8c" id="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2src_2multihash_2hashes_8c">
 <area shape="rect" title=" " alt="" coords="139,5,317,61"/>
-<area shape="rect" href="../../d6/df9/hashes_8h.html" title=" " alt="" coords="5,109,155,136"/>
-<area shape="rect" href="../../de/d45/errors_8h.html" title=" " alt="" coords="100,184,172,211"/>
+<area shape="rect" href="../../d6/df9/hashes_8h.html" title="multihash definitions" alt="" coords="5,109,155,136"/>
+<area shape="rect" href="../../de/d45/errors_8h.html" title="helpers for working with multihash errors" alt="" coords="100,184,172,211"/>
 <area shape="rect" title=" " alt="" coords="230,109,301,136"/>
-<area shape="rect" href="../../d2/d88/generic_8h.html" title=" " alt="" coords="325,109,475,136"/>
+<area shape="rect" href="../../d2/d88/generic_8h.html" title="generic definitions for multihashes" alt="" coords="325,109,475,136"/>
 </map>
 </div>
 </div>
@@ -121,8 +121,10 @@ Functions</h2></td></tr>
 <tr class="memitem:abb8811795c15911e42d77bdc5848504f"><td class="memItemLeft" align="right" valign="top">static const struct <a class="el" href="../../d8/da0/structhash__info.html">hash_info</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d99/hashes_8c.html#abb8811795c15911e42d77bdc5848504f">find_hash</a> (int hash)</td></tr>
 <tr class="separator:abb8811795c15911e42d77bdc5848504f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70b1117400bc8fb43f5b1d83815ac7d0"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d99/hashes_8c.html#a70b1117400bc8fb43f5b1d83815ac7d0">mh_hash_name</a> (int hash)</td></tr>
+<tr class="memdesc:a70b1117400bc8fb43f5b1d83815ac7d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given the id, return the hash name.  <a href="../../d3/d99/hashes_8c.html#a70b1117400bc8fb43f5b1d83815ac7d0">More...</a><br /></td></tr>
 <tr class="separator:a70b1117400bc8fb43f5b1d83815ac7d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a70713299e5149f9e08c6917132562bd7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d99/hashes_8c.html#a70713299e5149f9e08c6917132562bd7">mh_hash_default_length</a> (int hash)</td></tr>
+<tr class="memdesc:a70713299e5149f9e08c6917132562bd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given the id, return the default length.  <a href="../../d3/d99/hashes_8c.html#a70713299e5149f9e08c6917132562bd7">More...</a><br /></td></tr>
 <tr class="separator:a70713299e5149f9e08c6917132562bd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
@@ -169,8 +171,8 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="../../d3/d99/hashes_8c_abb8811795c15911e42d77bdc5848504f_icgraph.png" border="0" usemap="#d3/d99/hashes_8c_abb8811795c15911e42d77bdc5848504f_icgraph" alt=""/></div>
 <map name="d3/d99/hashes_8c_abb8811795c15911e42d77bdc5848504f_icgraph" id="d3/d99/hashes_8c_abb8811795c15911e42d77bdc5848504f_icgraph">
 <area shape="rect" title=" " alt="" coords="569,177,653,203"/>
-<area shape="rect" href="../../d6/df9/hashes_8h.html#a70713299e5149f9e08c6917132562bd7" title=" " alt="" coords="339,111,521,138"/>
-<area shape="rect" href="../../d6/df9/hashes_8h.html#a70b1117400bc8fb43f5b1d83815ac7d0" title=" " alt="" coords="367,209,493,235"/>
+<area shape="rect" href="../../d6/df9/hashes_8h.html#a70713299e5149f9e08c6917132562bd7" title="Given the id, return the default length." alt="" coords="339,111,521,138"/>
+<area shape="rect" href="../../d6/df9/hashes_8h.html#a70b1117400bc8fb43f5b1d83815ac7d0" title="Given the id, return the hash name." alt="" coords="367,209,493,235"/>
 <area shape="rect" href="../../d6/dab/multihash__test_8c.html#a705704337f7f14838966e620c670a79a" title=" " alt="" coords="118,5,281,47"/>
 <area shape="rect" href="../../d6/dab/multihash__test_8c.html#aeece0c07d5d880b83cd49acf0467ad1e" title=" " alt="" coords="122,71,277,112"/>
 <area shape="rect" href="../../d6/dab/multihash__test_8c.html#af86a335c228100550b3fac721c38762f" title=" " alt="" coords="116,136,283,177"/>
@@ -215,6 +217,8 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Given the id, return the default length. </p>
 <p>Given the id, return the default length </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">hash</td><td>the id </td></tr>
@@ -229,7 +233,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d3/d99/hashes_8c_a70713299e5149f9e08c6917132562bd7_cgraph.png" border="0" usemap="#d3/d99/hashes_8c_a70713299e5149f9e08c6917132562bd7_cgraph" alt=""/></div>
 <map name="d3/d99/hashes_8c_a70713299e5149f9e08c6917132562bd7_cgraph" id="d3/d99/hashes_8c_a70713299e5149f9e08c6917132562bd7_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,188,32"/>
+<area shape="rect" title="Given the id, return the default length." alt="" coords="5,5,188,32"/>
 <area shape="rect" href="../../d3/d99/hashes_8c.html#abb8811795c15911e42d77bdc5848504f" title=" " alt="" coords="236,5,320,32"/>
 </map>
 </div>
@@ -238,7 +242,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d3/d99/hashes_8c_a70713299e5149f9e08c6917132562bd7_icgraph.png" border="0" usemap="#d3/d99/hashes_8c_a70713299e5149f9e08c6917132562bd7_icgraph" alt=""/></div>
 <map name="d3/d99/hashes_8c_a70713299e5149f9e08c6917132562bd7_icgraph" id="d3/d99/hashes_8c_a70713299e5149f9e08c6917132562bd7_icgraph">
-<area shape="rect" title=" " alt="" coords="323,78,505,105"/>
+<area shape="rect" title="Given the id, return the default length." alt="" coords="323,78,505,105"/>
 <area shape="rect" href="../../d6/dab/multihash__test_8c.html#a705704337f7f14838966e620c670a79a" title=" " alt="" coords="110,5,273,47"/>
 <area shape="rect" href="../../d6/dab/multihash__test_8c.html#aeece0c07d5d880b83cd49acf0467ad1e" title=" " alt="" coords="114,71,269,112"/>
 <area shape="rect" href="../../d6/dab/multihash__test_8c.html#af86a335c228100550b3fac721c38762f" title=" " alt="" coords="108,136,275,177"/>
@@ -263,6 +267,8 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Given the id, return the hash name. </p>
 <p>Given the id, return the hash name </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">hash</td><td>the id (such as MH_H_SHA1) </td></tr>
@@ -277,7 +283,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d3/d99/hashes_8c_a70b1117400bc8fb43f5b1d83815ac7d0_cgraph.png" border="0" usemap="#d3/d99/hashes_8c_a70b1117400bc8fb43f5b1d83815ac7d0_cgraph" alt=""/></div>
 <map name="d3/d99/hashes_8c_a70b1117400bc8fb43f5b1d83815ac7d0_cgraph" id="d3/d99/hashes_8c_a70b1117400bc8fb43f5b1d83815ac7d0_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,131,32"/>
+<area shape="rect" title="Given the id, return the hash name." alt="" coords="5,5,131,32"/>
 <area shape="rect" href="../../d3/d99/hashes_8c.html#abb8811795c15911e42d77bdc5848504f" title=" " alt="" coords="179,5,263,32"/>
 </map>
 </div>
@@ -286,7 +292,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d3/d99/hashes_8c_a70b1117400bc8fb43f5b1d83815ac7d0_icgraph.png" border="0" usemap="#d3/d99/hashes_8c_a70b1117400bc8fb43f5b1d83815ac7d0_icgraph" alt=""/></div>
 <map name="d3/d99/hashes_8c_a70b1117400bc8fb43f5b1d83815ac7d0_icgraph" id="d3/d99/hashes_8c_a70b1117400bc8fb43f5b1d83815ac7d0_icgraph">
-<area shape="rect" title=" " alt="" coords="339,46,464,73"/>
+<area shape="rect" title="Given the id, return the hash name." alt="" coords="339,46,464,73"/>
 <area shape="rect" href="../../d6/dab/multihash__test_8c.html#a8638d8001ddd0c3f3435edaff810cde9" title=" " alt="" coords="118,5,281,47"/>
 <area shape="rect" href="../../d6/dab/multihash__test_8c.html#a2c20d844927bb90cdf5b3e1c954636e4" title=" " alt="" coords="108,71,291,112"/>
 <area shape="rect" href="../../d6/dab/multihash__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,46,60,73"/>
@@ -327,17 +333,17 @@ Here is the caller graph for this function:</div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="ahashes_8h_html_affad01bf35d2dfd5db6f92d986c09187"><div class="ttname"><a href="../../d6/df9/hashes_8h.html#affad01bf35d2dfd5db6f92d986c09187">MH_H_SHA2_256</a></div><div class="ttdeci">#define MH_H_SHA2_256</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/df9/hashes_8h_source.html#l00007">hashes.h:7</a></div></div>
-<div class="ttc" id="ahashes_8h_html_a467bd91ac951973045a1d4289d4164b7"><div class="ttname"><a href="../../d6/df9/hashes_8h.html#a467bd91ac951973045a1d4289d4164b7">MH_H_SHA3_384</a></div><div class="ttdeci">#define MH_H_SHA3_384</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/df9/hashes_8h_source.html#l00010">hashes.h:10</a></div></div>
-<div class="ttc" id="ahashes_8h_html_a4abf5b28f1c4f8e7fc99c09f18794baa"><div class="ttname"><a href="../../d6/df9/hashes_8h.html#a4abf5b28f1c4f8e7fc99c09f18794baa">MH_H_SHA2_512</a></div><div class="ttdeci">#define MH_H_SHA2_512</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/df9/hashes_8h_source.html#l00008">hashes.h:8</a></div></div>
-<div class="ttc" id="ahashes_8h_html_aabed7de0ece4a8bcc6afebd83d6fd321"><div class="ttname"><a href="../../d6/df9/hashes_8h.html#aabed7de0ece4a8bcc6afebd83d6fd321">MH_H_SHA3_256</a></div><div class="ttdeci">#define MH_H_SHA3_256</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/df9/hashes_8h_source.html#l00011">hashes.h:11</a></div></div>
-<div class="ttc" id="ahashes_8h_html_a6f480b20d284d35c10b47bc0c318e5c0"><div class="ttname"><a href="../../d6/df9/hashes_8h.html#a6f480b20d284d35c10b47bc0c318e5c0">MH_H_SHAKE_128</a></div><div class="ttdeci">#define MH_H_SHAKE_128</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/df9/hashes_8h_source.html#l00013">hashes.h:13</a></div></div>
-<div class="ttc" id="ahashes_8h_html_a06b2608649c74b0e7bdc4e2aa1e0f4da"><div class="ttname"><a href="../../d6/df9/hashes_8h.html#a06b2608649c74b0e7bdc4e2aa1e0f4da">MH_H_SHA3_512</a></div><div class="ttdeci">#define MH_H_SHA3_512</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/df9/hashes_8h_source.html#l00009">hashes.h:9</a></div></div>
-<div class="ttc" id="ahashes_8h_html_ab9e9298e7991e6fa51b79cc2201ca012"><div class="ttname"><a href="../../d6/df9/hashes_8h.html#ab9e9298e7991e6fa51b79cc2201ca012">MH_H_SHAKE_256</a></div><div class="ttdeci">#define MH_H_SHAKE_256</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/df9/hashes_8h_source.html#l00014">hashes.h:14</a></div></div>
-<div class="ttc" id="ahashes_8h_html_a679aab44b1405f9293d4ee9d07e81769"><div class="ttname"><a href="../../d6/df9/hashes_8h.html#a679aab44b1405f9293d4ee9d07e81769">MH_H_BLAKE2B</a></div><div class="ttdeci">#define MH_H_BLAKE2B</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/df9/hashes_8h_source.html#l00015">hashes.h:15</a></div></div>
-<div class="ttc" id="ahashes_8h_html_aa09fbcdbdcd4d860eb43513b08ef7291"><div class="ttname"><a href="../../d6/df9/hashes_8h.html#aa09fbcdbdcd4d860eb43513b08ef7291">MH_H_SHA3_224</a></div><div class="ttdeci">#define MH_H_SHA3_224</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/df9/hashes_8h_source.html#l00012">hashes.h:12</a></div></div>
-<div class="ttc" id="ahashes_8h_html_a79c9a5516efd8748f4c2cb0f2f150138"><div class="ttname"><a href="../../d6/df9/hashes_8h.html#a79c9a5516efd8748f4c2cb0f2f150138">MH_H_BLAKE2S</a></div><div class="ttdeci">#define MH_H_BLAKE2S</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/df9/hashes_8h_source.html#l00016">hashes.h:16</a></div></div>
-<div class="ttc" id="ahashes_8h_html_af85e32868bf80c2025ea630b4247dd3f"><div class="ttname"><a href="../../d6/df9/hashes_8h.html#af85e32868bf80c2025ea630b4247dd3f">MH_H_SHA1</a></div><div class="ttdeci">#define MH_H_SHA1</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/df9/hashes_8h_source.html#l00006">hashes.h:6</a></div></div>
+<div class="ttc" id="ahashes_8h_html_affad01bf35d2dfd5db6f92d986c09187"><div class="ttname"><a href="../../d6/df9/hashes_8h.html#affad01bf35d2dfd5db6f92d986c09187">MH_H_SHA2_256</a></div><div class="ttdeci">#define MH_H_SHA2_256</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/df9/hashes_8h_source.html#l00010">hashes.h:10</a></div></div>
+<div class="ttc" id="ahashes_8h_html_a467bd91ac951973045a1d4289d4164b7"><div class="ttname"><a href="../../d6/df9/hashes_8h.html#a467bd91ac951973045a1d4289d4164b7">MH_H_SHA3_384</a></div><div class="ttdeci">#define MH_H_SHA3_384</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/df9/hashes_8h_source.html#l00013">hashes.h:13</a></div></div>
+<div class="ttc" id="ahashes_8h_html_a4abf5b28f1c4f8e7fc99c09f18794baa"><div class="ttname"><a href="../../d6/df9/hashes_8h.html#a4abf5b28f1c4f8e7fc99c09f18794baa">MH_H_SHA2_512</a></div><div class="ttdeci">#define MH_H_SHA2_512</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/df9/hashes_8h_source.html#l00011">hashes.h:11</a></div></div>
+<div class="ttc" id="ahashes_8h_html_aabed7de0ece4a8bcc6afebd83d6fd321"><div class="ttname"><a href="../../d6/df9/hashes_8h.html#aabed7de0ece4a8bcc6afebd83d6fd321">MH_H_SHA3_256</a></div><div class="ttdeci">#define MH_H_SHA3_256</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/df9/hashes_8h_source.html#l00014">hashes.h:14</a></div></div>
+<div class="ttc" id="ahashes_8h_html_a6f480b20d284d35c10b47bc0c318e5c0"><div class="ttname"><a href="../../d6/df9/hashes_8h.html#a6f480b20d284d35c10b47bc0c318e5c0">MH_H_SHAKE_128</a></div><div class="ttdeci">#define MH_H_SHAKE_128</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/df9/hashes_8h_source.html#l00016">hashes.h:16</a></div></div>
+<div class="ttc" id="ahashes_8h_html_a06b2608649c74b0e7bdc4e2aa1e0f4da"><div class="ttname"><a href="../../d6/df9/hashes_8h.html#a06b2608649c74b0e7bdc4e2aa1e0f4da">MH_H_SHA3_512</a></div><div class="ttdeci">#define MH_H_SHA3_512</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/df9/hashes_8h_source.html#l00012">hashes.h:12</a></div></div>
+<div class="ttc" id="ahashes_8h_html_ab9e9298e7991e6fa51b79cc2201ca012"><div class="ttname"><a href="../../d6/df9/hashes_8h.html#ab9e9298e7991e6fa51b79cc2201ca012">MH_H_SHAKE_256</a></div><div class="ttdeci">#define MH_H_SHAKE_256</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/df9/hashes_8h_source.html#l00017">hashes.h:17</a></div></div>
+<div class="ttc" id="ahashes_8h_html_a679aab44b1405f9293d4ee9d07e81769"><div class="ttname"><a href="../../d6/df9/hashes_8h.html#a679aab44b1405f9293d4ee9d07e81769">MH_H_BLAKE2B</a></div><div class="ttdeci">#define MH_H_BLAKE2B</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/df9/hashes_8h_source.html#l00018">hashes.h:18</a></div></div>
+<div class="ttc" id="ahashes_8h_html_aa09fbcdbdcd4d860eb43513b08ef7291"><div class="ttname"><a href="../../d6/df9/hashes_8h.html#aa09fbcdbdcd4d860eb43513b08ef7291">MH_H_SHA3_224</a></div><div class="ttdeci">#define MH_H_SHA3_224</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/df9/hashes_8h_source.html#l00015">hashes.h:15</a></div></div>
+<div class="ttc" id="ahashes_8h_html_a79c9a5516efd8748f4c2cb0f2f150138"><div class="ttname"><a href="../../d6/df9/hashes_8h.html#a79c9a5516efd8748f4c2cb0f2f150138">MH_H_BLAKE2S</a></div><div class="ttdeci">#define MH_H_BLAKE2S</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/df9/hashes_8h_source.html#l00019">hashes.h:19</a></div></div>
+<div class="ttc" id="ahashes_8h_html_af85e32868bf80c2025ea630b4247dd3f"><div class="ttname"><a href="../../d6/df9/hashes_8h.html#af85e32868bf80c2025ea630b4247dd3f">MH_H_SHA1</a></div><div class="ttdeci">#define MH_H_SHA1</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/df9/hashes_8h_source.html#l00009">hashes.h:9</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

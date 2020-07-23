@@ -101,8 +101,8 @@ Maddr struct:</h2>
 <li>size_t bsize; //size_t that contains the real bytes size (Use it whenever using the bytes so you don't input trash!)</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md5"></a>
-New Multi Address From String(multiaddress_new_from_string)</h2>
-<p>struct MultiAddress* a = multiaddress_new_from_string("/ip4/127.0.0.1/tcp/8080/");</p>
+New Multi Address From String(multi_address_new_from_string)</h2>
+<p>struct multi_address* a = multi_address_new_from_string("/ip4/127.0.0.1/tcp/8080/");</p>
 <h2><a class="anchor" id="autotoc_md6"></a>
 Obtaining the byte buffer(.bytes, .bsize[0]):</h2>
 <p>printf("TEST BYTES: %s\n",Var_To_Hex(a-&gt;bsize, a-&gt;bytes)); Var_To_Hex = Byte Buffer to Hex String Hex_To_Var = Hex String to Byte Buffer</p>
@@ -112,18 +112,18 @@ Encapsulation &amp; Decapsulation(m_encapsulate, m_decapsulate)</h2>
 Remember, Decapsulation happens from right to left, never in reverse, if you have /ip4/udp/ipfs/ if you decapsulate "udp" you will also take out ipfs!</h4>
 <ul>
 <li>Now the string is: /ip4/192.168.1.1/</li>
-<li>multiaddress_encapsulate(a,"/udp/3333/"); //Adds udp/3333/</li>
+<li>multi_address_encapsulate(a,"/udp/3333/"); //Adds udp/3333/</li>
 <li>Now the string is: /ip4/192.168.1.1/udp/3333/</li>
-<li>multiaddress_decapsulate(a,"udp"); //Removes udp protocol and its address</li>
+<li>multi_address_decapsulate(a,"udp"); //Removes udp protocol and its address</li>
 <li>Now the string is: /ip4/192.168.1.1/</li>
-<li>multiaddress_encapsulate(a,"/tcp/8080");</li>
+<li>multi_address_encapsulate(a,"/tcp/8080");</li>
 <li>Now the string is: /ip4/192.168.1.1/tcp/8080/</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md9"></a>
-Constructing a multiaddress from bytes:</h1>
+Constructing a multi_address from bytes:</h1>
 <ul>
-<li>struct MultiAddress* beta;</li>
-<li>beta = multiaddress_new_from_bytes(a-&gt;bytes,a-&gt;bsize); //This will already construct back to the string too!</li>
+<li>struct multi_address* beta;</li>
+<li>beta = multi_address_new_from_bytes(a-&gt;bytes,a-&gt;bsize); //This will already construct back to the string too!</li>
 <li>printf("B STRING: %s\n",beta-&gt;string); //So after encapsulation and decapsulation atm this string would</li>
 <li>contain: /ip4/192.168.1.1/tcp/8080/ </li>
 </ul>

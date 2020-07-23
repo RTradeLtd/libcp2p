@@ -1,10 +1,10 @@
 <map id="libp2p_new_peer_id" name="libp2p_new_peer_id">
 <area shape="rect" id="node1" title="returns a libp2p peerid from the sha256 hash of a public key base58 encode a string NOTE: this also p..." alt="" coords="5,53,156,79"/>
 <area shape="rect" id="node2" href="$d4/da0/multihash_8c.html#a91aa646ac4a3a60ece14436b8123a1b0" title=" " alt="" coords="236,27,313,54"/>
-<area shape="rect" id="node3" href="$dc/db3/multibase_8c.html#a5f8db468b8b2ead762ff750b3e57b424" title=" " alt="" coords="204,78,345,105"/>
-<area shape="rect" id="node4" href="$de/df5/base16_8c.html#acd96e587c59cf9bc953e4ee8f7031fc6" title=" " alt="" coords="393,5,576,47"/>
-<area shape="rect" id="node5" href="$db/d08/base32_8c.html#a78acce42d5c859aea4c19508c1aaa1c5" title=" " alt="" coords="393,71,576,112"/>
-<area shape="rect" id="node8" href="$db/d36/base64_8c.html#a15d5a6ed9df11e87ac4aa0cf3975aa75" title=" " alt="" coords="393,136,576,177"/>
+<area shape="rect" id="node3" href="$dc/db3/multibase_8c.html#a5f8db468b8b2ead762ff750b3e57b424" title="Encode data in multibase format." alt="" coords="204,78,345,105"/>
+<area shape="rect" id="node4" href="$de/df5/base16_8c.html#acd96e587c59cf9bc953e4ee8f7031fc6" title="Encode in Base16 format." alt="" coords="393,5,576,47"/>
+<area shape="rect" id="node5" href="$db/d08/base32_8c.html#a78acce42d5c859aea4c19508c1aaa1c5" title="Encode in Base32 format." alt="" coords="393,71,576,112"/>
+<area shape="rect" id="node8" href="$db/d36/base64_8c.html#a15d5a6ed9df11e87ac4aa0cf3975aa75" title="encode using base64" alt="" coords="393,136,576,177"/>
 <area shape="rect" id="node6" href="$db/d08/base32_8c.html#a7b03b543c865173ec643b3c2ee4fb08f" title=" " alt="" coords="624,78,747,105"/>
 <area shape="rect" id="node7" href="$db/d08/base32_8c.html#a3c0c1964c1c1a0c1d499ff6edf8a68b5" title=" " alt="" coords="795,78,873,105"/>
 </map>

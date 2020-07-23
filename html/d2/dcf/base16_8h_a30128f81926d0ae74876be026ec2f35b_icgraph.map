@@ -1,5 +1,5 @@
 <map id="libp2p_encoding_base16_encode_size" name="libp2p_encoding_base16_encode_size">
-<area shape="rect" id="node1" title=" " alt="" coords="552,71,735,112"/>
+<area shape="rect" id="node1" title="Calculate the size of the buffer necessary to encode." alt="" coords="552,71,735,112"/>
 <area shape="rect" id="node2" href="$d4/d43/multibase_8h.html#a87879636fb4a1f49493a1ebd9b342863" title=" " alt="" coords="329,78,504,105"/>
 <area shape="rect" id="node3" href="$df/da0/multibase__test_8c.html#ad55c632c06c1269b39f88275cd5144ad" title=" " alt="" coords="108,5,281,47"/>
 <area shape="rect" id="node5" href="$df/da0/multibase__test_8c.html#a5a0521264cc8d45f64fda4f54d900e73" title=" " alt="" coords="108,71,281,112"/>

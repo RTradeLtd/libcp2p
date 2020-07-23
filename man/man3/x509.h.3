@@ -2,7 +2,8 @@
 .ad l
 .nh
 .SH NAME
-/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/x509.h
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/x509.h \- provides x509 cert management tooling  
+
 .SH SYNOPSIS
 .br
 .PP
@@ -15,14 +16,25 @@
 .ti -1c
 .RI "int \fBlibp2p_encoding_x509_private_key_to_der\fP (struct \fBRsaPrivateKey\fP *private_key, unsigned char *bytes[1600])"
 .br
+.RI "Turn an \fBRsaPrivateKey\fP struct into a DER formatted array of bytes\&. "
 .ti -1c
 .RI "int \fBlibp2p_encoding_x509_der_to_private_key\fP (unsigned char *der, size_t der_length, struct \fBRsaPrivateKey\fP *private_key)"
 .br
+.RI "Take a DER formatted char array and turn it into an \fBRsaPrivateKey\fP\&. "
 .in -1c
+.SH "Detailed Description"
+.PP 
+provides x509 cert management tooling 
+
+
+.PP
+Definition in file \fBx509\&.h\fP\&.
 .SH "Function Documentation"
 .PP 
 .SS "int libp2p_encoding_x509_der_to_private_key (unsigned char * der, size_t der_length, struct \fBRsaPrivateKey\fP * private_key)"
-Take a DER formatted char array and turn it into an \fBRsaPrivateKey\fP 
+
+.PP
+Take a DER formatted char array and turn it into an \fBRsaPrivateKey\fP\&. 
 .PP
 \fBParameters\fP
 .RS 4
@@ -42,7 +54,9 @@ true(1) on success
 .PP
 Definition at line 69 of file x509\&.c\&.
 .SS "int libp2p_encoding_x509_private_key_to_der (struct \fBRsaPrivateKey\fP * private_key, unsigned char * bytes[1600])"
-Wrappers around the x509 stuff Turn an \fBRsaPrivateKey\fP struct into a DER formatted array of bytes 
+
+.PP
+Turn an \fBRsaPrivateKey\fP struct into a DER formatted array of bytes\&. 
 .PP
 \fBParameters\fP
 .RS 4

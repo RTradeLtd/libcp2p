@@ -2,7 +2,8 @@
 .ad l
 .nh
 .SH NAME
-/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/encoding/base16.h
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/encoding/base16.h \- provides base 16 encoding/decoding functions  
+
 .SH SYNOPSIS
 .br
 .PP
@@ -15,19 +16,50 @@
 .ti -1c
 .RI "int \fBlibp2p_encoding_base16_encode\fP (const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t *results_length)"
 .br
+.RI "Encode in Base16 format\&. "
 .ti -1c
 .RI "int \fBlibp2p_encoding_base16_encode_size\fP (size_t incoming_length)"
 .br
+.RI "Calculate the size of the buffer necessary to encode\&. "
 .ti -1c
 .RI "int \fBlibp2p_encoding_base16_decode\fP (const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t *results_length)"
 .br
+.RI "Decode from Base16 format\&. "
 .ti -1c
 .RI "int \fBlibp2p_encoding_base16_decode_size\fP (size_t incoming_length)"
 .br
+.RI "Calculate the size of the buffer necessary to decode\&. "
 .in -1c
+.SH "Detailed Description"
+.PP 
+provides base 16 encoding/decoding functions 
+
+
+.PP
+Definition in file \fBbase16\&.h\fP\&.
 .SH "Function Documentation"
 .PP 
 .SS "int libp2p_encoding_base16_decode (const unsigned char * incoming, size_t incoming_length, unsigned char * results, size_t * results_length)"
+
+.PP
+Decode from Base16 format\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIincoming\fP the incoming base16 encoded string 
+.br
+\fIincoming_length\fP the length of the incoming string (no need to include null) 
+.br
+\fIresults\fP where to put the results 
+.br
+\fIresults_length\fP the size of the buffer, and returns the actual length used 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success
+.RE
+.PP
 Decode from Base16 format 
 .PP
 \fBParameters\fP
@@ -50,6 +82,20 @@ true(1) on success
 .PP
 Definition at line 56 of file base16\&.c\&.
 .SS "int libp2p_encoding_base16_decode_size (size_t incoming_length)"
+
+.PP
+Calculate the size of the buffer necessary to decode\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIincoming_length\fP the length of the incoming value 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the size of the buffer necessary to hold the decoded bytes
+.RE
+.PP
 Calculate the size of the buffer necessary to decode 
 .PP
 \fBParameters\fP
@@ -66,6 +112,26 @@ the size of the buffer necessary to hold the decoded bytes
 .PP
 Definition at line 80 of file base16\&.c\&.
 .SS "int libp2p_encoding_base16_encode (const unsigned char * incoming, size_t incoming_length, unsigned char * results, size_t * results_length)"
+
+.PP
+Encode in Base16 format\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIincoming\fP the incoming bytes 
+.br
+\fIincoming_length\fP the length of the incoming bytes 
+.br
+\fIresults\fP where to put the results 
+.br
+\fIresults_length\fP the size of the buffer, and returns the actual length used 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success
+.RE
+.PP
 Encode in Base16 format 
 .PP
 \fBParameters\fP
@@ -88,6 +154,20 @@ true(1) on success
 .PP
 Definition at line 15 of file base16\&.c\&.
 .SS "int libp2p_encoding_base16_encode_size (size_t incoming_length)"
+
+.PP
+Calculate the size of the buffer necessary to encode\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIincoming_length\fP the length of the incoming value 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the size of the buffer necessary to hold the encoded bytes
+.RE
+.PP
 Calculate the size of the buffer necessary to encode 
 .PP
 \fBParameters\fP

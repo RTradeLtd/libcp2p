@@ -143,8 +143,10 @@ Functions</h2></td></tr>
 <tr class="memdesc:aed61275944cb3475683e0cb4e2f1fc2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">free up resources allocated for multicodec_encoded_t  <a href="../../d2/da6/multicodec_8h.html#aed61275944cb3475683e0cb4e2f1fc2d">More...</a><br /></td></tr>
 <tr class="separator:aed61275944cb3475683e0cb4e2f1fc2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8f25d9186ed7d247e851221a27cf231"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d2/da6/multicodec_8h.html#a9fa1d77d2b72a22a44c1321c70ffd932">multicodec_encoded_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/da6/multicodec_8h.html#ae8f25d9186ed7d247e851221a27cf231">multicodec_encode</a> (char *codec, char *inData, size_t inDataLength, char *outData, size_t maxOutDataLength)</td></tr>
+<tr class="memdesc:ae8f25d9186ed7d247e851221a27cf231"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encode a char array using the specified encoding.  <a href="../../d2/da6/multicodec_8h.html#ae8f25d9186ed7d247e851221a27cf231">More...</a><br /></td></tr>
 <tr class="separator:ae8f25d9186ed7d247e851221a27cf231"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0dd345326afee00217e02d18e891b763"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/da6/multicodec_8h.html#a0dd345326afee00217e02d18e891b763">multicodec_decode</a> (<a class="el" href="../../d2/da6/multicodec_8h.html#a9fa1d77d2b72a22a44c1321c70ffd932">multicodec_encoded_t</a> *encoded, char *outData, size_t maxOutDataLength)</td></tr>
+<tr class="memdesc:a0dd345326afee00217e02d18e891b763"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decode a multicodec encoded data array.  <a href="../../d2/da6/multicodec_8h.html#a0dd345326afee00217e02d18e891b763">More...</a><br /></td></tr>
 <tr class="separator:a0dd345326afee00217e02d18e891b763"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b087e50afc90c43fbc2a5b464291840"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/da6/multicodec_8h.html#a6b087e50afc90c43fbc2a5b464291840">multicodec_is_valid</a> (char *codec)</td></tr>
 <tr class="memdesc:a6b087e50afc90c43fbc2a5b464291840"><td class="mdescLeft">&#160;</td><td class="mdescRight">used to check if the provided codec is a valid codec  <a href="../../d2/da6/multicodec_8h.html#a6b087e50afc90c43fbc2a5b464291840">More...</a><br /></td></tr>
@@ -153,7 +155,7 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>an implemention of multicodec </p>
 <dl class="section author"><dt>Author</dt><dd>Bonedaddy</dd></dl>
-<p>enables self describing data encoding methods, for the actual codec definitions see <a class="el" href="../../d7/ded/codecs_8h.html">codecs.h</a> </p><dl class="section note"><dt>Note</dt><dd>for more information on multicodecs see <a href="https://github.com/multiformats/multicodec">https://github.com/multiformats/multicodec</a> </dd></dl>
+<p>enables self describing data encoding methods, for the actual codec definitions see <a class="el" href="../../d7/ded/codecs_8h.html" title="macro definitions of all supported codecs">codecs.h</a> </p><dl class="section note"><dt>Note</dt><dd>for more information on multicodecs see <a href="https://github.com/multiformats/multicodec">https://github.com/multiformats/multicodec</a> </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="../../d2/da6/multicodec_8h_source.html">multicodec.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
@@ -238,6 +240,17 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Decode a multicodec encoded data array. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">encoded</td><td>an instance of multicodec_encoded_t holding the encoded data and codec used </td></tr>
+    <tr><td class="paramname">outData</td><td>the array to put the results in </td></tr>
+    <tr><td class="paramname">maxOutDataLength</td><td>the maximum size of the data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>an error code or 0 if all is well</dd></dl>
 <p>Decode a multicodec encoded data array </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">encoded</td><td>an instance of multicodec_encoded_t holding the encoded data and codec used </td></tr>
@@ -259,7 +272,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d2/da6/multicodec_8h_a0dd345326afee00217e02d18e891b763_cgraph.png" border="0" usemap="#d2/da6/multicodec_8h_a0dd345326afee00217e02d18e891b763_cgraph" alt=""/></div>
 <map name="d2/da6/multicodec_8h_a0dd345326afee00217e02d18e891b763_cgraph" id="d2/da6/multicodec_8h_a0dd345326afee00217e02d18e891b763_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,153,32"/>
+<area shape="rect" title="Decode a multicodec encoded data array." alt="" coords="5,5,153,32"/>
 <area shape="rect" href="../../d5/d14/multicodec_8c.html#a6b087e50afc90c43fbc2a5b464291840" title="used to check if the provided codec is a valid codec" alt="" coords="201,5,352,32"/>
 </map>
 </div>
@@ -268,7 +281,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d2/da6/multicodec_8h_a0dd345326afee00217e02d18e891b763_icgraph.png" border="0" usemap="#d2/da6/multicodec_8h_a0dd345326afee00217e02d18e891b763_icgraph" alt=""/></div>
 <map name="d2/da6/multicodec_8h_a0dd345326afee00217e02d18e891b763_icgraph" id="d2/da6/multicodec_8h_a0dd345326afee00217e02d18e891b763_icgraph">
-<area shape="rect" title=" " alt="" coords="336,13,484,39"/>
+<area shape="rect" title="Decode a multicodec encoded data array." alt="" coords="336,13,484,39"/>
 <area shape="rect" href="../../d9/d12/multicodec__test_8c.html#ab56cf73e5d700eb62427c3302e7abb8c" title=" " alt="" coords="108,5,288,47"/>
 <area shape="rect" href="../../d9/d12/multicodec__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
 </map>
@@ -319,6 +332,21 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Encode a char array using the specified encoding. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">codecName</td><td>a standard name of the codec </td></tr>
+    <tr><td class="paramname">inData</td><td>the incoming data to be encoded </td></tr>
+    <tr><td class="paramname">inDataLength</td><td>the length of the inData </td></tr>
+    <tr><td class="paramname">outData</td><td>a place to store the outgoing data that is at least maxOutDataLength in size </td></tr>
+    <tr><td class="paramname">maxOutDataLength</td><td>the max size for the output </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Success: pointer to an instance of multicodec_encoded_t </dd>
+<dd>
+Failure: NULL pointer</dd></dl>
 <p>Encode a char array using the specified encoding </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">codecName</td><td>a standard name of the codec </td></tr>
@@ -339,7 +367,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d2/da6/multicodec_8h_ae8f25d9186ed7d247e851221a27cf231_cgraph.png" border="0" usemap="#d2/da6/multicodec_8h_ae8f25d9186ed7d247e851221a27cf231_cgraph" alt=""/></div>
 <map name="d2/da6/multicodec_8h_ae8f25d9186ed7d247e851221a27cf231_cgraph" id="d2/da6/multicodec_8h_ae8f25d9186ed7d247e851221a27cf231_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,153,32"/>
+<area shape="rect" title="Encode a char array using the specified encoding." alt="" coords="5,5,153,32"/>
 <area shape="rect" href="../../d5/d14/multicodec_8c.html#a6b087e50afc90c43fbc2a5b464291840" title="used to check if the provided codec is a valid codec" alt="" coords="201,5,352,32"/>
 </map>
 </div>
@@ -348,7 +376,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d2/da6/multicodec_8h_ae8f25d9186ed7d247e851221a27cf231_icgraph.png" border="0" usemap="#d2/da6/multicodec_8h_ae8f25d9186ed7d247e851221a27cf231_icgraph" alt=""/></div>
 <map name="d2/da6/multicodec_8h_ae8f25d9186ed7d247e851221a27cf231_icgraph" id="d2/da6/multicodec_8h_ae8f25d9186ed7d247e851221a27cf231_icgraph">
-<area shape="rect" title=" " alt="" coords="336,13,484,39"/>
+<area shape="rect" title="Encode a char array using the specified encoding." alt="" coords="336,13,484,39"/>
 <area shape="rect" href="../../d9/d12/multicodec__test_8c.html#ab56cf73e5d700eb62427c3302e7abb8c" title=" " alt="" coords="108,5,288,47"/>
 <area shape="rect" href="../../d9/d12/multicodec__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
 </map>
@@ -429,8 +457,8 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="../../d2/da6/multicodec_8h_a6b087e50afc90c43fbc2a5b464291840_icgraph.png" border="0" usemap="#d2/da6/multicodec_8h_a6b087e50afc90c43fbc2a5b464291840_icgraph" alt=""/></div>
 <map name="d2/da6/multicodec_8h_a6b087e50afc90c43fbc2a5b464291840_icgraph" id="d2/da6/multicodec_8h_a6b087e50afc90c43fbc2a5b464291840_icgraph">
 <area shape="rect" title="used to check if the provided codec is a valid codec" alt="" coords="532,56,683,83"/>
-<area shape="rect" href="../../d2/da6/multicodec_8h.html#a0dd345326afee00217e02d18e891b763" title=" " alt="" coords="336,5,484,32"/>
-<area shape="rect" href="../../d2/da6/multicodec_8h.html#ae8f25d9186ed7d247e851221a27cf231" title=" " alt="" coords="336,56,484,83"/>
+<area shape="rect" href="../../d2/da6/multicodec_8h.html#a0dd345326afee00217e02d18e891b763" title="Decode a multicodec encoded data array." alt="" coords="336,5,484,32"/>
+<area shape="rect" href="../../d2/da6/multicodec_8h.html#ae8f25d9186ed7d247e851221a27cf231" title="Encode a char array using the specified encoding." alt="" coords="336,56,484,83"/>
 <area shape="rect" href="../../d9/d12/multicodec__test_8c.html#a65721c45976b6bd105adf024afde8f96" title=" " alt="" coords="125,107,271,133"/>
 <area shape="rect" href="../../d9/d12/multicodec__test_8c.html#ab56cf73e5d700eb62427c3302e7abb8c" title=" " alt="" coords="108,41,288,82"/>
 <area shape="rect" href="../../d9/d12/multicodec__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,77,60,104"/>

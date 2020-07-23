@@ -125,12 +125,15 @@ Data Structures</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a47e5aad937ee9402a5f759a2404629cb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d01/ephemeral_8h.html#a47e5aad937ee9402a5f759a2404629cb">libp2p_crypto_ephemeral_keypair_generate</a> (char *curve, struct <a class="el" href="../../d0/d5b/struct_ephemeral_private_key.html">EphemeralPrivateKey</a> **private_key)</td></tr>
+<tr class="memdesc:a47e5aad937ee9402a5f759a2404629cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a Ephemeral Public Key as well as a shared key.  <a href="../../d9/d01/ephemeral_8h.html#a47e5aad937ee9402a5f759a2404629cb">More...</a><br /></td></tr>
 <tr class="separator:a47e5aad937ee9402a5f759a2404629cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a275c41cbe0489b9f5199461c80d85d3c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d01/ephemeral_8h.html#a275c41cbe0489b9f5199461c80d85d3c">libp2p_crypto_ephemeral_generate_shared_secret</a> (struct <a class="el" href="../../d0/d5b/struct_ephemeral_private_key.html">EphemeralPrivateKey</a> *private_key, const unsigned char *remote_public_key, size_t remote_public_key_size)</td></tr>
+<tr class="memdesc:a275c41cbe0489b9f5199461c80d85d3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a shared secret.  <a href="../../d9/d01/ephemeral_8h.html#a275c41cbe0489b9f5199461c80d85d3c">More...</a><br /></td></tr>
 <tr class="separator:a275c41cbe0489b9f5199461c80d85d3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65762ddb8cca9ff714540e7e1c11ae93"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d01/ephemeral_8h.html#a65762ddb8cca9ff714540e7e1c11ae93">libp2p_crypto_ephemeral_key_free</a> (struct <a class="el" href="../../d0/d5b/struct_ephemeral_private_key.html">EphemeralPrivateKey</a> *in)</td></tr>
 <tr class="separator:a65762ddb8cca9ff714540e7e1c11ae93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1579e7eb2eb706fce755cef9a02a751"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../dd/d9a/struct_stretched_key.html">StretchedKey</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d01/ephemeral_8h.html#ac1579e7eb2eb706fce755cef9a02a751">libp2p_crypto_ephemeral_stretched_key_new</a> (void)</td></tr>
+<tr class="memdesc:ac1579e7eb2eb706fce755cef9a02a751"><td class="mdescLeft">&#160;</td><td class="mdescRight">Routines to help with the <a class="el" href="../../dd/d9a/struct_stretched_key.html">StretchedKey</a> struct.  <a href="../../d9/d01/ephemeral_8h.html#ac1579e7eb2eb706fce755cef9a02a751">More...</a><br /></td></tr>
 <tr class="separator:ac1579e7eb2eb706fce755cef9a02a751"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14cb32e490c60d39e60b049f30bf91c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d01/ephemeral_8h.html#a14cb32e490c60d39e60b049f30bf91c4">libp2p_crypto_ephemeral_stretched_key_free</a> (struct <a class="el" href="../../dd/d9a/struct_stretched_key.html">StretchedKey</a> *in)</td></tr>
 <tr class="separator:a14cb32e490c60d39e60b049f30bf91c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,6 +170,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Generate a shared secret. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">private_key</td><td>the context, also where it puts the shared secret </td></tr>
+    <tr><td class="paramname">remote_public_key</td><td>the key the remote gave us </td></tr>
+    <tr><td class="paramname">remote_public_key_size</td><td>the size of the remote public key @reutrns true(1) on success, otherwise false(0)</td></tr>
+  </table>
+  </dd>
+</dl>
 <p>Generate a shared secret </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">private_key</td><td>the context, also where it puts the shared secret </td></tr>
@@ -225,7 +238,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Generate a Ephemeral Public Key as well as a shared key </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Generate a Ephemeral Public Key as well as a shared key. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">curve</td><td>the curve to use (P-256, P-384, or P-521) </td></tr>
     <tr><td class="paramname">private_key</td><td>where to store the private key @reutrns true(1) on success, otherwise false(0)</td></tr>
@@ -247,7 +262,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d9/d01/ephemeral_8h_a47e5aad937ee9402a5f759a2404629cb_cgraph.png" border="0" usemap="#d9/d01/ephemeral_8h_a47e5aad937ee9402a5f759a2404629cb_cgraph" alt=""/></div>
 <map name="d9/d01/ephemeral_8h_a47e5aad937ee9402a5f759a2404629cb_cgraph" id="d9/d01/ephemeral_8h_a47e5aad937ee9402a5f759a2404629cb_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,192,47"/>
+<area shape="rect" title="Generate a Ephemeral Public Key as well as a shared key." alt="" coords="5,5,192,47"/>
 <area shape="rect" href="../../da/dc9/ephemeral_8c.html#ad765fc171667f71bd51ebf8a22f3c0ad" title=" " alt="" coords="240,5,427,47"/>
 </map>
 </div>
@@ -289,7 +304,8 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Routines to help with the <a class="el" href="../../dd/d9a/struct_stretched_key.html">StretchedKey</a> struct </p>
+
+<p>Routines to help with the <a class="el" href="../../dd/d9a/struct_stretched_key.html">StretchedKey</a> struct. </p>
 
 <p class="definition">Definition at line <a class="el" href="../../da/dc9/ephemeral_8c_source.html#l00012">12</a> of file <a class="el" href="../../da/dc9/ephemeral_8c_source.html">ephemeral.c</a>.</p>
 

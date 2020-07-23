@@ -2,10 +2,10 @@
 <area shape="rect" id="node1" title=" " alt="" coords="464,5,653,61"/>
 <area shape="rect" id="node2" href="$da/de0/multiaddr_8h.html" title=" " alt="" coords="359,109,521,136"/>
 <area shape="rect" id="node3" title=" " alt="" coords="46,408,117,435"/>
-<area shape="rect" id="node4" href="$d5/dca/protocols_8h.html" title=" " alt="" coords="298,259,393,285"/>
+<area shape="rect" id="node4" href="$d5/dca/protocols_8h.html" title="functions for managing multiaddr protocols" alt="" coords="298,259,393,285"/>
 <area shape="rect" id="node9" href="$d1/d17/varhexutils_8h.html" title="provides utilities for manipulating hexadecimal data" alt="" coords="433,333,572,360"/>
 <area shape="rect" id="node12" href="$d7/d0c/include_2utils_2varint_8h.html" title="provides utilities for manipulating varints" alt="" coords="579,408,651,435"/>
-<area shape="rect" id="node15" href="$df/d48/protoutils_8h.html" title=" " alt="" coords="647,184,743,211"/>
+<area shape="rect" id="node15" href="$df/d48/protoutils_8h.html" title="utility functions for working with multiaddrs and protocols" alt="" coords="647,184,743,211"/>
 <area shape="rect" id="node16" title=" " alt="" coords="827,109,930,136"/>
 <area shape="rect" id="node5" title=" " alt="" coords="145,333,215,360"/>
 <area shape="rect" id="node6" title=" " alt="" coords="239,333,307,360"/>

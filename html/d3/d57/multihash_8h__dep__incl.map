@@ -1,10 +1,10 @@
 <map id="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/multihash/multihash.h" name="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/multihash/multihash.h">
-<area shape="rect" id="node1" title=" " alt="" coords="244,5,467,61"/>
+<area shape="rect" id="node1" title="functions for working with multihashes" alt="" coords="244,5,467,61"/>
 <area shape="rect" id="node2" href="$de/de0/cid_8c.html" title=" " alt="" coords="5,109,183,165"/>
 <area shape="rect" id="node3" href="$dc/d82/peerutils_8c.html" title=" " alt="" coords="231,213,408,269"/>
 <area shape="rect" id="node4" href="$d4/da0/multihash_8c.html" title=" " alt="" coords="258,109,453,165"/>
 <area shape="rect" id="node5" href="$d6/dab/multihash__test_8c.html" title=" " alt="" coords="477,109,703,165"/>
-<area shape="rect" id="node6" href="$d7/dee/peerutils_8h.html" title=" " alt="" coords="728,109,919,165"/>
+<area shape="rect" id="node6" href="$d7/dee/peerutils_8h.html" title="provides utilities for managing peer identifiers" alt="" coords="728,109,919,165"/>
 <area shape="rect" id="node7" href="$d5/d29/crypto__test_8c.html" title=" " alt="" coords="531,213,710,269"/>
 <area shape="rect" id="node8" href="$dc/d09/ecdsa_8c.html" title=" " alt="" coords="735,213,912,269"/>
 <area shape="rect" id="node9" href="$db/dfd/key_8c.html" title=" " alt="" coords="936,213,1113,269"/>

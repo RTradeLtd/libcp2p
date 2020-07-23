@@ -37,6 +37,7 @@
 .ti -1c
 .RI "int \fBlibp2p_crypto_public_key_protobuf_decode\fP (unsigned char *buffer, size_t buffer_length, struct \fBPublicKey\fP **out)"
 .br
+.RI "Unmarshal a public key from a protobuf\&. "
 .ti -1c
 .RI "struct \fBPrivateKey\fP * \fBlibp2p_crypto_private_key_new\fP (void)"
 .br
@@ -58,6 +59,7 @@
 .ti -1c
 .RI "int \fBlibp2p_crypto_public_key_to_peer_id\fP (struct \fBPublicKey\fP *public_key, char **peer_id)"
 .br
+.RI "convert a public key into a peer id "
 .in -1c
 .SH "Function Documentation"
 .PP 
@@ -110,7 +112,9 @@ Utilities for public and private keys
 .PP
 Definition at line 13 of file key\&.c\&.
 .SS "int libp2p_crypto_public_key_protobuf_decode (unsigned char * buffer, size_t buffer_length, struct \fBPublicKey\fP ** out)"
-Unmarshal a public key from a protobuf 
+
+.PP
+Unmarshal a public key from a protobuf\&. Unmarshal a public key from a protobuf 
 .PP
 \fBParameters\fP
 .RS 4
@@ -138,7 +142,9 @@ Definition at line 50 of file key\&.c\&.
 .PP
 Definition at line 38 of file key\&.c\&.
 .SS "int libp2p_crypto_public_key_to_peer_id (struct \fBPublicKey\fP * public_key, char ** peer_id)"
-convert a public key into a peer id 
+
+.PP
+convert a public key into a peer id convert a public key into a peer id 
 .PP
 \fBParameters\fP
 .RS 4

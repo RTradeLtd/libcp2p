@@ -28,58 +28,63 @@
 .RI "int \fBstrpos\fP (char *haystack, char *needle)"
 .br
 .ti -1c
-.RI "struct \fBMultiAddress\fP * \fBmultiaddress_new\fP ()"
+.RI "struct \fBmulti_address\fP * \fBmulti_address_new\fP ()"
 .br
 .ti -1c
-.RI "struct \fBMultiAddress\fP * \fBmultiaddress_new_from_bytes\fP (const uint8_t *byteaddress, int size)"
+.RI "struct \fBmulti_address\fP * \fBmulti_address_new_from_bytes\fP (const uint8_t *byteaddress, int size)"
 .br
 .ti -1c
-.RI "struct \fBMultiAddress\fP * \fBmultiaddress_new_from_string\fP (const char *straddress)"
+.RI "struct \fBmulti_address\fP * \fBmulti_address_new_from_string\fP (const char *straddress)"
 .br
 .ti -1c
-.RI "int \fBmultiaddress_is_ip\fP (const struct \fBMultiAddress\fP *in)"
+.RI "int \fBmulti_address_is_ip\fP (const struct \fBmulti_address\fP *in)"
 .br
 .ti -1c
-.RI "int \fBmultiaddress_is_ip4\fP (const struct \fBMultiAddress\fP *in)"
+.RI "int \fBmulti_address_is_ip4\fP (const struct \fBmulti_address\fP *in)"
 .br
 .ti -1c
-.RI "int \fBmultiaddress_is_ip6\fP (const struct \fBMultiAddress\fP *in)"
+.RI "int \fBmulti_address_is_ip6\fP (const struct \fBmulti_address\fP *in)"
 .br
 .ti -1c
-.RI "int \fBmultiaddress_get_ip_family\fP (const struct \fBMultiAddress\fP *in)"
+.RI "int \fBmulti_address_get_ip_family\fP (const struct \fBmulti_address\fP *in)"
 .br
 .ti -1c
-.RI "int \fBmultiaddress_get_ip_address\fP (const struct \fBMultiAddress\fP *in, char *ip)"
+.RI "int \fBmulti_address_get_ip_address\fP (const struct \fBmulti_address\fP *in, char *ip)"
 .br
 .ti -1c
-.RI "int \fBmultiaddress_get_ip_port\fP (const struct \fBMultiAddress\fP *in)"
+.RI "int \fBmulti_address_get_ip_port\fP (const struct \fBmulti_address\fP *in)"
 .br
 .ti -1c
-.RI "char * \fBmultiaddress_get_peer_id\fP (const struct \fBMultiAddress\fP *in)"
+.RI "char * \fBmulti_address_get_peer_id\fP (const struct \fBmulti_address\fP *in)"
+.br
+.RI "Pulls the peer ID out of a \fBmulti_address\fP struct\&. "
+.ti -1c
+.RI "void \fBmulti_address_free\fP (struct \fBmulti_address\fP *in)"
 .br
 .ti -1c
-.RI "void \fBmultiaddress_free\fP (struct \fBMultiAddress\fP *in)"
+.RI "struct \fBmulti_address\fP * \fBmulti_address_copy\fP (const struct \fBmulti_address\fP *in)"
 .br
 .ti -1c
-.RI "struct \fBMultiAddress\fP * \fBmultiaddress_copy\fP (const struct \fBMultiAddress\fP *in)"
+.RI "int \fBmulti_address_encapsulate\fP (struct \fBmulti_address\fP *result, char *string)"
 .br
 .ti -1c
-.RI "int \fBmultiaddress_encapsulate\fP (struct \fBMultiAddress\fP *result, char *string)"
+.RI "int \fBmulti_address_decapsulate\fP (struct \fBmulti_address\fP *result, char *srci)"
 .br
 .ti -1c
-.RI "int \fBmultiaddress_decapsulate\fP (struct \fBMultiAddress\fP *result, char *srci)"
+.RI "int \fBmulti_address_compare\fP (const struct \fBmulti_address\fP *a, const struct \fBmulti_address\fP *b)"
 .br
+.RI "Check to see how these two addresses compare\&. "
 .ti -1c
-.RI "int \fBmultiaddress_compare\fP (const struct \fBMultiAddress\fP *a, const struct \fBMultiAddress\fP *b)"
+.RI "int \fBmulti_address_compare_id\fP (const struct \fBmulti_address\fP *a, const struct \fBmulti_address\fP *b)"
 .br
-.ti -1c
-.RI "int \fBmultiaddress_compare_id\fP (const struct \fBMultiAddress\fP *a, const struct \fBMultiAddress\fP *b)"
-.br
+.RI "Check to see how these two addresses compare, ignoring IP address, only\&. "
 .in -1c
 .SH "Function Documentation"
 .PP 
-.SS "int multiaddress_compare (const struct \fBMultiAddress\fP * a, const struct \fBMultiAddress\fP * b)"
-Check to see how these two addresses compare 
+.SS "int multi_address_compare (const struct \fBmulti_address\fP * a, const struct \fBmulti_address\fP * b)"
+
+.PP
+Check to see how these two addresses compare\&. Check to see how these two addresses compare 
 .PP
 \fBParameters\fP
 .RS 4
@@ -96,8 +101,10 @@ Check to see how these two addresses compare
 
 .PP
 Definition at line 345 of file multiaddr\&.c\&.
-.SS "int multiaddress_compare_id (const struct \fBMultiAddress\fP * a, const struct \fBMultiAddress\fP * b)"
-Check to see how these two addresses compare, ignoring IP address, only looking at the first /ipfs/ID hash 
+.SS "int multi_address_compare_id (const struct \fBmulti_address\fP * a, const struct \fBmulti_address\fP * b)"
+
+.PP
+Check to see how these two addresses compare, ignoring IP address, only\&. Check to see how these two addresses compare, ignoring IP address, only looking at the first /ipfs/ID hash 
 .PP
 \fBParameters\fP
 .RS 4
@@ -114,8 +121,8 @@ Check to see how these two addresses compare, ignoring IP address, only looking 
 
 .PP
 Definition at line 371 of file multiaddr\&.c\&.
-.SS "struct \fBMultiAddress\fP* multiaddress_copy (const struct \fBMultiAddress\fP * in)"
-Copy a multiaddress from one memory location to another 
+.SS "struct \fBmulti_address\fP* multi_address_copy (const struct \fBmulti_address\fP * in)"
+Copy a \fBmulti_address\fP from one memory location to another 
 .PP
 \fBParameters\fP
 .RS 4
@@ -124,13 +131,13 @@ Copy a multiaddress from one memory location to another
 .PP
 \fBReturns\fP
 .RS 4
-the new struct \fBMultiAddress\fP or NULL if there was a problem (i\&.e\&. out of memory) 
+the new struct \fBmulti_address\fP or NULL if there was a problem (i\&.e\&. out of memory) 
 .RE
 .PP
 
 .PP
 Definition at line 209 of file multiaddr\&.c\&.
-.SS "int multiaddress_decapsulate (struct \fBMultiAddress\fP * result, char * srci)"
+.SS "int multi_address_decapsulate (struct \fBmulti_address\fP * result, char * srci)"
 Find scri and remove it from the resultant value (ie /ip4/127\&.0\&.0\&.1/tcp/4001 becomes ip4/127\&.0\&.0\&.1 when you call decapsulate(addr, '/tcp') 
 .PP
 \fBParameters\fP
@@ -143,8 +150,8 @@ Find scri and remove it from the resultant value (ie /ip4/127\&.0\&.0\&.1/tcp/40
 
 .PP
 Definition at line 292 of file multiaddr\&.c\&.
-.SS "int multiaddress_encapsulate (struct \fBMultiAddress\fP * result, char * string)"
-Put a string into the \fBMultiAddress\fP and recalculate the bytes 
+.SS "int multi_address_encapsulate (struct \fBmulti_address\fP * result, char * string)"
+Put a string into the \fBmulti_address\fP and recalculate the bytes 
 .PP
 \fBParameters\fP
 .RS 4
@@ -156,28 +163,30 @@ Put a string into the \fBMultiAddress\fP and recalculate the bytes
 
 .PP
 Definition at line 243 of file multiaddr\&.c\&.
-.SS "void multiaddress_free (struct \fBMultiAddress\fP * in)"
+.SS "void multi_address_free (struct \fBmulti_address\fP * in)"
 
 .PP
 Definition at line 192 of file multiaddr\&.c\&.
-.SS "int multiaddress_get_ip_address (const struct \fBMultiAddress\fP * in, char * ip)"
+.SS "int multi_address_get_ip_address (const struct \fBmulti_address\fP * in, char * ip)"
 
 .PP
 Definition at line 122 of file multiaddr\&.c\&.
-.SS "int multiaddress_get_ip_family (const struct \fBMultiAddress\fP * in)"
+.SS "int multi_address_get_ip_family (const struct \fBmulti_address\fP * in)"
 
 .PP
 Definition at line 108 of file multiaddr\&.c\&.
-.SS "int multiaddress_get_ip_port (const struct \fBMultiAddress\fP * in)"
+.SS "int multi_address_get_ip_port (const struct \fBmulti_address\fP * in)"
 
 .PP
 Definition at line 150 of file multiaddr\&.c\&.
-.SS "char* multiaddress_get_peer_id (const struct \fBMultiAddress\fP * in)"
-Pulls the peer ID out of a multiaddress struct 
+.SS "char* multi_address_get_peer_id (const struct \fBmulti_address\fP * in)"
+
+.PP
+Pulls the peer ID out of a \fBmulti_address\fP struct\&. 
 .PP
 \fBParameters\fP
 .RS 4
-\fIin\fP the \fBMultiAddress\fP 
+\fIin\fP the \fBmulti_address\fP 
 .RE
 .PP
 \fBReturns\fP
@@ -188,31 +197,31 @@ the peer id string, or NULL NOTE: This allocates memory that needs to be freed
 
 .PP
 Definition at line 167 of file multiaddr\&.c\&.
-.SS "int multiaddress_is_ip (const struct \fBMultiAddress\fP * in)"
+.SS "int multi_address_is_ip (const struct \fBmulti_address\fP * in)"
 
 .PP
 Definition at line 89 of file multiaddr\&.c\&.
-.SS "int multiaddress_is_ip4 (const struct \fBMultiAddress\fP * in)"
+.SS "int multi_address_is_ip4 (const struct \fBmulti_address\fP * in)"
 
 .PP
 Definition at line 100 of file multiaddr\&.c\&.
-.SS "int multiaddress_is_ip6 (const struct \fBMultiAddress\fP * in)"
+.SS "int multi_address_is_ip6 (const struct \fBmulti_address\fP * in)"
 
 .PP
 Definition at line 104 of file multiaddr\&.c\&.
-.SS "struct \fBMultiAddress\fP* multiaddress_new ()"
-Construct a new \fBMultiAddress\fP struct 
+.SS "struct \fBmulti_address\fP* multi_address_new ()"
+Construct a new \fBmulti_address\fP struct 
 .PP
 \fBReturns\fP
 .RS 4
-an empty \fBMultiAddress\fP struct 
+an empty \fBmulti_address\fP struct 
 .RE
 .PP
 
 .PP
 Definition at line 24 of file multiaddr\&.c\&.
-.SS "struct \fBMultiAddress\fP* multiaddress_new_from_bytes (const uint8_t * byteaddress, int size)"
-construct a new \fBMultiAddress\fP from bytes 
+.SS "struct \fBmulti_address\fP* multi_address_new_from_bytes (const uint8_t * byteaddress, int size)"
+construct a new \fBmulti_address\fP from bytes 
 .PP
 \fBParameters\fP
 .RS 4
@@ -223,7 +232,7 @@ construct a new \fBMultiAddress\fP from bytes
 .PP
 \fBReturns\fP
 .RS 4
-a new \fBMultiAddress\fP struct filled in, or NULL on error 
+a new \fBmulti_address\fP struct filled in, or NULL on error 
 .RE
 .PP
 \fBWarning\fP
@@ -234,7 +243,7 @@ this currently is failing tests
 
 .PP
 Definition at line 43 of file multiaddr\&.c\&.
-.SS "struct \fBMultiAddress\fP* multiaddress_new_from_string (const char * straddress)"
+.SS "struct \fBmulti_address\fP* multi_address_new_from_string (const char * straddress)"
 
 .PP
 Definition at line 68 of file multiaddr\&.c\&.
