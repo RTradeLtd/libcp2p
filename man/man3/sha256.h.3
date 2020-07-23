@@ -1,0 +1,109 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/sha256.h" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/sha256.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'mbedtls/sha256\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBlibp2p_crypto_hashing_sha256\fP (const unsigned char *input, size_t input_length, unsigned char *output)"
+.br
+.ti -1c
+.RI "int \fBlibp2p_crypto_hashing_sha256_init\fP (mbedtls_sha256_context *ctx)"
+.br
+.ti -1c
+.RI "int \fBlibp2p_crypto_hashing_sha256_update\fP (mbedtls_sha256_context *ctx, const unsigned char *input, size_t input_size)"
+.br
+.ti -1c
+.RI "int \fBlibp2p_crypto_hashing_sha256_finish\fP (mbedtls_sha256_context *ctx, unsigned char *hash)"
+.br
+.ti -1c
+.RI "int \fBlibp2p_crypto_hashing_sha256_free\fP (mbedtls_sha256_context *ctx)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int libp2p_crypto_hashing_sha256 (const unsigned char * input, size_t input_length, unsigned char * output)"
+
+.PP
+Definition at line 11 of file sha256\&.c\&.
+.SS "int libp2p_crypto_hashing_sha256_finish (mbedtls_sha256_context * ctx, unsigned char * hash)"
+finalize a sha256 hmac process 
+.PP
+\fBParameters\fP
+.RS 4
+\fIctx\fP the context 
+.br
+\fIhash\fP where to put the results (for SHA256, should be 32 bytes long) 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success, otherwise false(0) 
+.RE
+.PP
+
+.PP
+Definition at line 47 of file sha256\&.c\&.
+.SS "int libp2p_crypto_hashing_sha256_free (mbedtls_sha256_context * ctx)"
+Clean up allocated memory 
+.PP
+\fBParameters\fP
+.RS 4
+\fIctx\fP the context 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success, otherwise false(0) 
+.RE
+.PP
+
+.PP
+Definition at line 58 of file sha256\&.c\&.
+.SS "int libp2p_crypto_hashing_sha256_init (mbedtls_sha256_context * ctx)"
+Initialize a sha256 hmac process 
+.PP
+\fBParameters\fP
+.RS 4
+\fIctx\fP the context 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success, otherwise false(0) 
+.RE
+.PP
+
+.PP
+Definition at line 22 of file sha256\&.c\&.
+.SS "int libp2p_crypto_hashing_sha256_update (mbedtls_sha256_context * ctx, const unsigned char * input, size_t input_size)"
+Update a sha256 hmac process 
+.PP
+\fBParameters\fP
+.RS 4
+\fIctx\fP the context 
+.br
+\fIinput\fP the data to add 
+.br
+\fIinput_size\fP the size of input 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success, otherwise false(0) 
+.RE
+.PP
+
+.PP
+Definition at line 34 of file sha256\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

@@ -1,0 +1,129 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/protobuf/protobuf.h" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/protobuf/protobuf.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdint\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBWireType\fP { \fBWIRETYPE_VARINT\fP, \fBWIRETYPE_64BIT\fP, \fBWIRETYPE_LENGTH_DELIMITED\fP, \fBWIRETYPE_START_GROUP\fP, \fBWIRETYPE_END_GROUP\fP, \fBWIRETYPE_32BIT\fP, \fBWIRETYPE_VARINT\fP, \fBWIRETYPE_64BIT\fP, \fBWIRETYPE_LENGTH_DELIMITED\fP, \fBWIRETYPE_START_GROUP\fP, \fBWIRETYPE_END_GROUP\fP, \fBWIRETYPE_32BIT\fP }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBprotobuf_encode_length_delimited\fP (int field_number, enum \fBWireType\fP wire_type, const char *incoming, size_t incoming_length, unsigned char *buffer, size_t max_buffer_size, size_t *bytes_written)"
+.br
+.ti -1c
+.RI "int \fBprotobuf_decode_length_delimited\fP (const unsigned char *buffer, size_t buffer_length, char **results, size_t *results_length, size_t *bytes_read)"
+.br
+.ti -1c
+.RI "int \fBprotobuf_encode_string\fP (int field_number, enum \fBWireType\fP wire_type, const char *incoming, unsigned char *buffer, size_t max_buffer_length, size_t *bytes_written)"
+.br
+.ti -1c
+.RI "int \fBprotobuf_decode_string\fP (const unsigned char *buffer, size_t buffer_length, char **results, size_t *bytes_read)"
+.br
+.ti -1c
+.RI "int \fBprotobuf_encode_varint\fP (int field_number, enum \fBWireType\fP field_type, unsigned long long incoming, unsigned char *buffer, size_t max_buffer_length, size_t *bytes_written)"
+.br
+.ti -1c
+.RI "int \fBprotobuf_decode_varint\fP (const unsigned char *buffer, size_t buffer_length, unsigned long long *results, size_t *bytes_read)"
+.br
+.ti -1c
+.RI "int \fBprotobuf_decode_field_and_type\fP (const unsigned char *buffer, int buffer_length, int *field_no, enum \fBWireType\fP *field_type, size_t *bytes_read)"
+.br
+.in -1c
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBWireType\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIWIRETYPE_VARINT \fP\fP
+.TP
+\fB\fIWIRETYPE_64BIT \fP\fP
+.TP
+\fB\fIWIRETYPE_LENGTH_DELIMITED \fP\fP
+.TP
+\fB\fIWIRETYPE_START_GROUP \fP\fP
+.TP
+\fB\fIWIRETYPE_END_GROUP \fP\fP
+.TP
+\fB\fIWIRETYPE_32BIT \fP\fP
+.TP
+\fB\fIWIRETYPE_VARINT \fP\fP
+.TP
+\fB\fIWIRETYPE_64BIT \fP\fP
+.TP
+\fB\fIWIRETYPE_LENGTH_DELIMITED \fP\fP
+.TP
+\fB\fIWIRETYPE_START_GROUP \fP\fP
+.TP
+\fB\fIWIRETYPE_END_GROUP \fP\fP
+.TP
+\fB\fIWIRETYPE_32BIT \fP\fP
+.PP
+Definition at line 14 of file protobuf\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "int protobuf_decode_field_and_type (const unsigned char * buffer, int buffer_length, int * field_no, enum \fBWireType\fP * field_type, size_t * bytes_read)"
+
+.PP
+Definition at line 155 of file protobuf\&.c\&.
+.SS "int protobuf_decode_length_delimited (const unsigned char * buffer, size_t buffer_length, char ** results, size_t * results_length, size_t * bytes_read)"
+
+.PP
+Definition at line 35 of file protobuf\&.c\&.
+.SS "int protobuf_decode_string (const unsigned char * buffer, size_t buffer_length, char ** results, size_t * bytes_read)"
+Pull a string from the protobuf buffer 
+.PP
+\fBParameters\fP
+.RS 4
+\fIthe\fP buffer, positioned at the field size 
+.br
+\fIbuffer_length\fP the buffer length 
+.br
+\fIresults\fP the results (NOTE: will allocate memory) 
+.br
+\fIbytes_read\fP the number of bytes read 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success 
+.RE
+.PP
+
+.PP
+Definition at line 122 of file protobuf\&.c\&.
+.SS "int protobuf_decode_varint (const unsigned char * buffer, size_t buffer_length, unsigned long long * results, size_t * bytes_read)"
+
+.PP
+Definition at line 108 of file protobuf\&.c\&.
+.SS "int protobuf_encode_length_delimited (int field_number, enum \fBWireType\fP wire_type, const char * incoming, size_t incoming_length, unsigned char * buffer, size_t max_buffer_size, size_t * bytes_written)"
+
+.PP
+Definition at line 11 of file protobuf\&.c\&.
+.SS "int protobuf_encode_string (int field_number, enum \fBWireType\fP wire_type, const char * incoming, unsigned char * buffer, size_t max_buffer_length, size_t * bytes_written)"
+
+.PP
+Definition at line 72 of file protobuf\&.c\&.
+.SS "int protobuf_encode_varint (int field_number, enum \fBWireType\fP field_type, unsigned long long incoming, unsigned char * buffer, size_t max_buffer_length, size_t * bytes_written)"
+
+.PP
+Definition at line 90 of file protobuf\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

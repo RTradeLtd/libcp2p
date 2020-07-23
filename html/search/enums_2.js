@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['socket_5fopts_481',['SOCKET_OPTS',['../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304',1,'socket.h']]]
+  ['log_5flevels_1835',['LOG_LEVELS',['../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99',1,'logger.h']]]
 ];

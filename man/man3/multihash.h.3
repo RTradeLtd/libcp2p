@@ -1,0 +1,118 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/multihash/multihash.h" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/multihash/multihash.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stddef\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBmh_multihash_hash\fP (const unsigned char *multihash, size_t len)"
+.br
+.ti -1c
+.RI "int \fBmh_multihash_length\fP (const unsigned char *multihash, size_t len)"
+.br
+.ti -1c
+.RI "int \fBmh_multihash_digest\fP (const unsigned char *multihash, size_t len, unsigned char **digest, size_t *digest_len)"
+.br
+.ti -1c
+.RI "int \fBmh_new_length\fP (int code, size_t digest_len)"
+.br
+.ti -1c
+.RI "int \fBmh_new\fP (unsigned char *buffer, int code, const unsigned char *digest, size_t digest_len)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int mh_multihash_digest (const unsigned char * multihash, size_t len, unsigned char ** digest, size_t * digest_len)"
+gives access to raw digest inside multihash buffer 
+.PP
+\fBParameters\fP
+.RS 4
+\fImultihash\fP the multihash 
+.br
+\fIlen\fP the length 
+.br
+\fIdigest\fP the results 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+error if less than zero, otherwise 0 
+.RE
+.PP
+
+.PP
+Definition at line 86 of file multihash\&.c\&.
+.SS "int mh_multihash_hash (const unsigned char * mh, size_t len)"
+Functions for working with a multihash\&. A multihash is a hash with a prefix 'code' that helps determine what type of hash this is\&. code name 0x00 identity 0x11 sha1 0x12 sha2-256 0x13 sha2-512 0x14 sha3-512 0x15 sha3-384 0x16 sha3-256 0x17 sha3-224 0x18 shake-128 0x19 shake-256 0x40 blake2b 0x41 blake2s 
+.SH "0x0400-0x040f reserved for application specific functions"
+.PP
+.SH "0x14 formerly had the name 'sha3', now deprecated"
+.PP
+returns hash code or error (which is < 0) 
+.PP
+\fBParameters\fP
+.RS 4
+\fImh\fP the multihash 
+.br
+\fIlen\fP the length of the multihash 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+errors ( < 0 ) or the multihash
+.RE
+.PP
+returns hash code or error (which is < 0) 
+.PP
+\fBParameters\fP
+.RS 4
+\fImh\fP the multihash 
+.br
+\fIlen\fP the length of the multihash 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+errors ( < 0 ) or the multihash 
+.RE
+.PP
+
+.PP
+Definition at line 57 of file multihash\&.c\&.
+.SS "int mh_multihash_length (const unsigned char * multihash, size_t len)"
+
+.PP
+Definition at line 71 of file multihash\&.c\&.
+.SS "int mh_new (unsigned char * buffer, int code, const unsigned char * digest, size_t digest_len)"
+
+.PP
+Definition at line 118 of file multihash\&.c\&.
+.SS "int mh_new_length (int code, size_t hash_len)"
+determine the size of the multihash given the data size 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcode\fP currently not used 
+.br
+\fIhash_len\fP the data size 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+hash_len + 2 (until the code parameter (varint) is added 
+.RE
+.PP
+
+.PP
+Definition at line 104 of file multihash\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

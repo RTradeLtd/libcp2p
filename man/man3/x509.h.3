@@ -1,0 +1,78 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/x509.h" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/x509.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'rsa\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBlibp2p_encoding_x509_private_key_to_der\fP (struct \fBRsaPrivateKey\fP *private_key, unsigned char *bytes[1600])"
+.br
+.ti -1c
+.RI "int \fBlibp2p_encoding_x509_der_to_private_key\fP (unsigned char *der, size_t der_length, struct \fBRsaPrivateKey\fP *private_key)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int libp2p_encoding_x509_der_to_private_key (unsigned char * der, size_t der_length, struct \fBRsaPrivateKey\fP * private_key)"
+Take a DER formatted char array and turn it into an \fBRsaPrivateKey\fP 
+.PP
+\fBParameters\fP
+.RS 4
+\fIder\fP the DER formatted char array 
+.br
+\fIder_length\fP the number of bytes in the char array 
+.br
+\fIprivate_key\fP the struct to put the data in\&. Memory should have already been allocated for the struct\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success 
+.RE
+.PP
+
+.PP
+Definition at line 69 of file x509\&.c\&.
+.SS "int libp2p_encoding_x509_private_key_to_der (struct \fBRsaPrivateKey\fP * private_key, unsigned char * bytes[1600])"
+Wrappers around the x509 stuff Turn an \fBRsaPrivateKey\fP struct into a DER formatted array of bytes 
+.PP
+\fBParameters\fP
+.RS 4
+\fIprivate_key\fP the \fBRsaPrivateKey\fP struct 
+.br
+\fIbytes\fP an array of 1600 bytes to hold the DER formatted data 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success
+.RE
+.PP
+public methods convert a RSA Private Key to an array of bytes in DER format 
+.PP
+\fBParameters\fP
+.RS 4
+\fIprivate_key\fP the private key 
+.br
+\fIbytes\fP where to put the resultant bytes 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success 
+.RE
+.PP
+
+.PP
+Definition at line 21 of file x509\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

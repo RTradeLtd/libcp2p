@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['thpool_5f_473',['thpool_',['../db/d84/thread__pool_8c.html#a38b9923cffb708762ac261b550639ecf',1,'thread_pool.c']]],
-  ['thread_474',['thread',['../db/d84/thread__pool_8c.html#ad25116f5b7d2fc3440bba1b4766d0a78',1,'thread_pool.c']]],
-  ['thread_5flogger_475',['thread_logger',['../d1/d8c/logger_8h.html#aa700e2a3210dcd775964660f191f29de',1,'logger.h']]],
-  ['threadpool_476',['threadpool',['../d3/dec/thread__pool_8h.html#a615a4a9fc352172af6db87f6787dc65f',1,'thread_pool.h']]],
-  ['threadpool_5ftask_5ffunc_477',['threadpool_task_func',['../d9/d26/socket__server_8h.html#aa845560c795f49741639e7aa83524fd3',1,'socket_server.h']]],
-  ['timeout_478',['timeout',['../da/ddd/socket_8h.html#aee145bfca8e9b2eaf3cd3c47157be9a3',1,'socket.h']]]
+  ['sock_5faddr_1822',['sock_addr',['../da/ddd/socket_8h.html#acf77d3554add8fce8fc0590f75e303f6',1,'socket.h']]],
+  ['sock_5faddr_5fstorage_1823',['sock_addr_storage',['../da/ddd/socket_8h.html#ab6caab1c6770adc9cabffb6a2a40ad75',1,'socket.h']]],
+  ['socket_5fclient_5ft_1824',['socket_client_t',['../d0/d3b/socket__client_8h.html#a9f1599fe9ce752bf7b20613ca0f725b2',1,'socket_client.h']]],
+  ['socket_5fserver_5fconfig_5ft_1825',['socket_server_config_t',['../d9/d26/socket__server_8h.html#aa393a347d02fb92a760791d8fa6734cb',1,'socket_server.h']]],
+  ['socket_5fserver_5ft_1826',['socket_server_t',['../d9/d26/socket__server_8h.html#aef5443b2975a516444230744f0b62499',1,'socket_server.h']]]
 ];

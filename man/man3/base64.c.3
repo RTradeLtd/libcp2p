@@ -1,0 +1,118 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/encoding/base64.c" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/encoding/base64.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <math\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include 'encoding/base64\&.h'\fP
+.br
+\fC#include 'mbedtls/base64\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBlibp2p_encoding_base64_encode\fP (const unsigned char *input_data, size_t input_length, unsigned char *output_data, size_t max_output_length, size_t *bytes_written)"
+.br
+.ti -1c
+.RI "int \fBlibp2p_encoding_base64_decode\fP (const unsigned char *input_data, size_t input_length, unsigned char *output_data, size_t max_output_length, size_t *bytes_written)"
+.br
+.ti -1c
+.RI "size_t \fBlibp2p_encoding_base64_decode_size\fP (size_t encoded_size)"
+.br
+.ti -1c
+.RI "size_t \fBlibp2p_encoding_base64_encode_size\fP (size_t decoded_size)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int libp2p_encoding_base64_decode (const unsigned char * input_data, size_t input_length, unsigned char * output_data, size_t max_output_length, size_t * bytes_written)"
+decode something that was encoded as base64 
+.PP
+\fBParameters\fP
+.RS 4
+\fIinput_data\fP the data to decode 
+.br
+\fIinput_length\fP the length of the input data 
+.br
+\fIoutput_data\fP the buffer to store the output 
+.br
+\fImax_output_length\fP the length of the output buffer 
+.br
+\fIbytes_written\fP the number of bytes written to output_data 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success, otherwise 0 
+.RE
+.PP
+
+.PP
+Definition at line 33 of file base64\&.c\&.
+.SS "size_t libp2p_encoding_base64_decode_size (size_t encoded_size)"
+calculate the max length in bytes of an encoding of n source bytes 
+.PP
+\fBParameters\fP
+.RS 4
+\fIencoded_size\fP the size of the encoded string 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the maximum size in bytes had the string been decoded 
+.RE
+.PP
+
+.PP
+Definition at line 46 of file base64\&.c\&.
+.SS "int libp2p_encoding_base64_encode (const unsigned char * input_data, size_t input_length, unsigned char * output_data, size_t max_output_length, size_t * bytes_written)"
+encode using base64 
+.PP
+\fBParameters\fP
+.RS 4
+\fIinput_data\fP the data to be encoded 
+.br
+\fIinput_length\fP the length of the input data 
+.br
+\fIoutput_data\fP where the data is to be stored 
+.br
+\fImax_output_length\fP the max size of the output_data 
+.br
+\fIbytes_written\fP the number of bytes written to output_data 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success, otherwise false 
+.RE
+.PP
+
+.PP
+Definition at line 16 of file base64\&.c\&.
+.SS "size_t libp2p_encoding_base64_encode_size (size_t decoded_size)"
+calculate the max length in bytes of a decoding of n source bytes 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdecoded_size\fP the size of the incoming string to be encoded 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the maximum size in bytes had the string been encoded 
+.RE
+.PP
+
+.PP
+Definition at line 58 of file base64\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

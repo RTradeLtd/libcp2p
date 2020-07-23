@@ -1,0 +1,184 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/key.h" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/key.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdlib\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBPublicKey\fP"
+.br
+.ti -1c
+.RI "struct \fBPrivateKey\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBKeyType\fP { \fBKEYTYPE_RSA\fP, \fBKEYTYPE_ED25519\fP, \fBKEYTYPE_INVALID\fP }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "struct \fBPublicKey\fP * \fBlibp2p_crypto_public_key_new\fP (void)"
+.br
+.ti -1c
+.RI "void \fBlibp2p_crypto_public_key_free\fP (struct \fBPublicKey\fP *in)"
+.br
+.ti -1c
+.RI "struct \fBPrivateKey\fP * \fBlibp2p_crypto_private_key_new\fP (void)"
+.br
+.ti -1c
+.RI "void \fBlibp2p_crypto_private_key_free\fP (struct \fBPrivateKey\fP *in)"
+.br
+.ti -1c
+.RI "int \fBlibp2p_crypto_private_key_copy\fP (const struct \fBPrivateKey\fP *source, struct \fBPrivateKey\fP *destination)"
+.br
+.ti -1c
+.RI "int \fBlibp2p_crypto_public_key_protobuf_decode\fP (unsigned char *buffer, size_t buffer_length, struct \fBPublicKey\fP **out)"
+.br
+.ti -1c
+.RI "size_t \fBlibp2p_crypto_public_key_protobuf_encode_size\fP (const struct \fBPublicKey\fP *in)"
+.br
+.ti -1c
+.RI "int \fBlibp2p_crypto_public_key_protobuf_encode\fP (const struct \fBPublicKey\fP *in, unsigned char *buffer, size_t max_buffer_length, size_t *bytes_written)"
+.br
+.ti -1c
+.RI "int \fBlibp2p_crypto_private_key_protobuf_decode\fP (unsigned char *buffer, size_t buffer_length, struct \fBPrivateKey\fP **out)"
+.br
+.ti -1c
+.RI "size_t \fBlibp2p_crypto_private_key_protobuf_encode_size\fP (const struct \fBPrivateKey\fP *in)"
+.br
+.ti -1c
+.RI "int \fBlibp2p_crypto_private_key_protobuf_encode\fP (const struct \fBPrivateKey\fP *in, unsigned char *buffer, size_t max_buffer_length, size_t *bytes_written)"
+.br
+.ti -1c
+.RI "int \fBlibp2p_crypto_public_key_to_peer_id\fP (struct \fBPublicKey\fP *public_key, char **peer_id)"
+.br
+.in -1c
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBKeyType\fP"
+Utilities for public keys 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIKEYTYPE_RSA \fP\fP
+.TP
+\fB\fIKEYTYPE_ED25519 \fP\fP
+.TP
+\fB\fIKEYTYPE_INVALID \fP\fP
+.PP
+Definition at line 9 of file key\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "int libp2p_crypto_private_key_copy (const struct \fBPrivateKey\fP * source, struct \fBPrivateKey\fP * destination)"
+
+.PP
+Definition at line 148 of file key\&.c\&.
+.SS "void libp2p_crypto_private_key_free (struct \fBPrivateKey\fP * in)"
+
+.PP
+Definition at line 139 of file key\&.c\&.
+.SS "struct \fBPrivateKey\fP* libp2p_crypto_private_key_new (void)"
+
+.PP
+Definition at line 129 of file key\&.c\&.
+.SS "int libp2p_crypto_private_key_protobuf_decode (unsigned char * buffer, size_t buffer_length, struct \fBPrivateKey\fP ** out)"
+Unmarshal a private key from a protobuf 
+.PP
+\fBParameters\fP
+.RS 4
+\fIbuffer\fP the protobuf 
+.br
+\fIbuffer_length\fP the length of the protobuf 
+.br
+\fIout\fP the pointer to the struct \fBPrivateKey\fP that will be allocated 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success, otherwise false(0) 
+.RE
+.PP
+
+.PP
+Definition at line 196 of file key\&.c\&.
+.SS "int libp2p_crypto_private_key_protobuf_encode (const struct \fBPrivateKey\fP * in, unsigned char * buffer, size_t max_buffer_length, size_t * bytes_written)"
+
+.PP
+Definition at line 167 of file key\&.c\&.
+.SS "size_t libp2p_crypto_private_key_protobuf_encode_size (const struct \fBPrivateKey\fP * in)"
+
+.PP
+Definition at line 163 of file key\&.c\&.
+.SS "void libp2p_crypto_public_key_free (struct \fBPublicKey\fP * in)"
+
+.PP
+Definition at line 23 of file key\&.c\&.
+.SS "struct \fBPublicKey\fP* libp2p_crypto_public_key_new (void)"
+Utilities for public and private keys 
+.PP
+Definition at line 13 of file key\&.c\&.
+.SS "int libp2p_crypto_public_key_protobuf_decode (unsigned char * buffer, size_t buffer_length, struct \fBPublicKey\fP ** out)"
+Unmarshal a public key from a protobuf
+.PP
+Unmarshal a public key from a protobuf 
+.PP
+\fBParameters\fP
+.RS 4
+\fIbuffer\fP the protobuf 
+.br
+\fIbuffer_length\fP the length of the protobuf 
+.br
+\fIout\fP the pointer to the struct \fBPublicKey\fP that will be allocated 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success, otherwise false(0) 
+.RE
+.PP
+
+.PP
+Definition at line 80 of file key\&.c\&.
+.SS "int libp2p_crypto_public_key_protobuf_encode (const struct \fBPublicKey\fP * in, unsigned char * buffer, size_t max_buffer_length, size_t * bytes_written)"
+
+.PP
+Definition at line 50 of file key\&.c\&.
+.SS "size_t libp2p_crypto_public_key_protobuf_encode_size (const struct \fBPublicKey\fP * in)"
+
+.PP
+Definition at line 38 of file key\&.c\&.
+.SS "int libp2p_crypto_public_key_to_peer_id (struct \fBPublicKey\fP * public_key, char ** peer_id)"
+convert a public key into a peer id 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpublic_key\fP the public key struct 
+.br
+\fIpeer_id\fP the results, in a null-terminated string 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success, otherwise false(0) 
+.RE
+.PP
+Converting to a peer id involves protobufing the struct \fBPublicKey\fP, SHA256 it, turn it into a MultiHash and base58 it
+.PP
+Definition at line 251 of file key\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

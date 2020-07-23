@@ -1,0 +1,169 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/multihash/hashes.h" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/multihash/hashes.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'errors\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBMH_H_SHA1\fP   0x11"
+.br
+.ti -1c
+.RI "#define \fBMH_H_SHA2_256\fP   0x12"
+.br
+.ti -1c
+.RI "#define \fBMH_H_SHA2_512\fP   0x13"
+.br
+.ti -1c
+.RI "#define \fBMH_H_SHA3_512\fP   0x14"
+.br
+.ti -1c
+.RI "#define \fBMH_H_SHA3_384\fP   0x15"
+.br
+.ti -1c
+.RI "#define \fBMH_H_SHA3_256\fP   0x16"
+.br
+.ti -1c
+.RI "#define \fBMH_H_SHA3_224\fP   0x17"
+.br
+.ti -1c
+.RI "#define \fBMH_H_SHAKE_128\fP   0x18"
+.br
+.ti -1c
+.RI "#define \fBMH_H_SHAKE_256\fP   0x19"
+.br
+.ti -1c
+.RI "#define \fBMH_H_BLAKE2B\fP   0x40"
+.br
+.ti -1c
+.RI "#define \fBMH_H_BLAKE2S\fP   0x41"
+.br
+.ti -1c
+.RI "#define \fBMH_H_COUNT\fP   (int)(sizeof(\fBmh_all_hashes\fP) / sizeof(\fBmh_all_hashes\fP[0]))"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "const char * \fBmh_hash_name\fP (int hash)"
+.br
+.ti -1c
+.RI "int \fBmh_hash_default_length\fP (int hash)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "static const int \fBmh_all_hashes\fP []"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define MH_H_BLAKE2B   0x40"
+
+.PP
+Definition at line 15 of file hashes\&.h\&.
+.SS "#define MH_H_BLAKE2S   0x41"
+
+.PP
+Definition at line 16 of file hashes\&.h\&.
+.SS "#define MH_H_COUNT   (int)(sizeof(\fBmh_all_hashes\fP) / sizeof(\fBmh_all_hashes\fP[0]))"
+
+.PP
+Definition at line 25 of file hashes\&.h\&.
+.SS "#define MH_H_SHA1   0x11"
+
+.PP
+Definition at line 6 of file hashes\&.h\&.
+.SS "#define MH_H_SHA2_256   0x12"
+
+.PP
+Definition at line 7 of file hashes\&.h\&.
+.SS "#define MH_H_SHA2_512   0x13"
+
+.PP
+Definition at line 8 of file hashes\&.h\&.
+.SS "#define MH_H_SHA3_224   0x17"
+
+.PP
+Definition at line 12 of file hashes\&.h\&.
+.SS "#define MH_H_SHA3_256   0x16"
+
+.PP
+Definition at line 11 of file hashes\&.h\&.
+.SS "#define MH_H_SHA3_384   0x15"
+
+.PP
+Definition at line 10 of file hashes\&.h\&.
+.SS "#define MH_H_SHA3_512   0x14"
+
+.PP
+Definition at line 9 of file hashes\&.h\&.
+.SS "#define MH_H_SHAKE_128   0x18"
+
+.PP
+Definition at line 13 of file hashes\&.h\&.
+.SS "#define MH_H_SHAKE_256   0x19"
+
+.PP
+Definition at line 14 of file hashes\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "int mh_hash_default_length (int hash)"
+Given the id, return the default length 
+.PP
+\fBParameters\fP
+.RS 4
+\fIhash\fP the id 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the default length of that hash 
+.RE
+.PP
+
+.PP
+Definition at line 57 of file hashes\&.c\&.
+.SS "const char* mh_hash_name (int hash)"
+Given the id, return the hash name 
+.PP
+\fBParameters\fP
+.RS 4
+\fIhash\fP the id (such as MH_H_SHA1) 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the name as text, such as 'sha1' 
+.RE
+.PP
+
+.PP
+Definition at line 47 of file hashes\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "const int mh_all_hashes[]\fC [static]\fP"
+\fBInitial value:\fP
+.PP
+.nf
+= {
+     0x11 ,       0x12 ,  0x13 ,  0x14 ,
+     0x15 ,   0x16 ,  0x17 ,  0x18 ,
+     0x19 ,  0x40 ,   0x41 ,
+}
+.fi
+.PP
+Definition at line 19 of file hashes\&.h\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

@@ -1,0 +1,230 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/multihash/multihash_test.c" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/multihash/multihash_test.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <assert\&.h>\fP
+.br
+\fC#include <stdarg\&.h>\fP
+.br
+\fC#include <stddef\&.h>\fP
+.br
+\fC#include <setjmp\&.h>\fP
+.br
+\fC#include <cmocka\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include 'multihash/errors\&.h'\fP
+.br
+\fC#include 'multihash/hashes\&.h'\fP
+.br
+\fC#include 'multihash/multihash\&.h'\fP
+.br
+\fC#include 'encoding/base64\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBhlen\fP   \fBmh_hash_default_length\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBinit_random_512\fP (void)"
+.br
+.ti -1c
+.RI "void \fBtest_bin_to_64\fP (void **state)"
+.br
+.ti -1c
+.RI "void \fBtest_error_messages_exist\fP (void **state)"
+.br
+.ti -1c
+.RI "void \fBtest_all_hashes_have_names\fP (void **state)"
+.br
+.ti -1c
+.RI "void \fBtest_name_is_null_when_out_of_bands\fP (void **state)"
+.br
+.ti -1c
+.RI "void \fBtest_all_hashes_have_lengths\fP (void **state)"
+.br
+.ti -1c
+.RI "void \fBtest_error_when_out_of_bands\fP (void **state)"
+.br
+.ti -1c
+.RI "void \fBtest_lengths_are_correct_for_known_codes\fP (void **state)"
+.br
+.ti -1c
+.RI "void \fBtest_multihash_new_is_reversible\fP (void **state)"
+.br
+.ti -1c
+.RI "void \fBtest_multihash_hash_decoding_works\fP (void **state)"
+.br
+.ti -1c
+.RI "void \fBtest_multihash_length_decoding_works\fP (void **state)"
+.br
+.ti -1c
+.RI "void \fBtest_multihash_new_crafts_right_multihash\fP (void **state)"
+.br
+.ti -1c
+.RI "int \fBmain\fP (void)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "unsigned char \fBsha1_example\fP []"
+.br
+.ti -1c
+.RI "size_t \fBsha1_example_length\fP = 22"
+.br
+.ti -1c
+.RI "unsigned char \fBsha2_example\fP []"
+.br
+.ti -1c
+.RI "size_t \fBsha2_example_length\fP = 22"
+.br
+.ti -1c
+.RI "unsigned char \fBsha3_example\fP []"
+.br
+.ti -1c
+.RI "size_t \fBsha3_example_length\fP = 34"
+.br
+.ti -1c
+.RI "unsigned char \fBrandom_512\fP [64]"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define hlen   \fBmh_hash_default_length\fP"
+
+.SH "Function Documentation"
+.PP 
+.SS "void init_random_512 (void)"
+
+.PP
+Definition at line 51 of file multihash_test\&.c\&.
+.SS "int main (void)"
+
+.PP
+Definition at line 188 of file multihash_test\&.c\&.
+.SS "void test_all_hashes_have_lengths (void ** state)"
+
+.PP
+Definition at line 107 of file multihash_test\&.c\&.
+.SS "void test_all_hashes_have_names (void ** state)"
+
+.PP
+Definition at line 92 of file multihash_test\&.c\&.
+.SS "void test_bin_to_64 (void ** state)"
+
+.PP
+Definition at line 58 of file multihash_test\&.c\&.
+.SS "void test_error_messages_exist (void ** state)"
+
+.PP
+Definition at line 78 of file multihash_test\&.c\&.
+.SS "void test_error_when_out_of_bands (void ** state)"
+
+.PP
+Definition at line 118 of file multihash_test\&.c\&.
+.SS "void test_lengths_are_correct_for_known_codes (void ** state)"
+
+.PP
+Definition at line 124 of file multihash_test\&.c\&.
+.SS "void test_multihash_hash_decoding_works (void ** state)"
+
+.PP
+Definition at line 155 of file multihash_test\&.c\&.
+.SS "void test_multihash_length_decoding_works (void ** state)"
+
+.PP
+Definition at line 163 of file multihash_test\&.c\&.
+.SS "void test_multihash_new_crafts_right_multihash (void ** state)"
+
+.PP
+Definition at line 173 of file multihash_test\&.c\&.
+.SS "void test_multihash_new_is_reversible (void ** state)"
+
+.PP
+Definition at line 139 of file multihash_test\&.c\&.
+.SS "void test_name_is_null_when_out_of_bands (void ** state)"
+
+.PP
+Definition at line 101 of file multihash_test\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "unsigned char random_512[64]"
+
+.PP
+Definition at line 49 of file multihash_test\&.c\&.
+.SS "unsigned char sha1_example[]"
+\fBInitial value:\fP
+.PP
+.nf
+= {
+    MH_H_SHA1,
+    20,
+    0x11, 0x0a, 0xda, 0x39, 0xa3, 0xee, 0x5e, 0x6b, 0x4b, 0x0d,
+    0x11, 0x0a, 0xda, 0x39, 0xa3, 0xee, 0x5e, 0x6b, 0x4b, 0x0d}
+.fi
+.PP
+Definition at line 21 of file multihash_test\&.c\&.
+.SS "size_t sha1_example_length = 22"
+
+.PP
+Definition at line 26 of file multihash_test\&.c\&.
+.SS "unsigned char sha2_example[]"
+\fBInitial value:\fP
+.PP
+.nf
+= {
+    MH_H_SHA2_256,
+    32,
+    0x11, 0x0a, 0xda, 0x39, 0xa3, 0xee, 0x5e, 0x6b, 0x4b, 0x0d,
+    0x11, 0x0a, 0xda, 0x39, 0xa3, 0xee, 0x5e, 0x6b, 0x4b, 0x0d,
+    0x11, 0x0a, 0xda, 0x39, 0xa3, 0xee, 0x5e, 0x6b, 0x4b, 0x0d,
+    0x00, 0x01}
+.fi
+.PP
+Definition at line 28 of file multihash_test\&.c\&.
+.SS "size_t sha2_example_length = 22"
+
+.PP
+Definition at line 35 of file multihash_test\&.c\&.
+.SS "unsigned char sha3_example[]"
+\fBInitial value:\fP
+.PP
+.nf
+= {
+    MH_H_SHA3_512,
+    64,
+    0x11, 0x0a, 0xda, 0x39, 0xa3, 0xee, 0x5e, 0x6b, 0x4b, 0x0d,
+    0x11, 0x0a, 0xda, 0x39, 0xa3, 0xee, 0x5e, 0x6b, 0x4b, 0x0d,
+    0x11, 0x0a, 0xda, 0x39, 0xa3, 0xee, 0x5e, 0x6b, 0x4b, 0x0d,
+    0x11, 0x0a, 0xda, 0x39, 0xa3, 0xee, 0x5e, 0x6b, 0x4b, 0x0d,
+    0x11, 0x0a, 0xda, 0x39, 0xa3, 0xee, 0x5e, 0x6b, 0x4b, 0x0d,
+    0x11, 0x0a, 0xda, 0x39, 0xa3, 0xee, 0x5e, 0x6b, 0x4b, 0x0d,
+    0x00, 0x01, 0x02, 0x03}
+.fi
+.PP
+Definition at line 37 of file multihash_test\&.c\&.
+.SS "size_t sha3_example_length = 34"
+
+.PP
+Definition at line 47 of file multihash_test\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

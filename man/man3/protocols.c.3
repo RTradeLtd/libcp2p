@@ -1,0 +1,83 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/multiaddr/protocols.c" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/multiaddr/protocols.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'multiaddr/protocols\&.h'\fP
+.br
+\fC#include <ctype\&.h>\fP
+.br
+\fC#include <errno\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <strings\&.h>\fP
+.br
+\fC#include 'utils/varhexutils\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBunload_protocols\fP (struct \fBProtocolListItem\fP *head)"
+.br
+.ti -1c
+.RI "int \fBload_protocols\fP (struct \fBProtocolListItem\fP **head)"
+.br
+.ti -1c
+.RI "struct \fBProtocol\fP * \fBproto_with_name\fP (const struct \fBProtocolListItem\fP *head, const char *proto_w_name)"
+.br
+.ti -1c
+.RI "struct \fBProtocol\fP * \fBproto_with_deccode\fP (const struct \fBProtocolListItem\fP *head, int proto_w_deccode)"
+.br
+.ti -1c
+.RI "void \fBprotocols_with_string\fP (const struct \fBProtocolListItem\fP *head, char *meee, int sizi)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int load_protocols (struct \fBProtocolListItem\fP ** head)"
+load the available protocols into the global protocol_P 
+.PP
+\fBReturns\fP
+.RS 4
+True(1) on success, otherwise 0 
+.RE
+.PP
+
+.PP
+Definition at line 64 of file protocols\&.c\&.
+.SS "struct \fBProtocol\fP* proto_with_deccode (const struct \fBProtocolListItem\fP * head, int proto_w_deccode)"
+
+.PP
+Definition at line 183 of file protocols\&.c\&.
+.SS "struct \fBProtocol\fP* proto_with_name (const struct \fBProtocolListItem\fP * head, const char * proto_w_name)"
+
+.PP
+Definition at line 169 of file protocols\&.c\&.
+.SS "void protocols_with_string (const struct \fBProtocolListItem\fP * head, char * meee, int sizi)"
+
+.PP
+\fBTodo\fP
+.RS 4
+TODO(bonedaddy): figure out why bzero is not present and if we should use 
+.RE
+.PP
+
+.PP
+Definition at line 198 of file protocols\&.c\&.
+.SS "void unload_protocols (struct \fBProtocolListItem\fP * head)"
+
+.PP
+Definition at line 50 of file protocols\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['sock_5faddr_468',['sock_addr',['../da/ddd/socket_8h.html#acf77d3554add8fce8fc0590f75e303f6',1,'socket.h']]],
-  ['sock_5faddr_5fstorage_469',['sock_addr_storage',['../da/ddd/socket_8h.html#ab6caab1c6770adc9cabffb6a2a40ad75',1,'socket.h']]],
-  ['socket_5fclient_5ft_470',['socket_client_t',['../d0/d3b/socket__client_8h.html#a9f1599fe9ce752bf7b20613ca0f725b2',1,'socket_client.h']]],
-  ['socket_5fserver_5fconfig_5ft_471',['socket_server_config_t',['../d9/d26/socket__server_8h.html#aa393a347d02fb92a760791d8fa6734cb',1,'socket_server.h']]],
-  ['socket_5fserver_5ft_472',['socket_server_t',['../d9/d26/socket__server_8h.html#aef5443b2975a516444230744f0b62499',1,'socket_server.h']]]
+  ['map_5fnode_5ft_1818',['map_node_t',['../dc/db7/map_8h.html#a011967d175ea0c282f352b4a95e05377',1,'map.h']]],
+  ['multi_5faddr_5ft_1819',['multi_addr_t',['../da/de0/multiaddr_8h.html#a177bf75fed64007d0d936baac86186c6',1,'multiaddr.h']]],
+  ['multicodec_5fencoded_5ft_1820',['multicodec_encoded_t',['../d2/da6/multicodec_8h.html#a9fa1d77d2b72a22a44c1321c70ffd932',1,'multicodec.h']]],
+  ['mutex_5ffn_1821',['mutex_fn',['../d1/d8c/logger_8h.html#ac8dc34c8e7f433a3b80d5bfa0aa59032',1,'logger.h']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['print_5fcolored_365',['print_colored',['../d3/d13/colors_8c.html#a9b86c057290aefcc15b20231f9cabe9e',1,'print_colored(COLORS color, char *message):&#160;colors.c'],['../da/dd8/colors_8h.html#a9b86c057290aefcc15b20231f9cabe9e',1,'print_colored(COLORS color, char *message):&#160;colors.c']]]
+  ['os_5futils_5ffile_5fsize_1543',['os_utils_file_size',['../d0/d29/main_8c.html#a36c12afde8f4fefe627cbb14841b6856',1,'main.c']]]
 ];

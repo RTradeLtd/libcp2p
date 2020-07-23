@@ -1,0 +1,191 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/cid/cid.c" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/cid/cid.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include 'cid/cid\&.h'\fP
+.br
+\fC#include 'encoding/base32\&.h'\fP
+.br
+\fC#include 'multibase/multibase\&.h'\fP
+.br
+\fC#include 'multihash/hashes\&.h'\fP
+.br
+\fC#include 'multihash/multihash\&.h'\fP
+.br
+\fC#include 'protobuf/varint\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "size_t \fBipfs_cid_protobuf_encode_size\fP (const struct \fBCid\fP *cid)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_protobuf_encode\fP (const struct \fBCid\fP *cid, unsigned char *buffer, size_t buffer_length, size_t *bytes_written)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_protobuf_decode\fP (unsigned char *buffer, size_t buffer_length, struct \fBCid\fP **output)"
+.br
+.ti -1c
+.RI "struct \fBCid\fP * \fBipfs_cid_new\fP (int version, const unsigned char *hash, size_t hash_length, const char codec)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_free\fP (struct \fBCid\fP *cid)"
+.br
+.ti -1c
+.RI "struct \fBCid\fP * \fBipfs_cid_copy\fP (const struct \fBCid\fP *original)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_decode_hash_from_ipfs_ipns_string\fP (const char *incoming, struct \fBCid\fP **cid)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_decode_hash_from_base32\fP (const unsigned char *incoming, size_t incoming_length, struct \fBCid\fP **cid)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_hash_to_base32\fP (const unsigned char *hash, size_t hash_length, unsigned char *buffer, size_t max_buffer_length)"
+.br
+.ti -1c
+.RI "char * \fBipfs_cid_to_string\fP (const struct \fBCid\fP *cid, char **result)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_cast\fP (const unsigned char *incoming, size_t incoming_size, struct \fBCid\fP *cid)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_compare\fP (const struct \fBCid\fP *a, const struct \fBCid\fP *b)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "enum \fBWireType\fP \fBipfs_cid_message_fields\fP []"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int ipfs_cid_cast (const unsigned char * incoming, size_t incoming_size, struct \fBCid\fP * cid)"
+
+.PP
+Definition at line 296 of file cid\&.c\&.
+.SS "int ipfs_cid_compare (const struct \fBCid\fP * a, const struct \fBCid\fP * b)"
+Compare two cids
+.PP
+TODO: find a common denominator between versions and codecs so that we can compare apples to apples\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIa\fP side A 
+.br
+\fIb\fP side B 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+< 0 if side A is greater, > 0 if side B is greater, or 0 if equal 
+.RE
+.PP
+
+.PP
+Definition at line 340 of file cid\&.c\&.
+.SS "struct \fBCid\fP* ipfs_cid_copy (const struct \fBCid\fP * original)"
+
+.PP
+Definition at line 156 of file cid\&.c\&.
+.SS "int ipfs_cid_decode_hash_from_base32 (const unsigned char * incoming, size_t incoming_length, struct \fBCid\fP ** cid)"
+
+.PP
+Definition at line 200 of file cid\&.c\&.
+.SS "int ipfs_cid_decode_hash_from_ipfs_ipns_string (const char * incoming, struct \fBCid\fP ** cid)"
+
+.PP
+Definition at line 178 of file cid\&.c\&.
+.SS "int ipfs_cid_free (struct \fBCid\fP * cid)"
+
+.PP
+Definition at line 140 of file cid\&.c\&.
+.SS "int ipfs_cid_hash_to_base32 (const unsigned char * hash, size_t hash_length, unsigned char * buffer, size_t max_buffer_length)"
+Turn a cid hash into a base 58 
+.PP
+\fBParameters\fP
+.RS 4
+\fIhash\fP the hash to work with 
+.br
+\fIhash_length\fP the length of the existing hash 
+.br
+\fIbuffer\fP where to put the results 
+.br
+\fImax_buffer_length\fP the maximum space reserved for the results 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success 
+.RE
+.PP
+
+.PP
+Definition at line 247 of file cid\&.c\&.
+.SS "struct \fBCid\fP* ipfs_cid_new (int version, const unsigned char * hash, size_t hash_length, const char codec)"
+Create a new CID based on the given hash 
+.PP
+\fBParameters\fP
+.RS 4
+\fIversion\fP the version 
+.br
+\fIhash\fP the multihash 
+.br
+\fIhash_length\fP the length of the multihash in bytes 
+.br
+\fIcodec\fP the codec to be used (NOTE: For version 0, this should be CID_DAG_PROTOBUF) 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the new \fBCid\fP or NULL if there was a problem 
+.RE
+.PP
+
+.PP
+Definition at line 113 of file cid\&.c\&.
+.SS "int ipfs_cid_protobuf_decode (unsigned char * buffer, size_t buffer_length, struct \fBCid\fP ** output)"
+
+.PP
+Definition at line 52 of file cid\&.c\&.
+.SS "int ipfs_cid_protobuf_encode (const struct \fBCid\fP * cid, unsigned char * buffer, size_t buffer_length, size_t * bytes_written)"
+
+.PP
+Definition at line 25 of file cid\&.c\&.
+.SS "size_t ipfs_cid_protobuf_encode_size (const struct \fBCid\fP * cid)"
+
+.PP
+Definition at line 19 of file cid\&.c\&.
+.SS "char* ipfs_cid_to_string (const struct \fBCid\fP * cid, char ** result)"
+
+.PP
+Definition at line 276 of file cid\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "enum \fBWireType\fP ipfs_cid_message_fields[]"
+\fBInitial value:\fP
+.PP
+.nf
+= {WIRETYPE_VARINT, WIRETYPE_VARINT,
+                                           WIRETYPE_LENGTH_DELIMITED}
+.fi
+Content ID 
+.PP
+Definition at line 16 of file cid\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['noblock_495',['NOBLOCK',['../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304a2be9044f7a5785fb4db63bae7d099a9b',1,'socket.h']]]
+  ['log_5flevels_5fdebug_1850',['LOG_LEVELS_DEBUG',['../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99aaf1acdeaa38597b53624a1692c7f894f',1,'logger.h']]],
+  ['log_5flevels_5ferror_1851',['LOG_LEVELS_ERROR',['../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99a24093121542f3c608c0b7094d97e49cb',1,'logger.h']]],
+  ['log_5flevels_5finfo_1852',['LOG_LEVELS_INFO',['../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99ace50ff5547ca932c712f3e62fc70d868',1,'logger.h']]],
+  ['log_5flevels_5fwarn_1853',['LOG_LEVELS_WARN',['../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99a511ee5c792e61122a792f213d025dd06',1,'logger.h']]]
 ];

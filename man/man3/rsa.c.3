@@ -1,0 +1,219 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/crypto/rsa.c" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/crypto/rsa.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include 'crypto/key\&.h'\fP
+.br
+\fC#include 'crypto/rsa\&.h'\fP
+.br
+\fC#include 'crypto/sha256\&.h'\fP
+.br
+\fC#include 'mbedtls/asn1write\&.h'\fP
+.br
+\fC#include 'mbedtls/bignum\&.h'\fP
+.br
+\fC#include 'mbedtls/config\&.h'\fP
+.br
+\fC#include 'mbedtls/ctr_drbg\&.h'\fP
+.br
+\fC#include 'mbedtls/entropy\&.h'\fP
+.br
+\fC#include 'mbedtls/oid\&.h'\fP
+.br
+\fC#include 'mbedtls/pk\&.h'\fP
+.br
+\fC#include 'mbedtls/platform\&.h'\fP
+.br
+\fC#include 'mbedtls/rsa\&.h'\fP
+.br
+\fC#include 'mbedtls/x509\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "struct \fBPrivateKey\fP * \fBlibp2p_crypto_rsa_to_private_key\fP (struct \fBRsaPrivateKey\fP *in)"
+.br
+.ti -1c
+.RI "struct \fBRsaPrivateKey\fP * \fBlibp2p_crypto_private_key_to_rsa\fP (struct \fBPrivateKey\fP *in)"
+.br
+.ti -1c
+.RI "static int \fBlibp2p_crypto_rsa_write_private_key_der\fP (mbedtls_rsa_context *rsa, unsigned char *buf, size_t *size)"
+.br
+.ti -1c
+.RI "static int \fBlibp2p_crypto_rsa_write_public_key_der\fP (mbedtls_pk_context *key, unsigned char *buf, size_t *size)"
+.br
+.ti -1c
+.RI "int \fBlibp2p_crypto_rsa_generate_keypair\fP (struct \fBRsaPrivateKey\fP *private_key, unsigned long num_bits_for_keypair)"
+.br
+.ti -1c
+.RI "int \fBlibp2p_crypto_rsa_private_key_fill_public_key\fP (struct \fBRsaPrivateKey\fP *private_key)"
+.br
+.ti -1c
+.RI "struct \fBRsaPrivateKey\fP * \fBlibp2p_crypto_rsa_rsa_private_key_new\fP (void)"
+.br
+.ti -1c
+.RI "int \fBlibp2p_crypto_rsa_rsa_private_key_free\fP (struct \fBRsaPrivateKey\fP *private_key)"
+.br
+.ti -1c
+.RI "int \fBlibp2p_crypto_rsa_sign\fP (struct \fBRsaPrivateKey\fP *private_key, const char *message, size_t message_length, unsigned char **result, size_t *result_size)"
+.br
+.ti -1c
+.RI "int \fBlibp2p_crypto_rsa_verify\fP (struct \fBRsaPublicKey\fP *public_key, const unsigned char *message, size_t message_length, const unsigned char *signature)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "struct \fBRsaPrivateKey\fP* libp2p_crypto_private_key_to_rsa (struct \fBPrivateKey\fP * in)"
+
+.PP
+Definition at line 40 of file rsa\&.c\&.
+.SS "int libp2p_crypto_rsa_generate_keypair (struct \fBRsaPrivateKey\fP * private_key, unsigned long num_bits_for_keypair)"
+generate a new private key 
+.PP
+\fBParameters\fP
+.RS 4
+\fIprivate_key\fP the new private key 
+.br
+\fInum_bits_for_keypair\fP the size of the key (1024 minimum) 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success 
+.RE
+.PP
+
+.PP
+Definition at line 149 of file rsa\&.c\&.
+.SS "int libp2p_crypto_rsa_private_key_fill_public_key (struct \fBRsaPrivateKey\fP * private_key)"
+Use the private key DER to fill in the public key DER 
+.PP
+\fBParameters\fP
+.RS 4
+\fIprivate_key\fP the private key to use @reutrns true(1) on success 
+.RE
+.PP
+
+.PP
+Definition at line 229 of file rsa\&.c\&.
+.SS "int libp2p_crypto_rsa_rsa_private_key_free (struct \fBRsaPrivateKey\fP * private_key)"
+
+.PP
+Definition at line 287 of file rsa\&.c\&.
+.SS "struct \fBRsaPrivateKey\fP* libp2p_crypto_rsa_rsa_private_key_new (void)"
+
+.PP
+Definition at line 262 of file rsa\&.c\&.
+.SS "int libp2p_crypto_rsa_sign (struct \fBRsaPrivateKey\fP * private_key, const char * message, size_t message_length, unsigned char ** result, size_t * result_size)"
+sign a message 
+.PP
+\fBParameters\fP
+.RS 4
+\fIprivate_key\fP the private key 
+.br
+\fImessage\fP the message to be signed 
+.br
+\fImessage_length\fP the length of message 
+.br
+\fIresult\fP the resultant signature\&. Note: should be pre-allocated and be the size of the private key (i\&.e\&. 2048 bit key can store a sig in 256 bytes) 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success, otherwise false(0) 
+.RE
+.PP
+
+.PP
+Definition at line 307 of file rsa\&.c\&.
+.SS "struct \fBPrivateKey\fP* libp2p_crypto_rsa_to_private_key (struct \fBRsaPrivateKey\fP * in)"
+Convert a struct \fBRsaPrivateKey\fP to a struct \fBPrivateKey\fP 
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP the \fBRsaPrivateKey\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a struct \fBPrivateKey\fP 
+.RE
+.PP
+
+.PP
+Definition at line 20 of file rsa\&.c\&.
+.SS "int libp2p_crypto_rsa_verify (struct \fBRsaPublicKey\fP * public_key, const unsigned char * message, size_t message_length, const unsigned char * signature)"
+verify a signature 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpublic_key\fP the public key to use 
+.br
+\fImessage\fP the message to compare to the signature 
+.br
+\fImessage_length\fP the length of the message 
+.br
+\fIsignature\fP the signature that was given 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) if the signature matches the SHA2-256 hash of message, false(0) otherwise 
+.RE
+.PP
+
+.PP
+Definition at line 386 of file rsa\&.c\&.
+.SS "static int libp2p_crypto_rsa_write_private_key_der (mbedtls_rsa_context * rsa, unsigned char * buf, size_t * size)\fC [static]\fP"
+Take an rsa context and turn it into a der formatted byte stream\&. NOTE: the stream starts from the right\&. So there could be a lot of padding in front\&. Pay attention to the returned size to cut the padding\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIrsa\fP the rsa key to encode 
+.br
+\fIbuf\fP where to put the bytes 
+.br
+\fIsize\fP the max size of the buffer\&. The actual size used is returned in this value 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success, else 0 
+.RE
+.PP
+
+.PP
+Definition at line 64 of file rsa\&.c\&.
+.SS "static int libp2p_crypto_rsa_write_public_key_der (mbedtls_pk_context * key, unsigned char * buf, size_t * size)\fC [static]\fP"
+Take a context and turn it into a der formatted byte stream\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP the key 
+.br
+\fIbuf\fP the buffer to be filled 
+.br
+\fIsize\fP the max size of the buffer\&. The actual size used is returned in this value 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success, else false(0) 
+.RE
+.PP
+
+.PP
+Definition at line 98 of file rsa\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

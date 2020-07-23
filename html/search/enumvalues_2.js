@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['log_5flevels_5fdebug_491',['LOG_LEVELS_DEBUG',['../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99aaf1acdeaa38597b53624a1692c7f894f',1,'logger.h']]],
-  ['log_5flevels_5ferror_492',['LOG_LEVELS_ERROR',['../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99a24093121542f3c608c0b7094d97e49cb',1,'logger.h']]],
-  ['log_5flevels_5finfo_493',['LOG_LEVELS_INFO',['../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99ace50ff5547ca932c712f3e62fc70d868',1,'logger.h']]],
-  ['log_5flevels_5fwarn_494',['LOG_LEVELS_WARN',['../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99a511ee5c792e61122a792f213d025dd06',1,'logger.h']]]
+  ['keytype_5fed25519_1847',['KEYTYPE_ED25519',['../de/de5/key_8h.html#aab0feaba617470cb4aa830dc5935238ca7c5ce755cd512f55e7767cc115562ea8',1,'key.h']]],
+  ['keytype_5finvalid_1848',['KEYTYPE_INVALID',['../de/de5/key_8h.html#aab0feaba617470cb4aa830dc5935238cab0dc7169cbe5abfc51c66a6826072fc1',1,'key.h']]],
+  ['keytype_5frsa_1849',['KEYTYPE_RSA',['../de/de5/key_8h.html#aab0feaba617470cb4aa830dc5935238ca9aefbce8185bc15734bf6f2b16750422',1,'key.h']]]
 ];

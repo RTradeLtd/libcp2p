@@ -1,0 +1,284 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/multiaddr/multiaddr.h" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/multiaddr/multiaddr.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <string\&.h>\fP
+.br
+\fC#include 'protocols\&.h'\fP
+.br
+\fC#include 'protoutils\&.h'\fP
+.br
+\fC#include 'utils/varhexutils\&.h'\fP
+.br
+\fC#include 'utils/varint\&.h'\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBMultiAddress\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBMultiAddress\fP \fBmulti_addr_t\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBstrpos\fP (char *haystack, char *needle)"
+.br
+.ti -1c
+.RI "struct \fBMultiAddress\fP * \fBmultiaddress_new_from_bytes\fP (const uint8_t *byteaddress, int size)"
+.br
+.ti -1c
+.RI "struct \fBMultiAddress\fP * \fBmultiaddress_new_from_string\fP (const char *straddress)"
+.br
+.ti -1c
+.RI "void \fBmultiaddress_free\fP (struct \fBMultiAddress\fP *in)"
+.br
+.ti -1c
+.RI "struct \fBMultiAddress\fP * \fBmultiaddress_copy\fP (const struct \fBMultiAddress\fP *source)"
+.br
+.ti -1c
+.RI "int \fBmultiaddress_encapsulate\fP (struct \fBMultiAddress\fP *result, char *string)"
+.br
+.ti -1c
+.RI "int \fBmultiaddress_decapsulate\fP (struct \fBMultiAddress\fP *result, char *srci)"
+.br
+.ti -1c
+.RI "int \fBmultiaddress_is_ip\fP (const struct \fBMultiAddress\fP *in)"
+.br
+.ti -1c
+.RI "int \fBmultiaddress_is_ip4\fP (const struct \fBMultiAddress\fP *in)"
+.br
+.ti -1c
+.RI "int \fBmultiaddress_is_ip6\fP (const struct \fBMultiAddress\fP *in)"
+.br
+.ti -1c
+.RI "int \fBmultiaddress_get_ip_family\fP (const struct \fBMultiAddress\fP *in)"
+.br
+.ti -1c
+.RI "int \fBmultiaddress_get_ip_address\fP (const struct \fBMultiAddress\fP *in, char *ip)"
+.br
+.ti -1c
+.RI "int \fBmultiaddress_get_ip_port\fP (const struct \fBMultiAddress\fP *in)"
+.br
+.ti -1c
+.RI "char * \fBmultiaddress_get_peer_id\fP (const struct \fBMultiAddress\fP *in)"
+.br
+.ti -1c
+.RI "int \fBmultiaddress_compare\fP (const struct \fBMultiAddress\fP *a, const struct \fBMultiAddress\fP *b)"
+.br
+.ti -1c
+.RI "int \fBmultiaddress_compare_id\fP (const struct \fBMultiAddress\fP *a, const struct \fBMultiAddress\fP *b)"
+.br
+.in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fBMultiAddress\fP \fBmulti_addr_t\fP"
+Normally, addresses have been represented using string addresses, like: 
+.PP
+.nf
+ tcp4://127.0.0.1:1234
+ udp4://10.20.30.40:5060
+ ws://1.2.3.4:5678
+ tcp6://[1fff:0:a88:85a3::ac1f]:8001
+ This isn't optimal. Instead, addresses should be formatted so:
+
+ Binary format:
+
+ (varint proto><n byte addr>)+
+ <1 byte ipv4 code><4 byte ipv4 addr><1 byte udp code><2 byte udp port>
+ <1 byte ipv6 code><16 byte ipv6 addr><1 byte tcp code><2 byte tcp port>
+
+ String format:
+
+ (/<addr str code>/<addr str rep>)+
+ /ip4/<ipv4 str addr>/udp/<udp int port>
+ /ip6/<ipv6 str addr>/tcp/<tcp int port>
+
+.fi
+.PP
+ 
+.SH "Function Documentation"
+.PP 
+.SS "int multiaddress_compare (const struct \fBMultiAddress\fP * a, const struct \fBMultiAddress\fP * b)"
+Check to see how these two addresses compare 
+.PP
+\fBParameters\fP
+.RS 4
+\fIa\fP side A 
+.br
+\fIb\fP side B 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+<0 if B > A; >0 if A > B; 0 if A == B 
+.RE
+.PP
+
+.PP
+Definition at line 345 of file multiaddr\&.c\&.
+.SS "int multiaddress_compare_id (const struct \fBMultiAddress\fP * a, const struct \fBMultiAddress\fP * b)"
+Check to see how these two addresses compare, ignoring IP address, only looking at ID hash 
+.PP
+\fBParameters\fP
+.RS 4
+\fIa\fP side A 
+.br
+\fIb\fP side B 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+<0 if B > A; >0 if A > B; 0 if A == B
+.RE
+.PP
+Check to see how these two addresses compare, ignoring IP address, only looking at the first /ipfs/ID hash 
+.PP
+\fBParameters\fP
+.RS 4
+\fIa\fP side A 
+.br
+\fIb\fP side B 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+<0 if B > A; >0 if A > B; 0 if A == B 
+.RE
+.PP
+
+.PP
+Definition at line 371 of file multiaddr\&.c\&.
+.SS "struct \fBMultiAddress\fP* multiaddress_copy (const struct \fBMultiAddress\fP * in)"
+Copy a multiaddress from one memory location to another 
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP the source 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the new struct \fBMultiAddress\fP or NULL if there was a problem (i\&.e\&. out of memory) 
+.RE
+.PP
+
+.PP
+Definition at line 209 of file multiaddr\&.c\&.
+.SS "int multiaddress_decapsulate (struct \fBMultiAddress\fP * result, char * srci)"
+Find scri and remove it from the resultant value (ie /ip4/127\&.0\&.0\&.1/tcp/4001 becomes ip4/127\&.0\&.0\&.1 when you call decapsulate(addr, '/tcp') 
+.PP
+\fBParameters\fP
+.RS 4
+\fIresult\fP the address to work with 
+.br
+\fIsrci\fP the string to look for 
+.RE
+.PP
+
+.PP
+Definition at line 292 of file multiaddr\&.c\&.
+.SS "int multiaddress_encapsulate (struct \fBMultiAddress\fP * result, char * string)"
+Put a string into the \fBMultiAddress\fP and recalculate the bytes 
+.PP
+\fBParameters\fP
+.RS 4
+\fIresult\fP the struct 
+.br
+\fIstring\fP the new string 
+.RE
+.PP
+
+.PP
+Definition at line 243 of file multiaddr\&.c\&.
+.SS "void multiaddress_free (struct \fBMultiAddress\fP * in)"
+
+.PP
+Definition at line 192 of file multiaddr\&.c\&.
+.SS "int multiaddress_get_ip_address (const struct \fBMultiAddress\fP * in, char * ip)"
+
+.PP
+Definition at line 122 of file multiaddr\&.c\&.
+.SS "int multiaddress_get_ip_family (const struct \fBMultiAddress\fP * in)"
+
+.PP
+Definition at line 108 of file multiaddr\&.c\&.
+.SS "int multiaddress_get_ip_port (const struct \fBMultiAddress\fP * in)"
+
+.PP
+Definition at line 150 of file multiaddr\&.c\&.
+.SS "char* multiaddress_get_peer_id (const struct \fBMultiAddress\fP * in)"
+Pulls the peer ID out of a multiaddress struct 
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP the \fBMultiAddress\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the peer id string, or NULL NOTE: This allocates memory that needs to be freed 
+.RE
+.PP
+
+.PP
+Definition at line 167 of file multiaddr\&.c\&.
+.SS "int multiaddress_is_ip (const struct \fBMultiAddress\fP * in)"
+
+.PP
+Definition at line 89 of file multiaddr\&.c\&.
+.SS "int multiaddress_is_ip4 (const struct \fBMultiAddress\fP * in)"
+
+.PP
+Definition at line 100 of file multiaddr\&.c\&.
+.SS "int multiaddress_is_ip6 (const struct \fBMultiAddress\fP * in)"
+
+.PP
+Definition at line 104 of file multiaddr\&.c\&.
+.SS "struct \fBMultiAddress\fP* multiaddress_new_from_bytes (const uint8_t * byteaddress, int size)"
+construct a new \fBMultiAddress\fP from bytes 
+.PP
+\fBParameters\fP
+.RS 4
+\fIbyteaddress\fP the byte array 
+.br
+\fIsize\fP the size of the byte array 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a new \fBMultiAddress\fP struct filled in, or NULL on error 
+.RE
+.PP
+\fBWarning\fP
+.RS 4
+this currently is failing tests 
+.RE
+.PP
+
+.PP
+Definition at line 43 of file multiaddr\&.c\&.
+.SS "struct \fBMultiAddress\fP* multiaddress_new_from_string (const char * straddress)"
+
+.PP
+Definition at line 68 of file multiaddr\&.c\&.
+.SS "int strpos (char * haystack, char * needle)"
+
+.PP
+Definition at line 11 of file multiaddr\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

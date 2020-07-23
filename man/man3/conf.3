@@ -1,0 +1,193 @@
+.TH "conf" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+conf
+.SH SYNOPSIS
+.br
+.PP
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "list \fBextensions\fP = []"
+.br
+.ti -1c
+.RI "list \fBtemplates_path\fP = ['_templates']"
+.br
+.ti -1c
+.RI "string \fBsource_suffix\fP = '\&.rst'"
+.br
+.ti -1c
+.RI "string \fBmaster_doc\fP = 'index'"
+.br
+.ti -1c
+.RI "string \fBproject\fP = 'c\-template\-REPLACEME'"
+.br
+.ti -1c
+.RI "string \fBcopyright\fP = '2020 c\-template\-REPLACEME'"
+.br
+.ti -1c
+.RI "string \fBauthor\fP = 'c\-template\-REPLACEME'"
+.br
+.ti -1c
+.RI "string \fBversion\fP = ''"
+.br
+.ti -1c
+.RI "string \fBrelease\fP = ''"
+.br
+.ti -1c
+.RI "\fBlanguage\fP = None"
+.br
+.ti -1c
+.RI "list \fBexclude_patterns\fP = ['_build', 'Thumbs\&.db', '\&.DS_Store']"
+.br
+.ti -1c
+.RI "string \fBpygments_style\fP = 'sphinx'"
+.br
+.ti -1c
+.RI "bool \fBtodo_include_todos\fP = False"
+.br
+.ti -1c
+.RI "string \fBhtml_theme\fP = 'alabaster'"
+.br
+.ti -1c
+.RI "list \fBhtml_static_path\fP = []"
+.br
+.ti -1c
+.RI "dictionary \fBhtml_sidebars\fP"
+.br
+.ti -1c
+.RI "string \fBhtmlhelp_basename\fP = 'c\-template\-REPLACEME\-doc'"
+.br
+.ti -1c
+.RI "dictionary \fBlatex_elements\fP"
+.br
+.ti -1c
+.RI "list \fBlatex_documents\fP"
+.br
+.ti -1c
+.RI "list \fBman_pages\fP = [(\fBmaster_doc\fP, 'c\-template\-REPLACEME', 'c\-template\-REPLACEME Documentation', [\fBauthor\fP], 1)]"
+.br
+.in -1c
+.SH "Variable Documentation"
+.PP 
+.SS "string conf\&.author = 'c\-template\-REPLACEME'"
+
+.PP
+Definition at line 50 of file conf\&.py\&.
+.SS "string conf\&.copyright = '2020 c\-template\-REPLACEME'"
+
+.PP
+Definition at line 49 of file conf\&.py\&.
+.SS "list conf\&.exclude_patterns = ['_build', 'Thumbs\&.db', '\&.DS_Store']"
+
+.PP
+Definition at line 71 of file conf\&.py\&.
+.SS "list conf\&.extensions = []"
+
+.PP
+Definition at line 33 of file conf\&.py\&.
+.SS "dictionary conf\&.html_sidebars"
+\fBInitial value:\fP
+.PP
+.nf
+1 =  {
+2     '**': [
+3         'relations\&.html',  # needs 'show_related': True theme option to display
+4         'searchbox\&.html',
+5     ]
+6 }
+.fi
+.PP
+Definition at line 102 of file conf\&.py\&.
+.SS "list conf\&.html_static_path = []"
+
+.PP
+Definition at line 95 of file conf\&.py\&.
+.SS "string conf\&.html_theme = 'alabaster'"
+
+.PP
+Definition at line 84 of file conf\&.py\&.
+.SS "string conf\&.htmlhelp_basename = 'c\-template\-REPLACEME\-doc'"
+
+.PP
+Definition at line 112 of file conf\&.py\&.
+.SS "conf\&.language = None"
+
+.PP
+Definition at line 66 of file conf\&.py\&.
+.SS "list conf\&.latex_documents"
+\fBInitial value:\fP
+.PP
+.nf
+1 =  [
+2     (master_doc, 'c-template-REPLACEME\&.tex', 'c-template-REPLACEME Documentation',
+3      'c-template-REPLACEME\&. c-template-AUTHOR', 'manual'),
+4 ]
+.fi
+.PP
+Definition at line 137 of file conf\&.py\&.
+.SS "dictionary conf\&.latex_elements"
+\fBInitial value:\fP
+.PP
+.nf
+1 =  {
+2     # The paper size ('letterpaper' or 'a4paper')\&.
+3     #
+4     # 'papersize': 'letterpaper',
+5 
+6     # The font size ('10pt', '11pt' or '12pt')\&.
+7     #
+8     # 'pointsize': '10pt',
+9 
+10     # Additional stuff for the LaTeX preamble\&.
+11     #
+12     # 'preamble': '',
+13 
+14     # Latex figure (float) alignment
+15     #
+16     # 'figure_align': 'htbp',
+17 }
+.fi
+.PP
+Definition at line 116 of file conf\&.py\&.
+.SS "list conf\&.man_pages = [(\fBmaster_doc\fP, 'c\-template\-REPLACEME', 'c\-template\-REPLACEME Documentation', [\fBauthor\fP], 1)]"
+
+.PP
+Definition at line 146 of file conf\&.py\&.
+.SS "string conf\&.master_doc = 'index'"
+
+.PP
+Definition at line 45 of file conf\&.py\&.
+.SS "string conf\&.project = 'c\-template\-REPLACEME'"
+
+.PP
+Definition at line 48 of file conf\&.py\&.
+.SS "string conf\&.pygments_style = 'sphinx'"
+
+.PP
+Definition at line 74 of file conf\&.py\&.
+.SS "string conf\&.release = ''"
+
+.PP
+Definition at line 59 of file conf\&.py\&.
+.SS "string conf\&.source_suffix = '\&.rst'"
+
+.PP
+Definition at line 42 of file conf\&.py\&.
+.SS "list conf\&.templates_path = ['_templates']"
+
+.PP
+Definition at line 36 of file conf\&.py\&.
+.SS "bool conf\&.todo_include_todos = False"
+
+.PP
+Definition at line 77 of file conf\&.py\&.
+.SS "string conf\&.version = ''"
+
+.PP
+Definition at line 57 of file conf\&.py\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

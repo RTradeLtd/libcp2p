@@ -1,0 +1,397 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/cid/cid.h" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/cid/cid.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'protobuf/protobuf\&.h'\fP
+.br
+\fC#include <stddef\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBCid\fP"
+.br
+.ti -1c
+.RI "struct \fBCidSet\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBCID_RAW\fP   0x55"
+.br
+.ti -1c
+.RI "#define \fBCID_DAG_PROTOBUF\fP   0x70"
+.br
+.ti -1c
+.RI "#define \fBCID_DAG_CBOR\fP   0x71"
+.br
+.ti -1c
+.RI "#define \fBCID_GIT_RAW\fP   0x78"
+.br
+.ti -1c
+.RI "#define \fBCID_ETHEREUM_BLOCK\fP   0x90"
+.br
+.ti -1c
+.RI "#define \fBCID_ETHEREUM_BLOCKLIST\fP   0x91"
+.br
+.ti -1c
+.RI "#define \fBCID_ETHEREUM_TRIE\fP   0x92"
+.br
+.ti -1c
+.RI "#define \fBCID_ETHEREUM_TX\fP   0x93"
+.br
+.ti -1c
+.RI "#define \fBCID_ETHEREUM_TX_RECEIPT_TRIE\fP   0x94"
+.br
+.ti -1c
+.RI "#define \fBCID_ETHEREUM_TX_RECEIPT\fP   0x95"
+.br
+.ti -1c
+.RI "#define \fBCID_ETHEREUM_STATE_TRIE\fP   0x96"
+.br
+.ti -1c
+.RI "#define \fBCID_ETHEREUM_ACCOUNT_SNAPSHOT\fP   0x97"
+.br
+.ti -1c
+.RI "#define \fBCID_ETHEREUM_STORAGE_TRIE\fP   0x98"
+.br
+.ti -1c
+.RI "#define \fBCID_BITCOIN_BLOCK\fP   0xb0"
+.br
+.ti -1c
+.RI "#define \fBCID_BITCOIN_TX\fP   0xb1"
+.br
+.ti -1c
+.RI "#define \fBCID_ZCASH_BLOCK\fP   0xc0"
+.br
+.ti -1c
+.RI "#define \fBCID_ZCASH_TX\fP   0xc1"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBipfs_cid_protobuf_encode\fP (const struct \fBCid\fP *incoming, unsigned char *buffer, size_t max_buffer_length, size_t *bytes_written)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_protobuf_decode\fP (unsigned char *buffer, size_t buffer_length, struct \fBCid\fP **output)"
+.br
+.ti -1c
+.RI "size_t \fBipfs_cid_protobuf_encode_size\fP (const struct \fBCid\fP *incoming)"
+.br
+.ti -1c
+.RI "struct \fBCid\fP * \fBipfs_cid_new\fP (int version, const unsigned char *hash, size_t hash_length, const char codec)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_free\fP (struct \fBCid\fP *cid)"
+.br
+.ti -1c
+.RI "struct \fBCid\fP * \fBipfs_cid_copy\fP (const struct \fBCid\fP *original)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_decode_hash_from_base32\fP (const unsigned char *incoming, size_t incoming_length, struct \fBCid\fP **cid)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_decode_hash_from_ipfs_ipns_string\fP (const char *incoming, struct \fBCid\fP **cid)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_hash_to_base32\fP (const unsigned char *hash, size_t hash_length, unsigned char *buffer, size_t max_buffer_length)"
+.br
+.ti -1c
+.RI "char * \fBipfs_cid_to_string\fP (const struct \fBCid\fP *cid, char **result)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_cast\fP (const unsigned char *incoming, size_t incoming_size, struct \fBCid\fP *cid)"
+.br
+.ti -1c
+.RI "struct \fBCidSet\fP * \fBipfs_cid_set_new\fP ()"
+.br
+.ti -1c
+.RI "void \fBipfs_cid_set_destroy\fP (struct \fBCidSet\fP **set)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_set_add\fP (struct \fBCidSet\fP *set, struct \fBCid\fP *cid, int visit)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_set_has\fP (struct \fBCidSet\fP *set, struct \fBCid\fP *cid)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_set_remove\fP (struct \fBCidSet\fP *set, struct \fBCid\fP *cid)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_set_len\fP (struct \fBCidSet\fP *set)"
+.br
+.ti -1c
+.RI "unsigned char ** \fBipfs_cid_set_keys\fP (struct \fBCidSet\fP *set)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_set_foreach\fP (struct \fBCidSet\fP *set, int(*func)(struct \fBCid\fP *))"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_compare\fP (const struct \fBCid\fP *a, const struct \fBCid\fP *b)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define CID_BITCOIN_BLOCK   0xb0"
+
+.PP
+Definition at line 27 of file cid\&.h\&.
+.SS "#define CID_BITCOIN_TX   0xb1"
+
+.PP
+Definition at line 28 of file cid\&.h\&.
+.SS "#define CID_DAG_CBOR   0x71"
+
+.PP
+Definition at line 16 of file cid\&.h\&.
+.SS "#define CID_DAG_PROTOBUF   0x70"
+
+.PP
+Definition at line 15 of file cid\&.h\&.
+.SS "#define CID_ETHEREUM_ACCOUNT_SNAPSHOT   0x97"
+
+.PP
+Definition at line 25 of file cid\&.h\&.
+.SS "#define CID_ETHEREUM_BLOCK   0x90"
+
+.PP
+Definition at line 18 of file cid\&.h\&.
+.SS "#define CID_ETHEREUM_BLOCKLIST   0x91"
+
+.PP
+Definition at line 19 of file cid\&.h\&.
+.SS "#define CID_ETHEREUM_STATE_TRIE   0x96"
+
+.PP
+Definition at line 24 of file cid\&.h\&.
+.SS "#define CID_ETHEREUM_STORAGE_TRIE   0x98"
+
+.PP
+Definition at line 26 of file cid\&.h\&.
+.SS "#define CID_ETHEREUM_TRIE   0x92"
+
+.PP
+Definition at line 20 of file cid\&.h\&.
+.SS "#define CID_ETHEREUM_TX   0x93"
+
+.PP
+Definition at line 21 of file cid\&.h\&.
+.SS "#define CID_ETHEREUM_TX_RECEIPT   0x95"
+
+.PP
+Definition at line 23 of file cid\&.h\&.
+.SS "#define CID_ETHEREUM_TX_RECEIPT_TRIE   0x94"
+
+.PP
+Definition at line 22 of file cid\&.h\&.
+.SS "#define CID_GIT_RAW   0x78"
+
+.PP
+Definition at line 17 of file cid\&.h\&.
+.SS "#define CID_RAW   0x55"
+
+.PP
+Definition at line 14 of file cid\&.h\&.
+.SS "#define CID_ZCASH_BLOCK   0xc0"
+
+.PP
+Definition at line 29 of file cid\&.h\&.
+.SS "#define CID_ZCASH_TX   0xc1"
+
+.PP
+Definition at line 30 of file cid\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "int ipfs_cid_cast (const unsigned char * incoming, size_t incoming_size, struct \fBCid\fP * cid)"
+
+.PP
+Definition at line 296 of file cid\&.c\&.
+.SS "int ipfs_cid_compare (const struct \fBCid\fP * a, const struct \fBCid\fP * b)"
+Compare two cids 
+.PP
+\fBParameters\fP
+.RS 4
+\fIa\fP side A 
+.br
+\fIb\fP side B 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+< 0 if side A is greater, > 0 if side B is greater, or 0 if equal
+.RE
+.PP
+Compare two cids
+.PP
+TODO: find a common denominator between versions and codecs so that we can compare apples to apples\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIa\fP side A 
+.br
+\fIb\fP side B 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+< 0 if side A is greater, > 0 if side B is greater, or 0 if equal 
+.RE
+.PP
+
+.PP
+Definition at line 340 of file cid\&.c\&.
+.SS "struct \fBCid\fP* ipfs_cid_copy (const struct \fBCid\fP * original)"
+
+.PP
+Definition at line 156 of file cid\&.c\&.
+.SS "int ipfs_cid_decode_hash_from_base32 (const unsigned char * incoming, size_t incoming_length, struct \fBCid\fP ** cid)"
+
+.PP
+Definition at line 200 of file cid\&.c\&.
+.SS "int ipfs_cid_decode_hash_from_ipfs_ipns_string (const char * incoming, struct \fBCid\fP ** cid)"
+
+.PP
+Definition at line 178 of file cid\&.c\&.
+.SS "int ipfs_cid_free (struct \fBCid\fP * cid)"
+
+.PP
+Definition at line 140 of file cid\&.c\&.
+.SS "int ipfs_cid_hash_to_base32 (const unsigned char * hash, size_t hash_length, unsigned char * buffer, size_t max_buffer_length)"
+Turn a cid into a base 58 of a multihash of the cid hash 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcid\fP the cid to work with 
+.br
+\fIbuffer\fP where to put the results 
+.br
+\fImax_buffer_length\fP the maximum space reserved for the results 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success
+.RE
+.PP
+Turn a cid hash into a base 58 
+.PP
+\fBParameters\fP
+.RS 4
+\fIhash\fP the hash to work with 
+.br
+\fIhash_length\fP the length of the existing hash 
+.br
+\fIbuffer\fP where to put the results 
+.br
+\fImax_buffer_length\fP the maximum space reserved for the results 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success 
+.RE
+.PP
+
+.PP
+Definition at line 247 of file cid\&.c\&.
+.SS "struct \fBCid\fP* ipfs_cid_new (int version, const unsigned char * hash, size_t hash_length, const char codec)"
+Create a new CID based on the given hash 
+.PP
+\fBParameters\fP
+.RS 4
+\fIversion\fP the version 
+.br
+\fIhash\fP the multihash 
+.br
+\fIhash_length\fP the length of the multihash in bytes 
+.br
+\fIcodec\fP the codec to be used (NOTE: For version 0, this should be CID_DAG_PROTOBUF) 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the \fBCid\fP, or NULL if there was a problem
+.RE
+.PP
+Create a new CID based on the given hash 
+.PP
+\fBParameters\fP
+.RS 4
+\fIversion\fP the version 
+.br
+\fIhash\fP the multihash 
+.br
+\fIhash_length\fP the length of the multihash in bytes 
+.br
+\fIcodec\fP the codec to be used (NOTE: For version 0, this should be CID_DAG_PROTOBUF) 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the new \fBCid\fP or NULL if there was a problem 
+.RE
+.PP
+
+.PP
+Definition at line 113 of file cid\&.c\&.
+.SS "int ipfs_cid_protobuf_decode (unsigned char * buffer, size_t buffer_length, struct \fBCid\fP ** output)"
+
+.PP
+Definition at line 52 of file cid\&.c\&.
+.SS "int ipfs_cid_protobuf_encode (const struct \fBCid\fP * incoming, unsigned char * buffer, size_t max_buffer_length, size_t * bytes_written)"
+
+.PP
+Definition at line 25 of file cid\&.c\&.
+.SS "size_t ipfs_cid_protobuf_encode_size (const struct \fBCid\fP * incoming)"
+
+.PP
+Definition at line 19 of file cid\&.c\&.
+.SS "int ipfs_cid_set_add (struct \fBCidSet\fP * set, struct \fBCid\fP * cid, int visit)"
+
+.PP
+Definition at line 24 of file set\&.c\&.
+.SS "void ipfs_cid_set_destroy (struct \fBCidSet\fP ** set)"
+
+.PP
+Definition at line 9 of file set\&.c\&.
+.SS "int ipfs_cid_set_foreach (struct \fBCidSet\fP * set, int(*)(struct \fBCid\fP *) func)"
+
+.PP
+Definition at line 166 of file set\&.c\&.
+.SS "int ipfs_cid_set_has (struct \fBCidSet\fP * set, struct \fBCid\fP * cid)"
+
+.PP
+Definition at line 85 of file set\&.c\&.
+.SS "unsigned char** ipfs_cid_set_keys (struct \fBCidSet\fP * set)"
+
+.PP
+Definition at line 147 of file set\&.c\&.
+.SS "int ipfs_cid_set_len (struct \fBCidSet\fP * set)"
+
+.PP
+Definition at line 134 of file set\&.c\&.
+.SS "struct \fBCidSet\fP* ipfs_cid_set_new ()"
+
+.PP
+Definition at line 5 of file set\&.c\&.
+.SS "int ipfs_cid_set_remove (struct \fBCidSet\fP * set, struct \fBCid\fP * cid)"
+
+.PP
+Definition at line 102 of file set\&.c\&.
+.SS "char* ipfs_cid_to_string (const struct \fBCid\fP * cid, char ** result)"
+
+.PP
+Definition at line 276 of file cid\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

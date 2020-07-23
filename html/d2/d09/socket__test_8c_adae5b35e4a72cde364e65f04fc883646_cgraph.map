@@ -1,47 +1,52 @@
 <map id="test_new_socket_server" name="test_new_socket_server">
-<area shape="rect" id="node1" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="5,293,184,320"/>
-<area shape="rect" id="node2" href="$d2/d09/socket__test_8c.html#a11e393df594425835c9dd42e2440d325" title="example function used to showcase how you can handle connections" alt="" coords="240,11,416,37"/>
-<area shape="rect" id="node3" href="$d2/d09/socket__test_8c.html#a96169235a26e3781a18709bc7d6d2886" title="example function used to showcase how you can udp connections" alt="" coords="238,61,418,88"/>
-<area shape="rect" id="node4" href="$d1/dfc/socket__server_8c.html#a0873d0d29f1ce24a3a9c7a199c03a2a1" title="terminates a server and frees up resources associated with it" alt="" coords="255,112,401,139"/>
-<area shape="rect" id="node15" href="$d1/dfc/socket__server_8c.html#a77df78f3e8eb1b69cca2b4f2c6b3e354" title="used to free up resources allocated for socket_server_config_t" alt="" coords="255,381,401,422"/>
-<area shape="rect" id="node16" href="$d4/d39/socket__client_8c.html#acddf96d2dea8f47ea2d0555c8500630d" title="returns a new socket client connected to addr:port" alt="" coords="257,213,399,240"/>
-<area shape="rect" id="node19" href="$d1/dfc/socket__server_8c.html#abdfa0f6886955caae3b71928592e0301" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="255,163,401,189"/>
-<area shape="rect" id="node26" href="$d1/dfc/socket__server_8c.html#a0a9835b57e74926457725150c2d2fed4" title="used to initialize a socket_server_config_t object" alt="" coords="232,447,424,473"/>
-<area shape="rect" id="node27" href="$d1/d22/logger_8c.html#aba435ba2ea5433b4dc792c5d8038a0d1" title="returns a new thread safe logger if with_debug is false, then all debug_log calls will be ignored" alt="" coords="255,497,401,524"/>
-<area shape="rect" id="node38" href="$d1/dfc/socket__server_8c.html#a80876c3df4dfb0c5d793cb641c884600" title="used to signal that we should exit the main start_socket_server function" alt="" coords="263,548,393,575"/>
-<area shape="rect" id="node39" href="$d4/d39/socket__client_8c.html#a46de905844492f3340913c1864e2366b" title="used to send a message through the connected socket number" alt="" coords="249,599,407,625"/>
-<area shape="rect" id="node40" href="$d2/d09/socket__test_8c.html#af651f6515eeb896e9fcf591d00ac3585" title=" " alt="" coords="253,315,403,357"/>
-<area shape="rect" id="node44" href="$db/d84/thread__pool_8c.html#ad3587d247f5458dc2c75539715665b7a" title=" " alt="" coords="681,325,814,352"/>
-<area shape="rect" id="node5" href="$d1/d22/logger_8c.html#a8cf74430151bf53ab52b8b94788186af" title="free resources for the threaded logger" alt="" coords="472,56,623,83"/>
-<area shape="rect" id="node6" href="$db/d84/thread__pool_8c.html#ae35764bc7ae46da374abd9d44db547ae" title=" " alt="" coords="488,107,607,133"/>
-<area shape="rect" id="node7" href="$db/d84/thread__pool_8c.html#ae6e1dd79d442233da83062562ee6972c" title=" " alt="" coords="689,56,805,83"/>
-<area shape="rect" id="node8" href="$db/d84/thread__pool_8c.html#a207f3cb12623e70e3cca759ad1b4382b" title=" " alt="" coords="678,107,817,133"/>
-<area shape="rect" id="node14" href="$db/d84/thread__pool_8c.html#aa1d12971ef30887ddfa7ce3cf71c34a8" title=" " alt="" coords="687,5,807,32"/>
-<area shape="rect" id="node9" href="$db/d84/thread__pool_8c.html#a4150995d61669c98f258fdeae6a5c51a" title=" " alt="" coords="873,107,995,133"/>
-<area shape="rect" id="node10" href="$db/d84/thread__pool_8c.html#a142c7c2ae2e4668b79c118be9ac821d9" title=" " alt="" coords="1055,72,1153,99"/>
-<area shape="rect" id="node12" href="$db/d84/thread__pool_8c.html#abfa490edbbfd573e2994fbe5b835075a" title=" " alt="" coords="1047,173,1161,200"/>
-<area shape="rect" id="node11" href="$db/d84/thread__pool_8c.html#a5d80ec2da8e51ce42dc7c62cbe4bd5fb" title=" " alt="" coords="1256,97,1343,124"/>
-<area shape="rect" id="node13" href="$db/d84/thread__pool_8c.html#a81956b8f532e6b303d98ebc51afbc5f7" title=" " alt="" coords="1253,249,1346,276"/>
-<area shape="rect" id="node17" href="$d5/df8/socket_8c.html#a1a802d1985754fe6d4d6c050c214e4b4" title="gets an available socket attached to bind_address" alt="" coords="484,213,611,240"/>
-<area shape="rect" id="node18" href="$d5/df8/socket_8c.html#add0cf15976a6dd3a21d81320a5fbf0cf" title="used to enable/disable blocking sockets" alt="" coords="671,259,824,301"/>
-<area shape="rect" id="node20" href="$db/d84/thread__pool_8c.html#a3e6ebbdd6aecc6fc0035e5780c9878c8" title=" " alt="" coords="502,159,593,185"/>
-<area shape="rect" id="node21" href="$db/d84/thread__pool_8c.html#acb152f2eb43e036be4dc165f7382575b" title=" " alt="" coords="1049,123,1159,149"/>
-<area shape="rect" id="node22" href="$db/d84/thread__pool_8c.html#a49362637086d4a7a964a42ac5a1d2e26" title=" " alt="" coords="701,208,793,235"/>
-<area shape="rect" id="node23" href="$db/d84/thread__pool_8c.html#aab606ee6d09b4f3c381ce49dd332f81c" title=" " alt="" coords="891,216,977,243"/>
-<area shape="rect" id="node24" href="$db/d84/thread__pool_8c.html#a8894df9ca292ef8e6aa02bce59417a83" title=" " alt="" coords="1057,224,1151,251"/>
-<area shape="rect" id="node25" href="$db/d84/thread__pool_8c.html#a8efaf18d873a1a794a446f537f8ad0f0" title=" " alt="" coords="1055,275,1153,301"/>
-<area shape="rect" id="node28" href="$d1/d22/logger_8c.html#a01cf0356db3e561c2ec43fa766ef56af" title="main function you should call, which will delegate to the appopriate *_log function" alt="" coords="709,537,786,564"/>
-<area shape="rect" id="node37" href="$d1/d22/logger_8c.html#ad4ca0f60df17abc4a0cfcbd71049aef9" title="like log_func but for formatted logs" alt="" coords="506,543,589,569"/>
-<area shape="rect" id="node29" href="$d1/d22/logger_8c.html#adbd079d224c0a17760bd34be2b94d4d4" title="logs a debug styled message &#45; called by log_fn" alt="" coords="889,436,979,463"/>
-<area shape="rect" id="node33" href="$d1/d22/logger_8c.html#a86974eb20c3c2a9b8528cca2bfd1526b" title="logs an error styled message &#45; called by log_fn" alt="" coords="894,487,974,513"/>
-<area shape="rect" id="node34" href="$d1/d22/logger_8c.html#a26fa286bf91c5bdead18c3e06ba8b5de" title="private function that returns a timestamp of format Jul 06 10:12:20 PM" alt="" coords="872,639,996,665"/>
-<area shape="rect" id="node35" href="$d1/d22/logger_8c.html#acb4bc62c4f5124145fdd7813a8eff213" title="logs an info styled message &#45; called by log_fn" alt="" coords="897,537,971,564"/>
-<area shape="rect" id="node36" href="$d1/d22/logger_8c.html#a1979109bb7f9b3fccd5d35ab62af76b0" title="logs a warned styled message &#45; called by log_fn" alt="" coords="893,588,975,615"/>
-<area shape="rect" id="node30" href="$d3/d13/colors_8c.html#a9b86c057290aefcc15b20231f9cabe9e" title="prints message to stdout with the given color" alt="" coords="1051,487,1157,513"/>
-<area shape="rect" id="node32" href="$d1/d22/logger_8c.html#a6362ea8a304cd179fbd42e2971ed71f3" title="used to write a log message to file" alt="" coords="1049,537,1159,564"/>
-<area shape="rect" id="node31" href="$d3/d13/colors_8c.html#ad8d5f1e1278b0284c4edf5cd254a39c6" title="returns an ansi color string to be used with printf" alt="" coords="1212,487,1387,513"/>
-<area shape="rect" id="node41" href="$d1/dfc/socket__server_8c.html#a1ce9882f112a3f405b53cdc3d35a2def" title="starts the socket server which processes new connections" alt="" coords="473,325,622,352"/>
-<area shape="rect" id="node42" href="$d1/dfc/socket__server_8c.html#a0a85f1e22b043be60df800b7e0be8cae" title="helper function for accepting client connections times out new attempts if they take 3 seconds or mor..." alt="" coords="674,376,821,403"/>
-<area shape="rect" id="node43" href="$d5/df8/socket_8c.html#aa3f161176f86bd430439429fbd7aec09" title="returns the address the client is connecting from" alt="" coords="875,376,993,403"/>
-<area shape="rect" id="node45" href="$db/d84/thread__pool_8c.html#a22c1741557b617f0d79c8c4fce6f3fce" title=" " alt="" coords="1044,325,1164,352"/>
+<area shape="rect" id="node1" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="5,463,184,489"/>
+<area shape="rect" id="node2" href="$d2/d09/socket__test_8c.html#a11e393df594425835c9dd42e2440d325" title="example function used to showcase how you can handle connections" alt="" coords="240,117,416,144"/>
+<area shape="rect" id="node3" href="$d2/d09/socket__test_8c.html#a96169235a26e3781a18709bc7d6d2886" title="example function used to showcase how you can udp connections" alt="" coords="238,168,418,195"/>
+<area shape="rect" id="node4" href="$d1/dfc/socket__server_8c.html#a0873d0d29f1ce24a3a9c7a199c03a2a1" title="terminates a server and frees up resources associated with it" alt="" coords="255,219,401,245"/>
+<area shape="rect" id="node11" href="$d1/dfc/socket__server_8c.html#a77df78f3e8eb1b69cca2b4f2c6b3e354" title="used to free up resources allocated for socket_server_config_t" alt="" coords="255,422,401,463"/>
+<area shape="rect" id="node12" href="$d8/d26/multiaddr_8c.html#a66cdd7c7f121be5d6f9819fc09ca625b" title=" " alt="" coords="495,429,635,456"/>
+<area shape="rect" id="node13" href="$d8/d26/multiaddr_8c.html#a8823478810318162fff2537edbcf698b" title=" " alt="" coords="239,487,417,529"/>
+<area shape="rect" id="node25" href="$d4/d39/socket__client_8c.html#acddf96d2dea8f47ea2d0555c8500630d" title="returns a new socket client connected to addr:port" alt="" coords="257,320,399,347"/>
+<area shape="rect" id="node30" href="$d1/dfc/socket__server_8c.html#abdfa0f6886955caae3b71928592e0301" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="255,269,401,296"/>
+<area shape="rect" id="node34" href="$d1/dfc/socket__server_8c.html#a0a9835b57e74926457725150c2d2fed4" title="used to initialize a socket_server_config_t object" alt="" coords="232,553,424,580"/>
+<area shape="rect" id="node35" href="$d1/d22/logger_8c.html#aba435ba2ea5433b4dc792c5d8038a0d1" title="returns a new thread safe logger if with_debug is false, then all debug_log calls will be ignored" alt="" coords="255,604,401,631"/>
+<area shape="rect" id="node43" href="$d1/dfc/socket__server_8c.html#a80876c3df4dfb0c5d793cb641c884600" title="used to signal that we should exit the main start_socket_server function" alt="" coords="263,655,393,681"/>
+<area shape="rect" id="node44" href="$d4/d39/socket__client_8c.html#a46de905844492f3340913c1864e2366b" title="used to send a message through the connected socket number" alt="" coords="249,705,407,732"/>
+<area shape="rect" id="node45" href="$d2/d09/socket__test_8c.html#af651f6515eeb896e9fcf591d00ac3585" title=" " alt="" coords="253,757,403,798"/>
+<area shape="rect" id="node48" href="$db/d84/thread__pool_8c.html#ad3587d247f5458dc2c75539715665b7a" title=" " alt="" coords="730,823,863,849"/>
+<area shape="rect" id="node5" href="$d1/d22/logger_8c.html#a8cf74430151bf53ab52b8b94788186af" title="free resources for the threaded logger" alt="" coords="490,157,641,184"/>
+<area shape="rect" id="node6" href="$db/d84/thread__pool_8c.html#ae35764bc7ae46da374abd9d44db547ae" title=" " alt="" coords="506,81,625,108"/>
+<area shape="rect" id="node7" href="$db/d84/thread__pool_8c.html#ae6e1dd79d442233da83062562ee6972c" title=" " alt="" coords="739,5,855,32"/>
+<area shape="rect" id="node8" href="$db/d84/thread__pool_8c.html#a207f3cb12623e70e3cca759ad1b4382b" title=" " alt="" coords="727,107,866,133"/>
+<area shape="rect" id="node10" href="$db/d84/thread__pool_8c.html#aa1d12971ef30887ddfa7ce3cf71c34a8" title=" " alt="" coords="737,56,857,83"/>
+<area shape="rect" id="node9" href="$db/d84/thread__pool_8c.html#a4150995d61669c98f258fdeae6a5c51a" title=" " alt="" coords="941,107,1062,133"/>
+<area shape="rect" id="node14" href="$d8/d26/multiaddr_8c.html#a70b88e59cb07058e6d6c7373ada71554" title=" " alt="" coords="495,531,636,557"/>
+<area shape="rect" id="node15" href="$dc/d80/protoutils_8c.html#a07260974981a08120ce7d210952aa0b9" title=" " alt="" coords="504,480,627,507"/>
+<area shape="rect" id="node16" href="$dc/d80/protoutils_8c.html#ae34375388f37361264489ac38b5ef8d6" title=" " alt="" coords="707,325,887,352"/>
+<area shape="rect" id="node17" href="$dc/d9a/varhexutils_8c.html#a4867d8e7469e092a578b10887669fdb1" title=" " alt="" coords="955,401,1048,428"/>
+<area shape="rect" id="node20" href="$dc/d9a/varhexutils_8c.html#a2a5d4ea35e5a01291806f4355836dd50" title=" " alt="" coords="748,376,845,403"/>
+<area shape="rect" id="node21" href="$de/db7/protocols_8c.html#a6d46ac1a0a6df5b003cb1bca51d74950" title=" " alt="" coords="738,629,855,656"/>
+<area shape="rect" id="node22" href="$de/db7/protocols_8c.html#a372efb7dae5ecc84c90ddd37f1b2184b" title=" " alt="" coords="935,500,1068,527"/>
+<area shape="rect" id="node23" href="$de/db7/protocols_8c.html#a61a5cdc3683c4369618899eab5c19418" title=" " alt="" coords="729,528,864,555"/>
+<area shape="rect" id="node24" href="$dc/d80/protoutils_8c.html#a9c6b43fd17114c06a5b35d60e8b7727b" title=" " alt="" coords="761,579,833,605"/>
+<area shape="rect" id="node18" href="$dc/d80/protoutils_8c.html#a879be90a7ec99722101eca2fc95578e8" title=" " alt="" coords="972,300,1031,327"/>
+<area shape="rect" id="node19" href="$dc/d80/protoutils_8c.html#a63c08b81b904d8869edf06f52e031c25" title=" " alt="" coords="948,351,1055,377"/>
+<area shape="rect" id="node26" href="$d5/df8/socket_8c.html#a1a802d1985754fe6d4d6c050c214e4b4" title="gets an available socket attached to bind_address" alt="" coords="502,261,629,288"/>
+<area shape="rect" id="node28" href="$d8/d26/multiaddr_8c.html#a46cd033b2ece8c11754ec6edfc6e0b43" title=" " alt="" coords="488,313,643,354"/>
+<area shape="rect" id="node29" href="$d8/d26/multiaddr_8c.html#ac49f592f1228e93dfa736e3bb547e938" title=" " alt="" coords="472,379,659,405"/>
+<area shape="rect" id="node27" href="$d5/df8/socket_8c.html#add0cf15976a6dd3a21d81320a5fbf0cf" title="used to enable/disable blocking sockets" alt="" coords="720,259,873,301"/>
+<area shape="rect" id="node31" href="$db/d84/thread__pool_8c.html#a3e6ebbdd6aecc6fc0035e5780c9878c8" title=" " alt="" coords="520,208,611,235"/>
+<area shape="rect" id="node32" href="$db/d84/thread__pool_8c.html#acb152f2eb43e036be4dc165f7382575b" title=" " alt="" coords="741,157,852,184"/>
+<area shape="rect" id="node33" href="$db/d84/thread__pool_8c.html#a49362637086d4a7a964a42ac5a1d2e26" title=" " alt="" coords="751,208,843,235"/>
+<area shape="rect" id="node36" href="$d1/d22/logger_8c.html#a01cf0356db3e561c2ec43fa766ef56af" title="main function you should call, which will delegate to the appopriate *_log function" alt="" coords="758,680,835,707"/>
+<area shape="rect" id="node42" href="$d1/d22/logger_8c.html#ad4ca0f60df17abc4a0cfcbd71049aef9" title="like log_func but for formatted logs" alt="" coords="524,673,607,700"/>
+<area shape="rect" id="node37" href="$d1/d22/logger_8c.html#adbd079d224c0a17760bd34be2b94d4d4" title="logs a debug styled message &#45; called by log_fn" alt="" coords="957,727,1046,753"/>
+<area shape="rect" id="node38" href="$d1/d22/logger_8c.html#a86974eb20c3c2a9b8528cca2bfd1526b" title="logs an error styled message &#45; called by log_fn" alt="" coords="961,777,1041,804"/>
+<area shape="rect" id="node39" href="$d1/d22/logger_8c.html#a26fa286bf91c5bdead18c3e06ba8b5de" title="private function that returns a timestamp of format Jul 06 10:12:20 PM" alt="" coords="939,575,1063,601"/>
+<area shape="rect" id="node40" href="$d1/d22/logger_8c.html#acb4bc62c4f5124145fdd7813a8eff213" title="logs an info styled message &#45; called by log_fn" alt="" coords="964,625,1039,652"/>
+<area shape="rect" id="node41" href="$d1/d22/logger_8c.html#a1979109bb7f9b3fccd5d35ab62af76b0" title="logs a warned styled message &#45; called by log_fn" alt="" coords="961,676,1042,703"/>
+<area shape="rect" id="node46" href="$d1/dfc/socket__server_8c.html#a1ce9882f112a3f405b53cdc3d35a2def" title="starts the socket server which processes new connections" alt="" coords="491,768,640,795"/>
+<area shape="rect" id="node47" href="$d1/dfc/socket__server_8c.html#a0a85f1e22b043be60df800b7e0be8cae" title="helper function for accepting client connections times out new attempts if they take 3 seconds or mor..." alt="" coords="723,768,870,795"/>
+<area shape="rect" id="node49" href="$db/d84/thread__pool_8c.html#a22c1741557b617f0d79c8c4fce6f3fce" title=" " alt="" coords="941,828,1061,855"/>
+<area shape="rect" id="node50" href="$db/d84/thread__pool_8c.html#a81956b8f532e6b303d98ebc51afbc5f7" title=" " alt="" coords="1116,828,1209,855"/>
 </map>

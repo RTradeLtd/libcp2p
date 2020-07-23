@@ -1,13 +1,23 @@
 var searchData=
 [
-  ['map_5fdeinit_510',['map_deinit',['../dc/db7/map_8h.html#a6439a84a2f821f08a5bccd2ed0fd48f0',1,'map.h']]],
-  ['map_5fget_511',['map_get',['../dc/db7/map_8h.html#adef169b1a836f0b6fb9a4dd28aed83ba',1,'map.h']]],
-  ['map_5finit_512',['map_init',['../dc/db7/map_8h.html#a56f2ecc1b6606a36667e03af6e465b9f',1,'map.h']]],
-  ['map_5fiter_513',['map_iter',['../dc/db7/map_8h.html#ae5fef820e80064cdafa2338d884a0481',1,'map.h']]],
-  ['map_5fnext_514',['map_next',['../dc/db7/map_8h.html#afdafd675ff4143363ffbc446072ba96b',1,'map.h']]],
-  ['map_5fremove_515',['map_remove',['../dc/db7/map_8h.html#a24b1f064c40f546caf175571dd4200de',1,'map.h']]],
-  ['map_5fset_516',['map_set',['../dc/db7/map_8h.html#a1e28a1ddec93bd42790be03c088ecfdc',1,'map.h']]],
-  ['map_5ft_517',['map_t',['../dc/db7/map_8h.html#aeeeefc7f7dcad69ecd72f9dbaf716625',1,'map.h']]],
-  ['map_5fversion_518',['MAP_VERSION',['../dc/db7/map_8h.html#a208c3d7fdbb5b67d0dd8ba323f94f4a8',1,'map.h']]],
-  ['max_5faddrs_519',['MAX_ADDRS',['../d9/d26/socket__server_8h.html#a957ceb9550e6ce75e003edd463e9bd14',1,'socket_server.h']]]
+  ['dag_5fcbor_1998',['DAG_CBOR',['../d7/ded/codecs_8h.html#a835b5be26fe7291aa5906db656afbe2a',1,'codecs.h']]],
+  ['dag_5fcose_1999',['DAG_COSE',['../d7/ded/codecs_8h.html#aeaa2a964c1436de520943dff4159ce4c',1,'codecs.h']]],
+  ['dag_5fjose_2000',['DAG_JOSE',['../d7/ded/codecs_8h.html#ac6edfabb1cb54a6b97b5eba46689728e',1,'codecs.h']]],
+  ['dag_5fjson_2001',['DAG_JSON',['../d7/ded/codecs_8h.html#a589c850842c88cd54319d591f0b3eb6f',1,'codecs.h']]],
+  ['dag_5fpb_2002',['DAG_PB',['../d7/ded/codecs_8h.html#aa3715becf21431058defea83ec76a6f8',1,'codecs.h']]],
+  ['dash_5fblock_2003',['DASH_BLOCK',['../d7/ded/codecs_8h.html#a0936166d33f407eba7aa6ba3f5f2dcb2',1,'codecs.h']]],
+  ['dash_5ftx_2004',['DASH_TX',['../d7/ded/codecs_8h.html#a3118d8d92c8bfeec36634da2bfead701',1,'codecs.h']]],
+  ['dbl_5fsha2_5f256_2005',['DBL_SHA2_256',['../d7/ded/codecs_8h.html#ad2c27b9d6eeea7ea0c0d96efc966a84f',1,'codecs.h']]],
+  ['dccp_2006',['DCCP',['../d7/ded/codecs_8h.html#ab384016982b98a5a4fd0a8b0f11ce45e',1,'codecs.h']]],
+  ['decl_5fdecoder_2007',['DECL_DECODER',['../d7/d0c/include_2utils_2varint_8h.html#ad4f2504fd6c574eb17f047b919fe4689',1,'varint.h']]],
+  ['decl_5fencoder_2008',['DECL_ENCODER',['../d7/d0c/include_2utils_2varint_8h.html#a6f5d8cd2eb8e4784de9e4edee5665bfa',1,'varint.h']]],
+  ['decred_5fblock_2009',['DECRED_BLOCK',['../d7/ded/codecs_8h.html#afdf2ae77968c73ae06199eefe036f2ef',1,'codecs.h']]],
+  ['decred_5ftx_2010',['DECRED_TX',['../d7/ded/codecs_8h.html#ad881c562b05aee54add1e4e0add3306c',1,'codecs.h']]],
+  ['defn_5fdecoder_2011',['DEFN_DECODER',['../d7/d0c/include_2utils_2varint_8h.html#afb0aede29674b3cdf22b7adfc6290e68',1,'varint.h']]],
+  ['defn_5fencoder_2012',['DEFN_ENCODER',['../d7/d0c/include_2utils_2varint_8h.html#a871f89e72ba1cb596de56858df765337',1,'varint.h']]],
+  ['delim_2013',['DELIM',['../dc/d80/protoutils_8c.html#a1129d7e0bed7c31561c8664cfe73ad07',1,'DELIM():&#160;protoutils.c'],['../df/d48/protoutils_8h.html#a1129d7e0bed7c31561c8664cfe73ad07',1,'DELIM():&#160;protoutils.h']]],
+  ['dns_2014',['DNS',['../d7/ded/codecs_8h.html#acbe2c637c1b86d32538d2f544aa289c3',1,'codecs.h']]],
+  ['dns4_2015',['DNS4',['../d7/ded/codecs_8h.html#aa09a1de965014023d4ee2a90eccb13c7',1,'codecs.h']]],
+  ['dns6_2016',['DNS6',['../d7/ded/codecs_8h.html#a5fb3c345c1a26cd86f6b1e669c2020f6',1,'codecs.h']]],
+  ['dnsaddr_2017',['DNSADDR',['../d7/ded/codecs_8h.html#a98aefcf278e984acffc46715f5c0fbd4',1,'codecs.h']]]
 ];

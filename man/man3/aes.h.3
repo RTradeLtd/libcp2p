@@ -1,0 +1,106 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/aes.h" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/aes.h
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBlibp2p_crypto_aes_key_generate\fP (char *key)"
+.br
+.ti -1c
+.RI "int \fBlibp2p_crypto_aes_encrypt\fP (char *key, char *iv, char *input, size_t input_size, unsigned char **output, size_t *output_size)"
+.br
+.ti -1c
+.RI "int \fBlibp2p_crypto_aes_decrypt\fP (char *key, char *iv, char *input, size_t input_size, unsigned char **output, size_t *output_size)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int libp2p_crypto_aes_decrypt (char * key, char * iv, char * input, size_t input_size, unsigned char ** output, size_t * output_size)"
+Decrypt a block of text 
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP the aes key (32 bytes) 
+.br
+\fIiv\fP the random part of encryption (16 bytes) 
+.br
+\fIinput\fP the text to encrypt 
+.br
+\fIinput_size\fP the length of the array 
+.br
+\fIoutput\fP where the output will be placed 
+.br
+\fIoutput_size\fP the length of the memory allocated for output 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success, otherwise false(0) 
+.RE
+.PP
+
+.PP
+Definition at line 85 of file aes\&.c\&.
+.SS "int libp2p_crypto_aes_encrypt (char * key, char * iv, char * input, size_t input_size, unsigned char ** output, size_t * output_size)"
+Encrypt a block of text 
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP the aes key (32 bytes) 
+.br
+\fIiv\fP the random part of encryption (16 bytes) 
+.br
+\fIinput\fP the text to encrypt 
+.br
+\fIinput_size\fP the length of the array 
+.br
+\fIoutput\fP where the output will be placed 
+.br
+\fIoutput_size\fP the length of the memory allocated for output 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success, otherwise false(0) 
+.RE
+.PP
+
+.PP
+Definition at line 48 of file aes\&.c\&.
+.SS "int libp2p_crypto_aes_key_generate (char * key)"
+Generate a new AES key 
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP where to store the 32 byte key 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success
+.RE
+.PP
+functions for aes encryption Generate a new AES key 
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP where to store the 32 byte key 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success 
+.RE
+.PP
+
+.PP
+Definition at line 18 of file aes\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

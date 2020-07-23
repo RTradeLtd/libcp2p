@@ -4,8 +4,8 @@
 <area shape="rect" id="node3" title=" " alt="" coords="117,109,183,136"/>
 <area shape="rect" id="node4" title=" " alt="" coords="208,109,279,136"/>
 <area shape="rect" id="node5" title=" " alt="" coords="303,109,373,136"/>
-<area shape="rect" id="node6" title=" " alt="" coords="397,109,476,136"/>
-<area shape="rect" id="node7" href="$d6/dd0/varint_8h.html" title="provides utilities for manipulating varints" alt="" coords="501,109,573,136"/>
+<area shape="rect" id="node6" href="$d1/d84/endian_8h.html" title=" " alt="" coords="397,109,476,136"/>
+<area shape="rect" id="node7" href="$d7/d0c/include_2utils_2varint_8h.html" title="provides utilities for manipulating varints" alt="" coords="501,109,573,136"/>
 <area shape="rect" id="node8" title=" " alt="" coords="450,184,525,211"/>
 <area shape="rect" id="node9" title=" " alt="" coords="549,184,620,211"/>
 </map>

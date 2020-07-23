@@ -1,0 +1,80 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/cid/set.c" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/cid/set.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'cid/cid\&.h'\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "struct \fBCidSet\fP * \fBipfs_cid_set_new\fP ()"
+.br
+.ti -1c
+.RI "void \fBipfs_cid_set_destroy\fP (struct \fBCidSet\fP **set)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_set_add\fP (struct \fBCidSet\fP *set, struct \fBCid\fP *cid, int visit)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_set_has\fP (struct \fBCidSet\fP *set, struct \fBCid\fP *cid)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_set_remove\fP (struct \fBCidSet\fP *set, struct \fBCid\fP *cid)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_set_len\fP (struct \fBCidSet\fP *set)"
+.br
+.ti -1c
+.RI "unsigned char ** \fBipfs_cid_set_keys\fP (struct \fBCidSet\fP *set)"
+.br
+.ti -1c
+.RI "int \fBipfs_cid_set_foreach\fP (struct \fBCidSet\fP *set, int(*func)(struct \fBCid\fP *))"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int ipfs_cid_set_add (struct \fBCidSet\fP * set, struct \fBCid\fP * cid, int visit)"
+
+.PP
+Definition at line 24 of file set\&.c\&.
+.SS "void ipfs_cid_set_destroy (struct \fBCidSet\fP ** set)"
+
+.PP
+Definition at line 9 of file set\&.c\&.
+.SS "int ipfs_cid_set_foreach (struct \fBCidSet\fP * set, int(*)(struct \fBCid\fP *) func)"
+
+.PP
+Definition at line 166 of file set\&.c\&.
+.SS "int ipfs_cid_set_has (struct \fBCidSet\fP * set, struct \fBCid\fP * cid)"
+
+.PP
+Definition at line 85 of file set\&.c\&.
+.SS "unsigned char** ipfs_cid_set_keys (struct \fBCidSet\fP * set)"
+
+.PP
+Definition at line 147 of file set\&.c\&.
+.SS "int ipfs_cid_set_len (struct \fBCidSet\fP * set)"
+
+.PP
+Definition at line 134 of file set\&.c\&.
+.SS "struct \fBCidSet\fP* ipfs_cid_set_new ()"
+
+.PP
+Definition at line 5 of file set\&.c\&.
+.SS "int ipfs_cid_set_remove (struct \fBCidSet\fP * set, struct \fBCid\fP * cid)"
+
+.PP
+Definition at line 102 of file set\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

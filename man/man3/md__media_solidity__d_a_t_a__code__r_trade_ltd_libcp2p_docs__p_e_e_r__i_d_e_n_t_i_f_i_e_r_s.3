@@ -1,0 +1,14 @@
+.TH "md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s \- Peer Identifiers 
+To construct a Peer Identifier (aka PeerID, peerID, etc\&.\&.), you take the hash of an ECC Public Key in PEM format, convert it to a multihash, and then encode the multihash using multibase\&. The result of this operation is your 'PeerID'\&. Laid out step by step:
+.PP
+1) Get an ECC Public Key in PEM format 2) Hash the public key 3) Convert the hash into a multihash 4) Base encoded the multihash using multibase
+.SH "Supported Algorithms"
+.PP
+In theory any hashing and base encoding algorithm can be used as long as they are supported by the multihash and multibase standards, collectively grouped under the multiformats umbrella\&. At the moment libcp2p uses SHA256, and base32\&. This is currently hard coded into the codebase, but will be made flexible later on
+.SH "NOTE"
+.PP
+Currently multiaddr parsing doesn't support multibase encoded strings, so you must ensure the peerID has the multibase identifier removed 

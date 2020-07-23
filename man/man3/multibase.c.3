@@ -1,0 +1,107 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/multibase/multibase.c" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/multibase/multibase.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include 'encoding/base16\&.h'\fP
+.br
+\fC#include 'encoding/base32\&.h'\fP
+.br
+\fC#include 'encoding/base64\&.h'\fP
+.br
+\fC#include 'multibase/multibase\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBmultibase_encode\fP (const char \fBbase\fP, const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t results_max_length, size_t *results_length)"
+.br
+.ti -1c
+.RI "int \fBmultibase_encode_size\fP (const char \fBbase\fP, const unsigned char *incoming, size_t incoming_length)"
+.br
+.ti -1c
+.RI "int \fBmultibase_decode\fP (const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t results_max_length, size_t *results_length)"
+.br
+.ti -1c
+.RI "int \fBmultibase_decode_size\fP (const char \fBbase\fP, const unsigned char *incoming, size_t incoming_length)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int multibase_decode (const unsigned char * incoming, size_t incoming_length, unsigned char * results, size_t results_max_length, size_t * results_length)"
+Decode data that was encoded in multibase format 
+.PP
+\fBParameters\fP
+.RS 4
+\fIincoming\fP the data to decode 
+.br
+\fIincoming_length\fP the length of the data to decode 
+.br
+\fIresults\fP where to put the results 
+.br
+\fIresults_max_length\fP the size of the results buffer 
+.br
+\fIresults_length\fP the size of the results after being encoded 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success 
+.RE
+.PP
+
+.PP
+Definition at line 99 of file multibase\&.c\&.
+.SS "int multibase_decode_size (const char base, const unsigned char * incoming, size_t incoming_length)"
+
+.PP
+Definition at line 149 of file multibase\&.c\&.
+.SS "int multibase_encode (const char base, const unsigned char * incoming, size_t incoming_length, unsigned char * results, size_t results_max_length, size_t * results_length)"
+Encode data in multibase format\&. NOTE: currently only supports MULTIBASE_BASE58_BTC and MULTIBASE_BASE16 
+.PP
+\fBParameters\fP
+.RS 4
+\fIbase\fP the format to use (i\&.e\&. MULTIBASE_BASE58_BTC) 
+.br
+\fIincoming\fP the data to encode 
+.br
+\fIincoming_length\fP the length of the data to encode 
+.br
+\fIresults\fP where to put the results 
+.br
+\fIresults_max_length\fP the size of the results buffer 
+.br
+\fIresults_length\fP the size of the results after being encoded 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success 
+.RE
+.PP
+
+.PP
+\fBNote\fP
+.RS 4
+: memcpy can't handle overlapping bytes so use memmove
+.RE
+.PP
+
+.PP
+Definition at line 22 of file multibase\&.c\&.
+.SS "int multibase_encode_size (const char base, const unsigned char * incoming, size_t incoming_length)"
+
+.PP
+Definition at line 75 of file multibase\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

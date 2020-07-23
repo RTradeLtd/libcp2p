@@ -1,4 +1,16 @@
 <map id="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/utils/varhexutils.h" name="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/utils/varhexutils.h">
-<area shape="rect" id="node1" title="provides utilities for manipulating hexadecimal data" alt="" coords="5,5,200,61"/>
-<area shape="rect" id="node2" href="$dc/d9a/varhexutils_8c.html" title=" " alt="" coords="14,109,191,165"/>
+<area shape="rect" id="node1" title="provides utilities for manipulating hexadecimal data" alt="" coords="374,5,568,61"/>
+<area shape="rect" id="node2" href="$d8/d26/multiaddr_8c.html" title=" " alt="" coords="158,429,347,485"/>
+<area shape="rect" id="node3" href="$d8/dca/multiaddr__test_8c.html" title=" " alt="" coords="686,429,909,485"/>
+<area shape="rect" id="node4" href="$de/db7/protocols_8c.html" title=" " alt="" coords="479,213,666,269"/>
+<area shape="rect" id="node5" href="$dc/d80/protoutils_8c.html" title=" " alt="" coords="26,317,215,373"/>
+<area shape="rect" id="node6" href="$dc/d9a/varhexutils_8c.html" title=" " alt="" coords="509,109,686,165"/>
+<area shape="rect" id="node7" href="$d5/dca/protocols_8h.html" title=" " alt="" coords="218,109,434,165"/>
+<area shape="rect" id="node8" href="$da/de0/multiaddr_8h.html" title=" " alt="" coords="428,317,647,373"/>
+<area shape="rect" id="node14" href="$df/d48/protoutils_8h.html" title=" " alt="" coords="135,213,354,269"/>
+<area shape="rect" id="node9" href="$d2/d09/socket__test_8c.html" title=" " alt="" coords="354,659,545,715"/>
+<area shape="rect" id="node10" href="$d0/d3b/socket__client_8h.html" title="stuff related to socket clients (ie, connecting to socket servers)" alt="" coords="434,421,612,492"/>
+<area shape="rect" id="node12" href="$d9/d26/socket__server_8h.html" title="used to create a tcp/udp socket server listening on multiaddrs" alt="" coords="649,540,826,611"/>
+<area shape="rect" id="node11" href="$d4/d39/socket__client_8c.html" title="client socket related tooling" alt="" coords="422,547,624,603"/>
+<area shape="rect" id="node13" href="$d1/dfc/socket__server_8c.html" title="used to create a tcp/udp socket server listening on multiaddrs" alt="" coords="634,659,841,715"/>
 </map>

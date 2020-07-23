@@ -1,0 +1,112 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/encoding/base16.c" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/encoding/base16.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include 'encoding/base16\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBlibp2p_encoding_base16_encode\fP (const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t *results_length)"
+.br
+.ti -1c
+.RI "int \fBlibp2p_encoding_base16_encode_size\fP (size_t incoming_length)"
+.br
+.ti -1c
+.RI "int \fBlibp2p_encoding_base16_decode\fP (const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t *results_length)"
+.br
+.ti -1c
+.RI "int \fBlibp2p_encoding_base16_decode_size\fP (size_t incoming_length)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int libp2p_encoding_base16_decode (const unsigned char * incoming, size_t incoming_length, unsigned char * results, size_t * results_length)"
+Decode from Base16 format 
+.PP
+\fBParameters\fP
+.RS 4
+\fIincoming\fP the incoming base16 encoded string 
+.br
+\fIincoming_length\fP the length of the incoming string (no need to include null) 
+.br
+\fIresults\fP where to put the results 
+.br
+\fIresults_length\fP the size of the buffer, and returns the actual length used 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success 
+.RE
+.PP
+
+.PP
+Definition at line 56 of file base16\&.c\&.
+.SS "int libp2p_encoding_base16_decode_size (size_t incoming_length)"
+Calculate the size of the buffer necessary to decode 
+.PP
+\fBParameters\fP
+.RS 4
+\fIincoming_length\fP the length of the incoming value 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the size of the buffer necessary to hold the decoded bytes 
+.RE
+.PP
+
+.PP
+Definition at line 80 of file base16\&.c\&.
+.SS "int libp2p_encoding_base16_encode (const unsigned char * incoming, size_t incoming_length, unsigned char * results, size_t * results_length)"
+Encode in Base16 format 
+.PP
+\fBParameters\fP
+.RS 4
+\fIincoming\fP the incoming bytes 
+.br
+\fIincoming_length\fP the length of the incoming bytes 
+.br
+\fIresults\fP where to put the results 
+.br
+\fIresults_length\fP the size of the buffer, and returns the actual length used 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success 
+.RE
+.PP
+
+.PP
+Definition at line 15 of file base16\&.c\&.
+.SS "int libp2p_encoding_base16_encode_size (size_t incoming_length)"
+Calculate the size of the buffer necessary to encode 
+.PP
+\fBParameters\fP
+.RS 4
+\fIincoming_length\fP the length of the incoming value 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the size of the buffer necessary to hold the encoded bytes 
+.RE
+.PP
+
+.PP
+Definition at line 42 of file base16\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

@@ -1,0 +1,69 @@
+.TH "MultiAddress" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+MultiAddress
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <multiaddr\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "char * \fBstring\fP"
+.br
+.ti -1c
+.RI "uint8_t * \fBbytes\fP"
+.br
+.ti -1c
+.RI "size_t \fBbsize\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Normally, addresses have been represented using string addresses, like: 
+.PP
+.nf
+ tcp4://127.0.0.1:1234
+ udp4://10.20.30.40:5060
+ ws://1.2.3.4:5678
+ tcp6://[1fff:0:a88:85a3::ac1f]:8001
+ This isn't optimal. Instead, addresses should be formatted so:
+
+ Binary format:
+
+ (varint proto><n byte addr>)+
+ <1 byte ipv4 code><4 byte ipv4 addr><1 byte udp code><2 byte udp port>
+ <1 byte ipv6 code><16 byte ipv6 addr><1 byte tcp code><2 byte tcp port>
+
+ String format:
+
+ (/<addr str code>/<addr str rep>)+
+ /ip4/<ipv4 str addr>/udp/<udp int port>
+ /ip6/<ipv6 str addr>/tcp/<tcp int port>
+
+.fi
+.PP
+ 
+.PP
+Definition at line 32 of file multiaddr\&.h\&.
+.SH "Field Documentation"
+.PP 
+.SS "size_t MultiAddress::bsize"
+
+.PP
+Definition at line 40 of file multiaddr\&.h\&.
+.SS "uint8_t* MultiAddress::bytes"
+
+.PP
+Definition at line 39 of file multiaddr\&.h\&.
+.SS "char* MultiAddress::string"
+
+.PP
+Definition at line 34 of file multiaddr\&.h\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

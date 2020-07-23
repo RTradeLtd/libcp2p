@@ -1,0 +1,196 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/multicodec/multicodec.h" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/multicodec/multicodec.h \- an implemention of multicodec  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdbool\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBmulticodec_encoded\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBMULTICODEC_RAW_BINARY\fP   0x052f6269632f"
+.br
+.ti -1c
+.RI "#define \fBMULTICODEC_ASCII_BASE_2\fP   0x042f62322f"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBmulticodec_encoded\fP \fBmulticodec_encoded_t\fP"
+.br
+.RI "holds a multicodec encoded data primarily used for easy multicodec decoded "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBmulticodec_free_encoded\fP (\fBmulticodec_encoded_t\fP *encoded)"
+.br
+.RI "free up resources allocated for multicodec_encoded_t "
+.ti -1c
+.RI "\fBmulticodec_encoded_t\fP * \fBmulticodec_encode\fP (char *codec, char *inData, size_t inDataLength, char *outData, size_t maxOutDataLength)"
+.br
+.ti -1c
+.RI "int \fBmulticodec_decode\fP (\fBmulticodec_encoded_t\fP *encoded, char *outData, size_t maxOutDataLength)"
+.br
+.ti -1c
+.RI "bool \fBmulticodec_is_valid\fP (char *codec)"
+.br
+.RI "used to check if the provided codec is a valid codec "
+.in -1c
+.SH "Detailed Description"
+.PP 
+an implemention of multicodec 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Bonedaddy
+.RE
+.PP
+enables self describing data encoding methods, for the actual codec definitions see \fBcodecs\&.h\fP 
+.PP
+\fBNote\fP
+.RS 4
+for more information on multicodecs see https://github.com/multiformats/multicodec 
+.RE
+.PP
+
+.PP
+Definition in file \fBmulticodec\&.h\fP\&.
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define MULTICODEC_ASCII_BASE_2   0x042f62322f"
+
+.PP
+Definition at line 28 of file multicodec\&.h\&.
+.SS "#define MULTICODEC_RAW_BINARY   0x052f6269632f"
+
+.PP
+Definition at line 27 of file multicodec\&.h\&.
+.SH "Typedef Documentation"
+.PP 
+.SS "\fBmulticodec_encoded_t\fP"
+
+.PP
+holds a multicodec encoded data primarily used for easy multicodec decoded 
+.SH "Function Documentation"
+.PP 
+.SS "int multicodec_decode (\fBmulticodec_encoded_t\fP * encoded, char * outData, size_t maxOutDataLength)"
+Decode a multicodec encoded data array 
+.PP
+\fBParameters\fP
+.RS 4
+\fIencoded\fP an instance of multicodec_encoded_t holding the encoded data and codec used 
+.br
+\fIoutData\fP the array to put the results in 
+.br
+\fImaxOutDataLength\fP the maximum size of the data 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+an error code or 0 if all is well 
+.RE
+.PP
+
+.PP
+\fBNote\fP
+.RS 4
+copy from inData starting at offset, do \fC+1\fP to account for array index starting at 0, 
+.PP
+and thus the next I value is the start of the actual data, whereas if we simply did 
+.PP
+\fCinData + i\fP we would be starting at the end of the codec part
+.RE
+.PP
+
+.PP
+Definition at line 531 of file multicodec\&.c\&.
+.SS "\fBmulticodec_encoded_t\fP* multicodec_encode (char * codec, char * inData, size_t inDataLength, char * outData, size_t maxOutDataLength)"
+Encode a char array using the specified encoding 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcodecName\fP a standard name of the codec 
+.br
+\fIinData\fP the incoming data to be encoded 
+.br
+\fIinDataLength\fP the length of the inData 
+.br
+\fIoutData\fP a place to store the outgoing data that is at least maxOutDataLength in size 
+.br
+\fImaxOutDataLength\fP the max size for the output 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Success: pointer to an instance of multicodec_encoded_t 
+.PP
+Failure: NULL pointer 
+.RE
+.PP
+
+.PP
+Definition at line 498 of file multicodec\&.c\&.
+.SS "void multicodec_free_encoded (\fBmulticodec_encoded_t\fP * encoded)"
+
+.PP
+free up resources allocated for multicodec_encoded_t 
+.PP
+\fBParameters\fP
+.RS 4
+\fIencoded\fP the isntance of multicodec_encoded_t we are freeing 
+.RE
+.PP
+
+.PP
+\fBNote\fP
+.RS 4
+we probably dont need to free up encoded->codec
+.RE
+.PP
+
+.PP
+Definition at line 479 of file multicodec\&.c\&.
+.SS "bool multicodec_is_valid (char * codec)"
+
+.PP
+used to check if the provided codec is a valid codec 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcodec\fP the codec value to check 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Success: true 
+.PP
+Failure: false 
+.RE
+.PP
+
+.PP
+Definition at line 557 of file multicodec\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

@@ -1,0 +1,54 @@
+.TH "md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multicodec__r_e_a_d_m_e" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multicodec__r_e_a_d_m_e \- regeneration 
+run the following to regenerate the codecs\&.c file
+.PP
+.PP
+.nf
+$> wget -O codecs\&.csv https://raw\&.githubusercontent\&.com/multiformats/multicodec/master/table\&.csv
+$> awk -F ',' '{print "#define "$1}' codecs\&.csv | tr '[:lower:]' '[:upper:]' | tr '-' '_' | tee > vars\&.txt # remove first row as it is the identifier
+$> awk -F ',' '{print "\x22"$3"\x22"}' codecs\&.csv | tr -d " \t\r" | tee > values\&.txt
+$> paste -d ' ' vars\&.txt values\&.txt > codecs\&.h
+$> sed -i 's/DEFINE/define/g' codecs\&.h
+.fi
+.PP
+.PP
+after you'll want to manually edit the file to remove the final line and \fC0XCERT_IMPRINT_256\fP declaration as it is not a valid variable name\&. Additionally you'll want to remove the first line of the file\&.
+.PP
+To regenerate the array of codecs you'll want to run the following:
+.PP
+.PP
+.nf
+#! /bin/bash
+
+OUT="[ "
+
+while IFS= read -r line; do
+        OUT="$OUT, $line"
+        echo "$OUT"
+done < vars\&.txt
+OUT="$OUT ]"
+
+echo "$OUT" >> codecs\&.h
+.fi
+.PP
+.PP
+then at the end of the file add the following (note you may need to increase the count)
+.PP
+.PP
+.nf
+#define CODECS_COUNT 445
+.fi
+.PP
+.SH "notes"
+.PP
+.IP "\(bu" 2
+\fCRAW\fP is the IPLD raw format
+.IP "\(bu" 2
+\fC0XCERT_IMPRINT_256\fP is incompatible as a variable name
+.PP
+.SH "license"
+.PP
+by and large this library has been completely overhauled from the original version in \fCAgorise/libp2p\fP however for historical purposes the license of the original version can be found \fChere\fP 

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['file_5flogger_461',['file_logger',['../d1/d8c/logger_8h.html#a8d9012aa0b71163e5cc71ddd0c227529',1,'logger.h']]]
+  ['ecdsa_5fprivate_5fkey_5ft_1812',['ecdsa_private_key_t',['../d5/d5d/ecdsa_8h.html#af8379012776767ebddaa42fede59ccf5',1,'ecdsa.h']]]
 ];

@@ -1,0 +1,91 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/multihash/errors.h" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/multihash/errors.h
+.SH SYNOPSIS
+.br
+.PP
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBMH_E_NO_ERROR\fP   0"
+.br
+.ti -1c
+.RI "#define \fBMH_E_UNKNOWN_CODE\fP   \-1"
+.br
+.ti -1c
+.RI "#define \fBMH_E_TOO_SHORT\fP   \-2"
+.br
+.ti -1c
+.RI "#define \fBMH_E_TOO_LONG\fP   \-3"
+.br
+.ti -1c
+.RI "#define \fBMH_E_VARINT_NOT_SUPPORTED\fP   \-4"
+.br
+.ti -1c
+.RI "#define \fBMH_E_DIGSET_TOO_LONG\fP   \-5"
+.br
+.ti -1c
+.RI "#define \fBMH_E_LAST\fP   \-5"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "const char * \fBmh_error_string\fP (int code)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define MH_E_DIGSET_TOO_LONG   \-5"
+
+.PP
+Definition at line 9 of file errors\&.h\&.
+.SS "#define MH_E_LAST   \-5"
+
+.PP
+Definition at line 11 of file errors\&.h\&.
+.SS "#define MH_E_NO_ERROR   0"
+
+.PP
+Definition at line 4 of file errors\&.h\&.
+.SS "#define MH_E_TOO_LONG   \-3"
+
+.PP
+Definition at line 7 of file errors\&.h\&.
+.SS "#define MH_E_TOO_SHORT   \-2"
+
+.PP
+Definition at line 6 of file errors\&.h\&.
+.SS "#define MH_E_UNKNOWN_CODE   \-1"
+
+.PP
+Definition at line 5 of file errors\&.h\&.
+.SS "#define MH_E_VARINT_NOT_SUPPORTED   \-4"
+
+.PP
+Definition at line 8 of file errors\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "const char* mh_error_string (int code)"
+Convert an error code into a string 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcode\fP the error code 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the error as text 
+.RE
+.PP
+
+.PP
+Definition at line 8 of file errors\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

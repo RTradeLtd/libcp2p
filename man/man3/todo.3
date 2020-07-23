@@ -14,6 +14,8 @@ figure out proper close procedures
 enable udp 
 .PP
 enable udp  
+.IP "\fBGlobal \fBlibp2p_crypto_ecdsa_keypair_generation\fP (unsigned char *output, mbedtls_ecp_group_id curve)\fP" 1c
+figure out if we need this  
 .IP "\fBFile \fBlogger\&.c\fP \fP" 1c
 .IP "\(bu" 2
 buffer logs and use a dedicated thread for writing (avoid blocking locks)
@@ -32,6 +34,8 @@ support non wildcard
 support non wildcard  
 .IP "\fBGlobal \fBNum_To_HexVar_64\fP (uint64_t TOHVINPUT)\fP" 1c
 TODO(bonedaddy): figure out the previous code did bzero before memset  
+.IP "\fBGlobal \fBprotocols_with_string\fP (const struct \fBProtocolListItem\fP *head, char *meee, int sizi)\fP" 1c
+TODO(bonedaddy): figure out why bzero is not present and if we should use  
 .IP "\fBGlobal \fBsocket_client_sendto\fP (socket_client_t *client, addr_info *peer_address, char *message)\fP" 1c
 if we sent less than total size, send remaining  
 .IP "\fBGlobal \fBsocket_server_config_t\fP \fP" 1c
@@ -40,6 +44,8 @@ switch to multiaddresses
 dont limit to two sockets (this will requiring using multiaddrs and an array of socket numbers)  
 .IP "\fBGlobal \fBstart_socket_server\fP (socket_server_t *srv)\fP" 1c
 enable customizable timeout  
+.IP "\fBGlobal \fBvarint_encode\fP (const unsigned long long n, unsigned char *buf, int len, size_t *bytes)\fP" 1c
+ 0 determine why \fClen\fP isnt being used  
 .IP "\fBGlobal \fBvthconvert\fP (const unsigned char *in, int in_size, unsigned char **out)\fP" 1c
 TODO(bonedaddy): figure out best way to error here 
 .PP

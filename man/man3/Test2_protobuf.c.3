@@ -1,0 +1,95 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/protobuf/test/Test2_protobuf.c" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/protobuf/test/Test2_protobuf.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'Test2_protobuf\&.h'\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include 'protobuf\&.h'\fP
+.br
+\fC#include 'varint\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBTest2_new\fP (struct \fBTest2\fP **test2)"
+.br
+.ti -1c
+.RI "int \fBTest2_free\fP (struct \fBTest2\fP *test2)"
+.br
+.ti -1c
+.RI "int \fBTest2_protobuf_encode\fP (struct \fBTest2\fP *incoming, unsigned char *buffer, size_t max_buffer_length, size_t *bytes_written)"
+.br
+.ti -1c
+.RI "int \fBTest2_protobuf_decode\fP (unsigned char *buffer, size_t buffer_length, struct \fBTest2\fP **output)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "enum \fBWireType\fP \fBTest2_message_fields\fP [] = {\fBWIRETYPE_LENGTH_DELIMITED\fP}"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int Test2_free (struct \fBTest2\fP * test2)"
+Free resources 
+.PP
+\fBParameters\fP
+.RS 4
+\fItest2\fP the struct 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success 
+.RE
+.PP
+
+.PP
+Definition at line 31 of file Test2_protobuf\&.c\&.
+.SS "int Test2_new (struct \fBTest2\fP ** test2)"
+Allocate resources for this structure 
+.PP
+\fBParameters\fP
+.RS 4
+\fItest2\fP the structure 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success 
+.RE
+.PP
+
+.PP
+Definition at line 17 of file Test2_protobuf\&.c\&.
+.SS "int Test2_protobuf_decode (unsigned char * buffer, size_t buffer_length, struct \fBTest2\fP ** output)"
+
+.PP
+Definition at line 61 of file Test2_protobuf\&.c\&.
+.SS "int Test2_protobuf_encode (struct \fBTest2\fP * incoming, unsigned char * buffer, size_t max_buffer_length, size_t * bytes_written)"
+
+.PP
+Definition at line 46 of file Test2_protobuf\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "enum \fBWireType\fP Test2_message_fields[] = {\fBWIRETYPE_LENGTH_DELIMITED\fP}"
+
+.PP
+Definition at line 10 of file Test2_protobuf\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

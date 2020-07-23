@@ -1,0 +1,82 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/peerutils.h" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/peerutils.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'crypto/sha256\&.h'\fP
+.br
+\fC#include 'multihash/hashes\&.h'\fP
+.br
+\fC#include 'multihash/multihash\&.h'\fP
+.br
+\fC#include 'stdio\&.h'\fP
+.br
+\fC#include 'string\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBlibp2p_new_peer_id\fP (unsigned char *pointyaddr, size_t *rezbuflen, unsigned char *ID_BUF, size_t ID_BUF_SIZE)"
+.br
+.RI "returns a libp2p peerid from the sha256 hash of a public key base58 encode a string NOTE: this also puts the prefix 'Qm' in front as the ID is a multihash "
+.ti -1c
+.RI "void \fBID_FromPK_non_null_terminated\fP (char *result, unsigned char *texttohash, size_t text_size)"
+.br
+.ti -1c
+.RI "void \fBID_FromPK\fP (char *result, unsigned char *texttohash)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void ID_FromPK (char * result, unsigned char * texttohash)"
+
+.SS "void ID_FromPK_non_null_terminated (char * result, unsigned char * texttohash, size_t text_size)"
+
+.SS "int libp2p_new_peer_id (unsigned char * pointyaddr, size_t * rezbuflen, unsigned char * ID_BUF, size_t ID_BUF_SIZE)"
+
+.PP
+returns a libp2p peerid from the sha256 hash of a public key base58 encode a string NOTE: this also puts the prefix 'Qm' in front as the ID is a multihash base58 encode a string NOTE: this also puts the prefix 'Qm' in front as the ID is a multihash 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpointyaddr\fP where the results will go 
+.br
+\fIrezbuflen\fP the length of the results buffer\&. It will also put how much was used here 
+.br
+\fIID_BUF\fP the input text (usually a SHA256 hash) 
+.br
+\fIID_BUF_SIZE\fP the input size (normally a SHA256, therefore 32 bytes) 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIpointyaddr\fP where the results will go 
+.br
+\fIrezbuflen\fP the length of the results buffer\&. It will also put how much was used here 
+.br
+\fIID_BUF\fP the input text (usually a SHA256 hash) 
+.br
+\fIID_BUF_SIZE\fP the input size (normally a SHA256, therefore 32 bytes) 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true(1) on success 
+.RE
+.PP
+
+.PP
+Definition at line 21 of file peerutils\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

@@ -1,0 +1,55 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/protobuf/test/Test1_protobuf.h" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/protobuf/test/Test1_protobuf.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'protobuf\&.h'\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBTest1\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBTest1_new\fP (struct \fBTest1\fP **test1)"
+.br
+.ti -1c
+.RI "int \fBTest1_free\fP (struct \fBTest1\fP *test1)"
+.br
+.ti -1c
+.RI "int \fBTest1_protobuf_encode\fP (struct \fBTest1\fP *incoming, unsigned char *buffer, size_t max_buffer_length, size_t *bytes_written)"
+.br
+.ti -1c
+.RI "int \fBTest1_protobuf_decode\fP (unsigned char *buffer, size_t buffer_length, struct \fBTest1\fP **output)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int Test1_free (struct \fBTest1\fP * test1)"
+
+.PP
+Definition at line 20 of file Test1_protobuf\&.c\&.
+.SS "int Test1_new (struct \fBTest1\fP ** test1)"
+
+.PP
+Definition at line 12 of file Test1_protobuf\&.c\&.
+.SS "int Test1_protobuf_decode (unsigned char * buffer, size_t buffer_length, struct \fBTest1\fP ** output)"
+
+.PP
+Definition at line 32 of file Test1_protobuf\&.c\&.
+.SS "int Test1_protobuf_encode (struct \fBTest1\fP * incoming, unsigned char * buffer, size_t max_buffer_length, size_t * bytes_written)"
+
+.PP
+Definition at line 25 of file Test1_protobuf\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

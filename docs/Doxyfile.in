@@ -108,14 +108,8 @@ WARN_LOGFILE           =
 # Configuration options related to the input files
 #---------------------------------------------------------------------------
 INPUT                  = @PROJECT_SOURCE_DIR@/src \
-                         @PROJECT_SOURCE_DIR@/src/utils \
-                         @PROJECT_SOURCE_DIR@/src/network \
-                         @PROJECT_SOURCE_DIR@/src/network \
-                         @PROJECT_SOURCE_DIR@/src/sync \
-                         @PROJECT_SOURCE_DIR@/include/utils \
-                         @PROJECT_SOURCE_DIR@/include/sync \
-                         @PROJECT_SOURCE_DIR@/include/network \
-                         @PROJECT_SOURCE_DIR@/include/network/socket
+                         @PROJECT_SOURCE_DIR@/include \
+                         @PROJECT_SOURCE_DIR@/docs 
 INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.c \
                          *.cc \
@@ -161,14 +155,14 @@ FILE_PATTERNS          = *.c \
                          *.vhdl \
                          *.ucf \
                          *.qsf
-RECURSIVE              = NO
+RECURSIVE              = YES
 EXCLUDE                =
 EXCLUDE_SYMLINKS       = NO
 EXCLUDE_PATTERNS       =
 EXCLUDE_SYMBOLS        =
 EXAMPLE_PATH           =
 EXAMPLE_PATTERNS       = *
-EXAMPLE_RECURSIVE      = NO
+EXAMPLE_RECURSIVE      = YES
 IMAGE_PATH             =
 INPUT_FILTER           =
 FILTER_PATTERNS        =

@@ -1,0 +1,195 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/multiaddr/protoutils.h" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/multiaddr/protoutils.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stddef\&.h>\fP
+.br
+\fC#include <stdint\&.h>\fP
+.br
+\fC#include 'protocols\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBDELIM\fP   '\&.'"
+.br
+.ti -1c
+.RI "#define \fBMAX_HEX_NUMBER_COUNT\fP   8"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "char \fBASCII2bits\fP (char ch)"
+.br
+.ti -1c
+.RI "void \fBhex2bin\fP (char *dst, char *src, int len)"
+.br
+.ti -1c
+.RI "char \fBbits2ASCII\fP (char b)"
+.br
+.ti -1c
+.RI "void \fBbin2hex\fP (char *dst, char *src, int len)"
+.br
+.ti -1c
+.RI "int \fBvalid_digit\fP (char *ip_str)"
+.br
+.ti -1c
+.RI "int \fBis_valid_ipv4\fP (char *ip_str)"
+.br
+.ti -1c
+.RI "int \fBishexdigit\fP (char ch)"
+.br
+.ti -1c
+.RI "int \fBis_valid_ipv6\fP (char *str)"
+.br
+.ti -1c
+.RI "uint64_t \fBip2int\fP (const char *ipconvertint)"
+.br
+.ti -1c
+.RI "char * \fBint2ip\fP (int inputintip)"
+.br
+.ti -1c
+.RI "int \fBbytes_to_string\fP (char **results, const uint8_t *bytes, int bytes_size)"
+.br
+.ti -1c
+.RI "char * \fBaddress_string_to_bytes\fP (struct \fBProtocol\fP *protocol, const char *incoming, size_t incoming_size, char **results, int *results_size)"
+.br
+.ti -1c
+.RI "int \fBstring_to_bytes\fP (uint8_t **finalbytes, size_t *realbbsize, const char *strx, size_t strsize)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define DELIM   '\&.'"
+
+.PP
+Definition at line 22 of file protoutils\&.h\&.
+.SS "#define MAX_HEX_NUMBER_COUNT   8"
+
+.PP
+Definition at line 31 of file protoutils\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "char* address_string_to_bytes (struct \fBProtocol\fP * protocol, const char * incoming, size_t incoming_size, char ** results, int * results_size)"
+Convert an address string to a byte representation 
+.PP
+\fBParameters\fP
+.RS 4
+\fIprotocol\fP the protocol to use 
+.br
+\fIincoming\fP the byte array 
+.br
+\fIincoming_size\fP the size of the byte array 
+.br
+\fIresults\fP the results 
+.br
+\fIresults_size\fP the size of the results 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the results array 
+.RE
+.PP
+
+.PP
+Definition at line 387 of file protoutils\&.c\&.
+.SS "char ASCII2bits (char ch)"
+
+.PP
+Definition at line 21 of file protoutils\&.c\&.
+.SS "void bin2hex (char * dst, char * src, int len)"
+
+.PP
+Definition at line 48 of file protoutils\&.c\&.
+.SS "char bits2ASCII (char b)"
+
+.PP
+Definition at line 39 of file protoutils\&.c\&.
+.SS "int bytes_to_string (char ** buffer, const uint8_t * in_bytes, int in_bytes_size)"
+Unserialize the bytes into a string 
+.PP
+\fBParameters\fP
+.RS 4
+\fIresults\fP where to put the resultant string 
+.br
+\fIbytes\fP the bytes to unserialize 
+.br
+\fIbytes_size\fP the length of the bytes array
+.RE
+.PP
+Unserialize the bytes into a string 
+.PP
+\fBParameters\fP
+.RS 4
+\fIresults\fP where to put the resultant string 
+.br
+\fIin_bytes\fP the bytes to unserialize 
+.br
+\fIin_bytes_size\fP the length of the bytes array 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on error, otherwise 1 
+.RE
+.PP
+Done processing this, move to next if there is more\&.
+.PP
+Definition at line 269 of file protoutils\&.c\&.
+.SS "void hex2bin (char * dst, char * src, int len)"
+
+.PP
+Definition at line 32 of file protoutils\&.c\&.
+.SS "char* int2ip (int inputintip)"
+
+.PP
+Definition at line 249 of file protoutils\&.c\&.
+.SS "uint64_t ip2int (const char * ipconvertint)"
+
+.PP
+Definition at line 210 of file protoutils\&.c\&.
+.SS "int is_valid_ipv4 (char * ip_str)"
+
+.PP
+Definition at line 72 of file protoutils\&.c\&.
+.SS "int is_valid_ipv6 (char * str)"
+
+.PP
+Definition at line 124 of file protoutils\&.c\&.
+.SS "int ishexdigit (char ch)"
+
+.PP
+Definition at line 117 of file protoutils\&.c\&.
+.SS "int string_to_bytes (uint8_t ** finalbytes, size_t * realbbsize, const char * strx, size_t strsize)"
+convert a string address into bytes 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfinalbytes\fP the destination 
+.br
+\fIrealbbsize\fP the ultimate size of the destination 
+.br
+\fIstrx\fP the incoming string 
+.br
+\fIstrsize\fP the string length 
+.RE
+.PP
+
+.PP
+Definition at line 585 of file protoutils\&.c\&.
+.SS "int valid_digit (char * ip_str)"
+
+.PP
+Definition at line 60 of file protoutils\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

@@ -1,0 +1,71 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/protobuf/test/testit.c" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/protobuf/test/testit.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include 'test_protobuf\&.h'\fP
+.br
+\fC#include 'test_varint\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBtestit\fP (const char *name, int(*func)(void))"
+.br
+.ti -1c
+.RI "int \fBmain\fP (int argc, char **argv)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "const char * \fBnames\fP []"
+.br
+.ti -1c
+.RI "int(* \fBfuncs\fP [])(void)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int main (int argc, char ** argv)"
+run 1 test or run all 
+.PP
+Definition at line 27 of file testit\&.c\&.
+.SS "int testit (const char * name, int(*)(void) func)"
+
+.PP
+Definition at line 7 of file testit\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "int(* funcs[])(void)"
+\fBInitial value:\fP
+.PP
+.nf
+= {test_write_simple, test_write_negative,   test_write_string,
+                        test_rightshift,   test_complex_protobuf, test_varint}
+.fi
+.PP
+Definition at line 21 of file testit\&.c\&.
+.SS "const char* names[]"
+\fBInitial value:\fP
+.PP
+.nf
+= {"test_write_simple",     "test_write_negative",
+                       "test_write_string",     "test_rightshift",
+                       "test_complex_protobuf", "test_varint"}
+.fi
+.PP
+Definition at line 17 of file testit\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

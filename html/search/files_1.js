@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['logger_2ec_284',['logger.c',['../d1/d22/logger_8c.html',1,'']]],
-  ['logger_2eh_285',['logger.h',['../d1/d8c/logger_8h.html',1,'']]]
+  ['base16_2ec_1240',['base16.c',['../de/df5/base16_8c.html',1,'']]],
+  ['base16_2eh_1241',['base16.h',['../d2/dcf/base16_8h.html',1,'']]],
+  ['base32_2ec_1242',['base32.c',['../db/d08/base32_8c.html',1,'']]],
+  ['base32_2eh_1243',['base32.h',['../d8/d33/base32_8h.html',1,'']]],
+  ['base64_2ec_1244',['base64.c',['../db/d36/base64_8c.html',1,'']]],
+  ['base64_2eh_1245',['base64.h',['../d2/d6f/base64_8h.html',1,'']]]
 ];

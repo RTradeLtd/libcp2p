@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['job_262',['job',['../d3/d8c/structjob.html',1,'']]],
-  ['jobqueue_263',['jobqueue',['../d7/dd0/structjobqueue.html',1,'']]]
+  ['file_5flogger_1203',['file_logger',['../d5/d99/structfile__logger.html',1,'']]]
 ];

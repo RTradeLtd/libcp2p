@@ -1,0 +1,51 @@
+.TH "EphemeralPrivateKey" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+EphemeralPrivateKey
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <ephemeral\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "size_t \fBnum_bits\fP"
+.br
+.ti -1c
+.RI "uint64_t \fBsecret_key\fP"
+.br
+.ti -1c
+.RI "mbedtls_ecdh_context \fBctx\fP"
+.br
+.ti -1c
+.RI "struct \fBEphemeralPublicKey\fP * \fBpublic_key\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 29 of file ephemeral\&.h\&.
+.SH "Field Documentation"
+.PP 
+.SS "mbedtls_ecdh_context EphemeralPrivateKey::ctx"
+
+.PP
+Definition at line 32 of file ephemeral\&.h\&.
+.SS "size_t EphemeralPrivateKey::num_bits"
+
+.PP
+Definition at line 30 of file ephemeral\&.h\&.
+.SS "struct \fBEphemeralPublicKey\fP* EphemeralPrivateKey::public_key"
+
+.PP
+Definition at line 33 of file ephemeral\&.h\&.
+.SS "uint64_t EphemeralPrivateKey::secret_key"
+
+.PP
+Definition at line 31 of file ephemeral\&.h\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

@@ -1,0 +1,177 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/crypto/ecdsa.c" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/crypto/ecdsa.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'mbedtls/config\&.h'\fP
+.br
+\fC#include 'mbedtls/ecdsa\&.h'\fP
+.br
+\fC#include 'crypto/ecdsa\&.h'\fP
+.br
+\fC#include 'crypto/peerutils\&.h'\fP
+.br
+\fC#include 'crypto/util\&.h'\fP
+.br
+\fC#include 'mbedtls/asn1write\&.h'\fP
+.br
+\fC#include 'mbedtls/bignum\&.h'\fP
+.br
+\fC#include 'mbedtls/ctr_drbg\&.h'\fP
+.br
+\fC#include 'mbedtls/entropy\&.h'\fP
+.br
+\fC#include 'mbedtls/error\&.h'\fP
+.br
+\fC#include 'mbedtls/oid\&.h'\fP
+.br
+\fC#include 'mbedtls/pk\&.h'\fP
+.br
+\fC#include 'mbedtls/platform\&.h'\fP
+.br
+\fC#include 'mbedtls/x509\&.h'\fP
+.br
+\fC#include <pthread\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBlibp2p_crypto_ecdsa_free\fP (\fBecdsa_private_key_t\fP *pk)"
+.br
+.RI "frees up resources allocated for the private key "
+.ti -1c
+.RI "unsigned char * \fBlibp2p_crypto_ecdsa_keypair_peerid\fP (\fBecdsa_private_key_t\fP *pk)"
+.br
+.RI "returns the peerid for the corresponding private key "
+.ti -1c
+.RI "unsigned char * \fBlibp2p_crypto_ecdsa_keypair_public\fP (\fBecdsa_private_key_t\fP *pk)"
+.br
+.RI "returns the public key associated with the private key "
+.ti -1c
+.RI "\fBecdsa_private_key_t\fP * \fBlibp2p_crypto_ecdsa_pem_to_private_key\fP (unsigned char *pem_input)"
+.br
+.RI "parses a PEM encoded private key and returns a struct for use "
+.ti -1c
+.RI "int \fBlibp2p_crypto_ecdsa_keypair_generation\fP (unsigned char *output, mbedtls_ecp_group_id curve)"
+.br
+.RI "used to generate an ECDSA keypair "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int libp2p_crypto_ecdsa_free (\fBecdsa_private_key_t\fP * pk)"
+
+.PP
+frees up resources allocated for the private key 
+.PP
+Definition at line 44 of file ecdsa\&.c\&.
+.SS "int libp2p_crypto_ecdsa_keypair_generation (unsigned char * output, mbedtls_ecp_group_id curve)"
+
+.PP
+used to generate an ECDSA keypair 
+.PP
+\fBParameters\fP
+.RS 4
+\fIprivate_key\fP the place to store the private key 
+.br
+\fIcurve\fP the ECC curve to use for key generation 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Fail: 0 
+.PP
+Success: 1 
+.RE
+.PP
+
+.IP "\(bu" 2
+\fBTodo\fP
+.RS 4
+figure out if we need this 
+.RE
+.PP
+
+.PP
+
+.PP
+Definition at line 157 of file ecdsa\&.c\&.
+.SS "unsigned char* libp2p_crypto_ecdsa_keypair_peerid (\fBecdsa_private_key_t\fP * pk)"
+
+.PP
+returns the peerid for the corresponding private key 
+.PP
+\fBWarning\fP
+.RS 4
+if hash of public key contains a 0, the output will be incorrect 
+.PP
+caller must free returned pointer when no longer needed
+.RE
+.PP
+to get the peerid we take a sha256 hash of the public key file in PEM format
+.PP
+we then generate a multihash of that sha256, and base58 encode it 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpk\fP a loaded ecdsa_private_key_t instance 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+pointer to an unsigned char peerID 
+.RE
+.PP
+
+.PP
+Definition at line 61 of file ecdsa\&.c\&.
+.SS "unsigned char* libp2p_crypto_ecdsa_keypair_public (\fBecdsa_private_key_t\fP * pk)"
+
+.PP
+returns the public key associated with the private key 
+.PP
+\fBNote\fP
+.RS 4
+returned value has a null terminating byte at the end 
+.RE
+.PP
+\fBWarning\fP
+.RS 4
+caller must free returned data when no longer 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the public key in PEM format 
+.RE
+.PP
+
+.PP
+Definition at line 100 of file ecdsa\&.c\&.
+.SS "\fBecdsa_private_key_t\fP* libp2p_crypto_ecdsa_pem_to_private_key (unsigned char * pem_input)"
+
+.PP
+parses a PEM encoded private key and returns a struct for use the returned mbedtls_*_context in the struct are not suitable for concurrent use, please access through mutex locks 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpem_input\fP the PEM encoded ECDSA private key 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+an initialize and populated ecdsa_private_key_t 
+.RE
+.PP
+
+.PP
+Definition at line 123 of file ecdsa\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

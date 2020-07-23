@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['var_5fbytes_5fcount_389',['Var_Bytes_Count',['../dc/d9a/varhexutils_8c.html#ab095737d237caec91eb0018680d29066',1,'Var_Bytes_Count(uint8_t *countbytesofthis):&#160;varhexutils.c'],['../d1/d17/varhexutils_8h.html#ab095737d237caec91eb0018680d29066',1,'Var_Bytes_Count(uint8_t *countbytesofthis):&#160;varhexutils.c']]],
-  ['var_5fto_5fhex_390',['Var_To_Hex',['../dc/d9a/varhexutils_8c.html#ad5320aaf6c29fcd2bf72ef43ed52e676',1,'Var_To_Hex(const unsigned char *incoming, size_t incoming_size):&#160;varhexutils.c'],['../d1/d17/varhexutils_8h.html#ad5320aaf6c29fcd2bf72ef43ed52e676',1,'Var_To_Hex(const unsigned char *incoming, size_t incoming_size):&#160;varhexutils.c']]],
-  ['varint_5fto_5fnum_5f32_391',['Varint_To_Num_32',['../dc/d9a/varhexutils_8c.html#a185825bf3a55829bda9bbd099528975c',1,'Varint_To_Num_32(uint8_t TON32INPUT[60]):&#160;varhexutils.c'],['../d1/d17/varhexutils_8h.html#a185825bf3a55829bda9bbd099528975c',1,'Varint_To_Num_32(uint8_t TON32INPUT[60]):&#160;varhexutils.c']]],
-  ['varint_5fto_5fnum_5f64_392',['Varint_To_Num_64',['../dc/d9a/varhexutils_8c.html#a9c793b33915c73eed78d684873fa10f4',1,'Varint_To_Num_64(uint8_t TON64INPUT[60]):&#160;varhexutils.c'],['../d1/d17/varhexutils_8h.html#a9c793b33915c73eed78d684873fa10f4',1,'Varint_To_Num_64(uint8_t TON64INPUT[60]):&#160;varhexutils.c']]],
-  ['vthconvert_393',['vthconvert',['../dc/d9a/varhexutils_8c.html#a12a8ed3b41f8b6dc471052c262bfa211',1,'varhexutils.c']]]
+  ['unload_5fprotocols_1632',['unload_protocols',['../de/db7/protocols_8c.html#a372efb7dae5ecc84c90ddd37f1b2184b',1,'unload_protocols(struct ProtocolListItem *head):&#160;protocols.c'],['../d5/dca/protocols_8h.html#a372efb7dae5ecc84c90ddd37f1b2184b',1,'unload_protocols(struct ProtocolListItem *head):&#160;protocols.c']]],
+  ['unserialize_5fuint64_1633',['unserialize_uint64',['../da/dc9/ephemeral_8c.html#a1a644e5e2e409ebd6207186a22605447',1,'ephemeral.c']]],
+  ['uvarint_5fdecode32_1634',['uvarint_decode32',['../d7/d0c/include_2utils_2varint_8h.html#ab014b392e982e8a272744667c4926bef',1,'varint.h']]],
+  ['uvarint_5fdecode64_1635',['uvarint_decode64',['../d7/d0c/include_2utils_2varint_8h.html#ab9b4e6231ef64921d55bb5f8c25dac73',1,'varint.h']]],
+  ['uvarint_5fencode32_1636',['uvarint_encode32',['../d7/d0c/include_2utils_2varint_8h.html#a8230149cbdc7e240e3fbcc5258b8d7a2',1,'varint.h']]],
+  ['uvarint_5fencode64_1637',['uvarint_encode64',['../d7/d0c/include_2utils_2varint_8h.html#a9729dc93298c34945567b08b8c27d122',1,'varint.h']]]
 ];
