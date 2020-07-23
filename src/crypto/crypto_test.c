@@ -277,33 +277,40 @@ void test_libp2p_crypto_hashing_sha256(void **state) {
 }
 
 void test_libp2p_crypto_cbor_encode_pub_key(void **state) {
-    public_key_t *pub_key = libp2p_crypto_public_key_new();
-    pub_key->curve = calloc(sizeof(unsigned char), 10);
-    pub_key->data = calloc(sizeof(unsigned char), 10);
-    pub_key->curve[0] = 'h';
-    pub_key->curve[1] = 'e';
-    pub_key->curve[2] = 'y';
-    pub_key->curve_size = 3;
-    pub_key->data[0] = 'y';
-    pub_key->data[1] = 'e';
-    pub_key->data[2] = 'h';
-    pub_key->data_size = 3;
-    pub_key->type = KEYTYPE_ECDSA;
+    unsigned char *output = calloc(sizeof(unsigned char), 1024);
+
+    int rc = libp2p_crypto_ecdsa_keypair_generation(output, MBEDTLS_ECP_DP_SECP256R1);    
+    assert(rc == 1);
     
+    ecdsa_private_key_t *pk = libp2p_crypto_ecdsa_pem_to_private_key(output);
+    assert(pk != NULL);
+    
+    unsigned char *public_key_pem = libp2p_crypto_ecdsa_keypair_public(pk);
+    assert(public_key_pem != NULL);
+
+    public_key_t *pub_key = libp2p_crypto_public_key_new();
+    pub_key->data = calloc(sizeof(unsigned char), strlen((char *)public_key_pem));
+    pub_key->data = public_key_pem;
+    pub_key->data_size = strlen((char *)public_key_pem);
+    pub_key->type = KEYTYPE_ECDSA;
+
     size_t bytes_written;
     uint8_t *out = libp2p_crypto_public_key_cbor_encode(
         pub_key,
         &bytes_written
     );
-    unsigned char *encoded = calloc(sizeof(unsigned char), 1024);
+    assert(out != NULL);
+    
+    unsigned char *encoded = calloc(sizeof(unsigned char), 2048);
     size_t encoded_size;
-    int rc =libp2p_encoding_base64_encode(
+    rc = libp2p_encoding_base64_encode(
         out,
         bytes_written,
         encoded,
         1024,
         &encoded_size
     );
+    printf("%s\n", encoded);
     assert(rc == 1);
     assert(
         memcmp(
@@ -312,6 +319,7 @@ void test_libp2p_crypto_cbor_encode_pub_key(void **state) {
             encoded_size
         ) == 0
     );
+    
     free(encoded);
     free(out);
     libp2p_crypto_public_key_free(pub_key);

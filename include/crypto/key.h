@@ -6,22 +6,18 @@
  * Utilities for public keys
  */
 
-typedef enum { KEYTYPE_ECDSA, KEYTYPE_INVALID } key_type_t;
+typedef enum { KEYTYPE_INVALID, KEYTYPE_ECDSA } key_type_t;
 
 typedef struct public_key {
     key_type_t type;
     unsigned char *data;
-    unsigned char *curve;
     size_t data_size;
-    size_t curve_size;
 } public_key_t;
 
 typedef struct private_key {
     key_type_t type;
     unsigned char *data;
-    unsigned char *curve;
     size_t data_size;
-    size_t curve_size;
 } private_key_t;
 
 public_key_t *libp2p_crypto_public_key_new(void);
@@ -31,6 +27,13 @@ private_key_t *libp2p_crypto_private_key_new(void);
 void libp2p_crypto_private_key_free(private_key_t *in);
 int libp2p_crypto_private_key_copy(const private_key_t *source,
                                    private_key_t *destination);
+
+/*!
+  * @brief used to cbor decode a uint8_t pointer and return a public_key_t object
+*/
+public_key_t *libp2p_crypto_public_key_cbor_decode(
+    uint8_t *buffer
+);
 
 /*!
   * @brief used to cbor encode a public_key_t object

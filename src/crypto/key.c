@@ -23,7 +23,6 @@ public_key_t *libp2p_crypto_public_key_new(void) {
 
 void libp2p_crypto_public_key_free(public_key_t *in) {
     free(in->data);
-    free(in->curve);
     free(in);
 }
 
@@ -276,36 +275,64 @@ int libp2p_crypto_public_key_to_peer_id(public_key_t *public_key,
 }
 
 /*!
+  * @brief used to cbor decode a uint8_t pointer and return a public_key_t object
+*/
+public_key_t *libp2p_crypto_public_key_cbor_decode(
+    uint8_t *buffer
+) {
+    size_t buffer_len = sizeof(buffer);
+    printf("%lu\n", buffer_len);
+    return NULL;
+}
+
+/*!
   * @brief used to cbor encode a public_key_t object
 */
 uint8_t *libp2p_crypto_public_key_cbor_encode(
     public_key_t *pub_key,
     size_t *bytes_written
 ) {
-    uint8_t buf[pub_key->data_size + pub_key->curve_size + sizeof(pub_key)];
+    
+    uint8_t buf[pub_key->data_size + sizeof(pub_key)];
     CborEncoder encoder, map_encoder;
+    CborError err;
+
     cbor_encoder_init(&encoder, buf, sizeof(buf), 0);
-    if (cbor_encoder_create_map(&encoder, &map_encoder, 5) != CborNoError) {
+
+    /*!
+      * @brief we Use CborIdefiniteLength to work around an error
+      * @brief the error is "too few items added to container" when closing the container
+    */
+    err = cbor_encoder_create_map(&encoder, &map_encoder, CborIndefiniteLength);
+    if (err != CborNoError) {
+        printf("failed to create map\n");
         return NULL;
     }
-    if (cbor_encode_simple_value(&map_encoder, pub_key->type) != CborNoError) {
+    
+    err = cbor_encode_simple_value(&map_encoder, pub_key->type);
+    if (err != CborNoError) {
+        printf("failed to encode simple values\n");
         return NULL;
     }
-    if (cbor_encode_byte_string(&map_encoder, pub_key->data, pub_key->data_size) != CborNoError) {
+
+    err = cbor_encode_byte_string(&map_encoder, pub_key->data, pub_key->data_size);
+    if (err != CborNoError) {
+        printf("failed to encode byte string\n");
         return NULL;
     }
-    if (cbor_encode_byte_string(&map_encoder, pub_key->curve, pub_key->curve_size) != CborNoError) {
+
+    err = cbor_encode_int(&map_encoder, (int64_t)pub_key->data_size);
+    if (err != CborNoError) {
+        printf("failed to encdoe int\n");
         return NULL;
     }
-    if (cbor_encode_int(&map_encoder, (int64_t)pub_key->data_size) != CborNoError) {
+
+    err = cbor_encoder_close_container(&encoder, &map_encoder);
+    if (err != CborNoError) {
+        printf("failed to close container: %s\n", cbor_error_string(err));
         return NULL;
     }
-    if (cbor_encode_int(&map_encoder, (int64_t)pub_key->curve_size) != CborNoError) {
-        return NULL;
-    }
-    if (cbor_encoder_close_container(&encoder, &map_encoder) != CborNoError) {
-        return NULL;
-    }
+    
     size_t size = cbor_encoder_get_buffer_size(&encoder, buf);
     *bytes_written = size;
     uint8_t *out = calloc(sizeof(uint8_t), size);
