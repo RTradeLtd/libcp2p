@@ -34,8 +34,8 @@
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 /*! @brief returns a new socket client connected to `addr:port`
-  * @param thl an instance of a thread logger
-  * @param addr the multiaddr to connect to
+ * @param thl an instance of a thread logger
+ * @param addr the multiaddr to connect to
  */
 socket_client_t *new_socket_client(thread_logger *thl, multi_addr_t *addr) {
     char ip[1024];
@@ -50,7 +50,7 @@ socket_client_t *new_socket_client(thread_logger *thl, multi_addr_t *addr) {
     }
     char cport[7];
     sprintf(cport, "%i", port);
-    
+
     addr_info hints;
     memset(&hints, 0, sizeof(hints));
     bool is_tcp = false;
@@ -87,7 +87,8 @@ socket_client_t *new_socket_client(thread_logger *thl, multi_addr_t *addr) {
         return NULL;
     }
 
-    socket_client_t *sock_client = calloc(sizeof(sock_client), sizeof(sock_client) + sizeof(peer_address));
+    socket_client_t *sock_client =
+        calloc(sizeof(sock_client), sizeof(sock_client) + sizeof(peer_address));
     if (sock_client == NULL) {
         thl->log(thl, 0, "failed to calloc socket_client_t", LOG_LEVELS_ERROR);
         return NULL;

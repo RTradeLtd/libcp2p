@@ -106,7 +106,7 @@ int multiaddress_is_ip6(const struct MultiAddress *in) {
 }
 
 int multiaddress_get_ip_family(const struct MultiAddress *in) {
-    if (in->bytes[0] == 4) 
+    if (in->bytes[0] == 4)
         return AF_INET;
     if (in->bytes[0] == 41)
         return AF_INET6;

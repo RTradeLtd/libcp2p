@@ -399,9 +399,10 @@ client_conn_t *accept_client_conn(socket_server_t *srv, int socket_num) {
 }
 
 /*!
-  * @brief used to free up resources allocated for socket_server_config_t
-  * @param config an instance of socket_server_config_t initialized with new_socket_server_config 
-*/
+ * @brief used to free up resources allocated for socket_server_config_t
+ * @param config an instance of socket_server_config_t initialized with
+ * new_socket_server_config
+ */
 void free_socket_server_config(socket_server_config_t *config) {
     for (int i = 0; i < config->num_addrs; i++) {
         multiaddress_free(config->addrs[i]);
@@ -411,16 +412,15 @@ void free_socket_server_config(socket_server_config_t *config) {
 }
 
 /*!
-  * @brief used to initialize a socket_server_config_t object
-  * @param num_addrs the number of multi_addr_t objects the addrs member will contain
-  * @return Success: pointer to an initialized block of memory for socket_server_config_t
-  * @return Failure: NULL pointer
-*/
+ * @brief used to initialize a socket_server_config_t object
+ * @param num_addrs the number of multi_addr_t objects the addrs member will contain
+ * @return Success: pointer to an initialized block of memory for
+ * socket_server_config_t
+ * @return Failure: NULL pointer
+ */
 socket_server_config_t *new_socket_server_config(int num_addrs) {
-    socket_server_config_t *config = calloc(
-        sizeof(socket_server_config_t), 
-        sizeof(socket_server_config_t)    
-    );
+    socket_server_config_t *config =
+        calloc(sizeof(socket_server_config_t), sizeof(socket_server_config_t));
     if (config == NULL) {
         return NULL;
     }

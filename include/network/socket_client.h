@@ -16,8 +16,8 @@
 
 #pragma once
 
-#include "socket.h"
 #include "multiaddr/multiaddr.h"
+#include "socket.h"
 #include "utils/logger.h"
 #include <arpa/inet.h>
 #include <netinet/in.h>
@@ -37,8 +37,8 @@ typedef struct socket_client {
 } socket_client_t;
 
 /*! @brief returns a new socket client connected to `addr:port`
-  * @param thl an instance of a thread logger
-  * @param addr the multiaddr to connect to
+ * @param thl an instance of a thread logger
+ * @param addr the multiaddr to connect to
  */
 socket_client_t *new_socket_client(thread_logger *thl, multi_addr_t *addr);
 
