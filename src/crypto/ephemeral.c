@@ -114,6 +114,9 @@ static int libp2p_crypto_ephemeral_point_marshal(int bit_size, uint64_t x,
 
     // bytelen is 32, and we never fill in from 1 to 33. hmmm....
     *results = (unsigned char *)malloc(2 * byteLen + 1);
+    if (results == NULL) {
+        return 0;
+    }
     memset(*results, 0, 2 * byteLen + 1);
     *results[0] = 4; // uncompressed point
     int uint64_len = 8;

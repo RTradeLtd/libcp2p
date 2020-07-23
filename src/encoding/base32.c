@@ -68,7 +68,7 @@ extern bool base32_decode_ctx(struct base32_decode_context *ctx,
                               char *restrict out, size_t *outlen);
 
 extern bool base32_decode_alloc_ctx(struct base32_decode_context *ctx,
-                                    const char *in, size_t inlen, char **out,
+                                    const char *in, size_t inlen, char *out,
                                     size_t *outlen);
 
 #define base32_decode(in, inlen, out, outlen) \
@@ -517,7 +517,7 @@ bool base32_decode_ctx(struct base32_decode_context *ctx, const char *restrict i
    input was invalid, in which case *OUT is NULL and *OUTLEN is
    undefined. */
 bool base32_decode_alloc_ctx(struct base32_decode_context *ctx, const char *in,
-                             size_t inlen, char **out, size_t *outlen) {
+                             size_t inlen, char *out, size_t *outlen) {
     /* This may allocate a few bytes too many, depending on input,
        but it's not worth the extra CPU time to compute the exact size.
        The exact size is 5 * inlen / 8, minus one or more bytes if the
@@ -525,19 +525,16 @@ bool base32_decode_alloc_ctx(struct base32_decode_context *ctx, const char *in,
        Dividing before multiplying avoids the possibility of overflow.  */
     size_t needlen = 5 * (inlen / 8) + 5;
 
-    *out = malloc(needlen);
-    if (!*out)
-        return true;
+    if (needlen > *outlen) {
+        return false;
+    }
 
-    if (!base32_decode_ctx(ctx, in, inlen, *out, &needlen)) {
-        free(*out);
-        *out = NULL;
+    if (!base32_decode_ctx(ctx, in, inlen, out, &needlen)) {
         return false;
     }
 
     if (outlen)
         *outlen = needlen;
-
     return true;
 }
 
