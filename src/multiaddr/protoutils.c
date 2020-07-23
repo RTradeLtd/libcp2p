@@ -266,9 +266,8 @@ char *int2ip(int inputintip) {
  * @param in_bytes_size the length of the bytes array
  * @returns 0 on error, otherwise 1
  */
-int bytes_to_string(char **buffer, const uint8_t *in_bytes, int in_bytes_size) {
+int bytes_to_string(char *buffer, const uint8_t *in_bytes, int in_bytes_size) {
     uint8_t *bytes = NULL;
-    char *results = NULL;
     int size = in_bytes_size;
     struct ProtocolListItem *head = NULL;
     char hex[(in_bytes_size * 2) + 1];
@@ -283,11 +282,6 @@ int bytes_to_string(char **buffer, const uint8_t *in_bytes, int in_bytes_size) {
     memcpy(hex, tmp, in_bytes_size * 2);
     free(tmp);
     pid[2] = 0;
-
-    // allocate memory for results
-    *buffer = malloc(800);
-    results = *buffer;
-    memset(results, 0, 800);
 
 // Process Hex String
 NAX:
@@ -314,19 +308,19 @@ NAX:
             // bzero(name, 30);
             strcpy(name, protocol->name);
             //
-            strcat(results, "/");
-            strcat(results, name);
-            strcat(results, "/");
+            strcat(buffer, "/");
+            strcat(buffer, name);
+            strcat(buffer, "/");
             if (strcmp(name, "ip4") == 0) {
-                strcat(results, int2ip(Hex_To_Int(address)));
+                strcat(buffer, int2ip(Hex_To_Int(address)));
             } else if (strcmp(name, "tcp") == 0) {
                 char a[5];
                 sprintf(a, "%lu", Hex_To_Int(address));
-                strcat(results, a);
+                strcat(buffer, a);
             } else if (strcmp(name, "udp") == 0) {
                 char a[5];
                 sprintf(a, "%lu", Hex_To_Int(address));
-                strcat(results, a);
+                strcat(buffer, a);
             }
             /////////////Done processing this, move to next if there
             /// is more.
@@ -363,13 +357,13 @@ NAX:
                 unload_protocols(head);
                 return 0;
             }
-            strcat(results, "/");
-            strcat(results, protocol->name);
-            strcat(results, "/");
-            strcat(results, (char *)b32);
+            strcat(buffer, "/");
+            strcat(buffer, protocol->name);
+            strcat(buffer, "/");
+            strcat(buffer, (char *)b32);
         }
     }
-    strcat(results, "/");
+    strcat(buffer, "/");
     unload_protocols(head);
     return 1;
 }

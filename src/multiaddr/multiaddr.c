@@ -27,7 +27,8 @@ struct multi_address *multi_address_new() {
     if (out != NULL) {
         out->bsize = 0;
         out->bytes = NULL;
-        out->string = NULL;
+        /*! @todo figure out a better way of estimating size */
+        out->string = calloc(sizeof(char), 2048);
     }
     return out;
 }
@@ -53,7 +54,7 @@ multi_address_new_from_bytes(const uint8_t *byteaddress,
             }
             out->bsize = size;
             memcpy(out->bytes, byteaddress, size);
-            if (!bytes_to_string(&out->string, byteaddress, size)) {
+            if (!bytes_to_string(out->string, byteaddress, size)) {
                 multi_address_free(out);
                 return NULL;
             }
