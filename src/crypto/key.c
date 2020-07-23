@@ -22,13 +22,11 @@ public_key_t *libp2p_crypto_public_key_new(void) {
 }
 
 void libp2p_crypto_public_key_free(public_key_t *in) {
-    if (in != NULL) {
-        if (in->data != NULL)
-            free(in->data);
-        free(in);
-        in = NULL;
-    }
+    free(in->data);
+    free(in->curve);
+    free(in);
 }
+
 
 /***
  * Calculates an approximate required size of a buffer for protobuf encoding a

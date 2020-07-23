@@ -312,6 +312,9 @@ void test_libp2p_crypto_cbor_encode_pub_key(void **state) {
             encoded_size
         ) == 0
     );
+    free(encoded);
+    free(out);
+    libp2p_crypto_public_key_free(pub_key);
 }
 
 int main(void) {
