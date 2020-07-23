@@ -1,6 +1,6 @@
 /*! @file sha512.h
-  * @brief provides sha512 hashing support
-*/
+ * @brief provides sha512 hashing support
+ */
 
 #pragma once
 

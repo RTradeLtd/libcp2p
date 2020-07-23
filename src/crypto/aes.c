@@ -56,7 +56,10 @@ int libp2p_crypto_aes_encrypt(char *key, char *iv, char *input, size_t input_siz
     if (new_size % 16 != 0) {
         new_size += new_size % 16;
     }
-    char *padded_input = malloc(new_size);
+    char *padded_input = calloc(sizeof(char), new_size);
+    if (padded_input == NULL) {
+        return 0;
+    }
     memcpy(padded_input, input, input_size);
     if (new_size != (int)input_size)
         memset(&padded_input[input_size], 0, new_size - input_size);

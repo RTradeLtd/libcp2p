@@ -1,6 +1,6 @@
 /*! @file multibase.h
-  * @brief functions for managing multibase identifiers
-*/
+ * @brief functions for managing multibase identifiers
+ */
 
 #include <stdio.h>
 
@@ -30,7 +30,8 @@ int multibase_encode(const char base, const unsigned char *incoming,
                      size_t results_max_length, size_t *results_length);
 
 /***
- * @brief Calculates the size of the buffer neccessary to encode the incoming byte array
+ * @brief Calculates the size of the buffer neccessary to encode the incoming byte
+ * array
  * @param base the encoding to use
  * @param incoming the incoming array of bytes
  * @param incoming_length the length of the array in bytes
@@ -53,7 +54,8 @@ int multibase_decode(const unsigned char *incoming, size_t incoming_length,
                      size_t *results_length);
 
 /***
- * @brief Calculates the size of the buffer neccessary to decode the incoming byte array
+ * @brief Calculates the size of the buffer neccessary to decode the incoming byte
+ * array
  * @param base the encoding to use
  * @param incoming the incoming array of bytes
  * @param incoming_length the length of the array in bytes

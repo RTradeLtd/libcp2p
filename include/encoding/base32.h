@@ -1,6 +1,6 @@
 /*! @file base32.h
-  * @brief provides base 32 encoding/decoding functions
-*/
+ * @brief provides base 32 encoding/decoding functions
+ */
 
 #pragma once
 

@@ -249,7 +249,7 @@ exit:
  * @returns true(1) on success, otherwise false(0)
  */
 int libp2p_crypto_public_key_to_peer_id(struct PublicKey *public_key,
-                                        char **peer_id) {
+                                        char *peer_id) {
 
     /**
      * Converting to a peer id involves protobufing the struct PublicKey,
@@ -271,10 +271,7 @@ int libp2p_crypto_public_key_to_peer_id(struct PublicKey *public_key,
     // turn it into a multihash and base58 it
     if (!libp2p_new_peer_id(final_id, &final_id_size, hashed, 32))
         return 0;
-    *peer_id = (char *)malloc(final_id_size + 1);
-    if (*peer_id == NULL)
-        return 0;
-    memset(*peer_id, 0, final_id_size + 1);
-    memcpy(*peer_id, final_id, final_id_size);
+    memset(peer_id, 0, final_id_size + 1);
+    memcpy(peer_id, final_id, final_id_size);
     return 1;
 }
