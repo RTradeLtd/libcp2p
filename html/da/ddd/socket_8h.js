@@ -10,7 +10,7 @@ var socket_8h =
       [ "BLOCK", "da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304a02fc27068fe9a3c151ffcc08ec5bb65d", null ]
     ] ],
     [ "default_hints", "da/ddd/socket_8h.html#a698af564637e1245e56bbb56c5d5b3f2", null ],
-    [ "get_name_info", "da/ddd/socket_8h.html#ad5537d856f4e63f072c66107c15e4b8a", null ],
+    [ "get_name_info", "da/ddd/socket_8h.html#aa3f161176f86bd430439429fbd7aec09", null ],
     [ "get_new_socket", "da/ddd/socket_8h.html#a1a802d1985754fe6d4d6c050c214e4b4", null ],
     [ "set_socket_blocking_status", "da/ddd/socket_8h.html#add0cf15976a6dd3a21d81320a5fbf0cf", null ]
 ];

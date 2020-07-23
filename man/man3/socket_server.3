@@ -12,10 +12,16 @@ socket_server
 
 .in +1c
 .ti -1c
-.RI "int \fBudp_socket_number\fP"
+.RI "int \fBmax_socket_num\fP"
 .br
 .ti -1c
-.RI "int \fBtcp_socket_number\fP"
+.RI "fd_set \fBgrouped_socket_set\fP"
+.br
+.ti -1c
+.RI "fd_set \fBtcp_socket_set\fP"
+.br
+.ti -1c
+.RI "fd_set \fBudp_socket_set\fP"
 .br
 .ti -1c
 .RI "\fBthread_logger\fP * \fBthl\fP"
@@ -35,39 +41,47 @@ socket_server
 .in -1c
 .SH "Detailed Description"
 .PP 
-Definition at line 50 of file socket_server\&.h\&.
+Definition at line 64 of file socket_server\&.h\&.
 .SH "Field Documentation"
 .PP 
+.SS "fd_set socket_server::grouped_socket_set"
+
+.PP
+Definition at line 66 of file socket_server\&.h\&.
+.SS "int socket_server::max_socket_num"
+
+.PP
+Definition at line 65 of file socket_server\&.h\&.
 .SS "\fBthreadpool_task_func\fP* socket_server::task_func_tcp"
 
 .PP
 used for submitting a task to the thread pool for processing a tcp connection 
 .PP
-Definition at line 59 of file socket_server\&.h\&.
+Definition at line 75 of file socket_server\&.h\&.
 .SS "\fBthreadpool_task_func\fP* socket_server::task_func_udp"
 
 .PP
 used for submitting a task to the thread pool for processing a udp connection 
 .PP
-Definition at line 62 of file socket_server\&.h\&.
-.SS "int socket_server::tcp_socket_number"
+Definition at line 78 of file socket_server\&.h\&.
+.SS "fd_set socket_server::tcp_socket_set"
 
 .PP
-Definition at line 52 of file socket_server\&.h\&.
+Definition at line 67 of file socket_server\&.h\&.
 .SS "\fBthread_logger\fP* socket_server::thl"
 
 .PP
-Definition at line 53 of file socket_server\&.h\&.
+Definition at line 69 of file socket_server\&.h\&.
 .SS "\fBthreadpool\fP socket_server::thpool"
 
 .PP
 a thread pool that allows submitting worker tasks to a pool of threads 
 .PP
-Definition at line 56 of file socket_server\&.h\&.
-.SS "int socket_server::udp_socket_number"
+Definition at line 72 of file socket_server\&.h\&.
+.SS "fd_set socket_server::udp_socket_set"
 
 .PP
-Definition at line 51 of file socket_server\&.h\&.
+Definition at line 68 of file socket_server\&.h\&.
 
 .SH "Author"
 .PP 

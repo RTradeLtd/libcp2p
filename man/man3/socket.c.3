@@ -54,7 +54,7 @@
 .br
 .RI "used to enable/disable blocking sockets "
 .ti -1c
-.RI "char * \fBget_name_info\fP (\fBaddr_info\fP *client_address)"
+.RI "char * \fBget_name_info\fP (\fBsock_addr\fP *client_address)"
 .br
 .RI "returns the address the client is connecting from "
 .ti -1c
@@ -76,13 +76,25 @@ Definition in file \fBsocket\&.c\fP\&.
 .PP
 generates an addr_info struct with defaults defaults is IPv4, TCP, and AI_PASSIVE flags 
 .PP
-Definition at line 139 of file socket\&.c\&.
-.SS "char* get_name_info (\fBaddr_info\fP * client_address)"
+Definition at line 149 of file socket\&.c\&.
+.SS "char* get_name_info (\fBsock_addr\fP * client_address)"
 
 .PP
 returns the address the client is connecting from 
 .PP
-Definition at line 115 of file socket\&.c\&.
+\fBNote\fP
+.RS 4
+this only works with tcp 
+.RE
+.PP
+\fBTodo\fP
+.RS 4
+enable udp 
+.RE
+.PP
+
+.PP
+Definition at line 129 of file socket\&.c\&.
 .SS "int get_new_socket (\fBthread_logger\fP * thl, \fBaddr_info\fP * bind_address, \fBSOCKET_OPTS\fP sock_opts[], int num_opts, bool is_client)"
 
 .PP
@@ -97,7 +109,7 @@ Failure: -1 initializers a socket attached to bind_address with sock_opts, and b
 .PP
 
 .PP
-Definition at line 31 of file socket\&.c\&.
+Definition at line 43 of file socket\&.c\&.
 .SS "bool set_socket_blocking_status (int fd, bool blocking)"
 
 .PP
@@ -117,7 +129,7 @@ see https://stackoverflow.com/questions/1543466/how-do-i-change-a-tcp-socket-to-
 .PP
 
 .PP
-Definition at line 100 of file socket\&.c\&.
+Definition at line 112 of file socket\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for libcp2p from the source code\&.

@@ -10,6 +10,8 @@
 .br
 \fC#include 'network/socket_server\&.h'\fP
 .br
+\fC#include 'multiaddr/multiaddr\&.h'\fP
+.br
 \fC#include <arpa/inet\&.h>\fP
 .br
 \fC#include <errno\&.h>\fP
@@ -94,7 +96,7 @@ figure out proper close procedures
 .PP
 
 .PP
-Definition at line 66 of file socket_test\&.c\&.
+Definition at line 78 of file socket_test\&.c\&.
 .SS "void example_task_func_udp (void * data)"
 
 .PP
@@ -107,21 +109,21 @@ in general should accept a conn_handle_data_t type but this is implementation de
 .PP
 
 .PP
-Definition at line 33 of file socket_test\&.c\&.
+Definition at line 46 of file socket_test\&.c\&.
 .SS "int main (void)"
 
 .PP
-Definition at line 131 of file socket_test\&.c\&.
+Definition at line 146 of file socket_test\&.c\&.
 .SS "void start_socker_server_wrapper (void * data)"
 
 .PP
-Definition at line 90 of file socket_test\&.c\&.
+Definition at line 102 of file socket_test\&.c\&.
 .SS "void test_new_socket_server (void ** state)"
 
 .PP
 in this we reuse the thread pool to start the socket server listening process, but you will likely want to do this from your main thread 
 .PP
-Definition at line 98 of file socket_test\&.c\&.
+Definition at line 110 of file socket_test\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for libcp2p from the source code\&.

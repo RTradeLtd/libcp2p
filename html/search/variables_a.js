@@ -1,10 +1,6 @@
 var searchData=
 [
-  ['nbuckets_417',['nbuckets',['../db/d57/structmap__base__t.html#ae8e237712ee5f3d4b3e5185a51f8f6a7',1,'map_base_t']]],
-  ['next_418',['next',['../d7/d1e/structmap__node__t.html#ae2931591ad14fb636a0595f09542b79c',1,'map_node_t']]],
-  ['nnodes_419',['nnodes',['../db/d57/structmap__base__t.html#a151c26f4dc4d6a2e9db5d97d37f37083',1,'map_base_t']]],
-  ['node_420',['node',['../d8/d90/structmap__iter__t.html#afe2dc4692682b833105fa02d57906bf8',1,'map_iter_t']]],
-  ['num_5fthreads_421',['num_threads',['../d9/d90/structsocket__server__config.html#a46995bde60d0809940202f70f982c3bc',1,'socket_server_config']]],
-  ['num_5fthreads_5falive_422',['num_threads_alive',['../d4/d05/structthpool__.html#ad8419ca087fb8143f5b33183038f10fc',1,'thpool_']]],
-  ['num_5fthreads_5fworking_423',['num_threads_working',['../d4/d05/structthpool__.html#a684bd22686434ea51d746c13f4ef066e',1,'thpool_']]]
+  ['max_5fconnections_421',['max_connections',['../d9/d90/structsocket__server__config.html#adc242b7b2b2d8ea51bf495f2aec54b43',1,'socket_server_config']]],
+  ['max_5fsocket_5fnum_422',['max_socket_num',['../d7/d8d/structsocket__server.html#a9b9de030f35cd4317a7ec798325eefdb',1,'socket_server']]],
+  ['mutex_423',['mutex',['../d5/d93/structbsem.html#aeb72d3f55aa3db011cd2156d23d605f2',1,'bsem::mutex()'],['../da/da5/structthread__logger.html#a0971895d3b7373e19c6ea497e89db84f',1,'thread_logger::mutex()']]]
 ];

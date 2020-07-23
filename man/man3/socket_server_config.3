@@ -20,58 +20,51 @@ socket_server_config
 .br
 .RI "the thread pool task function to use for processing tcp connections "
 .ti -1c
-.RI "char * \fBudp_port_number\fP"
-.br
-.ti -1c
-.RI "char * \fBtcp_port_number\fP"
-.br
-.ti -1c
-.RI "char * \fBlisten_address\fP"
-.br
-.ti -1c
 .RI "int \fBmax_connections\fP"
 .br
 .ti -1c
 .RI "int \fBnum_threads\fP"
 .br
+.ti -1c
+.RI "int \fBnum_addrs\fP"
+.br
+.ti -1c
+.RI "multi_addr_t ** \fBaddrs\fP"
+.br
 .in -1c
 .SH "Detailed Description"
 .PP 
-Definition at line 30 of file socket_server\&.h\&.
+Definition at line 45 of file socket_server\&.h\&.
 .SH "Field Documentation"
 .PP 
+.SS "multi_addr_t** socket_server_config::addrs"
+
+.PP
+Definition at line 53 of file socket_server\&.h\&.
 .SS "\fBthreadpool_task_func\fP* socket_server_config::fn_tcp"
 
 .PP
 the thread pool task function to use for processing tcp connections 
 .PP
-Definition at line 32 of file socket_server\&.h\&.
+Definition at line 47 of file socket_server\&.h\&.
 .SS "\fBthreadpool_task_func\fP* socket_server_config::fn_udp"
 
 .PP
 the thread pool task function to use for processing tcp connections 
 .PP
-Definition at line 34 of file socket_server\&.h\&.
-.SS "char* socket_server_config::listen_address"
-
-.PP
-Definition at line 37 of file socket_server\&.h\&.
+Definition at line 49 of file socket_server\&.h\&.
 .SS "int socket_server_config::max_connections"
 
 .PP
-Definition at line 38 of file socket_server\&.h\&.
+Definition at line 50 of file socket_server\&.h\&.
+.SS "int socket_server_config::num_addrs"
+
+.PP
+Definition at line 52 of file socket_server\&.h\&.
 .SS "int socket_server_config::num_threads"
 
 .PP
-Definition at line 39 of file socket_server\&.h\&.
-.SS "char* socket_server_config::tcp_port_number"
-
-.PP
-Definition at line 36 of file socket_server\&.h\&.
-.SS "char* socket_server_config::udp_port_number"
-
-.PP
-Definition at line 35 of file socket_server\&.h\&.
+Definition at line 51 of file socket_server\&.h\&.
 
 .SH "Author"
 .PP 

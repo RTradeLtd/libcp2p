@@ -3,7 +3,7 @@
 <area shape="rect" id="node2" href="$db/d84/thread__pool_8c.html#aab606ee6d09b4f3c381ce49dd332f81c" title=" " alt="" coords="808,5,895,32"/>
 <area shape="rect" id="node3" href="$db/d84/thread__pool_8c.html#a49362637086d4a7a964a42ac5a1d2e26" title=" " alt="" coords="668,5,760,32"/>
 <area shape="rect" id="node4" href="$d3/dec/thread__pool_8h.html#a7614111c3506926e142b7db0208d9553" title=" " alt="" coords="529,5,620,32"/>
-<area shape="rect" id="node5" href="$d9/d26/socket__server_8h.html#abdfa0f6886955caae3b71928592e0301" title="returns a new socket server bound to the port number and ready to accept connections" alt="" coords="335,5,481,32"/>
+<area shape="rect" id="node5" href="$d9/d26/socket__server_8h.html#abdfa0f6886955caae3b71928592e0301" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="335,5,481,32"/>
 <area shape="rect" id="node6" href="$d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="108,5,287,32"/>
 <area shape="rect" id="node7" href="$d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,5,60,32"/>
 </map>

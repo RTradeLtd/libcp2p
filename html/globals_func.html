@@ -27,7 +27,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">libcp2p
    </div>
-   <div id="projectbrief">Alibp2p-likeprotocolwithfirstclasssupportforembeddedsystems.Endgoalisaprotocolthatcanrunonanythingfromyourfridge,embeddedsystems,andanythingelse.HigherlevellanguagesbindingswillbedoneviaFFI.HeavyWIP</div>
+   <div id="projectbrief">A libp2p-like protocol with first class support for embedded systems. End goal is a protocol that can run on anything from your fridge, embedded systems, and anything else. Higher level languages bindings will be done via FFI. Heavy WIP</div>
   </td>
  </tr>
  </tbody>
@@ -86,8 +86,8 @@ $(document).ready(function(){initNavTree('globals_func.html',''); initResizable(
 
 <h3><a id="index_a"></a>- a -</h3><ul>
 <li>accept_client_conn()
-: <a class="el" href="d1/dfc/socket__server_8c.html#a1763924614c1b04b07e49140df0560c1">socket_server.c</a>
-, <a class="el" href="d9/d26/socket__server_8h.html#a1763924614c1b04b07e49140df0560c1">socket_server.h</a>
+: <a class="el" href="d1/dfc/socket__server_8c.html#a0a85f1e22b043be60df800b7e0be8cae">socket_server.c</a>
+, <a class="el" href="d9/d26/socket__server_8h.html#a0a85f1e22b043be60df800b7e0be8cae">socket_server.h</a>
 </li>
 <li>accept_connections()
 : <a class="el" href="d9/d26/socket__server_8h.html#a49c2655f4394c1887f17b5ec7c1fa267">socket_server.h</a>
@@ -95,9 +95,6 @@ $(document).ready(function(){initNavTree('globals_func.html',''); initResizable(
 <li>add_header()
 : <a class="el" href="dc/d9a/varhexutils_8c.html#a6801d8b4c1ed8ec917b973ee2b5a872a">varhexutils.c</a>
 , <a class="el" href="d1/d17/varhexutils_8h.html#a6801d8b4c1ed8ec917b973ee2b5a872a">varhexutils.h</a>
-</li>
-<li>async_listen_func()
-: <a class="el" href="d9/d26/socket__server_8h.html#a5f98c81dc341aa726f2f275aa89c9a16">socket_server.h</a>
 </li>
 </ul>
 
@@ -176,6 +173,10 @@ $(document).ready(function(){initNavTree('globals_func.html',''); initResizable(
 : <a class="el" href="d1/dfc/socket__server_8c.html#a0873d0d29f1ce24a3a9c7a199c03a2a1">socket_server.c</a>
 , <a class="el" href="d9/d26/socket__server_8h.html#a0873d0d29f1ce24a3a9c7a199c03a2a1">socket_server.h</a>
 </li>
+<li>free_socket_server_config()
+: <a class="el" href="d1/dfc/socket__server_8c.html#a77df78f3e8eb1b69cca2b4f2c6b3e354">socket_server.c</a>
+, <a class="el" href="d9/d26/socket__server_8h.html#a77df78f3e8eb1b69cca2b4f2c6b3e354">socket_server.h</a>
+</li>
 </ul>
 
 
@@ -192,8 +193,8 @@ $(document).ready(function(){initNavTree('globals_func.html',''); initResizable(
 : <a class="el" href="dc/d9a/varhexutils_8c.html#a0e45249bc3a02e20ad8e87e21fd4e68d">varhexutils.c</a>
 </li>
 <li>get_name_info()
-: <a class="el" href="d5/df8/socket_8c.html#ad5537d856f4e63f072c66107c15e4b8a">socket.c</a>
-, <a class="el" href="da/ddd/socket_8h.html#ad5537d856f4e63f072c66107c15e4b8a">socket.h</a>
+: <a class="el" href="d5/df8/socket_8c.html#aa3f161176f86bd430439429fbd7aec09">socket.c</a>
+, <a class="el" href="da/ddd/socket_8h.html#aa3f161176f86bd430439429fbd7aec09">socket.h</a>
 </li>
 <li>get_new_socket()
 : <a class="el" href="d5/df8/socket_8c.html#a1a802d1985754fe6d4d6c050c214e4b4">socket.c</a>
@@ -335,12 +336,16 @@ $(document).ready(function(){initNavTree('globals_func.html',''); initResizable(
 , <a class="el" href="d1/d8c/logger_8h.html#a346f22d0e57a25484ee39115185ef609">logger.h</a>
 </li>
 <li>new_socket_client()
-: <a class="el" href="d4/d39/socket__client_8c.html#a582e3e13553e23b0321aad1d691c7204">socket_client.c</a>
-, <a class="el" href="d0/d3b/socket__client_8h.html#a582e3e13553e23b0321aad1d691c7204">socket_client.h</a>
+: <a class="el" href="d4/d39/socket__client_8c.html#acddf96d2dea8f47ea2d0555c8500630d">socket_client.c</a>
+, <a class="el" href="d0/d3b/socket__client_8h.html#acddf96d2dea8f47ea2d0555c8500630d">socket_client.h</a>
 </li>
 <li>new_socket_server()
 : <a class="el" href="d1/dfc/socket__server_8c.html#abdfa0f6886955caae3b71928592e0301">socket_server.c</a>
 , <a class="el" href="d9/d26/socket__server_8h.html#abdfa0f6886955caae3b71928592e0301">socket_server.h</a>
+</li>
+<li>new_socket_server_config()
+: <a class="el" href="d1/dfc/socket__server_8c.html#a0a9835b57e74926457725150c2d2fed4">socket_server.c</a>
+, <a class="el" href="d9/d26/socket__server_8h.html#af4270b309bd086c69ec7390255b7c0ab">socket_server.h</a>
 </li>
 <li>new_thread_logger()
 : <a class="el" href="d1/d22/logger_8c.html#aba435ba2ea5433b4dc792c5d8038a0d1">logger.c</a>

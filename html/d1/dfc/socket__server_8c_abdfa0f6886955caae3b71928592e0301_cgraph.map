@@ -1,5 +1,5 @@
 <map id="new_socket_server" name="new_socket_server">
-<area shape="rect" id="node1" title="returns a new socket server bound to the port number and ready to accept connections" alt="" coords="5,95,152,121"/>
+<area shape="rect" id="node1" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="5,95,152,121"/>
 <area shape="rect" id="node2" href="$d5/df8/socket_8c.html#a1a802d1985754fe6d4d6c050c214e4b4" title="gets an available socket attached to bind_address" alt="" coords="200,53,327,80"/>
 <area shape="rect" id="node4" href="$db/d84/thread__pool_8c.html#a3e6ebbdd6aecc6fc0035e5780c9878c8" title=" " alt="" coords="218,120,309,147"/>
 <area shape="rect" id="node3" href="$d5/df8/socket_8c.html#add0cf15976a6dd3a21d81320a5fbf0cf" title="used to enable/disable blocking sockets" alt="" coords="375,29,528,70"/>

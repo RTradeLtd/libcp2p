@@ -27,7 +27,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">libcp2p
    </div>
-   <div id="projectbrief">Alibp2p-likeprotocolwithfirstclasssupportforembeddedsystems.Endgoalisaprotocolthatcanrunonanythingfromyourfridge,embeddedsystems,andanythingelse.HigherlevellanguagesbindingswillbedoneviaFFI.HeavyWIP</div>
+   <div id="projectbrief">A libp2p-like protocol with first class support for embedded systems. End goal is a protocol that can run on anything from your fridge, embedded systems, and anything else. Higher level languages bindings will be done via FFI. Heavy WIP</div>
   </td>
  </tr>
  </tbody>
@@ -107,10 +107,14 @@ Collaboration diagram for socket_server:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a942f38a48a37198d122e0ed5e6d6d423"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/structsocket__server.html#a942f38a48a37198d122e0ed5e6d6d423">udp_socket_number</a></td></tr>
-<tr class="separator:a942f38a48a37198d122e0ed5e6d6d423"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b6820940c2e0619b65f11437426b914"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/structsocket__server.html#a6b6820940c2e0619b65f11437426b914">tcp_socket_number</a></td></tr>
-<tr class="separator:a6b6820940c2e0619b65f11437426b914"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b9de030f35cd4317a7ec798325eefdb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/structsocket__server.html#a9b9de030f35cd4317a7ec798325eefdb">max_socket_num</a></td></tr>
+<tr class="separator:a9b9de030f35cd4317a7ec798325eefdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ba942899c709cc074cba514294838e3"><td class="memItemLeft" align="right" valign="top">fd_set&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/structsocket__server.html#a0ba942899c709cc074cba514294838e3">grouped_socket_set</a></td></tr>
+<tr class="separator:a0ba942899c709cc074cba514294838e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2140587d9f5584ccdc22002f455b23ee"><td class="memItemLeft" align="right" valign="top">fd_set&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/structsocket__server.html#a2140587d9f5584ccdc22002f455b23ee">tcp_socket_set</a></td></tr>
+<tr class="separator:a2140587d9f5584ccdc22002f455b23ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaedc6724c3d56bfe5ad364294e9fa0aa"><td class="memItemLeft" align="right" valign="top">fd_set&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/structsocket__server.html#aaedc6724c3d56bfe5ad364294e9fa0aa">udp_socket_set</a></td></tr>
+<tr class="separator:aaedc6724c3d56bfe5ad364294e9fa0aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaafcdd72385a0156dda2eb7c0949a48a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/da5/structthread__logger.html">thread_logger</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/structsocket__server.html#aaafcdd72385a0156dda2eb7c0949a48a">thl</a></td></tr>
 <tr class="separator:aaafcdd72385a0156dda2eb7c0949a48a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64fec4403103a5fc76f73d357d2ffdb0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d3/dec/thread__pool_8h.html#a615a4a9fc352172af6db87f6787dc65f">threadpool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/structsocket__server.html#a64fec4403103a5fc76f73d357d2ffdb0">thpool</a></td></tr>
@@ -125,8 +129,40 @@ Data Fields</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00050">50</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00064">64</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
+<a id="a0ba942899c709cc074cba514294838e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ba942899c709cc074cba514294838e3">&#9670;&nbsp;</a></span>grouped_socket_set</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">fd_set socket_server::grouped_socket_set</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00066">66</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
+
+</div>
+</div>
+<a id="a9b9de030f35cd4317a7ec798325eefdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b9de030f35cd4317a7ec798325eefdb">&#9670;&nbsp;</a></span>max_socket_num</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int socket_server::max_socket_num</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00065">65</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
+
+</div>
+</div>
 <a id="aa47767c843cdf018f134e57ba3423e52"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa47767c843cdf018f134e57ba3423e52">&#9670;&nbsp;</a></span>task_func_tcp</h2>
 
@@ -141,7 +177,7 @@ Data Fields</h2></td></tr>
 
 <p>used for submitting a task to the thread pool for processing a tcp connection </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00059">59</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00075">75</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
 
 </div>
 </div>
@@ -159,23 +195,23 @@ Data Fields</h2></td></tr>
 
 <p>used for submitting a task to the thread pool for processing a udp connection </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00062">62</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00078">78</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
 
 </div>
 </div>
-<a id="a6b6820940c2e0619b65f11437426b914"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b6820940c2e0619b65f11437426b914">&#9670;&nbsp;</a></span>tcp_socket_number</h2>
+<a id="a2140587d9f5584ccdc22002f455b23ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2140587d9f5584ccdc22002f455b23ee">&#9670;&nbsp;</a></span>tcp_socket_set</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int socket_server::tcp_socket_number</td>
+          <td class="memname">fd_set socket_server::tcp_socket_set</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00052">52</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00067">67</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
 
 </div>
 </div>
@@ -191,7 +227,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00053">53</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00069">69</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
 
 </div>
 </div>
@@ -209,23 +245,23 @@ Data Fields</h2></td></tr>
 
 <p>a thread pool that allows submitting worker tasks to a pool of threads </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00056">56</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00072">72</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
 
 </div>
 </div>
-<a id="a942f38a48a37198d122e0ed5e6d6d423"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a942f38a48a37198d122e0ed5e6d6d423">&#9670;&nbsp;</a></span>udp_socket_number</h2>
+<a id="aaedc6724c3d56bfe5ad364294e9fa0aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaedc6724c3d56bfe5ad364294e9fa0aa">&#9670;&nbsp;</a></span>udp_socket_set</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int socket_server::udp_socket_number</td>
+          <td class="memname">fd_set socket_server::udp_socket_set</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00051">51</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00068">68</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
 
 </div>
 </div>

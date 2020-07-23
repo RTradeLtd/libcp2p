@@ -27,7 +27,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">libcp2p
    </div>
-   <div id="projectbrief">Alibp2p-likeprotocolwithfirstclasssupportforembeddedsystems.Endgoalisaprotocolthatcanrunonanythingfromyourfridge,embeddedsystems,andanythingelse.HigherlevellanguagesbindingswillbedoneviaFFI.HeavyWIP</div>
+   <div id="projectbrief">A libp2p-like protocol with first class support for embedded systems. End goal is a protocol that can run on anything from your fridge, embedded systems, and anything else. Higher level languages bindings will be done via FFI. Heavy WIP</div>
   </td>
  </tr>
  </tbody>
@@ -88,12 +88,16 @@ $(document).ready(function(){initNavTree('dd/da0/todo.html','../../'); initResiz
 <div class="contents">
 <div class="textblock"><dl class="reflist">
 <dt>Class <a class="el" href="../../d5/de2/structclient__conn.html">client_conn</a>  </dt>
-<dd><a class="anchor" id="_todo000014"></a><ul>
+<dd><a class="anchor" id="_todo000015"></a><ul>
 <li>enable a queue/list of these  </li>
 </ul>
 </dd>
 <dt>Global <a class="el" href="../../d2/d09/socket__test_8c.html#a11e393df594425835c9dd42e2440d325">example_task_func_tcp</a>  (void *data)</dt>
 <dd><a class="anchor" id="_todo000009"></a>figure out proper close procedures  </dd>
+<dt>Global <a class="el" href="../../d5/df8/socket_8c.html#aa3f161176f86bd430439429fbd7aec09">get_name_info</a>  (sock_addr *client_address)</dt>
+<dd><p class="startdd"><a class="anchor" id="_todo000004"></a>enable udp </p>
+<p class="enddd"><a class="anchor" id="_todo000012"></a>enable udp  </p>
+</dd>
 <dt>File <a class="el" href="../../d1/d22/logger_8c.html">logger.c</a>  </dt>
 <dd><a class="anchor" id="_todo000001"></a><ul>
 <li>buffer logs and use a dedicated thread for writing (avoid blocking locks)</li>
@@ -107,21 +111,19 @@ $(document).ready(function(){initNavTree('dd/da0/todo.html','../../'); initResiz
 </ul>
 </dd>
 <dt>Global <a class="el" href="../../d1/dfc/socket__server_8c.html#abdfa0f6886955caae3b71928592e0301">new_socket_server</a>  (<a class="el" href="../../da/da5/structthread__logger.html">thread_logger</a> *thl, socket_server_config_t config)</dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000005"></a>support non wildcard </p>
-<p class="enddd"><a class="anchor" id="_todo000006"></a>support non wildcard  </p>
+<dd><p class="startdd"><a class="anchor" id="_todo000006"></a>support non wildcard </p>
+<p class="enddd"><a class="anchor" id="_todo000007"></a>support non wildcard  </p>
 </dd>
 <dt>Global <a class="el" href="../../dc/d9a/varhexutils_8c.html#aee38236e16fc131a0449bdde559b16e7">Num_To_HexVar_64</a>  (uint64_t TOHVINPUT)</dt>
 <dd><a class="anchor" id="_todo000003"></a>TODO(bonedaddy): figure out the previous code did bzero before memset  </dd>
 <dt>Global <a class="el" href="../../d4/d39/socket__client_8c.html#a46de905844492f3340913c1864e2366b">socket_client_sendto</a>  (socket_client_t *client, addr_info *peer_address, char *message)</dt>
-<dd><a class="anchor" id="_todo000004"></a>if we sent less than total size, send remaining  </dd>
+<dd><a class="anchor" id="_todo000005"></a>if we sent less than total size, send remaining  </dd>
 <dt>Global <a class="el" href="../../d9/d26/socket__server_8h.html#aa393a347d02fb92a760791d8fa6734cb">socket_server_config_t</a>  </dt>
-<dd><a class="anchor" id="_todo000012"></a>switch to multiaddresses  </dd>
+<dd><a class="anchor" id="_todo000013"></a>switch to multiaddresses  </dd>
 <dt>Global <a class="el" href="../../d9/d26/socket__server_8h.html#aef5443b2975a516444230744f0b62499">socket_server_t</a>  </dt>
-<dd><a class="anchor" id="_todo000013"></a>dont limit to two sockets (this will requiring using multiaddrs and an array of socket numbers)  </dd>
+<dd><a class="anchor" id="_todo000014"></a>dont limit to two sockets (this will requiring using multiaddrs and an array of socket numbers)  </dd>
 <dt>Global <a class="el" href="../../d1/dfc/socket__server_8c.html#a1ce9882f112a3f405b53cdc3d35a2def">start_socket_server</a>  (socket_server_t *srv)</dt>
-<dd><p class="startdd"><a class="anchor" id="_todo000007"></a>enable customizable timeout </p>
-<p class="enddd"><a class="anchor" id="_todo000008"></a>figure out why select isn't handling the udp connection  </p>
-</dd>
+<dd><a class="anchor" id="_todo000008"></a>enable customizable timeout  </dd>
 <dt>Global <a class="el" href="../../dc/d9a/varhexutils_8c.html#a12a8ed3b41f8b6dc471052c262bfa211">vthconvert</a>  (const unsigned char *in, int in_size, unsigned char **out)</dt>
 <dd><a class="anchor" id="_todo000002"></a>TODO(bonedaddy): figure out best way to error here </dd>
 </dl>

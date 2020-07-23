@@ -10,6 +10,10 @@ enable a queue/list of these
 .PP
 .IP "\fBGlobal \fBexample_task_func_tcp\fP (void *data)\fP" 1c
 figure out proper close procedures  
+.IP "\fBGlobal \fBget_name_info\fP (sock_addr *client_address)\fP" 1c
+enable udp 
+.PP
+enable udp  
 .IP "\fBFile \fBlogger\&.c\fP \fP" 1c
 .IP "\(bu" 2
 buffer logs and use a dedicated thread for writing (avoid blocking locks)
@@ -35,9 +39,7 @@ switch to multiaddresses
 .IP "\fBGlobal \fBsocket_server_t\fP \fP" 1c
 dont limit to two sockets (this will requiring using multiaddrs and an array of socket numbers)  
 .IP "\fBGlobal \fBstart_socket_server\fP (socket_server_t *srv)\fP" 1c
-enable customizable timeout 
-.PP
-figure out why select isn't handling the udp connection  
+enable customizable timeout  
 .IP "\fBGlobal \fBvthconvert\fP (const unsigned char *in, int in_size, unsigned char **out)\fP" 1c
 TODO(bonedaddy): figure out best way to error here 
 .PP

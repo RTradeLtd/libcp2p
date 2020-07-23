@@ -27,7 +27,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">libcp2p
    </div>
-   <div id="projectbrief">Alibp2p-likeprotocolwithfirstclasssupportforembeddedsystems.Endgoalisaprotocolthatcanrunonanythingfromyourfridge,embeddedsystems,andanythingelse.HigherlevellanguagesbindingswillbedoneviaFFI.HeavyWIP</div>
+   <div id="projectbrief">A libp2p-like protocol with first class support for embedded systems. End goal is a protocol that can run on anything from your fridge, embedded systems, and anything else. Higher level languages bindings will be done via FFI. Heavy WIP</div>
   </td>
  </tr>
  </tbody>
@@ -145,9 +145,9 @@ Functions</h2></td></tr>
 <tr class="memitem:add0cf15976a6dd3a21d81320a5fbf0cf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/df8/socket_8c.html#add0cf15976a6dd3a21d81320a5fbf0cf">set_socket_blocking_status</a> (int fd, bool blocking)</td></tr>
 <tr class="memdesc:add0cf15976a6dd3a21d81320a5fbf0cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">used to enable/disable blocking sockets  <a href="../../d5/df8/socket_8c.html#add0cf15976a6dd3a21d81320a5fbf0cf">More...</a><br /></td></tr>
 <tr class="separator:add0cf15976a6dd3a21d81320a5fbf0cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5537d856f4e63f072c66107c15e4b8a"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/df8/socket_8c.html#ad5537d856f4e63f072c66107c15e4b8a">get_name_info</a> (<a class="el" href="../../da/ddd/socket_8h.html#abd605b1edfb94b9967b92e0e99d931ba">addr_info</a> *client_address)</td></tr>
-<tr class="memdesc:ad5537d856f4e63f072c66107c15e4b8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the address the client is connecting from  <a href="../../d5/df8/socket_8c.html#ad5537d856f4e63f072c66107c15e4b8a">More...</a><br /></td></tr>
-<tr class="separator:ad5537d856f4e63f072c66107c15e4b8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3f161176f86bd430439429fbd7aec09"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/df8/socket_8c.html#aa3f161176f86bd430439429fbd7aec09">get_name_info</a> (<a class="el" href="../../da/ddd/socket_8h.html#acf77d3554add8fce8fc0590f75e303f6">sock_addr</a> *client_address)</td></tr>
+<tr class="memdesc:aa3f161176f86bd430439429fbd7aec09"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the address the client is connecting from  <a href="../../d5/df8/socket_8c.html#aa3f161176f86bd430439429fbd7aec09">More...</a><br /></td></tr>
+<tr class="separator:aa3f161176f86bd430439429fbd7aec09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a698af564637e1245e56bbb56c5d5b3f2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/ddd/socket_8h.html#abd605b1edfb94b9967b92e0e99d931ba">addr_info</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/df8/socket_8c.html#a698af564637e1245e56bbb56c5d5b3f2">default_hints</a> ()</td></tr>
 <tr class="memdesc:a698af564637e1245e56bbb56c5d5b3f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">generates an addr_info struct with defaults defaults is IPv4, TCP, and AI_PASSIVE flags  <a href="../../d5/df8/socket_8c.html#a698af564637e1245e56bbb56c5d5b3f2">More...</a><br /></td></tr>
 <tr class="separator:a698af564637e1245e56bbb56c5d5b3f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -174,12 +174,12 @@ Functions</h2></td></tr>
 
 <p>generates an addr_info struct with defaults defaults is IPv4, TCP, and AI_PASSIVE flags </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d5/df8/socket_8c_source.html#l00139">139</a> of file <a class="el" href="../../d5/df8/socket_8c_source.html">socket.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/df8/socket_8c_source.html#l00149">149</a> of file <a class="el" href="../../d5/df8/socket_8c_source.html">socket.c</a>.</p>
 
 </div>
 </div>
-<a id="ad5537d856f4e63f072c66107c15e4b8a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad5537d856f4e63f072c66107c15e4b8a">&#9670;&nbsp;</a></span>get_name_info()</h2>
+<a id="aa3f161176f86bd430439429fbd7aec09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3f161176f86bd430439429fbd7aec09">&#9670;&nbsp;</a></span>get_name_info()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -187,7 +187,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">char* get_name_info </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="../../da/ddd/socket_8h.html#abd605b1edfb94b9967b92e0e99d931ba">addr_info</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="../../da/ddd/socket_8h.html#acf77d3554add8fce8fc0590f75e303f6">sock_addr</a> *&#160;</td>
           <td class="paramname"><em>client_address</em></td><td>)</td>
           <td></td>
         </tr>
@@ -195,19 +195,21 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>returns the address the client is connecting from </p>
+<dl class="section note"><dt>Note</dt><dd>this only works with tcp </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000004">Todo:</a></b></dt><dd>enable udp </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d5/df8/socket_8c_source.html#l00115">115</a> of file <a class="el" href="../../d5/df8/socket_8c_source.html">socket.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/df8/socket_8c_source.html#l00129">129</a> of file <a class="el" href="../../d5/df8/socket_8c_source.html">socket.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="../../d5/df8/socket_8c_ad5537d856f4e63f072c66107c15e4b8a_icgraph.png" border="0" usemap="#d5/df8/socket_8c_ad5537d856f4e63f072c66107c15e4b8a_icgraph" alt=""/></div>
-<map name="d5/df8/socket_8c_ad5537d856f4e63f072c66107c15e4b8a_icgraph" id="d5/df8/socket_8c_ad5537d856f4e63f072c66107c15e4b8a_icgraph">
-<area shape="rect" title="returns the address the client is connecting from" alt="" coords="924,46,1043,73"/>
-<area shape="rect" href="../../d9/d26/socket__server_8h.html#a1763924614c1b04b07e49140df0560c1" title="helper function for accepting client connections times out new attempts if they take 3 seconds or mor..." alt="" coords="729,21,876,47"/>
-<area shape="rect" href="../../d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="108,42,287,69"/>
-<area shape="rect" href="../../d9/d26/socket__server_8h.html#a1ce9882f112a3f405b53cdc3d35a2def" title="starts the socket server which processes new connections" alt="" coords="532,17,681,43"/>
+<div class="center"><img src="../../d5/df8/socket_8c_aa3f161176f86bd430439429fbd7aec09_icgraph.png" border="0" usemap="#d5/df8/socket_8c_aa3f161176f86bd430439429fbd7aec09_icgraph" alt=""/></div>
+<map name="d5/df8/socket_8c_aa3f161176f86bd430439429fbd7aec09_icgraph" id="d5/df8/socket_8c_aa3f161176f86bd430439429fbd7aec09_icgraph">
+<area shape="rect" title="returns the address the client is connecting from" alt="" coords="924,13,1043,39"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a0a85f1e22b043be60df800b7e0be8cae" title="helper function for accepting client connections times out new attempts if they take 3 seconds or mor..." alt="" coords="729,13,876,39"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a1ce9882f112a3f405b53cdc3d35a2def" title="starts the socket server which processes new connections" alt="" coords="532,13,681,39"/>
 <area shape="rect" href="../../d2/d09/socket__test_8c.html#af651f6515eeb896e9fcf591d00ac3585" title=" " alt="" coords="335,5,484,47"/>
-<area shape="rect" href="../../d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,42,60,69"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="108,13,287,39"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
 </map>
 </div>
 
@@ -262,7 +264,7 @@ Here is the caller graph for this function:</div>
 <dd>
 Failure: -1 initializers a socket attached to bind_address with sock_opts, and binds the address </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d5/df8/socket_8c_source.html#l00031">31</a> of file <a class="el" href="../../d5/df8/socket_8c_source.html">socket.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/df8/socket_8c_source.html#l00043">43</a> of file <a class="el" href="../../d5/df8/socket_8c_source.html">socket.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -278,8 +280,8 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="../../d5/df8/socket_8c_a1a802d1985754fe6d4d6c050c214e4b4_icgraph.png" border="0" usemap="#d5/df8/socket_8c_a1a802d1985754fe6d4d6c050c214e4b4_icgraph" alt=""/></div>
 <map name="d5/df8/socket_8c_a1a802d1985754fe6d4d6c050c214e4b4_icgraph" id="d5/df8/socket_8c_a1a802d1985754fe6d4d6c050c214e4b4_icgraph">
 <area shape="rect" title="gets an available socket attached to bind_address" alt="" coords="529,31,656,57"/>
-<area shape="rect" href="../../d0/d3b/socket__client_8h.html#a582e3e13553e23b0321aad1d691c7204" title="returns a new socket client connected to addr:port" alt="" coords="337,5,479,32"/>
-<area shape="rect" href="../../d9/d26/socket__server_8h.html#abdfa0f6886955caae3b71928592e0301" title="returns a new socket server bound to the port number and ready to accept connections" alt="" coords="335,56,481,83"/>
+<area shape="rect" href="../../d0/d3b/socket__client_8h.html#acddf96d2dea8f47ea2d0555c8500630d" title="returns a new socket client connected to addr:port" alt="" coords="337,5,479,32"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#abdfa0f6886955caae3b71928592e0301" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="335,56,481,83"/>
 <area shape="rect" href="../../d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="108,31,287,57"/>
 <area shape="rect" href="../../d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,31,60,57"/>
 </map>
@@ -319,7 +321,7 @@ Here is the caller graph for this function:</div>
 Success: true </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>see <a href="https://stackoverflow.com/questions/1543466/how-do-i-change-a-tcp-socket-to-be-non-blocking/1549344#1549344">https://stackoverflow.com/questions/1543466/how-do-i-change-a-tcp-socket-to-be-non-blocking/1549344#1549344</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d5/df8/socket_8c_source.html#l00100">100</a> of file <a class="el" href="../../d5/df8/socket_8c_source.html">socket.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d5/df8/socket_8c_source.html#l00112">112</a> of file <a class="el" href="../../d5/df8/socket_8c_source.html">socket.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -327,8 +329,8 @@ Here is the caller graph for this function:</div>
 <map name="d5/df8/socket_8c_add0cf15976a6dd3a21d81320a5fbf0cf_icgraph" id="d5/df8/socket_8c_add0cf15976a6dd3a21d81320a5fbf0cf_icgraph">
 <area shape="rect" title="used to enable/disable blocking sockets" alt="" coords="704,23,857,65"/>
 <area shape="rect" href="../../da/ddd/socket_8h.html#a1a802d1985754fe6d4d6c050c214e4b4" title="gets an available socket attached to bind_address" alt="" coords="529,31,656,57"/>
-<area shape="rect" href="../../d0/d3b/socket__client_8h.html#a582e3e13553e23b0321aad1d691c7204" title="returns a new socket client connected to addr:port" alt="" coords="337,5,479,32"/>
-<area shape="rect" href="../../d9/d26/socket__server_8h.html#abdfa0f6886955caae3b71928592e0301" title="returns a new socket server bound to the port number and ready to accept connections" alt="" coords="335,56,481,83"/>
+<area shape="rect" href="../../d0/d3b/socket__client_8h.html#acddf96d2dea8f47ea2d0555c8500630d" title="returns a new socket client connected to addr:port" alt="" coords="337,5,479,32"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#abdfa0f6886955caae3b71928592e0301" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="335,56,481,83"/>
 <area shape="rect" href="../../d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="108,31,287,57"/>
 <area shape="rect" href="../../d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,31,60,57"/>
 </map>

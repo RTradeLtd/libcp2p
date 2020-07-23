@@ -27,7 +27,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">libcp2p
    </div>
-   <div id="projectbrief">Alibp2p-likeprotocolwithfirstclasssupportforembeddedsystems.Endgoalisaprotocolthatcanrunonanythingfromyourfridge,embeddedsystems,andanythingelse.HigherlevellanguagesbindingswillbedoneviaFFI.HeavyWIP</div>
+   <div id="projectbrief">A libp2p-like protocol with first class support for embedded systems. End goal is a protocol that can run on anything from your fridge, embedded systems, and anything else. Higher level languages bindings will be done via FFI. Heavy WIP</div>
   </td>
  </tr>
  </tbody>
@@ -93,7 +93,8 @@ $(document).ready(function(){initNavTree('d0/d3b/socket__client_8h.html','../../
 
 <p>stuff related to socket clients (ie, connecting to socket servers)  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="../../da/ddd/socket_8h_source.html">socket.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;multiaddr/multiaddr.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../da/ddd/socket_8h_source.html">socket.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../d1/d8c/logger_8h_source.html">utils/logger.h</a>&quot;</code><br />
 <code>#include &lt;arpa/inet.h&gt;</code><br />
 <code>#include &lt;netinet/in.h&gt;</code><br />
@@ -107,18 +108,19 @@ Include dependency graph for socket_client.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d5/de8/socket__client_8h__incl.png" border="0" usemap="#_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2network_2socket__client_8h" alt=""/></div>
 <map name="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2network_2socket__client_8h" id="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2network_2socket__client_8h">
-<area shape="rect" title="stuff related to socket clients (ie, connecting to socket servers)" alt="" coords="377,5,555,76"/>
-<area shape="rect" href="../../da/ddd/socket_8h.html" title="general socket related tooling" alt="" coords="428,124,504,151"/>
-<area shape="rect" href="../../d1/d8c/logger_8h.html" title="a thread safe logger with optional printf style logging" alt="" coords="85,199,191,225"/>
-<area shape="rect" title=" " alt="" coords="303,348,386,375"/>
-<area shape="rect" title=" " alt="" coords="5,273,89,300"/>
-<area shape="rect" title=" " alt="" coords="216,199,308,225"/>
-<area shape="rect" title=" " alt="" coords="333,199,429,225"/>
-<area shape="rect" title=" " alt="" coords="504,199,607,225"/>
-<area shape="rect" title=" " alt="" coords="631,199,722,225"/>
-<area shape="rect" title=" " alt="" coords="746,199,842,225"/>
-<area shape="rect" href="../../da/dd8/colors_8h.html" title="macros and utilities for printing color to stdout from https://www.quora.com/How&#45;do&#45;I&#45;print&#45;a&#45;colored..." alt="" coords="113,273,187,300"/>
-<area shape="rect" title=" " alt="" coords="263,273,333,300"/>
+<area shape="rect" title="stuff related to socket clients (ie, connecting to socket servers)" alt="" coords="493,5,670,76"/>
+<area shape="rect" title=" " alt="" coords="5,124,168,151"/>
+<area shape="rect" href="../../da/ddd/socket_8h.html" title="general socket related tooling" alt="" coords="582,124,658,151"/>
+<area shape="rect" href="../../d1/d8c/logger_8h.html" title="a thread safe logger with optional printf style logging" alt="" coords="243,199,349,225"/>
+<area shape="rect" title=" " alt="" coords="461,348,544,375"/>
+<area shape="rect" title=" " alt="" coords="163,273,247,300"/>
+<area shape="rect" title=" " alt="" coords="374,199,466,225"/>
+<area shape="rect" title=" " alt="" coords="491,199,587,225"/>
+<area shape="rect" title=" " alt="" coords="662,199,765,225"/>
+<area shape="rect" title=" " alt="" coords="789,199,880,225"/>
+<area shape="rect" title=" " alt="" coords="904,199,1000,225"/>
+<area shape="rect" href="../../da/dd8/colors_8h.html" title="macros and utilities for printing color to stdout from https://www.quora.com/How&#45;do&#45;I&#45;print&#45;a&#45;colored..." alt="" coords="271,273,345,300"/>
+<area shape="rect" title=" " alt="" coords="421,273,491,300"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -148,9 +150,9 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a582e3e13553e23b0321aad1d691c7204"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/d3b/socket__client_8h.html#a9f1599fe9ce752bf7b20613ca0f725b2">socket_client_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d3b/socket__client_8h.html#a582e3e13553e23b0321aad1d691c7204">new_socket_client</a> (<a class="el" href="../../da/da5/structthread__logger.html">thread_logger</a> *thl, <a class="el" href="../../da/ddd/socket_8h.html#abd605b1edfb94b9967b92e0e99d931ba">addr_info</a> hints, char *addr, char *port)</td></tr>
-<tr class="memdesc:a582e3e13553e23b0321aad1d691c7204"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns a new socket client connected to <code>addr:port</code>  <a href="../../d0/d3b/socket__client_8h.html#a582e3e13553e23b0321aad1d691c7204">More...</a><br /></td></tr>
-<tr class="separator:a582e3e13553e23b0321aad1d691c7204"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acddf96d2dea8f47ea2d0555c8500630d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d0/d3b/socket__client_8h.html#a9f1599fe9ce752bf7b20613ca0f725b2">socket_client_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d3b/socket__client_8h.html#acddf96d2dea8f47ea2d0555c8500630d">new_socket_client</a> (<a class="el" href="../../da/da5/structthread__logger.html">thread_logger</a> *thl, multi_addr_t *addr)</td></tr>
+<tr class="memdesc:acddf96d2dea8f47ea2d0555c8500630d"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns a new socket client connected to <code>addr:port</code>  <a href="../../d0/d3b/socket__client_8h.html#acddf96d2dea8f47ea2d0555c8500630d">More...</a><br /></td></tr>
+<tr class="separator:acddf96d2dea8f47ea2d0555c8500630d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46de905844492f3340913c1864e2366b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d3b/socket__client_8h.html#a46de905844492f3340913c1864e2366b">socket_client_sendto</a> (<a class="el" href="../../d0/d3b/socket__client_8h.html#a9f1599fe9ce752bf7b20613ca0f725b2">socket_client_t</a> *client, <a class="el" href="../../da/ddd/socket_8h.html#abd605b1edfb94b9967b92e0e99d931ba">addr_info</a> *peer_address, char *message)</td></tr>
 <tr class="memdesc:a46de905844492f3340913c1864e2366b"><td class="mdescLeft">&#160;</td><td class="mdescRight">used to send a message through the connected socket number  <a href="../../d0/d3b/socket__client_8h.html#a46de905844492f3340913c1864e2366b">More...</a><br /></td></tr>
 <tr class="separator:a46de905844492f3340913c1864e2366b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,8 +177,8 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a582e3e13553e23b0321aad1d691c7204"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a582e3e13553e23b0321aad1d691c7204">&#9670;&nbsp;</a></span>new_socket_client()</h2>
+<a id="acddf96d2dea8f47ea2d0555c8500630d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acddf96d2dea8f47ea2d0555c8500630d">&#9670;&nbsp;</a></span>new_socket_client()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -190,20 +192,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="../../da/ddd/socket_8h.html#abd605b1edfb94b9967b92e0e99d931ba">addr_info</a>&#160;</td>
-          <td class="paramname"><em>hints</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>addr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>port</em>&#160;</td>
+          <td class="paramtype">multi_addr_t *&#160;</td>
+          <td class="paramname"><em>addr</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -214,13 +204,20 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>returns a new socket client connected to <code>addr:port</code> </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">thl</td><td>an instance of a thread logger </td></tr>
+    <tr><td class="paramname">addr</td><td>the multiaddr to connect to </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d39/socket__client_8c_source.html#l00026">26</a> of file <a class="el" href="../../d4/d39/socket__client_8c_source.html">socket_client.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d39/socket__client_8c_source.html#l00040">40</a> of file <a class="el" href="../../d4/d39/socket__client_8c_source.html">socket_client.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="../../d0/d3b/socket__client_8h_a582e3e13553e23b0321aad1d691c7204_cgraph.png" border="0" usemap="#d0/d3b/socket__client_8h_a582e3e13553e23b0321aad1d691c7204_cgraph" alt=""/></div>
-<map name="d0/d3b/socket__client_8h_a582e3e13553e23b0321aad1d691c7204_cgraph" id="d0/d3b/socket__client_8h_a582e3e13553e23b0321aad1d691c7204_cgraph">
+<div class="center"><img src="../../d0/d3b/socket__client_8h_acddf96d2dea8f47ea2d0555c8500630d_cgraph.png" border="0" usemap="#d0/d3b/socket__client_8h_acddf96d2dea8f47ea2d0555c8500630d_cgraph" alt=""/></div>
+<map name="d0/d3b/socket__client_8h_acddf96d2dea8f47ea2d0555c8500630d_cgraph" id="d0/d3b/socket__client_8h_acddf96d2dea8f47ea2d0555c8500630d_cgraph">
 <area shape="rect" title="returns a new socket client connected to addr:port" alt="" coords="5,13,147,39"/>
 <area shape="rect" href="../../d5/df8/socket_8c.html#a1a802d1985754fe6d4d6c050c214e4b4" title="gets an available socket attached to bind_address" alt="" coords="195,13,321,39"/>
 <area shape="rect" href="../../d5/df8/socket_8c.html#add0cf15976a6dd3a21d81320a5fbf0cf" title="used to enable/disable blocking sockets" alt="" coords="369,5,523,47"/>
@@ -229,8 +226,8 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="../../d0/d3b/socket__client_8h_a582e3e13553e23b0321aad1d691c7204_icgraph.png" border="0" usemap="#d0/d3b/socket__client_8h_a582e3e13553e23b0321aad1d691c7204_icgraph" alt=""/></div>
-<map name="d0/d3b/socket__client_8h_a582e3e13553e23b0321aad1d691c7204_icgraph" id="d0/d3b/socket__client_8h_a582e3e13553e23b0321aad1d691c7204_icgraph">
+<div class="center"><img src="../../d0/d3b/socket__client_8h_acddf96d2dea8f47ea2d0555c8500630d_icgraph.png" border="0" usemap="#d0/d3b/socket__client_8h_acddf96d2dea8f47ea2d0555c8500630d_icgraph" alt=""/></div>
+<map name="d0/d3b/socket__client_8h_acddf96d2dea8f47ea2d0555c8500630d_icgraph" id="d0/d3b/socket__client_8h_acddf96d2dea8f47ea2d0555c8500630d_icgraph">
 <area shape="rect" title="returns a new socket client connected to addr:port" alt="" coords="335,5,476,32"/>
 <area shape="rect" href="../../d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="108,5,287,32"/>
 <area shape="rect" href="../../d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,5,60,32"/>
@@ -295,11 +292,11 @@ Failure: 1</dd></dl>
 <dd>
 Failure: 0 </dd></dl>
 <ul>
-<li><dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000004">Todo:</a></b></dt><dd>if we sent less than total size, send remaining </dd></dl>
+<li><dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000005">Todo:</a></b></dt><dd>if we sent less than total size, send remaining </dd></dl>
 </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d39/socket__client_8c_source.html#l00064">64</a> of file <a class="el" href="../../d4/d39/socket__client_8c_source.html">socket_client.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d39/socket__client_8c_source.html#l00112">112</a> of file <a class="el" href="../../d4/d39/socket__client_8c_source.html">socket_client.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">

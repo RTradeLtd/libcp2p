@@ -7,6 +7,8 @@
 .SH SYNOPSIS
 .br
 .PP
+\fC#include 'multiaddr/multiaddr\&.h'\fP
+.br
 \fC#include 'socket\&.h'\fP
 .br
 \fC#include 'utils/logger\&.h'\fP
@@ -44,7 +46,7 @@
 
 .in +1c
 .ti -1c
-.RI "\fBsocket_client_t\fP * \fBnew_socket_client\fP (\fBthread_logger\fP *thl, \fBaddr_info\fP hints, char *addr, char *port)"
+.RI "\fBsocket_client_t\fP * \fBnew_socket_client\fP (\fBthread_logger\fP *thl, multi_addr_t *addr)"
 .br
 .RI "returns a new socket client connected to \fCaddr:port\fP "
 .ti -1c
@@ -65,12 +67,21 @@ Definition in file \fBsocket_client\&.h\fP\&.
 
 .SH "Function Documentation"
 .PP 
-.SS "\fBsocket_client_t\fP* new_socket_client (\fBthread_logger\fP * thl, \fBaddr_info\fP hints, char * addr, char * port)"
+.SS "\fBsocket_client_t\fP* new_socket_client (\fBthread_logger\fP * thl, multi_addr_t * addr)"
 
 .PP
 returns a new socket client connected to \fCaddr:port\fP 
 .PP
-Definition at line 26 of file socket_client\&.c\&.
+\fBParameters\fP
+.RS 4
+\fIthl\fP an instance of a thread logger 
+.br
+\fIaddr\fP the multiaddr to connect to 
+.RE
+.PP
+
+.PP
+Definition at line 40 of file socket_client\&.c\&.
 .SS "int socket_client_sendto (\fBsocket_client_t\fP * client, \fBaddr_info\fP * peer_address, char * message)"
 
 .PP
@@ -119,7 +130,7 @@ if we sent less than total size, send remaining
 .PP
 
 .PP
-Definition at line 64 of file socket_client\&.c\&.
+Definition at line 112 of file socket_client\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for libcp2p from the source code\&.

@@ -1,8 +1,8 @@
 <map id="start_socket_server" name="start_socket_server">
 <area shape="rect" id="node1" title="starts the socket server which processes new connections" alt="" coords="5,31,155,57"/>
-<area shape="rect" id="node2" href="$d1/dfc/socket__server_8c.html#a1763924614c1b04b07e49140df0560c1" title="helper function for accepting client connections times out new attempts if they take 3 seconds or mor..." alt="" coords="203,5,349,32"/>
+<area shape="rect" id="node2" href="$d1/dfc/socket__server_8c.html#a0a85f1e22b043be60df800b7e0be8cae" title="helper function for accepting client connections times out new attempts if they take 3 seconds or mor..." alt="" coords="203,5,349,32"/>
 <area shape="rect" id="node4" href="$db/d84/thread__pool_8c.html#ad3587d247f5458dc2c75539715665b7a" title=" " alt="" coords="209,56,343,83"/>
-<area shape="rect" id="node3" href="$d5/df8/socket_8c.html#ad5537d856f4e63f072c66107c15e4b8a" title="returns the address the client is connecting from" alt="" coords="398,5,517,32"/>
+<area shape="rect" id="node3" href="$d5/df8/socket_8c.html#aa3f161176f86bd430439429fbd7aec09" title="returns the address the client is connecting from" alt="" coords="398,5,517,32"/>
 <area shape="rect" id="node5" href="$db/d84/thread__pool_8c.html#a22c1741557b617f0d79c8c4fce6f3fce" title=" " alt="" coords="397,56,517,83"/>
 <area shape="rect" id="node6" href="$db/d84/thread__pool_8c.html#a81956b8f532e6b303d98ebc51afbc5f7" title=" " alt="" coords="565,56,659,83"/>
 </map>

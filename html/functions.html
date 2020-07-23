@@ -27,7 +27,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">libcp2p
    </div>
-   <div id="projectbrief">Alibp2p-likeprotocolwithfirstclasssupportforembeddedsystems.Endgoalisaprotocolthatcanrunonanythingfromyourfridge,embeddedsystems,andanythingelse.HigherlevellanguagesbindingswillbedoneviaFFI.HeavyWIP</div>
+   <div id="projectbrief">A libp2p-like protocol with first class support for embedded systems. End goal is a protocol that can run on anything from your fridge, embedded systems, and anything else. Higher level languages bindings will be done via FFI. Heavy WIP</div>
   </td>
  </tr>
  </tbody>
@@ -87,6 +87,9 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <h3><a id="index_a"></a>- a -</h3><ul>
 <li>address
 : <a class="el" href="d5/de2/structclient__conn.html#af8e32eba77c5a495c18432e60add094c">client_conn</a>
+</li>
+<li>addrs
+: <a class="el" href="d9/d90/structsocket__server__config.html#a6181d362643eb83528218429c824bfff">socket_server_config</a>
 </li>
 <li>arg
 : <a class="el" href="d3/d8c/structjob.html#a8b3f0efe992ce0a83e8f9f7bf58b453a">job</a>
@@ -148,6 +151,13 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 </ul>
 
 
+<h3><a id="index_g"></a>- g -</h3><ul>
+<li>grouped_socket_set
+: <a class="el" href="d7/d8d/structsocket__server.html#a0ba942899c709cc074cba514294838e3">socket_server</a>
+</li>
+</ul>
+
+
 <h3><a id="index_h"></a>- h -</h3><ul>
 <li>has_jobs
 : <a class="el" href="d7/dd0/structjobqueue.html#adf63188dff1c55244814269890424844">jobqueue</a>
@@ -176,9 +186,6 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>len
 : <a class="el" href="d7/dd0/structjobqueue.html#a4c31e18dc40ec5ce79f675ba60b24316">jobqueue</a>
 </li>
-<li>listen_address
-: <a class="el" href="d9/d90/structsocket__server__config.html#a1f53d2580014c40696263672248f7c71">socket_server_config</a>
-</li>
 <li>lock
 : <a class="el" href="da/da5/structthread__logger.html#ae1d72468ad08b540320fa7f0b24d1c41">thread_logger</a>
 </li>
@@ -194,6 +201,9 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <h3><a id="index_m"></a>- m -</h3><ul>
 <li>max_connections
 : <a class="el" href="d9/d90/structsocket__server__config.html#adc242b7b2b2d8ea51bf495f2aec54b43">socket_server_config</a>
+</li>
+<li>max_socket_num
+: <a class="el" href="d7/d8d/structsocket__server.html#a9b9de030f35cd4317a7ec798325eefdb">socket_server</a>
 </li>
 <li>mutex
 : <a class="el" href="d5/d93/structbsem.html#aeb72d3f55aa3db011cd2156d23d605f2">bsem</a>
@@ -215,6 +225,9 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>node
 : <a class="el" href="d8/d90/structmap__iter__t.html#afe2dc4692682b833105fa02d57906bf8">map_iter_t</a>
 </li>
+<li>num_addrs
+: <a class="el" href="d9/d90/structsocket__server__config.html#a7d6d6c4b7ea84c6b1d578c9478977af9">socket_server_config</a>
+</li>
 <li>num_threads
 : <a class="el" href="d9/d90/structsocket__server__config.html#a46995bde60d0809940202f70f982c3bc">socket_server_config</a>
 </li>
@@ -228,6 +241,9 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 
 
 <h3><a id="index_p"></a>- p -</h3><ul>
+<li>peer_address
+: <a class="el" href="d9/d8c/structsocket__client.html#a0db314a5928fab116a72c7b09dec567f">socket_client</a>
+</li>
 <li>prev
 : <a class="el" href="d3/d8c/structjob.html#aaf356d89da4d51553a75e6cb0bfd24ac">job</a>
 </li>
@@ -273,11 +289,8 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>task_func_udp
 : <a class="el" href="d7/d8d/structsocket__server.html#a31a26ac270d1dd975d68b3000f40f5d2">socket_server</a>
 </li>
-<li>tcp_port_number
-: <a class="el" href="d9/d90/structsocket__server__config.html#a2a167aa1039e56b46689045fe2741289">socket_server_config</a>
-</li>
-<li>tcp_socket_number
-: <a class="el" href="d7/d8d/structsocket__server.html#a6b6820940c2e0619b65f11437426b914">socket_server</a>
+<li>tcp_socket_set
+: <a class="el" href="d7/d8d/structsocket__server.html#a2140587d9f5584ccdc22002f455b23ee">socket_server</a>
 </li>
 <li>thcount_lock
 : <a class="el" href="d4/d05/structthpool__.html#aad805a77e1175478f48332d036c4a2e9">thpool_</a>
@@ -310,11 +323,8 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 
 
 <h3><a id="index_u"></a>- u -</h3><ul>
-<li>udp_port_number
-: <a class="el" href="d9/d90/structsocket__server__config.html#a4901b31db1f36a3773f600b7fd9757f6">socket_server_config</a>
-</li>
-<li>udp_socket_number
-: <a class="el" href="d7/d8d/structsocket__server.html#a942f38a48a37198d122e0ed5e6d6d423">socket_server</a>
+<li>udp_socket_set
+: <a class="el" href="d7/d8d/structsocket__server.html#aaedc6724c3d56bfe5ad364294e9fa0aa">socket_server</a>
 </li>
 <li>unlock
 : <a class="el" href="da/da5/structthread__logger.html#ad4b91b5ae2e18e9fbbd808573b1db4b1">thread_logger</a>

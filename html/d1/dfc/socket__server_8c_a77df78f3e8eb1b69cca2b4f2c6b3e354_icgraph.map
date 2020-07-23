@@ -1,0 +1,5 @@
+<map id="free_socket_server_config" name="free_socket_server_config">
+<area shape="rect" id="node1" title="used to free up resources allocated for socket_server_config_t" alt="" coords="335,5,480,47"/>
+<area shape="rect" id="node2" href="$d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="108,13,287,39"/>
+<area shape="rect" id="node3" href="$d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
+</map>

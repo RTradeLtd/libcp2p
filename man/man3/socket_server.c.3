@@ -48,7 +48,7 @@
 .ti -1c
 .RI "\fBsocket_server_t\fP * \fBnew_socket_server\fP (\fBthread_logger\fP *thl, \fBsocket_server_config_t\fP config)"
 .br
-.RI "returns a new socket server bound to the port number and ready to accept connections "
+.RI "used to create a TCP/UDP socket server ready to accept connections "
 .ti -1c
 .RI "void \fBfree_socket_server\fP (\fBsocket_server_t\fP *srv)"
 .br
@@ -58,13 +58,21 @@
 .br
 .RI "starts the socket server which processes new connections "
 .ti -1c
-.RI "\fBclient_conn_t\fP * \fBaccept_client_conn\fP (\fBsocket_server_t\fP *srv)"
-.br
-.RI "helper function for accepting client connections times out new attempts if they take 3 seconds or more "
-.ti -1c
 .RI "void \fBsignal_shutdown\fP ()"
 .br
 .RI "used to signal that we should exit the main start_socket_server function "
+.ti -1c
+.RI "\fBclient_conn_t\fP * \fBaccept_client_conn\fP (\fBsocket_server_t\fP *srv, int socket_num)"
+.br
+.RI "helper function for accepting client connections times out new attempts if they take 3 seconds or more "
+.ti -1c
+.RI "void \fBfree_socket_server_config\fP (\fBsocket_server_config_t\fP *config)"
+.br
+.RI "used to free up resources allocated for socket_server_config_t "
+.ti -1c
+.RI "\fBsocket_server_config_t\fP * \fBnew_socket_server_config\fP (int num_addrs)"
+.br
+.RI "used to initialize a socket_server_config_t object "
 .in -1c
 .SS "Variables"
 
@@ -87,7 +95,7 @@ used to create a tcp/udp socket server listening on multiaddrs
 Definition in file \fBsocket_server\&.c\fP\&.
 .SH "Function Documentation"
 .PP 
-.SS "\fBclient_conn_t\fP* accept_client_conn (\fBsocket_server_t\fP * srv)"
+.SS "\fBclient_conn_t\fP* accept_client_conn (\fBsocket_server_t\fP * srv, int socket_num)"
 
 .PP
 helper function for accepting client connections times out new attempts if they take 3 seconds or more 
@@ -101,17 +109,46 @@ Success: non-NULL populated \fBclient_conn\fP object
 .PP
 
 .PP
-Definition at line 300 of file socket_server\&.c\&.
+Definition at line 376 of file socket_server\&.c\&.
 .SS "void free_socket_server (\fBsocket_server_t\fP * srv)"
 
 .PP
 terminates a server and frees up resources associated with it 
 .PP
-Definition at line 167 of file socket_server\&.c\&.
+Definition at line 237 of file socket_server\&.c\&.
+.SS "void free_socket_server_config (\fBsocket_server_config_t\fP * config)"
+
+.PP
+used to free up resources allocated for socket_server_config_t 
+.PP
+\fBParameters\fP
+.RS 4
+\fIconfig\fP an instance of socket_server_config_t initialized with new_socket_server_config 
+.RE
+.PP
+
+.PP
+Definition at line 406 of file socket_server\&.c\&.
 .SS "\fBsocket_server_t\fP* new_socket_server (\fBthread_logger\fP * thl, \fBsocket_server_config_t\fP config)"
 
 .PP
-returns a new socket server bound to the port number and ready to accept connections 
+used to create a TCP/UDP socket server ready to accept connections 
+.PP
+\fBParameters\fP
+.RS 4
+\fIthl\fP an instance of a \fBthread_logger\fP 
+.br
+\fIconfig\fP the configuration settings used for the tcp/udp server 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Success: pointer to a socket_server_t instance 
+.PP
+Failure: NULL pointer 
+.RE
+.PP
+
 .PP
 \fBWarning\fP
 .RS 4
@@ -136,7 +173,27 @@ support non wildcard
 .PP
 
 .PP
-Definition at line 37 of file socket_server\&.c\&.
+Definition at line 52 of file socket_server\&.c\&.
+.SS "\fBsocket_server_config_t\fP* new_socket_server_config (int num_addrs)"
+
+.PP
+used to initialize a socket_server_config_t object 
+.PP
+\fBParameters\fP
+.RS 4
+\fInum_addrs\fP the number of multi_addr_t objects the addrs member will contain 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Success: pointer to an initialized block of memory for socket_server_config_t 
+.PP
+Failure: NULL pointer 
+.RE
+.PP
+
+.PP
+Definition at line 421 of file socket_server\&.c\&.
 .SS "void signal_shutdown ()"
 
 .PP
@@ -149,7 +206,7 @@ this is only useful if you launch start_socket_server in a thread
 .PP
 
 .PP
-Definition at line 330 of file socket_server\&.c\&.
+Definition at line 365 of file socket_server\&.c\&.
 .SS "void start_socket_server (\fBsocket_server_t\fP * srv)"
 
 .PP
@@ -168,19 +225,24 @@ enable customizable timeout
 .RE
 .PP
 .PP
-\fBTodo\fP
+.IP "\(bu" 2
+\fBNote\fP
 .RS 4
-figure out why select isn't handling the udp connection 
+copy the main socket list containing both tcp and udp sockets
 .RE
 .PP
-\fBWarning\fP
+iterate over all known sockets 
+.PP
+\fBNote\fP
 .RS 4
-does not work with udp
+this will likely search a few extra sockets, but the overhead should be neglibie
 .RE
 .PP
 
 .PP
-Definition at line 191 of file socket_server\&.c\&.
+
+.PP
+Definition at line 263 of file socket_server\&.c\&.
 .SH "Variable Documentation"
 .PP 
 .SS "bool do_shutdown = false"
@@ -188,13 +250,13 @@ Definition at line 191 of file socket_server\&.c\&.
 .PP
 internal boolean variable used to signal async start_socket_server function calls 
 .PP
-Definition at line 32 of file socket_server\&.c\&.
+Definition at line 43 of file socket_server\&.c\&.
 .SS "pthread_mutex_t shutdown_mutex"
 
 .PP
 internal mutex lock used for signalling shutdown in async start_socket_server function calls 
 .PP
-Definition at line 27 of file socket_server\&.c\&.
+Definition at line 38 of file socket_server\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for libcp2p from the source code\&.

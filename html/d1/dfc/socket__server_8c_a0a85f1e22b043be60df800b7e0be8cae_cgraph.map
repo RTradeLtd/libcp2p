@@ -1,4 +1,4 @@
 <map id="accept_client_conn" name="accept_client_conn">
 <area shape="rect" id="node1" title="helper function for accepting client connections times out new attempts if they take 3 seconds or mor..." alt="" coords="5,5,152,32"/>
-<area shape="rect" id="node2" href="$d5/df8/socket_8c.html#ad5537d856f4e63f072c66107c15e4b8a" title="returns the address the client is connecting from" alt="" coords="200,5,319,32"/>
+<area shape="rect" id="node2" href="$d5/df8/socket_8c.html#aa3f161176f86bd430439429fbd7aec09" title="returns the address the client is connecting from" alt="" coords="200,5,319,32"/>
 </map>

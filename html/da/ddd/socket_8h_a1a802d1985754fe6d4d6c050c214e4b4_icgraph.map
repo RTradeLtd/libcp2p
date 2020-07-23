@@ -1,7 +1,7 @@
 <map id="get_new_socket" name="get_new_socket">
 <area shape="rect" id="node1" title="gets an available socket attached to bind_address" alt="" coords="529,31,656,57"/>
-<area shape="rect" id="node2" href="$d0/d3b/socket__client_8h.html#a582e3e13553e23b0321aad1d691c7204" title="returns a new socket client connected to addr:port" alt="" coords="337,5,479,32"/>
-<area shape="rect" id="node5" href="$d9/d26/socket__server_8h.html#abdfa0f6886955caae3b71928592e0301" title="returns a new socket server bound to the port number and ready to accept connections" alt="" coords="335,56,481,83"/>
+<area shape="rect" id="node2" href="$d0/d3b/socket__client_8h.html#acddf96d2dea8f47ea2d0555c8500630d" title="returns a new socket client connected to addr:port" alt="" coords="337,5,479,32"/>
+<area shape="rect" id="node5" href="$d9/d26/socket__server_8h.html#abdfa0f6886955caae3b71928592e0301" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="335,56,481,83"/>
 <area shape="rect" id="node3" href="$d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="108,31,287,57"/>
 <area shape="rect" id="node4" href="$d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,31,60,57"/>
 </map>
