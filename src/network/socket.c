@@ -1,3 +1,15 @@
+// Copyright 2020 RTrade Technologies Ltd
+//
+// licensed under GNU AFFERO GENERAL PUBLIC LICENSE;
+// you may not use this file except in compliance with the License;
+// You may obtain the license via the LICENSE file in the repository root;
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 /*! @file socket.c
  * @brief general socket related tooling
  */
@@ -111,26 +123,24 @@ bool set_socket_blocking_status(int fd, bool blocking) {
 }
 
 /*! @brief returns the address the client is connecting from
+ * @note this only works with tcp
+ * @todo enable udp
  */
-char *get_name_info(addr_info *client_address) {
-    char address_buffer[256]; // destroy when function returns
-    char service_buffer[256];
-
-    getnameinfo(
-        client_address->ai_addr, client_address->ai_addrlen,
-        address_buffer,                 // output buffer
-        sizeof(address_buffer),         // size of the output buffer
-        service_buffer,                 // second buffer which outputs service name
-        sizeof(service_buffer),         // length of the second buffer
-        NI_NUMERICHOST | NI_NUMERICSERV // want to see hostnmae as an ip address
+char *get_name_info(sock_addr *client_address) {
+    char address_info[256]; // destroy when function returns
+    getnameinfo(client_address, sizeof(*client_address),
+                address_info,         // output buffer
+                sizeof(address_info), // size of the output buffer
+                0,                    // second buffer which outputs service name
+                0,                    // length of the second buffer
+                NI_NUMERICHOST        // want to see hostnmae as an ip address
     );
-    char *info =
-        calloc(sizeof(char), sizeof(address_buffer) + sizeof(service_buffer) + 2);
-    if (info == NULL) {
+    char *addr = calloc(sizeof(address_info), sizeof(address_info));
+    if (addr == NULL) {
         return NULL;
     }
-    sprintf(info, "addr: %s\tservice: %s\n", address_buffer, service_buffer);
-    return info;
+    strcpy(addr, address_info);
+    return addr;
 }
 
 /*! @brief generates an addr_info struct with defaults

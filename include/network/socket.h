@@ -1,3 +1,15 @@
+// Copyright 2020 RTrade Technologies Ltd
+//
+// licensed under GNU AFFERO GENERAL PUBLIC LICENSE;
+// you may not use this file except in compliance with the License;
+// You may obtain the license via the LICENSE file in the repository root;
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 /*! @file socket.h
  * @brief general socket related tooling
  */
@@ -66,9 +78,11 @@ int get_new_socket(thread_logger *thl, addr_info *bind_address,
  */
 bool set_socket_blocking_status(int fd, bool blocking);
 
-/*! @brief returns the address the client is connecting from
+/*!
+ * @note this only works with tcp
+ * @todo enable udp
  */
-char *get_name_info(addr_info *client_address);
+char *get_name_info(sock_addr *client_address);
 
 /*! @brief generates an addr_info struct with defaults
  * defaults is IPv4, TCP, and AI_PASSIVE flags

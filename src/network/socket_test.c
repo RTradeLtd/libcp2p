@@ -1,5 +1,18 @@
+// Copyright 2020 RTrade Technologies Ltd
+//
+// licensed under GNU AFFERO GENERAL PUBLIC LICENSE;
+// you may not use this file except in compliance with the License;
+// You may obtain the license via the LICENSE file in the repository root;
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 #include "utils/logger.h"
 #include "network/socket_server.h"
+#include "multiaddr/multiaddr.h"
 #include <arpa/inet.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -43,10 +56,8 @@ void example_task_func_udp(void *data) {
         &client_address,
         &len
     );
-    if (bytes_received == -1) {
-        free(hdata->conn);
-        free(hdata);
-        return;
+    if (bytes_received == -1 || bytes_received == 0) {
+        goto EXIT;
     }
     hdata->srv->thl->logf(
         hdata->srv->thl,
@@ -55,6 +66,7 @@ void example_task_func_udp(void *data) {
         "received message from client %s",
         buffer
     );
+EXIT:
    free(hdata->conn);
    free(hdata);
 }
@@ -97,35 +109,38 @@ void start_socker_server_wrapper(void *data) {
 */
 void test_new_socket_server(void **state) {
     thread_logger *thl = new_thread_logger(false);
-    socket_server_config_t config = {.listen_address = "127.0.0.1", .max_connections = 100, .tcp_port_number = "9090", .udp_port_number = "9091", .num_threads = 6, .fn_tcp = example_task_func_tcp, .fn_udp = example_task_func_udp };
-    socket_server_t *server = new_socket_server(thl, config);
-    assert(server != NULL);
+    socket_server_config_t *config = new_socket_server_config(2);
+    config->max_connections = 100;
+    config->num_threads = 6;
+    config->fn_tcp = example_task_func_tcp;
+    config->fn_udp = example_task_func_udp;
 
+    multi_addr_t *tcp_addr = multiaddress_new_from_string("/ip4/127.0.0.1/tcp/9090");
+    multi_addr_t *udp_addr = multiaddress_new_from_string("/ip4/127.0.0.1/udp/9091");
+    multi_addr_t *endpoint = multiaddress_new_from_string("/ip4/127.0.0.1/udp/9091");
+    config->addrs[0] = tcp_addr;
+    config->addrs[1] = udp_addr;
+    config->num_addrs = 2;
+
+    //   .num_threads = 6, .fn_tcp = example_task_func_tcp, .fn_udp = example_task_func_udp };
+    socket_server_t *server = new_socket_server(thl, *config);
+    assert(server != NULL);
+    free_socket_server_config(config);
     thpool_add_work(server->thpool, start_socker_server_wrapper, server);
 
-    addr_info hint;
-    memset(&hint, 0, sizeof(hint));
-    hint.ai_socktype = SOCK_DGRAM;
-
-    socket_client_t *client = new_socket_client(thl, hint, "127.0.0.1", "9091");
+    socket_client_t *client = new_socket_client(thl, endpoint);
     assert(client != NULL);
 
-    addr_info *peer_address;
-    int rc = getaddrinfo("127.0.0.1", "9091", &hint, &peer_address);
-    assert(rc == 0);
-
-    char *addr = get_name_info(peer_address);
-    printf("client addr: %s\n", addr);
-    free(addr);
-
-    socket_client_sendto(client, peer_address, "hello world\n");
+    socket_client_sendto(client, client->peer_address, "hello world\n");
     sleep(2);
+    freeaddrinfo(client->peer_address);
     close(client->socket_number);
     free(client);
-    freeaddrinfo(peer_address);
     signal_shutdown();
     sleep(5);
     free_socket_server(server);
+    multiaddress_free(endpoint);
+    // free(config.addrs);
 }
 
 int main(void) {

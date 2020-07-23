@@ -30,6 +30,15 @@ A libp2p-like protocol written in C with first class support for embedded system
 * multibase
   * supports base16, base32, base64
   
+## networking
+
+* TCP/UDP socket server capable of leverage multiple threads
+* Uses the multiaddress standard as the method of addressing other hosts
+* Allows specifying two separate execution handlers whenever a new TCP/UDP connection is received
+* todo:
+  * enable secure connections
+  * enable using peerIds
+
 ## misc
 
 * cid

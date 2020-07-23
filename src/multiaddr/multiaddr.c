@@ -119,7 +119,7 @@ int multiaddress_get_ip_family(const struct MultiAddress *in) {
  * @param ip where to put the ip address
  * @returns true(1) on success, otherwise 0
  */
-int multiaddress_get_ip_address(const struct MultiAddress *in, char **ip) {
+int multiaddress_get_ip_address(const struct MultiAddress *in, char *ip) {
     // the incoming address is not what was expected
     if (strncmp(in->string, "/ip4/", 5) != 0 &&
         strncmp(in->string, "/ip6/", 5) != 0) {
@@ -129,18 +129,14 @@ int multiaddress_get_ip_address(const struct MultiAddress *in, char **ip) {
         return 0;
     }
     // ip
-    char *str = malloc(strlen(in->string));
+    char *str = malloc(strlen(in->string) + 1);
     if (str == NULL) {
         return 0;
     }
-    strcpy(str, &in->string[5]); // gets rid of /ip4/
+    strcpy(str, in->string + 5); // gets rid of /ip4/
     char *pos = strchr(str, '/');
     pos[0] = 0;
-    *ip = malloc(strlen(str) + 1);
-    if (*ip == NULL) {
-        return 0;
-    }
-    strcpy(*ip, str);
+    strcpy(ip, str);
     free(str);
     return 1;
 }
