@@ -30,8 +30,8 @@ void test_hex_to_var(void **state) {
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 void test_new_from_string(void **state) {
-    struct MultiAddress *a =
-        multiaddress_new_from_string("/ip4/127.0.0.1/tcp/8080/");
+    struct multi_address *a =
+        multi_address_new_from_string("/ip4/127.0.0.1/tcp/8080/");
     assert(a != NULL);
     /* printf("Number of Bytes: %lu, Bytes: ", a->bsize);
     for (int i = 0; i < (int)a->bsize; i++) {
@@ -39,7 +39,7 @@ void test_new_from_string(void **state) {
     }
     printf(" End of bytes\n");
     */
-    multiaddress_free(a);
+    multi_address_free(a);
 }
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
@@ -49,34 +49,34 @@ void test_new_like_libp2p(void **state) {
     int port = 4001;
     char str[strlen(ip) + 50];
     sprintf(str, "/ip4/%s/tcp/%d/", ip, port);
-    struct MultiAddress *ma_string = multiaddress_new_from_string(str);
+    struct multi_address *ma_string = multi_address_new_from_string(str);
     // convert to binary
-    struct MultiAddress *ma_binary =
-        multiaddress_new_from_bytes(ma_string->bytes, ma_string->bsize);
+    struct multi_address *ma_binary =
+        multi_address_new_from_bytes(ma_string->bytes, ma_string->bsize);
     assert(
         strcmp(ma_string->string, ma_binary->string) == 0
     );
-    multiaddress_free(ma_string);
-    multiaddress_free(ma_binary);
+    multi_address_free(ma_string);
+    multi_address_free(ma_binary);
 }
 
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 void test_multiaddr_utils(void **state) {
     int retVal = 0;
-    struct MultiAddress *addr =
-        multiaddress_new_from_string("/ip4/127.0.0.1/tcp/4001/");
-    assert(multiaddress_is_ip(addr));
+    struct multi_address *addr =
+        multi_address_new_from_string("/ip4/127.0.0.1/tcp/4001/");
+    assert(multi_address_is_ip(addr));
     char ip[1024];
-    multiaddress_get_ip_address(addr, ip);
+    multi_address_get_ip_address(addr, ip);
     assert(ip != NULL);
     assert(
         strcmp(ip, "127.0.0.1") == 0
     );
-    int port = multiaddress_get_ip_port(addr);
+    int port = multi_address_get_ip_port(addr);
     assert(port == 4001);
     
-    multiaddress_free(addr);
+    multi_address_free(addr);
 }
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
@@ -85,17 +85,17 @@ void test_multiaddr_get_peer_id(void **state) {
     char full_string[255] = "";
     char *result = NULL;
     int retVal = 0;
-    struct MultiAddress *addr = NULL;
+    struct multi_address *addr = NULL;
 
     sprintf(full_string, "/ip4/127.0.0.1/tcp/4001/ipfs/%s/", orig_address);
 
-    addr = multiaddress_new_from_string(full_string);
+    addr = multi_address_new_from_string(full_string);
     assert(addr != NULL);
-    result = multiaddress_get_peer_id(addr);
+    result = multi_address_get_peer_id(addr);
     assert(result != NULL);
     int rc = strcmp(orig_address, result);
     assert(rc == 0);
-    multiaddress_free(addr);
+    multi_address_free(addr);
     free(result);
 }
 
@@ -106,11 +106,11 @@ void test_multiaddr_peer_id(void **state) {
     char *result = NULL;
     char *bytes = NULL;
     int retVal = 0, port = 0;
-    struct MultiAddress *addr = NULL, *addr2 = NULL;
+    struct multi_address *addr = NULL, *addr2 = NULL;
     sprintf(full_string, "/ip4/127.0.0.1/tcp/4001/ipfs/%s/", orig_address);
 
-    addr = multiaddress_new_from_string(full_string);
-    result = multiaddress_get_peer_id(addr);
+    addr = multi_address_new_from_string(full_string);
+    result = multi_address_get_peer_id(addr);
     assert__(result) {
         printf("result is not NULL\n"); 
     };
@@ -126,12 +126,12 @@ void test_multiaddr_peer_id(void **state) {
     // fprintf(stderr, "Original Bytes: %s\n", result);
     free(result);
 
-    // make a new MultiAddress from bytes
+    // make a new multi_address from bytes
     bytes = malloc(addr->bsize);
     memcpy(bytes, addr->bytes, addr->bsize);
-    // TODO(bonedaddy): this is bugged and doesnt return the correct multiaddress
+    // TODO(bonedaddy): this is bugged and doesnt return the correct multi_address
     // interestingly enough the new bytes matches the old bytes???
-    addr2 = multiaddress_new_from_bytes(bytes, addr->bsize);
+    addr2 = multi_address_new_from_bytes(bytes, addr->bsize);
     assert(addr2 != NULL);
     free(bytes);
     
@@ -144,36 +144,36 @@ void test_multiaddr_peer_id(void **state) {
         printf("Original string was %s but new string is %s\n", full_string, addr2->string);
     }
 
-    port = multiaddress_get_ip_port(addr2);
+    port = multi_address_get_ip_port(addr2);
     assert__(port == 4001) {
         printf("Original port was 4001 but new port is %i\n", port);
     }
 
-    result = multiaddress_get_peer_id(addr2);
+    result = multi_address_get_peer_id(addr2);
     assert__(strcmp(result, orig_address) == 0) {
         printf("New peer id %s does not match %s\n", result, orig_address);
     }
     free(result);
-    multiaddress_free(addr2);
-    multiaddress_free(addr);
+    multi_address_free(addr2);
+    multi_address_free(addr);
 }
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 void test_multiaddr_bytes(void **state) {
     int retVal = 0;
     char *orig_address = "/ip4/127.0.0.1/tcp/4001/";
-    struct MultiAddress *orig = NULL, *result = NULL;
+    struct multi_address *orig = NULL, *result = NULL;
 
-    orig = multiaddress_new_from_string(orig_address);
+    orig = multi_address_new_from_string(orig_address);
 
-    result = multiaddress_new_from_bytes(orig->bytes, orig->bsize);
+    result = multi_address_new_from_bytes(orig->bytes, orig->bsize);
 
     assert(result != NULL);
     assert(
         strcmp(orig_address, result->string) == 0
     );
-    multiaddress_free(orig);
-    multiaddress_free(result);
+    multi_address_free(orig);
+    multi_address_free(result);
 }
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
@@ -181,8 +181,8 @@ void test_full(void **state) {
     char addrstr[100];
     strcpy(addrstr, "/ip4/192.168.1.1/");
     // printf("INITIAL: %s\n", addrstr);
-    struct MultiAddress *a;
-    a = multiaddress_new_from_string(addrstr);
+    struct multi_address *a;
+    a = multi_address_new_from_string(addrstr);
     unsigned char *tmp = Var_To_Hex((char *)a->bytes, a->bsize);
     //  printf("TEST BYTES: %s\n", tmp);
     free(tmp);
@@ -190,19 +190,19 @@ void test_full(void **state) {
     // Remember, Decapsulation happens from right to left, never in reverse!
 
     //  printf("A STRING:%s\n", a->string);
-    multiaddress_encapsulate(a, "/udp/3333/");
+    multi_address_encapsulate(a, "/udp/3333/");
     //  printf("A STRING ENCAPSULATED:%s\n", a->string);
     tmp = Var_To_Hex((char *)a->bytes, a->bsize);
     //  printf("TEST BYTES: %s\n", tmp);
     free(tmp);
-    multiaddress_decapsulate(a, "udp");
+    multi_address_decapsulate(a, "udp");
     //  printf("A STRING DECAPSULATED UDP:%s\n", a->string);
     tmp = Var_To_Hex((char *)a->bytes, a->bsize);
     //  printf("TEST BYTES: %s\n", tmp);
     free(tmp);
-    multiaddress_encapsulate(a, "/udp/3333/");
+    multi_address_encapsulate(a, "/udp/3333/");
     //  printf("A STRING ENCAPSULATED UDP: %s\n", a->string);
-    multiaddress_encapsulate(
+    multi_address_encapsulate(
         a, "/ipfs/CIQKAFXKNLNOTSYX4XXER2AXMVZHINJF7AGJPYNCV2D4F7GPEJEW3TA=");
     //  printf("A STRING ENCAPSULATED IPFS:%s\n", a->string);
     tmp = Var_To_Hex((char *)a->bytes, a->bsize);
@@ -210,12 +210,12 @@ void test_full(void **state) {
     free(tmp);
     //  printf("TEST BYTE SIZE: %lu\n", a->bsize);
 
-    struct MultiAddress *beta;
-    beta = multiaddress_new_from_bytes(a->bytes, a->bsize);
+    struct multi_address *beta;
+    beta = multi_address_new_from_bytes(a->bytes, a->bsize);
     // printf("B STRING: %s\n", beta->string);
 
-    multiaddress_free(a);
-    multiaddress_free(beta);
+    multi_address_free(a);
+    multi_address_free(beta);
 }
 
 

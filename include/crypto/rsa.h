@@ -1,5 +1,9 @@
-#ifndef rsa_h
-#define rsa_h
+/*! @file rsa.h
+ * @brief provides RSA cryptography support
+ */
+
+
+#pragma once
 
 #include <stddef.h>
 
@@ -28,21 +32,21 @@ struct RsaPrivateKey {
 };
 
 /**
- * Convert a struct RsaPrivateKey to a struct PrivateKey
+ * @brief Convert a struct RsaPrivateKey to a struct PrivateKey
  * @param in the RsaPrivateKey
  * @returns a struct PrivateKey
  */
 struct PrivateKey *libp2p_crypto_rsa_to_private_key(struct RsaPrivateKey *in);
 
 /***
- * Convert a PrivateKey struct to an RsaPrivateKey struct
+ * @brief Convert a PrivateKey struct to an RsaPrivateKey struct
  * @param in the PrivateKey (NOTE: Must be of type KEYTYPE_RSA
  * @returns the RsaPrivateKey or NULL on error
  */
 struct RsaPrivateKey *libp2p_crypto_private_key_to_rsa(struct PrivateKey *in);
 
 /**
- * generate a new private key
+ * @brief generate a new private key
  * @param private_key the new private key
  * @param num_bits_for_keypair the size of the key (1024 minimum)
  * @returns true(1) on success
@@ -58,14 +62,14 @@ int libp2p_crypto_rsa_generate_keypair(struct RsaPrivateKey *private_key,
 int libp2p_crypto_rsa_private_key_fill_public_key(struct RsaPrivateKey *private_key);
 
 /***
- * Free resources used by RsaPrivateKey
+ * @brief Free resources used by RsaPrivateKey
  * @param private_key the resources
  * @returns 0
  */
 int libp2p_crypto_rsa_rsa_private_key_free(struct RsaPrivateKey *private_key);
 struct RsaPrivateKey *libp2p_crypto_rsa_rsa_private_key_new(void);
 /**
- * sign a message
+ * @brief sign a message
  * @param private_key the private key
  * @param message the message to be signed
  * @param message_length the length of message
@@ -80,5 +84,3 @@ int libp2p_crypto_rsa_sign(struct RsaPrivateKey *private_key, const char *messag
 int libp2p_crypto_rsa_verify(struct RsaPublicKey *public_key,
                              const unsigned char *message, size_t message_length,
                              const unsigned char *signature);
-
-#endif /* rsa_h */

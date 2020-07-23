@@ -1,5 +1,8 @@
-#ifndef ERROR_H
-#define ERROR_H
+/*! @file errors.h
+  * @brief helpers for working with multihash errors
+*/
+
+#pragma once
 
 #define MH_E_NO_ERROR 0
 #define MH_E_UNKNOWN_CODE -1
@@ -11,5 +14,3 @@
 #define MH_E_LAST -5
 
 const char *mh_error_string(int code);
-
-#endif /* end of include guard */

@@ -43,7 +43,7 @@ typedef struct multicodec_encoded {
 void multicodec_free_encoded(multicodec_encoded_t *encoded);
 
 /**
- * Encode a char array using the specified encoding
+ * @brief Encode a char array using the specified encoding
  * @param codecName a standard name of the codec
  * @param inData the incoming data to be encoded
  * @param inDataLength the length of the inData
@@ -58,9 +58,8 @@ multicodec_encoded_t *multicodec_encode(char *codec, char *inData,
                                         size_t maxOutDataLength);
 
 /**
- * Decode a multicodec encoded data array
- * @param encoded an instance of multicodec_encoded_t holding the encoded data and
- * codec used
+ * @brief Decode a multicodec encoded data array
+ * @param encoded an instance of multicodec_encoded_t holding the encoded data and codec used
  * @param outData the array to put the results in
  * @param maxOutDataLength the maximum size of the data
  * @returns an error code or 0 if all is well

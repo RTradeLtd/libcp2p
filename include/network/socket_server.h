@@ -40,7 +40,7 @@ typedef void(threadpool_task_func)(void *data);
  * @struct socket_server_config
  * @typedef socket_server_config_t
  * @brief used for configuring a socket_server_t instance
- * @todo switch to multiaddresses
+ * @todo switch to multi_addresses
  */
 typedef struct socket_server_config {
     /*! @brief the thread pool task function to use for processing tcp connections */

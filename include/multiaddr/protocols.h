@@ -1,5 +1,6 @@
-// #ifndef PROTOCOLS
-// #define PROTOCOLS
+/*! @file protocols.h
+  * @brief functions for managing multiaddr protocols
+*/
 
 #pragma once
 
@@ -30,7 +31,7 @@ int protocol_REMOVE_id(struct ProtocolListItem *head,
 void unload_protocols(struct ProtocolListItem *head);
 
 /**
- * load the available protocols into the global protocol_P
+ * @brief  load the available protocols into the global protocol_P
  * @returns True(1) on success, otherwise 0
  */
 int load_protocols(struct ProtocolListItem **head);
@@ -45,5 +46,3 @@ proto_with_deccode(const struct ProtocolListItem *head,
 
 void protocols_with_string(const struct ProtocolListItem *head, char *meee,
                            int sizi); // NOT FINISHED, DO NOT USE!
-
-// #endif

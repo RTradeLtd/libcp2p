@@ -1,5 +1,8 @@
-#ifndef PEERDEP
-#define PEERDEP
+/*! @file peerutils.h
+  * @brief provides utilities for managing peer identifiers
+*/
+
+#pragma once
 
 #include "crypto/sha256.h"
 #include "multihash/hashes.h"
@@ -203,5 +206,3 @@ void ID_FromPK_non_null_terminated(char *result, unsigned char *texttohash,
  * @param texttohash a null terminated string of the text to hash
  */
 void ID_FromPK(char *result, unsigned char *texttohash);
-
-#endif

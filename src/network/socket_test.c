@@ -115,9 +115,9 @@ void test_new_socket_server(void **state) {
     config->fn_tcp = example_task_func_tcp;
     config->fn_udp = example_task_func_udp;
 
-    multi_addr_t *tcp_addr = multiaddress_new_from_string("/ip4/127.0.0.1/tcp/9090");
-    multi_addr_t *udp_addr = multiaddress_new_from_string("/ip4/127.0.0.1/udp/9091");
-    multi_addr_t *endpoint = multiaddress_new_from_string("/ip4/127.0.0.1/udp/9091");
+    multi_addr_t *tcp_addr = multi_address_new_from_string("/ip4/127.0.0.1/tcp/9090");
+    multi_addr_t *udp_addr = multi_address_new_from_string("/ip4/127.0.0.1/udp/9091");
+    multi_addr_t *endpoint = multi_address_new_from_string("/ip4/127.0.0.1/udp/9091");
     config->addrs[0] = tcp_addr;
     config->addrs[1] = udp_addr;
     config->num_addrs = 2;
@@ -139,7 +139,7 @@ void test_new_socket_server(void **state) {
     signal_shutdown();
     sleep(5);
     free_socket_server(server);
-    multiaddress_free(endpoint);
+    multi_address_free(endpoint);
     // free(config.addrs);
 }
 
