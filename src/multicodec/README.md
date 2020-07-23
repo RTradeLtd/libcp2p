@@ -1,4 +1,4 @@
-# regeneration	
+# multicodec list regeneration	
 
 run the following to regenerate the codecs.c file
 
