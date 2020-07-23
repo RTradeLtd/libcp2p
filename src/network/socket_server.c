@@ -69,10 +69,9 @@ socket_server_t *new_socket_server(thread_logger *thl,
     FD_ZERO(&udp_socket_set);
     FD_ZERO(&grouped_socket_set);
 
-    // allocate memory for ip and port
-    char *ip = malloc(sizeof(char) * 1024);
-    // 7 because the maximum number size is 6 digits, and 1 for the null terminator
-    char *cport = malloc(sizeof(char) * 7);
+    char ip[1024];
+    char cport[7];
+
     for (int i = 0; i < config.num_addrs; i++) {
 
         // zero ip and cport, overwriting previous data
@@ -195,10 +194,6 @@ socket_server_t *new_socket_server(thread_logger *thl,
         }
     }
 
-    // free the memory allocated here as it is no longer needed
-    free(ip);
-    free(cport);
-
     socket_server_t *server =
         calloc(sizeof(socket_server_t), sizeof(socket_server_t));
     if (server == NULL) {
@@ -224,9 +219,6 @@ socket_server_t *new_socket_server(thread_logger *thl,
     return server;
 
 EXIT:
-
-    free(cport);
-    free(ip);
 
     for (int i = 0; i < 65536; i++) {
         if (FD_ISSET(i, &tcp_socket_set)) {
