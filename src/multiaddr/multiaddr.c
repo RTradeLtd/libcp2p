@@ -72,7 +72,6 @@ struct multi_address *multi_address_new_from_string(
 {
     struct multi_address *out = multi_address_new();
     if (out != NULL) {
-        out->string = malloc(strlen(straddress) + 1);
         if (out->string == NULL) {
             multi_address_free(out);
             return NULL;
