@@ -1,6 +1,6 @@
 /*! @file errors.h
-  * @brief helpers for working with multihash errors
-*/
+ * @brief helpers for working with multihash errors
+ */
 
 #pragma once
 

@@ -4,7 +4,7 @@
 
 cmake_minimum_required(VERSION 3.0)
 project(libcp2p LANGUAGES C)
-    set(CMAKE_C_COMPILER /usr/bin/gcc-10)
+set(CMAKE_C_COMPILER /usr/bin/gcc)
 
 
 # handle debug build type

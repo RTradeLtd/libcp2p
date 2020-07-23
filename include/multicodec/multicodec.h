@@ -59,7 +59,8 @@ multicodec_encoded_t *multicodec_encode(char *codec, char *inData,
 
 /**
  * @brief Decode a multicodec encoded data array
- * @param encoded an instance of multicodec_encoded_t holding the encoded data and codec used
+ * @param encoded an instance of multicodec_encoded_t holding the encoded data and
+ * codec used
  * @param outData the array to put the results in
  * @param maxOutDataLength the maximum size of the data
  * @returns an error code or 0 if all is well

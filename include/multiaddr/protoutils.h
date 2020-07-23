@@ -1,6 +1,6 @@
 /*! @file protoutils.h
-  * @brief utility functions for working with multiaddrs and protocols
-*/
+ * @brief utility functions for working with multiaddrs and protocols
+ */
 #include <stddef.h>
 #include <stdint.h>
 
@@ -60,8 +60,7 @@ int bytes_to_string(char *results, const uint8_t *bytes, int bytes_size);
  * @returns Failure: 1
  */
 int address_string_to_bytes(struct Protocol *protocol, const char *incoming,
-                              size_t incoming_size, char *results,
-                              int *results_size);
+                            size_t incoming_size, char *results, int *results_size);
 
 int string_to_bytes(uint8_t **finalbytes, size_t *realbbsize, const char *strx,
                     size_t strsize);

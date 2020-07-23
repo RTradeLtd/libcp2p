@@ -1,6 +1,6 @@
 /*! @file aes.h
-  * @brief proivides aes encryption/decryption functions
-*/
+ * @brief proivides aes encryption/decryption functions
+ */
 
 #pragma once
 

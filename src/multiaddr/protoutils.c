@@ -379,8 +379,7 @@ NAX:
  * @returns the results array
  */
 int address_string_to_bytes(struct Protocol *protocol, const char *incoming,
-                              size_t incoming_size, char *results,
-                              int *results_size) {
+                            size_t incoming_size, char *results, int *results_size) {
     static char astb__stringy[800] = "\0";
     memset(astb__stringy, 0, 800);
 
@@ -533,7 +532,7 @@ int address_string_to_bytes(struct Protocol *protocol, const char *incoming,
             strcpy(prefixed, Num_To_HexVar_32(ilen));
             *results_size = ilen + 3;
             memset(results, 0, *results_size);
-            strcat(results, prefixed); // 2 bytes
+            strcat(results, prefixed);     // 2 bytes
             strcat(results, addr_encoded); // ilen bytes + null terminator
             return 0;
         }
@@ -622,7 +621,8 @@ int string_to_bytes(uint8_t **finalbytes, size_t *realbbsize, const char *strx,
         } else // This is the address
         {
             memset(s_to_b, 0, 800);
-            int rc = address_string_to_bytes(protx, wp, strlen(wp), s_to_b, &s_to_b_size);
+            int rc =
+                address_string_to_bytes(protx, wp, strlen(wp), s_to_b, &s_to_b_size);
             if (rc == 1) {
                 malf = 1;
             } else {

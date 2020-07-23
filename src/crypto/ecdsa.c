@@ -91,7 +91,7 @@ unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
     if (peer_id == NULL) {
         free(public_key);
         free(public_key_hash);
-        return NULL;        
+        return NULL;
     }
     strcpy((char *)peer_id, (char *)temp_peer_id);
 

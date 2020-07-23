@@ -12,8 +12,8 @@
 // limitations under the License.
 
 /*! @file sha1.h
-  * @brief provides sha1 hashing support
-*/
+ * @brief provides sha1 hashing support
+ */
 
 #pragma once
 

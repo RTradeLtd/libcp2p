@@ -1,6 +1,6 @@
 /*! @file protocols.h
-  * @brief functions for managing multiaddr protocols
-*/
+ * @brief functions for managing multiaddr protocols
+ */
 
 #pragma once
 

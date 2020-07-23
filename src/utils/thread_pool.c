@@ -1,6 +1,3 @@
-#pragma GCC diagnostic ignored "-Wanalyzer-double-free"
-#pragma GCC diagnostic ignored "-Wanalyzer-malloc-leak"
-#pragma GCC diagnostic ignored "-Wanalyzer-use-of-uninitialized-value"
 /*! ********************************
  * Author:       Johan Hanssen Seferidis
  * License:	     MIT

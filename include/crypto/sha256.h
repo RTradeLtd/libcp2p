@@ -1,6 +1,6 @@
 /*! @file sha256.h
-  * @brief provides sha256 hashing support
-*/
+ * @brief provides sha256 hashing support
+ */
 
 #pragma once
 

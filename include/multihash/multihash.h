@@ -1,6 +1,6 @@
 /*! @file multihash.h
-  * @brief functions for working with multihashes
-*/
+ * @brief functions for working with multihashes
+ */
 #pragma once
 
 #include <stddef.h>

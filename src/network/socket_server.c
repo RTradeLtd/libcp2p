@@ -425,7 +425,6 @@ void free_socket_server_config(socket_server_config_t *config) {
  * socket_server_config_t
  * @return Failure: NULL pointer
  */
-#pragma GCC diagnostic ignored "-Wanalyzer-malloc-leak"
 socket_server_config_t *new_socket_server_config(int num_addrs) {
     socket_server_config_t *config =
         calloc(sizeof(socket_server_config_t), sizeof(socket_server_config_t));
