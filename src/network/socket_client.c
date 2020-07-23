@@ -22,11 +22,47 @@
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 /*! @brief returns a new socket client connected to `addr:port`
+  * @param thl an instance of a thread logger
+  * @param addr the multiaddr to connect to
  */
-socket_client_t *new_socket_client(thread_logger *thl, addr_info hints, char *addr,
-                                   char *port) {
+socket_client_t *new_socket_client(thread_logger *thl, multi_addr_t *addr) {
+    char ip[1024];
+
+    int rc = multiaddress_get_ip_address(addr, ip);
+    if (rc != 1) {
+        return NULL;
+    }
+    int port = multiaddress_get_ip_port(addr);
+    if (port == -1) {
+        return NULL;
+    }
+    char cport[7];
+    sprintf(cport, "%i", port);
+    
+    addr_info hints;
+    memset(&hints, 0, sizeof(hints));
+    bool is_tcp = false;
+    bool is_udp = false;
+
+    if (strstr(addr->string, "/tcp/") != NULL) {
+        is_tcp = true;
+        hints.ai_family = AF_INET;
+        hints.ai_socktype = SOCK_STREAM;
+        hints.ai_flags = AI_PASSIVE;
+    }
+    if (strstr(addr->string, "/udp/") != NULL) {
+        is_udp = true;
+        hints.ai_family = AF_INET;
+        hints.ai_socktype = SOCK_DGRAM;
+        hints.ai_flags = AI_PASSIVE;
+    }
+
+    if (is_tcp == false && is_udp == false) {
+        return NULL;
+    }
+
     addr_info *peer_address;
-    int rc = getaddrinfo(addr, port, &hints, &peer_address);
+    rc = getaddrinfo(ip, cport, &hints, &peer_address);
     if (rc != 0) {
         freeaddrinfo(peer_address);
         return NULL;
@@ -39,14 +75,13 @@ socket_client_t *new_socket_client(thread_logger *thl, addr_info hints, char *ad
         return NULL;
     }
 
-    freeaddrinfo(peer_address);
-
-    socket_client_t *sock_client = calloc(sizeof(sock_client), sizeof(sock_client));
+    socket_client_t *sock_client = calloc(sizeof(sock_client), sizeof(sock_client) + sizeof(peer_address));
     if (sock_client == NULL) {
         thl->log(thl, 0, "failed to calloc socket_client_t", LOG_LEVELS_ERROR);
         return NULL;
     }
     sock_client->socket_number = client_socket_num;
+    sock_client->peer_address = peer_address;
 
     thl->log(thl, 0, "client successfully created", LOG_LEVELS_INFO);
 
