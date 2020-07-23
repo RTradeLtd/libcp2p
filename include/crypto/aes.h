@@ -1,14 +1,18 @@
+/*! @file aes.h
+  * @brief proivides aes encryption/decryption functions
+*/
+
 #pragma once
 
 /**
- * Generate a new AES key
+ * @brief Generate a new AES key
  * @param key where to store the 32 byte key
  * @returns true(1) on success
  */
 int libp2p_crypto_aes_key_generate(char *key);
 
 /**
- * Encrypt a block of text
+ * @brief Encrypt a block of text
  * @param key the aes key (32 bytes)
  * @param iv the random part of encryption (16 bytes)
  * @param input the text to encrypt
@@ -21,7 +25,7 @@ int libp2p_crypto_aes_encrypt(char *key, char *iv, char *input, size_t input_siz
                               unsigned char **output, size_t *output_size);
 
 /**
- * Decrypt a block of text
+ * @brief Decrypt a block of text
  * @param key the aes key (32 bytes)
  * @param iv the random part of encryption (16 bytes)
  * @param input the text to encrypt

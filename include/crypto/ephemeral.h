@@ -34,7 +34,7 @@ struct EphemeralPrivateKey {
 };
 
 /**
- * Generate a Ephemeral Public Key as well as a shared key
+ * @brief Generate a Ephemeral Public Key as well as a shared key
  * @param curve the curve to use (P-256, P-384, or P-521)
  * @param private_key where to store the private key
  * @reutrns true(1) on success, otherwise false(0)
@@ -43,7 +43,7 @@ int libp2p_crypto_ephemeral_keypair_generate(
     char *curve, struct EphemeralPrivateKey **private_key);
 
 /**
- * Generate a shared secret
+ * @brief Generate a shared secret
  * @param private_key the context, also where it puts the shared secret
  * @param remote_public_key the key the remote gave us
  * @param remote_public_key_size the size of the remote public key
@@ -54,13 +54,13 @@ int libp2p_crypto_ephemeral_generate_shared_secret(
     size_t remote_public_key_size);
 
 /***
- * Remove resources used by generation of ephemeral private key
+ * @brief Remove resources used by generation of ephemeral private key
  * @param in the key to destroy
  */
 void libp2p_crypto_ephemeral_key_free(struct EphemeralPrivateKey *in);
 
 /**
- * Routines to help with the StretchedKey struct
+ * @brief Routines to help with the StretchedKey struct
  */
 struct StretchedKey *libp2p_crypto_ephemeral_stretched_key_new(void);
 void libp2p_crypto_ephemeral_stretched_key_free(struct StretchedKey *in);

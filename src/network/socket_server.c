@@ -79,7 +79,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
         memset(cport, 0, 7);
 
         // get the ip address associated with the multiaddr
-        rc = multiaddress_get_ip_address(config.addrs[i], ip);
+        rc = multi_address_get_ip_address(config.addrs[i], ip);
         if (rc != 1) {
             thl->log(thl, 0, "failed to get ip address from multiaddr",
                      LOG_LEVELS_ERROR);
@@ -87,7 +87,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
         }
 
         // get the port for the address
-        int port = multiaddress_get_ip_port(config.addrs[i]);
+        int port = multi_address_get_ip_port(config.addrs[i]);
         if (port == -1) {
             thl->log(thl, 0, "failed to get ip port from multiaddr",
                      LOG_LEVELS_ERROR);
@@ -109,11 +109,11 @@ socket_server_t *new_socket_server(thread_logger *thl,
 
         // if the multiaddr has neither a tcp or udp protocol, exit
         if (is_tcp == false && is_udp == false) {
-            thl->log(thl, 0, "invalid multiaddress provided", LOG_LEVELS_ERROR);
+            thl->log(thl, 0, "invalid multi_address provided", LOG_LEVELS_ERROR);
             goto EXIT;
         }
 
-        // handle a tcp multiaddress
+        // handle a tcp multi_address
         if (is_tcp) {
 
             addr_info *tcp_bind_address = NULL;
@@ -157,7 +157,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
             free(tcp_bind_address);
         }
 
-        // handle a udp multiaddress
+        // handle a udp multi_address
         if (is_udp) {
 
             addr_info *udp_bind_address = NULL;
@@ -405,7 +405,7 @@ client_conn_t *accept_client_conn(socket_server_t *srv, int socket_num) {
  */
 void free_socket_server_config(socket_server_config_t *config) {
     for (int i = 0; i < config->num_addrs; i++) {
-        multiaddress_free(config->addrs[i]);
+        multi_address_free(config->addrs[i]);
     }
     free(config->addrs);
     free(config);

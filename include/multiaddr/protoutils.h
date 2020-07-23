@@ -39,7 +39,7 @@ uint64_t ip2int(const char *ipconvertint);
 char *int2ip(int inputintip);
 
 /**
- * Unserialize the bytes into a string
+ * @brief Unserialize the bytes into a string
  * @param results where to put the resultant string
  * @param bytes the bytes to unserialize
  * @param bytes_size the length of the bytes array
@@ -47,7 +47,7 @@ char *int2ip(int inputintip);
 int bytes_to_string(char **results, const uint8_t *bytes, int bytes_size);
 
 /**
- * Convert an address string to a byte representation
+ * @brief Convert an address string to a byte representation
  * @param protocol the protocol to use
  * @param incoming the byte array
  * @param incoming_size the size of the byte array

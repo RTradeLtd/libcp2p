@@ -29,10 +29,14 @@
         /ip6/<ipv6 str addr>/tcp/<tcp int port>
  */
 
-typedef struct MultiAddress {
-    // A MultiAddress represented as a string
+/*! @struct multi_address
+  * @typedef multi_addr_t
+  * @brief a structure composing a multiaddress
+*/
+typedef struct multi_address {
+    // A multi_address represented as a string
     char *string;
-    // A MultiAddress represented as an array of bytes
+    // A multi_address represented as an array of bytes
     //<varint proto><n byte addr><1 byte protocol code><4 byte ipv4 address
     // or 16
     // byte ipv6 address><1 byte tcp/udp code><2 byte port>
@@ -42,71 +46,71 @@ typedef struct MultiAddress {
 
 int strpos(char *haystack, char *needle);
 
-struct MultiAddress *
-multiaddress_new_from_bytes(const uint8_t *byteaddress,
+struct multi_address *
+multi_address_new_from_bytes(const uint8_t *byteaddress,
                             int size); // Construct new address from bytes
 
-struct MultiAddress *multiaddress_new_from_string(
+struct multi_address *multi_address_new_from_string(
     const char *straddress); // Construct new address from string
 
-void multiaddress_free(struct MultiAddress *in);
+void multi_address_free(struct multi_address *in);
 
-struct MultiAddress *multiaddress_copy(const struct MultiAddress *source);
+struct multi_address *multi_address_copy(const struct multi_address *source);
 
-// helpers to parse the MultiAddress struct
+// helpers to parse the multi_address struct
 
-int multiaddress_encapsulate(struct MultiAddress *result, char *string);
+int multi_address_encapsulate(struct multi_address *result, char *string);
 
-int multiaddress_decapsulate(struct MultiAddress *result, char *srci);
+int multi_address_decapsulate(struct multi_address *result, char *srci);
 
-int multiaddress_is_ip(const struct MultiAddress *in);
+int multi_address_is_ip(const struct multi_address *in);
 
-int multiaddress_is_ip4(const struct MultiAddress *in);
+int multi_address_is_ip4(const struct multi_address *in);
 
-int multiaddress_is_ip6(const struct MultiAddress *in);
+int multi_address_is_ip6(const struct multi_address *in);
 
-int multiaddress_get_ip_family(const struct MultiAddress *in);
+int multi_address_get_ip_family(const struct multi_address *in);
 
 /***
- * Pulls the textual representation of the IP address from a multihash
+ * @brief Pulls the textual representation of the IP address from a multihash
  * @param in the multihash to parse
  * @param ip where to put the ip address
  * @returns true(1) on success, otherwise 0
  */
-int multiaddress_get_ip_address(const struct MultiAddress *in, char *ip);
+int multi_address_get_ip_address(const struct multi_address *in, char *ip);
 
 /***
- * Pulls the IP port from a multiaddress
- * @param in the multiaddress
+ * @brief Pulls the IP port from a multi_address
+ * @param in the multi_address
  * @param port where to put the port
  * @returns the port, or a negative number for an error
  */
-int multiaddress_get_ip_port(const struct MultiAddress *in);
+int multi_address_get_ip_port(const struct multi_address *in);
 
 /**
- * Pulls the peer ID out of a multiaddress struct
- * @param in the MultiAddress
+ * @brief Pulls the peer ID out of a multi_address struct
+ * @param in the multi_address
  * @returns the peer id string, or NULL NOTE: This allocates memory that needs
  * to be freed
  */
-char *multiaddress_get_peer_id(const struct MultiAddress *in);
+char *multi_address_get_peer_id(const struct multi_address *in);
 
 /**
- * Check to see how these two addresses compare
+ * @brief Check to see how these two addresses compare
  * @param a side A
  * @param b side B
  * @returns <0 if B > A; >0 if A > B; 0 if A == B
  */
-int multiaddress_compare(const struct MultiAddress *a, const struct MultiAddress *b);
+int multi_address_compare(const struct multi_address *a, const struct multi_address *b);
 
 /**
- * Check to see how these two addresses compare, ignoring IP address, only
- * looking at ID hash
+ * @brief Check to see how these two addresses compare, ignoring IP address, only
+ * @brief looking at ID hash
  * @param a side A
  * @param b side B
  * @returns <0 if B > A; >0 if A > B; 0 if A == B
  */
-int multiaddress_compare_id(const struct MultiAddress *a,
-                            const struct MultiAddress *b);
+int multi_address_compare_id(const struct multi_address *a,
+                            const struct multi_address *b);
 
 #endif

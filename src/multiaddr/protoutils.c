@@ -358,7 +358,7 @@ NAX:
                                                              ptr_b32, &b32_size);
             free(addrbuf);
             if (returnstatus == 0) {
-                fprintf(stderr, "Unable to base32 encode MultiAddress %s\n",
+                fprintf(stderr, "Unable to base32 encode multi_address %s\n",
                         IPFS_ADDR);
                 unload_protocols(head);
                 return 0;

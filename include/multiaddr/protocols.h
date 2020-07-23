@@ -30,7 +30,7 @@ int protocol_REMOVE_id(struct ProtocolListItem *head,
 void unload_protocols(struct ProtocolListItem *head);
 
 /**
- * load the available protocols into the global protocol_P
+ * @brief  load the available protocols into the global protocol_P
  * @returns True(1) on success, otherwise 0
  */
 int load_protocols(struct ProtocolListItem **head);

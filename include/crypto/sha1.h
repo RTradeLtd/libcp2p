@@ -11,13 +11,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef _SHA1_H
-#define _SHA1_H
+/*! @file sha1.h
+  * @brief provides sha1 hashing support
+*/
+
+#pragma once
 
 #include "mbedtls/sha1.h"
 
 /***
- * hash a string using SHA1
+ * @brief hash a string using SHA1
  * @param input the input string
  * @param input_length the length of the input string
  * @param output where to place the results, should be 20 bytes
@@ -27,14 +30,14 @@ int libp2p_crypto_hashing_sha1(const unsigned char *input, size_t input_length,
                                unsigned char *output);
 
 /**
- * Initialize a sha1 hmac process
+ * @brief Initialize a sha1 hmac process
  * @param ctx the context
  * @returns true(1) on success, otherwise false(0)
  */
 int libp2p_crypto_hashing_sha1_init(mbedtls_sha1_context *ctx);
 
 /**
- * Update a sha1 hmac process
+ * @brief Update a sha1 hmac process
  * @param ctx the context
  * @param input the data to add
  * @param input_size the size of input
@@ -44,7 +47,7 @@ int libp2p_crypto_hashing_sha1_update(mbedtls_sha1_context *ctx,
                                       const unsigned char *input, size_t input_size);
 
 /**
- * finalize a sha1 hmac process
+ * @brief finalize a sha1 hmac process
  * @param ctx the context
  * @param hash where to put the results (for sha1, should be 20 bytes long)
  * @returns true(1) on success, otherwise false(0)
@@ -58,5 +61,3 @@ int libp2p_crypto_hashing_sha1_finish(mbedtls_sha1_context *ctx,
  * @returns true(1) on success, otherwise false(0)
  */
 int libp2p_crypto_hashing_sha1_free(mbedtls_sha1_context *ctx);
-
-#endif /* _SHA1_H */

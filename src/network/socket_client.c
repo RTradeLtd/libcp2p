@@ -40,11 +40,11 @@
 socket_client_t *new_socket_client(thread_logger *thl, multi_addr_t *addr) {
     char ip[1024];
 
-    int rc = multiaddress_get_ip_address(addr, ip);
+    int rc = multi_address_get_ip_address(addr, ip);
     if (rc != 1) {
         return NULL;
     }
-    int port = multiaddress_get_ip_port(addr);
+    int port = multi_address_get_ip_port(addr);
     if (port == -1) {
         return NULL;
     }

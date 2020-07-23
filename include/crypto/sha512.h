@@ -1,7 +1,11 @@
+/*! @file sha512.h
+  * @brief provides sha512 hashing support
+*/
+
 #pragma once
 
 /***
- * hash a string using SHA512
+ * @brief hash a string using SHA512
  * @param input the input string
  * @param input_length the length of the input string
  * @param output where to place the results, should be 64 bytes
