@@ -1,4 +1,4 @@
-.TH "todo" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.TH "todo" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -28,6 +28,8 @@ buffer logs and use a dedicated thread for writing (avoid blocking locks)
 .IP "\(bu" 2
 handling system signals (exit, kill, etc\&.\&.\&.)  
 .PP
+.IP "\fBGlobal \fBmulti_address_new\fP ()\fP" 1c
+figure out a better way of estimating size  
 .IP "\fBGlobal \fBnew_socket_server\fP (\fBthread_logger\fP *thl, socket_server_config_t config)\fP" 1c
 support non wildcard 
 .PP
@@ -44,6 +46,8 @@ switch to multi_addresses
 dont limit to two sockets (this will requiring using multiaddrs and an array of socket numbers)  
 .IP "\fBGlobal \fBstart_socket_server\fP (socket_server_t *srv)\fP" 1c
 enable customizable timeout  
+.IP "\fBGlobal \fBstring_to_bytes\fP (uint8_t **finalbytes, size_t *realbbsize, const char *strx, size_t strsize)\fP" 1c
+figure out a better size  
 .IP "\fBGlobal \fBvarint_encode\fP (const unsigned long long n, unsigned char *buf, int len, size_t *bytes)\fP" 1c
  0 determine why \fClen\fP isnt being used  
 .IP "\fBGlobal \fBvthconvert\fP (const unsigned char *in, int in_size, unsigned char **out)\fP" 1c

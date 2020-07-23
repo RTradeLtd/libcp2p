@@ -469,191 +469,21 @@ $(document).ready(function(){initNavTree('dc/d9a/varhexutils_8c_source.html','..
 <div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    }</div>
 <div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;    hexstring[j] = 0x00;</div>
 <div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;}</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160; </div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;<span class="comment">/*///Header - Usage Example:</span></div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;<span class="comment"> * unsigned char str[] = &quot;/lol/meow/&quot;;</span></div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="comment"> * unsigned char strhex[((strlen(str)-1)*2)+1];</span></div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;<span class="comment"> * str2hex(strhex,str);</span></div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="comment"> * unsigned char header_result[sizeof(strhex+2)]; // Extra 2 for size</span></div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;<span class="comment"> * bzero(header_result, sizeof(header_result));</span></div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;<span class="comment"> * header(header_result, strhex);</span></div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;<span class="comment"> * printf(&quot;header - Result: %s\n&quot;, header_result);</span></div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;<span class="comment"> * unsigned char header_path_result[strlen(header_result)-2];</span></div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00395"></a><span class="lineno"><a class="line" href="../../d1/d17/varhexutils_8h.html#a57369e005f30cc43e06d5f4c7a706f68">  395</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../dc/d9a/varhexutils_8c.html#a57369e005f30cc43e06d5f4c7a706f68">header</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *dest, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *src) {</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    <span class="keywordflow">if</span> (!src) {</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;    }</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    <span class="keywordtype">char</span> size[3];</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;    memset(size, 0, 3);</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    <span class="comment">// this likely contains a bug as we cant be sure `src` is null terminated</span></div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    strcpy(size, <a class="code" href="../../dc/d9a/varhexutils_8c.html#a4867d8e7469e092a578b10887669fdb1">Int_To_Hex</a>((strlen((<span class="keywordtype">char</span> *)src) / 2) - 1));</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    <span class="comment">// this likely contains a bug as we cant be sure `src` or `dest` is null</span></div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;    <span class="comment">// terminated</span></div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;    strcat((<span class="keywordtype">char</span> *)dest, size);</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;    strcat((<span class="keywordtype">char</span> *)dest, (<span class="keywordtype">char</span> *)src);</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;}</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160; </div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="comment"> *  //Header_Path - Usage Example</span></div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="comment"> *  header_path(header_path_result,header_result);</span></div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="comment"> *  printf(&quot;header_path - Result: %s\n&quot;,header_path_result);</span></div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00415"></a><span class="lineno"><a class="line" href="../../d1/d17/varhexutils_8h.html#a5332fe23288633c53c11320886c1ced0">  415</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../dc/d9a/varhexutils_8c.html#a5332fe23288633c53c11320886c1ced0">header_path</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *dest, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *src) {</div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;    <span class="keywordflow">if</span> (!src) {</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;    }</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;    <span class="comment">// this likely contains a bug as we cant be surce dest or src is null terminated</span></div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    sprintf((<span class="keywordtype">char</span> *)dest, <span class="stringliteral">&quot;%s&quot;</span>, src + 2);</div>
-<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;    <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;}</div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160; </div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="comment"> *  //Add Header - Usage Example:</span></div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="comment"> *  char continut[] = &quot;1234&quot;;</span></div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="comment"> *  char continuthex[((sizeof(continut)-1)*2)+1];</span></div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="comment"> *  bzero(continuthex, sizeof(continuthex));</span></div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="comment"> *  str2hex(continuthex, continut);</span></div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="comment"> *  char cap[] = &quot;/lol/&quot;;</span></div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="comment"> *  char caphex[((sizeof(cap)-1)*2)+1];</span></div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="comment"> *  bzero(caphex,sizeof(caphex));</span></div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="comment"> *  str2hex(caphex,cap);</span></div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="comment"> *  //printf(&quot;caphex = %s\n&quot;, caphex);</span></div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="comment"> *  //printf(&quot;conhex = %s\n&quot;, continuthex);</span></div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="comment"> *  char add_hdr_dest[sizeof(continuthex)-1+sizeof(caphex)-1+3];</span></div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="comment"> *  bzero(add_hdr_dest, sizeof(add_hdr_dest));</span></div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="comment"> *  add_header(add_hdr_dest, caphex,sizeof(caphex), continuthex,</span></div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="comment"> * sizeof(continuthex)); printf(&quot;add_header - Result: %s\n&quot;,add_hdr_dest);</span></div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00441"></a><span class="lineno"><a class="line" href="../../d1/d17/varhexutils_8h.html#a6801d8b4c1ed8ec917b973ee2b5a872a">  441</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../dc/d9a/varhexutils_8c.html#a6801d8b4c1ed8ec917b973ee2b5a872a">add_header</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *dest, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *<a class="code" href="../../dc/d9a/varhexutils_8c.html#a57369e005f30cc43e06d5f4c7a706f68">header</a>, <span class="keywordtype">size_t</span> headersize,</div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;               <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *content, <span class="keywordtype">size_t</span> contentsize) {</div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="../../dc/d9a/varhexutils_8c.html#a57369e005f30cc43e06d5f4c7a706f68">header</a> || !content) {</div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;    }</div>
-<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;    <span class="keywordtype">int</span> realsize = (headersize - 1 + contentsize - 1) / 2;</div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;    <span class="keywordtype">char</span> szhex[3];</div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;    memset(szhex, 0, 3);</div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;    strcat(szhex, <a class="code" href="../../dc/d9a/varhexutils_8c.html#a4867d8e7469e092a578b10887669fdb1">Int_To_Hex</a>(realsize));</div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;    strcat((<span class="keywordtype">char</span> *)dest, szhex);</div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;    strcat((<span class="keywordtype">char</span> *)dest, (<span class="keywordtype">char</span> *)<a class="code" href="../../dc/d9a/varhexutils_8c.html#a57369e005f30cc43e06d5f4c7a706f68">header</a>);</div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;    strcat((<span class="keywordtype">char</span> *)dest, (<span class="keywordtype">char</span> *)content);</div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;    <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;}</div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160; </div>
-<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<span class="comment">/*//Remove Header - Usage Example:</span></div>
-<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;<span class="comment"> *  char remove_hdr_dst[1000]; //Much bigger than needed tbh..</span></div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="comment"> *  bzero(remove_hdr_dst,1000);</span></div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;<span class="comment"> *  remove_header(remove_hdr_dst, add_hdr_dest);</span></div>
-<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;<span class="comment"> *  printf(&quot;remove_header - Result: %s\n&quot;,remove_hdr_dst);</span></div>
-<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00462"></a><span class="lineno"><a class="line" href="../../d1/d17/varhexutils_8h.html#a0e07329c9497bd0c9064c015051029f9">  462</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../dc/d9a/varhexutils_8c.html#a0e07329c9497bd0c9064c015051029f9">remove_header</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *dest, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *lel) {</div>
-<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;    <span class="keywordflow">if</span> (!lel) {</div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;    }</div>
-<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;    <span class="comment">// int init = 0;</span></div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;    <span class="keywordtype">char</span> s[(strlen((<span class="keywordtype">char</span> *)lel) / 2) + 1];</div>
-<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;    <span class="keywordtype">int</span> sizs = strlen((<span class="keywordtype">char</span> *)lel) / 2 + 1;</div>
-<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;    <a class="code" href="../../dc/d9a/varhexutils_8c.html#abc2ba573b926e86bb012190aad4b5ce6">hex2str</a>((<span class="keywordtype">char</span> *)lel, s, sizs);</div>
-<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;    sprintf(s, <span class="stringliteral">&quot;%s&quot;</span>, s + 1);</div>
-<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;    <span class="keywordtype">char</span> *pch;</div>
-<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;    <span class="keywordtype">char</span> *end;</div>
-<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;    pch = <a class="code" href="../../dc/d80/protoutils_8c.html#a9c6b43fd17114c06a5b35d60e8b7727b">strtok_r</a>(s, <span class="stringliteral">&quot;/&quot;</span>, &amp;end);</div>
-<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;    <span class="keywordtype">int</span> pos = 0;</div>
-<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;    <span class="keywordflow">while</span> (pch) {</div>
-<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;        <span class="comment">// printf(&quot;PCH: %s\n&quot;, pch);</span></div>
-<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;        <span class="keywordflow">if</span> (pos == 1) {</div>
-<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;            <a class="code" href="../../dc/d9a/varhexutils_8c.html#a1d3a8f7f9b5ce96ce002070872488ddd">str2hex</a>(dest, (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)pch);</div>
-<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;        }</div>
-<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;        <span class="comment">// sprintf(dest,&quot;%s&quot;,pch);</span></div>
-<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;        pch = <a class="code" href="../../dc/d80/protoutils_8c.html#a9c6b43fd17114c06a5b35d60e8b7727b">strtok_r</a>(NULL, <span class="stringliteral">&quot;/&quot;</span>, &amp;end);</div>
-<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;        pos = 1;</div>
-<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;    }</div>
-<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;    <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;}</div>
-<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160; </div>
-<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;<span class="comment">/*  //getHeader</span></div>
-<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;<span class="comment"> *  char geth_dest[1000];</span></div>
-<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;<span class="comment"> *  bzero(geth_dest,1000);</span></div>
-<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;<span class="comment"> *  get_header(geth_dest, add_hdr_dest);</span></div>
-<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;<span class="comment"> *  printf(&quot;get_header - Result: %s\n&quot;, geth_dest);</span></div>
-<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00493"></a><span class="lineno"><a class="line" href="../../dc/d9a/varhexutils_8c.html#a0e45249bc3a02e20ad8e87e21fd4e68d">  493</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../dc/d9a/varhexutils_8c.html#a0e45249bc3a02e20ad8e87e21fd4e68d">get_header</a>(<span class="keywordtype">char</span> *dest, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *src) {</div>
-<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;    <span class="keywordflow">if</span> (!src) {</div>
-<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;    }</div>
-<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;    <span class="keywordtype">char</span> ascii[strlen((<span class="keywordtype">char</span> *)src) / 2];</div>
-<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;    <a class="code" href="../../dc/d9a/varhexutils_8c.html#abc2ba573b926e86bb012190aad4b5ce6">hex2str</a>((<span class="keywordtype">char</span> *)src, ascii, strlen((<span class="keywordtype">char</span> *)src) / 2);</div>
-<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;    sprintf(ascii, <span class="stringliteral">&quot;%s&quot;</span>, ascii + 1);</div>
-<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;    <span class="keywordtype">char</span> *pch;</div>
-<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;    <span class="keywordtype">char</span> *end;</div>
-<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;    pch = <a class="code" href="../../dc/d80/protoutils_8c.html#a9c6b43fd17114c06a5b35d60e8b7727b">strtok_r</a>(ascii, <span class="stringliteral">&quot;/&quot;</span>, &amp;end);</div>
-<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;    <span class="keywordflow">while</span> (pch) {</div>
-<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;        strcat(dest, pch);</div>
-<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;    }</div>
-<div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;    <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;}</div>
-<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160; </div>
-<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;<span class="comment">/*  //getHeader</span></div>
-<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;<span class="comment"> *  char geth_dest[1000];</span></div>
-<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;<span class="comment"> *  bzero(geth_dest,1000);</span></div>
-<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;<span class="comment"> *  get_header(geth_dest, add_hdr_dest);</span></div>
-<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;<span class="comment"> *  printf(&quot;get_header - Result: %s\n&quot;, geth_dest);</span></div>
-<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../dc/d9a/varhexutils_8c.html#a0e45249bc3a02e20ad8e87e21fd4e68d">get_header</a>(<span class="keywordtype">char</span> *dest, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *src);</div>
-<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160; </div>
-<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;<span class="comment">/*</span></div>
-<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;<span class="comment"> *  //getcontent</span></div>
-<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;<span class="comment"> *  char getc_dest[1000];</span></div>
-<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;<span class="comment"> *  bzero(getc_dest,1000);</span></div>
-<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;<span class="comment"> *  get_content(getc_dest, add_hdr_dest);</span></div>
-<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;<span class="comment"> *  printf(&quot;get_content - Result: %s\n&quot;, getc_dest);</span></div>
-<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00525"></a><span class="lineno"><a class="line" href="../../d1/d17/varhexutils_8h.html#a6390f2a9f96fdb08431bcdfbf22ab5b8">  525</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../dc/d9a/varhexutils_8c.html#a6390f2a9f96fdb08431bcdfbf22ab5b8">get_content</a>(<span class="keywordtype">char</span> *dest, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *src) {</div>
-<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;    <span class="keywordflow">if</span> (!src) {</div>
-<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;    }</div>
-<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;    <span class="keywordtype">char</span> ascii[strlen((<span class="keywordtype">char</span> *)src) / 2];</div>
-<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;    <a class="code" href="../../dc/d9a/varhexutils_8c.html#abc2ba573b926e86bb012190aad4b5ce6">hex2str</a>((<span class="keywordtype">char</span> *)src, ascii, strlen((<span class="keywordtype">char</span> *)src) / 2);</div>
-<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;    sprintf(ascii, <span class="stringliteral">&quot;%s&quot;</span>, ascii + 1);</div>
-<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;    <span class="keywordtype">char</span> *pch;</div>
-<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;    <span class="keywordtype">char</span> *end;</div>
-<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;    <span class="keywordtype">int</span> ax = 0;</div>
-<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;    pch = <a class="code" href="../../dc/d80/protoutils_8c.html#a9c6b43fd17114c06a5b35d60e8b7727b">strtok_r</a>(ascii, <span class="stringliteral">&quot;/&quot;</span>, &amp;end);</div>
-<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;    <span class="keywordflow">while</span> (pch) {</div>
-<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;        <span class="comment">// printf(&quot;PCH: %s&quot;, pch);</span></div>
-<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;        <span class="keywordflow">if</span> (ax == 1) {</div>
-<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;            strcat(dest, pch);</div>
-<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;        }</div>
-<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;        ax = 1;</div>
-<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;        pch = <a class="code" href="../../dc/d80/protoutils_8c.html#a9c6b43fd17114c06a5b35d60e8b7727b">strtok_r</a>(NULL, <span class="stringliteral">&quot;/&quot;</span>, &amp;end);</div>
-<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;    }</div>
-<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;    <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="avarhexutils_8c_html_a3527bd521f099dacdb58ed80b5772441"><div class="ttname"><a href="../../dc/d9a/varhexutils_8c.html#a3527bd521f099dacdb58ed80b5772441">Num_To_Varint_64</a></div><div class="ttdeci">uint8_t * Num_To_Varint_64(uint64_t TOV64INPUT)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d9a/varhexutils_8c_source.html#l00039">varhexutils.c:39</a></div></div>
 <div class="ttc" id="avarhexutils_8c_html_a1d3a8f7f9b5ce96ce002070872488ddd"><div class="ttname"><a href="../../dc/d9a/varhexutils_8c.html#a1d3a8f7f9b5ce96ce002070872488ddd">str2hex</a></div><div class="ttdeci">void str2hex(unsigned char *hexstring, unsigned char *string)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d9a/varhexutils_8c_source.html#l00309">varhexutils.c:309</a></div></div>
 <div class="ttc" id="ainclude_2utils_2varint_8h_html_ab014b392e982e8a272744667c4926bef"><div class="ttname"><a href="../../d7/d0c/include_2utils_2varint_8h.html#ab014b392e982e8a272744667c4926bef">uvarint_decode32</a></div><div class="ttdeci">size_t uvarint_decode32(uint8_t buf[], size_t bufsize, uint32_t *val)</div></div>
-<div class="ttc" id="avarhexutils_8c_html_a6801d8b4c1ed8ec917b973ee2b5a872a"><div class="ttname"><a href="../../dc/d9a/varhexutils_8c.html#a6801d8b4c1ed8ec917b973ee2b5a872a">add_header</a></div><div class="ttdeci">int add_header(unsigned char *dest, unsigned char *header, size_t headersize, unsigned char *content, size_t contentsize)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d9a/varhexutils_8c_source.html#l00441">varhexutils.c:441</a></div></div>
 <div class="ttc" id="avarhexutils_8c_html_a1958027fb1688d53c81a837c77345f77"><div class="ttname"><a href="../../dc/d9a/varhexutils_8c.html#a1958027fb1688d53c81a837c77345f77">convert2</a></div><div class="ttdeci">void convert2(char *convert_result2, uint8_t *bufhx)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d9a/varhexutils_8c_source.html#l00203">varhexutils.c:203</a></div></div>
 <div class="ttc" id="avarhexutils_8c_html_a10c7728fa8b3190ebfbf20079912a83b"><div class="ttname"><a href="../../dc/d9a/varhexutils_8c.html#a10c7728fa8b3190ebfbf20079912a83b">Num_To_HexVar_32</a></div><div class="ttdeci">char * Num_To_HexVar_32(uint32_t TOHVINPUT)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d9a/varhexutils_8c_source.html#l00218">varhexutils.c:218</a></div></div>
-<div class="ttc" id="avarhexutils_8c_html_a57369e005f30cc43e06d5f4c7a706f68"><div class="ttname"><a href="../../dc/d9a/varhexutils_8c.html#a57369e005f30cc43e06d5f4c7a706f68">header</a></div><div class="ttdeci">int header(unsigned char *dest, unsigned char *src)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d9a/varhexutils_8c_source.html#l00395">varhexutils.c:395</a></div></div>
 <div class="ttc" id="ainclude_2utils_2varint_8h_html_a8230149cbdc7e240e3fbcc5258b8d7a2"><div class="ttname"><a href="../../d7/d0c/include_2utils_2varint_8h.html#a8230149cbdc7e240e3fbcc5258b8d7a2">uvarint_encode32</a></div><div class="ttdeci">size_t uvarint_encode32(uint32_t val, uint8_t buf[], size_t bufsize)</div></div>
 <div class="ttc" id="avarhexutils_8c_html_a9c793b33915c73eed78d684873fa10f4"><div class="ttname"><a href="../../dc/d9a/varhexutils_8c.html#a9c793b33915c73eed78d684873fa10f4">Varint_To_Num_64</a></div><div class="ttdeci">uint64_t * Varint_To_Num_64(uint8_t TON64INPUT[60])</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d9a/varhexutils_8c_source.html#l00051">varhexutils.c:51</a></div></div>
 <div class="ttc" id="avarhexutils_8c_html_ab5ea21214bf3aa0e7954293461003d9f"><div class="ttname"><a href="../../dc/d9a/varhexutils_8c.html#ab5ea21214bf3aa0e7954293461003d9f">HexVar_To_Num_64</a></div><div class="ttdeci">uint64_t HexVar_To_Num_64(char *theHEXstring)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d9a/varhexutils_8c_source.html#l00233">varhexutils.c:233</a></div></div>
 <div class="ttc" id="avarhexutils_8h_html"><div class="ttname"><a href="../../d1/d17/varhexutils_8h.html">varhexutils.h</a></div><div class="ttdoc">provides utilities for manipulating hexadecimal data</div></div>
 <div class="ttc" id="avarhexutils_8c_html_a185825bf3a55829bda9bbd099528975c"><div class="ttname"><a href="../../dc/d9a/varhexutils_8c.html#a185825bf3a55829bda9bbd099528975c">Varint_To_Num_32</a></div><div class="ttdeci">uint32_t * Varint_To_Num_32(uint8_t TON32INPUT[60])</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d9a/varhexutils_8c_source.html#l00057">varhexutils.c:57</a></div></div>
 <div class="ttc" id="ainclude_2utils_2varint_8h_html_a9729dc93298c34945567b08b8c27d122"><div class="ttname"><a href="../../d7/d0c/include_2utils_2varint_8h.html#a9729dc93298c34945567b08b8c27d122">uvarint_encode64</a></div><div class="ttdeci">size_t uvarint_encode64(uint64_t val, uint8_t buf[], size_t bufsize)</div></div>
-<div class="ttc" id="aprotoutils_8c_html_a9c6b43fd17114c06a5b35d60e8b7727b"><div class="ttname"><a href="../../dc/d80/protoutils_8c.html#a9c6b43fd17114c06a5b35d60e8b7727b">strtok_r</a></div><div class="ttdeci">char * strtok_r(char *, const char *, char **)</div></div>
-<div class="ttc" id="avarhexutils_8c_html_a5332fe23288633c53c11320886c1ced0"><div class="ttname"><a href="../../dc/d9a/varhexutils_8c.html#a5332fe23288633c53c11320886c1ced0">header_path</a></div><div class="ttdeci">int header_path(unsigned char *dest, unsigned char *src)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d9a/varhexutils_8c_source.html#l00415">varhexutils.c:415</a></div></div>
-<div class="ttc" id="avarhexutils_8c_html_a6390f2a9f96fdb08431bcdfbf22ab5b8"><div class="ttname"><a href="../../dc/d9a/varhexutils_8c.html#a6390f2a9f96fdb08431bcdfbf22ab5b8">get_content</a></div><div class="ttdeci">int get_content(char *dest, unsigned char *src)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d9a/varhexutils_8c_source.html#l00525">varhexutils.c:525</a></div></div>
 <div class="ttc" id="ainclude_2utils_2varint_8h_html_ab9b4e6231ef64921d55bb5f8c25dac73"><div class="ttname"><a href="../../d7/d0c/include_2utils_2varint_8h.html#ab9b4e6231ef64921d55bb5f8c25dac73">uvarint_decode64</a></div><div class="ttdeci">size_t uvarint_decode64(uint8_t buf[], size_t bufsize, uint64_t *val)</div></div>
 <div class="ttc" id="avarhexutils_8c_html_ad5320aaf6c29fcd2bf72ef43ed52e676"><div class="ttname"><a href="../../dc/d9a/varhexutils_8c.html#ad5320aaf6c29fcd2bf72ef43ed52e676">Var_To_Hex</a></div><div class="ttdeci">unsigned char * Var_To_Hex(const unsigned char *incoming, size_t incoming_size)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d9a/varhexutils_8c_source.html#l00132">varhexutils.c:132</a></div></div>
-<div class="ttc" id="avarhexutils_8c_html_a0e45249bc3a02e20ad8e87e21fd4e68d"><div class="ttname"><a href="../../dc/d9a/varhexutils_8c.html#a0e45249bc3a02e20ad8e87e21fd4e68d">get_header</a></div><div class="ttdeci">int get_header(char *dest, unsigned char *src)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d9a/varhexutils_8c_source.html#l00493">varhexutils.c:493</a></div></div>
-<div class="ttc" id="avarhexutils_8c_html_a0e07329c9497bd0c9064c015051029f9"><div class="ttname"><a href="../../dc/d9a/varhexutils_8c.html#a0e07329c9497bd0c9064c015051029f9">remove_header</a></div><div class="ttdeci">int remove_header(unsigned char *dest, unsigned char *lel)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d9a/varhexutils_8c_source.html#l00462">varhexutils.c:462</a></div></div>
 <div class="ttc" id="avarhexutils_8c_html_abc2ba573b926e86bb012190aad4b5ce6"><div class="ttname"><a href="../../dc/d9a/varhexutils_8c.html#abc2ba573b926e86bb012190aad4b5ce6">hex2str</a></div><div class="ttdeci">void hex2str(const char *h, char *s, int sizs)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d9a/varhexutils_8c_source.html#l00285">varhexutils.c:285</a></div></div>
 <div class="ttc" id="avarhexutils_8c_html_a12a8ed3b41f8b6dc471052c262bfa211"><div class="ttname"><a href="../../dc/d9a/varhexutils_8c.html#a12a8ed3b41f8b6dc471052c262bfa211">vthconvert</a></div><div class="ttdeci">void vthconvert(const unsigned char *in, int in_size, unsigned char **out)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d9a/varhexutils_8c_source.html#l00111">varhexutils.c:111</a></div></div>
 <div class="ttc" id="avarhexutils_8c_html_a35b3f5e0a4e1f9f3b94e5054ae669e3b"><div class="ttname"><a href="../../dc/d9a/varhexutils_8c.html#a35b3f5e0a4e1f9f3b94e5054ae669e3b">convert</a></div><div class="ttdeci">void convert(char *convert_result, uint8_t *buf)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d9a/varhexutils_8c_source.html#l00172">varhexutils.c:172</a></div></div>

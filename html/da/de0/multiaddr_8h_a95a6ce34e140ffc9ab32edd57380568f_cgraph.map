@@ -1,6 +1,6 @@
 <map id="multi_address_new_from_bytes" name="multi_address_new_from_bytes">
 <area shape="rect" id="node1" title=" " alt="" coords="5,259,192,301"/>
-<area shape="rect" id="node2" href="$dc/d80/protoutils_8c.html#a2e141f4b7c1f8ec0c977baa284194617" title="Unserialize the bytes into a string." alt="" coords="253,216,375,243"/>
+<area shape="rect" id="node2" href="$dc/d80/protoutils_8c.html#a0cb36ee44f522146075a6b5fc651c491" title="Unserialize the bytes into a string." alt="" coords="253,216,375,243"/>
 <area shape="rect" id="node16" href="$d8/d26/multiaddr_8c.html#a115898734d2b42e9445b5b4b7e60595a" title=" " alt="" coords="241,267,387,293"/>
 <area shape="rect" id="node17" href="$d8/d26/multiaddr_8c.html#a5cca5e1cfb7f87de3990471d022d3e52" title=" " alt="" coords="240,317,388,344"/>
 <area shape="rect" id="node3" href="$dc/d9a/varhexutils_8c.html#a8556ec6adb96a2e6e22321da09636483" title=" " alt="" coords="481,5,574,32"/>

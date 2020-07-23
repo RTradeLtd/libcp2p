@@ -8,7 +8,7 @@
 <area shape="rect" id="node39" href="$d8/d26/multiaddr_8c.html#af237ac393bd1a84840760647189d9633" title=" " alt="" coords="135,379,321,421"/>
 <area shape="rect" id="node4" href="$dc/d80/protoutils_8c.html#a07260974981a08120ce7d210952aa0b9" title=" " alt="" coords="389,289,511,316"/>
 <area shape="rect" id="node25" href="$d8/d26/multiaddr_8c.html#a9a05c7a818e6d359b2172cab3ea0d6f0" title=" " alt="" coords="419,239,481,265"/>
-<area shape="rect" id="node5" href="$dc/d80/protoutils_8c.html#ae34375388f37361264489ac38b5ef8d6" title="Convert an address string to a byte representation." alt="" coords="573,188,753,215"/>
+<area shape="rect" id="node5" href="$dc/d80/protoutils_8c.html#a32a04b85fa743ee338cfd4ff436f4e13" title="Convert an address string to a byte representation." alt="" coords="573,188,753,215"/>
 <area shape="rect" id="node6" href="$dc/d9a/varhexutils_8c.html#a4867d8e7469e092a578b10887669fdb1" title=" " alt="" coords="847,289,941,316"/>
 <area shape="rect" id="node20" href="$dc/d9a/varhexutils_8c.html#a2a5d4ea35e5a01291806f4355836dd50" title=" " alt="" coords="615,391,712,417"/>
 <area shape="rect" id="node21" href="$de/db7/protocols_8c.html#a6d46ac1a0a6df5b003cb1bca51d74950" title="load the available protocols into the global protocol_P" alt="" coords="605,340,722,367"/>
@@ -28,7 +28,7 @@
 <area shape="rect" id="node14" href="$db/d08/base32_8c.html#a3c0c1964c1c1a0c1d499ff6edf8a68b5" title=" " alt="" coords="1535,303,1613,329"/>
 <area shape="rect" id="node18" href="$dc/d9a/varhexutils_8c.html#a1958027fb1688d53c81a837c77345f77" title=" " alt="" coords="1069,220,1148,247"/>
 <area shape="rect" id="node19" href="$d7/d0c/include_2utils_2varint_8h.html#a8230149cbdc7e240e3fbcc5258b8d7a2" title=" " alt="" coords="1039,169,1178,196"/>
-<area shape="rect" id="node28" href="$dc/d80/protoutils_8c.html#a2e141f4b7c1f8ec0c977baa284194617" title="Unserialize the bytes into a string." alt="" coords="389,523,511,549"/>
+<area shape="rect" id="node28" href="$dc/d80/protoutils_8c.html#a0cb36ee44f522146075a6b5fc651c491" title="Unserialize the bytes into a string." alt="" coords="389,523,511,549"/>
 <area shape="rect" id="node38" href="$d8/d26/multiaddr_8c.html#a5cca5e1cfb7f87de3990471d022d3e52" title=" " alt="" coords="376,445,524,472"/>
 <area shape="rect" id="node29" href="$dc/d9a/varhexutils_8c.html#a8556ec6adb96a2e6e22321da09636483" title=" " alt="" coords="617,593,710,620"/>
 <area shape="rect" id="node30" href="$dc/d9a/varhexutils_8c.html#ab8b779849d8217ef5045d37dbfd09b67" title=" " alt="" coords="588,543,739,569"/>

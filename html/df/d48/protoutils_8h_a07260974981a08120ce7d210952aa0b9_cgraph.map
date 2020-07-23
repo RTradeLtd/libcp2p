@@ -1,6 +1,6 @@
 <map id="string_to_bytes" name="string_to_bytes">
 <area shape="rect" id="node1" title=" " alt="" coords="5,279,128,305"/>
-<area shape="rect" id="node2" href="$dc/d80/protoutils_8c.html#ae34375388f37361264489ac38b5ef8d6" title="Convert an address string to a byte representation." alt="" coords="176,165,356,192"/>
+<area shape="rect" id="node2" href="$dc/d80/protoutils_8c.html#a32a04b85fa743ee338cfd4ff436f4e13" title="Convert an address string to a byte representation." alt="" coords="176,165,356,192"/>
 <area shape="rect" id="node3" href="$dc/d9a/varhexutils_8c.html#a4867d8e7469e092a578b10887669fdb1" title=" " alt="" coords="449,5,542,32"/>
 <area shape="rect" id="node17" href="$dc/d9a/varhexutils_8c.html#a2a5d4ea35e5a01291806f4355836dd50" title=" " alt="" coords="217,228,315,255"/>
 <area shape="rect" id="node18" href="$de/db7/protocols_8c.html#a6d46ac1a0a6df5b003cb1bca51d74950" title="load the available protocols into the global protocol_P" alt="" coords="207,279,325,305"/>

@@ -2,7 +2,7 @@
 <area shape="rect" id="node1" title=" " alt="" coords="5,253,205,280"/>
 <area shape="rect" id="node2" href="$d8/d26/multiaddr_8c.html#a115898734d2b42e9445b5b4b7e60595a" title=" " alt="" coords="253,228,400,255"/>
 <area shape="rect" id="node3" href="$dc/d80/protoutils_8c.html#a07260974981a08120ce7d210952aa0b9" title=" " alt="" coords="265,279,388,305"/>
-<area shape="rect" id="node4" href="$dc/d80/protoutils_8c.html#ae34375388f37361264489ac38b5ef8d6" title="Convert an address string to a byte representation." alt="" coords="448,165,628,192"/>
+<area shape="rect" id="node4" href="$dc/d80/protoutils_8c.html#a32a04b85fa743ee338cfd4ff436f4e13" title="Convert an address string to a byte representation." alt="" coords="448,165,628,192"/>
 <area shape="rect" id="node5" href="$dc/d9a/varhexutils_8c.html#a4867d8e7469e092a578b10887669fdb1" title=" " alt="" coords="721,5,814,32"/>
 <area shape="rect" id="node19" href="$dc/d9a/varhexutils_8c.html#a2a5d4ea35e5a01291806f4355836dd50" title=" " alt="" coords="489,228,587,255"/>
 <area shape="rect" id="node20" href="$de/db7/protocols_8c.html#a6d46ac1a0a6df5b003cb1bca51d74950" title="load the available protocols into the global protocol_P" alt="" coords="479,279,597,305"/>

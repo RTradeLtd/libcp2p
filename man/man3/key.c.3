@@ -1,4 +1,4 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/crypto/key.c" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/crypto/key.c" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -57,7 +57,7 @@
 .RI "int \fBlibp2p_crypto_private_key_protobuf_decode\fP (unsigned char *buffer, size_t buffer_length, struct \fBPrivateKey\fP **out)"
 .br
 .ti -1c
-.RI "int \fBlibp2p_crypto_public_key_to_peer_id\fP (struct \fBPublicKey\fP *public_key, char **peer_id)"
+.RI "int \fBlibp2p_crypto_public_key_to_peer_id\fP (struct \fBPublicKey\fP *public_key, char *peer_id)"
 .br
 .RI "convert a public key into a peer id "
 .in -1c
@@ -141,7 +141,7 @@ Definition at line 50 of file key\&.c\&.
 
 .PP
 Definition at line 38 of file key\&.c\&.
-.SS "int libp2p_crypto_public_key_to_peer_id (struct \fBPublicKey\fP * public_key, char ** peer_id)"
+.SS "int libp2p_crypto_public_key_to_peer_id (struct \fBPublicKey\fP * public_key, char * peer_id)"
 
 .PP
 convert a public key into a peer id convert a public key into a peer id 

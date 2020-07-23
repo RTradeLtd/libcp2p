@@ -87,8 +87,8 @@ $(document).ready(function(){initNavTree('d4/d43/multibase_8h_source.html','../.
 </div><!--header-->
 <div class="contents">
 <a href="../../d4/d43/multibase_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*! @file multibase.h</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">  * @brief functions for managing multibase identifiers</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">*/</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * @brief functions for managing multibase identifiers</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
@@ -118,37 +118,39 @@ $(document).ready(function(){initNavTree('d4/d43/multibase_8h_source.html','../.
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                     <span class="keywordtype">size_t</span> results_max_length, <span class="keywordtype">size_t</span> *results_length);</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">/***</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> * @brief Calculates the size of the buffer neccessary to encode the incoming byte array</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> * @param base the encoding to use</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> * @param incoming the incoming array of bytes</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * @param incoming_length the length of the array in bytes</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> * @returns the appropriate size of the buffer</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d4/d43/multibase_8h.html#a87879636fb4a1f49493a1ebd9b342863">multibase_encode_size</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> <a class="code" href="../../d4/d87/structbase.html">base</a>, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *incoming,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                          <span class="keywordtype">size_t</span> incoming_length);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"> * @brief Decode data that was encoded in multibase format</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"> * @param incoming the data to decode</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"> * @param incoming_length the length of the data to decode</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"> * @param results where to put the results</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"> * @param results_max_length the size of the results buffer</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"> * @param results_length the size of the results after being encoded</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"> * @returns true(1) on success</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d4/d43/multibase_8h.html#a29045b9a6ab1fdf18b9097270db442c7">multibase_decode</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *incoming, <span class="keywordtype">size_t</span> incoming_length,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                     <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *results, <span class="keywordtype">size_t</span> results_max_length,</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                     <span class="keywordtype">size_t</span> *results_length);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">/***</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"> * @brief Calculates the size of the buffer neccessary to decode the incoming byte array</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"> * @param base the encoding to use</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"> * @param incoming the incoming array of bytes</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"> * @param incoming_length the length of the array in bytes</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"> * @returns the appropriate size of the buffer</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d4/d43/multibase_8h.html#accefe23bf6cdf404302a63663f3d09cd">multibase_decode_size</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> <a class="code" href="../../d4/d87/structbase.html">base</a>, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *incoming,</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                          <span class="keywordtype">size_t</span> incoming_length);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> * @brief Calculates the size of the buffer neccessary to encode the incoming byte</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> * array</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> * @param base the encoding to use</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * @param incoming the incoming array of bytes</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> * @param incoming_length the length of the array in bytes</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> * @returns the appropriate size of the buffer</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d4/d43/multibase_8h.html#a87879636fb4a1f49493a1ebd9b342863">multibase_encode_size</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> <a class="code" href="../../d4/d87/structbase.html">base</a>, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *incoming,</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                          <span class="keywordtype">size_t</span> incoming_length);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"> * @brief Decode data that was encoded in multibase format</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"> * @param incoming the data to decode</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"> * @param incoming_length the length of the data to decode</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"> * @param results where to put the results</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"> * @param results_max_length the size of the results buffer</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"> * @param results_length the size of the results after being encoded</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> * @returns true(1) on success</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d4/d43/multibase_8h.html#a29045b9a6ab1fdf18b9097270db442c7">multibase_decode</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *incoming, <span class="keywordtype">size_t</span> incoming_length,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                     <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *results, <span class="keywordtype">size_t</span> results_max_length,</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                     <span class="keywordtype">size_t</span> *results_length);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">/***</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"> * @brief Calculates the size of the buffer neccessary to decode the incoming byte</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"> * array</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"> * @param base the encoding to use</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"> * @param incoming the incoming array of bytes</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"> * @param incoming_length the length of the array in bytes</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"> * @returns the appropriate size of the buffer</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d4/d43/multibase_8h.html#accefe23bf6cdf404302a63663f3d09cd">multibase_decode_size</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> <a class="code" href="../../d4/d87/structbase.html">base</a>, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *incoming,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                          <span class="keywordtype">size_t</span> incoming_length);</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="astructbase_html"><div class="ttname"><a href="../../d4/d87/structbase.html">base</a></div></div>

@@ -1,4 +1,4 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/multiaddr/protoutils.c" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/multiaddr/protoutils.c" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -76,11 +76,11 @@
 .RI "char * \fBint2ip\fP (int inputintip)"
 .br
 .ti -1c
-.RI "int \fBbytes_to_string\fP (char **buffer, const uint8_t *in_bytes, int in_bytes_size)"
+.RI "int \fBbytes_to_string\fP (char *buffer, const uint8_t *in_bytes, int in_bytes_size)"
 .br
 .RI "Unserialize the bytes into a string\&. "
 .ti -1c
-.RI "char * \fBaddress_string_to_bytes\fP (struct \fBProtocol\fP *protocol, const char *incoming, size_t incoming_size, char **results, int *results_size)"
+.RI "int \fBaddress_string_to_bytes\fP (struct \fBProtocol\fP *protocol, const char *incoming, size_t incoming_size, char *results, int *results_size)"
 .br
 .RI "Convert an address string to a byte representation\&. "
 .ti -1c
@@ -99,7 +99,7 @@ Definition at line 57 of file protoutils\&.c\&.
 Definition at line 115 of file protoutils\&.c\&.
 .SH "Function Documentation"
 .PP 
-.SS "char* address_string_to_bytes (struct \fBProtocol\fP * protocol, const char * incoming, size_t incoming_size, char ** results, int * results_size)"
+.SS "int address_string_to_bytes (struct \fBProtocol\fP * protocol, const char * incoming, size_t incoming_size, char * results, int * results_size)"
 
 .PP
 Convert an address string to a byte representation\&. Convert an address string to a byte representation 
@@ -124,7 +124,7 @@ the results array
 .PP
 
 .PP
-Definition at line 387 of file protoutils\&.c\&.
+Definition at line 381 of file protoutils\&.c\&.
 .SS "char ASCII2bits (char ch)"
 
 .PP
@@ -137,7 +137,7 @@ Definition at line 48 of file protoutils\&.c\&.
 
 .PP
 Definition at line 39 of file protoutils\&.c\&.
-.SS "int bytes_to_string (char ** buffer, const uint8_t * in_bytes, int in_bytes_size)"
+.SS "int bytes_to_string (char * buffer, const uint8_t * in_bytes, int in_bytes_size)"
 
 .PP
 Unserialize the bytes into a string\&. Unserialize the bytes into a string 
@@ -199,7 +199,14 @@ convert a string address into bytes
 .PP
 
 .PP
-Definition at line 585 of file protoutils\&.c\&.
+\fBTodo\fP
+.RS 4
+figure out a better size 
+.RE
+.PP
+
+.PP
+Definition at line 573 of file protoutils\&.c\&.
 .SS "char* strtok_r (char *, const char *, char **)"
 
 .SS "int valid_digit (char * ip_str)"

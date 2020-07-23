@@ -5,7 +5,7 @@
 <area shape="rect" id="node41" href="$db/d08/base32_8c.html#a501a6d73efdebf84d29a92fb313e167f" title=" " alt="" coords="1623,269,1703,295"/>
 <area shape="rect" id="node3" href="$db/d08/base32_8c.html#af2a13ae09c201d70c650c1c4122570a7" title=" " alt="" coords="1069,158,1231,185"/>
 <area shape="rect" id="node4" href="$d8/d33/base32_8h.html#a78acce42d5c859aea4c19508c1aaa1c5" title="Encode in Base32 format." alt="" coords="1059,209,1241,251"/>
-<area shape="rect" id="node5" href="$df/d48/protoutils_8h.html#abe2819b830ec57bbae6e54677296aebd" title="Unserialize the bytes into a string." alt="" coords="855,326,977,353"/>
+<area shape="rect" id="node5" href="$df/d48/protoutils_8h.html#a8638c07f566ec7912ceac444b1d2c9a5" title="Unserialize the bytes into a string." alt="" coords="855,326,977,353"/>
 <area shape="rect" id="node12" href="$dc/d13/cid_8h.html#a09d36d1e4b0a4cbbe6ec74ad1b5740a3" title=" " alt="" coords="824,115,1008,142"/>
 <area shape="rect" id="node13" href="$dc/d13/cid_8h.html#a28923f7d9ba8dc49d899479e1d5776db" title=" " alt="" coords="848,166,984,193"/>
 <area shape="rect" id="node14" href="$d4/d43/multibase_8h.html#a5f8db468b8b2ead762ff750b3e57b424" title="Encode data in multibase format." alt="" coords="845,217,987,243"/>
@@ -20,14 +20,14 @@
 <area shape="rect" id="node22" href="$df/da0/multibase__test_8c.html#a5a0521264cc8d45f64fda4f54d900e73" title=" " alt="" coords="603,140,776,181"/>
 <area shape="rect" id="node23" href="$df/da0/multibase__test_8c.html#a0703fbf6e97c6c9b68ddf86dbcf998ea" title=" " alt="" coords="603,205,776,247"/>
 <area shape="rect" id="node16" href="$d5/d5d/ecdsa_8h.html#afab4ce5b8e4bde2be242ad28bf9f1474" title="returns the peerid for the corresponding private key" alt="" coords="377,71,532,112"/>
-<area shape="rect" id="node19" href="$de/de5/key_8h.html#ae44209ca99fb2a0a4facc7eea04a98c2" title="convert a public key into a peer id" alt="" coords="377,5,533,47"/>
+<area shape="rect" id="node19" href="$de/de5/key_8h.html#a880e85cb8f876de9eca86247cc0d30f6" title="convert a public key into a peer id" alt="" coords="377,5,533,47"/>
 <area shape="rect" id="node17" href="$d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="108,60,307,101"/>
 <area shape="rect" id="node18" href="$d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,67,60,94"/>
 <area shape="rect" id="node21" href="$df/da0/multibase__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="427,213,482,239"/>
 <area shape="rect" id="node25" href="$db/d08/base32_8c.html#a202f50cce9f077cd2d0b91e8243c1074" title=" " alt="" coords="1292,325,1443,351"/>
-<area shape="rect" id="node26" href="$db/d08/base32_8c.html#a6873a33232d40521df8943c2d8dadf47" title=" " alt="" coords="1056,325,1244,351"/>
+<area shape="rect" id="node26" href="$db/d08/base32_8c.html#a9f1164ecfdb760469b372e78d01011d8" title=" " alt="" coords="1056,325,1244,351"/>
 <area shape="rect" id="node27" href="$d8/d33/base32_8h.html#abdbe99d44b5208ff21cbe18c11c12465" title="Decode from Base16 format." alt="" coords="1059,379,1241,420"/>
-<area shape="rect" id="node28" href="$df/d48/protoutils_8h.html#ae34375388f37361264489ac38b5ef8d6" title="Convert an address string to a byte representation." alt="" coords="826,450,1006,477"/>
+<area shape="rect" id="node28" href="$df/d48/protoutils_8h.html#a32a04b85fa743ee338cfd4ff436f4e13" title="Convert an address string to a byte representation." alt="" coords="826,450,1006,477"/>
 <area shape="rect" id="node38" href="$dc/d13/cid_8h.html#a2013ad348ce900ca01012efdd865f6f9" title=" " alt="" coords="834,383,998,424"/>
 <area shape="rect" id="node40" href="$d4/d43/multibase_8h.html#a29045b9a6ab1fdf18b9097270db442c7" title="Decode data that was encoded in multibase format." alt="" coords="845,274,987,301"/>
 <area shape="rect" id="node29" href="$df/d48/protoutils_8h.html#a07260974981a08120ce7d210952aa0b9" title=" " alt="" coords="628,454,751,481"/>

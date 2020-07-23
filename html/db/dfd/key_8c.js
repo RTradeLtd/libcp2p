@@ -11,5 +11,5 @@ var key_8c =
     [ "libp2p_crypto_public_key_protobuf_decode", "db/dfd/key_8c.html#a4a3e3a966f33e5aeb930001fb45ddd03", null ],
     [ "libp2p_crypto_public_key_protobuf_encode", "db/dfd/key_8c.html#a6e78380678c6f00fdd220d668bfb4bde", null ],
     [ "libp2p_crypto_public_key_protobuf_encode_size", "db/dfd/key_8c.html#a43090ff5e4b9bf01c58c191709833d6b", null ],
-    [ "libp2p_crypto_public_key_to_peer_id", "db/dfd/key_8c.html#ae44209ca99fb2a0a4facc7eea04a98c2", null ]
+    [ "libp2p_crypto_public_key_to_peer_id", "db/dfd/key_8c.html#a880e85cb8f876de9eca86247cc0d30f6", null ]
 ];

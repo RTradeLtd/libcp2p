@@ -164,12 +164,12 @@ Functions</h2></td></tr>
 <tr class="separator:a879be90a7ec99722101eca2fc95578e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac18498977bbb4010294411b5620ed5f5"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d48/protoutils_8h.html#ac18498977bbb4010294411b5620ed5f5">int2ip</a> (int inputintip)</td></tr>
 <tr class="separator:ac18498977bbb4010294411b5620ed5f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe2819b830ec57bbae6e54677296aebd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d48/protoutils_8h.html#abe2819b830ec57bbae6e54677296aebd">bytes_to_string</a> (char **results, const uint8_t *bytes, int bytes_size)</td></tr>
-<tr class="memdesc:abe2819b830ec57bbae6e54677296aebd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unserialize the bytes into a string.  <a href="../../df/d48/protoutils_8h.html#abe2819b830ec57bbae6e54677296aebd">More...</a><br /></td></tr>
-<tr class="separator:abe2819b830ec57bbae6e54677296aebd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae34375388f37361264489ac38b5ef8d6"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d48/protoutils_8h.html#ae34375388f37361264489ac38b5ef8d6">address_string_to_bytes</a> (struct <a class="el" href="../../d8/dde/struct_protocol.html">Protocol</a> *protocol, const char *incoming, size_t incoming_size, char **results, int *results_size)</td></tr>
-<tr class="memdesc:ae34375388f37361264489ac38b5ef8d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an address string to a byte representation.  <a href="../../df/d48/protoutils_8h.html#ae34375388f37361264489ac38b5ef8d6">More...</a><br /></td></tr>
-<tr class="separator:ae34375388f37361264489ac38b5ef8d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8638c07f566ec7912ceac444b1d2c9a5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d48/protoutils_8h.html#a8638c07f566ec7912ceac444b1d2c9a5">bytes_to_string</a> (char *results, const uint8_t *bytes, int bytes_size)</td></tr>
+<tr class="memdesc:a8638c07f566ec7912ceac444b1d2c9a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unserialize the bytes into a string.  <a href="../../df/d48/protoutils_8h.html#a8638c07f566ec7912ceac444b1d2c9a5">More...</a><br /></td></tr>
+<tr class="separator:a8638c07f566ec7912ceac444b1d2c9a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32a04b85fa743ee338cfd4ff436f4e13"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d48/protoutils_8h.html#a32a04b85fa743ee338cfd4ff436f4e13">address_string_to_bytes</a> (struct <a class="el" href="../../d8/dde/struct_protocol.html">Protocol</a> *protocol, const char *incoming, size_t incoming_size, char *results, int *results_size)</td></tr>
+<tr class="memdesc:a32a04b85fa743ee338cfd4ff436f4e13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an address string to a byte representation.  <a href="../../df/d48/protoutils_8h.html#a32a04b85fa743ee338cfd4ff436f4e13">More...</a><br /></td></tr>
+<tr class="separator:a32a04b85fa743ee338cfd4ff436f4e13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07260974981a08120ce7d210952aa0b9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d48/protoutils_8h.html#a07260974981a08120ce7d210952aa0b9">string_to_bytes</a> (uint8_t **finalbytes, size_t *realbbsize, const char *strx, size_t strsize)</td></tr>
 <tr class="separator:a07260974981a08120ce7d210952aa0b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -211,14 +211,14 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ae34375388f37361264489ac38b5ef8d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae34375388f37361264489ac38b5ef8d6">&#9670;&nbsp;</a></span>address_string_to_bytes()</h2>
+<a id="a32a04b85fa743ee338cfd4ff436f4e13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32a04b85fa743ee338cfd4ff436f4e13">&#9670;&nbsp;</a></span>address_string_to_bytes()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">char* address_string_to_bytes </td>
+          <td class="memname">int address_string_to_bytes </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="../../d8/dde/struct_protocol.html">Protocol</a> *&#160;</td>
           <td class="paramname"><em>protocol</em>, </td>
@@ -238,7 +238,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char **&#160;</td>
+          <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>results</em>, </td>
         </tr>
         <tr>
@@ -266,7 +266,9 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>the results array</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Success: 0 </dd>
+<dd>
+Failure: 1</dd></dl>
 <p>Convert an address string to a byte representation </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">protocol</td><td>the protocol to use </td></tr>
@@ -279,12 +281,12 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the results array </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d80/protoutils_8c_source.html#l00387">387</a> of file <a class="el" href="../../dc/d80/protoutils_8c_source.html">protoutils.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d80/protoutils_8c_source.html#l00381">381</a> of file <a class="el" href="../../dc/d80/protoutils_8c_source.html">protoutils.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="../../df/d48/protoutils_8h_ae34375388f37361264489ac38b5ef8d6_cgraph.png" border="0" usemap="#df/d48/protoutils_8h_ae34375388f37361264489ac38b5ef8d6_cgraph" alt=""/></div>
-<map name="df/d48/protoutils_8h_ae34375388f37361264489ac38b5ef8d6_cgraph" id="df/d48/protoutils_8h_ae34375388f37361264489ac38b5ef8d6_cgraph">
+<div class="center"><img src="../../df/d48/protoutils_8h_a32a04b85fa743ee338cfd4ff436f4e13_cgraph.png" border="0" usemap="#df/d48/protoutils_8h_a32a04b85fa743ee338cfd4ff436f4e13_cgraph" alt=""/></div>
+<map name="df/d48/protoutils_8h_a32a04b85fa743ee338cfd4ff436f4e13_cgraph" id="df/d48/protoutils_8h_a32a04b85fa743ee338cfd4ff436f4e13_cgraph">
 <area shape="rect" title="Convert an address string to a byte representation." alt="" coords="5,136,185,163"/>
 <area shape="rect" href="../../dc/d9a/varhexutils_8c.html#a4867d8e7469e092a578b10887669fdb1" title=" " alt="" coords="278,5,371,32"/>
 <area shape="rect" href="../../dc/d80/protoutils_8c.html#a879be90a7ec99722101eca2fc95578e8" title=" " alt="" coords="295,56,354,83"/>
@@ -305,8 +307,8 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="../../df/d48/protoutils_8h_ae34375388f37361264489ac38b5ef8d6_icgraph.png" border="0" usemap="#df/d48/protoutils_8h_ae34375388f37361264489ac38b5ef8d6_icgraph" alt=""/></div>
-<map name="df/d48/protoutils_8h_ae34375388f37361264489ac38b5ef8d6_icgraph" id="df/d48/protoutils_8h_ae34375388f37361264489ac38b5ef8d6_icgraph">
+<div class="center"><img src="../../df/d48/protoutils_8h_a32a04b85fa743ee338cfd4ff436f4e13_icgraph.png" border="0" usemap="#df/d48/protoutils_8h_a32a04b85fa743ee338cfd4ff436f4e13_icgraph" alt=""/></div>
+<map name="df/d48/protoutils_8h_a32a04b85fa743ee338cfd4ff436f4e13_icgraph" id="df/d48/protoutils_8h_a32a04b85fa743ee338cfd4ff436f4e13_icgraph">
 <area shape="rect" title="Convert an address string to a byte representation." alt="" coords="753,56,933,83"/>
 <area shape="rect" href="../../df/d48/protoutils_8h.html#a07260974981a08120ce7d210952aa0b9" title=" " alt="" coords="583,56,705,83"/>
 <area shape="rect" href="../../da/de0/multiaddr_8h.html#a3292b7d06b491d71303cb0b9ae10fd0b" title=" " alt="" coords="335,5,535,32"/>
@@ -430,8 +432,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="abe2819b830ec57bbae6e54677296aebd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abe2819b830ec57bbae6e54677296aebd">&#9670;&nbsp;</a></span>bytes_to_string()</h2>
+<a id="a8638c07f566ec7912ceac444b1d2c9a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8638c07f566ec7912ceac444b1d2c9a5">&#9670;&nbsp;</a></span>bytes_to_string()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -439,7 +441,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">int bytes_to_string </td>
           <td>(</td>
-          <td class="paramtype">char **&#160;</td>
+          <td class="paramtype">char *&#160;</td>
           <td class="paramname"><em>buffer</em>, </td>
         </tr>
         <tr>
@@ -486,8 +488,8 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="../../df/d48/protoutils_8h_abe2819b830ec57bbae6e54677296aebd_cgraph.png" border="0" usemap="#df/d48/protoutils_8h_abe2819b830ec57bbae6e54677296aebd_cgraph" alt=""/></div>
-<map name="df/d48/protoutils_8h_abe2819b830ec57bbae6e54677296aebd_cgraph" id="df/d48/protoutils_8h_abe2819b830ec57bbae6e54677296aebd_cgraph">
+<div class="center"><img src="../../df/d48/protoutils_8h_a8638c07f566ec7912ceac444b1d2c9a5_cgraph.png" border="0" usemap="#df/d48/protoutils_8h_a8638c07f566ec7912ceac444b1d2c9a5_cgraph" alt=""/></div>
+<map name="df/d48/protoutils_8h_a8638c07f566ec7912ceac444b1d2c9a5_cgraph" id="df/d48/protoutils_8h_a8638c07f566ec7912ceac444b1d2c9a5_cgraph">
 <area shape="rect" title="Unserialize the bytes into a string." alt="" coords="5,216,128,243"/>
 <area shape="rect" href="../../dc/d9a/varhexutils_8c.html#a8556ec6adb96a2e6e22321da09636483" title=" " alt="" coords="221,5,314,32"/>
 <area shape="rect" href="../../dc/d9a/varhexutils_8c.html#a2a5d4ea35e5a01291806f4355836dd50" title=" " alt="" coords="219,56,316,83"/>
@@ -507,8 +509,8 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="../../df/d48/protoutils_8h_abe2819b830ec57bbae6e54677296aebd_icgraph.png" border="0" usemap="#df/d48/protoutils_8h_abe2819b830ec57bbae6e54677296aebd_icgraph" alt=""/></div>
-<map name="df/d48/protoutils_8h_abe2819b830ec57bbae6e54677296aebd_icgraph" id="df/d48/protoutils_8h_abe2819b830ec57bbae6e54677296aebd_icgraph">
+<div class="center"><img src="../../df/d48/protoutils_8h_a8638c07f566ec7912ceac444b1d2c9a5_icgraph.png" border="0" usemap="#df/d48/protoutils_8h_a8638c07f566ec7912ceac444b1d2c9a5_icgraph" alt=""/></div>
+<map name="df/d48/protoutils_8h_a8638c07f566ec7912ceac444b1d2c9a5_icgraph" id="df/d48/protoutils_8h_a8638c07f566ec7912ceac444b1d2c9a5_icgraph">
 <area shape="rect" title="Unserialize the bytes into a string." alt="" coords="563,81,685,108"/>
 <area shape="rect" href="../../da/de0/multiaddr_8h.html#a95a6ce34e140ffc9ab32edd57380568f" title=" " alt="" coords="328,74,515,115"/>
 <area shape="rect" href="../../d8/dca/multiaddr__test_8c.html#ad1e7c139c6cb28364f2b46fb50574d74" title=" " alt="" coords="157,5,231,32"/>
@@ -589,7 +591,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="../../df/d48/protoutils_8h_ac18498977bbb4010294411b5620ed5f5_icgraph.png" border="0" usemap="#df/d48/protoutils_8h_ac18498977bbb4010294411b5620ed5f5_icgraph" alt=""/></div>
 <map name="df/d48/protoutils_8h_ac18498977bbb4010294411b5620ed5f5_icgraph" id="df/d48/protoutils_8h_ac18498977bbb4010294411b5620ed5f5_icgraph">
 <area shape="rect" title=" " alt="" coords="733,81,792,108"/>
-<area shape="rect" href="../../df/d48/protoutils_8h.html#abe2819b830ec57bbae6e54677296aebd" title="Unserialize the bytes into a string." alt="" coords="563,81,685,108"/>
+<area shape="rect" href="../../df/d48/protoutils_8h.html#a8638c07f566ec7912ceac444b1d2c9a5" title="Unserialize the bytes into a string." alt="" coords="563,81,685,108"/>
 <area shape="rect" href="../../da/de0/multiaddr_8h.html#a95a6ce34e140ffc9ab32edd57380568f" title=" " alt="" coords="328,74,515,115"/>
 <area shape="rect" href="../../d8/dca/multiaddr__test_8c.html#ad1e7c139c6cb28364f2b46fb50574d74" title=" " alt="" coords="157,5,231,32"/>
 <area shape="rect" href="../../d8/dca/multiaddr__test_8c.html#a812e26f1859f9c8a120e9874f37dd83a" title=" " alt="" coords="114,56,274,83"/>
@@ -624,7 +626,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="../../df/d48/protoutils_8h_a879be90a7ec99722101eca2fc95578e8_icgraph.png" border="0" usemap="#df/d48/protoutils_8h_a879be90a7ec99722101eca2fc95578e8_icgraph" alt=""/></div>
 <map name="df/d48/protoutils_8h_a879be90a7ec99722101eca2fc95578e8_icgraph" id="df/d48/protoutils_8h_a879be90a7ec99722101eca2fc95578e8_icgraph">
 <area shape="rect" title=" " alt="" coords="981,56,1040,83"/>
-<area shape="rect" href="../../df/d48/protoutils_8h.html#ae34375388f37361264489ac38b5ef8d6" title="Convert an address string to a byte representation." alt="" coords="753,56,933,83"/>
+<area shape="rect" href="../../df/d48/protoutils_8h.html#a32a04b85fa743ee338cfd4ff436f4e13" title="Convert an address string to a byte representation." alt="" coords="753,56,933,83"/>
 <area shape="rect" href="../../df/d48/protoutils_8h.html#a07260974981a08120ce7d210952aa0b9" title=" " alt="" coords="583,56,705,83"/>
 <area shape="rect" href="../../da/de0/multiaddr_8h.html#a3292b7d06b491d71303cb0b9ae10fd0b" title=" " alt="" coords="335,5,535,32"/>
 <area shape="rect" href="../../da/de0/multiaddr_8h.html#ad3ee5cbe47bd239e6b308f367afb1726" title=" " alt="" coords="335,56,535,83"/>
@@ -676,7 +678,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="../../df/d48/protoutils_8h_a63c08b81b904d8869edf06f52e031c25_icgraph.png" border="0" usemap="#df/d48/protoutils_8h_a63c08b81b904d8869edf06f52e031c25_icgraph" alt=""/></div>
 <map name="df/d48/protoutils_8h_a63c08b81b904d8869edf06f52e031c25_icgraph" id="df/d48/protoutils_8h_a63c08b81b904d8869edf06f52e031c25_icgraph">
 <area shape="rect" title=" " alt="" coords="981,56,1088,83"/>
-<area shape="rect" href="../../df/d48/protoutils_8h.html#ae34375388f37361264489ac38b5ef8d6" title="Convert an address string to a byte representation." alt="" coords="753,56,933,83"/>
+<area shape="rect" href="../../df/d48/protoutils_8h.html#a32a04b85fa743ee338cfd4ff436f4e13" title="Convert an address string to a byte representation." alt="" coords="753,56,933,83"/>
 <area shape="rect" href="../../df/d48/protoutils_8h.html#a07260974981a08120ce7d210952aa0b9" title=" " alt="" coords="583,56,705,83"/>
 <area shape="rect" href="../../da/de0/multiaddr_8h.html#a3292b7d06b491d71303cb0b9ae10fd0b" title=" " alt="" coords="335,5,535,32"/>
 <area shape="rect" href="../../da/de0/multiaddr_8h.html#ad3ee5cbe47bd239e6b308f367afb1726" title=" " alt="" coords="335,56,535,83"/>
@@ -800,15 +802,16 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000004">Todo:</a></b></dt><dd>figure out a better size </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d80/protoutils_8c_source.html#l00585">585</a> of file <a class="el" href="../../dc/d80/protoutils_8c_source.html">protoutils.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d80/protoutils_8c_source.html#l00573">573</a> of file <a class="el" href="../../dc/d80/protoutils_8c_source.html">protoutils.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../df/d48/protoutils_8h_a07260974981a08120ce7d210952aa0b9_cgraph.png" border="0" usemap="#df/d48/protoutils_8h_a07260974981a08120ce7d210952aa0b9_cgraph" alt=""/></div>
 <map name="df/d48/protoutils_8h_a07260974981a08120ce7d210952aa0b9_cgraph" id="df/d48/protoutils_8h_a07260974981a08120ce7d210952aa0b9_cgraph">
 <area shape="rect" title=" " alt="" coords="5,279,128,305"/>
-<area shape="rect" href="../../dc/d80/protoutils_8c.html#ae34375388f37361264489ac38b5ef8d6" title="Convert an address string to a byte representation." alt="" coords="176,165,356,192"/>
+<area shape="rect" href="../../dc/d80/protoutils_8c.html#a32a04b85fa743ee338cfd4ff436f4e13" title="Convert an address string to a byte representation." alt="" coords="176,165,356,192"/>
 <area shape="rect" href="../../dc/d9a/varhexutils_8c.html#a4867d8e7469e092a578b10887669fdb1" title=" " alt="" coords="449,5,542,32"/>
 <area shape="rect" href="../../dc/d9a/varhexutils_8c.html#a2a5d4ea35e5a01291806f4355836dd50" title=" " alt="" coords="217,228,315,255"/>
 <area shape="rect" href="../../de/db7/protocols_8c.html#a6d46ac1a0a6df5b003cb1bca51d74950" title="load the available protocols into the global protocol_P" alt="" coords="207,279,325,305"/>
@@ -878,7 +881,7 @@ Here is the caller graph for this function:</div>
 <map name="df/d48/protoutils_8h_aa795818eb0d01911b58ca3ef2c8f980d_icgraph" id="df/d48/protoutils_8h_aa795818eb0d01911b58ca3ef2c8f980d_icgraph">
 <area shape="rect" title=" " alt="" coords="1136,56,1227,83"/>
 <area shape="rect" href="../../df/d48/protoutils_8h.html#a63c08b81b904d8869edf06f52e031c25" title=" " alt="" coords="981,56,1088,83"/>
-<area shape="rect" href="../../df/d48/protoutils_8h.html#ae34375388f37361264489ac38b5ef8d6" title="Convert an address string to a byte representation." alt="" coords="753,56,933,83"/>
+<area shape="rect" href="../../df/d48/protoutils_8h.html#a32a04b85fa743ee338cfd4ff436f4e13" title="Convert an address string to a byte representation." alt="" coords="753,56,933,83"/>
 <area shape="rect" href="../../df/d48/protoutils_8h.html#a07260974981a08120ce7d210952aa0b9" title=" " alt="" coords="583,56,705,83"/>
 <area shape="rect" href="../../da/de0/multiaddr_8h.html#a3292b7d06b491d71303cb0b9ae10fd0b" title=" " alt="" coords="335,5,535,32"/>
 <area shape="rect" href="../../da/de0/multiaddr_8h.html#ad3ee5cbe47bd239e6b308f367afb1726" title=" " alt="" coords="335,56,535,83"/>

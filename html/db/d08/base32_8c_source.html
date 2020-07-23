@@ -155,8 +155,8 @@ $(document).ready(function(){initNavTree('db/d08/base32_8c_source.html','../../'
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                              <span class="keyword">const</span> <span class="keywordtype">char</span> *restrict in, <span class="keywordtype">size_t</span> inlen,</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                              <span class="keywordtype">char</span> *restrict out, <span class="keywordtype">size_t</span> *outlen);</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">bool</span> <a class="code" href="../../db/d08/base32_8c.html#a6873a33232d40521df8943c2d8dadf47">base32_decode_alloc_ctx</a>(<span class="keyword">struct</span> <a class="code" href="../../d3/d2c/structbase32__decode__context.html">base32_decode_context</a> *ctx,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                                    <span class="keyword">const</span> <span class="keywordtype">char</span> *in, <span class="keywordtype">size_t</span> inlen, <span class="keywordtype">char</span> **out,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">bool</span> <a class="code" href="../../db/d08/base32_8c.html#a9f1164ecfdb760469b372e78d01011d8">base32_decode_alloc_ctx</a>(<span class="keyword">struct</span> <a class="code" href="../../d3/d2c/structbase32__decode__context.html">base32_decode_context</a> *ctx,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                                    <span class="keyword">const</span> <span class="keywordtype">char</span> *in, <span class="keywordtype">size_t</span> inlen, <span class="keywordtype">char</span> *out,</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                                    <span class="keywordtype">size_t</span> *outlen);</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="../../db/d08/base32_8c.html#ab24b8a8e0c08750998d507d1cbd049df">   74</a></span>&#160;<span class="preprocessor">#define base32_decode(in, inlen, out, outlen) \</span></div>
@@ -604,8 +604,8 @@ $(document).ready(function(){initNavTree('db/d08/base32_8c_source.html','../../'
 <div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;<span class="comment">   decoding and memory error.)  The function returns false if the</span></div>
 <div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;<span class="comment">   input was invalid, in which case *OUT is NULL and *OUTLEN is</span></div>
 <div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;<span class="comment">   undefined. */</span></div>
-<div class="line"><a name="l00519"></a><span class="lineno"><a class="line" href="../../db/d08/base32_8c.html#a6873a33232d40521df8943c2d8dadf47">  519</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="../../db/d08/base32_8c.html#a6873a33232d40521df8943c2d8dadf47">base32_decode_alloc_ctx</a>(<span class="keyword">struct</span> <a class="code" href="../../d3/d2c/structbase32__decode__context.html">base32_decode_context</a> *ctx, <span class="keyword">const</span> <span class="keywordtype">char</span> *in,</div>
-<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;                             <span class="keywordtype">size_t</span> inlen, <span class="keywordtype">char</span> **out, <span class="keywordtype">size_t</span> *outlen) {</div>
+<div class="line"><a name="l00519"></a><span class="lineno"><a class="line" href="../../db/d08/base32_8c.html#a9f1164ecfdb760469b372e78d01011d8">  519</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="../../db/d08/base32_8c.html#a9f1164ecfdb760469b372e78d01011d8">base32_decode_alloc_ctx</a>(<span class="keyword">struct</span> <a class="code" href="../../d3/d2c/structbase32__decode__context.html">base32_decode_context</a> *ctx, <span class="keyword">const</span> <span class="keywordtype">char</span> *in,</div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;                             <span class="keywordtype">size_t</span> inlen, <span class="keywordtype">char</span> *out, <span class="keywordtype">size_t</span> *outlen) {</div>
 <div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;    <span class="comment">/* This may allocate a few bytes too many, depending on input,</span></div>
 <div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;<span class="comment">       but it&#39;s not worth the extra CPU time to compute the exact size.</span></div>
 <div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;<span class="comment">       The exact size is 5 * inlen / 8, minus one or more bytes if the</span></div>
@@ -613,115 +613,112 @@ $(document).ready(function(){initNavTree('db/d08/base32_8c_source.html','../../'
 <div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;<span class="comment">       Dividing before multiplying avoids the possibility of overflow.  */</span></div>
 <div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;    <span class="keywordtype">size_t</span> needlen = 5 * (inlen / 8) + 5;</div>
 <div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160; </div>
-<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;    *out = malloc(needlen);</div>
-<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;    <span class="keywordflow">if</span> (!*out)</div>
-<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;    <span class="keywordflow">if</span> (needlen &gt; *outlen) {</div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;    }</div>
 <div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160; </div>
-<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="../../db/d08/base32_8c.html#a202f50cce9f077cd2d0b91e8243c1074">base32_decode_ctx</a>(ctx, in, inlen, *out, &amp;needlen)) {</div>
-<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;        free(*out);</div>
-<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;        *out = NULL;</div>
-<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;    }</div>
-<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160; </div>
-<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;    <span class="keywordflow">if</span> (outlen)</div>
-<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;        *outlen = needlen;</div>
-<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160; </div>
-<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;}</div>
-<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;<span class="comment"> * Public functions</span></div>
-<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;<span class="comment"> * Encode in Base32 format</span></div>
-<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;<span class="comment"> * @param incoming the incoming bytes</span></div>
-<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;<span class="comment"> * @param incoming_length the length of the incoming bytes</span></div>
-<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;<span class="comment"> * @param results where to put the results</span></div>
-<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;<span class="comment"> * @param results_length the size of the buffer, and returns the actual length</span></div>
-<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;<span class="comment"> * used</span></div>
-<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;<span class="comment"> * @returns true(1) on success</span></div>
-<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00557"></a><span class="lineno"><a class="line" href="../../d8/d33/base32_8h.html#a78acce42d5c859aea4c19508c1aaa1c5">  557</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../db/d08/base32_8c.html#a78acce42d5c859aea4c19508c1aaa1c5">libp2p_encoding_base32_encode</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *incoming,</div>
-<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;                                  <span class="keywordtype">size_t</span> incoming_length, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *results,</div>
-<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;                                  <span class="keywordtype">size_t</span> *results_length) {</div>
-<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;    memset(results, 0, *results_length);</div>
-<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;    <a class="code" href="../../db/d08/base32_8c.html#a7b03b543c865173ec643b3c2ee4fb08f">base32_encode</a>((<span class="keywordtype">char</span> *)incoming, incoming_length, (<span class="keywordtype">char</span> *)results,</div>
-<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;                  *results_length);</div>
-<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;    <span class="keywordflow">if</span> (results[(*results_length) - 1] == 0)</div>
-<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;        *results_length = strlen((<span class="keywordtype">char</span> *)results);</div>
-<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;    <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;}</div>
-<div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;<span class="comment"> * Calculate the size of the buffer necessary to encode</span></div>
-<div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;<span class="comment"> * @param incoming_length the length of the incoming value</span></div>
-<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;<span class="comment"> * @returns the size of the buffer necessary to hold the encoded bytes</span></div>
-<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00573"></a><span class="lineno"><a class="line" href="../../d8/d33/base32_8h.html#a37dc6aec5c9e10f4f7775d5db0fc1b63">  573</a></span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="../../db/d08/base32_8c.html#a37dc6aec5c9e10f4f7775d5db0fc1b63">libp2p_encoding_base32_encode_size</a>(<span class="keywordtype">size_t</span> incoming_length) {</div>
-<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;    <span class="comment">// https://stackoverflow.com/questions/23636240/how-do-i-predict-the-required-size-of-a-base32-decode-output</span></div>
-<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;    incoming_length = ((double)incoming_length * (<span class="keywordtype">double</span>)1.6);</div>
-<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;    <span class="keywordflow">return</span> incoming_length + 8; <span class="comment">// +8 due to rounding</span></div>
-<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160;}</div>
-<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160;<span class="comment"> * Decode from Base16 format</span></div>
-<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;<span class="comment"> * @param incoming the incoming base16 encoded string</span></div>
-<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;<span class="comment"> * @param incoming_length the length of the incoming string (no need to include</span></div>
-<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;<span class="comment"> * null)</span></div>
-<div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;<span class="comment"> * @param results where to put the results</span></div>
-<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;<span class="comment"> * @param results_length the size of the buffer, and returns the actual length</span></div>
-<div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160;<span class="comment"> * used</span></div>
-<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;<span class="comment"> * @returns true(1) on success</span></div>
-<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00589"></a><span class="lineno"><a class="line" href="../../d8/d33/base32_8h.html#abdbe99d44b5208ff21cbe18c11c12465">  589</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../db/d08/base32_8c.html#abdbe99d44b5208ff21cbe18c11c12465">libp2p_encoding_base32_decode</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *incoming,</div>
-<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160;                                  <span class="keywordtype">size_t</span> incoming_length, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *results,</div>
-<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;                                  <span class="keywordtype">size_t</span> *results_length) {</div>
-<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;    <span class="keywordtype">int</span> retVal = <a class="code" href="../../db/d08/base32_8c.html#a202f50cce9f077cd2d0b91e8243c1074">base32_decode_ctx</a>(NULL, (<span class="keywordtype">char</span> *)incoming, incoming_length,</div>
-<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;                                   (<span class="keywordtype">char</span> *)results, results_length);</div>
-<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160; </div>
-<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160;    <span class="comment">// unknown error</span></div>
-<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;    <span class="keywordflow">if</span> (results == NULL)</div>
-<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160; </div>
-<div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160;    <span class="comment">// Input was not valid base32</span></div>
-<div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;    <span class="keywordflow">if</span> (retVal == 0)</div>
-<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160; </div>
-<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;    <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;}</div>
-<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;<span class="comment"> * Calculate the size of the buffer necessary to decode</span></div>
-<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;<span class="comment"> * @param incoming_length the length of the incoming value</span></div>
-<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;<span class="comment"> * @returns the size of the buffer necessary to hold the decoded bytes</span></div>
-<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00611"></a><span class="lineno"><a class="line" href="../../d8/d33/base32_8h.html#aa5e9ce21e2e63e68515f76c19a49aeed">  611</a></span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="../../db/d08/base32_8c.html#aa5e9ce21e2e63e68515f76c19a49aeed">libp2p_encoding_base32_decode_size</a>(<span class="keywordtype">size_t</span> incoming_length) {</div>
-<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;    <span class="keywordflow">return</span> 5 * (incoming_length / 8) + 5;</div>
-<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;}</div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="../../db/d08/base32_8c.html#a202f50cce9f077cd2d0b91e8243c1074">base32_decode_ctx</a>(ctx, in, inlen, out, &amp;needlen)) {</div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;    }</div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160; </div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;    <span class="keywordflow">if</span> (outlen)</div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;        *outlen = needlen;</div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;}</div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;<span class="comment"> * Public functions</span></div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;<span class="comment"> * Encode in Base32 format</span></div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;<span class="comment"> * @param incoming the incoming bytes</span></div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;<span class="comment"> * @param incoming_length the length of the incoming bytes</span></div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;<span class="comment"> * @param results where to put the results</span></div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;<span class="comment"> * @param results_length the size of the buffer, and returns the actual length</span></div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;<span class="comment"> * used</span></div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;<span class="comment"> * @returns true(1) on success</span></div>
+<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00554"></a><span class="lineno"><a class="line" href="../../d8/d33/base32_8h.html#a78acce42d5c859aea4c19508c1aaa1c5">  554</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../db/d08/base32_8c.html#a78acce42d5c859aea4c19508c1aaa1c5">libp2p_encoding_base32_encode</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *incoming,</div>
+<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160;                                  <span class="keywordtype">size_t</span> incoming_length, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *results,</div>
+<div class="line"><a name="l00556"></a><span class="lineno">  556</span>&#160;                                  <span class="keywordtype">size_t</span> *results_length) {</div>
+<div class="line"><a name="l00557"></a><span class="lineno">  557</span>&#160;    memset(results, 0, *results_length);</div>
+<div class="line"><a name="l00558"></a><span class="lineno">  558</span>&#160;    <a class="code" href="../../db/d08/base32_8c.html#a7b03b543c865173ec643b3c2ee4fb08f">base32_encode</a>((<span class="keywordtype">char</span> *)incoming, incoming_length, (<span class="keywordtype">char</span> *)results,</div>
+<div class="line"><a name="l00559"></a><span class="lineno">  559</span>&#160;                  *results_length);</div>
+<div class="line"><a name="l00560"></a><span class="lineno">  560</span>&#160;    <span class="keywordflow">if</span> (results[(*results_length) - 1] == 0)</div>
+<div class="line"><a name="l00561"></a><span class="lineno">  561</span>&#160;        *results_length = strlen((<span class="keywordtype">char</span> *)results);</div>
+<div class="line"><a name="l00562"></a><span class="lineno">  562</span>&#160;    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;}</div>
+<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160;<span class="comment"> * Calculate the size of the buffer necessary to encode</span></div>
+<div class="line"><a name="l00567"></a><span class="lineno">  567</span>&#160;<span class="comment"> * @param incoming_length the length of the incoming value</span></div>
+<div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160;<span class="comment"> * @returns the size of the buffer necessary to hold the encoded bytes</span></div>
+<div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00570"></a><span class="lineno"><a class="line" href="../../d8/d33/base32_8h.html#a37dc6aec5c9e10f4f7775d5db0fc1b63">  570</a></span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="../../db/d08/base32_8c.html#a37dc6aec5c9e10f4f7775d5db0fc1b63">libp2p_encoding_base32_encode_size</a>(<span class="keywordtype">size_t</span> incoming_length) {</div>
+<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;    <span class="comment">// https://stackoverflow.com/questions/23636240/how-do-i-predict-the-required-size-of-a-base32-decode-output</span></div>
+<div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;    incoming_length = ((double)incoming_length * (<span class="keywordtype">double</span>)1.6);</div>
+<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;    <span class="keywordflow">return</span> incoming_length + 8; <span class="comment">// +8 due to rounding</span></div>
+<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;}</div>
+<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160;<span class="comment"> * Decode from Base16 format</span></div>
+<div class="line"><a name="l00578"></a><span class="lineno">  578</span>&#160;<span class="comment"> * @param incoming the incoming base16 encoded string</span></div>
+<div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;<span class="comment"> * @param incoming_length the length of the incoming string (no need to include</span></div>
+<div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160;<span class="comment"> * null)</span></div>
+<div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160;<span class="comment"> * @param results where to put the results</span></div>
+<div class="line"><a name="l00582"></a><span class="lineno">  582</span>&#160;<span class="comment"> * @param results_length the size of the buffer, and returns the actual length</span></div>
+<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;<span class="comment"> * used</span></div>
+<div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;<span class="comment"> * @returns true(1) on success</span></div>
+<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00586"></a><span class="lineno"><a class="line" href="../../d8/d33/base32_8h.html#abdbe99d44b5208ff21cbe18c11c12465">  586</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../db/d08/base32_8c.html#abdbe99d44b5208ff21cbe18c11c12465">libp2p_encoding_base32_decode</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *incoming,</div>
+<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;                                  <span class="keywordtype">size_t</span> incoming_length, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *results,</div>
+<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160;                                  <span class="keywordtype">size_t</span> *results_length) {</div>
+<div class="line"><a name="l00589"></a><span class="lineno">  589</span>&#160;    <span class="keywordtype">int</span> retVal = <a class="code" href="../../db/d08/base32_8c.html#a202f50cce9f077cd2d0b91e8243c1074">base32_decode_ctx</a>(NULL, (<span class="keywordtype">char</span> *)incoming, incoming_length,</div>
+<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160;                                   (<span class="keywordtype">char</span> *)results, results_length);</div>
+<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160; </div>
+<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;    <span class="comment">// unknown error</span></div>
+<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;    <span class="keywordflow">if</span> (results == NULL)</div>
+<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160;        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00595"></a><span class="lineno">  595</span>&#160; </div>
+<div class="line"><a name="l00596"></a><span class="lineno">  596</span>&#160;    <span class="comment">// Input was not valid base32</span></div>
+<div class="line"><a name="l00597"></a><span class="lineno">  597</span>&#160;    <span class="keywordflow">if</span> (retVal == 0)</div>
+<div class="line"><a name="l00598"></a><span class="lineno">  598</span>&#160;        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00599"></a><span class="lineno">  599</span>&#160; </div>
+<div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160;    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;}</div>
+<div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;<span class="comment"> * Calculate the size of the buffer necessary to decode</span></div>
+<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;<span class="comment"> * @param incoming_length the length of the incoming value</span></div>
+<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;<span class="comment"> * @returns the size of the buffer necessary to hold the decoded bytes</span></div>
+<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00608"></a><span class="lineno"><a class="line" href="../../d8/d33/base32_8h.html#aa5e9ce21e2e63e68515f76c19a49aeed">  608</a></span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="../../db/d08/base32_8c.html#aa5e9ce21e2e63e68515f76c19a49aeed">libp2p_encoding_base32_decode_size</a>(<span class="keywordtype">size_t</span> incoming_length) {</div>
+<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;    <span class="keywordflow">return</span> 5 * (incoming_length / 8) + 5;</div>
+<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="abase32_8c_html_a501a6d73efdebf84d29a92fb313e167f"><div class="ttname"><a href="../../db/d08/base32_8c.html#a501a6d73efdebf84d29a92fb313e167f">isbase32</a></div><div class="ttdeci">bool isbase32(char ch)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00285">base32.c:285</a></div></div>
 <div class="ttc" id="abase32_8c_html_a6adf4957785212a3309f709d073308b3"><div class="ttname"><a href="../../db/d08/base32_8c.html#a6adf4957785212a3309f709d073308b3">b32</a></div><div class="ttdeci">static const signed char b32[0x100]</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00242">base32.c:242</a></div></div>
 <div class="ttc" id="abase32_8c_html_af2a13ae09c201d70c650c1c4122570a7"><div class="ttname"><a href="../../db/d08/base32_8c.html#af2a13ae09c201d70c650c1c4122570a7">base32_encode_alloc</a></div><div class="ttdeci">size_t base32_encode_alloc(const char *in, size_t inlen, char **out)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00156">base32.c:156</a></div></div>
 <div class="ttc" id="astructbase32__decode__context_html_a9842181a9377602c2e6d70333fc6720b"><div class="ttname"><a href="../../d3/d2c/structbase32__decode__context.html#a9842181a9377602c2e6d70333fc6720b">base32_decode_context::buf</a></div><div class="ttdeci">char buf[8]</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00054">base32.c:54</a></div></div>
-<div class="ttc" id="abase32_8c_html_a37dc6aec5c9e10f4f7775d5db0fc1b63"><div class="ttname"><a href="../../db/d08/base32_8c.html#a37dc6aec5c9e10f4f7775d5db0fc1b63">libp2p_encoding_base32_encode_size</a></div><div class="ttdeci">size_t libp2p_encoding_base32_encode_size(size_t incoming_length)</div><div class="ttdoc">Calculate the size of the buffer necessary to encode.</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00573">base32.c:573</a></div></div>
-<div class="ttc" id="abase32_8c_html_a6873a33232d40521df8943c2d8dadf47"><div class="ttname"><a href="../../db/d08/base32_8c.html#a6873a33232d40521df8943c2d8dadf47">base32_decode_alloc_ctx</a></div><div class="ttdeci">bool base32_decode_alloc_ctx(struct base32_decode_context *ctx, const char *in, size_t inlen, char **out, size_t *outlen)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00519">base32.c:519</a></div></div>
+<div class="ttc" id="abase32_8c_html_a37dc6aec5c9e10f4f7775d5db0fc1b63"><div class="ttname"><a href="../../db/d08/base32_8c.html#a37dc6aec5c9e10f4f7775d5db0fc1b63">libp2p_encoding_base32_encode_size</a></div><div class="ttdeci">size_t libp2p_encoding_base32_encode_size(size_t incoming_length)</div><div class="ttdoc">Calculate the size of the buffer necessary to encode.</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00570">base32.c:570</a></div></div>
 <div class="ttc" id="astructbase32__decode__context_html_a0879b3e7cc0fa96e2ca6542b4a79849b"><div class="ttname"><a href="../../d3/d2c/structbase32__decode__context.html#a0879b3e7cc0fa96e2ca6542b4a79849b">base32_decode_context::i</a></div><div class="ttdeci">unsigned int i</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00053">base32.c:53</a></div></div>
 <div class="ttc" id="abase32_8c_html_a7b03b543c865173ec643b3c2ee4fb08f"><div class="ttname"><a href="../../db/d08/base32_8c.html#a7b03b543c865173ec643b3c2ee4fb08f">base32_encode</a></div><div class="ttdeci">void base32_encode(const char *restrict in, size_t inlen, char *restrict out, size_t outlen)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00097">base32.c:97</a></div></div>
 <div class="ttc" id="abase32_8c_html_a99b207232c9ea9fcf8126ba306331fa8"><div class="ttname"><a href="../../db/d08/base32_8c.html#a99b207232c9ea9fcf8126ba306331fa8">decode_8</a></div><div class="ttdeci">static bool decode_8(char const *restrict in, size_t inlen, char *restrict *outp, size_t *outleft)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00346">base32.c:346</a></div></div>
 <div class="ttc" id="abase32_8c_html_ad2e5a343faf193420b2f1bd2c9a2ca2c"><div class="ttname"><a href="../../db/d08/base32_8c.html#ad2e5a343faf193420b2f1bd2c9a2ca2c">base32_decode_ctx_init</a></div><div class="ttdeci">void base32_decode_ctx_init(struct base32_decode_context *ctx)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00290">base32.c:290</a></div></div>
-<div class="ttc" id="abase32_8c_html_a78acce42d5c859aea4c19508c1aaa1c5"><div class="ttname"><a href="../../db/d08/base32_8c.html#a78acce42d5c859aea4c19508c1aaa1c5">libp2p_encoding_base32_encode</a></div><div class="ttdeci">int libp2p_encoding_base32_encode(const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t *results_length)</div><div class="ttdoc">Encode in Base32 format.</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00557">base32.c:557</a></div></div>
+<div class="ttc" id="abase32_8c_html_a78acce42d5c859aea4c19508c1aaa1c5"><div class="ttname"><a href="../../db/d08/base32_8c.html#a78acce42d5c859aea4c19508c1aaa1c5">libp2p_encoding_base32_encode</a></div><div class="ttdeci">int libp2p_encoding_base32_encode(const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t *results_length)</div><div class="ttdoc">Encode in Base32 format.</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00554">base32.c:554</a></div></div>
 <div class="ttc" id="abase32_8c_html_a1c0f4f25842bd82b393ce4bcfd92e182"><div class="ttname"><a href="../../db/d08/base32_8c.html#a1c0f4f25842bd82b393ce4bcfd92e182">B32</a></div><div class="ttdeci">#define B32(_)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00188">base32.c:188</a></div></div>
 <div class="ttc" id="abase32_8c_html_a12c6c1b0c78f82cbe2ee3508b1c25f37"><div class="ttname"><a href="../../db/d08/base32_8c.html#a12c6c1b0c78f82cbe2ee3508b1c25f37">uchar_in_range</a></div><div class="ttdeci">#define uchar_in_range(c)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00279">base32.c:279</a></div></div>
 <div class="ttc" id="abase32_8c_html_a29a9ac3e865899c095aedc84a36e3617"><div class="ttname"><a href="../../db/d08/base32_8c.html#a29a9ac3e865899c095aedc84a36e3617">return_false</a></div><div class="ttdeci">#define return_false</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00334">base32.c:334</a></div></div>
 <div class="ttc" id="abase32_8c_html_a3c0c1964c1c1a0c1d499ff6edf8a68b5"><div class="ttname"><a href="../../db/d08/base32_8c.html#a3c0c1964c1c1a0c1d499ff6edf8a68b5">to_uchar</a></div><div class="ttdeci">static unsigned char to_uchar(char ch)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00089">base32.c:89</a></div></div>
 <div class="ttc" id="abase32_8c_html_a21d7809289d6b96e0358707a515a6c7f"><div class="ttname"><a href="../../db/d08/base32_8c.html#a21d7809289d6b96e0358707a515a6c7f">BASE32_LENGTH</a></div><div class="ttdeci">#define BASE32_LENGTH(inlen)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00050">base32.c:50</a></div></div>
 <div class="ttc" id="astructbase32__decode__context_html"><div class="ttname"><a href="../../d3/d2c/structbase32__decode__context.html">base32_decode_context</a></div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00052">base32.c:52</a></div></div>
-<div class="ttc" id="abase32_8c_html_aa5e9ce21e2e63e68515f76c19a49aeed"><div class="ttname"><a href="../../db/d08/base32_8c.html#aa5e9ce21e2e63e68515f76c19a49aeed">libp2p_encoding_base32_decode_size</a></div><div class="ttdeci">size_t libp2p_encoding_base32_decode_size(size_t incoming_length)</div><div class="ttdoc">Calculate the size of the buffer necessary to decode.</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00611">base32.c:611</a></div></div>
+<div class="ttc" id="abase32_8c_html_aa5e9ce21e2e63e68515f76c19a49aeed"><div class="ttname"><a href="../../db/d08/base32_8c.html#aa5e9ce21e2e63e68515f76c19a49aeed">libp2p_encoding_base32_decode_size</a></div><div class="ttdeci">size_t libp2p_encoding_base32_decode_size(size_t incoming_length)</div><div class="ttdoc">Calculate the size of the buffer necessary to decode.</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00608">base32.c:608</a></div></div>
 <div class="ttc" id="abase32_8c_html_a491bf1cfe5311f551cc3036f6119557a"><div class="ttname"><a href="../../db/d08/base32_8c.html#a491bf1cfe5311f551cc3036f6119557a">get_8</a></div><div class="ttdeci">static char * get_8(struct base32_decode_context *ctx, char const *restrict *in, char const *restrict in_end, size_t *n_non_newline)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00301">base32.c:301</a></div></div>
+<div class="ttc" id="abase32_8c_html_a9f1164ecfdb760469b372e78d01011d8"><div class="ttname"><a href="../../db/d08/base32_8c.html#a9f1164ecfdb760469b372e78d01011d8">base32_decode_alloc_ctx</a></div><div class="ttdeci">bool base32_decode_alloc_ctx(struct base32_decode_context *ctx, const char *in, size_t inlen, char *out, size_t *outlen)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00519">base32.c:519</a></div></div>
 <div class="ttc" id="abase32_8h_html"><div class="ttname"><a href="../../d8/d33/base32_8h.html">base32.h</a></div><div class="ttdoc">provides base 32 encoding/decoding functions</div></div>
-<div class="ttc" id="abase32_8c_html_abdbe99d44b5208ff21cbe18c11c12465"><div class="ttname"><a href="../../db/d08/base32_8c.html#abdbe99d44b5208ff21cbe18c11c12465">libp2p_encoding_base32_decode</a></div><div class="ttdeci">int libp2p_encoding_base32_decode(const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t *results_length)</div><div class="ttdoc">Decode from Base16 format.</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00589">base32.c:589</a></div></div>
+<div class="ttc" id="abase32_8c_html_abdbe99d44b5208ff21cbe18c11c12465"><div class="ttname"><a href="../../db/d08/base32_8c.html#abdbe99d44b5208ff21cbe18c11c12465">libp2p_encoding_base32_decode</a></div><div class="ttdeci">int libp2p_encoding_base32_decode(const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t *results_length)</div><div class="ttdoc">Decode from Base16 format.</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00586">base32.c:586</a></div></div>
 <div class="ttc" id="abase32_8c_html_a202f50cce9f077cd2d0b91e8243c1074"><div class="ttname"><a href="../../db/d08/base32_8c.html#a202f50cce9f077cd2d0b91e8243c1074">base32_decode_ctx</a></div><div class="ttdeci">bool base32_decode_ctx(struct base32_decode_context *ctx, const char *restrict in, size_t inlen, char *restrict out, size_t *outlen)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00436">base32.c:436</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

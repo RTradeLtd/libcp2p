@@ -7,7 +7,7 @@ var base32_8c =
     [ "BASE32_LENGTH", "db/d08/base32_8c.html#a21d7809289d6b96e0358707a515a6c7f", null ],
     [ "return_false", "db/d08/base32_8c.html#a29a9ac3e865899c095aedc84a36e3617", null ],
     [ "uchar_in_range", "db/d08/base32_8c.html#a12c6c1b0c78f82cbe2ee3508b1c25f37", null ],
-    [ "base32_decode_alloc_ctx", "db/d08/base32_8c.html#a6873a33232d40521df8943c2d8dadf47", null ],
+    [ "base32_decode_alloc_ctx", "db/d08/base32_8c.html#a9f1164ecfdb760469b372e78d01011d8", null ],
     [ "base32_decode_ctx", "db/d08/base32_8c.html#a202f50cce9f077cd2d0b91e8243c1074", null ],
     [ "base32_decode_ctx_init", "db/d08/base32_8c.html#ad2e5a343faf193420b2f1bd2c9a2ca2c", null ],
     [ "base32_encode", "db/d08/base32_8c.html#a7b03b543c865173ec643b3c2ee4fb08f", null ],

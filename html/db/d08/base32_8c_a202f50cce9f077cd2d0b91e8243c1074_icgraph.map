@@ -1,8 +1,8 @@
 <map id="base32_decode_ctx" name="base32_decode_ctx">
 <area shape="rect" id="node1" title=" " alt="" coords="1268,85,1419,112"/>
-<area shape="rect" id="node2" href="$db/d08/base32_8c.html#a6873a33232d40521df8943c2d8dadf47" title=" " alt="" coords="1032,56,1220,83"/>
+<area shape="rect" id="node2" href="$db/d08/base32_8c.html#a9f1164ecfdb760469b372e78d01011d8" title=" " alt="" coords="1032,56,1220,83"/>
 <area shape="rect" id="node3" href="$d8/d33/base32_8h.html#abdbe99d44b5208ff21cbe18c11c12465" title="Decode from Base16 format." alt="" coords="1035,107,1217,149"/>
-<area shape="rect" id="node4" href="$df/d48/protoutils_8h.html#ae34375388f37361264489ac38b5ef8d6" title="Convert an address string to a byte representation." alt="" coords="804,56,984,83"/>
+<area shape="rect" id="node4" href="$df/d48/protoutils_8h.html#a32a04b85fa743ee338cfd4ff436f4e13" title="Convert an address string to a byte representation." alt="" coords="804,56,984,83"/>
 <area shape="rect" id="node19" href="$dc/d13/cid_8h.html#a2013ad348ce900ca01012efdd865f6f9" title=" " alt="" coords="812,107,976,149"/>
 <area shape="rect" id="node21" href="$d4/d43/multibase_8h.html#a29045b9a6ab1fdf18b9097270db442c7" title="Decode data that was encoded in multibase format." alt="" coords="823,212,965,239"/>
 <area shape="rect" id="node5" href="$df/d48/protoutils_8h.html#a07260974981a08120ce7d210952aa0b9" title=" " alt="" coords="608,56,731,83"/>

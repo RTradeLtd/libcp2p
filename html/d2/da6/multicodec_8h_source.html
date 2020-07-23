@@ -147,21 +147,22 @@ $(document).ready(function(){initNavTree('d2/da6/multicodec_8h_source.html','../
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"> * @brief Decode a multicodec encoded data array</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"> * @param encoded an instance of multicodec_encoded_t holding the encoded data and codec used</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"> * @param outData the array to put the results in</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"> * @param maxOutDataLength the maximum size of the data</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"> * @returns an error code or 0 if all is well</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d2/da6/multicodec_8h.html#a0dd345326afee00217e02d18e891b763">multicodec_decode</a>(<a class="code" href="../../d1/d8e/structmulticodec__encoded.html">multicodec_encoded_t</a> *encoded, <span class="keywordtype">char</span> *outData,</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                      <span class="keywordtype">size_t</span> maxOutDataLength);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">/*!</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"> * @brief used to check if the provided codec is a valid codec</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"> * @param codec the codec value to check</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"> * @returns Success: true</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment"> * @returns Failure: false</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="../../d2/da6/multicodec_8h.html#a6b087e50afc90c43fbc2a5b464291840">multicodec_is_valid</a>(<span class="keywordtype">char</span> *codec);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"> * @param encoded an instance of multicodec_encoded_t holding the encoded data and</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"> * codec used</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"> * @param outData the array to put the results in</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"> * @param maxOutDataLength the maximum size of the data</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"> * @returns an error code or 0 if all is well</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d2/da6/multicodec_8h.html#a0dd345326afee00217e02d18e891b763">multicodec_decode</a>(<a class="code" href="../../d1/d8e/structmulticodec__encoded.html">multicodec_encoded_t</a> *encoded, <span class="keywordtype">char</span> *outData,</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                      <span class="keywordtype">size_t</span> maxOutDataLength);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">/*!</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"> * @brief used to check if the provided codec is a valid codec</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"> * @param codec the codec value to check</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment"> * @returns Success: true</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"> * @returns Failure: false</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="../../d2/da6/multicodec_8h.html#a6b087e50afc90c43fbc2a5b464291840">multicodec_is_valid</a>(<span class="keywordtype">char</span> *codec);</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="amulticodec_8h_html_aed61275944cb3475683e0cb4e2f1fc2d"><div class="ttname"><a href="../../d2/da6/multicodec_8h.html#aed61275944cb3475683e0cb4e2f1fc2d">multicodec_free_encoded</a></div><div class="ttdeci">void multicodec_free_encoded(multicodec_encoded_t *encoded)</div><div class="ttdoc">free up resources allocated for multicodec_encoded_t</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d14/multicodec_8c_source.html#l00479">multicodec.c:479</a></div></div>

@@ -1,4 +1,4 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/crypto/ephemeral.c" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/crypto/ephemeral.c" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -79,7 +79,7 @@ Generate a shared secret\&. Generate a shared secret
 .PP
 
 .PP
-Definition at line 229 of file ephemeral\&.c\&.
+Definition at line 238 of file ephemeral\&.c\&.
 .SS "void libp2p_crypto_ephemeral_key_free (struct \fBEphemeralPrivateKey\fP * in)"
 
 .PP
@@ -107,7 +107,7 @@ true(1) on success, otherwise false(0)
 .PP
 
 .PP
-Definition at line 155 of file ephemeral\&.c\&.
+Definition at line 158 of file ephemeral\&.c\&.
 .SS "static int libp2p_crypto_ephemeral_keypair_to_public_bytes (struct \fBEphemeralPublicKey\fP * public_key, unsigned char ** results, size_t * bytes_written)\fC [static]\fP"
 Generate a public key from a private key 
 .PP
@@ -127,7 +127,7 @@ true(1) on success, otherwise false(0)
 .PP
 
 .PP
-Definition at line 215 of file ephemeral\&.c\&.
+Definition at line 224 of file ephemeral\&.c\&.
 .SS "static int libp2p_crypto_ephemeral_point_marshal (int bit_size, uint64_t x, uint64_t y, unsigned char ** results, size_t * bytes_written)\fC [static]\fP"
 
 .PP
@@ -135,7 +135,7 @@ Definition at line 110 of file ephemeral\&.c\&.
 .SS "static int libp2p_crypto_ephemeral_point_unmarshal (int bit_size, unsigned char * buffer, size_t buffer_length, uint64_t * x, uint64_t * y)\fC [static]\fP"
 
 .PP
-Definition at line 131 of file ephemeral\&.c\&.
+Definition at line 134 of file ephemeral\&.c\&.
 .SS "void libp2p_crypto_ephemeral_stretched_key_free (struct \fBStretchedKey\fP * key)"
 
 .PP

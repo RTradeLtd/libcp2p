@@ -1,4 +1,4 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/encoding/base32.c" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/encoding/base32.c" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -67,7 +67,7 @@
 .RI "bool \fBbase32_decode_ctx\fP (struct \fBbase32_decode_context\fP *ctx, const char *restrict in, size_t inlen, char *restrict out, size_t *outlen)"
 .br
 .ti -1c
-.RI "bool \fBbase32_decode_alloc_ctx\fP (struct \fBbase32_decode_context\fP *ctx, const char *in, size_t inlen, char **out, size_t *outlen)"
+.RI "bool \fBbase32_decode_alloc_ctx\fP (struct \fBbase32_decode_context\fP *ctx, const char *in, size_t inlen, char *out, size_t *outlen)"
 .br
 .ti -1c
 .RI "static unsigned char \fBto_uchar\fP (char ch)"
@@ -137,7 +137,7 @@ Definition at line 334 of file base32\&.c\&.
 Definition at line 279 of file base32\&.c\&.
 .SH "Function Documentation"
 .PP 
-.SS "bool base32_decode_alloc_ctx (struct \fBbase32_decode_context\fP * ctx, const char * in, size_t inlen, char ** out, size_t * outlen)"
+.SS "bool base32_decode_alloc_ctx (struct \fBbase32_decode_context\fP * ctx, const char * in, size_t inlen, char * out, size_t * outlen)"
 
 .PP
 Definition at line 519 of file base32\&.c\&.
@@ -192,7 +192,7 @@ true(1) on success
 .PP
 
 .PP
-Definition at line 589 of file base32\&.c\&.
+Definition at line 586 of file base32\&.c\&.
 .SS "size_t libp2p_encoding_base32_decode_size (size_t incoming_length)"
 
 .PP
@@ -210,7 +210,7 @@ the size of the buffer necessary to hold the decoded bytes
 .PP
 
 .PP
-Definition at line 611 of file base32\&.c\&.
+Definition at line 608 of file base32\&.c\&.
 .SS "int libp2p_encoding_base32_encode (const unsigned char * incoming, size_t incoming_length, unsigned char * results, size_t * results_length)"
 
 .PP
@@ -234,7 +234,7 @@ true(1) on success
 .PP
 
 .PP
-Definition at line 557 of file base32\&.c\&.
+Definition at line 554 of file base32\&.c\&.
 .SS "size_t libp2p_encoding_base32_encode_size (size_t incoming_length)"
 
 .PP
@@ -252,7 +252,7 @@ the size of the buffer necessary to hold the encoded bytes
 .PP
 
 .PP
-Definition at line 573 of file base32\&.c\&.
+Definition at line 570 of file base32\&.c\&.
 .SS "static unsigned char to_uchar (char ch)\fC [static]\fP"
 
 .PP

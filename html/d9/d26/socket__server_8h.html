@@ -276,7 +276,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>used for configuring a socket_server_t instance </p>
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000014">Todo:</a></b></dt><dd>switch to multi_addresses </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000016">Todo:</a></b></dt><dd>switch to multi_addresses </dd></dl>
 
 </div>
 </div>
@@ -293,7 +293,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>a TCP/UDP socket server </p>
-<p>provides a thread pool can be used for handling new connections </p><dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000015">Todo:</a></b></dt><dd>dont limit to two sockets (this will requiring using multiaddrs and an array of socket numbers) </dd></dl>
+<p>provides a thread pool can be used for handling new connections </p><dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000017">Todo:</a></b></dt><dd>dont limit to two sockets (this will requiring using multiaddrs and an array of socket numbers) </dd></dl>
 
 </div>
 </div>
@@ -347,7 +347,7 @@ Functions</h2></td></tr>
 <dd>
 Success: non-NULL populated <a class="el" href="../../d5/de2/structclient__conn.html" title="a structure containing a file descriptor and address information">client_conn</a> object </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d1/dfc/socket__server_8c_source.html#l00376">376</a> of file <a class="el" href="../../d1/dfc/socket__server_8c_source.html">socket_server.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/dfc/socket__server_8c_source.html#l00383">383</a> of file <a class="el" href="../../d1/dfc/socket__server_8c_source.html">socket_server.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -467,7 +467,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d1/dfc/socket__server_8c_source.html#l00406">406</a> of file <a class="el" href="../../d1/dfc/socket__server_8c_source.html">socket_server.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/dfc/socket__server_8c_source.html#l00413">413</a> of file <a class="el" href="../../d1/dfc/socket__server_8c_source.html">socket_server.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -528,9 +528,9 @@ Here is the caller graph for this function:</div>
 <dd>
 Failure: NULL pointer </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>support non wildcard </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000005">Todo:</a></b></dt><dd>support non wildcard </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000007">Todo:</a></b></dt><dd>support non wildcard </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd>support non wildcard </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000006">Todo:</a></b></dt><dd>support non wildcard </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000008">Todo:</a></b></dt><dd>support non wildcard </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="../../d1/dfc/socket__server_8c_source.html#l00052">52</a> of file <a class="el" href="../../d1/dfc/socket__server_8c_source.html">socket_server.c</a>.</p>
 <div class="dynheader">
@@ -616,7 +616,7 @@ Failure: NULL pointer </dd></dl>
 <p>used to signal that we should exit the main start_socket_server function </p>
 <dl class="section note"><dt>Note</dt><dd>this is only useful if you launch start_socket_server in a thread </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d1/dfc/socket__server_8c_source.html#l00365">365</a> of file <a class="el" href="../../d1/dfc/socket__server_8c_source.html">socket_server.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/dfc/socket__server_8c_source.html#l00372">372</a> of file <a class="el" href="../../d1/dfc/socket__server_8c_source.html">socket_server.c</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -656,7 +656,7 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000007">Todo:</a></b></dt><dd>enable customizable timeout </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000009">Todo:</a></b></dt><dd>enable customizable timeout </dd></dl>
 <ul>
 <li><dl class="section note"><dt>Note</dt><dd>copy the main socket list containing both tcp and udp sockets</dd></dl>
 iterate over all known sockets <dl class="section note"><dt>Note</dt><dd>this will likely search a few extra sockets, but the overhead should be neglibie</dd></dl>

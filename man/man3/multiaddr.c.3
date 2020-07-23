@@ -1,4 +1,4 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/multiaddr/multiaddr.c" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/multiaddr/multiaddr.c" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -219,6 +219,13 @@ an empty \fBmulti_address\fP struct
 .PP
 
 .PP
+\fBTodo\fP
+.RS 4
+figure out a better way of estimating size 
+.RE
+.PP
+
+.PP
 Definition at line 24 of file multiaddr\&.c\&.
 .SS "struct \fBmulti_address\fP* multi_address_new_from_bytes (const uint8_t * byteaddress, int size)"
 construct a new \fBmulti_address\fP from bytes 
@@ -242,11 +249,11 @@ this currently is failing tests
 .PP
 
 .PP
-Definition at line 43 of file multiaddr\&.c\&.
+Definition at line 44 of file multiaddr\&.c\&.
 .SS "struct \fBmulti_address\fP* multi_address_new_from_string (const char * straddress)"
 
 .PP
-Definition at line 68 of file multiaddr\&.c\&.
+Definition at line 69 of file multiaddr\&.c\&.
 .SS "int strpos (char * haystack, char * needle)"
 
 .PP

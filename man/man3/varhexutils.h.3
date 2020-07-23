@@ -1,4 +1,4 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/utils/varhexutils.h" 3 "Wed Jul 22 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/utils/varhexutils.h" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -74,21 +74,6 @@
 .ti -1c
 .RI "void \fBstr2hex\fP (unsigned char *hexstring, unsigned char *string)"
 .br
-.ti -1c
-.RI "int \fBheader\fP (unsigned char *dest, unsigned char *src)"
-.br
-.ti -1c
-.RI "int \fBheader_path\fP (unsigned char *dest, unsigned char *src)"
-.br
-.ti -1c
-.RI "int \fBadd_header\fP (unsigned char *dest, unsigned char *\fBheader\fP, size_t headersize, unsigned char *content, size_t contentsize)"
-.br
-.ti -1c
-.RI "int \fBremove_header\fP (unsigned char *dest, unsigned char *lel)"
-.br
-.ti -1c
-.RI "int \fBget_content\fP (char *dest, unsigned char *src)"
-.br
 .in -1c
 .SH "Detailed Description"
 .PP 
@@ -99,10 +84,6 @@ provides utilities for manipulating hexadecimal data
 Definition in file \fBvarhexutils\&.h\fP\&.
 .SH "Function Documentation"
 .PP 
-.SS "int add_header (unsigned char * dest, unsigned char * header, size_t headersize, unsigned char * content, size_t contentsize)"
-
-.PP
-Definition at line 441 of file varhexutils\&.c\&.
 .SS "void convert (char * convert_result, uint8_t * buf)"
 
 .PP
@@ -111,18 +92,6 @@ Definition at line 172 of file varhexutils\&.c\&.
 
 .PP
 Definition at line 203 of file varhexutils\&.c\&.
-.SS "int get_content (char * dest, unsigned char * src)"
-
-.PP
-Definition at line 525 of file varhexutils\&.c\&.
-.SS "int header (unsigned char * dest, unsigned char * src)"
-
-.PP
-Definition at line 395 of file varhexutils\&.c\&.
-.SS "int header_path (unsigned char * dest, unsigned char * src)"
-
-.PP
-Definition at line 415 of file varhexutils\&.c\&.
 .SS "void hex2str (const char * h, char * s, int sizs)"
 
 .PP
@@ -196,10 +165,6 @@ Definition at line 45 of file varhexutils\&.c\&.
 
 .PP
 Definition at line 39 of file varhexutils\&.c\&.
-.SS "int remove_header (unsigned char * dest, unsigned char * lel)"
-
-.PP
-Definition at line 462 of file varhexutils\&.c\&.
 .SS "void str2hex (unsigned char * hexstring, unsigned char * string)"
 
 .PP

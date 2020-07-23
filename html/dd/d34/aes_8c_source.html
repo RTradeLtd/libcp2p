@@ -144,49 +144,52 @@ $(document).ready(function(){initNavTree('dd/d34/aes_8c_source.html','../../'); 
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">if</span> (new_size % 16 != 0) {</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        new_size += new_size % 16;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">char</span> *padded_input = malloc(new_size);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    memcpy(padded_input, input, input_size);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">if</span> (new_size != (<span class="keywordtype">int</span>)input_size)</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        memset(&amp;padded_input[input_size], 0, new_size - input_size);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="comment">// make room for the output</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    *output = malloc(new_size);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    *output_size = new_size;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">int</span> retVal = mbedtls_aes_crypt_cbc(&amp;ctx, MBEDTLS_AES_ENCRYPT, new_size,</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                                       (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)iv,</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                                       (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)padded_input, *output);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    free(padded_input);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">if</span> (retVal != 0)</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        free(output);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">return</span> retVal == 0;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"> * Decrypt a block of text</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"> * @param key the aes key (32 bytes)</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"> * @param iv the random part of encryption (16 bytes)</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment"> * @param input the text to encrypt</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment"> * @param input_size the length of the array</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment"> * @param output where the output will be placed</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"> * @param output_size the length of the memory allocated for output</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment"> * @returns true(1) on success, otherwise false(0)</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="../../db/dcb/aes_8h.html#a7637a5c4b2b30eb5a99a0079282e794c">   85</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../dd/d34/aes_8c.html#a7637a5c4b2b30eb5a99a0079282e794c">libp2p_crypto_aes_decrypt</a>(<span class="keywordtype">char</span> *key, <span class="keywordtype">char</span> *iv, <span class="keywordtype">char</span> *input, <span class="keywordtype">size_t</span> input_size,</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                              <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> **output, <span class="keywordtype">size_t</span> *output_size) {</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    mbedtls_aes_context ctx;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    mbedtls_aes_init(&amp;ctx);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    mbedtls_aes_setkey_dec(&amp;ctx, (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)key, 256);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="comment">// make room for the output</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    *output = malloc(input_size);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    *output_size = input_size;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordflow">if</span> (mbedtls_aes_crypt_cbc(&amp;ctx, MBEDTLS_AES_DECRYPT, input_size,</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                              (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)iv, (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)input,</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                              *output) != 0)</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;}</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">char</span> *padded_input = calloc(<span class="keyword">sizeof</span>(<span class="keywordtype">char</span>), new_size);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">if</span> (padded_input == NULL) {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    }</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    memcpy(padded_input, input, input_size);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">if</span> (new_size != (<span class="keywordtype">int</span>)input_size)</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        memset(&amp;padded_input[input_size], 0, new_size - input_size);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="comment">// make room for the output</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    *output = malloc(new_size);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    *output_size = new_size;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">int</span> retVal = mbedtls_aes_crypt_cbc(&amp;ctx, MBEDTLS_AES_ENCRYPT, new_size,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                                       (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)iv,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                                       (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)padded_input, *output);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    free(padded_input);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">if</span> (retVal != 0)</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        free(output);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">return</span> retVal == 0;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment"> * Decrypt a block of text</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment"> * @param key the aes key (32 bytes)</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment"> * @param iv the random part of encryption (16 bytes)</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"> * @param input the text to encrypt</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment"> * @param input_size the length of the array</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"> * @param output where the output will be placed</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment"> * @param output_size the length of the memory allocated for output</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"> * @returns true(1) on success, otherwise false(0)</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="../../db/dcb/aes_8h.html#a7637a5c4b2b30eb5a99a0079282e794c">   88</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../dd/d34/aes_8c.html#a7637a5c4b2b30eb5a99a0079282e794c">libp2p_crypto_aes_decrypt</a>(<span class="keywordtype">char</span> *key, <span class="keywordtype">char</span> *iv, <span class="keywordtype">char</span> *input, <span class="keywordtype">size_t</span> input_size,</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                              <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> **output, <span class="keywordtype">size_t</span> *output_size) {</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    mbedtls_aes_context ctx;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    mbedtls_aes_init(&amp;ctx);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    mbedtls_aes_setkey_dec(&amp;ctx, (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)key, 256);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="comment">// make room for the output</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    *output = malloc(input_size);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    *output_size = input_size;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordflow">if</span> (mbedtls_aes_crypt_cbc(&amp;ctx, MBEDTLS_AES_DECRYPT, input_size,</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                              (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)iv, (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)input,</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                              *output) != 0)</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aaes_8c_html_a7637a5c4b2b30eb5a99a0079282e794c"><div class="ttname"><a href="../../dd/d34/aes_8c.html#a7637a5c4b2b30eb5a99a0079282e794c">libp2p_crypto_aes_decrypt</a></div><div class="ttdeci">int libp2p_crypto_aes_decrypt(char *key, char *iv, char *input, size_t input_size, unsigned char **output, size_t *output_size)</div><div class="ttdoc">Decrypt a block of text.</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d34/aes_8c_source.html#l00085">aes.c:85</a></div></div>
+<div class="ttc" id="aaes_8c_html_a7637a5c4b2b30eb5a99a0079282e794c"><div class="ttname"><a href="../../dd/d34/aes_8c.html#a7637a5c4b2b30eb5a99a0079282e794c">libp2p_crypto_aes_decrypt</a></div><div class="ttdeci">int libp2p_crypto_aes_decrypt(char *key, char *iv, char *input, size_t input_size, unsigned char **output, size_t *output_size)</div><div class="ttdoc">Decrypt a block of text.</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d34/aes_8c_source.html#l00088">aes.c:88</a></div></div>
 <div class="ttc" id="aaes_8c_html_afd685288a33798a8caf4218ddb729cee"><div class="ttname"><a href="../../dd/d34/aes_8c.html#afd685288a33798a8caf4218ddb729cee">libp2p_crypto_aes_encrypt</a></div><div class="ttdeci">int libp2p_crypto_aes_encrypt(char *key, char *iv, char *input, size_t input_size, unsigned char **output, size_t *output_size)</div><div class="ttdoc">Encrypt a block of text.</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d34/aes_8c_source.html#l00048">aes.c:48</a></div></div>
 <div class="ttc" id="aaes_8c_html_a7b7d926d2ee5b7ab99c07714c9b62138"><div class="ttname"><a href="../../dd/d34/aes_8c.html#a7b7d926d2ee5b7ab99c07714c9b62138">libp2p_crypto_aes_key_generate</a></div><div class="ttdeci">int libp2p_crypto_aes_key_generate(char *key)</div><div class="ttdoc">Generate a new AES key.</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d34/aes_8c_source.html#l00018">aes.c:18</a></div></div>
 <div class="ttc" id="aaes_8h_html"><div class="ttname"><a href="../../db/dcb/aes_8h.html">aes.h</a></div><div class="ttdoc">proivides aes encryption/decryption functions</div></div>

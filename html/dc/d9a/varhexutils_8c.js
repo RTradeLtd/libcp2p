@@ -1,12 +1,7 @@
 var varhexutils_8c =
 [
-    [ "add_header", "dc/d9a/varhexutils_8c.html#a6801d8b4c1ed8ec917b973ee2b5a872a", null ],
     [ "convert", "dc/d9a/varhexutils_8c.html#a35b3f5e0a4e1f9f3b94e5054ae669e3b", null ],
     [ "convert2", "dc/d9a/varhexutils_8c.html#a1958027fb1688d53c81a837c77345f77", null ],
-    [ "get_content", "dc/d9a/varhexutils_8c.html#a6390f2a9f96fdb08431bcdfbf22ab5b8", null ],
-    [ "get_header", "dc/d9a/varhexutils_8c.html#a0e45249bc3a02e20ad8e87e21fd4e68d", null ],
-    [ "header", "dc/d9a/varhexutils_8c.html#a57369e005f30cc43e06d5f4c7a706f68", null ],
-    [ "header_path", "dc/d9a/varhexutils_8c.html#a5332fe23288633c53c11320886c1ced0", null ],
     [ "hex2str", "dc/d9a/varhexutils_8c.html#abc2ba573b926e86bb012190aad4b5ce6", null ],
     [ "Hex_To_Int", "dc/d9a/varhexutils_8c.html#a8556ec6adb96a2e6e22321da09636483", null ],
     [ "Hex_To_Var", "dc/d9a/varhexutils_8c.html#a2a5d4ea35e5a01291806f4355836dd50", null ],
@@ -17,7 +12,6 @@ var varhexutils_8c =
     [ "Num_To_HexVar_64", "dc/d9a/varhexutils_8c.html#aee38236e16fc131a0449bdde559b16e7", null ],
     [ "Num_To_Varint_32", "dc/d9a/varhexutils_8c.html#af31e786af12184e2f9733c70ebe978c6", null ],
     [ "Num_To_Varint_64", "dc/d9a/varhexutils_8c.html#a3527bd521f099dacdb58ed80b5772441", null ],
-    [ "remove_header", "dc/d9a/varhexutils_8c.html#a0e07329c9497bd0c9064c015051029f9", null ],
     [ "str2hex", "dc/d9a/varhexutils_8c.html#a1d3a8f7f9b5ce96ce002070872488ddd", null ],
     [ "Var_Bytes_Count", "dc/d9a/varhexutils_8c.html#ab095737d237caec91eb0018680d29066", null ],
     [ "Var_To_Hex", "dc/d9a/varhexutils_8c.html#ad5320aaf6c29fcd2bf72ef43ed52e676", null ],
