@@ -17,6 +17,13 @@ A libp2p-like protocol written in C with first class support for embedded system
 * first class support for embedded systems
 * higher level languages will use FFI instead of a language specific implementation
 
+# compatability with libp2p
+
+* in theory there will be network level compatability
+  * a libcp2p node would be able to open a connection to a libp2p node
+  * this is in no way a design goal, nor a priority
+* dht will not be compatible
+
 # features
 
 ## multiformats
