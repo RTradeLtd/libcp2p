@@ -1,3 +1,7 @@
+/*! @file multibase.h
+  * @brief functions for managing multibase identifiers
+*/
+
 #include <stdio.h>
 
 #pragma once
@@ -12,7 +16,7 @@
 #define MULTIBASE_BASE64 'm'
 
 /**
- * Encode data in multibase format
+ * @brief Encode data in multibase format
  * @param base the format to use (i.e. MULTIBASE_BASE58_BTC)
  * @param incoming the data to encode
  * @param incoming_length the length of the data to encode
@@ -26,7 +30,7 @@ int multibase_encode(const char base, const unsigned char *incoming,
                      size_t results_max_length, size_t *results_length);
 
 /***
- * Calculates the size of the buffer neccessary to encode the incoming byte array
+ * @brief Calculates the size of the buffer neccessary to encode the incoming byte array
  * @param base the encoding to use
  * @param incoming the incoming array of bytes
  * @param incoming_length the length of the array in bytes
@@ -36,7 +40,7 @@ int multibase_encode_size(const char base, const unsigned char *incoming,
                           size_t incoming_length);
 
 /**
- * Decode data that was encoded in multibase format
+ * @brief Decode data that was encoded in multibase format
  * @param incoming the data to decode
  * @param incoming_length the length of the data to decode
  * @param results where to put the results
@@ -49,7 +53,7 @@ int multibase_decode(const unsigned char *incoming, size_t incoming_length,
                      size_t *results_length);
 
 /***
- * Calculates the size of the buffer neccessary to decode the incoming byte array
+ * @brief Calculates the size of the buffer neccessary to decode the incoming byte array
  * @param base the encoding to use
  * @param incoming the incoming array of bytes
  * @param incoming_length the length of the array in bytes

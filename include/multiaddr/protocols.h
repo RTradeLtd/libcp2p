@@ -1,5 +1,6 @@
-// #ifndef PROTOCOLS
-// #define PROTOCOLS
+/*! @file protocols.h
+  * @brief functions for managing multiaddr protocols
+*/
 
 #pragma once
 
@@ -45,5 +46,3 @@ proto_with_deccode(const struct ProtocolListItem *head,
 
 void protocols_with_string(const struct ProtocolListItem *head, char *meee,
                            int sizi); // NOT FINISHED, DO NOT USE!
-
-// #endif

@@ -1,3 +1,6 @@
+/*! @file protoutils.h
+  * @brief utility functions for working with multiaddrs and protocols
+*/
 #include <stddef.h>
 #include <stdint.h>
 

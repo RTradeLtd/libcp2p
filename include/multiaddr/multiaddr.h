@@ -1,5 +1,5 @@
-#ifndef MULTIADDR
-#define MULTIADDR
+#pragma once
+
 #include <string.h>
 
 #include "protocols.h"
@@ -112,5 +112,3 @@ int multi_address_compare(const struct multi_address *a, const struct multi_addr
  */
 int multi_address_compare_id(const struct multi_address *a,
                             const struct multi_address *b);
-
-#endif
