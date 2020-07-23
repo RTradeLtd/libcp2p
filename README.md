@@ -55,7 +55,6 @@ A libp2p-like protocol written in C with first class support for embedded system
   * this will eventually be removed in favor of CBOR
 * cryptography
   * ecdsa key management
-  * rsa key management
   * sha1, sha256, sha512 hashing
   * misc other crypto functionality
 
