@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['x509_2ec_1324',['x509.c',['../d1/d1a/x509_8c.html',1,'']]],
-  ['x509_2eh_1325',['x509.h',['../d6/d90/x509_8h.html',1,'']]]
+  ['varhexutils_2ec_1323',['varhexutils.c',['../dc/d9a/varhexutils_8c.html',1,'']]],
+  ['varhexutils_2eh_1324',['varhexutils.h',['../d1/d17/varhexutils_8h.html',1,'']]],
+  ['varint_2ec_1325',['varint.c',['../d4/d08/protobuf_2varint_8c.html',1,'(Global Namespace)'],['../d6/d9f/utils_2varint_8c.html',1,'(Global Namespace)']]],
+  ['varint_2eh_1326',['varint.h',['../d3/d7a/src_2protobuf_2varint_8h.html',1,'(Global Namespace)'],['../d5/dc7/include_2protobuf_2varint_8h.html',1,'(Global Namespace)'],['../d7/d0c/include_2utils_2varint_8h.html',1,'(Global Namespace)']]]
 ];

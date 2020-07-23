@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>libcp2p: Main Page</title>
+<title>libcp2p: libcp2p</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -81,11 +81,126 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </iframe>
 </div>
 
-<div class="header">
+<div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">libcp2p Documentation</div>  </div>
+<div class="title">libcp2p </div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a href="https://travis-ci.com/RTradeLtd/libcp2p"><object type="image/svg+xml" data="https://travis-ci.com/RTradeLtd/libcp2p.svg?branch=master" style="pointer-events: none;">Build Status</object></a></p>
+<blockquote class="doxtable">
+<p><b>this is a work in progress</b> </p>
+</blockquote>
+<p>A libp2p-like protocol written in C with first class support for embedded systems. Goal is to be able to run in your fridge, arduinos, and any embedded system. Higher level languages will be done using FFI.</p>
+<h1><a class="anchor" id="autotoc_md16"></a>
+difference between libcp2p and libp2p</h1>
+<ul>
+<li>Written in C</li>
+<li>Base58 replaced with base32</li>
+<li>Removal of built-in identify protocol<ul>
+<li>LibP2P is heavily reliant on the identify protocol and it is not possible to remove it</li>
+<li>Redesigned so that identify is optional</li>
+</ul>
+</li>
+<li>Protobuf replaced with cbor</li>
+<li>first class support for embedded systems</li>
+<li>higher level languages will use FFI instead of a language specific implementation</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md17"></a>
+compatability with libp2p</h1>
+<ul>
+<li>in theory there will be network level compatability<ul>
+<li>a libcp2p node would be able to open a connection to a libp2p node</li>
+<li>this is in no way a design goal, nor a priority</li>
+</ul>
+</li>
+<li>dht will not be compatible</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md18"></a>
+features</h1>
+<h2><a class="anchor" id="autotoc_md19"></a>
+multiformats</h2>
+<ul>
+<li>multicodec<ul>
+<li>full encode/decode support for all codecs except 0xcert-imprint-256</li>
+</ul>
+</li>
+<li>multiaddr<ul>
+<li>full multiaddr functionality</li>
+</ul>
+</li>
+<li>multihash<ul>
+<li>basic multihash functionality, only supports SHAX-XXX, and Blake2B</li>
+</ul>
+</li>
+<li>multibase<ul>
+<li>supports base16, base32, base64</li>
+</ul>
+</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md20"></a>
+networking</h2>
+<ul>
+<li>TCP/UDP socket server capable of leverage multiple threads</li>
+<li>Uses the multiaddress standard as the method of addressing other hosts</li>
+<li>Allows specifying two separate execution handlers whenever a new TCP/UDP connection is received</li>
+<li>todo:<ul>
+<li>enable secure connections</li>
+<li>enable using peerIds</li>
+</ul>
+</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md21"></a>
+misc</h2>
+<ul>
+<li>cid<ul>
+<li>basic support only</li>
+</ul>
+</li>
+<li>protobuf support<ul>
+<li>basic support only</li>
+<li>this will eventually be removed in favor of CBOR</li>
+</ul>
+</li>
+<li>cryptography<ul>
+<li>ecdsa key management</li>
+<li>rsa key management</li>
+<li>sha1, sha256, sha512 hashing</li>
+<li>misc other crypto functionality</li>
+</ul>
+</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md22"></a>
+installation</h1>
+<h2><a class="anchor" id="autotoc_md23"></a>
+building</h2>
+<div class="fragment"><div class="line">$&gt; make # builds in release mode</div>
+<div class="line">$&gt; make build-debug # builds in debug mode</div>
+<div class="line">$&gt; make build-analysis # builds in static analysis mode</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md24"></a>
+testing</h2>
+<div class="fragment"><div class="line">$&gt; cd build &amp;&amp; ctest # runs regular tests</div>
+<div class="line">$&gt; cd build &amp;&amp; ctest -T memcheck # runs valgrind </div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md25"></a>
+dependencies</h2>
+<ul>
+<li>CMake &gt;= 3.0</li>
+<li>GCC with support for C17<ul>
+<li>If you want to run static analysis, GCC-10 installed</li>
+</ul>
+</li>
+<li>CMocka (testing dependency)</li>
+<li>Valgrind (dynamic analysis)</li>
+<li>clang-format (code formatting)</li>
+<li>doxygen (documentation generation)</li>
+<li>pthreads</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md26"></a>
+development/contribution</h1>
+<p>For instructions on development and contribution practices please see CONTRIBUTING.md</p>
+<h1><a class="anchor" id="autotoc_md27"></a>
+license</h1>
+<p>Certain libraries are copy&amp;pasted from other open sources repositories are explicitly licensed under MIT or GPLv3. The code written for this lbirary specifically is licensed under AGPLv3. <a href="https://opensource.stackexchange.com/questions/5909/is-every-license-that-is-gplv3-compatible-also-agplv3-compatible/6785#6785">According to this stack overflow post</a> this is acceptable. If you think this is not acceptable please open a github issue and we will make ammends </p>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

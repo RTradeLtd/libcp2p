@@ -23,6 +23,20 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "libcp2p", "index.html", [
+    [ "difference between libcp2p and libp2p", "index.html#autotoc_md16", null ],
+    [ "compatability with libp2p", "index.html#autotoc_md17", null ],
+    [ "features", "index.html#autotoc_md18", [
+      [ "multiformats", "index.html#autotoc_md19", null ],
+      [ "networking", "index.html#autotoc_md20", null ],
+      [ "misc", "index.html#autotoc_md21", null ]
+    ] ],
+    [ "installation", "index.html#autotoc_md22", [
+      [ "building", "index.html#autotoc_md23", null ],
+      [ "testing", "index.html#autotoc_md24", null ],
+      [ "dependencies", "index.html#autotoc_md25", null ]
+    ] ],
+    [ "development/contribution", "index.html#autotoc_md26", null ],
+    [ "license", "index.html#autotoc_md27", null ],
     [ "c-multiaddr", "d3/d47/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multiaddr__r_e_a_d_m_e.html", [
       [ "Usage:", "d3/d47/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multiaddr__r_e_a_d_m_e.html#autotoc_md2", [
         [ "Multiaddr provides easy networking protocols nesting, easy encapsulation of extra protocols, easy tunneling, etc.", "d3/d47/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multiaddr__r_e_a_d_m_e.html#autotoc_md1", null ],
@@ -38,8 +52,8 @@ var NAVTREE =
       [ "license", "de/db4/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multicodec__r_e_a_d_m_e.html#autotoc_md12", null ]
     ] ],
     [ "Peer Identifiers", "d3/d1f/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s.html", [
-      [ "Supported Algorithms", "d3/d1f/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s.html#autotoc_md16", null ],
-      [ "NOTE", "d3/d1f/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s.html#autotoc_md17", null ]
+      [ "Supported Algorithms", "d3/d1f/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s.html#autotoc_md29", null ],
+      [ "NOTE", "d3/d1f/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s.html#autotoc_md30", null ]
     ] ],
     [ "Todo List", "dd/da0/todo.html", null ],
     [ "Namespaces", "namespaces.html", [
