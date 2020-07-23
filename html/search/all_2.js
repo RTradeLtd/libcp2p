@@ -57,6 +57,5 @@ var searchData=
   ['crypto_5ftest_2ec_217',['crypto_test.c',['../d5/d29/crypto__test_8c.html',1,'']]],
   ['ctx_218',['ctx',['../d0/d5b/struct_ephemeral_private_key.html#a13837e048a1cce92c5cd891d56e84be0',1,'EphemeralPrivateKey']]],
   ['current_219',['current',['../d3/d6b/struct_protocol_list_item.html#afa92c69fcea9983d6c4ad07fa4836e67',1,'ProtocolListItem']]],
-  ['c_2dmultiaddr_220',['c-multiaddr',['../d3/d47/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multiaddr__r_e_a_d_m_e.html',1,'']]],
-  ['c_2dprotobuf_221',['c-protobuf',['../dc/dd5/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_protobuf__r_e_a_d_m_e.html',1,'']]]
+  ['c_2dmultiaddr_220',['c-multiaddr',['../d3/d47/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multiaddr__r_e_a_d_m_e.html',1,'']]]
 ];
