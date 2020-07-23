@@ -161,8 +161,8 @@ int libp2p_crypto_ephemeral_keypair_generate(
     // mbedtls_ecdh_context ctx;
     mbedtls_entropy_context entropy;
     mbedtls_ctr_drbg_context ctr_drbg;
-    struct EphemeralPrivateKey *private_key = NULL;
-    struct EphemeralPublicKey *public_key = NULL;
+    struct EphemeralPrivateKey *private_key;
+    struct EphemeralPublicKey *public_key;
     int selected_curve = 0;
     char *pers = "bitShares"; // data for seeding random number generator
 
@@ -175,7 +175,13 @@ int libp2p_crypto_ephemeral_keypair_generate(
 
     // allocate memory for result storage
     *private_key_ptr = libp2p_crypto_ephemeral_key_new();
+    if (private_key_ptr == NULL) {
+        return 0;
+    }
     private_key = *private_key_ptr;
+    if (private_key == NULL) {
+        return 0;
+    }
     public_key = private_key->public_key;
 
     mbedtls_ecdh_init(&private_key->ctx);
