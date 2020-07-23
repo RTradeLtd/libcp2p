@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
-
+#include <stdint.h>
 #include "crypto/key.h"
 #include "crypto/peerutils.h"
 #include "crypto/sha256.h"
@@ -282,10 +282,8 @@ int libp2p_crypto_public_key_to_peer_id(public_key_t *public_key,
 */
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 #pragma GCC diagnostic ignored "-Wreturn-type"
-int libp2p_crypto_public_key_cbor_encode(
+uint8_t *libp2p_crypto_public_key_cbor_encode(
     public_key_t *pub_key,
-    unsigned char *buffer,
-    size_t buffer_length,
     size_t *bytes_written
 ) {
     uint8_t buf[pub_key->data_size + pub_key->curve_size + sizeof(pub_key)];
@@ -298,4 +296,9 @@ int libp2p_crypto_public_key_cbor_encode(
     cbor_encode_int(&map_encoder, (int64_t)pub_key->data_size);
     cbor_encode_int(&map_encoder, (int64_t)pub_key->curve_size);
     cbor_encoder_close_container(&encoder, &map_encoder);
+    size_t size = cbor_encoder_get_buffer_size(&encoder, buf);
+    *bytes_written = size;
+    uint8_t *out = calloc(sizeof(uint8_t), size);
+    memcpy(out, buf, size);
+    return out;
 }

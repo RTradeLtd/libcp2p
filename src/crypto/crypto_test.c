@@ -13,6 +13,7 @@
 #include "encoding/base64.h"
 #include "mbedtls/base64.h"
 #include "crypto/peerutils.h"
+#include "crypto/key.h"
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
@@ -275,13 +276,52 @@ void test_libp2p_crypto_hashing_sha256(void **state) {
     free(decode_output);
 }
 
+void test_libp2p_crypto_cbor_encode_pub_key(void **state) {
+    public_key_t *pub_key = libp2p_crypto_public_key_new();
+    pub_key->curve = calloc(sizeof(unsigned char), 10);
+    pub_key->data = calloc(sizeof(unsigned char), 10);
+    pub_key->curve[0] = 'h';
+    pub_key->curve[1] = 'e';
+    pub_key->curve[2] = 'y';
+    pub_key->curve_size = 3;
+    pub_key->data[0] = 'y';
+    pub_key->data[1] = 'e';
+    pub_key->data[2] = 'h';
+    pub_key->data_size = 3;
+    pub_key->type = KEYTYPE_ECDSA;
+    
+    size_t bytes_written;
+    uint8_t *out = libp2p_crypto_public_key_cbor_encode(
+        pub_key,
+        &bytes_written
+    );
+    unsigned char *encoded = calloc(sizeof(unsigned char), 1024);
+    size_t encoded_size;
+    int rc =libp2p_encoding_base64_encode(
+        out,
+        bytes_written,
+        encoded,
+        1024,
+        &encoded_size
+    );
+    assert(rc == 1);
+    assert(
+        memcmp(
+            encoded,
+            "peBDeWVoQ2hleQMD",
+            encoded_size
+        ) == 0
+    );
+}
+
 int main(void) {
     const struct CMUnitTest tests[] = {
         cmocka_unit_test(test_libp2p_crypto_hashing_sha512),
         cmocka_unit_test(test_libp2p_crypto_hashing_sha256),
         cmocka_unit_test(test_libp2p_crypto_hashing_sha256_hmac),
         cmocka_unit_test(test_libp2p_crypto_hashing_sha1_hmac),
-        cmocka_unit_test(test_libp2p_crypto_ecdsa_keypair_generation)
+        cmocka_unit_test(test_libp2p_crypto_ecdsa_keypair_generation),
+        cmocka_unit_test(test_libp2p_crypto_cbor_encode_pub_key)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }

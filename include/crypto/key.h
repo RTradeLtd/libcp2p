@@ -35,10 +35,8 @@ int libp2p_crypto_private_key_copy(const private_key_t *source,
 /*!
   * @brief used to cbor encode a public_key_t object
 */
-int libp2p_crypto_public_key_cbor_encode(
+uint8_t *libp2p_crypto_public_key_cbor_encode(
     public_key_t *pub_key,
-    unsigned char *buffer,
-    size_t buffer_length,
     size_t *bytes_written
 );
 
