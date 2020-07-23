@@ -29,7 +29,7 @@
         /ip6/<ipv6 str addr>/tcp/<tcp int port>
  */
 
-struct MultiAddress {
+typedef struct MultiAddress {
     // A MultiAddress represented as a string
     char *string;
     // A MultiAddress represented as an array of bytes
@@ -38,7 +38,7 @@ struct MultiAddress {
     // byte ipv6 address><1 byte tcp/udp code><2 byte port>
     uint8_t *bytes;
     size_t bsize;
-};
+} multi_addr_t;
 
 int strpos(char *haystack, char *needle);
 
@@ -73,7 +73,7 @@ int multiaddress_get_ip_family(const struct MultiAddress *in);
  * @param ip where to put the ip address
  * @returns true(1) on success, otherwise 0
  */
-int multiaddress_get_ip_address(const struct MultiAddress *in, char **ip);
+int multiaddress_get_ip_address(const struct MultiAddress *in, char *ip);
 
 /***
  * Pulls the IP port from a multiaddress

@@ -67,8 +67,8 @@ void test_multiaddr_utils(void **state) {
     struct MultiAddress *addr =
         multiaddress_new_from_string("/ip4/127.0.0.1/tcp/4001/");
     assert(multiaddress_is_ip(addr));
-    char *ip = NULL;
-    multiaddress_get_ip_address(addr, &ip);
+    char ip[1024];
+    multiaddress_get_ip_address(addr, ip);
     assert(ip != NULL);
     assert(
         strcmp(ip, "127.0.0.1") == 0
@@ -76,7 +76,6 @@ void test_multiaddr_utils(void **state) {
     int port = multiaddress_get_ip_port(addr);
     assert(port == 4001);
     
-    free(ip);
     multiaddress_free(addr);
 }
 
