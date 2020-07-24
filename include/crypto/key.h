@@ -1,11 +1,13 @@
+/*! @file key.h
+  * @brief public/private key management functions
+  * @details provides tooling for working with public/private keys and transmitting them over the wire
+  * @warning none of these functions and structures are thread safe
+*/
+
 #pragma once
 
 #include <stdint.h>
 #include <stdlib.h>
-
-/**
- * Utilities for public keys
- */
 
 /*!
   * @enum key_type_t
@@ -45,11 +47,36 @@ typedef struct private_key {
     size_t data_size;
 } private_key_t; /*! @brief the size of the key data */
 
+/*!
+  * @brief returns a new instance of public_key_t
+  * @returns Success: pointer to an instance of public_key_t
+  * @returns Failure: NULL pointer
+*/
 public_key_t *libp2p_crypto_public_key_new(void);
+
+/*!
+  * @brief free up resources associated with a public_key_t instance
+*/
 void libp2p_crypto_public_key_free(public_key_t *in);
 
+/*!
+  * @brief returns a new instance of private_key_t
+  * @returns Success: pointer to an instance of private_key_t
+  * @returns Failure: NULL pointer
+*/
 private_key_t *libp2p_crypto_private_key_new(void);
+
+/*!
+  * @brief frees up resources associated with a private_key_t instance
+*/
 void libp2p_crypto_private_key_free(private_key_t *in);
+
+/*! 
+  * @brief copies a private key 
+  * @param source the key we are copying
+  * @param destination the location to copy to
+  * 
+*/
 int libp2p_crypto_private_key_copy(const private_key_t *source,
                                    private_key_t *destination);
 
