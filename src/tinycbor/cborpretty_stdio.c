@@ -26,8 +26,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-static CborError cbor_fprintf(void *out, const char *fmt, ...)
-{
+static CborError cbor_fprintf(void *out, const char *fmt, ...) {
     int n;
 
     va_list list;
@@ -58,11 +57,12 @@ static CborError cbor_fprintf(void *out, const char *fmt, ...)
  * done by appending a comma to the output stream in between calls to this
  * function.
  *
- * \sa cbor_value_to_pretty(), cbor_value_to_pretty_stream(), cbor_value_to_json_advance()
+ * \sa cbor_value_to_pretty(), cbor_value_to_pretty_stream(),
+ * cbor_value_to_json_advance()
  */
-CborError cbor_value_to_pretty_advance(FILE *out, CborValue *value)
-{
-    return cbor_value_to_pretty_stream(cbor_fprintf, out, value, CborPrettyDefaultFlags);
+CborError cbor_value_to_pretty_advance(FILE *out, CborValue *value) {
+    return cbor_value_to_pretty_stream(cbor_fprintf, out, value,
+                                       CborPrettyDefaultFlags);
 }
 
 /**
@@ -78,10 +78,10 @@ CborError cbor_value_to_pretty_advance(FILE *out, CborValue *value)
  * done by appending a comma to the output stream in between calls to this
  * function.
  *
- * \sa cbor_value_to_pretty_stream(), cbor_value_to_pretty(), cbor_value_to_json_advance()
+ * \sa cbor_value_to_pretty_stream(), cbor_value_to_pretty(),
+ * cbor_value_to_json_advance()
  */
-CborError cbor_value_to_pretty_advance_flags(FILE *out, CborValue *value, int flags)
-{
+CborError cbor_value_to_pretty_advance_flags(FILE *out, CborValue *value,
+                                             int flags) {
     return cbor_value_to_pretty_stream(cbor_fprintf, out, value, flags);
 }
-

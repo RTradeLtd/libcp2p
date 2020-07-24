@@ -26,14 +26,14 @@
 #define _DEFAULT_SOURCE 1
 #define _GNU_SOURCE 1
 
-#include <sys/types.h>
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
 
 #if defined(__unix__) || defined(__APPLE__)
-#  include <unistd.h>
+#include <unistd.h>
 #endif
 #ifdef __APPLE__
 typedef int RetType;
@@ -42,20 +42,18 @@ typedef int LenType;
 typedef ssize_t RetType;
 typedef size_t LenType;
 #else
-#  error "Cannot implement open_memstream!"
+#error "Cannot implement open_memstream!"
 #endif
 
 #include "tinycbor/compilersupport_p.h"
 
-struct Buffer
-{
+struct Buffer {
     char **ptr;
     size_t *len;
     size_t alloc;
 };
 
-static RetType write_to_buffer(void *cookie, const char *data, LenType len)
-{
+static RetType write_to_buffer(void *cookie, const char *data, LenType len) {
     struct Buffer *b = (struct Buffer *)cookie;
     char *ptr = *b->ptr;
     size_t newsize;
@@ -64,9 +62,10 @@ static RetType write_to_buffer(void *cookie, const char *data, LenType len)
     if (unlikely(add_check_overflow(*b->len, len, &newsize)))
         return -1;
 
-    if (newsize >= b->alloc) { // NB! one extra byte is needed to avoid buffer overflow at close_buffer
+    if (newsize >= b->alloc) { // NB! one extra byte is needed to avoid buffer
+                               // overflow at close_buffer
         // make room
-        size_t newalloc = newsize + newsize / 2 + 1;    // give 50% more room
+        size_t newalloc = newsize + newsize / 2 + 1; // give 50% more room
         ptr = realloc(ptr, newalloc);
         if (ptr == NULL)
             return -1;
@@ -79,8 +78,7 @@ static RetType write_to_buffer(void *cookie, const char *data, LenType len)
     return len;
 }
 
-static int close_buffer(void *cookie)
-{
+static int close_buffer(void *cookie) {
     struct Buffer *b = (struct Buffer *)cookie;
     if (*b->ptr)
         (*b->ptr)[*b->len] = '\0';
@@ -88,8 +86,7 @@ static int close_buffer(void *cookie)
     return 0;
 }
 
-FILE *open_memstream(char **bufptr, size_t *lenptr)
-{
+FILE *open_memstream(char **bufptr, size_t *lenptr) {
     struct Buffer *b = (struct Buffer *)malloc(sizeof(struct Buffer));
     if (b == NULL)
         return NULL;
@@ -102,13 +99,8 @@ FILE *open_memstream(char **bufptr, size_t *lenptr)
 #ifdef __APPLE__
     return funopen(b, NULL, write_to_buffer, NULL, close_buffer);
 #elif __linux__
-    static const cookie_io_functions_t vtable = {
-        NULL,
-        write_to_buffer,
-        NULL,
-        close_buffer
-    };
+    static const cookie_io_functions_t vtable = {NULL, write_to_buffer, NULL,
+                                                 close_buffer};
     return fopencookie(b, "w", vtable);
 #endif
 }
-

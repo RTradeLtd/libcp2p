@@ -9,11 +9,11 @@
 #include "crypto/peerutils.h"
 #include "crypto/sha256.h"
 #include "protobuf/protobuf.h"
+#include "tinycbor/cbor.h"
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include "tinycbor/cbor.h"
 
 /*!
  * @brief returns a new instance of public_key_t
