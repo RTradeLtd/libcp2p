@@ -19,7 +19,7 @@ before_install:
   - sudo apt install valgrind -y
   - make install-cmocka
   - make install-mbedtls
-  - make install-tinycbor
+  # - make install-tinycbor
 
 script:
   # Link gcc-9 and g++-9 to their standard commands
