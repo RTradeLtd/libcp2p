@@ -103,13 +103,13 @@ var NAVTREEINDEX =
 "annotated.html",
 "d2/d9e/cbor_8h.html#a38f51ceba8bc8a9b1cf7dd31e3f9c178ae705bcff9f8ea5e470dd222e5534592b",
 "d4/d05/structthpool__.html#a08d4a33fae889af4adc4e78d9e34602d",
-"d7/d8d/structsocket__server.html#aa47767c843cdf018f134e57ba3423e52",
-"d7/ded/codecs_8h.html#a7adb662ba94f42e6b140c6e9249b569d",
-"d8/d33/base32_8h.html#aa5e9ce21e2e63e68515f76c19a49aeed",
-"da/dc9/ephemeral_8c.html#ad765fc171667f71bd51ebf8a22f3c0ad",
-"dc/d74/group___cbor_parsing.html#ga0422ed961d973d190a19e12a3fe2390f",
-"dd/df6/open__memstream_8c.html#a369266c24eacffb87046522897a570d5",
-"globals_func_f.html"
+"d7/d8d/structsocket__server.html#a31a26ac270d1dd975d68b3000f40f5d2",
+"d7/ded/codecs_8h.html#a7a6276b72a37953f8f92158c878080f2",
+"d8/d33/base32_8h.html",
+"da/dc9/ephemeral_8c.html#a65762ddb8cca9ff714540e7e1c11ae93",
+"dc/d74/group___cbor_parsing.html#ga02ec0b5c8346f407cf5def566ddcf5ae",
+"dd/db3/cborpretty_8c.html#a8fb447618db946a9e2a596d9ea18763f",
+"globals_func_a.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

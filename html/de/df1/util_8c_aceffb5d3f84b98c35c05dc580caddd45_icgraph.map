@@ -1,10 +1,13 @@
 <map id="print_mbedtls_error" name="print_mbedtls_error">
-<area shape="rect" id="node1" title="prints the corresponding error to stdout" alt="" coords="784,117,935,143"/>
-<area shape="rect" id="node2" href="$d5/d5d/ecdsa_8h.html#ababc4b1b736eb55ea94abd3175fb76ea" title="used to generate an ECDSA keypair" alt="" coords="578,11,733,52"/>
-<area shape="rect" id="node6" href="$d5/d5d/ecdsa_8h.html#afab4ce5b8e4bde2be242ad28bf9f1474" title="returns the peerid for the corresponding private key" alt="" coords="363,200,518,241"/>
-<area shape="rect" id="node7" href="$d5/d5d/ecdsa_8h.html#a00d3cbd7d5de1849d5de9bd830fd7fb7" title="returns the public key associated with the private key" alt="" coords="578,141,733,183"/>
-<area shape="rect" id="node8" href="$d5/d5d/ecdsa_8h.html#a921b929610c8f4da6e9e10f6349759d3" title="parses a PEM encoded private key and returns a struct for use" alt="" coords="575,76,736,117"/>
-<area shape="rect" id="node3" href="$d5/d29/crypto__test_8c.html#a1401558d7902d15576f5aec9958a5d0e" title=" " alt="" coords="355,32,527,73"/>
-<area shape="rect" id="node5" href="$d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="108,91,307,132"/>
-<area shape="rect" id="node4" href="$d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,69,60,95"/>
+<area shape="rect" id="node1" title="prints the corresponding error to stdout" alt="" coords="784,229,935,255"/>
+<area shape="rect" id="node2" href="$d5/d5d/ecdsa_8h.html#ababc4b1b736eb55ea94abd3175fb76ea" title="used to generate an ECDSA keypair" alt="" coords="578,221,733,263"/>
+<area shape="rect" id="node7" href="$d5/d5d/ecdsa_8h.html#afab4ce5b8e4bde2be242ad28bf9f1474" title="returns the peerid for the corresponding private key" alt="" coords="363,5,518,47"/>
+<area shape="rect" id="node8" href="$d5/d5d/ecdsa_8h.html#a00d3cbd7d5de1849d5de9bd830fd7fb7" title="returns the public key associated with the private key" alt="" coords="578,115,733,156"/>
+<area shape="rect" id="node9" href="$d5/d5d/ecdsa_8h.html#a921b929610c8f4da6e9e10f6349759d3" title="parses a PEM encoded private key and returns a struct for use" alt="" coords="575,287,736,328"/>
+<area shape="rect" id="node11" href="$d5/d5d/ecdsa_8h.html#ab1fbd92d5f77addb900224162e1fb7d0" title="used to save a private key at the given path" alt="" coords="363,508,518,549"/>
+<area shape="rect" id="node3" href="$d5/d29/crypto__test_8c.html#a1401558d7902d15576f5aec9958a5d0e" title=" " alt="" coords="355,224,527,265"/>
+<area shape="rect" id="node5" href="$d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="108,165,307,207"/>
+<area shape="rect" id="node6" href="$d5/d29/crypto__test_8c.html#a04d295869fa1a64f7c011ce0b287bf03" title=" " alt="" coords="113,359,301,400"/>
+<area shape="rect" id="node4" href="$d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,231,60,258"/>
+<area shape="rect" id="node10" href="$d5/d5d/ecdsa_8h.html#a73c6a8cb5971191ba5dc7f940e45fa43" title="loads an ECDSA private key from a file containing a PEM key" alt="" coords="355,443,526,484"/>
 </map>

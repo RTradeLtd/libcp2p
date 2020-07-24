@@ -16,7 +16,7 @@ build-analysis:
 
 .PHONY: docs
 docs:
-	(cd build; cmake --build . --target doxygen-docs)
+	(cd build; cmake --build . --target doxygen-docs ; cd .. ; rm -rf html man ; cp -r docs-build/* .)
 
 .PHONY: install-cmocka
 install-cmocka:
@@ -50,4 +50,3 @@ clean:
 format:
 	find . -type f -name "*.c" -not -name "*_test.c" -exec clang-format -i {} \;
 	find . -type f -name "*.h" -exec clang-format -i {} \;
-

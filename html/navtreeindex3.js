@@ -1,5 +1,8 @@
 var NAVTREEINDEX3 =
 {
+"d7/d8d/structsocket__server.html#a31a26ac270d1dd975d68b3000f40f5d2":[14,0,31,3],
+"d7/d8d/structsocket__server.html#a64fec4403103a5fc76f73d357d2ffdb0":[14,0,31,6],
+"d7/d8d/structsocket__server.html#a9b9de030f35cd4317a7ec798325eefdb":[14,0,31,1],
 "d7/d8d/structsocket__server.html#aa47767c843cdf018f134e57ba3423e52":[14,0,31,2],
 "d7/d8d/structsocket__server.html#aaafcdd72385a0156dda2eb7c0949a48a":[14,0,31,5],
 "d7/d8d/structsocket__server.html#aaedc6724c3d56bfe5ad364294e9fa0aa":[14,0,31,7],
@@ -246,8 +249,5 @@ var NAVTREEINDEX3 =
 "d7/ded/codecs_8h.html#a79c1c0ac3cc3345ef9bdcc8f0d29e21f":[15,0,1,5,0,17],
 "d7/ded/codecs_8h.html#a79ca7468b2488b259916c16361f8e47a":[15,0,1,5,0,427],
 "d7/ded/codecs_8h.html#a79cdbb78126ad0d03fd2606393bc6ca3":[15,0,1,5,0,25],
-"d7/ded/codecs_8h.html#a79f00e8e12aa0ae0d364bb2aba6e1364":[15,0,1,5,0,430],
-"d7/ded/codecs_8h.html#a7a6276b72a37953f8f92158c878080f2":[15,0,1,5,0,66],
-"d7/ded/codecs_8h.html#a7abc0ca96b4afc028282ace76b9b30b5":[15,0,1,5,0,266],
-"d7/ded/codecs_8h.html#a7ad9c0931b61ba5c0f78881a0943e8b7":[15,0,1,5,0,137]
+"d7/ded/codecs_8h.html#a79f00e8e12aa0ae0d364bb2aba6e1364":[15,0,1,5,0,430]
 };

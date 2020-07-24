@@ -1,9 +1,0 @@
-<map id="libp2p_crypto_public_key_protobuf_decode" name="libp2p_crypto_public_key_protobuf_decode">
-<area shape="rect" id="node1" title="Unmarshal a public key from a protobuf." alt="" coords="5,136,173,177"/>
-<area shape="rect" id="node2" href="$db/dfd/key_8c.html#ab5f5391ac4101f380b7a144e7e6a5ff9" title=" " alt="" coords="233,5,389,47"/>
-<area shape="rect" id="node3" href="$db/dfd/key_8c.html#aaae23c3d5302352d3de26fb6be1e9cca" title=" " alt="" coords="233,71,389,112"/>
-<area shape="rect" id="node4" href="$d5/da8/protobuf_8c.html#a688679dacaa4dbb2bf3d69cef71c5a81" title=" " alt="" coords="227,136,394,177"/>
-<area shape="rect" id="node6" href="$d5/da8/protobuf_8c.html#afd58060a226f0ca28336ec20b8e798cf" title=" " alt="" coords="221,201,400,243"/>
-<area shape="rect" id="node7" href="$d5/da8/protobuf_8c.html#a6968bb1063b7b9ae98461a13bb6c4ac2" title=" " alt="" coords="223,267,399,294"/>
-<area shape="rect" id="node5" href="$d4/d08/protobuf_2varint_8c.html#a1e01d7843fea0ddd03554598f32e32ca" title=" " alt="" coords="448,209,563,235"/>
-</map>

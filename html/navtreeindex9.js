@@ -1,5 +1,10 @@
 var NAVTREEINDEX9 =
 {
+"globals_func_a.html":[15,1,1,1],
+"globals_func_b.html":[15,1,1,2],
+"globals_func_c.html":[15,1,1,3],
+"globals_func_d.html":[15,1,1,4],
+"globals_func_e.html":[15,1,1,5],
 "globals_func_f.html":[15,1,1,6],
 "globals_func_g.html":[15,1,1,7],
 "globals_func_h.html":[15,1,1,8],

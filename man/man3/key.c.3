@@ -100,13 +100,13 @@ does not allocate memory for caller
 .PP
 
 .PP
-Definition at line 76 of file key\&.c\&.
+Definition at line 88 of file key\&.c\&.
 .SS "void libp2p_crypto_private_key_free (\fBprivate_key_t\fP * in)"
 
 .PP
 frees up resources associated with a private_key_t instance 
 .PP
-Definition at line 59 of file key\&.c\&.
+Definition at line 71 of file key\&.c\&.
 .SS "\fBprivate_key_t\fP* libp2p_crypto_private_key_new (void)"
 
 .PP
@@ -121,7 +121,7 @@ Failure: NULL pointer
 .PP
 
 .PP
-Definition at line 46 of file key\&.c\&.
+Definition at line 58 of file key\&.c\&.
 .SS "\fBpublic_key_t\fP* libp2p_crypto_public_key_cbor_decode (\fBcbor_encoded_data_t\fP * data)"
 
 .PP
@@ -141,7 +141,7 @@ Failure: NULL pointer
 .PP
 
 .PP
-Definition at line 98 of file key\&.c\&.
+Definition at line 110 of file key\&.c\&.
 .SS "\fBcbor_encoded_data_t\fP* libp2p_crypto_public_key_cbor_encode (\fBpublic_key_t\fP * pub_key, size_t * bytes_written)"
 
 .PP
@@ -170,13 +170,13 @@ figure out why this returns an error
 .PP
 
 .PP
-Definition at line 207 of file key\&.c\&.
+Definition at line 219 of file key\&.c\&.
 .SS "void libp2p_crypto_public_key_free (\fBpublic_key_t\fP * in)"
 
 .PP
 free up resources associated with a public_key_t instance 
 .PP
-Definition at line 36 of file key\&.c\&.
+Definition at line 48 of file key\&.c\&.
 .SS "\fBpublic_key_t\fP* libp2p_crypto_public_key_new (void)"
 
 .PP
@@ -191,7 +191,7 @@ Failure: NULL pointer
 .PP
 
 .PP
-Definition at line 23 of file key\&.c\&.
+Definition at line 35 of file key\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for libcp2p from the source code\&.
