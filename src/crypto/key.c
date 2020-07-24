@@ -6,6 +6,7 @@
 #include "crypto/sha256.h"
 #include "protobuf/protobuf.h"
 #include <tinycbor/cbor.h>
+#include <stdbool.h>
 
 /**
  * Utilities for public and private keys
@@ -278,56 +279,121 @@ int libp2p_crypto_public_key_to_peer_id(public_key_t *public_key,
   * @brief used to cbor decode a uint8_t pointer and return a public_key_t object
 */
 public_key_t *libp2p_crypto_public_key_cbor_decode(
-    uint8_t *buffer
+    cbor_encoded_data_t *data
 ) {
-    size_t buffer_len = sizeof(buffer);
-    printf("%lu\n", buffer_len);
+    CborParser parser;
+    CborValue value;
+    CborError err;
+
+    cbor_parser_init(data->data, data->len, 0, &parser, &value);
+    
+    bool is_array = cbor_value_is_array(&value);
+    if (is_array == false) {
+        return NULL;
+    }
+
+    //size_t len = CborIndefiniteLength;
+    size_t len;
+
+    err = cbor_value_get_array_length(&value, &len);    
+    if (err != CborNoError) {
+        printf("get map length failed: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
+    printf("cbor array length: %lu\n", len);
+
+    CborValue recurse;
+    err = cbor_value_enter_container(&value, &recurse);
+    if (err != CborNoError) {
+        printf("failed to enter container: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
+    bool is_simple = cbor_value_is_simple_type(&recurse);
+    if (is_simple == false) {
+        printf("unexpected value encountered\n");
+        return NULL;
+    }
+
+    uint8_t key_type;
+    err = cbor_value_get_simple_type(&recurse, &key_type);
+    if (err != CborNoError) {
+        printf("failed to get simple value: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
+    err = cbor_value_advance_fixed(&recurse);
+    if (err != CborNoError) {
+        printf("failed to advanced iter: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
+    bool is_byte = cbor_value_is_byte_string(&recurse);
+    if (is_byte == false) {
+        printf("unexpected value encounterd\n");
+        return NULL;
+    }
+
+    size_t lenn;
+    err = cbor_value_get_string_length(&recurse, &lenn);
+    if (err != CborNoError) {
+        printf("failed to get string length: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+    uint8_t byte_buffer[lenn];
+    err = cbor_value_copy_byte_string(&recurse, byte_buffer, &lenn, &recurse);
+    if (err != CborNoError) {
+        printf("failed to copy byte string: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
+    printf("byte buffer: %s\n", byte_buffer);
+
     return NULL;
 }
 
 /*!
   * @brief used to cbor encode a public_key_t object
 */
-uint8_t *libp2p_crypto_public_key_cbor_encode(
+cbor_encoded_data_t *libp2p_crypto_public_key_cbor_encode(
     public_key_t *pub_key,
     size_t *bytes_written
 ) {
     
-    uint8_t buf[pub_key->data_size + sizeof(pub_key)];
-    CborEncoder encoder, map_encoder;
+    uint8_t buf[pub_key->data_size + sizeof(pub_key) + 3];
+    CborEncoder encoder, array_encoder;
     CborError err;
 
     cbor_encoder_init(&encoder, buf, sizeof(buf), 0);
-
-    /*!
-      * @brief we Use CborIdefiniteLength to work around an error
-      * @brief the error is "too few items added to container" when closing the container
-    */
-    err = cbor_encoder_create_map(&encoder, &map_encoder, CborIndefiniteLength);
+    err = cbor_encoder_create_array(&encoder, &array_encoder, 3);
     if (err != CborNoError) {
         printf("failed to create map\n");
         return NULL;
     }
-    
-    err = cbor_encode_simple_value(&map_encoder, pub_key->type);
+
+    err = cbor_encode_simple_value(&array_encoder, pub_key->type);
     if (err != CborNoError) {
         printf("failed to encode simple values\n");
         return NULL;
     }
 
-    err = cbor_encode_byte_string(&map_encoder, pub_key->data, pub_key->data_size);
+    err = cbor_encode_byte_string(&array_encoder, pub_key->data, pub_key->data_size);
     if (err != CborNoError) {
-        printf("failed to encode byte string\n");
+        printf("failed to encode byte string: %s\n", cbor_error_string(err));
         return NULL;
     }
 
-    err = cbor_encode_int(&map_encoder, (int64_t)pub_key->data_size);
+    err = cbor_encode_int(&array_encoder, (int64_t)pub_key->data_size);
     if (err != CborNoError) {
         printf("failed to encdoe int\n");
         return NULL;
     }
 
-    err = cbor_encoder_close_container(&encoder, &map_encoder);
+    /*!
+      * @todo figure out why this returns an error
+    */
+    err = cbor_encoder_close_container(&encoder, &array_encoder);
     if (err != CborNoError) {
         printf("failed to close container: %s\n", cbor_error_string(err));
         return NULL;
@@ -337,5 +403,8 @@ uint8_t *libp2p_crypto_public_key_cbor_encode(
     *bytes_written = size;
     uint8_t *out = calloc(sizeof(uint8_t), size);
     memcpy(out, buf, size);
-    return out;
+    cbor_encoded_data_t *cbdata = calloc(sizeof(cbor_encoded_data_t), sizeof(cbor_encoded_data_t));
+    cbdata->data = out;
+    cbdata->len = size;
+    return cbdata;
 }

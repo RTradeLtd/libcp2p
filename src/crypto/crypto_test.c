@@ -296,7 +296,7 @@ void test_libp2p_crypto_cbor_encode_pub_key(void **state) {
         pub_key->type = KEYTYPE_ECDSA;
         printf("data: %s\n", pub_key->data);
         size_t bytes_written;
-        uint8_t *out = libp2p_crypto_public_key_cbor_encode(
+        cbor_encoded_data_t *out = libp2p_crypto_public_key_cbor_encode(
             pub_key,
             &bytes_written
         );
@@ -305,14 +305,14 @@ void test_libp2p_crypto_cbor_encode_pub_key(void **state) {
         unsigned char *encoded = calloc(sizeof(unsigned char), 2048);
         size_t encoded_size;
         rc = libp2p_encoding_base64_encode(
-            out,
+            out->data,
             bytes_written,
             encoded,
             1024,
             &encoded_size
         );
         assert(rc == 1);
-        assert(sizeof(out) > 0 );
+        assert(strlen((char *)encoded) > 0 );
         free(encoded);
         free(out);
         free(output);
@@ -320,37 +320,42 @@ void test_libp2p_crypto_cbor_encode_pub_key(void **state) {
         libp2p_crypto_ecdsa_free(pk);
     }
     public_key_t *test_key = libp2p_crypto_public_key_new();
-    test_key->data = calloc(sizeof(unsigned char), 10);
-    test_key->data_size = 10;
-    test_key->data[0] = 'z';
-    test_key->data[1] = 'e';
-    test_key->data[2] = 'l';
-    test_key->data[3] = 'l';
-    test_key->data[4] = 'o';
-    test_key->data[5] = 'o';
+    test_key->data = calloc(sizeof(unsigned char), 7);
+    test_key->data_size = 7;
+    test_key->data[0] = '1';
+    test_key->data[1] = '2'; 
+    test_key->data[2] = '3';
+    test_key->data[3] = '4';
+    test_key->data[4] = '5';
+    test_key->data[5] = '6';
     test_key->data[6] = '\0';
     test_key->type = KEYTYPE_ECDSA;
 
     size_t bytes_written;
-    unsigned char *out = libp2p_crypto_public_key_cbor_encode(test_key, &bytes_written);
+    cbor_encoded_data_t *out = libp2p_crypto_public_key_cbor_encode(test_key, &bytes_written);
     assert(out != NULL);
     unsigned char *encoded = calloc(sizeof(unsigned char), 2048);
     size_t encoded_size;
     int rc = libp2p_encoding_base64_encode(
-        out,
+        out->data,
         bytes_written,
         encoded,
         1024,
         &encoded_size
     );
+    libp2p_crypto_public_key_cbor_decode(out);
+    printf("%s\n", encoded);
     assert(rc == 1);
     assert(
         memcmp(
             encoded,
-            "v+FKemVsbG9vAAAAAAr/",
+            "g+FHMTIzNDU2AAc=",
             encoded_size
         ) == 0
     );
+
+    
+
     free(encoded);
     free(out);
     libp2p_crypto_public_key_free(test_key);

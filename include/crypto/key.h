@@ -8,6 +8,11 @@
 
 typedef enum { KEYTYPE_INVALID, KEYTYPE_ECDSA } key_type_t;
 
+typedef struct cbor_encoded_data {
+    uint8_t *data;
+    size_t len;
+} cbor_encoded_data_t;
+
 typedef struct public_key {
     key_type_t type;
     unsigned char *data;
@@ -32,13 +37,13 @@ int libp2p_crypto_private_key_copy(const private_key_t *source,
   * @brief used to cbor decode a uint8_t pointer and return a public_key_t object
 */
 public_key_t *libp2p_crypto_public_key_cbor_decode(
-    uint8_t *buffer
+    cbor_encoded_data_t *data
 );
 
 /*!
   * @brief used to cbor encode a public_key_t object
 */
-uint8_t *libp2p_crypto_public_key_cbor_encode(
+cbor_encoded_data_t *libp2p_crypto_public_key_cbor_encode(
     public_key_t *pub_key,
     size_t *bytes_written
 );
