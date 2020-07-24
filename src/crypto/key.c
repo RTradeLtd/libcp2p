@@ -292,17 +292,6 @@ public_key_t *libp2p_crypto_public_key_cbor_decode(
         return NULL;
     }
 
-    //size_t len = CborIndefiniteLength;
-    size_t len;
-
-    err = cbor_value_get_array_length(&value, &len);    
-    if (err != CborNoError) {
-        printf("get map length failed: %s\n", cbor_error_string(err));
-        return NULL;
-    }
-
-    printf("cbor array length: %lu\n", len);
-
     CborValue recurse;
     err = cbor_value_enter_container(&value, &recurse);
     if (err != CborNoError) {
@@ -323,7 +312,7 @@ public_key_t *libp2p_crypto_public_key_cbor_decode(
         return NULL;
     }
 
-    err = cbor_value_advance_fixed(&recurse);
+    err = cbor_value_advance(&recurse);
     if (err != CborNoError) {
         printf("failed to advanced iter: %s\n", cbor_error_string(err));
         return NULL;
@@ -335,22 +324,38 @@ public_key_t *libp2p_crypto_public_key_cbor_decode(
         return NULL;
     }
 
-    size_t lenn;
-    err = cbor_value_get_string_length(&recurse, &lenn);
+    size_t data_len;
+    err = cbor_value_get_string_length(&recurse, &data_len);
     if (err != CborNoError) {
         printf("failed to get string length: %s\n", cbor_error_string(err));
         return NULL;
     }
-    uint8_t byte_buffer[lenn];
-    err = cbor_value_copy_byte_string(&recurse, byte_buffer, &lenn, &recurse);
+    uint8_t data_buffer[data_len];
+    err = cbor_value_copy_byte_string(&recurse, data_buffer, &data_len, &recurse);
     if (err != CborNoError) {
         printf("failed to copy byte string: %s\n", cbor_error_string(err));
         return NULL;
     }
 
-    printf("byte buffer: %s\n", byte_buffer);
+    bool is_int = cbor_value_is_integer(&recurse);
+    if (is_int == false) {
+        printf("unexpected value encountered wanted integer\n");
+        return NULL;
+    }
 
-    return NULL;
+    int64_t key_size;
+    err = cbor_value_get_int64(&recurse, &key_size);
+    if (err != CborNoError) {
+        printf("failed to get int: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+    public_key_t *pk = calloc(sizeof(public_key_t), sizeof(public_key_t));
+    pk->data = calloc(sizeof(unsigned char), data_len);
+    memcpy(pk->data, data, data_len);
+    pk->data_size = data_len;
+    pk->type = (key_type_t)key_type;
+
+    return pk;
 }
 
 /*!
