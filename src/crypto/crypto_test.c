@@ -17,6 +17,42 @@
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
+void test_libp2p_crypto_ecdsa_private_key_save(void **stat) {
+    unsigned char *output = malloc(sizeof(unsigned char) * 1024);
+    int rc = libp2p_crypto_ecdsa_keypair_generation(output, MBEDTLS_ECP_DP_SECP256R1);
+    assert(rc == 1);
+
+    ecdsa_private_key_t *pk = libp2p_crypto_ecdsa_pem_to_private_key(output);
+    assert(pk != NULL);
+
+    rc = libp2p_crypto_ecdsa_private_key_save(pk, "ecdsa.pem");
+    assert(rc == 0);
+
+    ecdsa_private_key_t *ret_pk = libp2p_crypto_ecdsa_private_key_from_file("ecdsa.pem");
+
+    unsigned char *pk_pub = libp2p_crypto_ecdsa_keypair_public(pk);
+    unsigned char *ret_pub = libp2p_crypto_ecdsa_keypair_public(ret_pk);
+
+    assert(
+        memcmp(
+            pk_pub,
+            ret_pub,
+            strlen((char *)pk_pub)
+        ) == 0 &&
+        memcmp(
+            pk_pub,
+            ret_pub,
+            strlen((char *)ret_pub)
+        ) == 0         
+    );
+
+    libp2p_crypto_ecdsa_free(pk);
+    libp2p_crypto_ecdsa_free(ret_pk);
+    free(output);
+    free(pk_pub);
+    free(ret_pub);
+}
+
 // also tests getting the associated public key
 void test_libp2p_crypto_ecdsa_keypair_generation(void **state) {
     unsigned char *output = malloc(sizeof(unsigned char) * 1024);
@@ -385,7 +421,8 @@ int main(void) {
         cmocka_unit_test(test_libp2p_crypto_hashing_sha256_hmac),
         cmocka_unit_test(test_libp2p_crypto_hashing_sha1_hmac),
         cmocka_unit_test(test_libp2p_crypto_ecdsa_keypair_generation),
-        cmocka_unit_test(test_libp2p_crypto_cbor_encode_pub_key)
+        cmocka_unit_test(test_libp2p_crypto_cbor_encode_pub_key),
+        cmocka_unit_test(test_libp2p_crypto_ecdsa_private_key_save)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }

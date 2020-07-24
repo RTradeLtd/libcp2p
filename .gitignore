@@ -10,3 +10,5 @@ docs-build/
 .vscode/settings.json
 
 Testing/
+
+*.pem
