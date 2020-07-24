@@ -34,19 +34,15 @@ int libp2p_crypto_private_key_copy(const private_key_t *source,
                                    private_key_t *destination);
 
 /*!
-  * @brief used to cbor decode a uint8_t pointer and return a public_key_t object
-*/
-public_key_t *libp2p_crypto_public_key_cbor_decode(
-    cbor_encoded_data_t *data
-);
+ * @brief used to cbor decode a uint8_t pointer and return a public_key_t object
+ */
+public_key_t *libp2p_crypto_public_key_cbor_decode(cbor_encoded_data_t *data);
 
 /*!
-  * @brief used to cbor encode a public_key_t object
-*/
-cbor_encoded_data_t *libp2p_crypto_public_key_cbor_encode(
-    public_key_t *pub_key,
-    size_t *bytes_written
-);
+ * @brief used to cbor encode a public_key_t object
+ */
+cbor_encoded_data_t *libp2p_crypto_public_key_cbor_encode(public_key_t *pub_key,
+                                                          size_t *bytes_written);
 
 /**
  * @brief Unmarshal a public key from a protobuf

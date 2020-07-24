@@ -1,12 +1,12 @@
-#include <stdlib.h>
-#include <string.h>
-#include <stdint.h>
 #include "crypto/key.h"
 #include "crypto/peerutils.h"
 #include "crypto/sha256.h"
 #include "protobuf/protobuf.h"
-#include <tinycbor/cbor.h>
 #include <stdbool.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
+#include <tinycbor/cbor.h>
 
 /**
  * Utilities for public and private keys
@@ -26,7 +26,6 @@ void libp2p_crypto_public_key_free(public_key_t *in) {
     free(in->data);
     free(in);
 }
-
 
 /***
  * Calculates an approximate required size of a buffer for protobuf encoding a
@@ -247,8 +246,7 @@ exit:
  * @param peer_id the results, in a null-terminated string
  * @returns true(1) on success, otherwise false(0)
  */
-int libp2p_crypto_public_key_to_peer_id(public_key_t *public_key,
-                                        char *peer_id) {
+int libp2p_crypto_public_key_to_peer_id(public_key_t *public_key, char *peer_id) {
 
     /**
      * Converting to a peer id involves protobufing the public_key_t,
@@ -276,17 +274,15 @@ int libp2p_crypto_public_key_to_peer_id(public_key_t *public_key,
 }
 
 /*!
-  * @brief used to cbor decode a uint8_t pointer and return a public_key_t object
-*/
-public_key_t *libp2p_crypto_public_key_cbor_decode(
-    cbor_encoded_data_t *data
-) {
+ * @brief used to cbor decode a uint8_t pointer and return a public_key_t object
+ */
+public_key_t *libp2p_crypto_public_key_cbor_decode(cbor_encoded_data_t *data) {
     CborParser parser;
     CborValue value;
     CborError err;
 
     cbor_parser_init(data->data, data->len, 0, &parser, &value);
-    
+
     bool is_array = cbor_value_is_array(&value);
     if (is_array == false) {
         return NULL;
@@ -359,13 +355,11 @@ public_key_t *libp2p_crypto_public_key_cbor_decode(
 }
 
 /*!
-  * @brief used to cbor encode a public_key_t object
-*/
-cbor_encoded_data_t *libp2p_crypto_public_key_cbor_encode(
-    public_key_t *pub_key,
-    size_t *bytes_written
-) {
-    
+ * @brief used to cbor encode a public_key_t object
+ */
+cbor_encoded_data_t *libp2p_crypto_public_key_cbor_encode(public_key_t *pub_key,
+                                                          size_t *bytes_written) {
+
     uint8_t buf[pub_key->data_size + sizeof(pub_key) + 3];
     CborEncoder encoder, array_encoder;
     CborError err;
@@ -396,19 +390,20 @@ cbor_encoded_data_t *libp2p_crypto_public_key_cbor_encode(
     }
 
     /*!
-      * @todo figure out why this returns an error
-    */
+     * @todo figure out why this returns an error
+     */
     err = cbor_encoder_close_container(&encoder, &array_encoder);
     if (err != CborNoError) {
         printf("failed to close container: %s\n", cbor_error_string(err));
         return NULL;
     }
-    
+
     size_t size = cbor_encoder_get_buffer_size(&encoder, buf);
     *bytes_written = size;
     uint8_t *out = calloc(sizeof(uint8_t), size);
     memcpy(out, buf, size);
-    cbor_encoded_data_t *cbdata = calloc(sizeof(cbor_encoded_data_t), sizeof(cbor_encoded_data_t));
+    cbor_encoded_data_t *cbdata =
+        calloc(sizeof(cbor_encoded_data_t), sizeof(cbor_encoded_data_t));
     cbdata->data = out;
     cbdata->len = size;
     return cbdata;
