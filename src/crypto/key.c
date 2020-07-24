@@ -13,7 +13,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include <tinycbor/cbor.h>
+#include "tinycbor/cbor.h"
 
 /*!
  * @brief returns a new instance of public_key_t

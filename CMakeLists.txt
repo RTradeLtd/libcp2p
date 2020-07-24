@@ -96,7 +96,7 @@ include(cmake/libraries/network.cmake)
 
 # tinycbor #
 
-include(cmake/thirdparty/tinycbor.cmake)
+include(cmake/libraries/tinycbor.cmake)
 
 #########################
 # END COMPILE LIBRARIES #

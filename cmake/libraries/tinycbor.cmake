@@ -1,6 +1,6 @@
 file(GLOB_RECURSE TINYCBOR_SOURCES
-    ${PROJECT_SOURCE_DIR}/thirdparty/tinycbor/src/*.h
-    ${PROJECT_SOURCE_DIR}/thirdparty/tinycbor/src/*.c
+    ./include/tinycbor/src/*.h
+    ./src/tinycbor/*.c
 )
 
 add_library(libtinycbor
