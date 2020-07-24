@@ -35,8 +35,14 @@
 #include "mbedtls/pk.h"
 #include "mbedtls/platform.h"
 #include "mbedtls/x509.h"
+#include <errno.h>
+#include <fcntl.h>
 #include <pthread.h>
+#include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 /*!
  * @brief frees up resources allocated for the private key
@@ -219,4 +225,61 @@ int libp2p_crypto_ecdsa_keypair_generation(unsigned char *output,
     mbedtls_ctr_drbg_free(&ctr_drb_context);
     mbedtls_entropy_free(&entropy_context);
     return 1;
+}
+
+/*!
+ * @brief used to save a private key at the given path
+ * @param pk an instance of ecdsa_private_key_t
+ * @param path the location on disk to save file at
+ * @return Success: 0
+ * @return Failure: 1
+ */
+int libp2p_crypto_ecdsa_private_key_save(ecdsa_private_key_t *pk, char *path) {
+    unsigned char pem_buffer[1024];
+
+    int rc = mbedtls_pk_write_key_pem(&pk->pk_ctx, pem_buffer, 1024);
+    if (rc != 0) {
+        print_mbedtls_error(rc);
+        return 1;
+    }
+
+    int fd = open(path, O_WRONLY | O_CREAT | O_SYNC | O_TRUNC, 0640);
+    if (fd <= 0) {
+        printf("failed to open: %s\n", strerror(errno));
+        return 1;
+    }
+
+    size_t stat = write(fd, (char *)pem_buffer, strlen((char *)pem_buffer));
+    if ((int)stat == -1) {
+        printf("failed to write: %s\n", strerror(errno));
+        rc = 1;
+    } else {
+        rc = 0;
+    }
+
+    close(fd);
+    return rc;
+}
+
+/*!
+ * @brief loads an ECDSA private key from a file containing a PEM key
+ * @param path the path on disk to a PEM file containing an ECDSA private key
+ * @return Success: pointer to an instance of an ecdsa_private_key_t type
+ * @return Failure: NULL pointer
+ */
+ecdsa_private_key_t *libp2p_crypto_ecdsa_private_key_from_file(char *path) {
+    int fd = open(path, O_RDONLY, 0640);
+    if (fd <= 0) {
+        printf("failed to open: %s\n", strerror(errno));
+        return NULL;
+    }
+    char pem_buffer[1024];
+    int rc = read(fd, pem_buffer, 1024);
+    if (rc == -1) {
+        printf("failed to read from file: %s\n", strerror(errno));
+        return NULL;
+    }
+    close(fd);
+
+    return libp2p_crypto_ecdsa_pem_to_private_key((unsigned char *)pem_buffer);
 }

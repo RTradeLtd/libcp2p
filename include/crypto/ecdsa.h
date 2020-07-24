@@ -30,6 +30,15 @@ typedef struct ecdsa_private_key {
     pthread_mutex_t mutex;
 } ecdsa_private_key_t;
 
+/*!
+ * @brief used to save a private key at the given path
+ * @param pk an instance of ecdsa_private_key_t
+ * @param path the location on disk to save file at
+ * @return Success: 0
+ * @return Failure: 1
+ */
+int libp2p_crypto_ecdsa_private_key_save(ecdsa_private_key_t *pk, char *path);
+
 /*! @brief used to generate an ECDSA keypair
  * @param output a buffer to write the ecdsa keypair into
  * @returns Fail: 0
@@ -69,3 +78,11 @@ unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk);
  * @brief frees up resources allocated for the private key
  */
 int libp2p_crypto_ecdsa_free(ecdsa_private_key_t *pk);
+
+/*!
+ * @brief loads an ECDSA private key from a file containing a PEM key
+ * @param path the path on disk to a PEM file containing an ECDSA private key
+ * @return Success: pointer to an instance of an ecdsa_private_key_t type
+ * @return Failure: NULL pointer
+ */
+ecdsa_private_key_t *libp2p_crypto_ecdsa_private_key_from_file(char *path);
