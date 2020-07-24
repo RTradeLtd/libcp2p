@@ -31,6 +31,7 @@ typedef struct cbor_encoded_data {
  * @typedef public_key_t
  * @brief a structure containing information needed for using a public key
  * @note to send over the wire use libp2p_crypto_public_key_cbor_encode
+ * @details CBOR wire representation is `array[type, data, size]`
  */
 typedef struct public_key {
     key_type_t type;     /*! @brief the type of the key */
