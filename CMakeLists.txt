@@ -35,6 +35,11 @@ if(NOT CMAKE_BUILD_TYPE)
     list(APPEND flags -std=c17 -Wall -Wextra -Werror -pedantic)
 endif()
 
+find_library(TINYCBOR_LIB 
+      tinycbor
+      PATHS /usr/local/lib
+)
+
 list(APPEND flags -D_POSIX_C_SOURCE=201112L)
 
 set(CMAKE_C_FLAGS_RELEASE "")
