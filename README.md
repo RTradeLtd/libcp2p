@@ -84,6 +84,8 @@ $> cd build && ctest -T memcheck # runs valgrind
 * clang-format (code formatting)
 * doxygen (documentation generation)
 * pthreads
+* tinycbor
+  * in repo using [this commit](https://github.com/intel/tinycbor/commit/085ca40781f7c39febe6d14fb7e5cba342e1804b)
 
 
 # development/contribution

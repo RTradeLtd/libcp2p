@@ -13,6 +13,7 @@
 #include "encoding/base64.h"
 #include "mbedtls/base64.h"
 #include "crypto/peerutils.h"
+#include "crypto/key.h"
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
@@ -275,13 +276,116 @@ void test_libp2p_crypto_hashing_sha256(void **state) {
     free(decode_output);
 }
 
+void test_libp2p_crypto_cbor_encode_pub_key(void **state) {
+    {
+        unsigned char *output = calloc(sizeof(unsigned char), 1024);
+
+        int rc = libp2p_crypto_ecdsa_keypair_generation(output, MBEDTLS_ECP_DP_SECP256R1);    
+        assert(rc == 1);
+        
+        ecdsa_private_key_t *pk = libp2p_crypto_ecdsa_pem_to_private_key(output);
+        assert(pk != NULL);
+        
+        unsigned char *public_key_pem = libp2p_crypto_ecdsa_keypair_public(pk);
+        assert(public_key_pem != NULL);
+
+        public_key_t *pub_key = libp2p_crypto_public_key_new();
+        pub_key->data = public_key_pem;
+        pub_key->data = public_key_pem;
+        pub_key->data_size = strlen((char *)public_key_pem);
+        pub_key->type = KEYTYPE_ECDSA;
+        
+        size_t bytes_written;
+        cbor_encoded_data_t *out = libp2p_crypto_public_key_cbor_encode(
+            pub_key,
+            &bytes_written
+        );
+        assert(out != NULL);
+        
+        unsigned char *encoded = calloc(sizeof(unsigned char), 2048);
+        size_t encoded_size;
+        rc = libp2p_encoding_base64_encode(
+            out->data,
+            bytes_written,
+            encoded,
+            1024,
+            &encoded_size
+        );
+        assert(rc == 1);
+        assert(strlen((char *)encoded) > 0 );
+
+        size_t cbor_size;
+        cbor_encoded_data_t *data = libp2p_crypto_public_key_cbor_encode(pub_key, &cbor_size);
+        assert(data != NULL);
+
+        public_key_t *ret_key = libp2p_crypto_public_key_cbor_decode(data);
+        assert(ret_key != NULL);
+
+        assert(ret_key->data_size == pub_key->data_size);
+        assert(
+            memcmp(
+                pub_key->data,
+                ret_key->data,
+                pub_key->data_size
+            ) == 0
+        );
+
+        free(encoded);
+        free(out->data);
+        free(out);
+        free(output);
+        free(data->data);
+        free(data);
+        libp2p_crypto_public_key_free(pub_key);
+        libp2p_crypto_public_key_free(ret_key);
+        libp2p_crypto_ecdsa_free(pk);
+    }
+    public_key_t *test_key = libp2p_crypto_public_key_new();
+    test_key->data = calloc(sizeof(unsigned char), 7);
+    test_key->data_size = 7;
+    test_key->data[0] = '1';
+    test_key->data[1] = '2'; 
+    test_key->data[2] = '3';
+    test_key->data[3] = '4';
+    test_key->data[4] = '5';
+    test_key->data[5] = '6';
+    test_key->data[6] = '\0';
+    test_key->type = KEYTYPE_ECDSA;
+
+    size_t bytes_written;
+    cbor_encoded_data_t *out = libp2p_crypto_public_key_cbor_encode(test_key, &bytes_written);
+    assert(out != NULL);
+    unsigned char *encoded = calloc(sizeof(unsigned char), 2048);
+    size_t encoded_size;
+    int rc = libp2p_encoding_base64_encode(
+        out->data,
+        bytes_written,
+        encoded,
+        1024,
+        &encoded_size
+    );
+    assert(rc == 1);
+    assert(
+        memcmp(
+            encoded,
+            "g+FHMTIzNDU2AAc=",
+            encoded_size
+        ) == 0
+    );
+    free(encoded);
+    free(out->data);
+    free(out);
+    libp2p_crypto_public_key_free(test_key);
+}
+
 int main(void) {
     const struct CMUnitTest tests[] = {
         cmocka_unit_test(test_libp2p_crypto_hashing_sha512),
         cmocka_unit_test(test_libp2p_crypto_hashing_sha256),
         cmocka_unit_test(test_libp2p_crypto_hashing_sha256_hmac),
         cmocka_unit_test(test_libp2p_crypto_hashing_sha1_hmac),
-        cmocka_unit_test(test_libp2p_crypto_ecdsa_keypair_generation)
+        cmocka_unit_test(test_libp2p_crypto_ecdsa_keypair_generation),
+        cmocka_unit_test(test_libp2p_crypto_cbor_encode_pub_key)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
