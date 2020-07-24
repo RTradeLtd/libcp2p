@@ -294,7 +294,7 @@ void test_libp2p_crypto_cbor_encode_pub_key(void **state) {
         pub_key->data = public_key_pem;
         pub_key->data_size = strlen((char *)public_key_pem);
         pub_key->type = KEYTYPE_ECDSA;
-        printf("data: %s\n", pub_key->data);
+        
         size_t bytes_written;
         cbor_encoded_data_t *out = libp2p_crypto_public_key_cbor_encode(
             pub_key,
@@ -313,10 +313,31 @@ void test_libp2p_crypto_cbor_encode_pub_key(void **state) {
         );
         assert(rc == 1);
         assert(strlen((char *)encoded) > 0 );
+
+        size_t cbor_size;
+        cbor_encoded_data_t *data = libp2p_crypto_public_key_cbor_encode(pub_key, &cbor_size);
+        assert(data != NULL);
+
+        public_key_t *ret_key = libp2p_crypto_public_key_cbor_decode(data);
+        assert(ret_key != NULL);
+
+        assert(ret_key->data_size == pub_key->data_size);
+        assert(
+            memcmp(
+                pub_key->data,
+                ret_key->data,
+                pub_key->data_size
+            ) == 0
+        );
+
         free(encoded);
+        free(out->data);
         free(out);
         free(output);
+        free(data->data);
+        free(data);
         libp2p_crypto_public_key_free(pub_key);
+        libp2p_crypto_public_key_free(ret_key);
         libp2p_crypto_ecdsa_free(pk);
     }
     public_key_t *test_key = libp2p_crypto_public_key_new();
@@ -343,8 +364,6 @@ void test_libp2p_crypto_cbor_encode_pub_key(void **state) {
         1024,
         &encoded_size
     );
-    libp2p_crypto_public_key_cbor_decode(out);
-    printf("%s\n", encoded);
     assert(rc == 1);
     assert(
         memcmp(
@@ -353,10 +372,8 @@ void test_libp2p_crypto_cbor_encode_pub_key(void **state) {
             encoded_size
         ) == 0
     );
-
-    
-
     free(encoded);
+    free(out->data);
     free(out);
     libp2p_crypto_public_key_free(test_key);
 }

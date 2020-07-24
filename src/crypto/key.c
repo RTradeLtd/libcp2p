@@ -345,9 +345,29 @@ public_key_t *libp2p_crypto_public_key_cbor_decode(cbor_encoded_data_t *data) {
         printf("failed to get int: %s\n", cbor_error_string(err));
         return NULL;
     }
+
+    err = cbor_value_advance(&recurse);
+    if (err != CborNoError) {
+        printf("failed to advanced container: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
+    err = cbor_value_leave_container(&value, &recurse);
+    if (err != CborNoError) {
+        printf("failed to leave container: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
     public_key_t *pk = calloc(sizeof(public_key_t), sizeof(public_key_t));
+    if (pk == NULL) {
+        return NULL;
+    }
     pk->data = calloc(sizeof(unsigned char), data_len);
-    memcpy(pk->data, data, data_len);
+    if (pk->data == NULL) {
+        free(pk);
+        return NULL;
+    }
+    memcpy(pk->data, data_buffer, data_len);
     pk->data_size = data_len;
     pk->type = (key_type_t)key_type;
 
