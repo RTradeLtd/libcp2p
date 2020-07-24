@@ -16,6 +16,9 @@ target_link_libraries(libcrypto mbedtls)
 target_link_libraries(libcrypto mbedx509)
 target_link_libraries(libcrypto mbedcrypto)
 target_link_libraries(libcrypto libmultibase)
+target_link_libraries(libcrypto libtinycbor)
+
+
 
 add_executable(libcrypto-test ./src/crypto/crypto_test.c)
 target_link_libraries(libcrypto-test mbedtls)

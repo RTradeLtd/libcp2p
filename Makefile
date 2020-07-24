@@ -26,6 +26,10 @@ install-cmocka:
 install-mbedtls:
 	(./.scripts/install_mbedtls.sh)
 
+.PHONY: install-tinycbor
+install-tinycbor:
+	(./.scripts/install_tinycbor.sh)
+
 .PHONY: install-deps-ubuntu
 install-deps-ubuntu: deps-ubuntu install-mbedtls
 
