@@ -1,3 +1,10 @@
+/*! @file key.c
+ * @brief public/private key management functions
+ * @details provides tooling for working with public/private keys and transmitting
+ * them over the wire
+ * @warning none of these functions and structures are thread safe
+ */
+
 #include "crypto/key.h"
 #include "crypto/peerutils.h"
 #include "crypto/sha256.h"
@@ -8,10 +15,11 @@
 #include <string.h>
 #include <tinycbor/cbor.h>
 
-/**
- * Utilities for public and private keys
+/*!
+ * @brief returns a new instance of public_key_t
+ * @returns Success: pointer to an instance of public_key_t
+ * @returns Failure: NULL pointer
  */
-
 public_key_t *libp2p_crypto_public_key_new(void) {
     public_key_t *retVal = malloc(sizeof(public_key_t));
     if (retVal == NULL)
@@ -22,11 +30,19 @@ public_key_t *libp2p_crypto_public_key_new(void) {
     return retVal;
 }
 
+/*!
+ * @brief free up resources associated with a public_key_t instance
+ */
 void libp2p_crypto_public_key_free(public_key_t *in) {
     free(in->data);
     free(in);
 }
 
+/*!
+ * @brief returns a new instance of private_key_t
+ * @returns Success: pointer to an instance of private_key_t
+ * @returns Failure: NULL pointer
+ */
 private_key_t *libp2p_crypto_private_key_new(void) {
     private_key_t *retVal = malloc(sizeof(private_key_t));
     if (retVal == NULL)
@@ -37,6 +53,9 @@ private_key_t *libp2p_crypto_private_key_new(void) {
     return retVal;
 }
 
+/*!
+ * @brief frees up resources associated with a private_key_t instance
+ */
 void libp2p_crypto_private_key_free(private_key_t *in) {
     if (in != NULL) {
         if (in->data != NULL)
@@ -46,23 +65,35 @@ void libp2p_crypto_private_key_free(private_key_t *in) {
     }
 }
 
+/*!
+ * @brief copies a private key
+ * @param source the key we are copying
+ * @param destination the location to copy to
+ * @return Success: 0
+ * @return Failure: 1
+ * @note does not allocate memory for caller
+ */
 int libp2p_crypto_private_key_copy(const private_key_t *source,
                                    private_key_t *destination) {
     if (source != NULL && destination != NULL) {
         destination->type = source->type;
         destination->data = (unsigned char *)malloc(source->data_size);
-        if (destination->data != NULL) {
-            memcpy(destination->data, source->data, source->data_size);
-            destination->data_size = source->data_size;
+        if (destination->data == NULL) {
             return 1;
         }
-        libp2p_crypto_private_key_free(destination);
+        memcpy(destination->data, source->data, source->data_size);
+        destination->data_size = source->data_size;
+        return 0;
     }
-    return 0;
+    return 1;
 }
 
 /*!
- * @brief used to cbor decode a uint8_t pointer and return a public_key_t object
+ * @brief used to cbor data a chunk of data
+ * @param data an instance of cbor_encoded_data_t created with
+ * libp2p_crypto_public_key_cbor_encode
+ * @returns Success: pointer to a public_key_t instance
+ * @returns Failure: NULL pointer
  */
 public_key_t *libp2p_crypto_public_key_cbor_decode(cbor_encoded_data_t *data) {
     CborParser parser;
@@ -163,7 +194,11 @@ public_key_t *libp2p_crypto_public_key_cbor_decode(cbor_encoded_data_t *data) {
 }
 
 /*!
- * @brief used to cbor encode a public_key_t object
+ * @brief used to cbor encode a public_key_t type for sending over the wire
+ * @param pub_key an instance of public_key_t fully filled out
+ * @param bytes_written returns the number of bytes written
+ * @return Success: pointer to an instance of cbor_encoded_data_t
+ * @return Failure: NULL pointer
  */
 cbor_encoded_data_t *libp2p_crypto_public_key_cbor_encode(public_key_t *pub_key,
                                                           size_t *bytes_written) {
@@ -209,9 +244,16 @@ cbor_encoded_data_t *libp2p_crypto_public_key_cbor_encode(public_key_t *pub_key,
     size_t size = cbor_encoder_get_buffer_size(&encoder, buf);
     *bytes_written = size;
     uint8_t *out = calloc(sizeof(uint8_t), size);
+    if (out == NULL) {
+        return NULL;
+    }
     memcpy(out, buf, size);
     cbor_encoded_data_t *cbdata =
         calloc(sizeof(cbor_encoded_data_t), sizeof(cbor_encoded_data_t));
+    if (cbdata == NULL) {
+        free(out);
+        return NULL;
+    }
     cbdata->data = out;
     cbdata->len = size;
     return cbdata;
