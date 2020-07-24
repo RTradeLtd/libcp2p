@@ -23,7 +23,7 @@ endif()
 # handle ci build type
 if(CMAKE_BUILD_TYPE STREQUAL "CI")
     set(CMAKE_BUILD_TYPE "Release")
-    list(APPEND flags -std=c17 -Wall -Wextra -Werror -pedantic -I/home/travis/build/RTradeLtd/libcp2p/destdir/usr/include/ -I /home/travis/build/RTradeLtd/libcp2p/tinycbor)
+    list(APPEND flags -std=c17 -Wall -Wextra -Werror -pedantic -I/home/travis/build/RTradeLtd/libcp2p/destdir/usr/include/ -I /home/travis/build/RTradeLtd/libcp2p/tinycbor -I/usr/local/lib/libtinycbor.so.0.5 -I/usr/local/lib)
     # override the previous C compiler choice
     set(CMAKE_C_COMPILER /usr/bin/gcc-9)
 endif()
