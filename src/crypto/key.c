@@ -100,7 +100,11 @@ public_key_t *libp2p_crypto_public_key_cbor_decode(cbor_encoded_data_t *data) {
     CborValue value;
     CborError err;
 
-    cbor_parser_init(data->data, data->len, 0, &parser, &value);
+    err = cbor_parser_init(data->data, data->len, 0, &parser, &value);
+    if (err != CborNoError) {
+        printf("failed to init parser: %s\n", cbor_error_string(err));
+        return NULL;
+    }
 
     bool is_array = cbor_value_is_array(&value);
     if (is_array == false) {
@@ -210,13 +214,13 @@ cbor_encoded_data_t *libp2p_crypto_public_key_cbor_encode(public_key_t *pub_key,
     cbor_encoder_init(&encoder, buf, sizeof(buf), 0);
     err = cbor_encoder_create_array(&encoder, &array_encoder, 3);
     if (err != CborNoError) {
-        printf("failed to create map\n");
+        printf("failed to create map: %s\n", cbor_error_string(err));
         return NULL;
     }
 
     err = cbor_encode_simple_value(&array_encoder, pub_key->type);
     if (err != CborNoError) {
-        printf("failed to encode simple values\n");
+        printf("failed to encode simple values: %s\n", cbor_error_string(err));
         return NULL;
     }
 
@@ -228,7 +232,7 @@ cbor_encoded_data_t *libp2p_crypto_public_key_cbor_encode(public_key_t *pub_key,
 
     err = cbor_encode_int(&array_encoder, (int64_t)pub_key->data_size);
     if (err != CborNoError) {
-        printf("failed to encdoe int\n");
+        printf("failed to encdoe int: %s\n", cbor_error_string(err));
         return NULL;
     }
 
