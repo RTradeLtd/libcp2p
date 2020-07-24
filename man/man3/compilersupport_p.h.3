@@ -1,0 +1,197 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/tinycbor/compilersupport_p.h" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/tinycbor/compilersupport_p.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'tinycbor/cbor\&.h'\fP
+.br
+\fC#include <assert\&.h>\fP
+.br
+\fC#include <stddef\&.h>\fP
+.br
+\fC#include <stdint\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+\fC#include <arpa/inet\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fB_BSD_SOURCE\fP"
+.br
+.ti -1c
+.RI "#define \fB_DEFAULT_SOURCE\fP"
+.br
+.ti -1c
+.RI "#define \fBcbor_static_assert\fP(x)   ((void)sizeof(char[2 * !!(x)\-1]))"
+.br
+.ti -1c
+.RI "#define \fBinline\fP   \fBCBOR_INLINE\fP"
+.br
+.ti -1c
+.RI "#define \fBcbor_assert\fP(cond)   assert(cond)"
+.br
+.ti -1c
+.RI "#define \fBSTRINGIFY\fP(x)   \fBSTRINGIFY2\fP(x)"
+.br
+.ti -1c
+.RI "#define \fBSTRINGIFY2\fP(x)   #x"
+.br
+.ti -1c
+.RI "#define \fBDBL_DECIMAL_DIG\fP   17"
+.br
+.ti -1c
+.RI "#define \fBDBL_DECIMAL_DIG_STR\fP   \fBSTRINGIFY\fP(\fBDBL_DECIMAL_DIG\fP)"
+.br
+.ti -1c
+.RI "#define \fBCBOR_INTERNAL_API_CC\fP"
+.br
+.ti -1c
+.RI "#define \fB__has_builtin\fP(x)   0"
+.br
+.ti -1c
+.RI "#define \fBcbor_ntohs\fP   ntohs"
+.br
+.ti -1c
+.RI "#define \fBcbor_htons\fP   htons"
+.br
+.ti -1c
+.RI "#define \fBcbor_ntohl\fP   ntohl"
+.br
+.ti -1c
+.RI "#define \fBcbor_htonl\fP   htonl"
+.br
+.ti -1c
+.RI "#define \fBcbor_ntohll\fP   ntohll"
+.br
+.ti -1c
+.RI "#define \fBcbor_htonll\fP   htonll"
+.br
+.ti -1c
+.RI "#define \fBCONST_CAST\fP(t,  v)   (t)(uintptr_t)(v)"
+.br
+.ti -1c
+.RI "#define \fBlikely\fP(x)   (x)"
+.br
+.ti -1c
+.RI "#define \fBunlikely\fP(x)   (x)"
+.br
+.ti -1c
+.RI "#define \fBunreachable\fP()"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "static \fBCBOR_INLINE\fP bool \fBadd_check_overflow\fP (size_t v1, size_t v2, size_t *r)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define __has_builtin(x)   0"
+
+.PP
+Definition at line 99 of file compilersupport_p\&.h\&.
+.SS "#define _BSD_SOURCE"
+
+.PP
+Definition at line 31 of file compilersupport_p\&.h\&.
+.SS "#define _DEFAULT_SOURCE"
+
+.PP
+Definition at line 34 of file compilersupport_p\&.h\&.
+.SS "#define cbor_assert(cond)   assert(cond)"
+
+.PP
+Definition at line 71 of file compilersupport_p\&.h\&.
+.SS "#define cbor_htonl   htonl"
+
+.PP
+Definition at line 147 of file compilersupport_p\&.h\&.
+.SS "#define cbor_htonll   htonll"
+
+.PP
+Definition at line 151 of file compilersupport_p\&.h\&.
+.SS "#define cbor_htons   htons"
+
+.PP
+Definition at line 142 of file compilersupport_p\&.h\&.
+.SS "#define CBOR_INTERNAL_API_CC"
+
+.PP
+Definition at line 95 of file compilersupport_p\&.h\&.
+.SS "#define cbor_ntohl   ntohl"
+
+.PP
+Definition at line 146 of file compilersupport_p\&.h\&.
+.SS "#define cbor_ntohll   ntohll"
+
+.PP
+Definition at line 150 of file compilersupport_p\&.h\&.
+.SS "#define cbor_ntohs   ntohs"
+
+.PP
+Definition at line 141 of file compilersupport_p\&.h\&.
+.SS "#define cbor_static_assert(x)   ((void)sizeof(char[2 * !!(x)\-1]))"
+
+.PP
+Definition at line 55 of file compilersupport_p\&.h\&.
+.SS "#define CONST_CAST(t, v)   (t)(uintptr_t)(v)"
+
+.PP
+Definition at line 187 of file compilersupport_p\&.h\&.
+.SS "#define DBL_DECIMAL_DIG   17"
+
+.PP
+Definition at line 86 of file compilersupport_p\&.h\&.
+.SS "#define DBL_DECIMAL_DIG_STR   \fBSTRINGIFY\fP(\fBDBL_DECIMAL_DIG\fP)"
+
+.PP
+Definition at line 88 of file compilersupport_p\&.h\&.
+.SS "#define inline   \fBCBOR_INLINE\fP"
+
+.PP
+Definition at line 61 of file compilersupport_p\&.h\&.
+.SS "#define likely(x)   (x)"
+
+.PP
+Definition at line 203 of file compilersupport_p\&.h\&.
+.SS "#define STRINGIFY(x)   \fBSTRINGIFY2\fP(x)"
+
+.PP
+Definition at line 75 of file compilersupport_p\&.h\&.
+.SS "#define STRINGIFY2(x)   #x"
+
+.PP
+Definition at line 77 of file compilersupport_p\&.h\&.
+.SS "#define unlikely(x)   (x)"
+
+.PP
+Definition at line 204 of file compilersupport_p\&.h\&.
+.SS "#define unreachable()"
+\fBValue:\fP
+.PP
+.nf
+    do {              \
+    } while (0)
+.fi
+.PP
+Definition at line 205 of file compilersupport_p\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "static \fBCBOR_INLINE\fP bool add_check_overflow (size_t v1, size_t v2, size_t * r)\fC [static]\fP"
+
+.PP
+Definition at line 210 of file compilersupport_p\&.h\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

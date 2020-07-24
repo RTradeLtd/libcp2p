@@ -1,8 +1,7 @@
 <map id="libp2p_crypto_hashing_sha256" name="libp2p_crypto_hashing_sha256">
-<area shape="rect" id="node1" title=" " alt="" coords="559,71,727,112"/>
-<area shape="rect" id="node2" href="$d5/d5d/ecdsa_8h.html#afab4ce5b8e4bde2be242ad28bf9f1474" title="returns the peerid for the corresponding private key" alt="" coords="355,5,510,47"/>
-<area shape="rect" id="node5" href="$de/de5/key_8h.html#a880e85cb8f876de9eca86247cc0d30f6" title="convert a public key into a peer id" alt="" coords="355,71,511,112"/>
-<area shape="rect" id="node6" href="$d5/d29/crypto__test_8c.html#afe42ae6e62a08bff21956adcfcb56a6d" title=" " alt="" coords="136,100,279,141"/>
-<area shape="rect" id="node3" href="$d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="108,20,307,61"/>
-<area shape="rect" id="node4" href="$d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,75,60,102"/>
+<area shape="rect" id="node1" title=" " alt="" coords="557,39,725,80"/>
+<area shape="rect" id="node2" href="$d5/d5d/ecdsa_8h.html#afab4ce5b8e4bde2be242ad28bf9f1474" title="returns the peerid for the corresponding private key" alt="" coords="355,8,509,49"/>
+<area shape="rect" id="node5" href="$d5/d29/crypto__test_8c.html#afe42ae6e62a08bff21956adcfcb56a6d" title=" " alt="" coords="136,71,279,112"/>
+<area shape="rect" id="node3" href="$d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="108,5,307,47"/>
+<area shape="rect" id="node4" href="$d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,46,60,73"/>
 </map>

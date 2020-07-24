@@ -1,0 +1,285 @@
+.TH "CborToJson" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+CborToJson \- Group of functions used to convert CBOR to JSON\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBConversionStatus\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBConversionStatus\fP \fBConversionStatus\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBConversionStatusFlags\fP { \fBTypeWasNotNative\fP, \fBTypeWasTagged\fP = 0x200, \fBNumberPrecisionWasLost\fP = 0x400, \fBNumberWasNaN\fP = 0x800, \fBNumberWasInfinite\fP = 0x1000, \fBNumberWasNegative\fP, \fBFinalTypeMask\fP = 0xff }"
+.br
+.ti -1c
+.RI "enum \fBCborToJsonFlags\fP { \fBCborConvertAddMetadata\fP = 1, \fBCborConvertTagsToObjects\fP = 2, \fBCborConvertIgnoreTags\fP = 0, \fBCborConvertObeyByteStringTags\fP = 0, \fBCborConvertByteStringsToBase64Url\fP = 4, \fBCborConvertRequireMapStringKeys\fP = 0, \fBCborConvertStringifyMapKeys\fP = 8, \fBCborConvertDefaultFlags\fP = 0 }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "FILE * \fBopen_memstream\fP (char **bufptr, size_t *sizeptr)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBvalue_to_json\fP (FILE *out, \fBCborValue\fP *it, int flags, \fBCborType\fP type, \fBConversionStatus\fP *status)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBdump_bytestring_base16\fP (char **result, \fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBgeneric_dump_base64\fP (char **result, \fBCborValue\fP *it, const char alphabet[65])"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBdump_bytestring_base64\fP (char **result, \fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBdump_bytestring_base64url\fP (char **result, \fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBadd_value_metadata\fP (FILE *out, \fBCborType\fP type, const \fBConversionStatus\fP *status)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBfind_tagged_type\fP (\fBCborValue\fP *it, \fBCborTag\fP *tag, \fBCborType\fP *type)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBtagged_value_to_json\fP (FILE *out, \fBCborValue\fP *it, int flags, \fBConversionStatus\fP *status)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBstringify_map_key\fP (char **key, \fBCborValue\fP *it, int flags, \fBCborType\fP type)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBarray_to_json\fP (FILE *out, \fBCborValue\fP *it, int flags, \fBConversionStatus\fP *status)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBmap_to_json\fP (FILE *out, \fBCborValue\fP *it, int flags, \fBConversionStatus\fP *status)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_to_json_advance\fP (FILE *out, \fBCborValue\fP *value, int flags)"
+.br
+.ti -1c
+.RI "\fBCBOR_INLINE_API\fP \fBCborError\fP \fBcbor_value_to_json\fP (FILE *out, const \fBCborValue\fP *value, int flags)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Group of functions used to convert CBOR to JSON\&. 
+
+This group contains two functions that can be used to convert a \fBCborValue\fP object to an equivalent JSON representation\&. This module attempts to follow the recommendations from RFC 7049 section 4\&.1 'Converting from
+CBOR to JSON', though it has a few differences\&. They are noted below\&.
+.PP
+These functions produce a 'minified' JSON output, with no spacing, indentation or line breaks\&. If those are necessary, they need to be applied in a post-processing phase\&.
+.PP
+Note that JSON cannot support all CBOR types with fidelity, so the conversion is usually lossy\&. For that reason, TinyCBOR supports adding a set of metadata JSON values that can be used by a JSON-to-CBOR converter to restore the original data types\&.
+.PP
+The TinyCBOR library does not provide a way to convert from JSON representation back to encoded form\&. However, it provides a tool called \fCjson2cbor\fP which can be used for that purpose\&. That tool supports the metadata format that these functions may produce\&.
+.PP
+Either of the functions in this section will attempt to convert exactly one \fBCborValue\fP object to JSON\&. Those functions may return any error documented for the functions for CborParsing\&. In addition, if the C standard library stream functions return with error, the text conversion will return with error CborErrorIO\&.
+.PP
+These functions also perform UTF-8 validation in CBOR text strings\&. If they encounter a sequence of bytes that is not permitted in UTF-8, they will return CborErrorInvalidUtf8TextString\&. That includes encoding of surrogate points in UTF-8\&.
+.PP
+\fBWarning\fP
+.RS 4
+The metadata produced by these functions is not guaranteed to remain stable\&. A future update of TinyCBOR may produce different output for the same input and parsers may be unable to handle it\&.
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBParsing CBOR streams\fP, \fBConverting CBOR to text\fP, \fBcbor_parser_init()\fP
+.RE
+.PP
+.SS "Conversion limitations"
+.PP
+When converting from CBOR to JSON, there may be information loss\&. This section lists the possible scenarios\&.
+.PP
+\fBNumber precision:\fP
+.RS 4
+ALL JSON numbers, due to its JavaScript heritage, are IEEE 754 double-precision floating point\&. This means JSON is not capable of representing all integers numbers outside the range [-(2\*{53\*} )+1, 2\*{53\*} -1] and is not capable of representing NaN or infinite\&. If the CBOR data contains a number outside the valid range, the conversion will lose precision\&. If the input was NaN or infinite, the result of the conversion will be the JSON null value\&. In addition, the distinction between half-, single- and double-precision is lost\&.
+.RE
+.PP
+\fB\fP
+.RS 4
+If enabled, the original value and original type are stored in the metadata\&.
+.RE
+.PP
+\fBNon-native types:\fP
+.RS 4
+CBOR's type system is richer than JSON's, which means some data values cannot be represented when converted to JSON\&. The conversion silently turns them into strings: CBOR simple types become 'simple(nn)' where \fCnn\fP is the simple type's value, with the exception of CBOR undefined, which becomes 'undefined', while CBOR byte strings are converted to an Base16, Base64, or Base64url encoding
+.RE
+.PP
+\fB\fP
+.RS 4
+If enabled, the original type is stored in the metadata\&.
+.RE
+.PP
+\fBPresence of tags:\fP
+.RS 4
+JSON has no support for tagged values, so by default tags are dropped when converting to JSON\&. However, if the CborConvertObeyByteStringTags option is active (default), then certain known tags are honored and are used to format the conversion of the tagged byte string to JSON\&.
+.RE
+.PP
+\fB\fP
+.RS 4
+If the CborConvertTagsToObjects option is active, then the tag and the tagged value are converted to a JSON object\&. Otherwise, if enabled, the last (innermost) tag is stored in the metadata\&.
+.RE
+.PP
+\fBNon-string keys in maps:\fP
+.RS 4
+JSON requires all Object keys to be strings, while CBOR does not\&. By default, if a non-string key is found, the conversion fails with error CborErrorJsonObjectKeyNotString\&. If the CborConvertStringifyMapKeys option is active, then the conversion attempts to create a string representation using CborPretty\&. Note that the \fCjson2cbor\fP tool is not able to parse this back to the original form\&.
+.RE
+.PP
+\fBDuplicate keys in maps:\fP
+.RS 4
+Neither JSON nor CBOR allow duplicated keys, but current TinyCBOR does not validate that this is the case\&. If there are duplicated keys in the input, they will be repeated in the output, which many JSON tools may flag as invalid\&. In addition to that, if the CborConvertStringifyMapKeys option is active, it is possible that a non-string key in a CBOR map will be converted to a string form that is identical to another key\&.
+.RE
+.PP
+\fB\fP
+.RS 4
+When metadata support is active, the conversion will add extra key-value pairs to the JSON output so it can store the metadata\&. It is possible that the keys for the metadata clash with existing keys in the JSON map\&. 
+.RE
+.PP
+
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fBConversionStatus\fP \fBConversionStatus\fP"
+
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBCborToJsonFlags\fP"
+The CborToJsonFlags enum contains flags that control the conversion of CBOR to JSON\&.
+.PP
+\\value CborConvertAddMetadata Adds metadata to facilitate restoration of the original CBOR data\&. \\value CborConvertTagsToObjects Converts CBOR tags to JSON objects \\value CborConvertIgnoreTags (default) Ignore CBOR tags, except for byte strings \\value CborConvertObeyByteStringTags (default) Honor formatting of CBOR byte strings if so tagged \\value CborConvertByteStringsToBase64Url Force the conversion of all CBOR byte strings to Base64url encoding, despite any tags \\value CborConvertRequireMapStringKeys (default) Require CBOR map keys to be strings, failing the conversion if they are not \\value CborConvertStringifyMapKeys Convert non-string keys in CBOR maps to a string form \\value CborConvertDefaultFlags Default conversion flags\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fICborConvertAddMetadata \fP\fP
+.TP
+\fB\fICborConvertTagsToObjects \fP\fP
+.TP
+\fB\fICborConvertIgnoreTags \fP\fP
+.TP
+\fB\fICborConvertObeyByteStringTags \fP\fP
+.TP
+\fB\fICborConvertByteStringsToBase64Url \fP\fP
+.TP
+\fB\fICborConvertRequireMapStringKeys \fP\fP
+.TP
+\fB\fICborConvertStringifyMapKeys \fP\fP
+.TP
+\fB\fICborConvertDefaultFlags \fP\fP
+.PP
+Definition at line 35 of file cborjson\&.h\&.
+.SS "enum \fBConversionStatusFlags\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fITypeWasNotNative \fP\fP
+.TP
+\fB\fITypeWasTagged \fP\fP
+.TP
+\fB\fINumberPrecisionWasLost \fP\fP
+.TP
+\fB\fINumberWasNaN \fP\fP
+.TP
+\fB\fINumberWasInfinite \fP\fP
+.TP
+\fB\fINumberWasNegative \fP\fP
+.TP
+\fB\fIFinalTypeMask \fP\fP
+.PP
+Definition at line 151 of file cbortojson\&.c\&.
+.SH "Function Documentation"
+.PP 
+.SS "static \fBCborError\fP add_value_metadata (FILE * out, \fBCborType\fP type, const \fBConversionStatus\fP * status)\fC [static]\fP"
+
+.PP
+Definition at line 299 of file cbortojson\&.c\&.
+.SS "static \fBCborError\fP array_to_json (FILE * out, \fBCborValue\fP * it, int flags, \fBConversionStatus\fP * status)\fC [static]\fP"
+
+.PP
+Definition at line 439 of file cbortojson\&.c\&.
+.SS "\fBCborError\fP cbor_value_to_json (FILE * out, const \fBCborValue\fP * value, int flags)"
+Converts the current CBOR type pointed to by \fIvalue\fP to JSON and writes that to the \fIout\fP stream\&. If an error occurs, this function returns an error code similar to CborParsing\&. The \fIflags\fP parameter indicates one or more of the flags from CborToJsonFlags that control the conversion\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_to_json_advance()\fP, \fBcbor_value_to_pretty()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 51 of file cborjson\&.h\&.
+.SS "\fBCborError\fP cbor_value_to_json_advance (FILE * out, \fBCborValue\fP * value, int flags)"
+Converts the current CBOR type pointed to by \fIvalue\fP to JSON and writes that to the \fIout\fP stream\&. If an error occurs, this function returns an error code similar to CborParsing\&. The \fIflags\fP parameter indicates one or more of the flags from CborToJsonFlags that control the conversion\&.
+.PP
+If no error ocurred, this function advances \fIvalue\fP to the next element\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_to_json()\fP, \fBcbor_value_to_pretty_advance()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 718 of file cbortojson\&.c\&.
+.SS "static \fBCborError\fP dump_bytestring_base16 (char ** result, \fBCborValue\fP * it)\fC [static]\fP"
+
+.PP
+Definition at line 173 of file cbortojson\&.c\&.
+.SS "static \fBCborError\fP dump_bytestring_base64 (char ** result, \fBCborValue\fP * it)\fC [static]\fP"
+
+.PP
+Definition at line 274 of file cbortojson\&.c\&.
+.SS "static \fBCborError\fP dump_bytestring_base64url (char ** result, \fBCborValue\fP * it)\fC [static]\fP"
+
+.PP
+Definition at line 287 of file cbortojson\&.c\&.
+.SS "static \fBCborError\fP find_tagged_type (\fBCborValue\fP * it, \fBCborTag\fP * tag, \fBCborType\fP * type)\fC [static]\fP"
+
+.PP
+Definition at line 337 of file cbortojson\&.c\&.
+.SS "static \fBCborError\fP generic_dump_base64 (char ** result, \fBCborValue\fP * it, const char alphabet[65])\fC [static]\fP"
+
+.PP
+Definition at line 200 of file cbortojson\&.c\&.
+.SS "static \fBCborError\fP map_to_json (FILE * out, \fBCborValue\fP * it, int flags, \fBConversionStatus\fP * status)\fC [static]\fP"
+
+.PP
+Definition at line 455 of file cbortojson\&.c\&.
+.SS "FILE* open_memstream (char ** bufptr, size_t * sizeptr)"
+
+.PP
+Definition at line 89 of file open_memstream\&.c\&.
+.SS "static \fBCborError\fP stringify_map_key (char ** key, \fBCborValue\fP * it, int flags, \fBCborType\fP type)\fC [static]\fP"
+
+.PP
+Definition at line 417 of file cbortojson\&.c\&.
+.SS "static \fBCborError\fP tagged_value_to_json (FILE * out, \fBCborValue\fP * it, int flags, \fBConversionStatus\fP * status)\fC [static]\fP"
+
+.PP
+Definition at line 351 of file cbortojson\&.c\&.
+.SS "static \fBCborError\fP value_to_json (FILE * out, \fBCborValue\fP * it, int flags, \fBCborType\fP type, \fBConversionStatus\fP * status)\fC [static]\fP"
+
+.PP
+Definition at line 508 of file cbortojson\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

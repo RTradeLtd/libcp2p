@@ -1,0 +1,881 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/tinycbor/cbor.h" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/tinycbor/cbor.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <assert\&.h>\fP
+.br
+\fC#include <limits\&.h>\fP
+.br
+\fC#include <stddef\&.h>\fP
+.br
+\fC#include <stdint\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include 'tinycbor\-version\&.h'\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBCborEncoder\fP"
+.br
+.ti -1c
+.RI "struct \fBCborParser\fP"
+.br
+.ti -1c
+.RI "struct \fBCborValue\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBTINYCBOR_VERSION\fP"
+.br
+.ti -1c
+.RI "#define \fBSIZE_MAX\fP   ((size_t)\-1)"
+.br
+.ti -1c
+.RI "#define \fBCBOR_PRIVATE_API\fP"
+.br
+.ti -1c
+.RI "#define \fBCBOR_INLINE_API\fP   static \fBCBOR_INLINE\fP"
+.br
+.ti -1c
+.RI "#define \fBCBOR_INLINE\fP"
+.br
+.ti -1c
+.RI "#define \fBCborDateTimeStringTag\fP   CborDateTimeStringTag"
+.br
+.ti -1c
+.RI "#define \fBCborUnixTime_tTag\fP   CborUnixTime_tTag"
+.br
+.ti -1c
+.RI "#define \fBCborPositiveBignumTag\fP   CborPositiveBignumTag"
+.br
+.ti -1c
+.RI "#define \fBCborNegativeBignumTag\fP   CborNegativeBignumTag"
+.br
+.ti -1c
+.RI "#define \fBCborDecimalTag\fP   CborDecimalTag"
+.br
+.ti -1c
+.RI "#define \fBCborBigfloatTag\fP   CborBigfloatTag"
+.br
+.ti -1c
+.RI "#define \fBCborCOSE_Encrypt0Tag\fP   CborCOSE_Encrypt0Tag"
+.br
+.ti -1c
+.RI "#define \fBCborCOSE_Mac0Tag\fP   CborCOSE_Mac0Tag"
+.br
+.ti -1c
+.RI "#define \fBCborCOSE_Sign1Tag\fP   CborCOSE_Sign1Tag"
+.br
+.ti -1c
+.RI "#define \fBCborExpectedBase64urlTag\fP   CborExpectedBase64urlTag"
+.br
+.ti -1c
+.RI "#define \fBCborExpectedBase64Tag\fP   CborExpectedBase64Tag"
+.br
+.ti -1c
+.RI "#define \fBCborExpectedBase16Tag\fP   CborExpectedBase16Tag"
+.br
+.ti -1c
+.RI "#define \fBCborEncodedCborTag\fP   CborEncodedCborTag"
+.br
+.ti -1c
+.RI "#define \fBCborUrlTag\fP   CborUrlTag"
+.br
+.ti -1c
+.RI "#define \fBCborBase64urlTag\fP   CborBase64urlTag"
+.br
+.ti -1c
+.RI "#define \fBCborBase64Tag\fP   CborBase64Tag"
+.br
+.ti -1c
+.RI "#define \fBCborRegularExpressionTag\fP   CborRegularExpressionTag"
+.br
+.ti -1c
+.RI "#define \fBCborMimeMessageTag\fP   CborMimeMessageTag"
+.br
+.ti -1c
+.RI "#define \fBCborCOSE_EncryptTag\fP   CborCOSE_EncryptTag"
+.br
+.ti -1c
+.RI "#define \fBCborCOSE_MacTag\fP   CborCOSE_MacTag"
+.br
+.ti -1c
+.RI "#define \fBCborCOSE_SignTag\fP   CborCOSE_SignTag"
+.br
+.ti -1c
+.RI "#define \fBCborSignatureTag\fP   CborSignatureTag"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef enum \fBCborType\fP \fBCborType\fP"
+.br
+.ti -1c
+.RI "typedef uint64_t \fBCborTag\fP"
+.br
+.ti -1c
+.RI "typedef enum \fBCborKnownTags\fP \fBCborKnownTags\fP"
+.br
+.ti -1c
+.RI "typedef enum \fBCborError\fP \fBCborError\fP"
+.br
+.ti -1c
+.RI "typedef struct \fBCborEncoder\fP \fBCborEncoder\fP"
+.br
+.ti -1c
+.RI "typedef struct \fBCborParser\fP \fBCborParser\fP"
+.br
+.ti -1c
+.RI "typedef struct \fBCborValue\fP \fBCborValue\fP"
+.br
+.ti -1c
+.RI "typedef \fBCborError\fP(* \fBCborStreamFunction\fP) (void *token, const char *fmt,\&.\&.\&.)"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBCborType\fP { \fBCborIntegerType\fP = 0x00, \fBCborByteStringType\fP = 0x40, \fBCborTextStringType\fP = 0x60, \fBCborArrayType\fP = 0x80, \fBCborMapType\fP = 0xa0, \fBCborTagType\fP = 0xc0, \fBCborSimpleType\fP = 0xe0, \fBCborBooleanType\fP = 0xf5, \fBCborNullType\fP = 0xf6, \fBCborUndefinedType\fP = 0xf7, \fBCborHalfFloatType\fP = 0xf9, \fBCborFloatType\fP = 0xfa, \fBCborDoubleType\fP = 0xfb, \fBCborInvalidType\fP }"
+.br
+.ti -1c
+.RI "enum \fBCborKnownTags\fP { \fBCborDateTimeStringTag\fP = 0, \fBCborUnixTime_tTag\fP = 1, \fBCborPositiveBignumTag\fP = 2, \fBCborNegativeBignumTag\fP = 3, \fBCborDecimalTag\fP = 4, \fBCborBigfloatTag\fP = 5, \fBCborCOSE_Encrypt0Tag\fP = 16, \fBCborCOSE_Mac0Tag\fP = 17, \fBCborCOSE_Sign1Tag\fP = 18, \fBCborExpectedBase64urlTag\fP = 21, \fBCborExpectedBase64Tag\fP = 22, \fBCborExpectedBase16Tag\fP = 23, \fBCborEncodedCborTag\fP = 24, \fBCborUrlTag\fP = 32, \fBCborBase64urlTag\fP = 33, \fBCborBase64Tag\fP = 34, \fBCborRegularExpressionTag\fP = 35, \fBCborMimeMessageTag\fP = 36, \fBCborCOSE_EncryptTag\fP = 96, \fBCborCOSE_MacTag\fP = 97, \fBCborCOSE_SignTag\fP = 98, \fBCborSignatureTag\fP = 55799 }"
+.br
+.ti -1c
+.RI "enum \fBCborError\fP { \fBCborNoError\fP = 0, \fBCborUnknownError\fP, \fBCborErrorUnknownLength\fP, \fBCborErrorAdvancePastEOF\fP, \fBCborErrorIO\fP, \fBCborErrorGarbageAtEnd\fP = 256, \fBCborErrorUnexpectedEOF\fP, \fBCborErrorUnexpectedBreak\fP, \fBCborErrorUnknownType\fP, \fBCborErrorIllegalType\fP, \fBCborErrorIllegalNumber\fP, \fBCborErrorIllegalSimpleType\fP, \fBCborErrorUnknownSimpleType\fP = 512, \fBCborErrorUnknownTag\fP, \fBCborErrorInappropriateTagForType\fP, \fBCborErrorDuplicateObjectKeys\fP, \fBCborErrorInvalidUtf8TextString\fP, \fBCborErrorExcludedType\fP, \fBCborErrorExcludedValue\fP, \fBCborErrorImproperValue\fP, \fBCborErrorOverlongEncoding\fP, \fBCborErrorMapKeyNotString\fP, \fBCborErrorMapNotSorted\fP, \fBCborErrorMapKeysNotUnique\fP, \fBCborErrorTooManyItems\fP = 768, \fBCborErrorTooFewItems\fP, \fBCborErrorDataTooLarge\fP = 1024, \fBCborErrorNestingTooDeep\fP, \fBCborErrorUnsupportedType\fP, \fBCborErrorJsonObjectKeyIsAggregate\fP = 1280, \fBCborErrorJsonObjectKeyNotString\fP, \fBCborErrorJsonNotImplemented\fP, \fBCborErrorOutOfMemory\fP = (int)(~0U / 2 + 1), \fBCborErrorInternalError\fP }"
+.br
+.ti -1c
+.RI "enum \fBCborParserIteratorFlags\fP { \fBCborIteratorFlag_IntegerValueTooLarge\fP = 0x01, \fBCborIteratorFlag_NegativeInteger\fP = 0x02, \fBCborIteratorFlag_IteratingStringChunks\fP = 0x02, \fBCborIteratorFlag_UnknownLength\fP = 0x04, \fBCborIteratorFlag_ContainerIsMap\fP = 0x20, \fBCborIteratorFlag_NextIsMapKey\fP = 0x40 }"
+.br
+.ti -1c
+.RI "enum \fBCborValidationFlags\fP { \fBCborValidateShortestIntegrals\fP = 0x0001, \fBCborValidateShortestFloatingPoint\fP = 0x0002, \fBCborValidateShortestNumbers\fP, \fBCborValidateNoIndeterminateLength\fP = 0x0100, \fBCborValidateMapIsSorted\fP = 0x0200 | CborValidateNoIndeterminateLength, \fBCborValidateCanonicalFormat\fP = 0x0fff, \fBCborValidateMapKeysAreUnique\fP = 0x1000 | CborValidateMapIsSorted, \fBCborValidateTagUse\fP = 0x2000, \fBCborValidateUtf8\fP = 0x4000, \fBCborValidateStrictMode\fP = 0xfff00, \fBCborValidateMapKeysAreString\fP = 0x100000, \fBCborValidateNoUndefined\fP = 0x200000, \fBCborValidateNoTags\fP = 0x400000, \fBCborValidateFiniteFloatingPoint\fP = 0x800000, \fBCborValidateNoUnknownSimpleTypesSA\fP = 0x4000000, \fBCborValidateNoUnknownSimpleTypes\fP, \fBCborValidateNoUnknownTagsSA\fP = 0x10000000, \fBCborValidateNoUnknownTagsSR\fP = 0x20000000 | CborValidateNoUnknownTagsSA, \fBCborValidateNoUnknownTags\fP = 0x40000000 | CborValidateNoUnknownTagsSR, \fBCborValidateCompleteData\fP = (int)0x80000000, \fBCborValidateStrictest\fP = (int)~0U, \fBCborValidateBasic\fP = 0 }"
+.br
+.ti -1c
+.RI "enum \fBCborPrettyFlags\fP { \fBCborPrettyNumericEncodingIndicators\fP = 0x01, \fBCborPrettyTextualEncodingIndicators\fP = 0, \fBCborPrettyIndicateIndeterminateLength\fP = 0x02, \fBCborPrettyIndicateIndetermineLength\fP, \fBCborPrettyIndicateOverlongNumbers\fP = 0x04, \fBCborPrettyShowStringFragments\fP = 0x100, \fBCborPrettyMergeStringFragments\fP = 0, \fBCborPrettyDefaultFlags\fP = CborPrettyIndicateIndeterminateLength }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "const CBOR_API char * \fBcbor_error_string\fP (\fBCborError\fP error)"
+.br
+.ti -1c
+.RI "CBOR_API void \fBcbor_encoder_init\fP (\fBCborEncoder\fP *encoder, uint8_t *buffer, size_t size, int flags)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_encode_uint\fP (\fBCborEncoder\fP *encoder, uint64_t value)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_encode_int\fP (\fBCborEncoder\fP *encoder, int64_t value)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_encode_negative_int\fP (\fBCborEncoder\fP *encoder, uint64_t absolute_value)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_encode_simple_value\fP (\fBCborEncoder\fP *encoder, uint8_t value)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_encode_tag\fP (\fBCborEncoder\fP *encoder, \fBCborTag\fP tag)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_encode_text_string\fP (\fBCborEncoder\fP *encoder, const char *string, size_t length)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_encode_text_stringz\fP (\fBCborEncoder\fP *encoder, const char *string)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_encode_byte_string\fP (\fBCborEncoder\fP *encoder, const uint8_t *string, size_t length)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_encode_floating_point\fP (\fBCborEncoder\fP *encoder, \fBCborType\fP fpType, const void *value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_encode_boolean\fP (\fBCborEncoder\fP *encoder, bool value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_encode_null\fP (\fBCborEncoder\fP *encoder)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_encode_undefined\fP (\fBCborEncoder\fP *encoder)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_encode_half_float\fP (\fBCborEncoder\fP *encoder, const void *value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_encode_float\fP (\fBCborEncoder\fP *encoder, float value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_encode_double\fP (\fBCborEncoder\fP *encoder, double value)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_encoder_create_array\fP (\fBCborEncoder\fP *encoder, \fBCborEncoder\fP *arrayEncoder, size_t length)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_encoder_create_map\fP (\fBCborEncoder\fP *encoder, \fBCborEncoder\fP *mapEncoder, size_t length)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_encoder_close_container\fP (\fBCborEncoder\fP *encoder, const \fBCborEncoder\fP *containerEncoder)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_encoder_close_container_checked\fP (\fBCborEncoder\fP *encoder, const \fBCborEncoder\fP *containerEncoder)"
+.br
+.ti -1c
+.RI "static uint8_t * \fB_cbor_encoder_get_buffer_pointer\fP (const \fBCborEncoder\fP *encoder)"
+.br
+.ti -1c
+.RI "static size_t \fBcbor_encoder_get_buffer_size\fP (const \fBCborEncoder\fP *encoder, const uint8_t *buffer)"
+.br
+.ti -1c
+.RI "static size_t \fBcbor_encoder_get_extra_bytes_needed\fP (const \fBCborEncoder\fP *encoder)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_parser_init\fP (const uint8_t *buffer, size_t size, uint32_t flags, \fBCborParser\fP *parser, \fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_value_validate_basic\fP (const \fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_at_end\fP (const \fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static const uint8_t * \fBcbor_value_get_next_byte\fP (const \fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_value_advance_fixed\fP (\fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_value_advance\fP (\fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_container\fP (const \fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_value_enter_container\fP (const \fBCborValue\fP *it, \fBCborValue\fP *recursed)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_value_leave_container\fP (\fBCborValue\fP *it, const \fBCborValue\fP *recursed)"
+.br
+.ti -1c
+.RI "uint64_t \fB_cbor_value_decode_int64_internal\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static uint64_t \fB_cbor_value_extract_int64_helper\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_valid\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static \fBCborType\fP \fBcbor_value_get_type\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_null\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_undefined\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_boolean\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_boolean\fP (const \fBCborValue\fP *value, bool *result)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_simple_type\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_simple_type\fP (const \fBCborValue\fP *value, uint8_t *result)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_integer\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_unsigned_integer\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_negative_integer\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_raw_integer\fP (const \fBCborValue\fP *value, uint64_t *result)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_uint64\fP (const \fBCborValue\fP *value, uint64_t *result)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_int64\fP (const \fBCborValue\fP *value, int64_t *result)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_int\fP (const \fBCborValue\fP *value, int *result)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_value_get_int64_checked\fP (const \fBCborValue\fP *value, int64_t *result)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_value_get_int_checked\fP (const \fBCborValue\fP *value, int *result)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_length_known\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_tag\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_tag\fP (const \fBCborValue\fP *value, \fBCborTag\fP *result)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_value_skip_tag\fP (\fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_byte_string\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_text_string\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_string_length\fP (const \fBCborValue\fP *value, size_t *length)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fB_cbor_value_copy_string\fP (const \fBCborValue\fP *value, void *buffer, size_t *buflen, \fBCborValue\fP *next)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fB_cbor_value_dup_string\fP (const \fBCborValue\fP *value, void **buffer, size_t *buflen, \fBCborValue\fP *next)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_value_calculate_string_length\fP (const \fBCborValue\fP *value, size_t *length)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_copy_text_string\fP (const \fBCborValue\fP *value, char *buffer, size_t *buflen, \fBCborValue\fP *next)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_copy_byte_string\fP (const \fBCborValue\fP *value, uint8_t *buffer, size_t *buflen, \fBCborValue\fP *next)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_dup_text_string\fP (const \fBCborValue\fP *value, char **buffer, size_t *buflen, \fBCborValue\fP *next)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_dup_byte_string\fP (const \fBCborValue\fP *value, uint8_t **buffer, size_t *buflen, \fBCborValue\fP *next)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_value_text_string_equals\fP (const \fBCborValue\fP *value, const char *string, bool *result)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_array\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_map\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_array_length\fP (const \fBCborValue\fP *value, size_t *length)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_map_length\fP (const \fBCborValue\fP *value, size_t *length)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_value_map_find_value\fP (const \fBCborValue\fP *map, const char *string, \fBCborValue\fP *element)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_half_float\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_value_get_half_float\fP (const \fBCborValue\fP *value, void *result)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_float\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_float\fP (const \fBCborValue\fP *value, float *result)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_double\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_double\fP (const \fBCborValue\fP *value, double *result)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_value_validate\fP (const \fBCborValue\fP *it, uint32_t flags)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_value_to_pretty_stream\fP (\fBCborStreamFunction\fP streamFunction, void *token, \fBCborValue\fP *value, int flags)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_value_to_pretty_advance_flags\fP (FILE *out, \fBCborValue\fP *value, int flags)"
+.br
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_value_to_pretty_advance\fP (FILE *out, \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_to_pretty\fP (FILE *out, const \fBCborValue\fP *value)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "static const size_t \fBCborIndefiniteLength\fP = ((size_t)\-1)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define CBOR_INLINE"
+
+.PP
+Definition at line 79 of file cbor\&.h\&.
+.SS "#define CBOR_INLINE_API   static \fBCBOR_INLINE\fP"
+
+.PP
+Definition at line 71 of file cbor\&.h\&.
+.SS "#define CBOR_PRIVATE_API"
+
+.PP
+Definition at line 64 of file cbor\&.h\&.
+.SS "#define CborBase64Tag   CborBase64Tag"
+
+.PP
+Definition at line 145 of file cbor\&.h\&.
+.SS "#define CborBase64urlTag   CborBase64urlTag"
+
+.PP
+Definition at line 144 of file cbor\&.h\&.
+.SS "#define CborBigfloatTag   CborBigfloatTag"
+
+.PP
+Definition at line 135 of file cbor\&.h\&.
+.SS "#define CborCOSE_Encrypt0Tag   CborCOSE_Encrypt0Tag"
+
+.PP
+Definition at line 136 of file cbor\&.h\&.
+.SS "#define CborCOSE_EncryptTag   CborCOSE_EncryptTag"
+
+.PP
+Definition at line 148 of file cbor\&.h\&.
+.SS "#define CborCOSE_Mac0Tag   CborCOSE_Mac0Tag"
+
+.PP
+Definition at line 137 of file cbor\&.h\&.
+.SS "#define CborCOSE_MacTag   CborCOSE_MacTag"
+
+.PP
+Definition at line 149 of file cbor\&.h\&.
+.SS "#define CborCOSE_Sign1Tag   CborCOSE_Sign1Tag"
+
+.PP
+Definition at line 138 of file cbor\&.h\&.
+.SS "#define CborCOSE_SignTag   CborCOSE_SignTag"
+
+.PP
+Definition at line 150 of file cbor\&.h\&.
+.SS "#define CborDateTimeStringTag   CborDateTimeStringTag"
+
+.PP
+Definition at line 130 of file cbor\&.h\&.
+.SS "#define CborDecimalTag   CborDecimalTag"
+
+.PP
+Definition at line 134 of file cbor\&.h\&.
+.SS "#define CborEncodedCborTag   CborEncodedCborTag"
+
+.PP
+Definition at line 142 of file cbor\&.h\&.
+.SS "#define CborExpectedBase16Tag   CborExpectedBase16Tag"
+
+.PP
+Definition at line 141 of file cbor\&.h\&.
+.SS "#define CborExpectedBase64Tag   CborExpectedBase64Tag"
+
+.PP
+Definition at line 140 of file cbor\&.h\&.
+.SS "#define CborExpectedBase64urlTag   CborExpectedBase64urlTag"
+
+.PP
+Definition at line 139 of file cbor\&.h\&.
+.SS "#define CborMimeMessageTag   CborMimeMessageTag"
+
+.PP
+Definition at line 147 of file cbor\&.h\&.
+.SS "#define CborNegativeBignumTag   CborNegativeBignumTag"
+
+.PP
+Definition at line 133 of file cbor\&.h\&.
+.SS "#define CborPositiveBignumTag   CborPositiveBignumTag"
+
+.PP
+Definition at line 132 of file cbor\&.h\&.
+.SS "#define CborRegularExpressionTag   CborRegularExpressionTag"
+
+.PP
+Definition at line 146 of file cbor\&.h\&.
+.SS "#define CborSignatureTag   CborSignatureTag"
+
+.PP
+Definition at line 151 of file cbor\&.h\&.
+.SS "#define CborUnixTime_tTag   CborUnixTime_tTag"
+
+.PP
+Definition at line 131 of file cbor\&.h\&.
+.SS "#define CborUrlTag   CborUrlTag"
+
+.PP
+Definition at line 143 of file cbor\&.h\&.
+.SS "#define SIZE_MAX   ((size_t)\-1)"
+
+.PP
+Definition at line 57 of file cbor\&.h\&.
+.SS "#define TINYCBOR_VERSION"
+\fBValue:\fP
+.PP
+.nf
+    ((TINYCBOR_VERSION_MAJOR << 16) | (TINYCBOR_VERSION_MINOR << 8) | \
+     TINYCBOR_VERSION_PATCH)
+.fi
+.PP
+Definition at line 39 of file cbor\&.h\&.
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fBCborEncoder\fP \fBCborEncoder\fP"
+
+.PP
+Definition at line 220 of file cbor\&.h\&.
+.SS "typedef enum \fBCborError\fP \fBCborError\fP"
+
+.SS "typedef enum \fBCborKnownTags\fP \fBCborKnownTags\fP"
+
+.SS "typedef struct \fBCborParser\fP \fBCborParser\fP"
+
+.PP
+Definition at line 305 of file cbor\&.h\&.
+.SS "typedef \fBCborError\fP(* CborStreamFunction) (void *token, const char *fmt,\&.\&.\&.)"
+
+.PP
+Definition at line 642 of file cbor\&.h\&.
+.SS "typedef uint64_t \fBCborTag\fP"
+
+.PP
+Definition at line 103 of file cbor\&.h\&.
+.SS "typedef enum \fBCborType\fP \fBCborType\fP"
+
+.SS "typedef struct \fBCborValue\fP \fBCborValue\fP"
+
+.PP
+Definition at line 315 of file cbor\&.h\&.
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBCborError\fP"
+The CborError enum contains the possible error values used by the CBOR encoder and decoder\&.
+.PP
+TinyCBOR functions report success by returning CborNoError, or one error condition by returning one of the values below\&. One exception is the out-of-memory condition (CborErrorOutOfMemory), which the functions for \fBEncoding to CBOR\fP may report in bit-wise OR with other conditions\&.
+.PP
+This technique allows code to determine whether the only error condition was a lack of buffer space, which may not be a fatal condition if the buffer can be resized\&. Additionally, the functions for \fBEncoding to CBOR\fP may continue to be used even after CborErrorOutOfMemory is returned, and instead they will simply calculate the extra space needed\&.
+.PP
+\\value CborNoError No error occurred \\omitvalue CborUnknownError \\value CborErrorUnknownLength Request for the length of an array, map or string whose length is not provided in the CBOR stream \\value CborErrorAdvancePastEOF Not enough data in the stream to decode item (decoding would advance past end of stream) \\value CborErrorIO An I/O error occurred, probably due to an out-of-memory situation \\value CborErrorGarbageAtEnd Bytes exist past the end of the CBOR stream \\value CborErrorUnexpectedEOF End of stream reached unexpectedly \\value CborErrorUnexpectedBreak A CBOR break byte was found where not expected \\value CborErrorUnknownType An unknown type (future extension to CBOR) was found in the stream \\value CborErrorIllegalType An invalid type was found while parsing a chunked CBOR string \\value CborErrorIllegalNumber An illegal initial byte (encoding unspecified additional information) was found \\value CborErrorIllegalSimpleType An illegal encoding of a CBOR Simple Type of value less than 32 was found \\omitvalue CborErrorUnknownSimpleType \\omitvalue CborErrorUnknownTag \\omitvalue CborErrorInappropriateTagForType \\omitvalue CborErrorDuplicateObjectKeys \\value CborErrorInvalidUtf8TextString Illegal UTF-8 encoding found while parsing CBOR Text String \\value CborErrorTooManyItems Too many items were added to CBOR map or array of pre-determined length \\value CborErrorTooFewItems Too few items were added to CBOR map or array of pre-determined length \\value CborErrorDataTooLarge Data item size exceeds TinyCBOR's implementation limits \\value CborErrorNestingTooDeep Data item nesting exceeds TinyCBOR's implementation limits \\omitvalue CborErrorUnsupportedType \\value CborErrorJsonObjectKeyIsAggregate Conversion to JSON failed because the key in a map is a CBOR map or array \\value CborErrorJsonObjectKeyNotString Conversion to JSON failed because the key in a map is not a text string \\value CborErrorOutOfMemory During CBOR encoding, the buffer provided is insufficient for encoding the data item; in other situations, TinyCBOR failed to allocate memory \\value CborErrorInternalError An internal error occurred in TinyCBOR 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fICborNoError \fP\fP
+.TP
+\fB\fICborUnknownError \fP\fP
+.TP
+\fB\fICborErrorUnknownLength \fP\fP
+.TP
+\fB\fICborErrorAdvancePastEOF \fP\fP
+.TP
+\fB\fICborErrorIO \fP\fP
+.TP
+\fB\fICborErrorGarbageAtEnd \fP\fP
+.TP
+\fB\fICborErrorUnexpectedEOF \fP\fP
+.TP
+\fB\fICborErrorUnexpectedBreak \fP\fP
+.TP
+\fB\fICborErrorUnknownType \fP\fP
+.TP
+\fB\fICborErrorIllegalType \fP\fP
+.TP
+\fB\fICborErrorIllegalNumber \fP\fP
+.TP
+\fB\fICborErrorIllegalSimpleType \fP\fP
+.TP
+\fB\fICborErrorUnknownSimpleType \fP\fP
+.TP
+\fB\fICborErrorUnknownTag \fP\fP
+.TP
+\fB\fICborErrorInappropriateTagForType \fP\fP
+.TP
+\fB\fICborErrorDuplicateObjectKeys \fP\fP
+.TP
+\fB\fICborErrorInvalidUtf8TextString \fP\fP
+.TP
+\fB\fICborErrorExcludedType \fP\fP
+.TP
+\fB\fICborErrorExcludedValue \fP\fP
+.TP
+\fB\fICborErrorImproperValue \fP\fP
+.TP
+\fB\fICborErrorOverlongEncoding \fP\fP
+.TP
+\fB\fICborErrorMapKeyNotString \fP\fP
+.TP
+\fB\fICborErrorMapNotSorted \fP\fP
+.TP
+\fB\fICborErrorMapKeysNotUnique \fP\fP
+.TP
+\fB\fICborErrorTooManyItems \fP\fP
+.TP
+\fB\fICborErrorTooFewItems \fP\fP
+.TP
+\fB\fICborErrorDataTooLarge \fP\fP
+.TP
+\fB\fICborErrorNestingTooDeep \fP\fP
+.TP
+\fB\fICborErrorUnsupportedType \fP\fP
+.TP
+\fB\fICborErrorJsonObjectKeyIsAggregate \fP\fP
+.TP
+\fB\fICborErrorJsonObjectKeyNotString \fP\fP
+.TP
+\fB\fICborErrorJsonNotImplemented \fP\fP
+.TP
+\fB\fICborErrorOutOfMemory \fP\fP
+.TP
+\fB\fICborErrorInternalError \fP\fP
+.PP
+Definition at line 155 of file cbor\&.h\&.
+.SS "enum \fBCborKnownTags\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fICborDateTimeStringTag \fP\fP
+.TP
+\fB\fICborUnixTime_tTag \fP\fP
+.TP
+\fB\fICborPositiveBignumTag \fP\fP
+.TP
+\fB\fICborNegativeBignumTag \fP\fP
+.TP
+\fB\fICborDecimalTag \fP\fP
+.TP
+\fB\fICborBigfloatTag \fP\fP
+.TP
+\fB\fICborCOSE_Encrypt0Tag \fP\fP
+.TP
+\fB\fICborCOSE_Mac0Tag \fP\fP
+.TP
+\fB\fICborCOSE_Sign1Tag \fP\fP
+.TP
+\fB\fICborExpectedBase64urlTag \fP\fP
+.TP
+\fB\fICborExpectedBase64Tag \fP\fP
+.TP
+\fB\fICborExpectedBase16Tag \fP\fP
+.TP
+\fB\fICborEncodedCborTag \fP\fP
+.TP
+\fB\fICborUrlTag \fP\fP
+.TP
+\fB\fICborBase64urlTag \fP\fP
+.TP
+\fB\fICborBase64Tag \fP\fP
+.TP
+\fB\fICborRegularExpressionTag \fP\fP
+.TP
+\fB\fICborMimeMessageTag \fP\fP
+.TP
+\fB\fICborCOSE_EncryptTag \fP\fP
+.TP
+\fB\fICborCOSE_MacTag \fP\fP
+.TP
+\fB\fICborCOSE_SignTag \fP\fP
+.TP
+\fB\fICborSignatureTag \fP\fP
+.PP
+Definition at line 104 of file cbor\&.h\&.
+.SS "enum \fBCborParserIteratorFlags\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fICborIteratorFlag_IntegerValueTooLarge \fP\fP
+.TP
+\fB\fICborIteratorFlag_NegativeInteger \fP\fP
+.TP
+\fB\fICborIteratorFlag_IteratingStringChunks \fP\fP
+.TP
+\fB\fICborIteratorFlag_UnknownLength \fP\fP
+.TP
+\fB\fICborIteratorFlag_ContainerIsMap \fP\fP
+.TP
+\fB\fICborIteratorFlag_NextIsMapKey \fP\fP
+.PP
+Definition at line 292 of file cbor\&.h\&.
+.SS "enum \fBCborType\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fICborIntegerType \fP\fP
+.TP
+\fB\fICborByteStringType \fP\fP
+.TP
+\fB\fICborTextStringType \fP\fP
+.TP
+\fB\fICborArrayType \fP\fP
+.TP
+\fB\fICborMapType \fP\fP
+.TP
+\fB\fICborTagType \fP\fP
+.TP
+\fB\fICborSimpleType \fP\fP
+.TP
+\fB\fICborBooleanType \fP\fP
+.TP
+\fB\fICborNullType \fP\fP
+.TP
+\fB\fICborUndefinedType \fP\fP
+.TP
+\fB\fICborHalfFloatType \fP\fP
+.TP
+\fB\fICborFloatType \fP\fP
+.TP
+\fB\fICborDoubleType \fP\fP
+.TP
+\fB\fICborInvalidType \fP\fP
+.PP
+Definition at line 84 of file cbor\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "static uint8_t* _cbor_encoder_get_buffer_pointer (const \fBCborEncoder\fP * encoder)\fC [static]\fP"
+
+.PP
+Definition at line 276 of file cbor\&.h\&.
+.SS "\fBCborError\fP _cbor_value_dup_string (const \fBCborValue\fP * value, void ** buffer, size_t * buflen, \fBCborValue\fP * next)"
+
+.PP
+Definition at line 101 of file cborparser_dup_string\&.c\&.
+.SS "static uint64_t _cbor_value_extract_int64_helper (const \fBCborValue\fP * value)\fC [static]\fP"
+
+.PP
+Definition at line 340 of file cbor\&.h\&.
+.SS "const CBOR_API char* cbor_error_string (\fBCborError\fP error)"
+Returns the error string corresponding to the CBOR error condition \fIerror\fP\&. 
+.PP
+Definition at line 85 of file cborerrorstrings\&.c\&.
+.SS "\fBCborError\fP cbor_value_dup_byte_string (const \fBCborValue\fP * value, uint8_t ** buffer, size_t * buflen, \fBCborValue\fP * next)\fC [static]\fP"
+Allocates memory for the string pointed by \fIvalue\fP and copies it into this buffer\&. The pointer to the buffer is stored in \fIbuffer\fP and the number of bytes copied is stored in \fIbuflen\fP (those variables must not be NULL)\&.
+.PP
+If the iterator \fIvalue\fP does not point to a byte string, the behaviour is undefined, so checking with \fBcbor_value_get_type\fP or \fBcbor_value_is_byte_string\fP is recommended\&.
+.PP
+If \fCmalloc\fP returns a NULL pointer, this function will return error condition \fBCborErrorOutOfMemory\fP\&.
+.PP
+On success, \fC\fP{*buffer} will contain a valid pointer that must be freed by calling \fC\fP{free()}\&. This is the case even for zero-length strings\&.
+.PP
+The \fInext\fP pointer, if not null, will be updated to point to the next item after this string\&. If \fIvalue\fP points to the last item, then \fInext\fP will be invalid\&.
+.PP
+This function may not run in constant time (it will run in O(n) time on the number of chunks)\&. It requires constant memory (O(1)) in addition to the malloc'ed block\&.
+.PP
+\fBSee also\fP
+.RS 4
+cbor_value_get_text_string_chunk(), \fBcbor_value_copy_byte_string()\fP, \fBcbor_value_dup_text_string()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 498 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_value_dup_text_string (const \fBCborValue\fP * value, char ** buffer, size_t * buflen, \fBCborValue\fP * next)\fC [static]\fP"
+Allocates memory for the string pointed by \fIvalue\fP and copies it into this buffer\&. The pointer to the buffer is stored in \fIbuffer\fP and the number of bytes copied is stored in \fIbuflen\fP (those variables must not be NULL)\&.
+.PP
+If the iterator \fIvalue\fP does not point to a text string, the behaviour is undefined, so checking with \fBcbor_value_get_type\fP or \fBcbor_value_is_text_string\fP is recommended\&.
+.PP
+If \fCmalloc\fP returns a NULL pointer, this function will return error condition \fBCborErrorOutOfMemory\fP\&.
+.PP
+On success, \fC\fP{*buffer} will contain a valid pointer that must be freed by calling \fC\fP{free()}\&. This is the case even for zero-length strings\&.
+.PP
+The \fInext\fP pointer, if not null, will be updated to point to the next item after this string\&. If \fIvalue\fP points to the last item, then \fInext\fP will be invalid\&.
+.PP
+This function may not run in constant time (it will run in O(n) time on the number of chunks)\&. It requires constant memory (O(1)) in addition to the malloc'ed block\&.
+.PP
+\fBNote\fP
+.RS 4
+This function does not perform UTF-8 validation on the incoming text string\&.
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+cbor_value_get_text_string_chunk(), \fBcbor_value_copy_text_string()\fP, \fBcbor_value_dup_byte_string()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 492 of file cbor\&.h\&.
+.SS "static \fBCborError\fP cbor_value_get_double (const \fBCborValue\fP * value, double * result)\fC [static]\fP"
+
+.PP
+Definition at line 568 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_value_to_pretty (FILE * out, const \fBCborValue\fP * value)\fC [static]\fP"
+Converts the current CBOR type pointed to by \fIvalue\fP to its textual representation and writes it to the \fIout\fP stream\&. If an error occurs, this function returns an error code similar to CborParsing\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_to_pretty_advance()\fP, \fBcbor_value_to_json_advance()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 657 of file cbor\&.h\&.
+.SS "CBOR_API \fBCborError\fP cbor_value_to_pretty_advance (FILE * out, \fBCborValue\fP * value)"
+Converts the current CBOR type pointed to by \fIvalue\fP to its textual representation and writes it to the \fIout\fP stream\&. If an error occurs, this function returns an error code similar to CborParsing\&.
+.PP
+If no error ocurred, this function advances \fIvalue\fP to the next element\&. Often, concatenating the text representation of multiple elements can be done by appending a comma to the output stream in between calls to this function\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_to_pretty()\fP, \fBcbor_value_to_pretty_stream()\fP, \fBcbor_value_to_json_advance()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 63 of file cborpretty_stdio\&.c\&.
+.SS "CBOR_API \fBCborError\fP cbor_value_to_pretty_advance_flags (FILE * out, \fBCborValue\fP * value, int flags)"
+Converts the current CBOR type pointed to by \fIvalue\fP to its textual representation and writes it to the \fIout\fP stream\&. If an error occurs, this function returns an error code similar to CborParsing\&.
+.PP
+The textual representation can be controlled by the \fIflags\fP parameter (see CborPrettyFlags for more information)\&.
+.PP
+If no error ocurred, this function advances \fIvalue\fP to the next element\&. Often, concatenating the text representation of multiple elements can be done by appending a comma to the output stream in between calls to this function\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_to_pretty_stream()\fP, \fBcbor_value_to_pretty()\fP, \fBcbor_value_to_json_advance()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 84 of file cborpretty_stdio\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "const size_t CborIndefiniteLength = ((size_t)\-1)\fC [static]\fP"
+
+.PP
+Definition at line 222 of file cbor\&.h\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

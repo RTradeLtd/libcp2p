@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['noblock_1710',['NOBLOCK',['../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304a2be9044f7a5785fb4db63bae7d099a9b',1,'socket.h']]]
+  ['falsevalue_2416',['FalseValue',['../d9/d2c/cborinternal__p_8h.html#a8d7056f42637468688b461d7bb3e5125ab920bcdc46b20dd779c2c804421a960a',1,'cborinternal_p.h']]],
+  ['finaltypemask_2417',['FinalTypeMask',['../de/d6b/group___cbor_to_json.html#ggad9c270534e62cc617f9a5b8c7562efcbaaec2a4b22a157e164fe14e0084126b57',1,'cbortojson.c']]]
 ];

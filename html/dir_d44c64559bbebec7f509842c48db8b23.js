@@ -9,5 +9,6 @@ var dir_d44c64559bbebec7f509842c48db8b23 =
     [ "multihash", "dir_cc0c26c33fa5be0c9f869282832fa5a8.html", "dir_cc0c26c33fa5be0c9f869282832fa5a8" ],
     [ "network", "dir_dafb25a37831a87d2e2e8b780f24e872.html", "dir_dafb25a37831a87d2e2e8b780f24e872" ],
     [ "protobuf", "dir_b517bf84e3ab961b0dc571c924624d64.html", "dir_b517bf84e3ab961b0dc571c924624d64" ],
+    [ "tinycbor", "dir_ac76b57b658620137c6f49417925e4a9.html", "dir_ac76b57b658620137c6f49417925e4a9" ],
     [ "utils", "dir_821002d4f10779a80d4fb17bc32f21f1.html", "dir_821002d4f10779a80d4fb17bc32f21f1" ]
 ];

@@ -1,0 +1,477 @@
+.TH "CborEncoding" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+CborEncoding \- Group of functions used to encode data to CBOR\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBCborEncoder\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcbor_encoder_init\fP (\fBCborEncoder\fP *encoder, uint8_t *buffer, size_t size, int flags)"
+.br
+.ti -1c
+.RI "static void \fBput16\fP (void *where, uint16_t v)"
+.br
+.ti -1c
+.RI "static bool \fBisOomError\fP (\fBCborError\fP \fBerr\fP)"
+.br
+.ti -1c
+.RI "static void \fBput32\fP (void *where, uint32_t v)"
+.br
+.ti -1c
+.RI "static void \fBput64\fP (void *where, uint64_t v)"
+.br
+.ti -1c
+.RI "static bool \fBwould_overflow\fP (\fBCborEncoder\fP *encoder, size_t len)"
+.br
+.ti -1c
+.RI "static void \fBadvance_ptr\fP (\fBCborEncoder\fP *encoder, size_t n)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBappend_to_buffer\fP (\fBCborEncoder\fP *encoder, const void *data, size_t len)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBappend_byte_to_buffer\fP (\fBCborEncoder\fP *encoder, uint8_t byte)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBencode_number_no_update\fP (\fBCborEncoder\fP *encoder, uint64_t ui, uint8_t shiftedMajorType)"
+.br
+.ti -1c
+.RI "static void \fBsaturated_decrement\fP (\fBCborEncoder\fP *encoder)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBencode_number\fP (\fBCborEncoder\fP *encoder, uint64_t ui, uint8_t shiftedMajorType)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encode_uint\fP (\fBCborEncoder\fP *encoder, uint64_t value)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encode_negative_int\fP (\fBCborEncoder\fP *encoder, uint64_t absolute_value)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encode_int\fP (\fBCborEncoder\fP *encoder, int64_t value)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encode_simple_value\fP (\fBCborEncoder\fP *encoder, uint8_t value)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encode_floating_point\fP (\fBCborEncoder\fP *encoder, \fBCborType\fP fpType, const void *value)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encode_tag\fP (\fBCborEncoder\fP *encoder, \fBCborTag\fP tag)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBencode_string\fP (\fBCborEncoder\fP *encoder, size_t length, uint8_t shiftedMajorType, const void *string)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encode_byte_string\fP (\fBCborEncoder\fP *encoder, const uint8_t *string, size_t length)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encode_text_string\fP (\fBCborEncoder\fP *encoder, const char *string, size_t length)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcreate_container\fP (\fBCborEncoder\fP *encoder, \fBCborEncoder\fP *container, size_t length, uint8_t shiftedMajorType)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encoder_create_array\fP (\fBCborEncoder\fP *encoder, \fBCborEncoder\fP *arrayEncoder, size_t length)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encoder_create_map\fP (\fBCborEncoder\fP *encoder, \fBCborEncoder\fP *mapEncoder, size_t length)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encoder_close_container\fP (\fBCborEncoder\fP *encoder, const \fBCborEncoder\fP *containerEncoder)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encoder_close_container_checked\fP (\fBCborEncoder\fP *encoder, const \fBCborEncoder\fP *containerEncoder)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_encode_text_stringz\fP (\fBCborEncoder\fP *encoder, const char *string)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_encode_boolean\fP (\fBCborEncoder\fP *encoder, bool value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_encode_null\fP (\fBCborEncoder\fP *encoder)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_encode_undefined\fP (\fBCborEncoder\fP *encoder)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_encode_half_float\fP (\fBCborEncoder\fP *encoder, const void *value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_encode_float\fP (\fBCborEncoder\fP *encoder, float value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_encode_double\fP (\fBCborEncoder\fP *encoder, double value)"
+.br
+.ti -1c
+.RI "static size_t \fBcbor_encoder_get_buffer_size\fP (const \fBCborEncoder\fP *encoder, const uint8_t *buffer)"
+.br
+.ti -1c
+.RI "static size_t \fBcbor_encoder_get_extra_bytes_needed\fP (const \fBCborEncoder\fP *encoder)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Group of functions used to encode data to CBOR\&. 
+
+\fBCborEncoder\fP is used to encode data into a CBOR stream\&. The outermost \fBCborEncoder\fP is initialized by calling \fBcbor_encoder_init()\fP, with the buffer where the CBOR stream will be stored\&. The outermost \fBCborEncoder\fP is usually used to encode exactly one item, most often an array or map\&. It is possible to encode more than one item, but care must then be taken on the decoder side to ensure the state is reset after each item was decoded\&.
+.PP
+Nested \fBCborEncoder\fP objects are created using \fBcbor_encoder_create_array()\fP and \fBcbor_encoder_create_map()\fP, later closed with \fBcbor_encoder_close_container()\fP or \fBcbor_encoder_close_container_checked()\fP\&. The pairs of creation and closing must be exactly matched and their parameters are always the same\&.
+.PP
+\fBCborEncoder\fP writes directly to the user-supplied buffer, without extra buffering\&. \fBCborEncoder\fP does not allocate memory and \fBCborEncoder\fP objects are usually created on the stack of the encoding functions\&.
+.PP
+The example below initializes a \fBCborEncoder\fP object with a buffer and encodes a single integer\&.
+.PP
+.PP
+.nf
+uint8_t buf[16];
+CborEncoder encoder;
+cbor_encoder_init(&encoder, buf, sizeof(buf), 0);
+cbor_encode_int(&encoder, some_value);
+.fi
+.PP
+.PP
+As explained before, usually the outermost \fBCborEncoder\fP object is used to add one array or map, which in turn contains multiple elements\&. The example below creates a CBOR map with one element: a key 'foo' and a boolean value\&.
+.PP
+.PP
+.nf
+uint8_t buf[16];
+CborEncoder encoder, mapEncoder;
+cbor_encoder_init(&encoder, buf, sizeof(buf), 0);
+cbor_encoder_create_map(&encoder, &mapEncoder, 1);
+cbor_encode_text_stringz(&mapEncoder, "foo");
+cbor_encode_boolean(&mapEncoder, some_value);
+cbor_encoder_close_container(&encoder, &mapEncoder);
+.fi
+.PP
+.PP
+.SS "Error checking and buffer size"
+.PP
+All functions operating on \fBCborEncoder\fP return a condition of type CborError\&. If the encoding was successful, they return CborNoError\&. Some functions do extra checking on the input provided and may return some other error conditions (for example, \fBcbor_encode_simple_value()\fP checks that the type is of the correct type)\&.
+.PP
+In addition, all functions check whether the buffer has enough bytes to encode the item being appended\&. If that is not possible, they return CborErrorOutOfMemory\&.
+.PP
+It is possible to continue with the encoding of data past the first function that returns CborErrorOutOfMemory\&. \fBCborEncoder\fP functions will not overrun the buffer, but will instead count how many more bytes are needed to complete the encoding\&. At the end, you can obtain that count by calling \fBcbor_encoder_get_extra_bytes_needed()\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "static void advance_ptr (\fBCborEncoder\fP * encoder, size_t n)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 244 of file cborencoder\&.c\&.
+.SS "static \fBCborError\fP append_byte_to_buffer (\fBCborEncoder\fP * encoder, uint8_t byte)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 269 of file cborencoder\&.c\&.
+.SS "static \fBCborError\fP append_to_buffer (\fBCborEncoder\fP * encoder, const void * data, size_t len)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 251 of file cborencoder\&.c\&.
+.SS "\fBCborError\fP cbor_encode_boolean (\fBCborEncoder\fP * encoder, bool value)\fC [static]\fP"
+Appends the boolean value \fIvalue\fP to the CBOR stream provided by \fIencoder\fP\&. 
+.PP
+Definition at line 243 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_encode_byte_string (\fBCborEncoder\fP * encoder, const uint8_t * string, size_t length)"
+Appends the text string \fIstring\fP of length \fIlength\fP to the CBOR stream provided by \fIencoder\fP\&. CBOR requires that \fIstring\fP be valid UTF-8, but TinyCBOR makes no verification of correctness\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBCborError\fP \fBcbor_encode_text_stringz\fP, \fBcbor_encode_byte_string\fP 
+.RE
+.PP
+
+.PP
+Definition at line 432 of file cborencoder\&.c\&.
+.SS "\fBCborError\fP cbor_encode_double (\fBCborEncoder\fP * encoder, double value)\fC [static]\fP"
+Appends the IEEE 754 double-precision (64-bit) floating point value \fIvalue\fP to the CBOR stream provided by \fIencoder\fP\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_encode_floating_point()\fP, \fBcbor_encode_half_float()\fP, \fBcbor_encode_float()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 261 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_encode_float (\fBCborEncoder\fP * encoder, float value)\fC [static]\fP"
+Appends the IEEE 754 single-precision (32-bit) floating point value \fIvalue\fP to the CBOR stream provided by \fIencoder\fP\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_encode_floating_point()\fP, \fBcbor_encode_half_float()\fP, \fBcbor_encode_double()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 258 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_encode_floating_point (\fBCborEncoder\fP * encoder, \fBCborType\fP fpType, const void * value)"
+Appends the floating-point value of type \fIfpType\fP and pointed to by \fIvalue\fP to the CBOR stream provided by \fIencoder\fP\&. The value of \fIfpType\fP must be one of CborHalfFloatType, CborFloatType or CborDoubleType, otherwise the behavior of this function is undefined\&.
+.PP
+This function is useful for code that needs to pass through floating point values but does not wish to have the actual floating-point code\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_encode_half_float\fP, \fBcbor_encode_float\fP, \fBcbor_encode_double\fP 
+.RE
+.PP
+
+.PP
+Definition at line 377 of file cborencoder\&.c\&.
+.SS "\fBCborError\fP cbor_encode_half_float (\fBCborEncoder\fP * encoder, const void * value)\fC [static]\fP"
+Appends the IEEE 754 half-precision (16-bit) floating point value pointed to by \fIvalue\fP to the CBOR stream provided by \fIencoder\fP\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_encode_floating_point()\fP, \fBcbor_encode_float()\fP, \fBcbor_encode_double()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 254 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_encode_int (\fBCborEncoder\fP * encoder, int64_t value)"
+Appends the signed 64-bit integer \fIvalue\fP to the CBOR stream provided by \fIencoder\fP\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_encode_negative_int\fP, \fBcbor_encode_uint\fP 
+.RE
+.PP
+
+.PP
+Definition at line 342 of file cborencoder\&.c\&.
+.SS "\fBCborError\fP cbor_encode_negative_int (\fBCborEncoder\fP * encoder, uint64_t absolute_value)"
+Appends the negative 64-bit integer whose absolute value is \fIabsolute_value\fP to the CBOR stream provided by \fIencoder\fP\&.
+.PP
+If the value \fIabsolute_value\fP is zero, this function encodes -2^64\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_encode_uint\fP, \fBcbor_encode_int\fP 
+.RE
+.PP
+
+.PP
+Definition at line 331 of file cborencoder\&.c\&.
+.SS "\fBCborError\fP cbor_encode_null (\fBCborEncoder\fP * encoder)\fC [static]\fP"
+Appends the CBOR type representing a null value to the CBOR stream provided by \fIencoder\fP\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_encode_undefined()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 247 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_encode_simple_value (\fBCborEncoder\fP * encoder, uint8_t value)"
+Appends the CBOR Simple Type of value \fIvalue\fP to the CBOR stream provided by \fIencoder\fP\&.
+.PP
+This function may return error CborErrorIllegalSimpleType if the \fIvalue\fP variable contains a number that is not a valid simple type\&. 
+.PP
+Definition at line 357 of file cborencoder\&.c\&.
+.SS "\fBCborError\fP cbor_encode_tag (\fBCborEncoder\fP * encoder, \fBCborTag\fP tag)"
+Appends the CBOR tag \fItag\fP to the CBOR stream provided by \fIencoder\fP\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBCborTag\fP 
+.RE
+.PP
+
+.PP
+Definition at line 401 of file cborencoder\&.c\&.
+.SS "\fBCborError\fP cbor_encode_text_string (\fBCborEncoder\fP * encoder, const char * string, size_t length)"
+Appends the byte string \fIstring\fP of length \fIlength\fP to the CBOR stream provided by \fIencoder\fP\&. CBOR byte strings are arbitrary raw data\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_encode_text_stringz\fP, \fBcbor_encode_text_string\fP 
+.RE
+.PP
+
+.PP
+Definition at line 443 of file cborencoder\&.c\&.
+.SS "\fBCborError\fP cbor_encode_text_stringz (\fBCborEncoder\fP * encoder, const char * string)\fC [static]\fP"
+Appends the null-terminated text string \fIstring\fP to the CBOR stream provided by \fIencoder\fP\&. CBOR requires that \fIstring\fP be valid UTF-8, but TinyCBOR makes no verification of correctness\&. The terminating null is not included in the stream\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_encode_text_string\fP, \fBcbor_encode_byte_string\fP 
+.RE
+.PP
+
+.PP
+Definition at line 234 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_encode_uint (\fBCborEncoder\fP * encoder, uint64_t value)"
+Appends the unsigned 64-bit integer \fIvalue\fP to the CBOR stream provided by \fIencoder\fP\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_encode_negative_int\fP, \fBcbor_encode_int\fP 
+.RE
+.PP
+
+.PP
+Definition at line 319 of file cborencoder\&.c\&.
+.SS "\fBCborError\fP cbor_encode_undefined (\fBCborEncoder\fP * encoder)\fC [static]\fP"
+Appends the CBOR type representing an undefined value to the CBOR stream provided by \fIencoder\fP\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_encode_null()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 250 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_encoder_close_container (\fBCborEncoder\fP * encoder, const \fBCborEncoder\fP * containerEncoder)"
+Closes the CBOR container (array or map) provided by \fIcontainerEncoder\fP and updates the CBOR stream provided by \fIencoder\fP\&. Both parameters must be the same as were passed to \fBcbor_encoder_create_array()\fP or \fBcbor_encoder_create_map()\fP\&.
+.PP
+Since version 0\&.5, this function verifies that the number of items (or pairs of items, in the case of a map) was correct\&. It is no longer necessary to call \fBcbor_encoder_close_container_checked()\fP instead\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_encoder_create_array()\fP, \fBcbor_encoder_create_map()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 536 of file cborencoder\&.c\&.
+.SS "\fBCborError\fP cbor_encoder_close_container_checked (\fBCborEncoder\fP * encoder, const \fBCborEncoder\fP * containerEncoder)"
+
+.PP
+\fBDeprecated\fP
+.RS 4
+
+.RE
+.PP
+.PP
+Closes the CBOR container (array or map) provided by \fIcontainerEncoder\fP and updates the CBOR stream provided by \fIencoder\fP\&. Both parameters must be the same as were passed to \fBcbor_encoder_create_array()\fP or \fBcbor_encoder_create_map()\fP\&.
+.PP
+Prior to version 0\&.5, \fBcbor_encoder_close_container()\fP did not check the number of items added\&. Since that version, it does and now \fBcbor_encoder_close_container_checked()\fP is no longer needed\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_encoder_create_array()\fP, \fBcbor_encoder_create_map()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 52 of file cborencoder_close_container_checked\&.c\&.
+.SS "\fBCborError\fP cbor_encoder_create_array (\fBCborEncoder\fP * encoder, \fBCborEncoder\fP * arrayEncoder, size_t length)"
+Creates a CBOR array in the CBOR stream provided by \fIencoder\fP and initializes \fIarrayEncoder\fP so that items can be added to the array using the \fBCborEncoder\fP functions\&. The array must be terminated by calling either \fBcbor_encoder_close_container()\fP or \fBcbor_encoder_close_container_checked()\fP with the same \fIencoder\fP and \fIarrayEncoder\fP parameters\&.
+.PP
+The number of items inserted into the array must be exactly \fIlength\fP items, otherwise the stream is invalid\&. If the number of items is not known when creating the array, the constant \fBCborIndefiniteLength\fP may be passed as length instead\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_encoder_create_map\fP 
+.RE
+.PP
+
+.PP
+Definition at line 492 of file cborencoder\&.c\&.
+.SS "\fBCborError\fP cbor_encoder_create_map (\fBCborEncoder\fP * encoder, \fBCborEncoder\fP * mapEncoder, size_t length)"
+Creates a CBOR map in the CBOR stream provided by \fIencoder\fP and initializes \fImapEncoder\fP so that items can be added to the map using the \fBCborEncoder\fP functions\&. The map must be terminated by calling either \fBcbor_encoder_close_container()\fP or \fBcbor_encoder_close_container_checked()\fP with the same \fIencoder\fP and \fImapEncoder\fP parameters\&.
+.PP
+The number of pair of items inserted into the map must be exactly \fIlength\fP items, otherwise the stream is invalid\&. If the number is not known when creating the map, the constant \fBCborIndefiniteLength\fP may be passed as length instead\&.
+.PP
+\fB\fP{Implementation limitation:} TinyCBOR cannot encode more than SIZE_MAX/2 key-value pairs in the stream\&. If the length \fIlength\fP is larger than this value (and is not \fBCborIndefiniteLength\fP), this function returns error CborErrorDataTooLarge\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_encoder_create_array\fP 
+.RE
+.PP
+
+.PP
+Definition at line 517 of file cborencoder\&.c\&.
+.SS "size_t cbor_encoder_get_buffer_size (const \fBCborEncoder\fP * encoder, const uint8_t * buffer)\fC [static]\fP"
+Returns the total size of the buffer starting at \fIbuffer\fP after the encoding finished without errors\&. The \fIencoder\fP and \fIbuffer\fP arguments must be the same as supplied to \fBcbor_encoder_init()\fP\&.
+.PP
+If the encoding process had errors, the return value of this function is meaningless\&. If the only errors were CborErrorOutOfMemory, instead use \fBcbor_encoder_get_extra_bytes_needed()\fP to find out by how much to grow the buffer before encoding again\&.
+.PP
+See \fBEncoding to CBOR\fP for an example of using this function\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_encoder_init()\fP, \fBcbor_encoder_get_extra_bytes_needed()\fP, \fBEncoding to CBOR\fP 
+.RE
+.PP
+
+.PP
+Definition at line 280 of file cbor\&.h\&.
+.SS "size_t cbor_encoder_get_extra_bytes_needed (const \fBCborEncoder\fP * encoder)\fC [static]\fP"
+Returns how many more bytes the original buffer supplied to \fBcbor_encoder_init()\fP needs to be extended by so that no CborErrorOutOfMemory condition will happen for the encoding\&. If the buffer was big enough, this function returns 0\&. The \fIencoder\fP must be the original argument as passed to \fBcbor_encoder_init()\fP\&.
+.PP
+This function is usually called after an encoding sequence ended with one or more CborErrorOutOfMemory errors, but no other error\&. If any other error happened, the return value of this function is meaningless\&.
+.PP
+See \fBEncoding to CBOR\fP for an example of using this function\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_encoder_init()\fP, \fBcbor_encoder_get_buffer_size()\fP, \fBEncoding to CBOR\fP 
+.RE
+.PP
+
+.PP
+Definition at line 286 of file cbor\&.h\&.
+.SS "void cbor_encoder_init (\fBCborEncoder\fP * encoder, uint8_t * buffer, size_t size, int flags)"
+Initializes a \fBCborEncoder\fP structure \fIencoder\fP by pointing it to buffer \fIbuffer\fP of size \fIsize\fP\&. The \fIflags\fP field is currently unused and must be zero\&. 
+.PP
+Definition at line 203 of file cborencoder\&.c\&.
+.SS "static \fBCborError\fP create_container (\fBCborEncoder\fP * encoder, \fBCborEncoder\fP * container, size_t length, uint8_t shiftedMajorType)\fC [static]\fP"
+
+.PP
+Definition at line 452 of file cborencoder\&.c\&.
+.SS "static \fBCborError\fP encode_number (\fBCborEncoder\fP * encoder, uint64_t ui, uint8_t shiftedMajorType)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 307 of file cborencoder\&.c\&.
+.SS "static \fBCborError\fP encode_number_no_update (\fBCborEncoder\fP * encoder, uint64_t ui, uint8_t shiftedMajorType)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 273 of file cborencoder\&.c\&.
+.SS "static \fBCborError\fP encode_string (\fBCborEncoder\fP * encoder, size_t length, uint8_t shiftedMajorType, const void * string)\fC [static]\fP"
+
+.PP
+Definition at line 406 of file cborencoder\&.c\&.
+.SS "static bool isOomError (\fBCborError\fP err)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 221 of file cborencoder\&.c\&.
+.SS "static void put16 (void * where, uint16_t v)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 211 of file cborencoder\&.c\&.
+.SS "static void put32 (void * where, uint32_t v)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 226 of file cborencoder\&.c\&.
+.SS "static void put64 (void * where, uint64_t v)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 231 of file cborencoder\&.c\&.
+.SS "static void saturated_decrement (\fBCborEncoder\fP * encoder)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 302 of file cborencoder\&.c\&.
+.SS "static bool would_overflow (\fBCborEncoder\fP * encoder, size_t len)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 236 of file cborencoder\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

@@ -1,0 +1,102 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/tinycbor/cborvalidation.c" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/tinycbor/cborvalidation.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'tinycbor/cbor\&.h'\fP
+.br
+\fC#include 'tinycbor/cborinternal_p\&.h'\fP
+.br
+\fC#include 'tinycbor/compilersupport_p\&.h'\fP
+.br
+\fC#include 'tinycbor/utf8_p\&.h'\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <float\&.h>\fP
+.br
+\fC#include <math\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBKnownTagData\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fB_BSD_SOURCE\fP   1"
+.br
+.ti -1c
+.RI "#define \fB_DEFAULT_SOURCE\fP   1"
+.br
+.ti -1c
+.RI "#define \fB__STDC_LIMIT_MACROS\fP   1"
+.br
+.ti -1c
+.RI "#define \fBCBOR_PARSER_MAX_RECURSIONS\fP   1024"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "static \fBCborError\fP \fBvalidate_value\fP (\fBCborValue\fP *it, uint32_t flags, int recursionLeft)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBvalidate_utf8_string\fP (const void *ptr, size_t n)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBvalidate_simple_type\fP (uint8_t simple_type, uint32_t flags)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBvalidate_number\fP (const \fBCborValue\fP *it, \fBCborType\fP type, uint32_t flags)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBvalidate_tag\fP (\fBCborValue\fP *it, \fBCborTag\fP tag, uint32_t flags, int recursionLeft)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBvalidate_floating_point\fP (\fBCborValue\fP *it, \fBCborType\fP type, uint32_t flags)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBvalidate_container\fP (\fBCborValue\fP *it, int containerType, uint32_t flags, int recursionLeft)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_validate\fP (const \fBCborValue\fP *it, uint32_t flags)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "static const struct \fBKnownTagData\fP \fBknownTagData\fP []"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define __STDC_LIMIT_MACROS   1"
+
+.PP
+Definition at line 28 of file cborvalidation\&.c\&.
+.SS "#define _BSD_SOURCE   1"
+
+.PP
+Definition at line 25 of file cborvalidation\&.c\&.
+.SS "#define _DEFAULT_SOURCE   1"
+
+.PP
+Definition at line 26 of file cborvalidation\&.c\&.
+.SS "#define CBOR_PARSER_MAX_RECURSIONS   1024"
+
+.PP
+Definition at line 44 of file cborvalidation\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

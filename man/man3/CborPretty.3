@@ -1,0 +1,214 @@
+.TH "CborPretty" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+CborPretty \- Group of functions used to convert CBOR to text form\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBCborPrettyFlags\fP { \fBCborPrettyNumericEncodingIndicators\fP = 0x01, \fBCborPrettyTextualEncodingIndicators\fP = 0, \fBCborPrettyIndicateIndeterminateLength\fP = 0x02, \fBCborPrettyIndicateIndetermineLength\fP, \fBCborPrettyIndicateOverlongNumbers\fP = 0x04, \fBCborPrettyShowStringFragments\fP = 0x100, \fBCborPrettyMergeStringFragments\fP = 0, \fBCborPrettyDefaultFlags\fP = CborPrettyIndicateIndeterminateLength }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "static bool \fBconvertToUint64\fP (double v, uint64_t *absolute)"
+.br
+.ti -1c
+.RI "static void \fBprintRecursionLimit\fP (\fBCborStreamFunction\fP stream, void *out)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBhexDump\fP (\fBCborStreamFunction\fP stream, void *out, const void *ptr, size_t n)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fButf8EscapedDump\fP (\fBCborStreamFunction\fP stream, void *out, const void *ptr, size_t n)"
+.br
+.ti -1c
+.RI "static const char * \fBresolve_indicator\fP (const uint8_t *ptr, const uint8_t *end, int flags)"
+.br
+.ti -1c
+.RI "static const char * \fBget_indicator\fP (const \fBCborValue\fP *it, int flags)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBvalue_to_pretty\fP (\fBCborStreamFunction\fP stream, void *out, \fBCborValue\fP *it, int flags, int recursionsLeft)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcontainer_to_pretty\fP (\fBCborStreamFunction\fP stream, void *out, \fBCborValue\fP *it, \fBCborType\fP containerType, int flags, int recursionsLeft)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_to_pretty_stream\fP (\fBCborStreamFunction\fP streamFunction, void *token, \fBCborValue\fP *value, int flags)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Group of functions used to convert CBOR to text form\&. 
+
+This group contains two functions that can be used to convert a \fBCborValue\fP object to a text representation\&. This module attempts to follow the recommendations from RFC 7049 section 6 'Diagnostic Notation', though it has a few differences\&. They are noted below\&.
+.PP
+TinyCBOR does not provide a way to convert from the text representation back to encoded form\&. To produce a text form meant to be parsed, CborToJson is recommended instead\&.
+.PP
+Either of the functions in this section will attempt to convert exactly one \fBCborValue\fP object to text\&. Those functions may return any error documented for the functions for CborParsing\&. In addition, if the C standard library stream functions return with error, the text conversion will return with error CborErrorIO\&.
+.PP
+These functions also perform UTF-8 validation in CBOR text strings\&. If they encounter a sequence of bytes that is not permitted in UTF-8, they will return CborErrorInvalidUtf8TextString\&. That includes encoding of surrogate points in UTF-8\&.
+.PP
+\fBWarning\fP
+.RS 4
+The output type produced by these functions is not guaranteed to remain stable\&. A future update of TinyCBOR may produce different output for the same input and parsers may be unable to handle it\&.
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBParsing CBOR streams\fP, \fBConverting CBOR to JSON\fP, \fBcbor_parser_init()\fP
+.RE
+.PP
+.SS "Text format"
+.PP
+As described in RFC 7049 section 6 'Diagnostic Notation', the format is largely borrowed from JSON, but modified to suit CBOR's different data types\&. TinyCBOR makes further modifications to distinguish different, but similar values\&.
+.PP
+CBOR values are currently encoded as follows: 
+.PP
+\fBIntegrals (unsigned and negative)\fP
+.RS 4
+Base-10 (decimal) text representation of the value 
+.RE
+.PP
+\fBByte strings:\fP
+.RS 4
+\fC'h''\fP followed by the Base16 (hex) representation of the binary data, followed by an ending quote (') 
+.RE
+.PP
+\fBText strings: C-style escaped string in\fP
+.RS 4
+quotes, with C11/C++11 escaping of Unicode codepoints above U+007F\&. 
+.RE
+.PP
+\fBTags: Tag\fP
+.RS 4
+value, with the tagged value in parentheses\&. No special encoding of the tagged value is performed\&. 
+.RE
+.PP
+\fBSimple types: 'simple(nn)' where \fCnn\fP is the\fP
+.RS 4
+simple value 
+.RE
+.PP
+\fBNull: \fCnull\fP \\par Undefined: \fCundefined\fP \\par Booleans: \fC\fP \fP
+.RS 4
+true or \fCfalse\fP 
+.RE
+.PP
+\fBFloating point: If NaN or infinite, the actual words \fCNaN\fP \fP
+.RS 4
+or \fCinfinite\fP\&. Otherwise, the decimal representation with as many digits as necessary to ensure no loss of information\&. By default, float values are suffixed by 'f' and half-float values suffixed by 'f16' (doubles have no suffix)\&. If the CborPrettyNumericEncodingIndicators flag is active, the values instead are encoded following the Section 6 recommended encoding indicators: float values are suffixed with '_2' and half-float with '_1'\&. A decimal point is always present\&. 
+.RE
+.PP
+\fB\fP
+.RS 4
+Arrays: Comma-separated list of elements, enclosed in square brackets ('[' and ']')\&. 
+.RE
+.PP
+\fBMaps: Comma-separated list of key-value pairs, with the key and value\fP
+.RS 4
+separated by a colon (':'), enclosed in curly braces ('{' and '}')\&.
+.RE
+.PP
+The CborPrettyFlags enumerator contains flags to control some aspects of the encoding: 
+.PP
+\fBString fragmentation\fP
+.RS 4
+When the CborPrettyShowStringFragments option is active, text and byte strings that are transmitted in fragments are shown instead inside parentheses ('(' and ')') with no preceding number and each fragment is displayed individually\&. If a tag precedes the string, then the output will contain a double set of parentheses\&. If the option is not active, the fragments are merged together and the display will not show any difference from a string transmitted with determinate length\&. 
+.RE
+.PP
+\fBEncoding indicators\fP
+.RS 4
+Numbers and lengths in CBOR can be encoded in multiple representations\&. If the CborPrettyIndicateOverlongNumbers option is active, numbers and lengths that are transmitted in a longer encoding than necessary will be indicated, by appending an underscore ('_') to either the number or the opening bracket or brace, followed by a number indicating the CBOR additional information: 0 for 1 byte, 1 for 2 bytes, 2 for 4 bytes and 3 for 8 bytes\&. If the CborPrettyIndicateIndeterminateLength option is active, maps, arrays and strings encoded with indeterminate length will be marked by an underscore after the opening bracket or brace or the string (if not showing fragments), without a number after it\&. 
+.RE
+.PP
+
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBCborPrettyFlags\fP"
+The CborPrettyFlags enum contains flags that control the conversion of CBOR to text format\&.
+.PP
+\\value CborPrettyNumericEncodingIndicators Use numeric encoding indicators instead of textual for float and half-float\&. \\value CborPrettyTextualEncodingIndicators Use textual encoding indicators for float ('f') and half-float ('f16')\&. \\value CborPrettyIndicateIndeterminateLength (default) Indicate when a map or array has indeterminate length\&. \\value CborPrettyIndicateOverlongNumbers Indicate when a number or length was encoded with more bytes than needed\&. \\value CborPrettyShowStringFragments If the byte or text string is transmitted in chunks, show each individually\&. \\value CborPrettyMergeStringFragment Merge all chunked byte or text strings and display them in a single entry\&. \\value CborPrettyDefaultFlags Default conversion flags\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fICborPrettyNumericEncodingIndicators \fP\fP
+.TP
+\fB\fICborPrettyTextualEncodingIndicators \fP\fP
+.TP
+\fB\fICborPrettyIndicateIndeterminateLength \fP\fP
+.TP
+\fB\fICborPrettyIndicateIndetermineLength \fP\fP
+.TP
+\fB\fICborPrettyIndicateOverlongNumbers \fP\fP
+.TP
+\fB\fICborPrettyShowStringFragments \fP\fP
+.TP
+\fB\fICborPrettyMergeStringFragments \fP\fP
+.TP
+\fB\fICborPrettyDefaultFlags \fP\fP
+.PP
+Definition at line 627 of file cbor\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "\fBCborError\fP cbor_value_to_pretty_stream (\fBCborStreamFunction\fP streamFunction, void * token, \fBCborValue\fP * value, int flags)"
+Converts the current CBOR type pointed by \fIvalue\fP to its textual representation and writes it to the stream by calling the \fIstreamFunction\fP\&. If an error occurs, this function returns an error code similar to \fBParsing CBOR streams\fP\&.
+.PP
+The textual representation can be controlled by the \fIflags\fP parameter (see \fBCborPrettyFlags\fP for more information)\&.
+.PP
+If no error ocurred, this function advances \fIvalue\fP to the next element\&. Often, concatenating the text representation of multiple elements can be done by appending a comma to the output stream in between calls to this function\&.
+.PP
+The \fIstreamFunction\fP function will be called with the \fItoken\fP value as the first parameter and a printf-style format string as the second, with a variable number of further parameters\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_to_pretty()\fP, \fBcbor_value_to_json_advance()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 573 of file cborpretty\&.c\&.
+.SS "static \fBCborError\fP container_to_pretty (\fBCborStreamFunction\fP stream, void * out, \fBCborValue\fP * it, \fBCborType\fP containerType, int flags, int recursionsLeft)\fC [static]\fP"
+
+.PP
+Definition at line 301 of file cborpretty\&.c\&.
+.SS "static bool convertToUint64 (double v, uint64_t * absolute)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 144 of file cborpretty\&.c\&.
+.SS "static const char* get_indicator (const \fBCborValue\fP * it, int flags)\fC [static]\fP"
+
+.PP
+Definition at line 295 of file cborpretty\&.c\&.
+.SS "static \fBCborError\fP hexDump (\fBCborStreamFunction\fP stream, void * out, const void * ptr, size_t n)\fC [static]\fP"
+
+.PP
+Definition at line 179 of file cborpretty\&.c\&.
+.SS "static void printRecursionLimit (\fBCborStreamFunction\fP stream, void * out)\fC [static]\fP"
+
+.PP
+Definition at line 175 of file cborpretty\&.c\&.
+.SS "static const char* resolve_indicator (const uint8_t * ptr, const uint8_t * end, int flags)\fC [static]\fP"
+
+.PP
+Definition at line 252 of file cborpretty\&.c\&.
+.SS "static \fBCborError\fP utf8EscapedDump (\fBCborStreamFunction\fP stream, void * out, const void * ptr, size_t n)\fC [static]\fP"
+
+.PP
+Definition at line 191 of file cborpretty\&.c\&.
+.SS "static \fBCborError\fP value_to_pretty (\fBCborStreamFunction\fP stream, void * out, \fBCborValue\fP * it, int flags, int recursionsLeft)\fC [static]\fP"
+
+.PP
+Definition at line 331 of file cborpretty\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

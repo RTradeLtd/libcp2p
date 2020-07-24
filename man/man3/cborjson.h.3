@@ -1,0 +1,31 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/tinycbor/cborjson.h" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/tinycbor/cborjson.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'tinycbor/cbor\&.h'\fP
+.br
+
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBCborToJsonFlags\fP { \fBCborConvertAddMetadata\fP = 1, \fBCborConvertTagsToObjects\fP = 2, \fBCborConvertIgnoreTags\fP = 0, \fBCborConvertObeyByteStringTags\fP = 0, \fBCborConvertByteStringsToBase64Url\fP = 4, \fBCborConvertRequireMapStringKeys\fP = 0, \fBCborConvertStringifyMapKeys\fP = 8, \fBCborConvertDefaultFlags\fP = 0 }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "CBOR_API \fBCborError\fP \fBcbor_value_to_json_advance\fP (FILE *out, \fBCborValue\fP *value, int flags)"
+.br
+.ti -1c
+.RI "\fBCBOR_INLINE_API\fP \fBCborError\fP \fBcbor_value_to_json\fP (FILE *out, const \fBCborValue\fP *value, int flags)"
+.br
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

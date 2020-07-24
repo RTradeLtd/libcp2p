@@ -1,0 +1,173 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/tinycbor/cborinternal_p.h" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/tinycbor/cborinternal_p.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'tinycbor/compilersupport_p\&.h'\fP
+.br
+\fC#include <float\&.h>\fP
+.br
+\fC#include <math\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBCBOR_INTERNAL_API\fP"
+.br
+.ti -1c
+.RI "#define \fBCBOR_PARSER_MAX_RECURSIONS\fP   1024"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef enum \fBCborMajorTypes\fP \fBCborMajorTypes\fP"
+.br
+.ti -1c
+.RI "typedef enum \fBCborSimpleTypes\fP \fBCborSimpleTypes\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBCborMajorTypes\fP { \fBUnsignedIntegerType\fP = 0U, \fBNegativeIntegerType\fP = 1U, \fBByteStringType\fP = 2U, \fBTextStringType\fP = 3U, \fBArrayType\fP = 4U, \fBMapType\fP = 5U, \fBTagType\fP = 6U, \fBSimpleTypesType\fP = 7U }"
+.br
+.ti -1c
+.RI "enum \fBCborSimpleTypes\fP { \fBFalseValue\fP = 20, \fBTrueValue\fP = 21, \fBNullValue\fP = 22, \fBUndefinedValue\fP = 23, \fBSimpleTypeInNextByte\fP = 24, \fBHalfPrecisionFloat\fP = 25, \fBSinglePrecisionFloat\fP = 26, \fBDoublePrecisionFloat\fP = 27, \fBBreak\fP = 31 }"
+.br
+.ti -1c
+.RI "enum { \fBSmallValueBitLength\fP = 5U, \fBSmallValueMask\fP = (1U << SmallValueBitLength) - 1, \fBValue8Bit\fP = 24U, \fBValue16Bit\fP = 25U, \fBValue32Bit\fP = 26U, \fBValue64Bit\fP = 27U, \fBIndefiniteLength\fP = 31U, \fBMajorTypeShift\fP = SmallValueBitLength, \fBMajorTypeMask\fP = (int)(~0U << MajorTypeShift), \fBBreakByte\fP = (unsigned)Break | (SimpleTypesType << MajorTypeShift) }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "static unsigned short \fBencode_half\fP (double val)"
+.br
+.ti -1c
+.RI "static double \fBdecode_half\fP (unsigned short half)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBCBOR_INTERNAL_API_CC\fP \fB_cbor_value_extract_number\fP (const uint8_t **ptr, const uint8_t *end, uint64_t *len)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBCBOR_INTERNAL_API_CC\fP \fB_cbor_value_prepare_string_iteration\fP (\fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBCBOR_INTERNAL_API_CC\fP \fB_cbor_value_get_string_chunk\fP (const \fBCborValue\fP *value, const void **bufferptr, size_t *len, \fBCborValue\fP *next)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define CBOR_INTERNAL_API"
+
+.PP
+Definition at line 100 of file cborinternal_p\&.h\&.
+.SS "#define CBOR_PARSER_MAX_RECURSIONS   1024"
+
+.PP
+Definition at line 104 of file cborinternal_p\&.h\&.
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef enum \fBCborMajorTypes\fP \fBCborMajorTypes\fP"
+
+.SS "typedef enum \fBCborSimpleTypes\fP \fBCborSimpleTypes\fP"
+
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "anonymous enum"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fISmallValueBitLength \fP\fP
+.TP
+\fB\fISmallValueMask \fP\fP
+.TP
+\fB\fIValue8Bit \fP\fP
+.TP
+\fB\fIValue16Bit \fP\fP
+.TP
+\fB\fIValue32Bit \fP\fP
+.TP
+\fB\fIValue64Bit \fP\fP
+.TP
+\fB\fIIndefiniteLength \fP\fP
+.TP
+\fB\fIMajorTypeShift \fP\fP
+.TP
+\fB\fIMajorTypeMask \fP\fP
+.TP
+\fB\fIBreakByte \fP\fP
+.PP
+Definition at line 140 of file cborinternal_p\&.h\&.
+.SS "enum \fBCborMajorTypes\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIUnsignedIntegerType \fP\fP
+.TP
+\fB\fINegativeIntegerType \fP\fP
+.TP
+\fB\fIByteStringType \fP\fP
+.TP
+\fB\fITextStringType \fP\fP
+.TP
+\fB\fIArrayType \fP\fP
+.TP
+\fB\fIMapType \fP\fP
+.TP
+\fB\fITagType \fP\fP
+.TP
+\fB\fISimpleTypesType \fP\fP
+.PP
+Definition at line 112 of file cborinternal_p\&.h\&.
+.SS "enum \fBCborSimpleTypes\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIFalseValue \fP\fP
+.TP
+\fB\fITrueValue \fP\fP
+.TP
+\fB\fINullValue \fP\fP
+.TP
+\fB\fIUndefinedValue \fP\fP
+.TP
+\fB\fISimpleTypeInNextByte \fP\fP
+.TP
+\fB\fIHalfPrecisionFloat \fP\fP
+.TP
+\fB\fISinglePrecisionFloat \fP\fP
+.TP
+\fB\fIDoublePrecisionFloat \fP\fP
+.TP
+\fB\fIBreak \fP\fP
+.PP
+Definition at line 128 of file cborinternal_p\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "static double decode_half (unsigned short half)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 84 of file cborinternal_p\&.h\&.
+.SS "static unsigned short encode_half (double val)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 50 of file cborinternal_p\&.h\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

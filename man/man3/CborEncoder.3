@@ -1,0 +1,68 @@
+.TH "CborEncoder" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+CborEncoder
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <cbor\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "union {"
+.br
+.ti -1c
+.RI "   uint8_t * \fBptr\fP"
+.br
+.ti -1c
+.RI "   ptrdiff_t \fBbytes_needed\fP"
+.br
+.ti -1c
+.RI "} \fBdata\fP"
+.br
+.ti -1c
+.RI "const uint8_t * \fBend\fP"
+.br
+.ti -1c
+.RI "size_t \fBremaining\fP"
+.br
+.ti -1c
+.RI "int \fBflags\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Structure used to encode to CBOR\&. 
+.PP
+Definition at line 211 of file cbor\&.h\&.
+.SH "Field Documentation"
+.PP 
+.SS "ptrdiff_t CborEncoder::bytes_needed"
+
+.PP
+Definition at line 214 of file cbor\&.h\&.
+.SS "union { \&.\&.\&. }  CborEncoder::data"
+
+.SS "const uint8_t* CborEncoder::end"
+
+.PP
+Definition at line 216 of file cbor\&.h\&.
+.SS "int CborEncoder::flags"
+
+.PP
+Definition at line 218 of file cbor\&.h\&.
+.SS "uint8_t* CborEncoder::ptr"
+
+.PP
+Definition at line 213 of file cbor\&.h\&.
+.SS "size_t CborEncoder::remaining"
+
+.PP
+Definition at line 217 of file cbor\&.h\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

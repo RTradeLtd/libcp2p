@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['garlic32_1887',['GARLIC32',['../d7/ded/codecs_8h.html#a1e62a359e886e8a2fdb45177541d0dee',1,'codecs.h']]],
-  ['garlic64_1888',['GARLIC64',['../d7/ded/codecs_8h.html#a815d0ef597ac026ef3e9ea87b75532f0',1,'codecs.h']]],
-  ['git_5fraw_1889',['GIT_RAW',['../d7/ded/codecs_8h.html#ac23e0a72753d9e173fe52ee65c0f5e10',1,'codecs.h']]]
+  ['fil_5fcommitment_5fsealed_2672',['FIL_COMMITMENT_SEALED',['../d7/ded/codecs_8h.html#a27f415df29b625d5af347b32a7bde848',1,'codecs.h']]],
+  ['fil_5fcommitment_5funsealed_2673',['FIL_COMMITMENT_UNSEALED',['../d7/ded/codecs_8h.html#a196d88d74d288e1efb823fed97faf387',1,'codecs.h']]]
 ];

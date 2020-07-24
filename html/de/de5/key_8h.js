@@ -1,22 +1,20 @@
 var key_8h =
 [
-    [ "PublicKey", "d5/dd7/struct_public_key.html", "d5/dd7/struct_public_key" ],
-    [ "PrivateKey", "d9/dc0/struct_private_key.html", "d9/dc0/struct_private_key" ],
-    [ "KeyType", "de/de5/key_8h.html#aab0feaba617470cb4aa830dc5935238c", [
-      [ "KEYTYPE_RSA", "de/de5/key_8h.html#aab0feaba617470cb4aa830dc5935238ca9aefbce8185bc15734bf6f2b16750422", null ],
-      [ "KEYTYPE_ED25519", "de/de5/key_8h.html#aab0feaba617470cb4aa830dc5935238ca7c5ce755cd512f55e7767cc115562ea8", null ],
-      [ "KEYTYPE_INVALID", "de/de5/key_8h.html#aab0feaba617470cb4aa830dc5935238cab0dc7169cbe5abfc51c66a6826072fc1", null ]
+    [ "cbor_encoded_data", "d3/de2/structcbor__encoded__data.html", "d3/de2/structcbor__encoded__data" ],
+    [ "public_key", "d3/dce/structpublic__key.html", "d3/dce/structpublic__key" ],
+    [ "private_key", "d4/d54/structprivate__key.html", "d4/d54/structprivate__key" ],
+    [ "cbor_encoded_data_t", "de/de5/key_8h.html#a3a83b5537216917ab3bc74d872977fc5", null ],
+    [ "private_key_t", "de/de5/key_8h.html#a7a838446f46ae16af3b1e62140908e4e", null ],
+    [ "public_key_t", "de/de5/key_8h.html#a24ac5e605e5e8cfe4d897ff6acd50d9a", null ],
+    [ "key_type_t", "de/de5/key_8h.html#a4f367c350737c92475175fb229c5570e", [
+      [ "KEYTYPE_INVALID", "de/de5/key_8h.html#a4f367c350737c92475175fb229c5570eab0dc7169cbe5abfc51c66a6826072fc1", null ],
+      [ "KEYTYPE_ECDSA", "de/de5/key_8h.html#a4f367c350737c92475175fb229c5570ea0d24a7fdd0814c0edc07dd094adf679c", null ]
     ] ],
-    [ "libp2p_crypto_private_key_copy", "de/de5/key_8h.html#a468c65592f3cb01a35fa7e20003aaa2a", null ],
-    [ "libp2p_crypto_private_key_free", "de/de5/key_8h.html#aa08f9672efcc5a8f51f1c24a702be0fd", null ],
-    [ "libp2p_crypto_private_key_new", "de/de5/key_8h.html#ac058cf71ca1188147d8a6bf369806322", null ],
-    [ "libp2p_crypto_private_key_protobuf_decode", "de/de5/key_8h.html#a7c56539d28743850e7d8663d763cfee2", null ],
-    [ "libp2p_crypto_private_key_protobuf_encode", "de/de5/key_8h.html#ac117246560e14f28a4a5fec744896e7c", null ],
-    [ "libp2p_crypto_private_key_protobuf_encode_size", "de/de5/key_8h.html#a91666336b0f4890e22e87fc3b3480e52", null ],
-    [ "libp2p_crypto_public_key_free", "de/de5/key_8h.html#ab5f5391ac4101f380b7a144e7e6a5ff9", null ],
-    [ "libp2p_crypto_public_key_new", "de/de5/key_8h.html#aaae23c3d5302352d3de26fb6be1e9cca", null ],
-    [ "libp2p_crypto_public_key_protobuf_decode", "de/de5/key_8h.html#a4a3e3a966f33e5aeb930001fb45ddd03", null ],
-    [ "libp2p_crypto_public_key_protobuf_encode", "de/de5/key_8h.html#a6e78380678c6f00fdd220d668bfb4bde", null ],
-    [ "libp2p_crypto_public_key_protobuf_encode_size", "de/de5/key_8h.html#a43090ff5e4b9bf01c58c191709833d6b", null ],
-    [ "libp2p_crypto_public_key_to_peer_id", "de/de5/key_8h.html#a880e85cb8f876de9eca86247cc0d30f6", null ]
+    [ "libp2p_crypto_private_key_copy", "de/de5/key_8h.html#a1023c4b3fa124442a905905f8dcb4da0", null ],
+    [ "libp2p_crypto_private_key_free", "de/de5/key_8h.html#a4ea8c0ef6e2eae7af868421329369b5e", null ],
+    [ "libp2p_crypto_private_key_new", "de/de5/key_8h.html#a37d53eccc54cdcb1b0d5ca30160454d7", null ],
+    [ "libp2p_crypto_public_key_cbor_decode", "de/de5/key_8h.html#a8c593674228430737badfa42408ec292", null ],
+    [ "libp2p_crypto_public_key_cbor_encode", "de/de5/key_8h.html#af172f4050fed0de3e3a6582ef3fa5c02", null ],
+    [ "libp2p_crypto_public_key_free", "de/de5/key_8h.html#abb6b43f3899e4ef603898cb5aedfe4ef", null ],
+    [ "libp2p_crypto_public_key_new", "de/de5/key_8h.html#a9c803993819a08dc0584b8995eaa3232", null ]
 ];

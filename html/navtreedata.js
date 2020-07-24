@@ -65,6 +65,8 @@ var NAVTREE =
       [ "NOTE", "d3/d1f/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s.html#autotoc_md37", null ]
     ] ],
     [ "Todo List", "dd/da0/todo.html", null ],
+    [ "Deprecated List", "da/d58/deprecated.html", null ],
+    [ "Modules", "modules.html", "modules" ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -99,12 +101,15 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d4/d05/structthpool__.html#ad8419ca087fb8143f5b33183038f10fc",
-"d7/ded/codecs_8h.html#a06bfda798b79913b8d2d2efda1dd0927",
-"d7/ded/codecs_8h.html#a8cf1707b3fbe8973dbf4e22bc0a6fb15",
-"d9/d01/ephemeral_8h.html#ac1579e7eb2eb706fce755cef9a02a751",
-"dc/d13/cid_8h.html#a3fd7bda791958634eff19d3dd89d71c5",
-"dir_adc29181cbd206d836a76325c2172cc8.html"
+"d2/d9e/cbor_8h.html#a38f51ceba8bc8a9b1cf7dd31e3f9c178ae705bcff9f8ea5e470dd222e5534592b",
+"d4/d05/structthpool__.html#a08d4a33fae889af4adc4e78d9e34602d",
+"d7/d8d/structsocket__server.html#aa47767c843cdf018f134e57ba3423e52",
+"d7/ded/codecs_8h.html#a7adb662ba94f42e6b140c6e9249b569d",
+"d8/d33/base32_8h.html#aa5e9ce21e2e63e68515f76c19a49aeed",
+"da/dc9/ephemeral_8c.html#ad765fc171667f71bd51ebf8a22f3c0ad",
+"dc/d74/group___cbor_parsing.html#ga0422ed961d973d190a19e12a3fe2390f",
+"dd/df6/open__memstream_8c.html#a369266c24eacffb87046522897a570d5",
+"globals_func_f.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

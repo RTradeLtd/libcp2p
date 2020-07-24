@@ -1,6 +1,10 @@
 var searchData=
 [
-  ['warn_5flog_1525',['warn_log',['../d1/d22/logger_8c.html#a1979109bb7f9b3fccd5d35ab62af76b0',1,'warn_log(thread_logger *thl, int file_descriptor, char *message):&#160;logger.c'],['../d1/d8c/logger_8h.html#a1979109bb7f9b3fccd5d35ab62af76b0',1,'warn_log(thread_logger *thl, int file_descriptor, char *message):&#160;logger.c']]],
-  ['write_5fcolored_1526',['write_colored',['../d3/d13/colors_8c.html#aa1fa3472b5bc15e07fe0d5ce481617a1',1,'write_colored(COLORS color, int file_descriptor, char *message):&#160;colors.c'],['../da/dd8/colors_8h.html#aa1fa3472b5bc15e07fe0d5ce481617a1',1,'write_colored(COLORS color, int file_descriptor, char *message):&#160;colors.c']]],
-  ['write_5ffile_5flog_1527',['write_file_log',['../d1/d22/logger_8c.html#a6362ea8a304cd179fbd42e2971ed71f3',1,'write_file_log(int file_descriptor, char *message):&#160;logger.c'],['../d1/d8c/logger_8h.html#a6362ea8a304cd179fbd42e2971ed71f3',1,'write_file_log(int file_descriptor, char *message):&#160;logger.c']]]
+  ['unload_5fprotocols_2053',['unload_protocols',['../de/db7/protocols_8c.html#a372efb7dae5ecc84c90ddd37f1b2184b',1,'unload_protocols(struct ProtocolListItem *head):&#160;protocols.c'],['../d5/dca/protocols_8h.html#a372efb7dae5ecc84c90ddd37f1b2184b',1,'unload_protocols(struct ProtocolListItem *head):&#160;protocols.c']]],
+  ['unserialize_5fuint64_2054',['unserialize_uint64',['../da/dc9/ephemeral_8c.html#a1a644e5e2e409ebd6207186a22605447',1,'ephemeral.c']]],
+  ['utf8escapeddump_2055',['utf8EscapedDump',['../d1/d5f/group___cbor_pretty.html#gaae73737de733123cd80de58fb54908fb',1,'cborpretty.c']]],
+  ['uvarint_5fdecode32_2056',['uvarint_decode32',['../d7/d0c/include_2utils_2varint_8h.html#ab014b392e982e8a272744667c4926bef',1,'varint.h']]],
+  ['uvarint_5fdecode64_2057',['uvarint_decode64',['../d7/d0c/include_2utils_2varint_8h.html#ab9b4e6231ef64921d55bb5f8c25dac73',1,'varint.h']]],
+  ['uvarint_5fencode32_2058',['uvarint_encode32',['../d7/d0c/include_2utils_2varint_8h.html#a8230149cbdc7e240e3fbcc5258b8d7a2',1,'varint.h']]],
+  ['uvarint_5fencode64_2059',['uvarint_encode64',['../d7/d0c/include_2utils_2varint_8h.html#a9729dc93298c34945567b08b8c27d122',1,'varint.h']]]
 ];

@@ -1,0 +1,160 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/tinycbor/cborparser.c" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/tinycbor/cborparser.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'tinycbor/cbor\&.h'\fP
+.br
+\fC#include 'tinycbor/cborinternal_p\&.h'\fP
+.br
+\fC#include 'tinycbor/compilersupport_p\&.h'\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fB_BSD_SOURCE\fP   1"
+.br
+.ti -1c
+.RI "#define \fB_DEFAULT_SOURCE\fP   1"
+.br
+.ti -1c
+.RI "#define \fB__STDC_LIMIT_MACROS\fP   1"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef uintptr_t(* \fBIterateFunction\fP) (char *, const uint8_t *, size_t)"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "static uint16_t \fBget16\fP (const uint8_t *ptr)"
+.br
+.ti -1c
+.RI "static uint32_t \fBget32\fP (const uint8_t *ptr)"
+.br
+.ti -1c
+.RI "static uint64_t \fBget64\fP (const uint8_t *ptr)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBCBOR_INTERNAL_API_CC\fP \fB_cbor_value_extract_number\fP (const uint8_t **ptr, const uint8_t *end, uint64_t *len)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBextract_length\fP (const \fBCborParser\fP *parser, const uint8_t **ptr, size_t *len)"
+.br
+.ti -1c
+.RI "static bool \fBis_fixed_type\fP (uint8_t type)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBpreparse_value\fP (\fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBpreparse_next_value_nodecrement\fP (\fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBpreparse_next_value\fP (\fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBadvance_internal\fP (\fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "uint64_t \fB_cbor_value_decode_int64_internal\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_parser_init\fP (const uint8_t *buffer, size_t size, uint32_t flags, \fBCborParser\fP *parser, \fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_validate_basic\fP (const \fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_advance_fixed\fP (\fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBadvance_recursive\fP (\fBCborValue\fP *it, int nestingLevel)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_advance\fP (\fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_skip_tag\fP (\fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_enter_container\fP (const \fBCborValue\fP *it, \fBCborValue\fP *recursed)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_leave_container\fP (\fBCborValue\fP *it, const \fBCborValue\fP *recursed)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_get_int64_checked\fP (const \fBCborValue\fP *value, int64_t *result)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_get_int_checked\fP (const \fBCborValue\fP *value, int *result)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_calculate_string_length\fP (const \fBCborValue\fP *value, size_t *len)"
+.br
+.ti -1c
+.RI "static void \fBprepare_string_iteration\fP (\fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBCBOR_INTERNAL_API_CC\fP \fB_cbor_value_prepare_string_iteration\fP (\fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBget_string_chunk\fP (\fBCborValue\fP *it, const void **bufferptr, size_t *len)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBCBOR_INTERNAL_API_CC\fP \fB_cbor_value_get_string_chunk\fP (const \fBCborValue\fP *value, const void **bufferptr, size_t *len, \fBCborValue\fP *next)"
+.br
+.ti -1c
+.RI "static uintptr_t \fBiterate_noop\fP (char *dest, const uint8_t *src, size_t len)"
+.br
+.ti -1c
+.RI "static uintptr_t \fBiterate_memcmp\fP (char *s1, const uint8_t *s2, size_t len)"
+.br
+.ti -1c
+.RI "static uintptr_t \fBiterate_memcpy\fP (char *dest, const uint8_t *src, size_t len)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBiterate_string_chunks\fP (const \fBCborValue\fP *value, char *buffer, size_t *buflen, bool *result, \fBCborValue\fP *next, \fBIterateFunction\fP func)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fB_cbor_value_copy_string\fP (const \fBCborValue\fP *value, void *buffer, size_t *buflen, \fBCborValue\fP *next)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_text_string_equals\fP (const \fBCborValue\fP *value, const char *string, bool *result)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_map_find_value\fP (const \fBCborValue\fP *map, const char *string, \fBCborValue\fP *element)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_get_half_float\fP (const \fBCborValue\fP *value, void *result)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define __STDC_LIMIT_MACROS   1"
+
+.PP
+Definition at line 32 of file cborparser\&.c\&.
+.SS "#define _BSD_SOURCE   1"
+
+.PP
+Definition at line 26 of file cborparser\&.c\&.
+.SS "#define _DEFAULT_SOURCE   1"
+
+.PP
+Definition at line 29 of file cborparser\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

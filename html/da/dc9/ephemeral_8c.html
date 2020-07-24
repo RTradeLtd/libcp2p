@@ -136,9 +136,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a65ed903b5260e35022b42a4fe176a7f1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc9/ephemeral_8c.html#a65ed903b5260e35022b42a4fe176a7f1">libp2p_crypto_ephemeral_keypair_generate</a> (char *curve, struct <a class="el" href="../../d0/d5b/struct_ephemeral_private_key.html">EphemeralPrivateKey</a> **private_key_ptr)</td></tr>
 <tr class="memdesc:a65ed903b5260e35022b42a4fe176a7f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a Ephemeral Public Key as well as a shared key.  <a href="../../da/dc9/ephemeral_8c.html#a65ed903b5260e35022b42a4fe176a7f1">More...</a><br /></td></tr>
 <tr class="separator:a65ed903b5260e35022b42a4fe176a7f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea991b272dae2486b47b8a69571d7d4d"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc9/ephemeral_8c.html#aea991b272dae2486b47b8a69571d7d4d">libp2p_crypto_ephemeral_keypair_to_public_bytes</a> (struct <a class="el" href="../../d7/d04/struct_ephemeral_public_key.html">EphemeralPublicKey</a> *public_key, unsigned char **results, size_t *bytes_written)</td></tr>
+<tr class="memitem:aea991b272dae2486b47b8a69571d7d4d"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc9/ephemeral_8c.html#aea991b272dae2486b47b8a69571d7d4d">libp2p_crypto_ephemeral_keypair_to_public_bytes</a> (struct <a class="el" href="../../d7/d04/struct_ephemeral_public_key.html">EphemeralPublicKey</a> *<a class="el" href="../../d3/dce/structpublic__key.html">public_key</a>, unsigned char **results, size_t *bytes_written)</td></tr>
 <tr class="separator:aea991b272dae2486b47b8a69571d7d4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a275c41cbe0489b9f5199461c80d85d3c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc9/ephemeral_8c.html#a275c41cbe0489b9f5199461c80d85d3c">libp2p_crypto_ephemeral_generate_shared_secret</a> (struct <a class="el" href="../../d0/d5b/struct_ephemeral_private_key.html">EphemeralPrivateKey</a> *private_key, const unsigned char *remote_public_key, size_t remote_public_key_size)</td></tr>
+<tr class="memitem:a275c41cbe0489b9f5199461c80d85d3c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dc9/ephemeral_8c.html#a275c41cbe0489b9f5199461c80d85d3c">libp2p_crypto_ephemeral_generate_shared_secret</a> (struct <a class="el" href="../../d0/d5b/struct_ephemeral_private_key.html">EphemeralPrivateKey</a> *<a class="el" href="../../d4/d54/structprivate__key.html">private_key</a>, const unsigned char *remote_public_key, size_t remote_public_key_size)</td></tr>
 <tr class="memdesc:a275c41cbe0489b9f5199461c80d85d3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a shared secret.  <a href="../../da/dc9/ephemeral_8c.html#a275c41cbe0489b9f5199461c80d85d3c">More...</a><br /></td></tr>
 <tr class="separator:a275c41cbe0489b9f5199461c80d85d3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -178,7 +178,7 @@ Functions</h2></td></tr>
 <p>Generate a shared secret. </p>
 <p>Generate a shared secret </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">private_key</td><td>the context, also where it puts the shared secret </td></tr>
+    <tr><td class="paramname"><a class="el" href="../../d4/d54/structprivate__key.html">private_key</a></td><td>the context, also where it puts the shared secret </td></tr>
     <tr><td class="paramname">remote_public_key</td><td>the key the remote gave us </td></tr>
     <tr><td class="paramname">remote_public_key_size</td><td>the size of the remote public key @reutrns true(1) on success, otherwise false(0) </td></tr>
   </table>
@@ -276,7 +276,7 @@ Here is the caller graph for this function:</div>
 <p>Generate a Ephemeral keypair </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">curve</td><td>the curve to use (P-256, P-384, or P-521) </td></tr>
-    <tr><td class="paramname">private_key</td><td>the struct to store the generated key </td></tr>
+    <tr><td class="paramname"><a class="el" href="../../d4/d54/structprivate__key.html">private_key</a></td><td>the struct to store the generated key </td></tr>
   </table>
   </dd>
 </dl>

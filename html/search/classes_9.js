@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['sockaddr_1137',['sockaddr',['../d5/dad/structsockaddr.html',1,'']]],
-  ['sockaddr_5fstorage_1138',['sockaddr_storage',['../d0/d6d/structsockaddr__storage.html',1,'']]],
-  ['socket_5fclient_1139',['socket_client',['../d9/d8c/structsocket__client.html',1,'']]],
-  ['socket_5fserver_1140',['socket_server',['../d7/d8d/structsocket__server.html',1,'']]],
-  ['socket_5fserver_5fconfig_1141',['socket_server_config',['../d9/d90/structsocket__server__config.html',1,'']]],
-  ['stretchedkey_1142',['StretchedKey',['../dd/d9a/struct_stretched_key.html',1,'']]]
+  ['private_5fkey_1525',['private_key',['../d4/d54/structprivate__key.html',1,'']]],
+  ['protocol_1526',['Protocol',['../d8/dde/struct_protocol.html',1,'']]],
+  ['protocollistitem_1527',['ProtocolListItem',['../d3/d6b/struct_protocol_list_item.html',1,'']]],
+  ['public_5fkey_1528',['public_key',['../d3/dce/structpublic__key.html',1,'']]]
 ];

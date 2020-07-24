@@ -1,12 +1,9 @@
 <map id="protobuf_encode_length_delimited" name="protobuf_encode_length_delimited">
-<area shape="rect" id="node1" title=" " alt="" coords="901,90,1080,131"/>
+<area shape="rect" id="node1" title=" " alt="" coords="901,23,1080,65"/>
 <area shape="rect" id="node2" href="$dc/d13/cid_8h.html#a24e9c44b8658475e936f9d01ff4fcc8f" title=" " alt="" coords="665,5,853,32"/>
-<area shape="rect" id="node3" href="$de/de5/key_8h.html#ac117246560e14f28a4a5fec744896e7c" title=" " alt="" coords="675,57,843,98"/>
-<area shape="rect" id="node4" href="$de/de5/key_8h.html#a6e78380678c6f00fdd220d668bfb4bde" title=" " alt="" coords="675,122,843,163"/>
-<area shape="rect" id="node6" href="$df/dbd/include_2protobuf_2protobuf_8h.html#ac5cf746c08cf04bc4c9ca849dde78bbd" title=" " alt="" coords="672,188,847,215"/>
-<area shape="rect" id="node5" href="$de/de5/key_8h.html#a880e85cb8f876de9eca86247cc0d30f6" title="convert a public key into a peer id" alt="" coords="453,122,609,163"/>
-<area shape="rect" id="node7" href="$d2/d4d/_test2__protobuf_8h.html#a537235ab9adaf32ead5e8b65be2d88f4" title=" " alt="" coords="445,239,617,265"/>
-<area shape="rect" id="node8" href="$d5/d12/_test3__protobuf_8h.html#ada99929dc2c5805e870882e7e77bd35b" title=" " alt="" coords="225,188,397,215"/>
-<area shape="rect" id="node10" href="$d7/d17/test__protobuf_8h.html#a131f6e1afafd38b431ee896b01b06ae5" title=" " alt="" coords="246,239,377,265"/>
-<area shape="rect" id="node9" href="$d7/d17/test__protobuf_8h.html#ac2bf3635850dec5e02745c238a519569" title=" " alt="" coords="5,188,177,215"/>
+<area shape="rect" id="node3" href="$df/dbd/include_2protobuf_2protobuf_8h.html#ac5cf746c08cf04bc4c9ca849dde78bbd" title=" " alt="" coords="672,56,847,83"/>
+<area shape="rect" id="node4" href="$d2/d4d/_test2__protobuf_8h.html#a537235ab9adaf32ead5e8b65be2d88f4" title=" " alt="" coords="445,81,617,108"/>
+<area shape="rect" id="node5" href="$d5/d12/_test3__protobuf_8h.html#ada99929dc2c5805e870882e7e77bd35b" title=" " alt="" coords="225,31,397,57"/>
+<area shape="rect" id="node7" href="$d7/d17/test__protobuf_8h.html#a131f6e1afafd38b431ee896b01b06ae5" title=" " alt="" coords="246,81,377,108"/>
+<area shape="rect" id="node6" href="$d7/d17/test__protobuf_8h.html#ac2bf3635850dec5e02745c238a519569" title=" " alt="" coords="5,31,177,57"/>
 </map>

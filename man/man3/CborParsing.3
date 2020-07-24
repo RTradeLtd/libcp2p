@@ -1,0 +1,1202 @@
+.TH "CborParsing" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+CborParsing \- Group of functions used to parse CBOR streams\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBKnownTagData\fP"
+.br
+.ti -1c
+.RI "struct \fBCborValue\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef uintptr_t(* \fBIterateFunction\fP) (char *, const uint8_t *, size_t)"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBCborValidationFlags\fP { \fBCborValidateShortestIntegrals\fP = 0x0001, \fBCborValidateShortestFloatingPoint\fP = 0x0002, \fBCborValidateShortestNumbers\fP, \fBCborValidateNoIndeterminateLength\fP = 0x0100, \fBCborValidateMapIsSorted\fP = 0x0200 | CborValidateNoIndeterminateLength, \fBCborValidateCanonicalFormat\fP = 0x0fff, \fBCborValidateMapKeysAreUnique\fP = 0x1000 | CborValidateMapIsSorted, \fBCborValidateTagUse\fP = 0x2000, \fBCborValidateUtf8\fP = 0x4000, \fBCborValidateStrictMode\fP = 0xfff00, \fBCborValidateMapKeysAreString\fP = 0x100000, \fBCborValidateNoUndefined\fP = 0x200000, \fBCborValidateNoTags\fP = 0x400000, \fBCborValidateFiniteFloatingPoint\fP = 0x800000, \fBCborValidateNoUnknownSimpleTypesSA\fP = 0x4000000, \fBCborValidateNoUnknownSimpleTypes\fP, \fBCborValidateNoUnknownTagsSA\fP = 0x10000000, \fBCborValidateNoUnknownTagsSR\fP = 0x20000000 | CborValidateNoUnknownTagsSA, \fBCborValidateNoUnknownTags\fP = 0x40000000 | CborValidateNoUnknownTagsSR, \fBCborValidateCompleteData\fP = (int)0x80000000, \fBCborValidateStrictest\fP = (int)~0U, \fBCborValidateBasic\fP = 0 }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "static uint16_t \fBget16\fP (const uint8_t *ptr)"
+.br
+.ti -1c
+.RI "static uint32_t \fBget32\fP (const uint8_t *ptr)"
+.br
+.ti -1c
+.RI "static uint64_t \fBget64\fP (const uint8_t *ptr)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBCBOR_INTERNAL_API_CC\fP \fB_cbor_value_extract_number\fP (const uint8_t **ptr, const uint8_t *end, uint64_t *len)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBextract_length\fP (const \fBCborParser\fP *parser, const uint8_t **ptr, size_t *len)"
+.br
+.ti -1c
+.RI "static bool \fBis_fixed_type\fP (uint8_t type)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBpreparse_value\fP (\fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBpreparse_next_value_nodecrement\fP (\fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBpreparse_next_value\fP (\fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBadvance_internal\fP (\fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "uint64_t \fB_cbor_value_decode_int64_internal\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_parser_init\fP (const uint8_t *buffer, size_t size, uint32_t flags, \fBCborParser\fP *parser, \fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_validate_basic\fP (const \fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_advance_fixed\fP (\fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBadvance_recursive\fP (\fBCborValue\fP *it, int nestingLevel)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_advance\fP (\fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_skip_tag\fP (\fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_enter_container\fP (const \fBCborValue\fP *it, \fBCborValue\fP *recursed)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_leave_container\fP (\fBCborValue\fP *it, const \fBCborValue\fP *recursed)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_get_int64_checked\fP (const \fBCborValue\fP *value, int64_t *result)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_get_int_checked\fP (const \fBCborValue\fP *value, int *result)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_calculate_string_length\fP (const \fBCborValue\fP *value, size_t *len)"
+.br
+.ti -1c
+.RI "static void \fBprepare_string_iteration\fP (\fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBCBOR_INTERNAL_API_CC\fP \fB_cbor_value_prepare_string_iteration\fP (\fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBget_string_chunk\fP (\fBCborValue\fP *it, const void **bufferptr, size_t *len)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBCBOR_INTERNAL_API_CC\fP \fB_cbor_value_get_string_chunk\fP (const \fBCborValue\fP *value, const void **bufferptr, size_t *len, \fBCborValue\fP *next)"
+.br
+.ti -1c
+.RI "static uintptr_t \fBiterate_noop\fP (char *dest, const uint8_t *src, size_t len)"
+.br
+.ti -1c
+.RI "static uintptr_t \fBiterate_memcmp\fP (char *s1, const uint8_t *s2, size_t len)"
+.br
+.ti -1c
+.RI "static uintptr_t \fBiterate_memcpy\fP (char *dest, const uint8_t *src, size_t len)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBiterate_string_chunks\fP (const \fBCborValue\fP *value, char *buffer, size_t *buflen, bool *result, \fBCborValue\fP *next, \fBIterateFunction\fP func)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fB_cbor_value_copy_string\fP (const \fBCborValue\fP *value, void *buffer, size_t *buflen, \fBCborValue\fP *next)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_text_string_equals\fP (const \fBCborValue\fP *value, const char *string, bool *result)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_map_find_value\fP (const \fBCborValue\fP *map, const char *string, \fBCborValue\fP *element)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_get_half_float\fP (const \fBCborValue\fP *value, void *result)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBvalidate_value\fP (\fBCborValue\fP *it, uint32_t flags, int recursionLeft)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBvalidate_utf8_string\fP (const void *ptr, size_t n)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBvalidate_simple_type\fP (uint8_t simple_type, uint32_t flags)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBvalidate_number\fP (const \fBCborValue\fP *it, \fBCborType\fP type, uint32_t flags)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBvalidate_tag\fP (\fBCborValue\fP *it, \fBCborTag\fP tag, uint32_t flags, int recursionLeft)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBvalidate_floating_point\fP (\fBCborValue\fP *it, \fBCborType\fP type, uint32_t flags)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBvalidate_container\fP (\fBCborValue\fP *it, int containerType, uint32_t flags, int recursionLeft)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_validate\fP (const \fBCborValue\fP *it, uint32_t flags)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_at_end\fP (const \fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static const uint8_t * \fBcbor_value_get_next_byte\fP (const \fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_valid\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_tag\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_tag\fP (const \fBCborValue\fP *value, \fBCborTag\fP *result)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_container\fP (const \fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static \fBCborType\fP \fBcbor_value_get_type\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_null\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_undefined\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_boolean\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_boolean\fP (const \fBCborValue\fP *value, bool *result)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_simple_type\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_simple_type\fP (const \fBCborValue\fP *value, uint8_t *result)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_integer\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_unsigned_integer\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_negative_integer\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_int\fP (const \fBCborValue\fP *value, int *result)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_int64\fP (const \fBCborValue\fP *value, int64_t *result)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_uint64\fP (const \fBCborValue\fP *value, uint64_t *result)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_raw_integer\fP (const \fBCborValue\fP *value, uint64_t *result)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_length_known\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_text_string\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_byte_string\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_string_length\fP (const \fBCborValue\fP *value, size_t *length)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_copy_text_string\fP (const \fBCborValue\fP *value, char *buffer, size_t *buflen, \fBCborValue\fP *next)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_copy_byte_string\fP (const \fBCborValue\fP *value, uint8_t *buffer, size_t *buflen, \fBCborValue\fP *next)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_array\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_array_length\fP (const \fBCborValue\fP *value, size_t *length)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_map\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_map_length\fP (const \fBCborValue\fP *value, size_t *length)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_float\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_value_get_float\fP (const \fBCborValue\fP *value, float *result)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_double\fP (const \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "static bool \fBcbor_value_is_half_float\fP (const \fBCborValue\fP *value)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "static const struct \fBKnownTagData\fP \fBknownTagData\fP []"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Group of functions used to parse CBOR streams\&. 
+
+TinyCBOR provides functions for pull-based stream parsing of a CBOR-encoded payload\&. The main data type for the parsing is a \fBCborValue\fP, which behaves like an iterator and can be used to extract the encoded data\&. It is first initialized with a call to \fBcbor_parser_init()\fP and is usually used to extract exactly one item, most often an array or map\&.
+.PP
+Nested \fBCborValue\fP objects can be parsed using \fBcbor_value_enter_container()\fP\&. Each call to \fBcbor_value_enter_container()\fP must be matched by a call to \fBcbor_value_leave_container()\fP, with the exact same parameters\&.
+.PP
+The example below initializes a \fBCborParser\fP object, begins the parsing with a \fBCborValue\fP and decodes a single integer:
+.PP
+.PP
+.nf
+int extract_int(const uint8_t *buffer, size_t len)
+{
+    CborParser parser;
+    CborValue value;
+    int result;
+    cbor_parser_init(buffer, len, 0, &parser, &value);
+    cbor_value_get_int(&value, &result);
+    return result;
+}
+.fi
+.PP
+.PP
+The code above does no error checking, which means it assumes the data comes from a source trusted to send one properly-encoded integer\&. The following example does the exact same operation, but includes error checking and returns 0 on parsing failure:
+.PP
+.PP
+.nf
+int extract_int(const uint8_t *buffer, size_t len)
+{
+    CborParser parser;
+    CborValue value;
+    int result;
+    if (cbor_parser_init(buffer, len, 0, &parser, &value) != CborNoError)
+        return 0;
+    if (!cbor_value_is_integer(&value) ||
+            cbor_value_get_int(&value, &result) != CborNoError)
+        return 0;
+    return result;
+}
+.fi
+.PP
+.PP
+Note, in the example above, that one can't distinguish a parsing failure from an encoded value of zero\&. Reporting a parsing error is left as an exercise to the reader\&.
+.PP
+The code above does not execute a range-check either: it is possible that the value decoded from the CBOR stream encodes a number larger than what can be represented in a variable of type \fC\fP{int}\&. If detecting that case is important, the code should call \fBcbor_value_get_int_checked()\fP instead\&.
+.PP
+.SS "Memory and parsing constraints"
+.PP
+TinyCBOR is designed to run with little memory and with minimal overhead\&. Except where otherwise noted, the parser functions always run on constant time (O(1)), do not recurse and never allocate memory (thus, stack usage is bounded and is O(1))\&.
+.PP
+.SS "Error handling and preconditions"
+.PP
+All functions operating on a \fBCborValue\fP return a CborError condition, with CborNoError standing for the normal situation in which no parsing error occurred\&. All functions may return parsing errors in case the stream cannot be decoded properly, be it due to corrupted data or due to reaching the end of the input buffer\&.
+.PP
+Error conditions must not be ignored\&. All decoder functions have undefined behavior if called after an error has been reported, and may crash\&.
+.PP
+Some functions are also documented to have preconditions, like \fBcbor_value_get_int()\fP requiring that the input be an integral value\&. Violation of preconditions also results in undefined behavior and the program may crash\&. 
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef uintptr_t(* IterateFunction) (char *, const uint8_t *, size_t)"
+
+.PP
+Definition at line 1077 of file cborparser\&.c\&.
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBCborValidationFlags\fP"
+The CborValidationFlags enum contains flags that control the validation of a CBOR stream\&.
+.PP
+\\value CborValidateBasic Validates only the syntactic correctedness of the stream\&. \\value CborValidateCanonical Validates that the stream is in canonical format, according to RFC 7049 section 3\&.9\&. \\value CborValidateStrictMode Performs strict validation, according to RFC 7049 section 3\&.10\&. \\value CborValidateStrictest Attempt to perform the strictest validation we know of\&.
+.PP
+\\value CborValidateShortestIntegrals (Canonical) Validate that integral numbers and lengths are enconded in their shortest form possible\&. \\value CborValidateShortestFloatingPoint (Canonical) Validate that floating-point numbers are encoded in their shortest form possible\&. \\value CborValidateShortestNumbers (Canonical) Validate both integral and floating-point numbers are in their shortest form possible\&. \\value CborValidateNoIndeterminateLength (Canonical) Validate that no string, array or map uses indeterminate length encoding\&. \\value CborValidateMapIsSorted (Canonical & Strict mode) Validate that map keys appear in sorted order\&. \\value CborValidateMapKeysAreUnique (Strict mode) Validate that map keys are unique\&. \\value CborValidateTagUse (Strict mode) Validate that known tags are used with the correct types\&. This does not validate that the content of those types is syntactically correct\&. For example, this option validates that tag 1 (DateTimeString) is used with a Text String, but it does not validate that the string is a valid date/time representation\&. \\value CborValidateUtf8 (Strict mode) Validate that text strings are appropriately encoded in UTF-8\&. \\value CborValidateMapKeysAreString Validate that all map keys are text strings\&. \\value CborValidateNoUndefined Validate that no elements of type 'undefined' are present\&. \\value CborValidateNoTags Validate that no tags are used\&. \\value CborValidateFiniteFloatingPoint Validate that all floating point numbers are finite (no NaN or infinities are allowed)\&. \\value CborValidateCompleteData Validate that the stream is complete and there is no more data in the buffer\&. \\value CborValidateNoUnknownSimpleTypesSA Validate that all Standards Action simple types are registered with IANA\&. \\value CborValidateNoUnknownSimpleTypes Validate that all simple types used are registered with IANA\&. \\value CborValidateNoUnknownTagsSA Validate that all Standard Actions tags are registered with IANA\&. \\value CborValidateNoUnknownTagsSR Validate that all Standard Actions and Specification Required tags are registered with IANA (see below for limitations)\&. \\value CborValidateNoUnkonwnTags Validate that all tags are registered with IANA (see below for limitations)\&.
+.PP
+\fBSimple type registry\fP
+.RS 4
+The CBOR specification requires that registration for use of the first 19 simple types must be done by way of Standards Action\&. The rest of the simple types only require a specification\&. The official list can be obtained from https://www.iana.org/assignments/cbor-simple-values/cbor-simple-values.xhtml\&.
+.RE
+.PP
+\fB\fP
+.RS 4
+There are no registered simple types recognized by this release of TinyCBOR (beyond those defined by RFC 7049)\&.
+.RE
+.PP
+\fBTag registry\fP
+.RS 4
+The CBOR specification requires that registration for use of the first 23 tags must be done by way of Standards Action\&. The next up to tag 255 only require a specification\&. Finally, all other tags can be registered on a first-come-first-serve basis\&. The official list can be ontained from https://www.iana.org/assignments/cbor-tags/cbor-tags.xhtml\&.
+.RE
+.PP
+\fB\fP
+.RS 4
+Given the variability of this list, TinyCBOR cannot recognize all tags registered with IANA\&. Instead, the implementation only recognizes tags that are backed by an RFC\&.
+.RE
+.PP
+\fB\fP
+.RS 4
+These are the tags known to the current TinyCBOR release: Tag Data Item Semantics  0 UTF-8 text string Standard date/time string  1 integer Epoch-based date/time  2 byte string Positive bignum  3 byte string Negative bignum  4 array Decimal fraction  5 array Bigfloat  16 array COSE Single Recipient Encrypted Data Object (RFC 8152)  17 array COSE Mac w/o Recipients Object (RFC 8152)  18 array COSE Single Signer Data Object (RFC 8162)  21 byte string, array, map Expected conversion to base64url encoding  22 byte string, array, map Expected conversion to base64 encoding  23 byte string, array, map Expected conversion to base16 encoding  24 byte string Encoded CBOR data item  32 UTF-8 text string URI  33 UTF-8 text string base64url  34 UTF-8 text string base64  35 UTF-8 text string Regular expression  36 UTF-8 text string MIME message  96 array COSE Encrypted Data Object (RFC 8152)  97 array COSE MACed Data Object (RFC 8152)  98 array COSE Signed Data Object (RFC 8152)  55799 any Self-describe CBOR  
+.RE
+.PP
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fICborValidateShortestIntegrals \fP\fP
+.TP
+\fB\fICborValidateShortestFloatingPoint \fP\fP
+.TP
+\fB\fICborValidateShortestNumbers \fP\fP
+.TP
+\fB\fICborValidateNoIndeterminateLength \fP\fP
+.TP
+\fB\fICborValidateMapIsSorted \fP\fP
+.TP
+\fB\fICborValidateCanonicalFormat \fP\fP
+.TP
+\fB\fICborValidateMapKeysAreUnique \fP\fP
+.TP
+\fB\fICborValidateTagUse \fP\fP
+.TP
+\fB\fICborValidateUtf8 \fP\fP
+.TP
+\fB\fICborValidateStrictMode \fP\fP
+.TP
+\fB\fICborValidateMapKeysAreString \fP\fP
+.TP
+\fB\fICborValidateNoUndefined \fP\fP
+.TP
+\fB\fICborValidateNoTags \fP\fP
+.TP
+\fB\fICborValidateFiniteFloatingPoint \fP\fP
+.TP
+\fB\fICborValidateNoUnknownSimpleTypesSA \fP\fP
+.TP
+\fB\fICborValidateNoUnknownSimpleTypes \fP\fP
+.TP
+\fB\fICborValidateNoUnknownTagsSA \fP\fP
+.TP
+\fB\fICborValidateNoUnknownTagsSR \fP\fP
+.TP
+\fB\fICborValidateNoUnknownTags \fP\fP
+.TP
+\fB\fICborValidateCompleteData \fP\fP
+.TP
+\fB\fICborValidateStrictest \fP\fP
+.TP
+\fB\fICborValidateBasic \fP\fP
+.PP
+Definition at line 580 of file cbor\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "\fBCborError\fP _cbor_value_copy_string (const \fBCborValue\fP * value, void * buffer, size_t * buflen, \fBCborValue\fP * next)"
+
+.PP
+Definition at line 1212 of file cborparser\&.c\&.
+.SS "uint64_t _cbor_value_decode_int64_internal (const \fBCborValue\fP * value)"
+
+.PP
+Definition at line 365 of file cborparser\&.c\&.
+.SS "\fBCborError\fP \fBCBOR_INTERNAL_API_CC\fP _cbor_value_extract_number (const uint8_t ** ptr, const uint8_t * end, uint64_t * len)"
+
+.PP
+Definition at line 162 of file cborparser\&.c\&.
+.SS "\fBCborError\fP \fBCBOR_INTERNAL_API_CC\fP _cbor_value_get_string_chunk (const \fBCborValue\fP * value, const void ** bufferptr, size_t * len, \fBCborValue\fP * next)"
+
+.PP
+Definition at line 1062 of file cborparser\&.c\&.
+.SS "\fBCborError\fP \fBCBOR_INTERNAL_API_CC\fP _cbor_value_prepare_string_iteration (\fBCborValue\fP * it)"
+
+.PP
+Definition at line 1003 of file cborparser\&.c\&.
+.SS "static \fBCborError\fP advance_internal (\fBCborValue\fP * it)\fC [static]\fP"
+
+.PP
+Definition at line 341 of file cborparser\&.c\&.
+.SS "static \fBCborError\fP advance_recursive (\fBCborValue\fP * it, int nestingLevel)\fC [static]\fP"
+
+.PP
+Definition at line 495 of file cborparser\&.c\&.
+.SS "\fBCborError\fP cbor_parser_init (const uint8_t * buffer, size_t size, uint32_t flags, \fBCborParser\fP * parser, \fBCborValue\fP * it)"
+Initializes the CBOR parser for parsing \fIsize\fP bytes beginning at \fIbuffer\fP\&. Parsing will use flags set in \fIflags\fP\&. The iterator to the first element is returned in \fIit\fP\&.
+.PP
+The \fIparser\fP structure needs to remain valid throughout the decoding process\&. It is not thread-safe to share one \fBCborParser\fP among multiple threads iterating at the same time, but the object can be copied so multiple threads can iterate\&. 
+.PP
+Definition at line 390 of file cborparser\&.c\&.
+.SS "\fBCborError\fP cbor_value_advance (\fBCborValue\fP * it)"
+Advances the CBOR value \fIit\fP by one element, skipping over containers\&. Unlike \fBcbor_value_advance_fixed()\fP, this function can be called on a CBOR value of any type\&. However, if the type is a container (map or array) or a string with a chunked payload, this function will not run in constant time and will recurse into itself (it will run on O(n) time for the number of elements or chunks and will use O(n) memory for the number of nested containers)\&.
+.PP
+The number of recursions can be limited at compile time to avoid stack exhaustion in constrained systems\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_at_end()\fP, \fBcbor_value_advance_fixed()\fP, \fBcbor_value_enter_container()\fP, \fBcbor_value_leave_container()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 537 of file cborparser\&.c\&.
+.SS "\fBCborError\fP cbor_value_advance_fixed (\fBCborValue\fP * it)"
+Advances the CBOR value \fIit\fP by one fixed-size position\&. Fixed-size types are: integers, tags, simple types (including boolean, null and undefined values) and floating point types\&.
+.PP
+If the type is not of fixed size, this function has undefined behavior\&. Code must be sure that the current type is one of the fixed-size types before calling this function\&. This function is provided because it can guarantee that it runs in constant time (O(1))\&.
+.PP
+If the caller is not able to determine whether the type is fixed or not, code can use the \fBcbor_value_advance()\fP function instead\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_at_end()\fP, \fBcbor_value_advance()\fP, \fBcbor_value_enter_container()\fP, \fBcbor_value_leave_container()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 487 of file cborparser\&.c\&.
+.SS "bool cbor_value_at_end (const \fBCborValue\fP * it)\fC [static]\fP"
+Returns true if \fIit\fP has reached the end of the iteration, usually when advancing after the last item in an array or map\&.
+.PP
+In the case of the outermost \fBCborValue\fP object, this function returns true after decoding a single element\&. A pointer to the first byte of the remaining data (if any) can be obtained with \fBcbor_value_get_next_byte()\fP\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_advance()\fP, \fBcbor_value_is_valid()\fP, \fBcbor_value_get_next_byte()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 323 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_value_calculate_string_length (const \fBCborValue\fP * value, size_t * len)"
+Calculates the length of the byte or text string that \fIvalue\fP points to and stores it in \fIlen\fP\&. If the iterator \fIvalue\fP does not point to a text string or a byte string, the behaviour is undefined, so checking with \fBcbor_value_get_type\fP, with \fBcbor_value_is_text_string\fP or \fBcbor_value_is_byte_string\fP is recommended\&.
+.PP
+This function is different from \fBcbor_value_get_string_length()\fP in that it calculates the length even for strings sent in chunks\&. For that reason, this function may not run in constant time (it will run in O(n) time on the number of chunks)\&. It does use constant memory (O(1))\&.
+.PP
+\fBNote\fP
+.RS 4
+On 32-bit platforms, this function will return error condition of \fBCborErrorDataTooLarge\fP if the stream indicates a length that is too big to fit in 32-bit\&.
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_get_string_length()\fP, \fBcbor_value_copy_text_string()\fP, \fBcbor_value_copy_byte_string()\fP, \fBcbor_value_is_length_known()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 989 of file cborparser\&.c\&.
+.SS "\fBCborError\fP cbor_value_copy_byte_string (const \fBCborValue\fP * value, uint8_t * buffer, size_t * buflen, \fBCborValue\fP * next)\fC [static]\fP"
+Copies the string pointed by \fIvalue\fP into the buffer provided at \fIbuffer\fP of \fIbuflen\fP bytes\&. If \fIbuffer\fP is a NULL pointer, this function will not copy anything and will only update the \fInext\fP value\&.
+.PP
+If the iterator \fIvalue\fP does not point to a byte string, the behaviour is undefined, so checking with \fBcbor_value_get_type\fP or \fBcbor_value_is_byte_string\fP is recommended\&.
+.PP
+If the provided buffer length was too small, this function returns an error condition of \fBCborErrorOutOfMemory\fP\&. If you need to calculate the length of the string in order to preallocate a buffer, use \fBcbor_value_calculate_string_length()\fP\&.
+.PP
+On success, this function sets the number of bytes copied to \fC\fP{*buflen}\&. If the buffer is large enough, this function will insert a null byte after the last copied byte, to facilitate manipulation of null-terminated strings\&. That byte is not included in the returned value of \fC\fP{*buflen}\&.
+.PP
+The \fInext\fP pointer, if not null, will be updated to point to the next item after this string\&. If \fIvalue\fP points to the last item, then \fInext\fP will be invalid\&.
+.PP
+This function may not run in constant time (it will run in O(n) time on the number of chunks)\&. It requires constant memory (O(1))\&.
+.PP
+\fBSee also\fP
+.RS 4
+cbor_value_get_byte_string_chunk(), \fBcbor_value_dup_text_string()\fP, \fBcbor_value_copy_text_string()\fP, \fBcbor_value_get_string_length()\fP, \fBcbor_value_calculate_string_length()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 484 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_value_copy_text_string (const \fBCborValue\fP * value, char * buffer, size_t * buflen, \fBCborValue\fP * next)\fC [static]\fP"
+Copies the string pointed to by \fIvalue\fP into the buffer provided at \fIbuffer\fP of \fIbuflen\fP bytes\&. If \fIbuffer\fP is a NULL pointer, this function will not copy anything and will only update the \fInext\fP value\&.
+.PP
+If the iterator \fIvalue\fP does not point to a text string, the behaviour is undefined, so checking with \fBcbor_value_get_type\fP or \fBcbor_value_is_text_string\fP is recommended\&.
+.PP
+If the provided buffer length was too small, this function returns an error condition of \fBCborErrorOutOfMemory\fP\&. If you need to calculate the length of the string in order to preallocate a buffer, use \fBcbor_value_calculate_string_length()\fP\&.
+.PP
+On success, this function sets the number of bytes copied to \fC\fP{*buflen}\&. If the buffer is large enough, this function will insert a null byte after the last copied byte, to facilitate manipulation of text strings\&. That byte is not included in the returned value of \fC\fP{*buflen}\&. If there was no space for the terminating null, no error is returned, so callers must check the value of *buflen after the call, before relying on the '\\0'; if it has not been changed by the call, there is no '\\0'-termination on the buffer's contents\&.
+.PP
+The \fInext\fP pointer, if not null, will be updated to point to the next item after this string\&. If \fIvalue\fP points to the last item, then \fInext\fP will be invalid\&.
+.PP
+This function may not run in constant time (it will run in O(n) time on the number of chunks)\&. It requires constant memory (O(1))\&.
+.PP
+\fBNote\fP
+.RS 4
+This function does not perform UTF-8 validation on the incoming text string\&.
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+cbor_value_get_text_string_chunk() \fBcbor_value_dup_text_string()\fP, \fBcbor_value_copy_byte_string()\fP, \fBcbor_value_get_string_length()\fP, \fBcbor_value_calculate_string_length()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 478 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_value_enter_container (const \fBCborValue\fP * it, \fBCborValue\fP * recursed)"
+Creates a \fBCborValue\fP iterator pointing to the first element of the container represented by \fIit\fP and saves it in \fIrecursed\fP\&. The \fIit\fP container object needs to be kept and passed again to \fBcbor_value_leave_container()\fP in order to continue iterating past this container\&.
+.PP
+The \fIit\fP \fBCborValue\fP iterator must point to a container\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_is_container()\fP, \fBcbor_value_leave_container()\fP, \fBcbor_value_advance()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 598 of file cborparser\&.c\&.
+.SS "\fBCborError\fP cbor_value_get_array_length (const \fBCborValue\fP * value, size_t * length)\fC [static]\fP"
+Extracts the length of the CBOR array that \fIvalue\fP points to and stores it in \fIresult\fP\&. If the iterator \fIvalue\fP does not point to a CBOR array, the behaviour is undefined, so checking with \fBcbor_value_get_type\fP or \fBcbor_value_is_array\fP is recommended\&.
+.PP
+If the length of this array is not encoded in the CBOR data stream, this function will return the recoverable error CborErrorUnknownLength\&. You may also check whether that is the case by using \fBcbor_value_is_length_known()\fP\&.
+.PP
+\fBNote\fP
+.RS 4
+On 32-bit platforms, this function will return error condition of \fBCborErrorDataTooLarge\fP if the stream indicates a length that is too big to fit in 32-bit\&.
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_is_valid()\fP, \fBcbor_value_is_length_known()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 517 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_value_get_boolean (const \fBCborValue\fP * value, bool * result)\fC [static]\fP"
+Retrieves the boolean value that \fIvalue\fP points to and stores it in \fIresult\fP\&. If the iterator \fIvalue\fP does not point to a boolean value, the behavior is undefined, so checking with \fBcbor_value_get_type\fP or with \fBcbor_value_is_boolean\fP is recommended\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_get_type()\fP, \fBcbor_value_is_valid()\fP, \fBcbor_value_is_boolean()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 365 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_value_get_float (const \fBCborValue\fP * value, float * result)\fC [static]\fP"
+Retrieves the CBOR single-precision floating point (32-bit) value that \fIvalue\fP points to and stores it in \fIresult\fP\&. If the iterator \fIvalue\fP does not point to a single-precision floating point value, the behavior is undefined, so checking with \fBcbor_value_get_type\fP or with \fBcbor_value_is_float\fP is recommended\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_get_type()\fP, \fBcbor_value_is_valid()\fP, \fBcbor_value_is_float()\fP, \fBcbor_value_get_double()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 555 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_value_get_half_float (const \fBCborValue\fP * value, void * result)"
+Retrieves the CBOR half-precision floating point (16-bit) value that \fIvalue\fP points to and stores it in \fIresult\fP\&. If the iterator \fIvalue\fP does not point to a half-precision floating point value, the behavior is undefined, so checking with \fBcbor_value_get_type\fP or with \fBcbor_value_is_half_float\fP is recommended\&.
+.PP
+Note: since the C language does not have a standard type for half-precision floating point, this function takes a \fC\fP{void *} as a parameter for the storage area, which must be at least 16 bits wide\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_get_type()\fP, \fBcbor_value_is_valid()\fP, \fBcbor_value_is_half_float()\fP, \fBcbor_value_get_float()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 1443 of file cborparser\&.c\&.
+.SS "\fBCborError\fP cbor_value_get_int (const \fBCborValue\fP * value, int * result)\fC [static]\fP"
+Retrieves the CBOR integer value that \fIvalue\fP points to and stores it in \fIresult\fP\&. If the iterator \fIvalue\fP does not point to an integer value, the behavior is undefined, so checking with \fBcbor_value_get_type\fP or with \fBcbor_value_is_integer\fP is recommended\&.
+.PP
+Note that this function does not do range-checking: integral values that do not fit in a variable of type \fC\fP{int} are silently truncated to fit\&. Use \fBcbor_value_get_int_checked()\fP if that is not acceptable\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_get_type()\fP, \fBcbor_value_is_valid()\fP, \fBcbor_value_is_integer()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 419 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_value_get_int64 (const \fBCborValue\fP * value, int64_t * result)\fC [static]\fP"
+Retrieves the CBOR integer value that \fIvalue\fP points to and stores it in \fIresult\fP\&. If the iterator \fIvalue\fP does not point to an integer value, the behavior is undefined, so checking with \fBcbor_value_get_type\fP or with \fBcbor_value_is_integer\fP is recommended\&.
+.PP
+Note that this function does not do range-checking: integral values that do not fit in a variable of type \fC\fP{int64_t} are silently truncated to fit\&. Use \fBcbor_value_get_int64_checked()\fP that is not acceptable\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_get_type()\fP, \fBcbor_value_is_valid()\fP, \fBcbor_value_is_integer()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 410 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_value_get_int64_checked (const \fBCborValue\fP * value, int64_t * result)"
+Retrieves the CBOR integer value that \fIvalue\fP points to and stores it in \fIresult\fP\&. If the iterator \fIvalue\fP does not point to an integer value, the behavior is undefined, so checking with \fBcbor_value_get_type\fP or with \fBcbor_value_is_integer\fP is recommended\&.
+.PP
+Unlike \fBcbor_value_get_int64()\fP, this function performs a check to see if the stored integer fits in \fIresult\fP without data loss\&. If the number is outside the valid range for the data type, this function returns the recoverable error CborErrorDataTooLarge\&. In that case, use either \fBcbor_value_get_uint64()\fP (if the number is positive) or \fBcbor_value_get_raw_integer()\fP\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_get_type()\fP, \fBcbor_value_is_valid()\fP, \fBcbor_value_is_integer()\fP, \fBcbor_value_get_int64()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 834 of file cborparser\&.c\&.
+.SS "\fBCborError\fP cbor_value_get_int_checked (const \fBCborValue\fP * value, int * result)"
+Retrieves the CBOR integer value that \fIvalue\fP points to and stores it in \fIresult\fP\&. If the iterator \fIvalue\fP does not point to an integer value, the behavior is undefined, so checking with \fBcbor_value_get_type\fP or with \fBcbor_value_is_integer\fP is recommended\&.
+.PP
+Unlike \fBcbor_value_get_int()\fP, this function performs a check to see if the stored integer fits in \fIresult\fP without data loss\&. If the number is outside the valid range for the data type, this function returns the recoverable error CborErrorDataTooLarge\&. In that case, use one of the other integer functions to obtain the value\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_get_type()\fP, \fBcbor_value_is_valid()\fP, \fBcbor_value_is_integer()\fP, \fBcbor_value_get_int64()\fP, \fBcbor_value_get_uint64()\fP, \fBcbor_value_get_int64_checked()\fP, \fBcbor_value_get_raw_integer()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 875 of file cborparser\&.c\&.
+.SS "\fBCborError\fP cbor_value_get_map_length (const \fBCborValue\fP * value, size_t * length)\fC [static]\fP"
+Extracts the length of the CBOR map that \fIvalue\fP points to and stores it in \fIresult\fP\&. If the iterator \fIvalue\fP does not point to a CBOR map, the behaviour is undefined, so checking with \fBcbor_value_get_type\fP or \fBcbor_value_is_map\fP is recommended\&.
+.PP
+If the length of this map is not encoded in the CBOR data stream, this function will return the recoverable error CborErrorUnknownLength\&. You may also check whether that is the case by using \fBcbor_value_is_length_known()\fP\&.
+.PP
+\fBNote\fP
+.RS 4
+On 32-bit platforms, this function will return error condition of \fBCborErrorDataTooLarge\fP if the stream indicates a length that is too big to fit in 32-bit\&.
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_is_valid()\fP, \fBcbor_value_is_length_known()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 530 of file cbor\&.h\&.
+.SS "const uint8_t * cbor_value_get_next_byte (const \fBCborValue\fP * it)\fC [static]\fP"
+Returns a pointer to the next byte that would be decoded if this \fBCborValue\fP object were advanced\&.
+.PP
+This function is useful if \fBcbor_value_at_end()\fP returns true for the outermost \fBCborValue\fP: the pointer returned is the first byte of the data remaining in the buffer, if any\&. Code can decide whether to begin decoding a new CBOR data stream from this point, or parse some other data appended to the same buffer\&.
+.PP
+This function may be used even after a parsing error\&. If that occurred, then this function returns a pointer to where the parsing error occurred\&. Note that the error recovery is not precise and the pointer may not indicate the exact byte containing bad data\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_at_end()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 326 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_value_get_raw_integer (const \fBCborValue\fP * value, uint64_t * result)\fC [static]\fP"
+Retrieves the CBOR integer value that \fIvalue\fP points to and stores it in \fIresult\fP\&. If the iterator \fIvalue\fP does not point to an integer value, the behavior is undefined, so checking with \fBcbor_value_get_type\fP or with \fBcbor_value_is_integer\fP is recommended\&.
+.PP
+This function is provided because CBOR negative integers can assume values that cannot be represented with normal 64-bit integer variables\&.
+.PP
+If the integer is unsigned (that is, if \fBcbor_value_is_unsigned_integer()\fP returns true), then \fIresult\fP will contain the actual value\&. If the integer is negative, then \fIresult\fP will contain the absolute value of that integer, minus one\&. That is, \fC{actual\fP = -result - 1}\&. On architectures using two's complement for representation of negative integers, it is equivalent to say that \fIresult\fP will contain the bitwise negation of the actual value\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_get_type()\fP, \fBcbor_value_is_valid()\fP, \fBcbor_value_is_integer()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 396 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_value_get_simple_type (const \fBCborValue\fP * value, uint8_t * result)\fC [static]\fP"
+Retrieves the CBOR Simple Type value that \fIvalue\fP points to and stores it in \fIresult\fP\&. If the iterator \fIvalue\fP does not point to a simple_type value, the behavior is undefined, so checking with \fBcbor_value_get_type\fP or with \fBcbor_value_is_simple_type\fP is recommended\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_get_type()\fP, \fBcbor_value_is_valid()\fP, \fBcbor_value_is_simple_type()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 376 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_value_get_string_length (const \fBCborValue\fP * value, size_t * length)\fC [static]\fP"
+Extracts the length of the byte or text string that \fIvalue\fP points to and stores it in \fIresult\fP\&. If the iterator \fIvalue\fP does not point to a text string or a byte string, the behaviour is undefined, so checking with \fBcbor_value_get_type\fP, with \fBcbor_value_is_text_string\fP or \fBcbor_value_is_byte_string\fP is recommended\&.
+.PP
+If the length of this string is not encoded in the CBOR data stream, this function will return the recoverable error CborErrorUnknownLength\&. You may also check whether that is the case by using \fBcbor_value_is_length_known()\fP\&.
+.PP
+If the length of the string is required but the length was not encoded, use \fBcbor_value_calculate_string_length()\fP, but note that that function does not run in constant time\&.
+.PP
+\fBNote\fP
+.RS 4
+On 32-bit platforms, this function will return error condition of \fBCborErrorDataTooLarge\fP if the stream indicates a length that is too big to fit in 32-bit\&.
+.RE
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_is_valid()\fP, \fBcbor_value_is_length_known()\fP, \fBcbor_value_calculate_string_length()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 455 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_value_get_tag (const \fBCborValue\fP * value, \fBCborTag\fP * result)\fC [static]\fP"
+Retrieves the CBOR tag value that \fIvalue\fP points to and stores it in \fIresult\fP\&. If the iterator \fIvalue\fP does not point to a CBOR tag value, the behavior is undefined, so checking with \fBcbor_value_get_type\fP or with \fBcbor_value_is_tag\fP is recommended\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_get_type()\fP, \fBcbor_value_is_valid()\fP, \fBcbor_value_is_tag()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 439 of file cbor\&.h\&.
+.SS "\fBCborType\fP cbor_value_get_type (const \fBCborValue\fP * value)\fC [static]\fP"
+Returns the type of the CBOR value that the iterator \fIvalue\fP points to\&. If \fIvalue\fP does not point to a valid value, this function returns \fBCborInvalidType\fP\&.
+.PP
+TinyCBOR also provides functions to test directly if a given \fBCborValue\fP object is of a given type, like \fBcbor_value_is_text_string()\fP and \fBcbor_value_is_null()\fP\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_is_valid()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 349 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_value_get_uint64 (const \fBCborValue\fP * value, uint64_t * result)\fC [static]\fP"
+Retrieves the CBOR integer value that \fIvalue\fP points to and stores it in \fIresult\fP\&. If the iterator \fIvalue\fP does not point to an unsigned integer value, the behavior is undefined, so checking with \fBcbor_value_get_type\fP or with \fBcbor_value_is_unsigned_integer\fP is recommended\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_get_type()\fP, \fBcbor_value_is_valid()\fP, \fBcbor_value_is_unsigned_integer()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 403 of file cbor\&.h\&.
+.SS "bool cbor_value_is_array (const \fBCborValue\fP * value)\fC [static]\fP"
+Returns true if the iterator \fIvalue\fP is valid and points to a CBOR array\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_is_valid()\fP, \fBcbor_value_is_map()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 510 of file cbor\&.h\&.
+.SS "bool cbor_value_is_boolean (const \fBCborValue\fP * value)\fC [static]\fP"
+Returns true if the iterator \fIvalue\fP is valid and points to a CBOR boolean type (true or false)\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_is_valid()\fP, \fBcbor_value_get_boolean()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 362 of file cbor\&.h\&.
+.SS "bool cbor_value_is_byte_string (const \fBCborValue\fP * value)\fC [static]\fP"
+Returns true if the iterator \fIvalue\fP is valid and points to a CBOR byte string\&. CBOR byte strings are binary data with no specified encoding or format\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_is_valid()\fP, \fBcbor_value_get_string_length()\fP, \fBcbor_value_calculate_string_length()\fP, \fBcbor_value_copy_byte_string()\fP, \fBcbor_value_dup_byte_string()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 448 of file cbor\&.h\&.
+.SS "bool cbor_value_is_container (const \fBCborValue\fP * it)\fC [static]\fP"
+Returns true if the \fIit\fP value is a container and requires recursion in order to decode (maps and arrays), false otherwise\&. 
+.PP
+Definition at line 331 of file cbor\&.h\&.
+.SS "bool cbor_value_is_double (const \fBCborValue\fP * value)\fC [static]\fP"
+Returns true if the iterator \fIvalue\fP is valid and points to a CBOR double-precision floating point (64-bit)\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_is_valid()\fP, \fBcbor_value_is_float()\fP, \fBcbor_value_is_half_float()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 565 of file cbor\&.h\&.
+.SS "bool cbor_value_is_float (const \fBCborValue\fP * value)\fC [static]\fP"
+Returns true if the iterator \fIvalue\fP is valid and points to a CBOR single-precision floating point (32-bit)\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_is_valid()\fP, \fBcbor_value_is_double()\fP, \fBcbor_value_is_half_float()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 552 of file cbor\&.h\&.
+.SS "bool cbor_value_is_half_float (const \fBCborValue\fP * value)\fC [static]\fP"
+Returns true if the iterator \fIvalue\fP is valid and points to a CBOR single-precision floating point (16-bit)\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_is_valid()\fP, \fBcbor_value_is_double()\fP, \fBcbor_value_is_float()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 547 of file cbor\&.h\&.
+.SS "bool cbor_value_is_integer (const \fBCborValue\fP * value)\fC [static]\fP"
+Returns true if the iterator \fIvalue\fP is valid and points to a CBOR integer type\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_is_valid()\fP, \fBcbor_value_get_int\fP, \fBcbor_value_get_int64\fP, \fBcbor_value_get_uint64\fP, \fBcbor_value_get_raw_integer\fP 
+.RE
+.PP
+
+.PP
+Definition at line 384 of file cbor\&.h\&.
+.SS "bool cbor_value_is_length_known (const \fBCborValue\fP * value)\fC [static]\fP"
+Returns true if the length of this type is known without calculation\&. That is, if the length of this CBOR string, map or array is encoded in the data stream, this function returns true\&. If the length is not encoded, it returns false\&.
+.PP
+If the length is known, code can call \fBcbor_value_get_string_length()\fP, \fBcbor_value_get_array_length()\fP or \fBcbor_value_get_map_length()\fP to obtain the length\&. If the length is not known but is necessary, code can use the \fBcbor_value_calculate_string_length()\fP function (no equivalent function is provided for maps and arrays)\&. 
+.PP
+Definition at line 431 of file cbor\&.h\&.
+.SS "bool cbor_value_is_map (const \fBCborValue\fP * value)\fC [static]\fP"
+Returns true if the iterator \fIvalue\fP is valid and points to a CBOR map\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_is_valid()\fP, \fBcbor_value_is_array()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 513 of file cbor\&.h\&.
+.SS "bool cbor_value_is_negative_integer (const \fBCborValue\fP * value)\fC [static]\fP"
+Returns true if the iterator \fIvalue\fP is valid and points to a CBOR negative integer type\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_is_valid()\fP, \fBcbor_value_get_int\fP, \fBcbor_value_get_int64\fP, \fBcbor_value_get_raw_integer\fP 
+.RE
+.PP
+
+.PP
+Definition at line 391 of file cbor\&.h\&.
+.SS "bool cbor_value_is_null (const \fBCborValue\fP * value)\fC [static]\fP"
+Returns true if the iterator \fIvalue\fP is valid and points to a CBOR null type\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_is_valid()\fP, \fBcbor_value_is_undefined()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 354 of file cbor\&.h\&.
+.SS "bool cbor_value_is_simple_type (const \fBCborValue\fP * value)\fC [static]\fP"
+Returns true if the iterator \fIvalue\fP is valid and points to a CBOR Simple Type type (other than true, false, null and undefined)\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_is_valid()\fP, \fBcbor_value_get_simple_type()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 373 of file cbor\&.h\&.
+.SS "bool cbor_value_is_tag (const \fBCborValue\fP * value)\fC [static]\fP"
+Returns true if the iterator \fIvalue\fP is valid and points to a CBOR tag\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_get_tag()\fP, \fBcbor_value_skip_tag()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 436 of file cbor\&.h\&.
+.SS "bool cbor_value_is_text_string (const \fBCborValue\fP * value)\fC [static]\fP"
+Returns true if the iterator \fIvalue\fP is valid and points to a CBOR text string\&. CBOR text strings are UTF-8 encoded and usually contain human-readable text\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_is_valid()\fP, \fBcbor_value_get_string_length()\fP, \fBcbor_value_calculate_string_length()\fP, \fBcbor_value_copy_text_string()\fP, \fBcbor_value_dup_text_string()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 451 of file cbor\&.h\&.
+.SS "bool cbor_value_is_undefined (const \fBCborValue\fP * value)\fC [static]\fP"
+Returns true if the iterator \fIvalue\fP is valid and points to a CBOR undefined type\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_is_valid()\fP, \fBcbor_value_is_null()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 357 of file cbor\&.h\&.
+.SS "bool cbor_value_is_unsigned_integer (const \fBCborValue\fP * value)\fC [static]\fP"
+Returns true if the iterator \fIvalue\fP is valid and points to a CBOR unsigned integer type (positive values or zero)\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_is_valid()\fP, \fBcbor_value_get_uint64()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 387 of file cbor\&.h\&.
+.SS "bool cbor_value_is_valid (const \fBCborValue\fP * it)\fC [static]\fP"
+Returns true if the iterator \fIit\fP contains a valid value\&. Invalid iterators happen when iteration reaches the end of a container (see \fBcbor_value_at_end()\fP) or when a search function resulted in no matches\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_advance()\fP, \fBcbor_value_at_end()\fP, \fBcbor_value_get_type()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 346 of file cbor\&.h\&.
+.SS "\fBCborError\fP cbor_value_leave_container (\fBCborValue\fP * it, const \fBCborValue\fP * recursed)"
+Updates \fIit\fP to point to the next element after the container\&. The \fIrecursed\fP object needs to point to the element obtained either by advancing the last element of the container (via \fBcbor_value_advance()\fP, \fBcbor_value_advance_fixed()\fP, a nested \fBcbor_value_leave_container()\fP, or the \fCnext\fP pointer from cbor_value_copy_string() or cbor_value_dup_string())\&.
+.PP
+The \fIit\fP and \fIrecursed\fP parameters must be the exact same as passed to \fBcbor_value_enter_container()\fP\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_enter_container()\fP, \fBcbor_value_at_end()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 650 of file cborparser\&.c\&.
+.SS "\fBCborError\fP cbor_value_map_find_value (const \fBCborValue\fP * map, const char * string, \fBCborValue\fP * element)"
+Attempts to find the value in map \fImap\fP that corresponds to the text string entry \fIstring\fP\&. If the iterator \fIvalue\fP does not point to a CBOR map, the behaviour is undefined, so checking with \fBcbor_value_get_type\fP or \fBcbor_value_is_map\fP is recommended\&.
+.PP
+If the item is found, it is stored in \fIresult\fP\&. If no item is found matching the key, then \fIresult\fP will contain an element of type \fBCborInvalidType\fP\&. Matching is performed using \fBcbor_value_text_string_equals()\fP, so tagged strings will also match\&.
+.PP
+This function has a time complexity of O(n) where n is the number of elements in the map to be searched\&. In addition, this function is has O(n) memory requirement based on the number of nested containers (maps or arrays) found as elements of this map\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_is_valid()\fP, \fBcbor_value_text_string_equals()\fP, \fBcbor_value_advance()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 1328 of file cborparser\&.c\&.
+.SS "\fBCborError\fP cbor_value_skip_tag (\fBCborValue\fP * it)"
+Advances the CBOR value \fIit\fP until it no longer points to a tag\&. If \fIit\fP is already not pointing to a tag, then this function returns it unchanged\&.
+.PP
+This function does not run in constant time: it will run on O(n) for n being the number of tags\&. It does use constant memory (O(1) memory requirements)\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_advance_fixed()\fP, \fBcbor_value_advance()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 572 of file cborparser\&.c\&.
+.SS "\fBCborError\fP cbor_value_text_string_equals (const \fBCborValue\fP * value, const char * string, bool * result)"
+Compares the entry \fIvalue\fP with the string \fIstring\fP and stores the result in \fIresult\fP\&. If the value is different from \fIstring\fP \fIresult\fP will contain \fCfalse\fP\&.
+.PP
+The entry at \fIvalue\fP may be a tagged string\&. If \fIvalue\fP is not a string or a tagged string, the comparison result will be false\&.
+.PP
+CBOR requires text strings to be encoded in UTF-8, but this function does not validate either the strings in the stream or the string \fIstring\fP to be matched\&. Moreover, comparison is done on strict codepoint comparison, without any Unicode normalization\&.
+.PP
+This function may not run in constant time (it will run in O(n) time on the number of chunks)\&. It requires constant memory (O(1))\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_skip_tag()\fP, \fBcbor_value_copy_text_string()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 1239 of file cborparser\&.c\&.
+.SS "\fBCborError\fP cbor_value_validate (const \fBCborValue\fP * it, uint32_t flags)"
+Performs a full validation, controlled by the \fIflags\fP options, of the CBOR stream pointed by \fIit\fP and returns the error it found\&. If no error was found, it returns CborNoError and the application can iterate over the items with certainty that no errors will appear during parsing\&.
+.PP
+If \fIflags\fP is CborValidateBasic, the result should be the same as \fBcbor_value_validate_basic()\fP\&.
+.PP
+This function has the same timing and memory requirements as \fBcbor_value_advance()\fP and \fBcbor_value_validate_basic()\fP\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBCborValidationFlags\fP, \fBcbor_value_validate_basic()\fP, \fBcbor_value_advance()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 691 of file cborvalidation\&.c\&.
+.SS "\fBCborError\fP cbor_value_validate_basic (const \fBCborValue\fP * it)"
+Performs a basic validation of the CBOR stream pointed by \fIit\fP and returns the error it found\&. If no error was found, it returns CborNoError and the application can iterate over the items with certainty that no other errors will appear during parsing\&.
+.PP
+A basic validation checks for: \\list 
+.PD 0
+
+.IP "\(bu" 2
+absence of undefined additional information bytes; 
+.IP "\(bu" 2
+well-formedness of all numbers, lengths, and simple values; 
+.IP "\(bu" 2
+string contents match reported sizes; 
+.IP "\(bu" 2
+arrays and maps contain the number of elements they are reported to have; \\endlist
+.PP
+For further checks, see \fBcbor_value_validate()\fP\&.
+.PP
+This function has the same timing and memory requirements as \fBcbor_value_advance()\fP\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_validate()\fP, \fBcbor_value_advance()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 466 of file cborparser\&.c\&.
+.SS "static \fBCborError\fP extract_length (const \fBCborParser\fP * parser, const uint8_t ** ptr, size_t * len)\fC [static]\fP"
+
+.PP
+Definition at line 191 of file cborparser\&.c\&.
+.SS "static uint16_t get16 (const uint8_t * ptr)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 144 of file cborparser\&.c\&.
+.SS "static uint32_t get32 (const uint8_t * ptr)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 150 of file cborparser\&.c\&.
+.SS "static uint64_t get64 (const uint8_t * ptr)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 156 of file cborparser\&.c\&.
+.SS "static \fBCborError\fP get_string_chunk (\fBCborValue\fP * it, const void ** bufferptr, size_t * len)\fC [static]\fP"
+
+.PP
+Definition at line 1013 of file cborparser\&.c\&.
+.SS "static bool is_fixed_type (uint8_t type)\fC [static]\fP"
+
+.PP
+Definition at line 206 of file cborparser\&.c\&.
+.SS "static uintptr_t iterate_memcmp (char * s1, const uint8_t * s2, size_t len)\fC [static]\fP"
+
+.PP
+Definition at line 1086 of file cborparser\&.c\&.
+.SS "static uintptr_t iterate_memcpy (char * dest, const uint8_t * src, size_t len)\fC [static]\fP"
+
+.PP
+Definition at line 1090 of file cborparser\&.c\&.
+.SS "static uintptr_t iterate_noop (char * dest, const uint8_t * src, size_t len)\fC [static]\fP"
+
+.PP
+Definition at line 1079 of file cborparser\&.c\&.
+.SS "static \fBCborError\fP iterate_string_chunks (const \fBCborValue\fP * value, char * buffer, size_t * buflen, bool * result, \fBCborValue\fP * next, \fBIterateFunction\fP func)\fC [static]\fP"
+
+.PP
+Definition at line 1094 of file cborparser\&.c\&.
+.SS "static void prepare_string_iteration (\fBCborValue\fP * it)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 994 of file cborparser\&.c\&.
+.SS "static \fBCborError\fP preparse_next_value (\fBCborValue\fP * it)\fC [static]\fP"
+
+.PP
+Definition at line 323 of file cborparser\&.c\&.
+.SS "static \fBCborError\fP preparse_next_value_nodecrement (\fBCborValue\fP * it)\fC [static]\fP"
+
+.PP
+Definition at line 304 of file cborparser\&.c\&.
+.SS "static \fBCborError\fP preparse_value (\fBCborValue\fP * it)\fC [static]\fP"
+
+.PP
+Definition at line 211 of file cborparser\&.c\&.
+.SS "static \fBCborError\fP validate_container (\fBCborValue\fP * it, int containerType, uint32_t flags, int recursionLeft)\fC [static]\fP"
+
+.PP
+Definition at line 473 of file cborvalidation\&.c\&.
+.SS "static \fBCborError\fP validate_floating_point (\fBCborValue\fP * it, \fBCborType\fP type, uint32_t flags)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 410 of file cborvalidation\&.c\&.
+.SS "static \fBCborError\fP validate_number (const \fBCborValue\fP * it, \fBCborType\fP type, uint32_t flags)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 325 of file cborvalidation\&.c\&.
+.SS "static \fBCborError\fP validate_simple_type (uint8_t simple_type, uint32_t flags)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 311 of file cborvalidation\&.c\&.
+.SS "static \fBCborError\fP validate_tag (\fBCborValue\fP * it, \fBCborTag\fP tag, uint32_t flags, int recursionLeft)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 356 of file cborvalidation\&.c\&.
+.SS "static \fBCborError\fP validate_utf8_string (const void * ptr, size_t n)\fC [inline]\fP, \fC [static]\fP"
+
+.PP
+Definition at line 300 of file cborvalidation\&.c\&.
+.SS "static \fBCborError\fP validate_value (\fBCborValue\fP * it, uint32_t flags, int recursionLeft)\fC [static]\fP"
+
+.PP
+Definition at line 549 of file cborvalidation\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "const struct \fBKnownTagData\fP knownTagData[]\fC [static]\fP"
+\fBInitial value:\fP
+.PP
+.nf
+= {
+    {0, (uint32_t)CborTextStringType},
+    {1, (uint32_t)(CborIntegerType + 1)},
+    {2, (uint32_t)CborByteStringType},
+    {3, (uint32_t)CborByteStringType},
+    {4, (uint32_t)CborArrayType},
+    {5, (uint32_t)CborArrayType},
+    {16, (uint32_t)CborArrayType},
+    {17, (uint32_t)CborArrayType},
+    {18, (uint32_t)CborArrayType},
+    {21, (uint32_t)CborByteStringType | ((uint32_t)CborArrayType << 8) |
+             ((uint32_t)CborMapType << 16)},
+    {22, (uint32_t)CborByteStringType | ((uint32_t)CborArrayType << 8) |
+             ((uint32_t)CborMapType << 16)},
+    {23, (uint32_t)CborByteStringType | ((uint32_t)CborArrayType << 8) |
+             ((uint32_t)CborMapType << 16)},
+    {24, (uint32_t)CborByteStringType},
+    {32, (uint32_t)CborTextStringType},
+    {33, (uint32_t)CborTextStringType},
+    {34, (uint32_t)CborTextStringType},
+    {35, (uint32_t)CborTextStringType},
+    {36, (uint32_t)CborTextStringType},
+    {96, (uint32_t)CborArrayType},
+    {97, (uint32_t)CborArrayType},
+    {98, (uint32_t)CborArrayType},
+    {55799, 0U}}
+.fi
+.PP
+Definition at line 271 of file cborvalidation\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

@@ -1,0 +1,81 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/tinycbor/open_memstream.c" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/tinycbor/open_memstream.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <errno\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+\fC#include 'tinycbor/compilersupport_p\&.h'\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBBuffer\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fB_BSD_SOURCE\fP   1"
+.br
+.ti -1c
+.RI "#define \fB_DEFAULT_SOURCE\fP   1"
+.br
+.ti -1c
+.RI "#define \fB_GNU_SOURCE\fP   1"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "static RetType \fBwrite_to_buffer\fP (void *cookie, const char *data, LenType len)"
+.br
+.ti -1c
+.RI "static int \fBclose_buffer\fP (void *cookie)"
+.br
+.ti -1c
+.RI "FILE * \fBopen_memstream\fP (char **bufptr, size_t *lenptr)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define _BSD_SOURCE   1"
+
+.PP
+Definition at line 25 of file open_memstream\&.c\&.
+.SS "#define _DEFAULT_SOURCE   1"
+
+.PP
+Definition at line 26 of file open_memstream\&.c\&.
+.SS "#define _GNU_SOURCE   1"
+
+.PP
+Definition at line 27 of file open_memstream\&.c\&.
+.SH "Function Documentation"
+.PP 
+.SS "static int close_buffer (void * cookie)\fC [static]\fP"
+
+.PP
+Definition at line 81 of file open_memstream\&.c\&.
+.SS "static RetType write_to_buffer (void * cookie, const char * data, LenType len)\fC [static]\fP"
+
+.PP
+Definition at line 56 of file open_memstream\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

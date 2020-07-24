@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['leofcoin_5fblock_1912',['LEOFCOIN_BLOCK',['../d7/ded/codecs_8h.html#acb3f24f12c40fb6aecb09dd38477b6f1',1,'codecs.h']]],
-  ['leofcoin_5fpr_1913',['LEOFCOIN_PR',['../d7/ded/codecs_8h.html#ab4ac90e06907dc96232454071f601593',1,'codecs.h']]],
-  ['leofcoin_5ftx_1914',['LEOFCOIN_TX',['../d7/ded/codecs_8h.html#ab74349530961fdd8d8def179f4ca0dbc',1,'codecs.h']]],
-  ['libp2p_5fkey_1915',['LIBP2P_KEY',['../d7/ded/codecs_8h.html#a625e35f03491305e5857dad11ec8f95f',1,'codecs.h']]],
-  ['libp2p_5fpeer_5frecord_1916',['LIBP2P_PEER_RECORD',['../d7/ded/codecs_8h.html#a7d413c4483e2abcf4150378d9bee88f7',1,'codecs.h']]]
+  ['keccak_5f224_2696',['KECCAK_224',['../d7/ded/codecs_8h.html#aa8fe87f2410a571f5c8fe73915c3a995',1,'codecs.h']]],
+  ['keccak_5f256_2697',['KECCAK_256',['../d7/ded/codecs_8h.html#a4417602f04a728717bd31c5180230d48',1,'codecs.h']]],
+  ['keccak_5f384_2698',['KECCAK_384',['../d7/ded/codecs_8h.html#a34ac125192ad00e4cf170e359e2c9087',1,'codecs.h']]],
+  ['keccak_5f512_2699',['KECCAK_512',['../d7/ded/codecs_8h.html#a84420739fb502d10ebbfba302aed94f6',1,'codecs.h']]]
 ];

@@ -2,14 +2,11 @@
 .ad l
 .nh
 .SH NAME
-/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/crypto/key.c
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/crypto/key.c \- public/private key management functions  
+
 .SH SYNOPSIS
 .br
 .PP
-\fC#include <stdlib\&.h>\fP
-.br
-\fC#include <string\&.h>\fP
-.br
 \fC#include 'crypto/key\&.h'\fP
 .br
 \fC#include 'crypto/peerutils\&.h'\fP
@@ -18,149 +15,183 @@
 .br
 \fC#include 'protobuf/protobuf\&.h'\fP
 .br
+\fC#include 'tinycbor/cbor\&.h'\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+\fC#include <stdint\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
 
 .SS "Functions"
 
 .in +1c
 .ti -1c
-.RI "struct \fBPublicKey\fP * \fBlibp2p_crypto_public_key_new\fP (void)"
+.RI "\fBpublic_key_t\fP * \fBlibp2p_crypto_public_key_new\fP (void)"
 .br
+.RI "returns a new instance of public_key_t "
 .ti -1c
-.RI "void \fBlibp2p_crypto_public_key_free\fP (struct \fBPublicKey\fP *in)"
+.RI "void \fBlibp2p_crypto_public_key_free\fP (\fBpublic_key_t\fP *in)"
 .br
+.RI "free up resources associated with a public_key_t instance "
 .ti -1c
-.RI "size_t \fBlibp2p_crypto_public_key_protobuf_encode_size\fP (const struct \fBPublicKey\fP *in)"
+.RI "\fBprivate_key_t\fP * \fBlibp2p_crypto_private_key_new\fP (void)"
 .br
+.RI "returns a new instance of private_key_t "
 .ti -1c
-.RI "int \fBlibp2p_crypto_public_key_protobuf_encode\fP (const struct \fBPublicKey\fP *in, unsigned char *buffer, size_t max_buffer_length, size_t *bytes_written)"
+.RI "void \fBlibp2p_crypto_private_key_free\fP (\fBprivate_key_t\fP *in)"
 .br
+.RI "frees up resources associated with a private_key_t instance "
 .ti -1c
-.RI "int \fBlibp2p_crypto_public_key_protobuf_decode\fP (unsigned char *buffer, size_t buffer_length, struct \fBPublicKey\fP **out)"
+.RI "int \fBlibp2p_crypto_private_key_copy\fP (const \fBprivate_key_t\fP *source, \fBprivate_key_t\fP *destination)"
 .br
-.RI "Unmarshal a public key from a protobuf\&. "
+.RI "copies a private key "
 .ti -1c
-.RI "struct \fBPrivateKey\fP * \fBlibp2p_crypto_private_key_new\fP (void)"
+.RI "\fBpublic_key_t\fP * \fBlibp2p_crypto_public_key_cbor_decode\fP (\fBcbor_encoded_data_t\fP *data)"
 .br
+.RI "used to cbor data a chunk of data "
 .ti -1c
-.RI "void \fBlibp2p_crypto_private_key_free\fP (struct \fBPrivateKey\fP *in)"
+.RI "\fBcbor_encoded_data_t\fP * \fBlibp2p_crypto_public_key_cbor_encode\fP (\fBpublic_key_t\fP *pub_key, size_t *bytes_written)"
 .br
-.ti -1c
-.RI "int \fBlibp2p_crypto_private_key_copy\fP (const struct \fBPrivateKey\fP *source, struct \fBPrivateKey\fP *destination)"
-.br
-.ti -1c
-.RI "size_t \fBlibp2p_crypto_private_key_protobuf_encode_size\fP (const struct \fBPrivateKey\fP *in)"
-.br
-.ti -1c
-.RI "int \fBlibp2p_crypto_private_key_protobuf_encode\fP (const struct \fBPrivateKey\fP *in, unsigned char *buffer, size_t max_buffer_length, size_t *bytes_written)"
-.br
-.ti -1c
-.RI "int \fBlibp2p_crypto_private_key_protobuf_decode\fP (unsigned char *buffer, size_t buffer_length, struct \fBPrivateKey\fP **out)"
-.br
-.ti -1c
-.RI "int \fBlibp2p_crypto_public_key_to_peer_id\fP (struct \fBPublicKey\fP *public_key, char *peer_id)"
-.br
-.RI "convert a public key into a peer id "
+.RI "used to cbor encode a public_key_t type for sending over the wire "
 .in -1c
+.SH "Detailed Description"
+.PP 
+public/private key management functions 
+
+provides tooling for working with public/private keys and transmitting them over the wire 
+.PP
+\fBWarning\fP
+.RS 4
+none of these functions and structures are thread safe 
+.RE
+.PP
+
+.PP
+Definition in file \fBkey\&.c\fP\&.
 .SH "Function Documentation"
 .PP 
-.SS "int libp2p_crypto_private_key_copy (const struct \fBPrivateKey\fP * source, struct \fBPrivateKey\fP * destination)"
+.SS "int libp2p_crypto_private_key_copy (const \fBprivate_key_t\fP * source, \fBprivate_key_t\fP * destination)"
 
 .PP
-Definition at line 148 of file key\&.c\&.
-.SS "void libp2p_crypto_private_key_free (struct \fBPrivateKey\fP * in)"
-
-.PP
-Definition at line 139 of file key\&.c\&.
-.SS "struct \fBPrivateKey\fP* libp2p_crypto_private_key_new (void)"
-
-.PP
-Definition at line 129 of file key\&.c\&.
-.SS "int libp2p_crypto_private_key_protobuf_decode (unsigned char * buffer, size_t buffer_length, struct \fBPrivateKey\fP ** out)"
-Unmarshal a private key from a protobuf 
+copies a private key 
 .PP
 \fBParameters\fP
 .RS 4
-\fIbuffer\fP the protobuf 
+\fIsource\fP the key we are copying 
 .br
-\fIbuffer_length\fP the length of the protobuf 
-.br
-\fIout\fP the pointer to the struct \fBPrivateKey\fP that will be allocated 
+\fIdestination\fP the location to copy to 
 .RE
 .PP
 \fBReturns\fP
 .RS 4
-true(1) on success, otherwise false(0) 
+Success: 0 
+.PP
+Failure: 1 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+does not allocate memory for caller 
 .RE
 .PP
 
 .PP
-Definition at line 196 of file key\&.c\&.
-.SS "int libp2p_crypto_private_key_protobuf_encode (const struct \fBPrivateKey\fP * in, unsigned char * buffer, size_t max_buffer_length, size_t * bytes_written)"
+Definition at line 76 of file key\&.c\&.
+.SS "void libp2p_crypto_private_key_free (\fBprivate_key_t\fP * in)"
 
 .PP
-Definition at line 167 of file key\&.c\&.
-.SS "size_t libp2p_crypto_private_key_protobuf_encode_size (const struct \fBPrivateKey\fP * in)"
+frees up resources associated with a private_key_t instance 
+.PP
+Definition at line 59 of file key\&.c\&.
+.SS "\fBprivate_key_t\fP* libp2p_crypto_private_key_new (void)"
 
 .PP
-Definition at line 163 of file key\&.c\&.
-.SS "void libp2p_crypto_public_key_free (struct \fBPublicKey\fP * in)"
+returns a new instance of private_key_t 
+.PP
+\fBReturns\fP
+.RS 4
+Success: pointer to an instance of private_key_t 
+.PP
+Failure: NULL pointer 
+.RE
+.PP
+
+.PP
+Definition at line 46 of file key\&.c\&.
+.SS "\fBpublic_key_t\fP* libp2p_crypto_public_key_cbor_decode (\fBcbor_encoded_data_t\fP * data)"
+
+.PP
+used to cbor data a chunk of data 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdata\fP an instance of cbor_encoded_data_t created with libp2p_crypto_public_key_cbor_encode 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Success: pointer to a public_key_t instance 
+.PP
+Failure: NULL pointer 
+.RE
+.PP
+
+.PP
+Definition at line 98 of file key\&.c\&.
+.SS "\fBcbor_encoded_data_t\fP* libp2p_crypto_public_key_cbor_encode (\fBpublic_key_t\fP * pub_key, size_t * bytes_written)"
+
+.PP
+used to cbor encode a public_key_t type for sending over the wire 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpub_key\fP an instance of public_key_t fully filled out 
+.br
+\fIbytes_written\fP returns the number of bytes written 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Success: pointer to an instance of cbor_encoded_data_t 
+.PP
+Failure: NULL pointer 
+.RE
+.PP
+
+.PP
+\fBTodo\fP
+.RS 4
+figure out why this returns an error 
+.RE
+.PP
+
+.PP
+Definition at line 207 of file key\&.c\&.
+.SS "void libp2p_crypto_public_key_free (\fBpublic_key_t\fP * in)"
+
+.PP
+free up resources associated with a public_key_t instance 
+.PP
+Definition at line 36 of file key\&.c\&.
+.SS "\fBpublic_key_t\fP* libp2p_crypto_public_key_new (void)"
+
+.PP
+returns a new instance of public_key_t the size of the key data
+.PP
+\fBReturns\fP
+.RS 4
+Success: pointer to an instance of public_key_t 
+.PP
+Failure: NULL pointer 
+.RE
+.PP
 
 .PP
 Definition at line 23 of file key\&.c\&.
-.SS "struct \fBPublicKey\fP* libp2p_crypto_public_key_new (void)"
-Utilities for public and private keys 
-.PP
-Definition at line 13 of file key\&.c\&.
-.SS "int libp2p_crypto_public_key_protobuf_decode (unsigned char * buffer, size_t buffer_length, struct \fBPublicKey\fP ** out)"
-
-.PP
-Unmarshal a public key from a protobuf\&. Unmarshal a public key from a protobuf 
-.PP
-\fBParameters\fP
-.RS 4
-\fIbuffer\fP the protobuf 
-.br
-\fIbuffer_length\fP the length of the protobuf 
-.br
-\fIout\fP the pointer to the struct \fBPublicKey\fP that will be allocated 
-.RE
-.PP
-\fBReturns\fP
-.RS 4
-true(1) on success, otherwise false(0) 
-.RE
-.PP
-
-.PP
-Definition at line 80 of file key\&.c\&.
-.SS "int libp2p_crypto_public_key_protobuf_encode (const struct \fBPublicKey\fP * in, unsigned char * buffer, size_t max_buffer_length, size_t * bytes_written)"
-
-.PP
-Definition at line 50 of file key\&.c\&.
-.SS "size_t libp2p_crypto_public_key_protobuf_encode_size (const struct \fBPublicKey\fP * in)"
-
-.PP
-Definition at line 38 of file key\&.c\&.
-.SS "int libp2p_crypto_public_key_to_peer_id (struct \fBPublicKey\fP * public_key, char * peer_id)"
-
-.PP
-convert a public key into a peer id convert a public key into a peer id 
-.PP
-\fBParameters\fP
-.RS 4
-\fIpublic_key\fP the public key struct 
-.br
-\fIpeer_id\fP the results, in a null-terminated string 
-.RE
-.PP
-\fBReturns\fP
-.RS 4
-true(1) on success, otherwise false(0) 
-.RE
-.PP
-Converting to a peer id involves protobufing the struct \fBPublicKey\fP, SHA256 it, turn it into a MultiHash and base58 it
-.PP
-Definition at line 251 of file key\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for libcp2p from the source code\&.

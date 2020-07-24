@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['keytype_1690',['KeyType',['../de/de5/key_8h.html#aab0feaba617470cb4aa830dc5935238c',1,'key.h']]]
+  ['key_5ftype_5ft_2284',['key_type_t',['../de/de5/key_8h.html#a4f367c350737c92475175fb229c5570e',1,'key.h']]]
 ];

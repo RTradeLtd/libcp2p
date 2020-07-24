@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['log_5ffn_1673',['log_fn',['../d1/d8c/logger_8h.html#acbb4363df37107a069aededd1b6c568b',1,'logger.h']]],
-  ['log_5ffnf_1674',['log_fnf',['../d1/d8c/logger_8h.html#a665ba15eee3a57a2d5b1b0febdf30b96',1,'logger.h']]]
+  ['job_2253',['job',['../db/d84/thread__pool_8c.html#a7e76c3b43901a65c2e31e18292700f77',1,'thread_pool.c']]],
+  ['jobqueue_2254',['jobqueue',['../db/d84/thread__pool_8c.html#a3565ff50371ac64dcce7ac97208c8a1e',1,'thread_pool.c']]]
 ];

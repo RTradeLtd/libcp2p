@@ -147,18 +147,18 @@ $(document).ready(function(){initNavTree('dc/d09/ecdsa_8c_source.html','../../')
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"> * @return pointer to an unsigned char peerID</span></div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="../../d5/d5d/ecdsa_8h.html#afab4ce5b8e4bde2be242ad28bf9f1474">   61</a></span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *<a class="code" href="../../dc/d09/ecdsa_8c.html#afab4ce5b8e4bde2be242ad28bf9f1474">libp2p_crypto_ecdsa_keypair_peerid</a>(<a class="code" href="../../d7/dc6/structecdsa__private__key.html">ecdsa_private_key_t</a> *pk) {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *public_key = <a class="code" href="../../dc/d09/ecdsa_8c.html#a00d3cbd7d5de1849d5de9bd830fd7fb7">libp2p_crypto_ecdsa_keypair_public</a>(pk);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">if</span> (public_key == NULL) {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *<a class="code" href="../../d3/dce/structpublic__key.html">public_key</a> = <a class="code" href="../../dc/d09/ecdsa_8c.html#a00d3cbd7d5de1849d5de9bd830fd7fb7">libp2p_crypto_ecdsa_keypair_public</a>(pk);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="../../d3/dce/structpublic__key.html">public_key</a> == NULL) {</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *public_key_hash = calloc(<span class="keyword">sizeof</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>), 64);</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">if</span> (public_key_hash == NULL) {</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    }</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">int</span> rc = <a class="code" href="../../da/d01/sha256_8c.html#abec2cc9b75a7053f0b5db97881857712">libp2p_crypto_hashing_sha256</a>(public_key, strlen((<span class="keywordtype">char</span> *)public_key),</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">int</span> rc = <a class="code" href="../../da/d01/sha256_8c.html#abec2cc9b75a7053f0b5db97881857712">libp2p_crypto_hashing_sha256</a>(<a class="code" href="../../d3/dce/structpublic__key.html">public_key</a>, strlen((<span class="keywordtype">char</span> *)<a class="code" href="../../d3/dce/structpublic__key.html">public_key</a>),</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                                          public_key_hash);</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">if</span> (rc != 1) {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        free(public_key);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        free(<a class="code" href="../../d3/dce/structpublic__key.html">public_key</a>);</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        free(public_key_hash);</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <a class="code" href="../../de/df1/util_8c.html#aceffb5d3f84b98c35c05dc580caddd45">print_mbedtls_error</a>(rc);</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
@@ -168,7 +168,7 @@ $(document).ready(function(){initNavTree('dc/d09/ecdsa_8c_source.html','../../')
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">size_t</span> len = (size_t)1024;</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    rc = <a class="code" href="../../dc/d82/peerutils_8c.html#af28758e71406b9bf461a7d56481746fc">libp2p_new_peer_id</a>(temp_peer_id, &amp;len, public_key_hash, 32);</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">if</span> (rc != 1) {</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        free(public_key);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        free(<a class="code" href="../../d3/dce/structpublic__key.html">public_key</a>);</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        free(public_key_hash);</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <a class="code" href="../../de/df1/util_8c.html#aceffb5d3f84b98c35c05dc580caddd45">print_mbedtls_error</a>(rc);</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
@@ -177,13 +177,13 @@ $(document).ready(function(){initNavTree('dc/d09/ecdsa_8c_source.html','../../')
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordtype">size_t</span> tpid_size = strlen((<span class="keywordtype">char</span> *)temp_peer_id);</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *peer_id = calloc(<span class="keyword">sizeof</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>), tpid_size + 2);</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordflow">if</span> (peer_id == NULL) {</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        free(public_key);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        free(<a class="code" href="../../d3/dce/structpublic__key.html">public_key</a>);</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        free(public_key_hash);</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    }</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    strcpy((<span class="keywordtype">char</span> *)peer_id, (<span class="keywordtype">char</span> *)temp_peer_id);</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    free(public_key);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    free(<a class="code" href="../../d3/dce/structpublic__key.html">public_key</a>);</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    free(public_key_hash);</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordflow">return</span> peer_id;</div>
@@ -204,13 +204,13 @@ $(document).ready(function(){initNavTree('dc/d09/ecdsa_8c_source.html','../../')
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <a class="code" href="../../de/df1/util_8c.html#aceffb5d3f84b98c35c05dc580caddd45">print_mbedtls_error</a>(rc);</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    }</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *public_key =</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *<a class="code" href="../../d3/dce/structpublic__key.html">public_key</a> =</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        malloc(<span class="keyword">sizeof</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>) * strlen((<span class="keywordtype">char</span> *)output_buf) + 1);</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordflow">if</span> (public_key == NULL) {</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="../../d3/dce/structpublic__key.html">public_key</a> == NULL) {</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    }</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    strcpy((<span class="keywordtype">char</span> *)public_key, (<span class="keywordtype">char</span> *)output_buf);</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordflow">return</span> public_key;</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    strcpy((<span class="keywordtype">char</span> *)<a class="code" href="../../d3/dce/structpublic__key.html">public_key</a>, (<span class="keywordtype">char</span> *)output_buf);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="../../d3/dce/structpublic__key.html">public_key</a>;</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;}</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">/*!</span></div>
@@ -310,6 +310,7 @@ $(document).ready(function(){initNavTree('dc/d09/ecdsa_8c_source.html','../../')
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="astructpublic__key_html"><div class="ttname"><a href="../../d3/dce/structpublic__key.html">public_key</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/de5/key_8h_source.html#l00036">key.h:36</a></div></div>
 <div class="ttc" id="astructecdsa__private__key_html_a8ee56b1ca318d8825e178ad06c8ac24d"><div class="ttname"><a href="../../d7/dc6/structecdsa__private__key.html#a8ee56b1ca318d8825e178ad06c8ac24d">ecdsa_private_key::pk_ctx</a></div><div class="ttdeci">mbedtls_pk_context pk_ctx</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d5d/ecdsa_8h_source.html#l00028">ecdsa.h:28</a></div></div>
 <div class="ttc" id="autil_8c_html_aceffb5d3f84b98c35c05dc580caddd45"><div class="ttname"><a href="../../de/df1/util_8c.html#aceffb5d3f84b98c35c05dc580caddd45">print_mbedtls_error</a></div><div class="ttdeci">void print_mbedtls_error(int errcode)</div><div class="ttdoc">prints the corresponding error to stdout</div><div class="ttdef"><b>Definition:</b> <a href="../../de/df1/util_8c_source.html#l00007">util.c:7</a></div></div>
 <div class="ttc" id="aecdsa_8h_html"><div class="ttname"><a href="../../d5/d5d/ecdsa_8h.html">ecdsa.h</a></div><div class="ttdoc">provides ECDSA cryptography support</div></div>

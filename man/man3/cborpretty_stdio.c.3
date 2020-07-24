@@ -1,0 +1,65 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/tinycbor/cborpretty_stdio.c" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/tinycbor/cborpretty_stdio.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'tinycbor/cbor\&.h'\fP
+.br
+\fC#include <stdarg\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "static \fBCborError\fP \fBcbor_fprintf\fP (void *out, const char *fmt,\&.\&.\&.)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_to_pretty_advance\fP (FILE *out, \fBCborValue\fP *value)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_to_pretty_advance_flags\fP (FILE *out, \fBCborValue\fP *value, int flags)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "static \fBCborError\fP cbor_fprintf (void * out, const char * fmt,  \&.\&.\&.)\fC [static]\fP"
+
+.PP
+Definition at line 29 of file cborpretty_stdio\&.c\&.
+.SS "\fBCborError\fP cbor_value_to_pretty_advance (FILE * out, \fBCborValue\fP * value)"
+Converts the current CBOR type pointed to by \fIvalue\fP to its textual representation and writes it to the \fIout\fP stream\&. If an error occurs, this function returns an error code similar to CborParsing\&.
+.PP
+If no error ocurred, this function advances \fIvalue\fP to the next element\&. Often, concatenating the text representation of multiple elements can be done by appending a comma to the output stream in between calls to this function\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_to_pretty()\fP, \fBcbor_value_to_pretty_stream()\fP, \fBcbor_value_to_json_advance()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 63 of file cborpretty_stdio\&.c\&.
+.SS "\fBCborError\fP cbor_value_to_pretty_advance_flags (FILE * out, \fBCborValue\fP * value, int flags)"
+Converts the current CBOR type pointed to by \fIvalue\fP to its textual representation and writes it to the \fIout\fP stream\&. If an error occurs, this function returns an error code similar to CborParsing\&.
+.PP
+The textual representation can be controlled by the \fIflags\fP parameter (see CborPrettyFlags for more information)\&.
+.PP
+If no error ocurred, this function advances \fIvalue\fP to the next element\&. Often, concatenating the text representation of multiple elements can be done by appending a comma to the output stream in between calls to this function\&.
+.PP
+\fBSee also\fP
+.RS 4
+\fBcbor_value_to_pretty_stream()\fP, \fBcbor_value_to_pretty()\fP, \fBcbor_value_to_json_advance()\fP 
+.RE
+.PP
+
+.PP
+Definition at line 84 of file cborpretty_stdio\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

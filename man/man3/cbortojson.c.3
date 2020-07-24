@@ -1,0 +1,133 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/tinycbor/cbortojson.c" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/tinycbor/cbortojson.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'tinycbor/cbor\&.h'\fP
+.br
+\fC#include 'tinycbor/cborinternal_p\&.h'\fP
+.br
+\fC#include 'tinycbor/cborjson\&.h'\fP
+.br
+\fC#include 'tinycbor/compilersupport_p\&.h'\fP
+.br
+\fC#include <inttypes\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBConversionStatus\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fB_BSD_SOURCE\fP   1"
+.br
+.ti -1c
+.RI "#define \fB_DEFAULT_SOURCE\fP   1"
+.br
+.ti -1c
+.RI "#define \fB_GNU_SOURCE\fP   1"
+.br
+.ti -1c
+.RI "#define \fB_POSIX_C_SOURCE\fP   200809L"
+.br
+.ti -1c
+.RI "#define \fB__STDC_LIMIT_MACROS\fP   1"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBConversionStatus\fP \fBConversionStatus\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBConversionStatusFlags\fP { \fBTypeWasNotNative\fP, \fBTypeWasTagged\fP = 0x200, \fBNumberPrecisionWasLost\fP = 0x400, \fBNumberWasNaN\fP = 0x800, \fBNumberWasInfinite\fP = 0x1000, \fBNumberWasNegative\fP, \fBFinalTypeMask\fP = 0xff }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "FILE * \fBopen_memstream\fP (char **bufptr, size_t *sizeptr)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBvalue_to_json\fP (FILE *out, \fBCborValue\fP *it, int flags, \fBCborType\fP type, \fBConversionStatus\fP *status)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBdump_bytestring_base16\fP (char **result, \fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBgeneric_dump_base64\fP (char **result, \fBCborValue\fP *it, const char alphabet[65])"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBdump_bytestring_base64\fP (char **result, \fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBdump_bytestring_base64url\fP (char **result, \fBCborValue\fP *it)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBadd_value_metadata\fP (FILE *out, \fBCborType\fP type, const \fBConversionStatus\fP *status)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBfind_tagged_type\fP (\fBCborValue\fP *it, \fBCborTag\fP *tag, \fBCborType\fP *type)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBtagged_value_to_json\fP (FILE *out, \fBCborValue\fP *it, int flags, \fBConversionStatus\fP *status)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBstringify_map_key\fP (char **key, \fBCborValue\fP *it, int flags, \fBCborType\fP type)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBarray_to_json\fP (FILE *out, \fBCborValue\fP *it, int flags, \fBConversionStatus\fP *status)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBmap_to_json\fP (FILE *out, \fBCborValue\fP *it, int flags, \fBConversionStatus\fP *status)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_to_json_advance\fP (FILE *out, \fBCborValue\fP *value, int flags)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define __STDC_LIMIT_MACROS   1"
+
+.PP
+Definition at line 30 of file cbortojson\&.c\&.
+.SS "#define _BSD_SOURCE   1"
+
+.PP
+Definition at line 25 of file cbortojson\&.c\&.
+.SS "#define _DEFAULT_SOURCE   1"
+
+.PP
+Definition at line 26 of file cbortojson\&.c\&.
+.SS "#define _GNU_SOURCE   1"
+
+.PP
+Definition at line 27 of file cbortojson\&.c\&.
+.SS "#define _POSIX_C_SOURCE   200809L"
+
+.PP
+Definition at line 28 of file cbortojson\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

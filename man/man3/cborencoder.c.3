@@ -1,0 +1,128 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/tinycbor/cborencoder.c" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/tinycbor/cborencoder.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'tinycbor/cbor\&.h'\fP
+.br
+\fC#include 'tinycbor/cborinternal_p\&.h'\fP
+.br
+\fC#include 'tinycbor/compilersupport_p\&.h'\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fB_BSD_SOURCE\fP   1"
+.br
+.ti -1c
+.RI "#define \fB_DEFAULT_SOURCE\fP   1"
+.br
+.ti -1c
+.RI "#define \fB__STDC_LIMIT_MACROS\fP   1"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcbor_encoder_init\fP (\fBCborEncoder\fP *encoder, uint8_t *buffer, size_t size, int flags)"
+.br
+.ti -1c
+.RI "static void \fBput16\fP (void *where, uint16_t v)"
+.br
+.ti -1c
+.RI "static bool \fBisOomError\fP (\fBCborError\fP \fBerr\fP)"
+.br
+.ti -1c
+.RI "static void \fBput32\fP (void *where, uint32_t v)"
+.br
+.ti -1c
+.RI "static void \fBput64\fP (void *where, uint64_t v)"
+.br
+.ti -1c
+.RI "static bool \fBwould_overflow\fP (\fBCborEncoder\fP *encoder, size_t len)"
+.br
+.ti -1c
+.RI "static void \fBadvance_ptr\fP (\fBCborEncoder\fP *encoder, size_t n)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBappend_to_buffer\fP (\fBCborEncoder\fP *encoder, const void *data, size_t len)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBappend_byte_to_buffer\fP (\fBCborEncoder\fP *encoder, uint8_t byte)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBencode_number_no_update\fP (\fBCborEncoder\fP *encoder, uint64_t ui, uint8_t shiftedMajorType)"
+.br
+.ti -1c
+.RI "static void \fBsaturated_decrement\fP (\fBCborEncoder\fP *encoder)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBencode_number\fP (\fBCborEncoder\fP *encoder, uint64_t ui, uint8_t shiftedMajorType)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encode_uint\fP (\fBCborEncoder\fP *encoder, uint64_t value)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encode_negative_int\fP (\fBCborEncoder\fP *encoder, uint64_t absolute_value)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encode_int\fP (\fBCborEncoder\fP *encoder, int64_t value)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encode_simple_value\fP (\fBCborEncoder\fP *encoder, uint8_t value)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encode_floating_point\fP (\fBCborEncoder\fP *encoder, \fBCborType\fP fpType, const void *value)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encode_tag\fP (\fBCborEncoder\fP *encoder, \fBCborTag\fP tag)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBencode_string\fP (\fBCborEncoder\fP *encoder, size_t length, uint8_t shiftedMajorType, const void *string)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encode_byte_string\fP (\fBCborEncoder\fP *encoder, const uint8_t *string, size_t length)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encode_text_string\fP (\fBCborEncoder\fP *encoder, const char *string, size_t length)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcreate_container\fP (\fBCborEncoder\fP *encoder, \fBCborEncoder\fP *container, size_t length, uint8_t shiftedMajorType)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encoder_create_array\fP (\fBCborEncoder\fP *encoder, \fBCborEncoder\fP *arrayEncoder, size_t length)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encoder_create_map\fP (\fBCborEncoder\fP *encoder, \fBCborEncoder\fP *mapEncoder, size_t length)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_encoder_close_container\fP (\fBCborEncoder\fP *encoder, const \fBCborEncoder\fP *containerEncoder)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define __STDC_LIMIT_MACROS   1"
+
+.PP
+Definition at line 32 of file cborencoder\&.c\&.
+.SS "#define _BSD_SOURCE   1"
+
+.PP
+Definition at line 26 of file cborencoder\&.c\&.
+.SS "#define _DEFAULT_SOURCE   1"
+
+.PP
+Definition at line 29 of file cborencoder\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

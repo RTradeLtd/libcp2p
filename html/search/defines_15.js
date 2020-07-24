@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['ws_2231',['WS',['../d7/ded/codecs_8h.html#a59799636dce6e7dfa2ce20c48147fa6b',1,'codecs.h']]],
-  ['wss_2232',['WSS',['../d7/ded/codecs_8h.html#a243baf59a10c7e5eff1a0f0b0b056a33',1,'codecs.h']]]
+  ['varint_5fmask_3028',['VARINT_MASK',['../d4/da0/multihash_8c.html#a01b1c02776ce13c0ded00110c9ce056c',1,'multihash.c']]]
 ];

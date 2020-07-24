@@ -19,7 +19,7 @@ size_t bsize; //size_t that contains the real bytes size (Use it whenever using 
 .SS "New Multi Address From String(multi_address_new_from_string)"
 struct multi_address* a = multi_address_new_from_string('/ip4/127\&.0\&.0\&.1/tcp/8080/');
 .SS "Obtaining the byte buffer(\&.bytes, \&.bsize[0]):"
-printf('TEST BYTES: %s\\n',Var_To_Hex(a->bsize, a->bytes)); Var_To_Hex = Byte Buffer to Hex String Hex_To_Var = Hex String to Byte Buffer
+printf('TEST BYTES: %s\\n',Var_To_Hex(a->bsize, a->bytes)); Var_To_Hex = Byte \fBBuffer\fP to Hex String Hex_To_Var = Hex String to Byte \fBBuffer\fP
 .SS "Encapsulation & Decapsulation(m_encapsulate, m_decapsulate)"
 .SS "Remember, Decapsulation happens from right to left, never in reverse, if you have /ip4/udp/ipfs/ if you decapsulate 'udp' you will also take out ipfs!"
 .IP "\(bu" 2

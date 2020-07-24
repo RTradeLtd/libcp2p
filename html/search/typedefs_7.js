@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['multi_5faddr_5ft_1675',['multi_addr_t',['../da/de0/multiaddr_8h.html#a572c8fe8d222f6defe054a111e283e69',1,'multiaddr.h']]],
-  ['multicodec_5fencoded_5ft_1676',['multicodec_encoded_t',['../d2/da6/multicodec_8h.html#a9fa1d77d2b72a22a44c1321c70ffd932',1,'multicodec.h']]],
-  ['mutex_5ffn_1677',['mutex_fn',['../d1/d8c/logger_8h.html#ac8dc34c8e7f433a3b80d5bfa0aa59032',1,'logger.h']]]
+  ['log_5ffn_2255',['log_fn',['../d1/d8c/logger_8h.html#acbb4363df37107a069aededd1b6c568b',1,'logger.h']]],
+  ['log_5ffnf_2256',['log_fnf',['../d1/d8c/logger_8h.html#a665ba15eee3a57a2d5b1b0febdf30b96',1,'logger.h']]]
 ];

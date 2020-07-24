@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['y_1112',['y',['../d7/d04/struct_ephemeral_public_key.html#a37e939c39d7a4ed7ca18a74de741bad1',1,'EphemeralPublicKey']]]
+  ['x_1493',['x',['../d7/d04/struct_ephemeral_public_key.html#afc1242c216d3d3b00ae3a430856d6235',1,'EphemeralPublicKey']]],
+  ['x11_1494',['X11',['../d7/ded/codecs_8h.html#a47322ec94c24726c1f04d8638b975016',1,'codecs.h']]],
+  ['x25519_5fpub_1495',['X25519_PUB',['../d7/ded/codecs_8h.html#ae6ec46e0f201ddfea8f5a75234fd98b7',1,'codecs.h']]],
+  ['xor_5fbin_1496',['xor_bin',['../d6/d43/operations_8c.html#aac525193c10373a352e3a284b33cd19a',1,'xor_bin(const unsigned char *bin1, const unsigned char *bin2, unsigned char *dest):&#160;operations.c'],['../da/d4f/operations_8h.html#aac525193c10373a352e3a284b33cd19a',1,'xor_bin(const unsigned char *bin1, const unsigned char *bin2, unsigned char *dest):&#160;operations.c']]]
 ];

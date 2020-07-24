@@ -1,0 +1,82 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/tinycbor/cborpretty.c" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/tinycbor/cborpretty.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'tinycbor/cbor\&.h'\fP
+.br
+\fC#include 'tinycbor/cborinternal_p\&.h'\fP
+.br
+\fC#include 'tinycbor/compilersupport_p\&.h'\fP
+.br
+\fC#include 'tinycbor/utf8_p\&.h'\fP
+.br
+\fC#include <inttypes\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fB_BSD_SOURCE\fP   1"
+.br
+.ti -1c
+.RI "#define \fB_DEFAULT_SOURCE\fP   1"
+.br
+.ti -1c
+.RI "#define \fB__STDC_LIMIT_MACROS\fP   1"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "static bool \fBconvertToUint64\fP (double v, uint64_t *absolute)"
+.br
+.ti -1c
+.RI "static void \fBprintRecursionLimit\fP (\fBCborStreamFunction\fP stream, void *out)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBhexDump\fP (\fBCborStreamFunction\fP stream, void *out, const void *ptr, size_t n)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fButf8EscapedDump\fP (\fBCborStreamFunction\fP stream, void *out, const void *ptr, size_t n)"
+.br
+.ti -1c
+.RI "static const char * \fBresolve_indicator\fP (const uint8_t *ptr, const uint8_t *end, int flags)"
+.br
+.ti -1c
+.RI "static const char * \fBget_indicator\fP (const \fBCborValue\fP *it, int flags)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBvalue_to_pretty\fP (\fBCborStreamFunction\fP stream, void *out, \fBCborValue\fP *it, int flags, int recursionsLeft)"
+.br
+.ti -1c
+.RI "static \fBCborError\fP \fBcontainer_to_pretty\fP (\fBCborStreamFunction\fP stream, void *out, \fBCborValue\fP *it, \fBCborType\fP containerType, int flags, int recursionsLeft)"
+.br
+.ti -1c
+.RI "\fBCborError\fP \fBcbor_value_to_pretty_stream\fP (\fBCborStreamFunction\fP streamFunction, void *token, \fBCborValue\fP *value, int flags)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define __STDC_LIMIT_MACROS   1"
+
+.PP
+Definition at line 28 of file cborpretty\&.c\&.
+.SS "#define _BSD_SOURCE   1"
+
+.PP
+Definition at line 25 of file cborpretty\&.c\&.
+.SS "#define _DEFAULT_SOURCE   1"
+
+.PP
+Definition at line 26 of file cborpretty\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

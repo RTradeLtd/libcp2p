@@ -16,6 +16,8 @@ enable udp
 enable udp  
 .IP "\fBGlobal \fBlibp2p_crypto_ecdsa_keypair_generation\fP (unsigned char *output, mbedtls_ecp_group_id curve)\fP" 1c
 figure out if we need this  
+.IP "\fBGlobal \fBlibp2p_crypto_public_key_cbor_encode\fP (public_key_t *pub_key, size_t *bytes_written)\fP" 1c
+figure out why this returns an error  
 .IP "\fBFile \fBlogger\&.c\fP \fP" 1c
 .IP "\(bu" 2
 buffer logs and use a dedicated thread for writing (avoid blocking locks)

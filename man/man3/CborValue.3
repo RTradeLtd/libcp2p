@@ -1,0 +1,67 @@
+.TH "CborValue" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+CborValue
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <cbor\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "const \fBCborParser\fP * \fBparser\fP"
+.br
+.ti -1c
+.RI "const uint8_t * \fBptr\fP"
+.br
+.ti -1c
+.RI "uint32_t \fBremaining\fP"
+.br
+.ti -1c
+.RI "uint16_t \fBextra\fP"
+.br
+.ti -1c
+.RI "uint8_t \fBtype\fP"
+.br
+.ti -1c
+.RI "uint8_t \fBflags\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+This type contains one value parsed from the CBOR stream\&. Each \fBCborValue\fP behaves as an iterator in a StAX-style parser\&. 
+.PP
+Definition at line 307 of file cbor\&.h\&.
+.SH "Field Documentation"
+.PP 
+.SS "uint16_t CborValue::extra"
+
+.PP
+Definition at line 311 of file cbor\&.h\&.
+.SS "uint8_t CborValue::flags"
+
+.PP
+Definition at line 313 of file cbor\&.h\&.
+.SS "const \fBCborParser\fP* CborValue::parser"
+
+.PP
+Definition at line 308 of file cbor\&.h\&.
+.SS "const uint8_t* CborValue::ptr"
+
+.PP
+Definition at line 309 of file cbor\&.h\&.
+.SS "uint32_t CborValue::remaining"
+
+.PP
+Definition at line 310 of file cbor\&.h\&.
+.SS "uint8_t CborValue::type"
+
+.PP
+Definition at line 312 of file cbor\&.h\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

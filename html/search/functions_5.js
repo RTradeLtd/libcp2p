@@ -1,7 +1,11 @@
 var searchData=
 [
-  ['find_5fhash_1270',['find_hash',['../d3/d99/hashes_8c.html#abb8811795c15911e42d77bdc5848504f',1,'hashes.c']]],
-  ['format_5fcolored_1271',['format_colored',['../d3/d13/colors_8c.html#ab3caa8a3d15672e3597eb5e08b593860',1,'format_colored(COLORS color, char *message):&#160;colors.c'],['../da/dd8/colors_8h.html#ab3caa8a3d15672e3597eb5e08b593860',1,'format_colored(COLORS color, char *message):&#160;colors.c']]],
-  ['free_5fsocket_5fserver_1272',['free_socket_server',['../d1/dfc/socket__server_8c.html#a0873d0d29f1ce24a3a9c7a199c03a2a1',1,'free_socket_server(socket_server_t *srv):&#160;socket_server.c'],['../d9/d26/socket__server_8h.html#a0873d0d29f1ce24a3a9c7a199c03a2a1',1,'free_socket_server(socket_server_t *srv):&#160;socket_server.c']]],
-  ['free_5fsocket_5fserver_5fconfig_1273',['free_socket_server_config',['../d1/dfc/socket__server_8c.html#a77df78f3e8eb1b69cca2b4f2c6b3e354',1,'free_socket_server_config(socket_server_config_t *config):&#160;socket_server.c'],['../d9/d26/socket__server_8h.html#a77df78f3e8eb1b69cca2b4f2c6b3e354',1,'free_socket_server_config(socket_server_config_t *config):&#160;socket_server.c']]]
+  ['encode_5fhalf_1780',['encode_half',['../d9/d2c/cborinternal__p_8h.html#a1b364c8e51f6127589cb10666ce1978c',1,'cborinternal_p.h']]],
+  ['encode_5fnumber_1781',['encode_number',['../d9/d70/group___cbor_encoding.html#gac454fc4ce51c690cdf5ec867a391dce6',1,'cborencoder.c']]],
+  ['encode_5fnumber_5fno_5fupdate_1782',['encode_number_no_update',['../d9/d70/group___cbor_encoding.html#gafeb6394a4c6607c7f238901ed6528607',1,'cborencoder.c']]],
+  ['encode_5fstring_1783',['encode_string',['../d9/d70/group___cbor_encoding.html#ga9d2995415ef55a58b1d8647c9a179fe0',1,'cborencoder.c']]],
+  ['error_5flog_1784',['error_log',['../d1/d22/logger_8c.html#a86974eb20c3c2a9b8528cca2bfd1526b',1,'error_log(thread_logger *thl, int file_descriptor, char *message):&#160;logger.c'],['../d1/d8c/logger_8h.html#a86974eb20c3c2a9b8528cca2bfd1526b',1,'error_log(thread_logger *thl, int file_descriptor, char *message):&#160;logger.c']]],
+  ['example_5ftask_5ffunc_5ftcp_1785',['example_task_func_tcp',['../d2/d09/socket__test_8c.html#a11e393df594425835c9dd42e2440d325',1,'socket_test.c']]],
+  ['example_5ftask_5ffunc_5fudp_1786',['example_task_func_udp',['../d2/d09/socket__test_8c.html#a96169235a26e3781a18709bc7d6d2886',1,'socket_test.c']]],
+  ['extract_5flength_1787',['extract_length',['../dc/d74/group___cbor_parsing.html#ga3677fd5d7ebd5ce9e0f6ac80a65788ff',1,'cborparser.c']]]
 ];
