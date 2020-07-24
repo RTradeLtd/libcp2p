@@ -16,13 +16,8 @@ target_link_libraries(libcrypto mbedtls)
 target_link_libraries(libcrypto mbedx509)
 target_link_libraries(libcrypto mbedcrypto)
 target_link_libraries(libcrypto libmultibase)
+target_link_libraries(libcrypto tinycbor)
 
-if (CMAKE_BUILD_TYPE STREQUAL "CI")
-    target_link_libraries(libcrypto TINYCBOR_LIB)
-endif()
-if (NOT CMAKE_BUILD_TYPE STREQUAL "CI")
-    target_link_libraries(libcrypto tinycbor)
-endif()
 
 
 add_executable(libcrypto-test ./src/crypto/crypto_test.c)
