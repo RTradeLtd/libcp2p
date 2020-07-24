@@ -37,7 +37,7 @@ endif()
 
 find_library(TINYCBOR_LIB 
       tinycbor
-      PATHS /usr/local/lib
+      PATHS /home/travis/build/RTradeLtd/libcp2p/tinycbor
 )
 
 list(APPEND flags -D_POSIX_C_SOURCE=201112L)
