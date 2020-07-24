@@ -16,7 +16,7 @@ build-analysis:
 
 .PHONY: docs
 docs:
-	(cd build; cmake --build . --target doxygen-docs)
+	(cd build; cmake --build . --target doxygen-docs ; cd .. ; rm -rf html man ; cp -r docs-build/* .)
 
 .PHONY: install-cmocka
 install-cmocka:
