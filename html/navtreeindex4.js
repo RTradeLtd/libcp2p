@@ -1,5 +1,6 @@
 var NAVTREEINDEX4 =
 {
+"d7/ded/codecs_8h.html#a7954590f66ad9db4fabb89389758eed2":[16,0,1,5,0,408],
 "d7/ded/codecs_8h.html#a79c1c0ac3cc3345ef9bdcc8f0d29e21f":[16,0,1,5,0,17],
 "d7/ded/codecs_8h.html#a79ca7468b2488b259916c16361f8e47a":[16,0,1,5,0,427],
 "d7/ded/codecs_8h.html#a79cdbb78126ad0d03fd2606393bc6ca3":[16,0,1,5,0,25],
@@ -248,6 +249,5 @@ var NAVTREEINDEX4 =
 "d8/d26/multiaddr_8c.html#acbccc0cd009eefa4a89cf85d774c0c7b":[16,0,2,3,0,1],
 "d8/d26/multiaddr_8c.html#ad3ee5cbe47bd239e6b308f367afb1726":[16,0,2,3,0,4],
 "d8/d26/multiaddr_8c.html#ae89c19ef7ce71183b7b1685cf33739ed":[16,0,2,3,0,7],
-"d8/d26/multiaddr_8c.html#af1f42d846e45954fb1dfdd004d71bc37":[16,0,2,3,0,12],
-"d8/d26/multiaddr_8c.html#af237ac393bd1a84840760647189d9633":[16,0,2,3,0,15]
+"d8/d26/multiaddr_8c.html#af1f42d846e45954fb1dfdd004d71bc37":[16,0,2,3,0,12]
 };

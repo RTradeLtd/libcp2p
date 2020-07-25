@@ -42,8 +42,9 @@ var NAVTREEINDEX1 =
 "d3/d99/hashes_8c_source.html":[16,0,2,6,1],
 "d3/d9b/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s.html":[10],
 "d3/d9b/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s.html#autotoc_md39":[10,0],
-"d3/d9b/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s.html#autotoc_md40":[10,0,0],
-"d3/d9b/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s.html#autotoc_md41":[10,0,1],
+"d3/d9b/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s.html#autotoc_md40":[10,1],
+"d3/d9b/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s.html#autotoc_md41":[10,1,0],
+"d3/d9b/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s.html#autotoc_md42":[10,1,1],
 "d3/dc5/structthread.html":[15,0,38],
 "d3/dc5/structthread.html#a179c3787ca24dc339fa88d610f93c620":[15,0,38,0],
 "d3/dc5/structthread.html#a63ecb8c391b54826c5199070848b1f09":[15,0,38,2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "d6/dab/multihash__test_8c.html#a0b865ac1ba7901cc49300f9b52b77432":[16,0,2,6,3,16],
 "d6/dab/multihash__test_8c.html#a0d5cecec7fbc17e5de8497b913a07342":[16,0,2,6,3,20],
 "d6/dab/multihash__test_8c.html#a2459b3927efd0c2565864750afe7b48c":[16,0,2,6,3,0],
-"d6/dab/multihash__test_8c.html#a251d306906300006443ada0de143d81e":[16,0,2,6,3,9],
-"d6/dab/multihash__test_8c.html#a2be1bc627d7fd6fc9e01d3445fda32da":[16,0,2,6,3,14]
+"d6/dab/multihash__test_8c.html#a251d306906300006443ada0de143d81e":[16,0,2,6,3,9]
 };

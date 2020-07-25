@@ -4,6 +4,9 @@
 .SH NAME
 md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s \- Secure Connections Overview 
 When connecting to a remote peer, we have a multiaddress that looks like \fC/ip4/127\&.0\&.0\&.1/tcp/9090/p2p/somepeerid\fP\&. \fCsomepeerid\fP corresponds to the SHA256 hash of an ECC public key in PEM format\&. When connecting to the remote peer, we initiate the connection over an insecure connection asking for public key corresponding to the peerID\&. When we receive the public key, we calculate the peerID locally\&. If it matches we then initiate an ECDH key agreement\&. The new key from the key agreement is used to then encrypt/decrypt messages with the peer\&.
+.SH "Why Not Just Use TLS"
+.PP
+The main reason for not using TLS directly is that it is a resource intensive process and requires using trusted CA issued certificates\&. By just using ECDSA keys and ECDH for shared secret negotiation, we can have a lightweight method of providing secure communications\&. Eventually a TLS implementation may be integrated if it proves to be needed\&.
 .SH "Process"
 .PP
 .SS "Code"
