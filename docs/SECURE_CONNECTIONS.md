@@ -28,4 +28,4 @@ sequenceDiagram
 
 ## Diagram
 
-![](./secure_conn.jpg)
+![](https://gateway.temporal.cloud/ipfs/QmWfDod8zp8CKALZ1aW4hHjNiLek73fTtDrjwVZHHmGpj5)
