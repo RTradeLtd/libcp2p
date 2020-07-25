@@ -20,6 +20,7 @@
 #include "crypto/key.h"
 #include "crypto/peerutils.h"
 #include "crypto/sha256.h"
+#include "encoding/cbor.h"
 #include "protobuf/protobuf.h"
 #include "tinycbor/cbor.h"
 #include <stdbool.h>
@@ -216,8 +217,7 @@ public_key_t *libp2p_crypto_public_key_cbor_decode(cbor_encoded_data_t *data) {
  * @return Success: pointer to an instance of cbor_encoded_data_t
  * @return Failure: NULL pointer
  */
-cbor_encoded_data_t *libp2p_crypto_public_key_cbor_encode(public_key_t *pub_key,
-                                                          size_t *bytes_written) {
+cbor_encoded_data_t *libp2p_crypto_public_key_cbor_encode(public_key_t *pub_key) {
 
     uint8_t buf[pub_key->data_size + sizeof(pub_key) + 3];
     CborEncoder encoder, array_encoder;
@@ -258,19 +258,10 @@ cbor_encoded_data_t *libp2p_crypto_public_key_cbor_encode(public_key_t *pub_key,
     }
 
     size_t size = cbor_encoder_get_buffer_size(&encoder, buf);
-    *bytes_written = size;
-    uint8_t *out = calloc(sizeof(uint8_t), size);
-    if (out == NULL) {
-        return NULL;
-    }
-    memcpy(out, buf, size);
-    cbor_encoded_data_t *cbdata =
-        calloc(sizeof(cbor_encoded_data_t), sizeof(cbor_encoded_data_t));
+
+    cbor_encoded_data_t *cbdata = new_cbor_encoded_data(buf, size);
     if (cbdata == NULL) {
-        free(out);
         return NULL;
     }
-    cbdata->data = out;
-    cbdata->len = size;
     return cbdata;
 }
