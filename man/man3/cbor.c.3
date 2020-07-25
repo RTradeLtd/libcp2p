@@ -1,0 +1,77 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/encoding/cbor.c" 3 "Fri Jul 24 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/encoding/cbor.c \- utilities for working with cbor encoding/decoding  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'encoding/cbor\&.h'\fP
+.br
+\fC#include <stdint\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBfree_cbor_encoded_data\fP (\fBcbor_encoded_data_t\fP *in)"
+.br
+.RI "free up resources associated with an instance of cbor_encoded_t "
+.ti -1c
+.RI "\fBcbor_encoded_data_t\fP * \fBnew_cbor_encoded_data\fP (uint8_t *data, size_t len)"
+.br
+.RI "allocates a chunk of memory for a new cbor_encoded_data_t instance "
+.in -1c
+.SH "Detailed Description"
+.PP 
+utilities for working with cbor encoding/decoding 
+
+provides helper functions for working with CBOR encoding/decoding 
+.PP
+Definition in file \fBcbor\&.c\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "void free_cbor_encoded_data (\fBcbor_encoded_data_t\fP * in)"
+
+.PP
+free up resources associated with an instance of cbor_encoded_t 
+.PP
+\fBParameters\fP
+.RS 4
+\fIin\fP pointer to an instance of cbor_encoded_data_t 
+.RE
+.PP
+
+.PP
+Definition at line 16 of file cbor\&.c\&.
+.SS "\fBcbor_encoded_data_t\fP* new_cbor_encoded_data (uint8_t * data, size_t len)"
+
+.PP
+allocates a chunk of memory for a new cbor_encoded_data_t instance 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdata\fP pointer to the data we are copying into the new struct 
+.br
+\fIlen\fP size of the data we are copying in 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Success: pointer to an instance of a new cbor_encoded_data_t 
+.PP
+Failure: NULL pointer 
+.RE
+.PP
+
+.PP
+Definition at line 28 of file cbor\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

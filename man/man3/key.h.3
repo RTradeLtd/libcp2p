@@ -1,4 +1,4 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/key.h" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/key.h" 3 "Fri Jul 24 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,6 +7,8 @@
 .SH SYNOPSIS
 .br
 .PP
+\fC#include 'encoding/cbor\&.h'\fP
+.br
 \fC#include <stdint\&.h>\fP
 .br
 \fC#include <stdlib\&.h>\fP
@@ -15,9 +17,6 @@
 .SS "Data Structures"
 
 .in +1c
-.ti -1c
-.RI "struct \fBcbor_encoded_data\fP"
-.br
 .ti -1c
 .RI "struct \fBpublic_key\fP"
 .br
@@ -28,10 +27,6 @@
 .SS "Typedefs"
 
 .in +1c
-.ti -1c
-.RI "typedef struct \fBcbor_encoded_data\fP \fBcbor_encoded_data_t\fP"
-.br
-.RI "wraps data returned from encoding with tinycbor "
 .ti -1c
 .RI "typedef struct \fBpublic_key\fP \fBpublic_key_t\fP"
 .br
@@ -77,7 +72,7 @@
 .br
 .RI "used to cbor data a chunk of data "
 .ti -1c
-.RI "\fBcbor_encoded_data_t\fP * \fBlibp2p_crypto_public_key_cbor_encode\fP (\fBpublic_key_t\fP *pub_key, size_t *bytes_written)"
+.RI "\fBcbor_encoded_data_t\fP * \fBlibp2p_crypto_public_key_cbor_encode\fP (\fBpublic_key_t\fP *pub_key)"
 .br
 .RI "used to cbor encode a public_key_t type for sending over the wire "
 .in -1c
@@ -97,10 +92,6 @@ none of these functions and structures are thread safe
 Definition in file \fBkey\&.h\fP\&.
 .SH "Typedef Documentation"
 .PP 
-.SS "\fBcbor_encoded_data_t\fP"
-
-.PP
-wraps data returned from encoding with tinycbor 
 .SS "\fBprivate_key_t\fP"
 
 .PP
@@ -130,7 +121,7 @@ denotes the type of key indicates the type of cryptography used with the key
 .TP
 \fB\fIKEYTYPE_ECDSA \fP\fP
 .PP
-Definition at line 30 of file key\&.h\&.
+Definition at line 31 of file key\&.h\&.
 .SH "Function Documentation"
 .PP 
 .SS "int libp2p_crypto_private_key_copy (const \fBprivate_key_t\fP * source, \fBprivate_key_t\fP * destination)"
@@ -159,13 +150,13 @@ does not allocate memory for caller
 .PP
 
 .PP
-Definition at line 88 of file key\&.c\&.
+Definition at line 89 of file key\&.c\&.
 .SS "void libp2p_crypto_private_key_free (\fBprivate_key_t\fP * in)"
 
 .PP
 frees up resources associated with a private_key_t instance 
 .PP
-Definition at line 71 of file key\&.c\&.
+Definition at line 72 of file key\&.c\&.
 .SS "\fBprivate_key_t\fP* libp2p_crypto_private_key_new (void)"
 
 .PP
@@ -180,7 +171,7 @@ Failure: NULL pointer
 .PP
 
 .PP
-Definition at line 58 of file key\&.c\&.
+Definition at line 59 of file key\&.c\&.
 .SS "\fBpublic_key_t\fP* libp2p_crypto_public_key_cbor_decode (\fBcbor_encoded_data_t\fP * data)"
 
 .PP
@@ -200,8 +191,8 @@ Failure: NULL pointer
 .PP
 
 .PP
-Definition at line 110 of file key\&.c\&.
-.SS "\fBcbor_encoded_data_t\fP* libp2p_crypto_public_key_cbor_encode (\fBpublic_key_t\fP * pub_key, size_t * bytes_written)"
+Definition at line 111 of file key\&.c\&.
+.SS "\fBcbor_encoded_data_t\fP* libp2p_crypto_public_key_cbor_encode (\fBpublic_key_t\fP * pub_key)"
 
 .PP
 used to cbor encode a public_key_t type for sending over the wire 
@@ -229,13 +220,13 @@ figure out why this returns an error
 .PP
 
 .PP
-Definition at line 219 of file key\&.c\&.
+Definition at line 220 of file key\&.c\&.
 .SS "void libp2p_crypto_public_key_free (\fBpublic_key_t\fP * in)"
 
 .PP
 free up resources associated with a public_key_t instance 
 .PP
-Definition at line 48 of file key\&.c\&.
+Definition at line 49 of file key\&.c\&.
 .SS "\fBpublic_key_t\fP* libp2p_crypto_public_key_new (void)"
 
 .PP
@@ -259,7 +250,7 @@ Failure: NULL pointer
 .PP
 
 .PP
-Definition at line 35 of file key\&.c\&.
+Definition at line 36 of file key\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for libcp2p from the source code\&.

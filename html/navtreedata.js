@@ -64,6 +64,12 @@ var NAVTREE =
       [ "Supported Algorithms", "d3/d1f/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s.html#autotoc_md36", null ],
       [ "NOTE", "d3/d1f/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s.html#autotoc_md37", null ]
     ] ],
+    [ "Secure Connections Overview", "d3/d9b/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s.html", [
+      [ "Process", "d3/d9b/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s.html#autotoc_md39", [
+        [ "Code", "d3/d9b/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s.html#autotoc_md40", null ],
+        [ "Diagram", "d3/d9b/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s.html#autotoc_md41", null ]
+      ] ]
+    ] ],
     [ "Todo List", "dd/da0/todo.html", null ],
     [ "Deprecated List", "da/d58/deprecated.html", null ],
     [ "Modules", "modules.html", "modules" ],
@@ -101,15 +107,15 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d2/d9e/cbor_8h.html#a38f51ceba8bc8a9b1cf7dd31e3f9c178ae705bcff9f8ea5e470dd222e5534592b",
-"d4/d05/structthpool__.html#a08d4a33fae889af4adc4e78d9e34602d",
-"d7/d8d/structsocket__server.html#a31a26ac270d1dd975d68b3000f40f5d2",
-"d7/ded/codecs_8h.html#a7a6276b72a37953f8f92158c878080f2",
-"d8/d33/base32_8h.html",
-"da/dc9/ephemeral_8c.html#a65762ddb8cca9ff714540e7e1c11ae93",
-"dc/d74/group___cbor_parsing.html#ga02ec0b5c8346f407cf5def566ddcf5ae",
-"dd/db3/cborpretty_8c.html#a8fb447618db946a9e2a596d9ea18763f",
-"globals_func_a.html"
+"d3/d13/colors_8c.html#a9b86c057290aefcc15b20231f9cabe9e",
+"d6/dab/multihash__test_8c.html#a2c20d844927bb90cdf5b3e1c954636e4",
+"d7/dda/tinycbor_2cbor_8h.html#gac7df91cad1cba43d5d0103284fc390fcaca0e8dca46c4050e122fd51cc8a0f346",
+"d7/ded/codecs_8h.html#a79c1c0ac3cc3345ef9bdcc8f0d29e21f",
+"d8/d26/multiaddr_8c_source.html",
+"da/da5/structthread__logger.html",
+"dc/d6a/src_2protobuf_2protobuf_8h.html#a73fb00c9b846caa4065b423724b5878eaa2f8730ce013cb24177ca1ba0091b930",
+"dd/d56/struct_cbor_value.html#a3a7e8ff14adf8c01baeaeadf30f9f692",
+"globals_defs_t.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

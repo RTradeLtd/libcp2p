@@ -1,4 +1,4 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/crypto/key.c" 3 "Thu Jul 23 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/crypto/key.c" 3 "Fri Jul 24 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -12,6 +12,8 @@
 \fC#include 'crypto/peerutils\&.h'\fP
 .br
 \fC#include 'crypto/sha256\&.h'\fP
+.br
+\fC#include 'encoding/cbor\&.h'\fP
 .br
 \fC#include 'protobuf/protobuf\&.h'\fP
 .br
@@ -54,7 +56,7 @@
 .br
 .RI "used to cbor data a chunk of data "
 .ti -1c
-.RI "\fBcbor_encoded_data_t\fP * \fBlibp2p_crypto_public_key_cbor_encode\fP (\fBpublic_key_t\fP *pub_key, size_t *bytes_written)"
+.RI "\fBcbor_encoded_data_t\fP * \fBlibp2p_crypto_public_key_cbor_encode\fP (\fBpublic_key_t\fP *pub_key)"
 .br
 .RI "used to cbor encode a public_key_t type for sending over the wire "
 .in -1c
@@ -100,13 +102,13 @@ does not allocate memory for caller
 .PP
 
 .PP
-Definition at line 88 of file key\&.c\&.
+Definition at line 89 of file key\&.c\&.
 .SS "void libp2p_crypto_private_key_free (\fBprivate_key_t\fP * in)"
 
 .PP
 frees up resources associated with a private_key_t instance 
 .PP
-Definition at line 71 of file key\&.c\&.
+Definition at line 72 of file key\&.c\&.
 .SS "\fBprivate_key_t\fP* libp2p_crypto_private_key_new (void)"
 
 .PP
@@ -121,7 +123,7 @@ Failure: NULL pointer
 .PP
 
 .PP
-Definition at line 58 of file key\&.c\&.
+Definition at line 59 of file key\&.c\&.
 .SS "\fBpublic_key_t\fP* libp2p_crypto_public_key_cbor_decode (\fBcbor_encoded_data_t\fP * data)"
 
 .PP
@@ -141,8 +143,8 @@ Failure: NULL pointer
 .PP
 
 .PP
-Definition at line 110 of file key\&.c\&.
-.SS "\fBcbor_encoded_data_t\fP* libp2p_crypto_public_key_cbor_encode (\fBpublic_key_t\fP * pub_key, size_t * bytes_written)"
+Definition at line 111 of file key\&.c\&.
+.SS "\fBcbor_encoded_data_t\fP* libp2p_crypto_public_key_cbor_encode (\fBpublic_key_t\fP * pub_key)"
 
 .PP
 used to cbor encode a public_key_t type for sending over the wire 
@@ -170,13 +172,13 @@ figure out why this returns an error
 .PP
 
 .PP
-Definition at line 219 of file key\&.c\&.
+Definition at line 220 of file key\&.c\&.
 .SS "void libp2p_crypto_public_key_free (\fBpublic_key_t\fP * in)"
 
 .PP
 free up resources associated with a public_key_t instance 
 .PP
-Definition at line 48 of file key\&.c\&.
+Definition at line 49 of file key\&.c\&.
 .SS "\fBpublic_key_t\fP* libp2p_crypto_public_key_new (void)"
 
 .PP
@@ -191,7 +193,7 @@ Failure: NULL pointer
 .PP
 
 .PP
-Definition at line 35 of file key\&.c\&.
+Definition at line 36 of file key\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for libcp2p from the source code\&.
