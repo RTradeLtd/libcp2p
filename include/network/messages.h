@@ -10,10 +10,11 @@
 
 /*!
     * @enum MESSAGE_TYPES
+    * @typedef MESSAGE_TYPES_T
     * @brief denotes a type of message in a format for inclusion in structs
     * @details the actual value of the message is a macro defined at the top of messages.h
 */
-typedef enum {
+typedef enum MESSAGE_TYPES {
     /*!
     * @brief indicates we are sending a message wanting the peerID
     */
@@ -44,7 +45,7 @@ typedef enum {
     * @brief an arbitrary message type for implementation defined behavior
     */
     MESSAGE_ARBITRARY
-} MESSAGE_TYPES;
+} MESSAGE_TYPES_T;
 
 /*!
   * @struct message
@@ -53,7 +54,7 @@ typedef enum {
   * @details a message is sent to a peer, or received from a peer during communications
 */
 typedef struct message {
-    MESSAGE_TYPES type; /*! @brief the type of message */
+    MESSAGE_TYPES_T type; /*! @brief the type of message */
     size_t len; /*! @brief the size of the data contained in the message */
     unsigned char *data; /*! @brief the actual data in the message */
 } message_t;
