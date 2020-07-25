@@ -2,6 +2,10 @@
 
 When connecting to a remote peer, we have a multiaddress that looks like `/ip4/127.0.0.1/tcp/9090/p2p/somepeerid`. `somepeerid` corresponds to the SHA256 hash of an ECC public key in PEM format. When connecting to the remote peer, we initiate the connection over an insecure connection asking for public key corresponding to the peerID. When we receive the public key, we calculate the peerID locally. If it matches we then initiate an ECDH key agreement. The new key from the key agreement is used to then encrypt/decrypt messages with the peer.
 
+# Why Not Just Use TLS
+
+The main reason for not using TLS directly is that it is a resource intensive process and requires using trusted CA issued certificates. By just using ECDSA keys and ECDH for shared secret negotiation, we can have a lightweight method of providing secure communications. Eventually a TLS implementation may be integrated if it proves to be needed.
+
 # Process
 
 ## Code
@@ -24,4 +28,4 @@ sequenceDiagram
 
 ## Diagram
 
-![](./secure_conn.jpg)
+![](https://gateway.temporal.cloud/ipfs/QmWfDod8zp8CKALZ1aW4hHjNiLek73fTtDrjwVZHHmGpj5)
