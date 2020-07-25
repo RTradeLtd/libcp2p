@@ -1,8 +1,8 @@
 # Peer Identifiers
 
-To construct a Peer Identifier (aka PeerID, peerID, etc..), you take the hash of an ECC Public Key in DER format, convert it to a multihash, and then encode the multihash using multibase. The result of this operation is your "PeerID". Laid out step by step:
+To construct a Peer Identifier (aka PeerID, peerID, etc..), you take the hash of an ECC Public Key in PEM format, convert it to a multihash, and then encode the multihash using multibase. The result of this operation is your "PeerID". Laid out step by step:
 
-1) Get an ECC Public Key in DER format
+1) Get an ECC Public Key in PEM format
 2) Hash the public key
 3) Convert the hash into a multihash
 4) Base encoded the multihash using multibase
@@ -22,9 +22,9 @@ stateDiagram
 	[*] -->  ECC_KEY
   note right of ECC_KEY: this is an ECC public key
   ECC_KEY --> ECC_KEY_DER
-  note right of ECC_KEY_DER: convert ECC public key into DER format
+  note right of ECC_KEY_DER: convert ECC public key into PEM format
   ECC_KEY_DER --> SHA256_HASH
-  note right of SHA256_HASH: compute the sha256 hash of the DER encoded key
+  note right of SHA256_HASH: compute the sha256 hash of the PEM encoded key
   SHA256_HASH --> MULTIHASH_SHA256
   note right of MULTIHASH_SHA256: take the sha256 hash and turn it into a multihash
   MULTIHASH_SHA256 --> MULTIBASE_BASE32_ENCODE
@@ -34,7 +34,7 @@ stateDiagram
 ## Diagram
 
 
-![](https://gateway.temporal.cloud/ipfs/QmZAfE9sHXa3gMhatzCVxaUVcMriMZ8EfYTmCTnjVo83JM)
+![](https://gateway.temporal.cloud/ipfs/QmfW1SFrmHMVUw3ToNjvaDoBo3k4vqmK5DPdbCJWcAWdQs)
 
 # NOTE
 

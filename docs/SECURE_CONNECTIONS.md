@@ -23,9 +23,9 @@ sequenceDiagram
 	Peer2->>+Peer1: 
     Note over Peer1,Peer2: After successful key agreement all messages exchange via encryption
 	Note over Peer1,Peer2: Secret key for AES message encryption is sha256 hash of ECDH priv key
-	Note over Peer1,Peer2: We take the sha256 hash of the private key in DER format
+	Note over Peer1,Peer2: We take the sha256 hash of the private key in PEM format
 ```					
 
 ## Diagram
 
-![](https://gateway.temporal.cloud/ipfs/QmWfDod8zp8CKALZ1aW4hHjNiLek73fTtDrjwVZHHmGpj5)
+![](https://gateway.temporal.cloud/ipfs/QmR39BfPRcyXawA7X7eXrhmsCAEMYM1ZfPzZjYmg7buntW)
