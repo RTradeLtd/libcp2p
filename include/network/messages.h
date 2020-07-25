@@ -1,5 +1,7 @@
 /*! @file messages.h
-  * @brief defines message types and tooling for sending/receiving messages
+  * @brief defines message types and tooling for a very minimal RPC framework
+  * @note when sending messages anytime you send a new message, you must first send a single byte that indicates the size of the messsage we are sending
+  * @note this helps ensure that we can appropriately handle new requests and allocate enough memory
   * @details the message types here are intended to be served as a building block for your own applications
   * @details at a minimum the types here are setup to establish a secure communications channel using ECDSA keys and ECDH key agreement
 */
@@ -34,6 +36,10 @@ typedef enum {
     * @brief indicates we want to start an ECDH key exchange
     */
     MESSAGE_START_ECDH,
+    /*!
+      * @brief indicates we are willing to start an ECDH key exchange and tells the other peer to begin it
+    */
+    MESSAGE_BEGIN_ECDH,
     /*!
     * @brief an arbitrary message type for implementation defined behavior
     */
