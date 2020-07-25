@@ -19,6 +19,7 @@
 
 #pragma once
 
+#include "encoding/cbor.h"
 #include <stdint.h>
 #include <stdlib.h>
 
@@ -28,16 +29,6 @@
  * @details indicates the type of cryptography used with the key
  */
 typedef enum { KEYTYPE_INVALID, KEYTYPE_ECDSA } key_type_t;
-
-/*!
- * @struct cbor_encoded_data
- * @typedef cbor_encoded_data_t
- * @brief wraps data returned from encoding with tinycbor
- */
-typedef struct cbor_encoded_data {
-    uint8_t *data; /*! @brief the actual cbor encoded data */
-    size_t len;    /*! @brief the length of the cbor encoded data */
-} cbor_encoded_data_t;
 
 /*! @struct public_key
  * @typedef public_key_t
@@ -112,5 +103,4 @@ public_key_t *libp2p_crypto_public_key_cbor_decode(cbor_encoded_data_t *data);
  * @return Success: pointer to an instance of cbor_encoded_data_t
  * @return Failure: NULL pointer
  */
-cbor_encoded_data_t *libp2p_crypto_public_key_cbor_encode(public_key_t *pub_key,
-                                                          size_t *bytes_written);
+cbor_encoded_data_t *libp2p_crypto_public_key_cbor_encode(public_key_t *pub_key);

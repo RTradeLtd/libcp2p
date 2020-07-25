@@ -274,6 +274,7 @@ ecdsa_private_key_t *libp2p_crypto_ecdsa_private_key_from_file(char *path) {
         return NULL;
     }
     char pem_buffer[1024];
+    memset(pem_buffer, 0, 1024);
     int rc = read(fd, pem_buffer, 1024);
     if (rc == -1) {
         printf("failed to read from file: %s\n", strerror(errno));
