@@ -20,7 +20,7 @@ The following message types are denoted as an enum `MESSAGE_TYPES`
 
 ## Encoding
 
-Messages are encoded on the wire using CBOR encoding. When sending a message the first byte is used to indicate the size of the message data. Essentailly a single message looks like, where `X` is determined by the first byte sent:
+Messages are encoded on the wire using CBOR encoding. When sending a message the first byte is used to indicate the size of the message data. Essentailly a single message looks like:
 
 ```
 | 1 Byte            | X Bytes     |
