@@ -60,6 +60,22 @@ typedef enum MESSAGE_TYPES {
 } message_t;
 
 /*!
+  * @struct message_send_opts
+  * @typedef message_send_opts_t
+  * @brief defines options used for sending messages to peers
+*/
+typedef struct message_send_opts {
+  /*!
+    * @brief the source file descriptor we are sending from
+  */
+  int src_fd;
+  /*!
+    * @brief the destination file descriptor we are sending too
+  */
+  int dst_fd;
+} message_send_opts_t;
+
+/*!
   * @brief used to cbor encode a message_t instance
   * @param msg pointer to an instance of message_t
   * @return Success: pointer to an instance of cbor_encoded_data_t
@@ -80,3 +96,10 @@ message_t *cbor_decode_message_t(cbor_encoded_data_t *input);
   * @param msg an instance of message_t
 */
 void free_message_t(message_t *msg);
+
+/*!
+  * @brief used to send messages to peers
+  * @param msg the actual message we are sending to a peer
+  * @param opts specifies how to send the message to a peer
+*/
+int send_message(message_t *msg, message_send_opts_t opts);
