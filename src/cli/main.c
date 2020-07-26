@@ -37,7 +37,7 @@ void start_server_callback(int argc, char *argv[]) {
     }
     printf("tcp addr: %s\n", tcp_addr->string);
     multi_addr_t *udp_addr =
-        multi_address_new_from_string((char *)*listen_address_tcp->sval);
+        multi_address_new_from_string((char *)*listen_address_udp->sval);
     if (udp_addr == NULL) {
         free_socket_server_config(config);
         return;
