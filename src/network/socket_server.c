@@ -53,10 +53,8 @@ bool do_shutdown = false;
  * does not match the actual number of options is undefined behavior
  * @return Success: pointer to a socket_server_t instance
  * @return Failure: NULL pointer
- * @details once you have used the config and created a new server with
- * new_socket_server() you can free the socket config with free_socket_config
- * @note once you have used the config and created a new server with
- * new_socket_server() you can free the socket config with free_socket_config
+ * @details once you have used the config and created a new server with new_socket_server() you can free the socket config with free_socket_config
+ * @note once you have used the config and created a new server with new_socket_server() you can free the socket config with free_socket_config
  */
 socket_server_t *new_socket_server(thread_logger *thl,
                                    socket_server_config_t *config,
@@ -454,132 +452,78 @@ socket_server_config_t *new_socket_server_config(int num_addrs) {
 
 /*!
  * @brief handles receiving an rpc message from another peer
- * @note if you send an inbound message of `5hello` you'll invoke a debug handler to
- * print to stdout
- * @warning needs to check to see if the data we are getting is for a tcp or udp
- * connection
- * @warning if a tcp connection we need to close the socket (as its the socket
- * connecting to the client)
- * @warning if a udp connection we dont close the socket and simply free the
- * resources
  */
 void handle_inbound_rpc(void *data) {
-    conn_handle_data_t *hdata = NULL;
-    hdata = (conn_handle_data_t *)data;
-    if (hdata == NULL) {
+    conn_handle_data_t *hdata = (conn_handle_data_t *)data;
+
+    // read the first byte to determine the size of the buffer
+    char first_byte[1];
+    memset(first_byte, 0, 1);
+
+    int rc = read(hdata->conn->socket_number, first_byte, 1);
+    switch (rc) {
+        case 0:
+            hdata->srv->thl->log(hdata->srv->thl, 0, "client disconnected",
+                                 LOG_LEVELS_DEBUG);
+            close(hdata->conn->socket_number);
+            free(hdata->conn);
+            free(hdata);
+            return;
+        case -1:
+            hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR,
+                                  "error encountered during read %s",
+                                  strerror(errno));
+            close(hdata->conn->socket_number);
+            free(hdata->conn);
+            free(hdata);
+            return;
+        default:
+            break;
+    }
+
+    int message_size = (int)first_byte[0];
+
+    if (message_size <= 0) {
+        // invalid first byte skip
+        close(hdata->conn->socket_number);
+        free(hdata->conn);
+        free(hdata);
         return;
     }
 
-    for (;;) {
-
-        // check to see if we shoudl exit
-        if (do_shutdown == true) {
-            goto RETURN;
-        }
-
-        message_t *msg = handle_receive(
-            hdata->srv->thl,
-            hdata->conn->socket_number,
-            hdata->is_tcp,
-            MAX_RPC_MSG_SIZE_KB
-        );
-
-        if (msg == NULL) {
-            goto RETURN;
-        }
-
-        bool success = false;
-
-        switch (msg->type) {
-            case MESSAGE_START_ECDH:
-                success = negotiate_secure_connection(hdata);
-                if (success == false) {
-                    printf("failed to negotiate secure connection\n");
-                } else {
-                    printf("successfully negotiated secure connection\n");
-                }
-                break;
-            case MESSAGE_BEGIN_ECDH:
-                break;
-            case MESSAGE_WANT_PEER_ID:
-                break;
-            case MESSAGE_HAVE_PEER_ID:
-                break;
-            case MESSAGE_WANT_PUB_KEY:
-                break;
-            case MESSAGE_HAVE_PUB_KEY:
-                break;
-            case MESSAGE_ARBITRARY:
-                break;
-            default:
-                break;
-        }
-    
-        free_message_t(msg);
-    }
-RETURN:
-
-    hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_DEBUG,
-                          "terminating connection. type tcp: %i", hdata->is_tcp);
-
-    // if TCP, close the connection to the client socket
-    if (hdata->is_tcp == true) {
+    // message too large skip
+    if (message_size > 8192) {
         close(hdata->conn->socket_number);
-    }
-    if (hdata != NULL) {
         free(hdata->conn);
         free(hdata);
+        return;
     }
+
+    // declare an array on stack to hold the rest of the message data
+    char message_data[message_size];
+    memset(message_data, 0, message_size);
+
+    rc = read(hdata->conn->socket_number, message_data, message_size);
+    switch (rc) {
+        case 0:
+            hdata->srv->thl->log(hdata->srv->thl, 0, "client disconnected",
+                                 LOG_LEVELS_DEBUG);
+            goto EXIT;
+        case -1:
+            hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR,
+                                  "error encountered during read %s",
+                                  strerror(errno));
+            goto EXIT;
+        default:
+            // connection was successful and we read some data
+            goto EXIT;
+    }
+
+    // todo: handle actual message
+
+    printf("%s\n", message_data);
+EXIT:
+    close(hdata->conn->socket_number);
+    free(hdata->conn);
+    free(hdata);
 }
-
-/*!
- * @brief used to specify which syscall signals should trigger shutdown process
- */
-void setup_signal_shutdown(int signals[], int num_signals) {
-    for (int i = 0; i < num_signals; i++) {
-        signal(signals[i], signal_shutdown);
-    }
-}
-
-/*!
-  * @brief used to negotiate a secure connection with the current connection
-*/
-bool negotiate_secure_connection(conn_handle_data_t *data) {
-    /*!
-      * @warning UDP secure connections currently disabled
-    */
-   if (data->is_tcp == false) {
-       return false;
-   }
-   message_t *msg = calloc(1, sizeof(message_t));
-   if (msg == NULL) {
-       return false;
-   }
-   
-   msg->data = calloc(1, 2);
-   if (msg->data == NULL) {
-       free(msg);
-       return false;
-   }
-
-   msg->type = MESSAGE_BEGIN_ECDH;
-   msg->data[0] = 'o';
-   msg->data[1] = 'k';
-   msg->len = 2;
-   
-    int rc = handle_send(
-        data->srv->thl,
-        data->conn->socket_number,
-        data->is_tcp,
-        msg,
-        NULL
-    );
-
-    free_message_t(msg);
-
-    if (rc == -1) {
-        return false;
-    }
-
-    return true;
-} 

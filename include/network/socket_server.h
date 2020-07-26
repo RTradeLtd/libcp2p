@@ -42,10 +42,8 @@ typedef void(threadpool_task_func)(void *data);
  * @typedef socket_server_config_t
  * @brief used for configuring a socket_server_t instance
  * @todo switch to multi_addresses
- * @details once you have used the config and created a new server with
- * new_socket_server() you can free the socket config with free_socket_config
- * @note once you have used the config and created a new server with
- * new_socket_server() you can free the socket config with free_socket_config
+ * @details once you have used the config and created a new server with new_socket_server() you can free the socket config with free_socket_config
+ * @note once you have used the config and created a new server with new_socket_server() you can free the socket config with free_socket_config
  */
 typedef struct socket_server_config {
     /*! @brief the thread pool task function to use for processing tcp connections */
@@ -114,10 +112,8 @@ typedef struct conn_handle_data {
  * does not match the actual number of options is undefined behavior
  * @return Success: pointer to a socket_server_t instance
  * @return Failure: NULL pointer
- * @details once you have used the config and created a new server with
- * new_socket_server() you can free the socket config with free_socket_config
- * @note once you have used the config and created a new server with
- * new_socket_server() you can free the socket config with free_socket_config
+ * @details once you have used the config and created a new server with new_socket_server() you can free the socket config with free_socket_config
+ * @note once you have used the config and created a new server with new_socket_server() you can free the socket config with free_socket_config
  */
 socket_server_t *new_socket_server(thread_logger *thl,
                                    socket_server_config_t *config,
@@ -175,17 +171,5 @@ socket_server_config_t *new_socket_server_config(int num_addrs);
 
 /*!
  * @brief handles receiving an rpc message from another peer
- * @note if you send an inbound message of `5hello` you'll invoke a debug handler to
- * print to stdout
  */
 void handle_inbound_rpc(void *data);
-
-/*!
- * @brief used to specify which syscall signals should trigger shutdown process
- */
-void setup_signal_shutdown(int signals[], int num_signals);
-
-/*!
-  * @brief used to negotiate a secure connection with the current connection
-*/
-bool negotiate_secure_connection(conn_handle_data_t *data);
