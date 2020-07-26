@@ -74,3 +74,9 @@ cbor_encoded_data_t *cbor_encode_message_t(message_t *msg);
   * @return Failure: NULL pointer
 */
 message_t *cbor_decode_message_t(cbor_encoded_data_t *input);
+
+/*!
+  * @brief frees up resources allocated for an instance of message_t
+  * @param msg an instance of message_t
+*/
+void free_message_t(message_t *msg);

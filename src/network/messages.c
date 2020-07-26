@@ -172,3 +172,12 @@ message_t *cbor_decode_message_t(cbor_encoded_data_t *input) {
     msg->len = data_len;
     return msg;
 }
+
+/*!
+  * @brief frees up resources allocated for an instance of message_t
+  * @param msg an instance of message_t
+*/
+void free_message_t(message_t *msg) {
+    free(msg->data);
+    free(msg);
+}
