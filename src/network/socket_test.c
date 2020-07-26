@@ -150,9 +150,9 @@ void test_new_socket_server(void **state) {
 
 
 void test_cbor_message_t_encoding(void **state) {
-    message_t *msg = calloc(1, sizeof(message_t));
+    message_t *msg = calloc(sizeof(message_t), sizeof(message_t));
     assert(msg != NULL);
-    msg->data = calloc(1, 6);
+    msg->data = calloc(sizeof(unsigned char), 6);
     assert(msg->data != NULL);
 
     msg->data[0] = 'h';
@@ -192,9 +192,10 @@ void test_cbor_message_t_encoding(void **state) {
             ret_msg->len
         ) == 0
     );
+
     free_cbor_encoded_data(cbdata);
-    free_message_t(msg);
-    free_message_t(ret_msg);
+    free(msg->data);
+    free(msg);
 }
 
 int main(void) {

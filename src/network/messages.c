@@ -19,7 +19,7 @@
   * @return Success: pointer to an instance of cbor_encoded_data_t
   * @return Failure: NULL pointer
 */
-cbor_encoded_data_t *cbor_encoded_message_t(message_t *msg) {
+cbor_encoded_data_t *cbor_encode_message_t(message_t *msg) {
     uint8_t buf[sizeof(message_t) + msg->len];
     CborEncoder encoder, array_encoder;
     CborError err;
