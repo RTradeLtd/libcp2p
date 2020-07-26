@@ -48,6 +48,8 @@ bool do_shutdown = false;
  * @param config the configuration settings used for the tcp/udp server
  * @return Success: pointer to a socket_server_t instance
  * @return Failure: NULL pointer
+ * @details once you have used the config and created a new server with new_socket_server() you can free the socket config with free_socket_config
+ * @note once you have used the config and created a new server with new_socket_server() you can free the socket config with free_socket_config
  */
 socket_server_t *new_socket_server(thread_logger *thl,
                                    socket_server_config_t config) {
@@ -431,4 +433,82 @@ socket_server_config_t *new_socket_server_config(int num_addrs) {
     config->addrs = calloc(1, sizeof(multi_addr_t) * 2);
     config->num_addrs = num_addrs;
     return config;
+}
+
+/*!
+ * @brief handles receiving an rpc message from another peer
+ */
+void handle_inbound_rpc(void *data) {
+    conn_handle_data_t *hdata = (conn_handle_data_t *)data;
+
+    // read the first byte to determine the size of the buffer
+    char first_byte[1];
+    memset(first_byte, 0, 1);
+
+    int rc = read(hdata->conn->socket_number, first_byte, 1);
+    switch (rc) {
+        case 0:
+            hdata->srv->thl->log(hdata->srv->thl, 0, "client disconnected",
+                                 LOG_LEVELS_DEBUG);
+            close(hdata->conn->socket_number);
+            free(hdata->conn);
+            free(hdata);
+            return;
+        case -1:
+            hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR,
+                                  "error encountered during read %s",
+                                  strerror(errno));
+            close(hdata->conn->socket_number);
+            free(hdata->conn);
+            free(hdata);
+            return;
+        default:
+            break;
+    }
+
+    int message_size = (int)first_byte[0];
+
+    if (message_size <= 0) {
+        // invalid first byte skip
+        close(hdata->conn->socket_number);
+        free(hdata->conn);
+        free(hdata);
+        return;
+    }
+
+    // message too large skip
+    if (message_size > 8192) {
+        close(hdata->conn->socket_number);
+        free(hdata->conn);
+        free(hdata);
+        return;
+    }
+
+    // declare an array on stack to hold the rest of the message data
+    char message_data[message_size];
+    memset(message_data, 0, message_size);
+
+    rc = read(hdata->conn->socket_number, message_data, message_size);
+    switch (rc) {
+        case 0:
+            hdata->srv->thl->log(hdata->srv->thl, 0, "client disconnected",
+                                 LOG_LEVELS_DEBUG);
+            goto EXIT;
+        case -1:
+            hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR,
+                                  "error encountered during read %s",
+                                  strerror(errno));
+            goto EXIT;
+        default:
+            // connection was successful and we read some data
+            goto EXIT;
+    }
+
+    // todo: handle actual message
+
+    printf("%s\n", message_data);
+EXIT:
+    close(hdata->conn->socket_number);
+    free(hdata->conn);
+    free(hdata);
 }
