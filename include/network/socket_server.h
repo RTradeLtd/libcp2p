@@ -41,6 +41,8 @@ typedef void(threadpool_task_func)(void *data);
  * @typedef socket_server_config_t
  * @brief used for configuring a socket_server_t instance
  * @todo switch to multi_addresses
+ * @details once you have used the config and created a new server with new_socket_server() you can free the socket config with free_socket_config
+ * @note once you have used the config and created a new server with new_socket_server() you can free the socket config with free_socket_config
  */
 typedef struct socket_server_config {
     /*! @brief the thread pool task function to use for processing tcp connections */
@@ -104,6 +106,8 @@ typedef struct conn_handle_data {
  * @param config the configuration settings used for the tcp/udp server
  * @return Success: pointer to a socket_server_t instance
  * @return Failure: NULL pointer
+ * @details once you have used the config and created a new server with new_socket_server() you can free the socket config with free_socket_config
+ * @note once you have used the config and created a new server with new_socket_server() you can free the socket config with free_socket_config
  */
 socket_server_t *new_socket_server(thread_logger *thl,
                                    socket_server_config_t config);
@@ -156,4 +160,9 @@ void free_socket_server_config(socket_server_config_t *config);
  * socket_server_config_t
  * @return Failure: NULL pointer
  */
-socket_server_config_t *new_socket_server_config();
+socket_server_config_t *new_socket_server_config(int num_addrs);
+
+/*!
+ * @brief handles receiving an rpc message from another peer
+ */
+void handle_inbound_rpc(void *data);

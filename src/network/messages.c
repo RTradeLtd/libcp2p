@@ -1,24 +1,28 @@
 /*! @file messages.c
-  * @brief defines message types and tooling for a very minimal RPC framework
-  * @note when sending messages anytime you send a new message, you must first send a single byte that indicates the size of the messsage we are sending
-  * @note this helps ensure that we can appropriately handle new requests and allocate enough memory
-  * @details the message types here are intended to be served as a building block for your own applications
-  * @details at a minimum the types here are setup to establish a secure communications channel using ECDSA keys and ECDH key agreement
-*/
+ * @brief defines message types and tooling for a very minimal RPC framework
+ * @note when sending messages anytime you send a new message, you must first send a
+ * single byte that indicates the size of the messsage we are sending
+ * @note this helps ensure that we can appropriately handle new requests and allocate
+ * enough memory
+ * @details the message types here are intended to be served as a building block for
+ * your own applications
+ * @details at a minimum the types here are setup to establish a secure
+ * communications channel using ECDSA keys and ECDH key agreement
+ */
 
 #include "network/messages.h"
 #include "encoding/cbor.h"
 #include "tinycbor/cbor.h"
 #include <stdint.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 /*!
-  * @brief used to cbor encode a message_t instance
-  * @param msg pointer to an instance of message_t
-  * @return Success: pointer to an instance of cbor_encoded_data_t
-  * @return Failure: NULL pointer
-*/
+ * @brief used to cbor encode a message_t instance
+ * @param msg pointer to an instance of message_t
+ * @return Success: pointer to an instance of cbor_encoded_data_t
+ * @return Failure: NULL pointer
+ */
 cbor_encoded_data_t *cbor_encode_message_t(message_t *msg) {
     uint8_t buf[sizeof(message_t) + msg->len];
     CborEncoder encoder, array_encoder;
@@ -62,17 +66,17 @@ cbor_encoded_data_t *cbor_encode_message_t(message_t *msg) {
     if (cbdata == NULL) {
         return NULL;
     }
-    return cbdata;       
+    return cbdata;
 }
 
 /*!
-  * @brief used to cbor decode data into a message_t instance
-  * @param input an instance of cbor_encoded_data_t containing the data to decode
-  * @return Success: poitner to an instance of message_t
-  * @return Failure: NULL pointer
-*/
+ * @brief used to cbor decode data into a message_t instance
+ * @param input an instance of cbor_encoded_data_t containing the data to decode
+ * @return Success: poitner to an instance of message_t
+ * @return Failure: NULL pointer
+ */
 message_t *cbor_decode_message_t(cbor_encoded_data_t *input) {
-    CborParser parser; 
+    CborParser parser;
     CborValue value, recurse;
     CborError err;
 
@@ -157,7 +161,7 @@ message_t *cbor_decode_message_t(cbor_encoded_data_t *input) {
         printf("failed to leave container: %s\n", cbor_error_string(err));
         return NULL;
     }
-    
+
     message_t *msg = calloc(sizeof(message_t), sizeof(message_t));
     if (msg == NULL) {
         return NULL;
@@ -174,9 +178,9 @@ message_t *cbor_decode_message_t(cbor_encoded_data_t *input) {
 }
 
 /*!
-  * @brief frees up resources allocated for an instance of message_t
-  * @param msg an instance of message_t
-*/
+ * @brief frees up resources allocated for an instance of message_t
+ * @param msg an instance of message_t
+ */
 void free_message_t(message_t *msg) {
     free(msg->data);
     free(msg);
