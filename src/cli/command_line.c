@@ -88,6 +88,9 @@ void free_command_object(command_object *self) {
     for (int i = 0; i < self->command_count; i++) {
         free(self->commands[i]);
     }
+    for (int i = 0; i < self->argc; i++) {
+        free(self->argv[i]);
+    }
     free(self);
 }
 
