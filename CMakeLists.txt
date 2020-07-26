@@ -113,6 +113,10 @@ include(cmake/thirdparty/argtable3.cmake)
 include(cmake/thirdparty/logger.cmake)
 include(cmake/thirdparty/thread_pool.cmake)
 
+# cli #
+
+include(cmake/libraries/cli.cmake)
+
 #########################
 # END COMPILE LIBRARIES #
 #########################
