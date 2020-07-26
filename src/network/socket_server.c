@@ -457,7 +457,6 @@ void handle_inbound_rpc(void *data) {
         case 0:
             hdata->srv->thl->log(hdata->srv->thl, 0, "client disconnected",
                                  LOG_LEVELS_DEBUG);
-            close(hdata->conn->socket_number);
             free(hdata->conn);
             free(hdata);
             return;
@@ -465,7 +464,6 @@ void handle_inbound_rpc(void *data) {
             hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR,
                                   "error encountered during read %s",
                                   strerror(errno));
-            close(hdata->conn->socket_number);
             free(hdata->conn);
             free(hdata);
             return;
