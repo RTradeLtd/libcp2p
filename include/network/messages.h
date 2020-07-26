@@ -18,33 +18,33 @@ typedef enum MESSAGE_TYPES {
     /*!
     * @brief indicates we are sending a message wanting the peerID
     */
-    MESSAGE_WANT_PEER_ID,
+    MESSAGE_WANT_PEER_ID = 0,
     /*!
     * @brief indicates we have a peer id
     * @details sent in response to a WANT_PEERID message
     */
-    MESSAGE_HAVE_PEER_ID,
+    MESSAGE_HAVE_PEER_ID = 1,
     /*!
     * @brief indicates we want a public key
     */
-    MESSAGE_WANT_PUB_KEY,
+    MESSAGE_WANT_PUB_KEY = 2,
     /*!
     * @brief indicates we have a public key
     * @details sent in response to a WANT_PUB_KEY messages
     */
-    MESSAGE_HAVE_PUB_KEY,
+    MESSAGE_HAVE_PUB_KEY = 3,
     /*!
     * @brief indicates we want to start an ECDH key exchange
     */
-    MESSAGE_START_ECDH,
+    MESSAGE_START_ECDH = 4,
     /*!
       * @brief indicates we are willing to start an ECDH key exchange and tells the other peer to begin it
     */
-    MESSAGE_BEGIN_ECDH,
+    MESSAGE_BEGIN_ECDH = 5,
     /*!
     * @brief an arbitrary message type for implementation defined behavior
     */
-    MESSAGE_ARBITRARY
+    MESSAGE_ARBITRARY = 99
 } MESSAGE_TYPES_T;
 
 /*!
@@ -53,7 +53,7 @@ typedef enum MESSAGE_TYPES {
   * @brief a structure wrapping a message used by libcp2p
   * @details a message is sent to a peer, or received from a peer during communications
 */
-typedef struct message {
+ typedef struct message {
     MESSAGE_TYPES_T type; /*! @brief the type of message */
     size_t len; /*! @brief the size of the data contained in the message */
     unsigned char *data; /*! @brief the actual data in the message */
