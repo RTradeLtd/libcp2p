@@ -144,7 +144,7 @@ public_key_t *libp2p_crypto_public_key_cbor_decode(cbor_encoded_data_t *data) {
         return NULL;
     }
 
-    err = cbor_value_advance_fixed(&recurse);
+    err = cbor_value_advance(&recurse);
     if (err != CborNoError) {
         printf("failed to advanced iter: %s\n", cbor_error_string(err));
         return NULL;
@@ -182,7 +182,7 @@ public_key_t *libp2p_crypto_public_key_cbor_decode(cbor_encoded_data_t *data) {
         return NULL;
     }
 
-    err = cbor_value_advance_fixed(&recurse);
+    err = cbor_value_advance(&recurse);
     if (err != CborNoError) {
         printf("failed to advanced container: %s\n", cbor_error_string(err));
         return NULL;
