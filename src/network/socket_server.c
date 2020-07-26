@@ -444,6 +444,9 @@ socket_server_config_t *new_socket_server_config(int num_addrs) {
 /*!
  * @brief handles receiving an rpc message from another peer
  * @note if you send an inbound message of `5hello` you'll invoke a debug handler to print to stdout
+ * @warning needs to check to see if the data we are getting is for a tcp or udp connection
+ * @warning if a tcp connection we need to close the socket (as its the socket connecting to the client)
+ * @warning if a udp connection we dont close the socket and simply free the resources
  */
 void handle_inbound_rpc(void *data) {
     conn_handle_data_t *hdata = (conn_handle_data_t *)data;
@@ -475,7 +478,6 @@ void handle_inbound_rpc(void *data) {
     if (message_size <= 0 || message_size > 8192) {
         hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR, "invalid message size");        
         // invalid first byte skip
-        close(hdata->conn->socket_number);
         free(hdata->conn);
         free(hdata);
         return;
@@ -490,7 +492,6 @@ void handle_inbound_rpc(void *data) {
         case 0:
             hdata->srv->thl->log(hdata->srv->thl, 0, "client disconnected",
                                  LOG_LEVELS_DEBUG);
-            close(hdata->conn->socket_number);
             free(hdata->conn);
             free(hdata);
             return;
@@ -498,7 +499,6 @@ void handle_inbound_rpc(void *data) {
             hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR,
                                   "error encountered during read %s",
                                   strerror(errno));
-            close(hdata->conn->socket_number);
             free(hdata->conn);
             free(hdata);
             return;
@@ -515,7 +515,6 @@ void handle_inbound_rpc(void *data) {
             ) == 0
         ) {
             printf("size: %i, data: %s\n", message_size, message_data);
-            close(hdata->conn->socket_number);
             free(hdata->conn);
             free(hdata);
             return;
@@ -525,7 +524,6 @@ void handle_inbound_rpc(void *data) {
 
     cbor_encoded_data_t *cbdata = new_cbor_encoded_data(message_data, (size_t)message_size);
     if (cbdata == NULL) {
-            close(hdata->conn->socket_number);
             free(hdata->conn);
             free(hdata);
             return;
@@ -533,7 +531,6 @@ void handle_inbound_rpc(void *data) {
     printf("got new cbor encoded message\n");
     free_cbor_encoded_data(cbdata);
 
-    close(hdata->conn->socket_number);
     free(hdata->conn);
     free(hdata);
 }
