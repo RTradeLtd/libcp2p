@@ -35,12 +35,16 @@ void start_server_callback(int argc, char *argv[]) {
         free_socket_server_config(config);
         return;
     }
+    printf("tcp addr: %s\n", tcp_addr->string);
     multi_addr_t *udp_addr =
         multi_address_new_from_string((char *)*listen_address_tcp->sval);
     if (udp_addr == NULL) {
         free_socket_server_config(config);
         return;
     }
+    printf("udp addr: %s\n", udp_addr->string);
+    config->max_connections = 100;
+    config->num_threads = 6;
     config->addrs[0] = tcp_addr;
     config->addrs[1] = udp_addr;
     config->fn_tcp = handle_inbound_rpc;
@@ -57,10 +61,17 @@ void start_server_callback(int argc, char *argv[]) {
         clear_thread_logger(logger);
         return;
     }
-    start_socket_server(server);
-    free_socket_server(server);
+
+    // free up config as it is no longer needed
     free_socket_server_config(config);
+
+    // start the actual server
+    start_socket_server(server);
+    // free up the server resources
+    free_socket_server(server);
+
     clear_thread_logger(logger);
+
     return;
 }
 
@@ -106,6 +117,7 @@ int main(int argc, char *argv[]) {
         case 0:
             break;
         case -1:
+            arg_freetable(argtable, sizeof(argtable) / sizeof(argtable[0]));
             printf("parse_args failed\n");
             return response;
         case -2: // this means --help was invoked
@@ -115,13 +127,14 @@ int main(int argc, char *argv[]) {
     // ./some-binary)
     if (argc == 1) {
         print_help(argv[0], argtable);
+        arg_freetable(argtable, sizeof(argtable) / sizeof(argtable[0]));
         return 0;
     }
     // construct the command object
     command_object *pcmd = new_command_object(argc, argv);
     if (pcmd == NULL) {
         printf("failed to get command_object");
-        return -1;
+        goto EXIT;
     }
 
     load_command(pcmd, new_socket_server_command());
@@ -132,6 +145,7 @@ int main(int argc, char *argv[]) {
         // TODO(bonedaddy): figure out if we should log this
         // printf("command run failed\n");
     }
+EXIT:
     free_command_object(pcmd);
     arg_freetable(argtable, sizeof(argtable) / sizeof(argtable[0]));
     return resp;
