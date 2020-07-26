@@ -12,6 +12,8 @@ target_compile_options(libnetwork PRIVATE ${flags})
 target_link_libraries(libnetwork pthread)
 target_link_libraries(libnetwork libutils)
 target_link_libraries(libnetwork libmultiaddr)
+target_link_libraries(libnetwork libtinycbor)
+target_link_libraries(libnetwork libencoding)
 
 add_executable(libnetwork-test ./src/network/socket_test.c)
 target_compile_options(libnetwork-test PRIVATE ${flags})
