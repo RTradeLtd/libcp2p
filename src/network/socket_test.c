@@ -10,7 +10,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
+#include "encoding/cbor.h"
 #include "utils/logger.h"
+#include "network/messages.h"
 #include "network/socket_server.h"
 #include "multiaddr/multiaddr.h"
 #include <arpa/inet.h>
@@ -143,9 +146,60 @@ void test_new_socket_server(void **state) {
     // free(config.addrs);
 }
 
+
+void test_cbor_message_t_encoding(void **state) {
+    message_t *msg = calloc(sizeof(message_t), sizeof(message_t));
+    assert(msg != NULL);
+    msg->data = calloc(sizeof(unsigned char), 6);
+    assert(msg->data != NULL);
+
+    msg->data[0] = 'h';
+    msg->data[1] = 'e';
+    msg->data[2] = 'l';
+    msg->data[3] = 'l';
+    msg->data[4] = 'o';
+    msg->data[5] = '\0';
+    msg->len = 6;
+    msg->type = MESSAGE_WANT_PEER_ID;
+
+    cbor_encoded_data_t *cbdata = cbor_encode_message_t(msg);
+    assert(cbdata != NULL);
+    assert(cbdata->len == 10);
+
+    message_t *ret_msg = cbor_decode_message_t(cbdata);
+    assert(ret_msg != NULL);
+    assert(ret_msg->len == 6);
+    assert(ret_msg->type == MESSAGE_WANT_PEER_ID);
+    assert(
+        strcmp(
+            (char *)ret_msg->data,
+            (char *)msg->data
+        ) == 0
+    );
+    assert(
+        memcmp(
+            ret_msg->data,
+            msg->data,
+            msg->len
+        ) == 0
+    );
+    assert(
+        memcmp(
+            ret_msg->data,
+            msg->data,
+            ret_msg->len
+        ) == 0
+    );
+
+    free_cbor_encoded_data(cbdata);
+    free(msg->data);
+    free(msg);
+}
+
 int main(void) {
     const struct CMUnitTest tests[] = {
-       cmocka_unit_test(test_new_socket_server)
+        cmocka_unit_test(test_cbor_message_t_encoding),
+        cmocka_unit_test(test_new_socket_server)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
