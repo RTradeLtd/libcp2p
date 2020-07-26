@@ -14,6 +14,7 @@
  * @brief used to create a tcp/udp socket server listening on multiaddrs
  */
 
+#include "encoding/cbor.h"
 #include "network/socket_server.h"
 #include "utils/thread_pool.h"
 #include <arpa/inet.h>
@@ -442,6 +443,7 @@ socket_server_config_t *new_socket_server_config(int num_addrs) {
 
 /*!
  * @brief handles receiving an rpc message from another peer
+ * @note if you send an inbound message of `5hello` you'll invoke a debug handler to print to stdout
  */
 void handle_inbound_rpc(void *data) {
     conn_handle_data_t *hdata = (conn_handle_data_t *)data;
@@ -470,8 +472,7 @@ void handle_inbound_rpc(void *data) {
         default:
             break;
     }
-
-    int message_size = (int)first_byte[0];
+    int message_size = atoi(first_byte);
 
     if (message_size <= 0 || message_size > 8192) {
         hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR, "invalid message size");        
@@ -483,7 +484,7 @@ void handle_inbound_rpc(void *data) {
     }
 
     // declare an array on stack to hold the rest of the message data
-    char message_data[message_size];
+    unsigned char message_data[message_size];
     memset(message_data, 0, message_size);
 
     rc = read(hdata->conn->socket_number, message_data, message_size);
@@ -491,21 +492,49 @@ void handle_inbound_rpc(void *data) {
         case 0:
             hdata->srv->thl->log(hdata->srv->thl, 0, "client disconnected",
                                  LOG_LEVELS_DEBUG);
-            goto EXIT;
+            close(hdata->conn->socket_number);
+            free(hdata->conn);
+            free(hdata);
+            return;
         case -1:
             hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR,
                                   "error encountered during read %s",
                                   strerror(errno));
-            goto EXIT;
+            close(hdata->conn->socket_number);
+            free(hdata->conn);
+            free(hdata);
+            return;
         default:
             // connection was successful and we read some data
             break;
     }
-
+    if (message_size == 5) {
+        if (
+            memcmp(
+                message_data,
+                "hello",
+                message_size
+            ) == 0
+        ) {
+            printf("size: %i, data: %s\n", message_size, message_data);
+            close(hdata->conn->socket_number);
+            free(hdata->conn);
+            free(hdata);
+            return;
+        }
+    }
     // todo: handle actual message
 
-    printf("%s\n", message_data);
-EXIT:
+    cbor_encoded_data_t *cbdata = new_cbor_encoded_data(message_data, (size_t)message_size);
+    if (cbdata == NULL) {
+            close(hdata->conn->socket_number);
+            free(hdata->conn);
+            free(hdata);
+            return;
+    }
+    printf("got new cbor encoded message\n");
+    free_cbor_encoded_data(cbdata);
+
     close(hdata->conn->socket_number);
     free(hdata->conn);
     free(hdata);
