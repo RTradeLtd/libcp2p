@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 #ifndef COMMAND_VERSION_STRING
 #define COMMAND_VERSION_STRING "0.0.1"
@@ -17,10 +18,84 @@
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
 void start_server_callback(int argc, char *argv[]);
+void test_server_callback(int argc, char *argv[]);
 
 struct arg_str *listen_address_tcp;
 struct arg_str *listen_address_udp;
 struct arg_str *pem_file_path;
+
+void test_server_callback(int argc, char *argv[]) {
+    multi_addr_t *tcp_addr = NULL;
+    multi_addr_t *udp_addr = NULL;
+
+    if (listen_address_tcp->count == 1) {
+        tcp_addr = multi_address_new_from_string((char *)*listen_address_tcp->sval);
+        if (tcp_addr == NULL) {
+            return;
+        }
+    }
+
+    if (listen_address_udp->count == 1) {
+        udp_addr = multi_address_new_from_string((char *)*listen_address_udp->sval);
+        if (udp_addr == NULL) {
+            return;
+        }
+    }
+
+    if (udp_addr == NULL && tcp_addr == NULL) {
+        printf("no valid address found\n");
+        return;
+    }
+
+    thread_logger *logger = new_thread_logger(false);
+
+    socket_client_t *client = NULL;
+
+    if (tcp_addr != NULL) {
+        client = new_socket_client(logger, tcp_addr);
+        if (client == NULL) {
+            if (tcp_addr != NULL) {
+                multi_address_free(tcp_addr);
+            }
+            if (udp_addr != NULL) {
+                multi_address_free(udp_addr);
+            }
+            clear_thread_logger(logger);
+            return;
+        }
+    }
+
+    if (udp_addr != NULL) {
+        client = new_socket_client(logger, udp_addr);
+        if (client == NULL) {
+            if (tcp_addr != NULL) {
+                multi_address_free(tcp_addr);
+            }
+            if (udp_addr != NULL) {
+                multi_address_free(udp_addr);
+            }
+            clear_thread_logger(logger);
+            return;
+        }        
+    }
+
+    // no longer needed
+    if (tcp_addr != NULL) {
+        multi_address_free(tcp_addr);
+    }
+    if (udp_addr != NULL) {
+        multi_address_free(udp_addr);
+    }
+
+    int rc = socket_client_sendto(client, client->peer_address, "5hello");
+    if (rc == 0) {
+        printf("request failed\n");
+    }
+    clear_thread_logger(logger);
+    close(client->socket_number);
+    free(client);
+}
+
 
 void start_server_callback(int argc, char *argv[]) {
     socket_server_config_t *config = new_socket_server_config(2);
@@ -35,14 +110,14 @@ void start_server_callback(int argc, char *argv[]) {
         free_socket_server_config(config);
         return;
     }
-    printf("tcp addr: %s\n", tcp_addr->string);
+
     multi_addr_t *udp_addr =
         multi_address_new_from_string((char *)*listen_address_udp->sval);
     if (udp_addr == NULL) {
         free_socket_server_config(config);
         return;
     }
-    printf("udp addr: %s\n", udp_addr->string);
+    
     config->max_connections = 100;
     config->num_threads = 6;
     config->addrs[0] = tcp_addr;
@@ -77,6 +152,7 @@ void start_server_callback(int argc, char *argv[]) {
 
 // displays the help command
 command_handler *new_socket_server_command();
+command_handler *new_socket_server_test_command();
 
 command_handler *new_socket_server_command() {
     command_handler *handler = malloc(sizeof(command_handler));
@@ -86,6 +162,17 @@ command_handler *new_socket_server_command() {
     }
     handler->callback = start_server_callback;
     handler->name = "start-socket-server";
+    return handler;
+}
+
+command_handler *new_socket_server_test_command() {
+    command_handler *handler = malloc(sizeof(command_handler));
+    if (handler == NULL) {
+        printf("failed to malloc comand_handler\n");
+        return NULL;
+    }
+    handler->callback = test_server_callback;
+    handler->name = "test-socket-server";
     return handler;
 }
 
@@ -138,6 +225,7 @@ int main(int argc, char *argv[]) {
     }
 
     load_command(pcmd, new_socket_server_command());
+    load_command(pcmd, new_socket_server_test_command());
 
     // END COMMAND INPUT PREPARATION
     int resp = execute(pcmd, (char *)*command_to_run->sval);
