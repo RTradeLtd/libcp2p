@@ -164,5 +164,6 @@ socket_server_config_t *new_socket_server_config(int num_addrs);
 
 /*!
  * @brief handles receiving an rpc message from another peer
+ * @note if you send an inbound message of `5hello` you'll invoke a debug handler to print to stdout
  */
 void handle_inbound_rpc(void *data);
