@@ -289,9 +289,6 @@ void start_socket_server(socket_server_t *srv) {
 
         switch (rc) {
             case 0:
-                srv->thl->log(srv->thl, 0,
-                              "no sockets are ready for processing, sleeping",
-                              LOG_LEVELS_DEBUG);
                 sleep(0.50);
                 continue;
             case -1:
@@ -473,16 +470,9 @@ void handle_inbound_rpc(void *data) {
 
     int message_size = (int)first_byte[0];
 
-    if (message_size <= 0) {
+    if (message_size <= 0 || message_size > 8192) {
+        hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR, "invalid message size");        
         // invalid first byte skip
-        close(hdata->conn->socket_number);
-        free(hdata->conn);
-        free(hdata);
-        return;
-    }
-
-    // message too large skip
-    if (message_size > 8192) {
         close(hdata->conn->socket_number);
         free(hdata->conn);
         free(hdata);
@@ -506,7 +496,7 @@ void handle_inbound_rpc(void *data) {
             goto EXIT;
         default:
             // connection was successful and we read some data
-            goto EXIT;
+            break;
     }
 
     // todo: handle actual message

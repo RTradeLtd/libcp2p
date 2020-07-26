@@ -50,7 +50,7 @@ void start_server_callback(int argc, char *argv[]) {
     config->fn_tcp = handle_inbound_rpc;
     config->fn_udp = handle_inbound_rpc;
 
-    thread_logger *logger = new_thread_logger(true);
+    thread_logger *logger = new_thread_logger(false);
     if (logger == NULL) {
         free_socket_server_config(config);
         return;
