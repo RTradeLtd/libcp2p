@@ -98,6 +98,10 @@ include(cmake/libraries/network.cmake)
 
 include(cmake/libraries/tinycbor.cmake)
 
+# cli #
+
+include(cmake/libraries/cli.cmake)
+
 #########################
 # END COMPILE LIBRARIES #
 #########################
