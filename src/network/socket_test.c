@@ -190,10 +190,9 @@ void test_cbor_message_t_encoding(void **state) {
             ret_msg->len
         ) == 0
     );
-
     free_cbor_encoded_data(cbdata);
-    free(msg->data);
-    free(msg);
+    free_message_t(msg);
+    free_message_t(ret_msg);
 }
 
 int main(void) {
