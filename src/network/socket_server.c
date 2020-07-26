@@ -130,6 +130,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
 
             rc = getaddrinfo(ip, cport, &tcp_hints, &tcp_bind_address);
             if (rc != 0) {
+                freeaddrinfo(tcp_bind_address);
                 thl->log(thl, 0, "failed to get tcp addr info", LOG_LEVELS_ERROR);
                 goto EXIT;
             }
@@ -137,12 +138,14 @@ socket_server_t *new_socket_server(thread_logger *thl,
             int tcp_socket_num =
                 get_new_socket(thl, tcp_bind_address, opts, 2, false);
             if (tcp_socket_num == -1) {
+                freeaddrinfo(tcp_bind_address);
                 thl->log(thl, 0, "failed to get new tcp socket", LOG_LEVELS_ERROR);
                 goto EXIT;
             }
 
             listen(tcp_socket_num, config.max_connections);
             if (errno != 0) {
+                freeaddrinfo(tcp_bind_address);
                 thl->logf(thl, 0, LOG_LEVELS_ERROR,
                           "failed to start listening on tcp socket with error %s",
                           strerror(errno));
@@ -156,7 +159,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
                 max_socket_num = tcp_socket_num;
             }
 
-            free(tcp_bind_address);
+            freeaddrinfo(tcp_bind_address);
         }
 
         // handle a udp multi_address
@@ -174,6 +177,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
 
             rc = getaddrinfo(ip, cport, &udp_hints, &udp_bind_address);
             if (rc != 0) {
+                freeaddrinfo(udp_bind_address);
                 thl->log(thl, 0, "failed to get udp addr info", LOG_LEVELS_ERROR);
                 goto EXIT;
             }
@@ -181,6 +185,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
             int udp_socket_num =
                 get_new_socket(thl, udp_bind_address, opts, 2, false);
             if (udp_socket_num == -1) {
+                freeaddrinfo(udp_bind_address);
                 thl->log(thl, 0, "failed to get new udp socket", LOG_LEVELS_ERROR);
                 goto EXIT;
             }
@@ -192,7 +197,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
                 max_socket_num = udp_socket_num;
             }
 
-            free(udp_bind_address);
+            freeaddrinfo(udp_bind_address);
         }
     }
 
@@ -221,7 +226,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
 
 EXIT:
 
-    for (int i = 0; i < 65536; i++) {
+    for (int i = 0; i < max_socket_num; i++) {
         if (FD_ISSET(i, &tcp_socket_set)) {
             close(i);
         }
