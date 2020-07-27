@@ -452,29 +452,37 @@ socket_server_config_t *new_socket_server_config(int num_addrs) {
  */
 void handle_inbound_rpc(void *data) {
     conn_handle_data_t *hdata = (conn_handle_data_t *)data;
-
+    int rc = 0;
     // read the first byte to determine the size of the buffer
     char first_byte[1];
     memset(first_byte, 0, 1);
 
-    int rc = read(hdata->conn->socket_number, first_byte, 1);
+
+    if (hdata->is_tcp == true) {
+        rc = read(hdata->conn->socket_number, first_byte, 1);
+    } else {
+        /*! @todo handle udp connection */
+    }
+    
+    
     switch (rc) {
         case 0:
             hdata->srv->thl->log(hdata->srv->thl, 0, "client disconnected",
-                                 LOG_LEVELS_DEBUG);
+                                LOG_LEVELS_DEBUG);
             free(hdata->conn);
             free(hdata);
             return;
         case -1:
             hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR,
-                                  "error encountered during read %s",
-                                  strerror(errno));
+                                "error encountered during read %s",
+                                strerror(errno));
             free(hdata->conn);
             free(hdata);
             return;
         default:
             break;
     }
+
     int message_size = atoi(first_byte);
 
     if (message_size <= 0 || message_size > 8192) {
@@ -489,7 +497,14 @@ void handle_inbound_rpc(void *data) {
     unsigned char message_data[message_size];
     memset(message_data, 0, message_size);
 
-    rc = read(hdata->conn->socket_number, message_data, message_size);
+    if (hdata->is_tcp == true) {
+        rc = read(hdata->conn->socket_number, message_data, message_size);
+    } else {
+        /*! @todo handle udp connection */
+    }
+    
+
+    
     switch (rc) {
         case 0:
             hdata->srv->thl->log(hdata->srv->thl, 0, "client disconnected",
@@ -508,6 +523,7 @@ void handle_inbound_rpc(void *data) {
             // connection was successful and we read some data
             break;
     }
+    printf("got message\n");
     if (message_size == 5) {
         if (
             memcmp(
