@@ -456,7 +456,14 @@ void handle_inbound_rpc(void *data) {
     if (hdata->is_tcp == true) {
         rc = read(hdata->conn->socket_number, first_byte, 1);
     } else {
-        /*! @todo handle udp connection */
+        rc = recvfrom(
+            hdata->conn->socket_number,
+            first_byte,
+            1,
+            0,
+            NULL,
+            NULL
+        );
     }
     
     
@@ -495,10 +502,15 @@ void handle_inbound_rpc(void *data) {
     if (hdata->is_tcp == true) {
         rc = read(hdata->conn->socket_number, message_data, message_size);
     } else {
-        /*! @todo handle udp connection */
+        rc = recvfrom(
+            hdata->conn->socket_number,
+            message_data,
+            message_size,
+            0,
+            NULL,
+            NULL
+        );
     }
-    
-
     
     switch (rc) {
         case 0:
@@ -518,6 +530,7 @@ void handle_inbound_rpc(void *data) {
             // connection was successful and we read some data
             break;
     }
+
     printf("got message\n");
     if (message_size == 5) {
         if (
