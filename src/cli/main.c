@@ -52,6 +52,7 @@ void test_server_callback(int argc, char *argv[]) {
 
     if (tcp_addr != NULL) {
         client = new_socket_client(logger, tcp_addr);
+        sleep(1);
         if (client == NULL) {
             if (tcp_addr != NULL) {
                 multi_address_free(tcp_addr);
@@ -61,11 +62,17 @@ void test_server_callback(int argc, char *argv[]) {
             }
             clear_thread_logger(logger);
             return;
+        }
+        printf("sending tcp\n");
+        int rc = send(client->socket_number, "5hello", 6, 0);
+        if (rc == -1) {
+            printf("request failed: %s\n", strerror(errno));
         }
     }
 
     if (udp_addr != NULL) {
         client = new_socket_client(logger, udp_addr);
+        sleep(1);
         if (client == NULL) {
             if (tcp_addr != NULL) {
                 multi_address_free(tcp_addr);
@@ -76,8 +83,14 @@ void test_server_callback(int argc, char *argv[]) {
             clear_thread_logger(logger);
             return;
         }
+        printf("sending udp\n");
+        /* UDP based sending */
+        int rc = socket_client_sendto(client, client->peer_address, "5hello\0");
+        if (rc == 0) {
+            printf("request failed: %s\n", strerror(errno));
+        }
     }
-    sleep(1);
+
     // no longer needed
     if (tcp_addr != NULL) {
         multi_address_free(tcp_addr);
@@ -85,17 +98,8 @@ void test_server_callback(int argc, char *argv[]) {
     if (udp_addr != NULL) {
         multi_address_free(udp_addr);
     }
-    printf("sending\n");
-    int rc = send(client->socket_number, "5hello\0", 7, 0);
-    if (rc == -1) {
-        printf("request failed\n");
-    }
+
     printf("closing client\n");
-    /* UDP based sending */
-    rc = socket_client_sendto(client, client->peer_address, "5hello");
-    if (rc == 0) {
-        printf("request failed\n");
-    }
     clear_thread_logger(logger);
     close(client->socket_number);
     free(client);
