@@ -50,16 +50,14 @@ bool do_shutdown = false;
  * @param thl an instance of a thread_logger
  * @param config the configuration settings used for the tcp/udp server
  * @param sock_opts an array of options to configure the sockets we open with
- * @param num_opts the number of socket options we are using, providing a number that
- * does not match the actual number of options is undefined behavior
+ * @param num_opts the number of socket options we are using, providing a number that does not match the actual number of options is undefined behavior
  * @return Success: pointer to a socket_server_t instance
  * @return Failure: NULL pointer
  * @details once you have used the config and created a new server with new_socket_server() you can free the socket config with free_socket_config
  * @note once you have used the config and created a new server with new_socket_server() you can free the socket config with free_socket_config
  */
 socket_server_t *new_socket_server(thread_logger *thl,
-                                   socket_server_config_t *config,
-                                   SOCKET_OPTS sock_opts[], int num_opts) {
+                                   socket_server_config_t config, SOCKET_OPTS sock_opts[], int num_opts) {
 
     addr_info tcp_hints;
     addr_info udp_hints;
@@ -140,8 +138,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
                 goto EXIT;
             }
 
-            int tcp_socket_num = get_new_socket(thl, tcp_bind_address, sock_opts,
-                                                num_opts, false, true);
+            int tcp_socket_num =
+                get_new_socket(thl, tcp_bind_address, sock_opts, num_opts, false);
             if (tcp_socket_num == -1) {
                 freeaddrinfo(tcp_bind_address);
                 thl->log(thl, 0, "failed to get new tcp socket", LOG_LEVELS_ERROR);
@@ -187,8 +185,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
                 goto EXIT;
             }
 
-            int udp_socket_num = get_new_socket(thl, udp_bind_address, sock_opts,
-                                                num_opts, false, false);
+            int udp_socket_num =
+                get_new_socket(thl, udp_bind_address, sock_opts, num_opts, false);
             if (udp_socket_num == -1) {
                 freeaddrinfo(udp_bind_address);
                 thl->log(thl, 0, "failed to get new udp socket", LOG_LEVELS_ERROR);

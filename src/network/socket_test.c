@@ -128,7 +128,7 @@ void test_new_socket_server(void **state) {
     SOCKET_OPTS opts[2] = {REUSEADDR, NOBLOCK};
 
     //   .num_threads = 6, .fn_tcp = example_task_func_tcp, .fn_udp = example_task_func_udp };
-    socket_server_t *server = new_socket_server(thl, config, opts, 2);
+    socket_server_t *server = new_socket_server(thl, *config, opts, 2);
     assert(server != NULL);
     free_socket_server_config(config);
     thpool_add_work(server->thpool, start_socker_server_wrapper, server);

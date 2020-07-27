@@ -108,16 +108,14 @@ typedef struct conn_handle_data {
  * @param thl an instance of a thread_logger
  * @param config the configuration settings used for the tcp/udp server
  * @param sock_opts an array of options to configure the sockets we open with
- * @param num_opts the number of socket options we are using, providing a number that
- * does not match the actual number of options is undefined behavior
+ * @param num_opts the number of socket options we are using, providing a number that does not match the actual number of options is undefined behavior
  * @return Success: pointer to a socket_server_t instance
  * @return Failure: NULL pointer
  * @details once you have used the config and created a new server with new_socket_server() you can free the socket config with free_socket_config
  * @note once you have used the config and created a new server with new_socket_server() you can free the socket config with free_socket_config
  */
 socket_server_t *new_socket_server(thread_logger *thl,
-                                   socket_server_config_t *config,
-                                   SOCKET_OPTS sock_opts[], int num_opts);
+                                   socket_server_config_t config, SOCKET_OPTS sock_opts[], int num_opts);
 
 /*! @brief helper function for accepting client connections
  * times out new attempts if they take 3 seconds or more
