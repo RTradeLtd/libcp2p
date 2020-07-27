@@ -138,7 +138,7 @@ void start_server_callback(int argc, char *argv[]) {
         free_socket_server_config(config);
         return;
     }
-    socket_server_t *server = new_socket_server(logger, *config);
+    socket_server_t *server = new_socket_server(logger, *config, NULL, 0);
     if (server == NULL) {
         free_socket_server_config(config);
         clear_thread_logger(logger);
