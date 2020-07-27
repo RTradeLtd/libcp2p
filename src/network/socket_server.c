@@ -360,7 +360,7 @@ void start_socket_server(socket_server_t *srv) {
                     }
 
                     chdata->srv = srv;
-                    chdata->conn = conn;
+                    chdata->conn = conn; 
                     chdata->is_tcp = false;
 
                     thpool_add_work(srv->thpool, srv->task_func_udp, chdata);
@@ -459,7 +459,8 @@ void handle_inbound_rpc(void *data) {
 
 
     if (hdata->is_tcp == true) {
-        rc = read(hdata->conn->socket_number, first_byte, 1);
+        // rc = read(hdata->conn->socket_number, first_byte, 1);
+        rc = recv(hdata->conn->socket_number, first_byte, 1, 0);
     } else {
         rc = recvfrom(
             hdata->conn->socket_number,
