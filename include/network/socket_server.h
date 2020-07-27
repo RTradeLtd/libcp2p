@@ -98,6 +98,7 @@ typedef struct client_conn {
 typedef struct conn_handle_data {
     socket_server_t *srv;
     client_conn_t *conn;
+    bool is_tcp; /*! @brief if false then this is for a udp connection */
 } conn_handle_data_t;
 
 /*!
