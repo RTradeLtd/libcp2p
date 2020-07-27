@@ -1,4 +1,3 @@
-#include "utils/logger.h"
 #include "cli/command_line.h"
 #include "multiaddr/multiaddr.h"
 #include "network/socket_server.h"
@@ -76,9 +75,9 @@ void test_server_callback(int argc, char *argv[]) {
             }
             clear_thread_logger(logger);
             return;
-        }        
+        }
     }
-
+    sleep(1);
     // no longer needed
     if (tcp_addr != NULL) {
         multi_address_free(tcp_addr);
@@ -86,8 +85,14 @@ void test_server_callback(int argc, char *argv[]) {
     if (udp_addr != NULL) {
         multi_address_free(udp_addr);
     }
-
-    int rc = socket_client_sendto(client, client->peer_address, "5hello");
+    printf("sending\n");
+    int rc = send(client->socket_number, "5hello\0", 7, 0);
+    if (rc == -1) {
+        printf("request failed\n");
+    }
+    printf("closing client\n");
+    /* UDP based sending */
+    rc = socket_client_sendto(client, client->peer_address, "5hello");
     if (rc == 0) {
         printf("request failed\n");
     }
@@ -95,7 +100,6 @@ void test_server_callback(int argc, char *argv[]) {
     close(client->socket_number);
     free(client);
 }
-
 
 void start_server_callback(int argc, char *argv[]) {
     socket_server_config_t *config = new_socket_server_config(2);
@@ -117,7 +121,7 @@ void start_server_callback(int argc, char *argv[]) {
         free_socket_server_config(config);
         return;
     }
-    
+
     config->max_connections = 100;
     config->num_threads = 6;
     config->addrs[0] = tcp_addr;
