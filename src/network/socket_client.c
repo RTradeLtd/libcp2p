@@ -118,5 +118,5 @@ int socket_client_sendto(socket_client_t *client, addr_info *peer_address,
     }
     /*! *@todo if we sent less than total size, send remaining
      */
-    return 0;
+    return 1;
 }
