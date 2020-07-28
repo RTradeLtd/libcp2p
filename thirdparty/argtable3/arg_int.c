@@ -30,17 +30,17 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include "thirdparty/argtable3/argtable3.h"
+#include "argtable3.h"
 
 #ifndef ARG_AMALGAMATION
-#include "thirdparty/argtable3/argtable3_private.h"
+#include "argtable3_private.h"
 #endif
 
 #include <ctype.h>
 #include <limits.h>
 #include <stdlib.h>
 
-static void arg_int_resetfn(struct arg_int *parent) {
+static void arg_int_resetfn(struct arg_int* parent) {
     ARG_TRACE(("%s:resetfn(%p)\n", __FILE__, parent));
     parent->count = 0;
 }
@@ -55,10 +55,10 @@ static void arg_int_resetfn(struct arg_int *parent) {
 /* eg: to parse oct str="+0o12324", specify X='O' and base=8.       */
 /* eg: to parse bin str="-0B01010", specify X='B' and base=2.       */
 /* Failure of conversion is indicated by result where *endptr==str. */
-static long int strtol0X(const char *str, const char **endptr, char X, int base) {
+static long int strtol0X(const char* str, const char** endptr, char X, int base) {
     long int val;          /* stores result */
     int s = 1;             /* sign is +1 or -1 */
-    const char *ptr = str; /* ptr to current position in str */
+    const char* ptr = str; /* ptr to current position in str */
 
     /* skip leading whitespace */
     while (isspace(*ptr))
@@ -96,7 +96,7 @@ static long int strtol0X(const char *str, const char **endptr, char X, int base)
     /* printf("4) %s\n",ptr); */
 
     /* attempt conversion on remainder of string using strtol() */
-    val = strtol(ptr, (char **)endptr, base);
+    val = strtol(ptr, (char**)endptr, base);
     if (*endptr == ptr) {
         /* conversion failed */
         *endptr = str;
@@ -109,7 +109,7 @@ static long int strtol0X(const char *str, const char **endptr, char X, int base)
 
 /* Returns 1 if str matches suffix (case insensitive).    */
 /* Str may contain trailing whitespace, but nothing else. */
-static int detectsuffix(const char *str, const char *suffix) {
+static int detectsuffix(const char* str, const char* suffix) {
     /* scan pairwise through strings until mismatch detected */
     while (toupper(*str) == toupper(*suffix)) {
         /* printf("'%c' '%c'\n", *str, *suffix); */
@@ -136,7 +136,7 @@ static int detectsuffix(const char *str, const char *suffix) {
     return (*str == '\0') ? 1 : 0;
 }
 
-static int arg_int_scanfn(struct arg_int *parent, const char *argval) {
+static int arg_int_scanfn(struct arg_int* parent, const char* argval) {
     int errorcode = 0;
 
     if (parent->count == parent->hdr.maxcount) {
@@ -149,10 +149,9 @@ static int arg_int_scanfn(struct arg_int *parent, const char *argval) {
         parent->count++;
     } else {
         long int val;
-        const char *end;
+        const char* end;
 
-        /* attempt to extract hex integer (eg: +0x123) from argval into val
-         * conversion */
+        /* attempt to extract hex integer (eg: +0x123) from argval into val conversion */
         val = strtol0X(argval, &end, 'X', 16);
         if (end == argval) {
             /* hex failed, attempt octal conversion (eg +0o123) */
@@ -161,9 +160,8 @@ static int arg_int_scanfn(struct arg_int *parent, const char *argval) {
                 /* octal failed, attempt binary conversion (eg +0B101) */
                 val = strtol0X(argval, &end, 'B', 2);
                 if (end == argval) {
-                    /* binary failed, attempt decimal conversion with no prefix (eg
-                     * 1234) */
-                    val = strtol(argval, (char **)&end, 10);
+                    /* binary failed, attempt decimal conversion with no prefix (eg 1234) */
+                    val = strtol(argval, (char**)&end, 10);
                     if (end == argval) {
                         /* all supported number formats failed */
                         return ARG_ERR_BADINT;
@@ -177,28 +175,24 @@ static int arg_int_scanfn(struct arg_int *parent, const char *argval) {
         if (val > INT_MAX || val < INT_MIN)
             errorcode = ARG_ERR_OVERFLOW;
 
-        /* Detect any suffixes (KB,MB,GB) and multiply argument value appropriately.
-         */
-        /* We need to be mindful of integer overflows when using such big numbers. */
+        /* Detect any suffixes (KB,MB,GB) and multiply argument value appropriately. */
+        /* We need to be mindful of integer overflows when using such big numbers.   */
         if (detectsuffix(end, "KB")) /* kilobytes */
         {
             if (val > (INT_MAX / 1024) || val < (INT_MIN / 1024))
-                errorcode =
-                    ARG_ERR_OVERFLOW; /* Overflow would occur if we proceed */
+                errorcode = ARG_ERR_OVERFLOW; /* Overflow would occur if we proceed */
             else
                 val *= 1024;                /* 1KB = 1024 */
         } else if (detectsuffix(end, "MB")) /* megabytes */
         {
             if (val > (INT_MAX / 1048576) || val < (INT_MIN / 1048576))
-                errorcode =
-                    ARG_ERR_OVERFLOW; /* Overflow would occur if we proceed */
+                errorcode = ARG_ERR_OVERFLOW; /* Overflow would occur if we proceed */
             else
                 val *= 1048576;             /* 1MB = 1024*1024 */
         } else if (detectsuffix(end, "GB")) /* gigabytes */
         {
             if (val > (INT_MAX / 1073741824) || val < (INT_MIN / 1073741824))
-                errorcode =
-                    ARG_ERR_OVERFLOW; /* Overflow would occur if we proceed */
+                errorcode = ARG_ERR_OVERFLOW; /* Overflow would occur if we proceed */
             else
                 val *= 1073741824; /* 1GB = 1024*1024*1024 */
         } else if (!detectsuffix(end, ""))
@@ -213,17 +207,16 @@ static int arg_int_scanfn(struct arg_int *parent, const char *argval) {
     return errorcode;
 }
 
-static int arg_int_checkfn(struct arg_int *parent) {
+static int arg_int_checkfn(struct arg_int* parent) {
     int errorcode = (parent->count < parent->hdr.mincount) ? ARG_ERR_MINCOUNT : 0;
     /*printf("%s:checkfn(%p) returns %d\n",__FILE__,parent,errorcode);*/
     return errorcode;
 }
 
-static void arg_int_errorfn(struct arg_int *parent, arg_dstr_t ds, int errorcode,
-                            const char *argval, const char *progname) {
-    const char *shortopts = parent->hdr.shortopts;
-    const char *longopts = parent->hdr.longopts;
-    const char *datatype = parent->hdr.datatype;
+static void arg_int_errorfn(struct arg_int* parent, arg_dstr_t ds, int errorcode, const char* argval, const char* progname) {
+    const char* shortopts = parent->hdr.shortopts;
+    const char* longopts = parent->hdr.longopts;
+    const char* datatype = parent->hdr.datatype;
 
     /* make argval NULL safe */
     argval = argval ? argval : "";
@@ -253,21 +246,17 @@ static void arg_int_errorfn(struct arg_int *parent, arg_dstr_t ds, int errorcode
     }
 }
 
-struct arg_int *arg_int0(const char *shortopts, const char *longopts,
-                         const char *datatype, const char *glossary) {
+struct arg_int* arg_int0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary) {
     return arg_intn(shortopts, longopts, datatype, 0, 1, glossary);
 }
 
-struct arg_int *arg_int1(const char *shortopts, const char *longopts,
-                         const char *datatype, const char *glossary) {
+struct arg_int* arg_int1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary) {
     return arg_intn(shortopts, longopts, datatype, 1, 1, glossary);
 }
 
-struct arg_int *arg_intn(const char *shortopts, const char *longopts,
-                         const char *datatype, int mincount, int maxcount,
-                         const char *glossary) {
+struct arg_int* arg_intn(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary) {
     size_t nbytes;
-    struct arg_int *result;
+    struct arg_int* result;
 
     /* foolproof things by ensuring maxcount is not less than mincount */
     maxcount = (maxcount < mincount) ? mincount : maxcount;
@@ -275,7 +264,7 @@ struct arg_int *arg_intn(const char *shortopts, const char *longopts,
     nbytes = sizeof(struct arg_int)    /* storage for struct arg_int */
              + maxcount * sizeof(int); /* storage for ival[maxcount] array */
 
-    result = (struct arg_int *)xmalloc(nbytes);
+    result = (struct arg_int*)xmalloc(nbytes);
 
     /* init the arg_hdr struct */
     result->hdr.flag = ARG_HASVALUE;
@@ -286,13 +275,13 @@ struct arg_int *arg_intn(const char *shortopts, const char *longopts,
     result->hdr.mincount = mincount;
     result->hdr.maxcount = maxcount;
     result->hdr.parent = result;
-    result->hdr.resetfn = (arg_resetfn *)arg_int_resetfn;
-    result->hdr.scanfn = (arg_scanfn *)arg_int_scanfn;
-    result->hdr.checkfn = (arg_checkfn *)arg_int_checkfn;
-    result->hdr.errorfn = (arg_errorfn *)arg_int_errorfn;
+    result->hdr.resetfn = (arg_resetfn*)arg_int_resetfn;
+    result->hdr.scanfn = (arg_scanfn*)arg_int_scanfn;
+    result->hdr.checkfn = (arg_checkfn*)arg_int_checkfn;
+    result->hdr.errorfn = (arg_errorfn*)arg_int_errorfn;
 
     /* store the ival[maxcount] array immediately after the arg_int struct */
-    result->ival = (int *)(result + 1);
+    result->ival = (int*)(result + 1);
     result->count = 0;
 
     ARG_TRACE(("arg_intn() returns %p\n", result));

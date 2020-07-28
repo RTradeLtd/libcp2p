@@ -30,21 +30,20 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include "thirdparty/argtable3/argtable3.h"
+#include "argtable3.h"
 
 #ifndef ARG_AMALGAMATION
-#include "thirdparty/argtable3/argtable3_private.h"
+#include "argtable3_private.h"
 #endif
 
 #include <stdlib.h>
 
-static void arg_end_resetfn(struct arg_end *parent) {
+static void arg_end_resetfn(struct arg_end* parent) {
     ARG_TRACE(("%s:resetfn(%p)\n", __FILE__, parent));
     parent->count = 0;
 }
 
-static void arg_end_errorfn(void *parent, arg_dstr_t ds, int error,
-                            const char *argval, const char *progname) {
+static void arg_end_errorfn(void* parent, arg_dstr_t ds, int error, const char* argval, const char* progname) {
     /* suppress unreferenced formal parameter warning */
     (void)parent;
 
@@ -76,17 +75,15 @@ static void arg_end_errorfn(void *parent, arg_dstr_t ds, int error,
     arg_dstr_cat(ds, "\n");
 }
 
-struct arg_end *arg_end(int maxcount) {
+struct arg_end* arg_end(int maxcount) {
     size_t nbytes;
-    struct arg_end *result;
+    struct arg_end* result;
 
-    nbytes =
-        sizeof(struct arg_end) +
-        maxcount * sizeof(int)       /* storage for int error[maxcount] array*/
-        + maxcount * sizeof(void *)  /* storage for void* parent[maxcount] array */
-        + maxcount * sizeof(char *); /* storage for char* argval[maxcount] array */
+    nbytes = sizeof(struct arg_end) + maxcount * sizeof(int) /* storage for int error[maxcount] array*/
+             + maxcount * sizeof(void*)                      /* storage for void* parent[maxcount] array */
+             + maxcount * sizeof(char*);                     /* storage for char* argval[maxcount] array */
 
-    result = (struct arg_end *)xmalloc(nbytes);
+    result = (struct arg_end*)xmalloc(nbytes);
 
     /* init the arg_hdr struct */
     result->hdr.flag = ARG_TERMINATOR;
@@ -97,36 +94,35 @@ struct arg_end *arg_end(int maxcount) {
     result->hdr.mincount = 1;
     result->hdr.maxcount = maxcount;
     result->hdr.parent = result;
-    result->hdr.resetfn = (arg_resetfn *)arg_end_resetfn;
+    result->hdr.resetfn = (arg_resetfn*)arg_end_resetfn;
     result->hdr.scanfn = NULL;
     result->hdr.checkfn = NULL;
-    result->hdr.errorfn = (arg_errorfn *)arg_end_errorfn;
+    result->hdr.errorfn = (arg_errorfn*)arg_end_errorfn;
 
     /* store error[maxcount] array immediately after struct arg_end */
-    result->error = (int *)(result + 1);
+    result->error = (int*)(result + 1);
 
     /* store parent[maxcount] array immediately after error[] array */
-    result->parent = (void **)(result->error + maxcount);
+    result->parent = (void**)(result->error + maxcount);
 
     /* store argval[maxcount] array immediately after parent[] array */
-    result->argval = (const char **)(result->parent + maxcount);
+    result->argval = (const char**)(result->parent + maxcount);
 
     ARG_TRACE(("arg_end(%d) returns %p\n", maxcount, result));
     return result;
 }
 
-void arg_print_errors_ds(arg_dstr_t ds, struct arg_end *end, const char *progname) {
+void arg_print_errors_ds(arg_dstr_t ds, struct arg_end* end, const char* progname) {
     int i;
     ARG_TRACE(("arg_errors()\n"));
     for (i = 0; i < end->count; i++) {
-        struct arg_hdr *errorparent = (struct arg_hdr *)(end->parent[i]);
+        struct arg_hdr* errorparent = (struct arg_hdr*)(end->parent[i]);
         if (errorparent->errorfn)
-            errorparent->errorfn(end->parent[i], ds, end->error[i], end->argval[i],
-                                 progname);
+            errorparent->errorfn(end->parent[i], ds, end->error[i], end->argval[i], progname);
     }
 }
 
-void arg_print_errors(FILE *fp, struct arg_end *end, const char *progname) {
+void arg_print_errors(FILE* fp, struct arg_end* end, const char* progname) {
     arg_dstr_t ds = arg_dstr_create();
     arg_print_errors_ds(ds, end, progname);
     fputs(arg_dstr_cstr(ds), fp);

@@ -30,33 +30,32 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include "thirdparty/argtable3/argtable3.h"
+#include "argtable3.h"
 
 #ifndef ARG_AMALGAMATION
-#include "thirdparty/argtable3/argtable3_private.h"
+#include "argtable3_private.h"
 #endif
 
 #include <stdlib.h>
 #include <string.h>
 
-char *arg_strptime(const char *buf, const char *fmt, struct tm *tm);
+char* arg_strptime(const char* buf, const char* fmt, struct tm* tm);
 
-static void arg_date_resetfn(struct arg_date *parent) {
+static void arg_date_resetfn(struct arg_date* parent) {
     ARG_TRACE(("%s:resetfn(%p)\n", __FILE__, parent));
     parent->count = 0;
 }
 
-static int arg_date_scanfn(struct arg_date *parent, const char *argval) {
+static int arg_date_scanfn(struct arg_date* parent, const char* argval) {
     int errorcode = 0;
 
     if (parent->count == parent->hdr.maxcount) {
         errorcode = ARG_ERR_MAXCOUNT;
     } else if (!argval) {
-        /* no argument value was given, leave parent->tmval[] unaltered but still
-         * count it */
+        /* no argument value was given, leave parent->tmval[] unaltered but still count it */
         parent->count++;
     } else {
-        const char *pend;
+        const char* pend;
         struct tm tm = parent->tmval[parent->count];
 
         /* parse the given argument value, store result in parent->tmval[] */
@@ -71,18 +70,17 @@ static int arg_date_scanfn(struct arg_date *parent, const char *argval) {
     return errorcode;
 }
 
-static int arg_date_checkfn(struct arg_date *parent) {
+static int arg_date_checkfn(struct arg_date* parent) {
     int errorcode = (parent->count < parent->hdr.mincount) ? ARG_ERR_MINCOUNT : 0;
 
     ARG_TRACE(("%s:checkfn(%p) returns %d\n", __FILE__, parent, errorcode));
     return errorcode;
 }
 
-static void arg_date_errorfn(struct arg_date *parent, arg_dstr_t ds, int errorcode,
-                             const char *argval, const char *progname) {
-    const char *shortopts = parent->hdr.shortopts;
-    const char *longopts = parent->hdr.longopts;
-    const char *datatype = parent->hdr.datatype;
+static void arg_date_errorfn(struct arg_date* parent, arg_dstr_t ds, int errorcode, const char* argval, const char* progname) {
+    const char* shortopts = parent->hdr.shortopts;
+    const char* longopts = parent->hdr.longopts;
+    const char* datatype = parent->hdr.datatype;
 
     /* make argval NULL safe */
     argval = argval ? argval : "";
@@ -113,23 +111,18 @@ static void arg_date_errorfn(struct arg_date *parent, arg_dstr_t ds, int errorco
     }
 }
 
-struct arg_date *arg_date0(const char *shortopts, const char *longopts,
-                           const char *format, const char *datatype,
-                           const char *glossary) {
+struct arg_date* arg_date0(const char* shortopts, const char* longopts, const char* format, const char* datatype, const char* glossary) {
     return arg_daten(shortopts, longopts, format, datatype, 0, 1, glossary);
 }
 
-struct arg_date *arg_date1(const char *shortopts, const char *longopts,
-                           const char *format, const char *datatype,
-                           const char *glossary) {
+struct arg_date* arg_date1(const char* shortopts, const char* longopts, const char* format, const char* datatype, const char* glossary) {
     return arg_daten(shortopts, longopts, format, datatype, 1, 1, glossary);
 }
 
-struct arg_date *arg_daten(const char *shortopts, const char *longopts,
-                           const char *format, const char *datatype, int mincount,
-                           int maxcount, const char *glossary) {
+struct arg_date*
+arg_daten(const char* shortopts, const char* longopts, const char* format, const char* datatype, int mincount, int maxcount, const char* glossary) {
     size_t nbytes;
-    struct arg_date *result;
+    struct arg_date* result;
 
     /* foolproof things by ensuring maxcount is not less than mincount */
     maxcount = (maxcount < mincount) ? mincount : maxcount;
@@ -143,7 +136,7 @@ struct arg_date *arg_daten(const char *shortopts, const char *longopts,
 
     /* allocate storage for the arg_date struct + tmval[] array.    */
     /* we use calloc because we want the tmval[] array zero filled. */
-    result = (struct arg_date *)xcalloc(1, nbytes);
+    result = (struct arg_date*)xcalloc(1, nbytes);
 
     /* init the arg_hdr struct */
     result->hdr.flag = ARG_HASVALUE;
@@ -154,13 +147,13 @@ struct arg_date *arg_daten(const char *shortopts, const char *longopts,
     result->hdr.mincount = mincount;
     result->hdr.maxcount = maxcount;
     result->hdr.parent = result;
-    result->hdr.resetfn = (arg_resetfn *)arg_date_resetfn;
-    result->hdr.scanfn = (arg_scanfn *)arg_date_scanfn;
-    result->hdr.checkfn = (arg_checkfn *)arg_date_checkfn;
-    result->hdr.errorfn = (arg_errorfn *)arg_date_errorfn;
+    result->hdr.resetfn = (arg_resetfn*)arg_date_resetfn;
+    result->hdr.scanfn = (arg_scanfn*)arg_date_scanfn;
+    result->hdr.checkfn = (arg_checkfn*)arg_date_checkfn;
+    result->hdr.errorfn = (arg_errorfn*)arg_date_errorfn;
 
     /* store the tmval[maxcount] array immediately after the arg_date struct */
-    result->tmval = (struct tm *)(result + 1);
+    result->tmval = (struct tm*)(result + 1);
 
     /* init the remaining arg_date member variables */
     result->count = 0;
@@ -216,25 +209,22 @@ struct arg_date *arg_daten(const char *shortopts, const char *longopts,
     }
 #define TM_YEAR_BASE (1900)
 
-static int conv_num(const char **, int *, int, int);
+static int conv_num(const char**, int*, int, int);
 
-static const char *day[7] = {"Sunday",   "Monday", "Tuesday", "Wednesday",
-                             "Thursday", "Friday", "Saturday"};
+static const char* day[7] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
-static const char *abday[7] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+static const char* abday[7] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
-static const char *mon[12] = {"January",   "February", "March",    "April",
-                              "May",       "June",     "July",     "August",
-                              "September", "October",  "November", "December"};
+static const char* mon[12] = {"January", "February", "March",     "April",   "May",      "June",
+                              "July",    "August",   "September", "October", "November", "December"};
 
-static const char *abmon[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+static const char* abmon[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
-static const char *am_pm[2] = {"AM", "PM"};
+static const char* am_pm[2] = {"AM", "PM"};
 
-static int arg_strcasecmp(const char *s1, const char *s2) {
-    const unsigned char *us1 = (const unsigned char *)s1;
-    const unsigned char *us2 = (const unsigned char *)s2;
+static int arg_strcasecmp(const char* s1, const char* s2) {
+    const unsigned char* us1 = (const unsigned char*)s1;
+    const unsigned char* us2 = (const unsigned char*)s2;
     while (tolower(*us1) == tolower(*us2++))
         if (*us1++ == '\0')
             return 0;
@@ -242,10 +232,10 @@ static int arg_strcasecmp(const char *s1, const char *s2) {
     return tolower(*us1) - tolower(*--us2);
 }
 
-static int arg_strncasecmp(const char *s1, const char *s2, size_t n) {
+static int arg_strncasecmp(const char* s1, const char* s2, size_t n) {
     if (n != 0) {
-        const unsigned char *us1 = (const unsigned char *)s1;
-        const unsigned char *us2 = (const unsigned char *)s2;
+        const unsigned char* us1 = (const unsigned char*)s1;
+        const unsigned char* us2 = (const unsigned char*)s2;
         do {
             if (tolower(*us1) != tolower(*us2++))
                 return tolower(*us1) - tolower(*--us2);
@@ -258,9 +248,9 @@ static int arg_strncasecmp(const char *s1, const char *s2, size_t n) {
     return 0;
 }
 
-char *arg_strptime(const char *buf, const char *fmt, struct tm *tm) {
+char* arg_strptime(const char* buf, const char* fmt, struct tm* tm) {
     char c;
-    const char *bp;
+    const char* bp;
     size_t len = 0;
     int alt_format, i, split_year = 0;
 
@@ -554,10 +544,10 @@ char *arg_strptime(const char *buf, const char *fmt, struct tm *tm) {
     }
 
     /* LINTED functional specification */
-    return ((char *)bp);
+    return ((char*)bp);
 }
 
-static int conv_num(const char **buf, int *dest, int llim, int ulim) {
+static int conv_num(const char** buf, int* dest, int llim, int ulim) {
     int result = 0;
 
     /* The limit also determines the number of valid digits. */

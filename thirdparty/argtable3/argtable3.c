@@ -30,11 +30,11 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include "thirdparty/argtable3/argtable3.h"
+#include "argtable3.h"
 
 #ifndef ARG_AMALGAMATION
+#include "argtable3_private.h"
 #include "getopt.h"
-#include "thirdparty/argtable3/argtable3_private.h"
 #endif
 
 #ifdef _WIN32
@@ -49,8 +49,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static void arg_register_error(struct arg_end *end, void *parent, int error,
-                               const char *argval) {
+static void arg_register_error(struct arg_end* end, void* parent, int error, const char* argval) {
     /* printf("arg_register_error(%p,%p,%d,%s)\n",end,parent,error,argval); */
     if (end->count < end->hdr.maxcount) {
         end->error[end->count] = error;
@@ -68,11 +67,10 @@ static void arg_register_error(struct arg_end *end, void *parent, int error,
  * Return index of first table entry with a matching short option
  * or -1 if no match was found.
  */
-static int find_shortoption(struct arg_hdr **table, char shortopt) {
+static int find_shortoption(struct arg_hdr** table, char shortopt) {
     int tabindex;
     for (tabindex = 0; !(table[tabindex]->flag & ARG_TERMINATOR); tabindex++) {
-        if (table[tabindex]->shortopts &&
-            strchr(table[tabindex]->shortopts, shortopt))
+        if (table[tabindex]->shortopts && strchr(table[tabindex]->shortopts, shortopt))
             return tabindex;
     }
     return -1;
@@ -81,7 +79,7 @@ static int find_shortoption(struct arg_hdr **table, char shortopt) {
 struct longoptions {
     int getoptval;
     int noptions;
-    struct option *options;
+    struct option* options;
 };
 
 #if 0
@@ -103,14 +101,14 @@ void dump_longoptions(struct longoptions * longoptions)
 }
 #endif
 
-static struct longoptions *alloc_longoptions(struct arg_hdr **table) {
-    struct longoptions *result;
+static struct longoptions* alloc_longoptions(struct arg_hdr** table) {
+    struct longoptions* result;
     size_t nbytes;
     int noptions = 1;
     size_t longoptlen = 0;
     int tabindex;
     int option_index = 0;
-    char *store;
+    char* store;
 
     /*
      * Determine the total number of option structs required
@@ -124,7 +122,7 @@ static struct longoptions *alloc_longoptions(struct arg_hdr **table) {
      */
     tabindex = 0;
     do {
-        const char *longopts = table[tabindex]->longopts;
+        const char* longopts = table[tabindex]->longopts;
         longoptlen += (longopts ? strlen(longopts) : 0) + 1;
         while (longopts) {
             noptions++;
@@ -135,20 +133,19 @@ static struct longoptions *alloc_longoptions(struct arg_hdr **table) {
 
     /* allocate storage for return data structure as: */
     /* (struct longoptions) + (struct options)[noptions] + char[longoptlen] */
-    nbytes =
-        sizeof(struct longoptions) + sizeof(struct option) * noptions + longoptlen;
-    result = (struct longoptions *)xmalloc(nbytes);
+    nbytes = sizeof(struct longoptions) + sizeof(struct option) * noptions + longoptlen;
+    result = (struct longoptions*)xmalloc(nbytes);
 
     result->getoptval = 0;
     result->noptions = noptions;
-    result->options = (struct option *)(result + 1);
-    store = (char *)(result->options + noptions);
+    result->options = (struct option*)(result + 1);
+    store = (char*)(result->options + noptions);
 
     for (tabindex = 0; !(table[tabindex]->flag & ARG_TERMINATOR); tabindex++) {
-        const char *longopts = table[tabindex]->longopts;
+        const char* longopts = table[tabindex]->longopts;
 
         while (longopts && *longopts) {
-            char *storestart = store;
+            char* storestart = store;
 
             /* copy progressive longopt strings into the store */
             while (*longopts != 0 && *longopts != ',')
@@ -181,15 +178,15 @@ static struct longoptions *alloc_longoptions(struct arg_hdr **table) {
     return result;
 }
 
-static char *alloc_shortoptions(struct arg_hdr **table) {
-    char *result;
+static char* alloc_shortoptions(struct arg_hdr** table) {
+    char* result;
     size_t len = 2;
     int tabindex;
-    char *res;
+    char* res;
 
     /* determine the total number of option chars required */
     for (tabindex = 0; !(table[tabindex]->flag & ARG_TERMINATOR); tabindex++) {
-        struct arg_hdr *hdr = table[tabindex];
+        struct arg_hdr* hdr = table[tabindex];
         len += 3 * (hdr->shortopts ? strlen(hdr->shortopts) : 0);
     }
 
@@ -202,8 +199,8 @@ static char *alloc_shortoptions(struct arg_hdr **table) {
     *res++ = ':';
 
     for (tabindex = 0; !(table[tabindex]->flag & ARG_TERMINATOR); tabindex++) {
-        struct arg_hdr *hdr = table[tabindex];
-        const char *shortopts = hdr->shortopts;
+        struct arg_hdr* hdr = table[tabindex];
+        const char* shortopts = hdr->shortopts;
         while (shortopts && *shortopts) {
             *res++ = *shortopts++;
             if (hdr->flag & ARG_HASVALUE)
@@ -220,17 +217,16 @@ static char *alloc_shortoptions(struct arg_hdr **table) {
 }
 
 /* return index of the table terminator entry */
-static int arg_endindex(struct arg_hdr **table) {
+static int arg_endindex(struct arg_hdr** table) {
     int tabindex = 0;
     while (!(table[tabindex]->flag & ARG_TERMINATOR))
         tabindex++;
     return tabindex;
 }
 
-static void arg_parse_tagged(int argc, char **argv, struct arg_hdr **table,
-                             struct arg_end *endtable) {
-    struct longoptions *longoptions;
-    char *shortoptions;
+static void arg_parse_tagged(int argc, char** argv, struct arg_hdr** table, struct arg_end* endtable) {
+    struct longoptions* longoptions;
+    char* shortoptions;
     int copt;
 
     /*printf("arg_parse_tagged(%d,%p,%p,%p)\n",argc,argv,table,endtable);*/
@@ -247,8 +243,7 @@ static void arg_parse_tagged(int argc, char **argv, struct arg_hdr **table,
     opterr = 0;
 
     /* fetch and process args using getopt_long */
-    while ((copt = getopt_long(argc, argv, shortoptions, longoptions->options,
-                               NULL)) != -1) {
+    while ((copt = getopt_long(argc, argv, shortoptions, longoptions->options, NULL)) != -1) {
         /*
            printf("optarg='%s'\n",optarg);
            printf("optind=%d\n",optind);
@@ -258,16 +253,12 @@ static void arg_parse_tagged(int argc, char **argv, struct arg_hdr **table,
         switch (copt) {
             case 0: {
                 int tabindex = longoptions->getoptval;
-                void *parent = table[tabindex]->parent;
+                void* parent = table[tabindex]->parent;
                 /*printf("long option detected from argtable[%d]\n", tabindex);*/
-                if (optarg && optarg[0] == 0 &&
-                    (table[tabindex]->flag & ARG_HASVALUE)) {
-                    /* printf(": long option %s requires an
-                     * argument\n",argv[optind-1]); */
-                    arg_register_error(endtable, endtable, ARG_EMISSARG,
-                                       argv[optind - 1]);
-                    /* continue to scan the (empty) argument value to enforce
-                     * argument count checking */
+                if (optarg && optarg[0] == 0 && (table[tabindex]->flag & ARG_HASVALUE)) {
+                    /* printf(": long option %s requires an argument\n",argv[optind-1]); */
+                    arg_register_error(endtable, endtable, ARG_EMISSARG, argv[optind - 1]);
+                    /* continue to scan the (empty) argument value to enforce argument count checking */
                 }
                 if (table[tabindex]->scanfn) {
                     int errorcode = table[tabindex]->scanfn(parent, optarg);
@@ -284,10 +275,8 @@ static void arg_parse_tagged(int argc, char **argv, struct arg_hdr **table,
                  */
                 switch (optopt) {
                     case 0:
-                        /*printf("?0 unrecognised long option
-                         * %s\n",argv[optind-1]);*/
-                        arg_register_error(endtable, endtable, ARG_ELONGOPT,
-                                           argv[optind - 1]);
+                        /*printf("?0 unrecognised long option %s\n",argv[optind-1]);*/
+                        arg_register_error(endtable, endtable, ARG_ELONGOPT, argv[optind - 1]);
                         break;
                     default:
                         /*printf("?* unrecognised short option '%c'\n",optopt);*/
@@ -301,8 +290,7 @@ static void arg_parse_tagged(int argc, char **argv, struct arg_hdr **table,
                  * getopt_long() found an option with its argument missing.
                  */
                 /*printf(": option %s requires an argument\n",argv[optind-1]); */
-                arg_register_error(endtable, endtable, ARG_EMISSARG,
-                                   argv[optind - 1]);
+                arg_register_error(endtable, endtable, ARG_EMISSARG, argv[optind - 1]);
                 break;
 
             default: {
@@ -315,7 +303,7 @@ static void arg_parse_tagged(int argc, char **argv, struct arg_hdr **table,
                     arg_register_error(endtable, endtable, copt, NULL);
                 } else {
                     if (table[tabindex]->scanfn) {
-                        void *parent = table[tabindex]->parent;
+                        void* parent = table[tabindex]->parent;
                         int errorcode = table[tabindex]->scanfn(parent, optarg);
                         if (errorcode != 0)
                             arg_register_error(endtable, parent, errorcode, optarg);
@@ -330,16 +318,15 @@ static void arg_parse_tagged(int argc, char **argv, struct arg_hdr **table,
     xfree(longoptions);
 }
 
-static void arg_parse_untagged(int argc, char **argv, struct arg_hdr **table,
-                               struct arg_end *endtable) {
+static void arg_parse_untagged(int argc, char** argv, struct arg_hdr** table, struct arg_end* endtable) {
     int tabindex = 0;
     int errorlast = 0;
-    const char *optarglast = NULL;
-    void *parentlast = NULL;
+    const char* optarglast = NULL;
+    void* parentlast = NULL;
 
     /*printf("arg_parse_untagged(%d,%p,%p,%p)\n",argc,argv,table,endtable);*/
     while (!(table[tabindex]->flag & ARG_TERMINATOR)) {
-        void *parent;
+        void* parent;
         int errorcode;
 
         /* if we have exhausted our argv[optind] entries then we have finished */
@@ -348,19 +335,16 @@ static void arg_parse_untagged(int argc, char **argv, struct arg_hdr **table,
             return;
         }
 
-        /* skip table entries with non-null long or short options (they are not
-         * untagged entries) */
+        /* skip table entries with non-null long or short options (they are not untagged entries) */
         if (table[tabindex]->longopts || table[tabindex]->shortopts) {
-            /*printf("arg_parse_untagged(): skipping argtable[%d] (tagged
-             * argument)\n",tabindex);*/
+            /*printf("arg_parse_untagged(): skipping argtable[%d] (tagged argument)\n",tabindex);*/
             tabindex++;
             continue;
         }
 
         /* skip table entries with NULL scanfn */
         if (!(table[tabindex]->scanfn)) {
-            /*printf("arg_parse_untagged(): skipping argtable[%d] (NULL
-             * scanfn)\n",tabindex);*/
+            /*printf("arg_parse_untagged(): skipping argtable[%d] (NULL scanfn)\n",tabindex);*/
             tabindex++;
             continue;
         }
@@ -371,10 +355,8 @@ static void arg_parse_untagged(int argc, char **argv, struct arg_hdr **table,
         parent = table[tabindex]->parent;
         errorcode = table[tabindex]->scanfn(parent, argv[optind]);
         if (errorcode == 0) {
-            /* success, move onto next argv[optind] but stay with same
-             * table[tabindex] */
-            /*printf("arg_parse_untagged(): argtable[%d] successfully
-             * matched\n",tabindex);*/
+            /* success, move onto next argv[optind] but stay with same table[tabindex] */
+            /*printf("arg_parse_untagged(): argtable[%d] successfully matched\n",tabindex);*/
             optind++;
 
             /* clear the last tentative error */
@@ -391,8 +373,7 @@ static void arg_parse_untagged(int argc, char **argv, struct arg_hdr **table,
         }
     }
 
-    /* if a tenative error still remains at this point then register it as a proper
-     * error */
+    /* if a tenative error still remains at this point then register it as a proper error */
     if (errorlast) {
         arg_register_error(endtable, parentlast, errorlast, optarglast);
         optind++;
@@ -401,20 +382,19 @@ static void arg_parse_untagged(int argc, char **argv, struct arg_hdr **table,
     /* only get here when not all argv[] entries were consumed */
     /* register an error for each unused argv[] entry */
     while (optind < argc) {
-        /*printf("arg_parse_untagged(): argv[%d]=\"%s\" not
-         * consumed\n",optind,argv[optind]);*/
+        /*printf("arg_parse_untagged(): argv[%d]=\"%s\" not consumed\n",optind,argv[optind]);*/
         arg_register_error(endtable, endtable, ARG_ENOMATCH, argv[optind++]);
     }
 
     return;
 }
 
-static void arg_parse_check(struct arg_hdr **table, struct arg_end *endtable) {
+static void arg_parse_check(struct arg_hdr** table, struct arg_end* endtable) {
     int tabindex = 0;
     /* printf("arg_parse_check()\n"); */
     do {
         if (table[tabindex]->checkfn) {
-            void *parent = table[tabindex]->parent;
+            void* parent = table[tabindex]->parent;
             int errorcode = table[tabindex]->checkfn(parent);
             if (errorcode != 0)
                 arg_register_error(endtable, parent, errorcode, NULL);
@@ -422,8 +402,8 @@ static void arg_parse_check(struct arg_hdr **table, struct arg_end *endtable) {
     } while (!(table[tabindex++]->flag & ARG_TERMINATOR));
 }
 
-static void arg_reset(void **argtable) {
-    struct arg_hdr **table = (struct arg_hdr **)argtable;
+static void arg_reset(void** argtable) {
+    struct arg_hdr** table = (struct arg_hdr**)argtable;
     int tabindex = 0;
     /*printf("arg_reset(%p)\n",argtable);*/
     do {
@@ -432,11 +412,11 @@ static void arg_reset(void **argtable) {
     } while (!(table[tabindex++]->flag & ARG_TERMINATOR));
 }
 
-int arg_parse(int argc, char **argv, void **argtable) {
-    struct arg_hdr **table = (struct arg_hdr **)argtable;
-    struct arg_end *endtable;
+int arg_parse(int argc, char** argv, void** argtable) {
+    struct arg_hdr** table = (struct arg_hdr**)argtable;
+    struct arg_end* endtable;
     int endindex;
-    char **argvcopy = NULL;
+    char** argvcopy = NULL;
     int i;
 
     /*printf("arg_parse(%d,%p,%p)\n",argc,argv,argtable);*/
@@ -446,21 +426,20 @@ int arg_parse(int argc, char **argv, void **argtable) {
 
     /* locate the first end-of-table marker within the array */
     endindex = arg_endindex(table);
-    endtable = (struct arg_end *)table[endindex];
+    endtable = (struct arg_end*)table[endindex];
 
     /* Special case of argc==0.  This can occur on Texas Instruments DSP. */
     /* Failure to trap this case results in an unwanted NULL result from  */
     /* the malloc for argvcopy (next code block).                         */
     if (argc == 0) {
-        /* We must still perform post-parse checks despite the absence of command
-         * line arguments */
+        /* We must still perform post-parse checks despite the absence of command line arguments */
         arg_parse_check(table, endtable);
 
         /* Now we are finished */
         return endtable->count;
     }
 
-    argvcopy = (char **)xmalloc(sizeof(char *) * (argc + 1));
+    argvcopy = (char**)xmalloc(sizeof(char*) * (argc + 1));
 
     /*
         Fill in the local copy of argv[]. We need a local copy
@@ -508,9 +487,9 @@ int arg_parse(int argc, char **argv, void **argtable) {
  *   dest[] == "goodbye cruel world!"
  *   ndest  == 10
  */
-static void arg_cat(char **pdest, const char *src, size_t *pndest) {
-    char *dest = *pdest;
-    char *end = dest + *pndest;
+static void arg_cat(char** pdest, const char* src, size_t* pndest) {
+    char* dest = *pdest;
+    char* end = dest + *pndest;
 
     /*locate null terminator of dest string */
     while (dest < end && *dest != 0)
@@ -528,9 +507,7 @@ static void arg_cat(char **pdest, const char *src, size_t *pndest) {
     *pdest = dest;
 }
 
-static void arg_cat_option(char *dest, size_t ndest, const char *shortopts,
-                           const char *longopts, const char *datatype,
-                           int optvalue) {
+static void arg_cat_option(char* dest, size_t ndest, const char* shortopts, const char* longopts, const char* datatype, int optvalue) {
     if (shortopts) {
         char option[3];
 
@@ -558,8 +535,7 @@ static void arg_cat_option(char *dest, size_t ndest, const char *shortopts,
 
         /* add comma separated option tag */
         ncspn = strcspn(longopts, ",");
-#if (defined(__STDC_LIB_EXT1__) && defined(__STDC_WANT_LIB_EXT1__)) || \
-    (defined(__STDC_SECURE_LIB__) && defined(__STDC_WANT_SECURE_LIB__))
+#if (defined(__STDC_LIB_EXT1__) && defined(__STDC_WANT_LIB_EXT1__)) || (defined(__STDC_SECURE_LIB__) && defined(__STDC_WANT_SECURE_LIB__))
         strncat_s(dest, ndest, longopts, (ncspn < ndest) ? ncspn : ndest);
 #else
         strncat(dest, longopts, (ncspn < ndest) ? ncspn : ndest);
@@ -584,13 +560,12 @@ static void arg_cat_option(char *dest, size_t ndest, const char *shortopts,
     }
 }
 
-static void arg_cat_optionv(char *dest, size_t ndest, const char *shortopts,
-                            const char *longopts, const char *datatype, int optvalue,
-                            const char *separator) {
+static void
+arg_cat_optionv(char* dest, size_t ndest, const char* shortopts, const char* longopts, const char* datatype, int optvalue, const char* separator) {
     separator = separator ? separator : "";
 
     if (shortopts) {
-        const char *c = shortopts;
+        const char* c = shortopts;
         while (*c) {
             /* "-a|-b|-c" */
             char shortopt[3];
@@ -612,7 +587,7 @@ static void arg_cat_optionv(char *dest, size_t ndest, const char *shortopts,
         arg_cat(&dest, separator, &ndest);
 
     if (longopts) {
-        const char *c = longopts;
+        const char* c = longopts;
         while (*c) {
             size_t ncspn;
 
@@ -621,8 +596,7 @@ static void arg_cat_optionv(char *dest, size_t ndest, const char *shortopts,
 
             /* add comma separated option tag */
             ncspn = strcspn(c, ",");
-#if (defined(__STDC_LIB_EXT1__) && defined(__STDC_WANT_LIB_EXT1__)) || \
-    (defined(__STDC_SECURE_LIB__) && defined(__STDC_WANT_SECURE_LIB__))
+#if (defined(__STDC_LIB_EXT1__) && defined(__STDC_WANT_LIB_EXT1__)) || (defined(__STDC_SECURE_LIB__) && defined(__STDC_WANT_SECURE_LIB__))
             strncat_s(dest, ndest, c, (ncspn < ndest) ? ncspn : ndest);
 #else
             strncat(dest, c, (ncspn < ndest) ? ncspn : ndest);
@@ -652,23 +626,19 @@ static void arg_cat_optionv(char *dest, size_t ndest, const char *shortopts,
     }
 }
 
-void arg_print_option_ds(arg_dstr_t ds, const char *shortopts, const char *longopts,
-                         const char *datatype, const char *suffix) {
+void arg_print_option_ds(arg_dstr_t ds, const char* shortopts, const char* longopts, const char* datatype, const char* suffix) {
     char syntax[200] = "";
     suffix = suffix ? suffix : "";
 
-    /* there is no way of passing the proper optvalue for optional argument values
-     * here, so we must ignore it */
+    /* there is no way of passing the proper optvalue for optional argument values here, so we must ignore it */
     arg_cat_optionv(syntax, sizeof(syntax), shortopts, longopts, datatype, 0, "|");
 
     arg_dstr_cat(ds, syntax);
-    arg_dstr_cat(ds, (char *)suffix);
+    arg_dstr_cat(ds, (char*)suffix);
 }
 
-/* this function should be deprecated because it doesn't consider optional argument
- * values (ARG_HASOPTVALUE) */
-void arg_print_option(FILE *fp, const char *shortopts, const char *longopts,
-                      const char *datatype, const char *suffix) {
+/* this function should be deprecated because it doesn't consider optional argument values (ARG_HASOPTVALUE) */
+void arg_print_option(FILE* fp, const char* shortopts, const char* longopts, const char* datatype, const char* suffix) {
     arg_dstr_t ds = arg_dstr_create();
     arg_print_option_ds(ds, shortopts, longopts, datatype, suffix);
     fputs(arg_dstr_cstr(ds), fp);
@@ -680,15 +650,14 @@ void arg_print_option(FILE *fp, const char *shortopts, const char *longopts,
  * do not take argument values are presented in abbreviated form, as
  * in: -xvfsd, or -xvf[sd], or [-xvsfd]
  */
-static void arg_print_gnuswitch_ds(arg_dstr_t ds, struct arg_hdr **table) {
+static void arg_print_gnuswitch_ds(arg_dstr_t ds, struct arg_hdr** table) {
     int tabindex;
-    char *format1 = " -%c";
-    char *format2 = " [-%c";
-    char *suffix = "";
+    char* format1 = " -%c";
+    char* format2 = " [-%c";
+    char* suffix = "";
 
     /* print all mandatory switches that are without argument values */
-    for (tabindex = 0; table[tabindex] && !(table[tabindex]->flag & ARG_TERMINATOR);
-         tabindex++) {
+    for (tabindex = 0; table[tabindex] && !(table[tabindex]->flag & ARG_TERMINATOR); tabindex++) {
         /* skip optional options */
         if (table[tabindex]->mincount < 1)
             continue;
@@ -701,16 +670,14 @@ static void arg_print_gnuswitch_ds(arg_dstr_t ds, struct arg_hdr **table) {
         if (table[tabindex]->flag & ARG_HASVALUE)
             continue;
 
-        /* print the short option (only the first short option char, ignore multiple
-         * choices)*/
+        /* print the short option (only the first short option char, ignore multiple choices)*/
         arg_dstr_catf(ds, format1, table[tabindex]->shortopts[0]);
         format1 = "%c";
         format2 = "[%c";
     }
 
     /* print all optional switches that are without argument values */
-    for (tabindex = 0; table[tabindex] && !(table[tabindex]->flag & ARG_TERMINATOR);
-         tabindex++) {
+    for (tabindex = 0; table[tabindex] && !(table[tabindex]->flag & ARG_TERMINATOR); tabindex++) {
         /* skip mandatory args */
         if (table[tabindex]->mincount > 0)
             continue;
@@ -732,29 +699,26 @@ static void arg_print_gnuswitch_ds(arg_dstr_t ds, struct arg_hdr **table) {
     arg_dstr_catf(ds, "%s", suffix);
 }
 
-void arg_print_syntax_ds(arg_dstr_t ds, void **argtable, const char *suffix) {
-    struct arg_hdr **table = (struct arg_hdr **)argtable;
+void arg_print_syntax_ds(arg_dstr_t ds, void** argtable, const char* suffix) {
+    struct arg_hdr** table = (struct arg_hdr**)argtable;
     int i, tabindex;
 
     /* print GNU style [OPTION] string */
     arg_print_gnuswitch_ds(ds, table);
 
     /* print remaining options in abbreviated style */
-    for (tabindex = 0; table[tabindex] && !(table[tabindex]->flag & ARG_TERMINATOR);
-         tabindex++) {
+    for (tabindex = 0; table[tabindex] && !(table[tabindex]->flag & ARG_TERMINATOR); tabindex++) {
         char syntax[200] = "";
         const char *shortopts, *longopts, *datatype;
 
-        /* skip short options without arg values (they were printed by
-         * arg_print_gnu_switch) */
+        /* skip short options without arg values (they were printed by arg_print_gnu_switch) */
         if (table[tabindex]->shortopts && !(table[tabindex]->flag & ARG_HASVALUE))
             continue;
 
         shortopts = table[tabindex]->shortopts;
         longopts = table[tabindex]->longopts;
         datatype = table[tabindex]->datatype;
-        arg_cat_option(syntax, sizeof(syntax), shortopts, longopts, datatype,
-                       table[tabindex]->flag & ARG_HASOPTVALUE);
+        arg_cat_option(syntax, sizeof(syntax), shortopts, longopts, datatype, table[tabindex]->flag & ARG_HASOPTVALUE);
 
         if (strlen(syntax) > 0) {
             /* print mandatory instances of this option */
@@ -790,32 +754,30 @@ void arg_print_syntax_ds(arg_dstr_t ds, void **argtable, const char *suffix) {
     }
 
     if (suffix) {
-        arg_dstr_cat(ds, (char *)suffix);
+        arg_dstr_cat(ds, (char*)suffix);
     }
 }
 
-void arg_print_syntax(FILE *fp, void **argtable, const char *suffix) {
+void arg_print_syntax(FILE* fp, void** argtable, const char* suffix) {
     arg_dstr_t ds = arg_dstr_create();
     arg_print_syntax_ds(ds, argtable, suffix);
     fputs(arg_dstr_cstr(ds), fp);
     arg_dstr_destroy(ds);
 }
 
-void arg_print_syntaxv_ds(arg_dstr_t ds, void **argtable, const char *suffix) {
-    struct arg_hdr **table = (struct arg_hdr **)argtable;
+void arg_print_syntaxv_ds(arg_dstr_t ds, void** argtable, const char* suffix) {
+    struct arg_hdr** table = (struct arg_hdr**)argtable;
     int i, tabindex;
 
     /* print remaining options in abbreviated style */
-    for (tabindex = 0; table[tabindex] && !(table[tabindex]->flag & ARG_TERMINATOR);
-         tabindex++) {
+    for (tabindex = 0; table[tabindex] && !(table[tabindex]->flag & ARG_TERMINATOR); tabindex++) {
         char syntax[200] = "";
         const char *shortopts, *longopts, *datatype;
 
         shortopts = table[tabindex]->shortopts;
         longopts = table[tabindex]->longopts;
         datatype = table[tabindex]->datatype;
-        arg_cat_optionv(syntax, sizeof(syntax), shortopts, longopts, datatype,
-                        table[tabindex]->flag & ARG_HASOPTVALUE, "|");
+        arg_cat_optionv(syntax, sizeof(syntax), shortopts, longopts, datatype, table[tabindex]->flag & ARG_HASOPTVALUE, "|");
 
         /* print mandatory options */
         for (i = 0; i < table[tabindex]->mincount; i++) {
@@ -849,37 +811,36 @@ void arg_print_syntaxv_ds(arg_dstr_t ds, void **argtable, const char *suffix) {
     }
 
     if (suffix) {
-        arg_dstr_cat(ds, (char *)suffix);
+        arg_dstr_cat(ds, (char*)suffix);
     }
 }
 
-void arg_print_syntaxv(FILE *fp, void **argtable, const char *suffix) {
+void arg_print_syntaxv(FILE* fp, void** argtable, const char* suffix) {
     arg_dstr_t ds = arg_dstr_create();
     arg_print_syntaxv_ds(ds, argtable, suffix);
     fputs(arg_dstr_cstr(ds), fp);
     arg_dstr_destroy(ds);
 }
 
-void arg_print_glossary_ds(arg_dstr_t ds, void **argtable, const char *format) {
-    struct arg_hdr **table = (struct arg_hdr **)argtable;
+void arg_print_glossary_ds(arg_dstr_t ds, void** argtable, const char* format) {
+    struct arg_hdr** table = (struct arg_hdr**)argtable;
     int tabindex;
 
     format = format ? format : "  %-20s %s\n";
     for (tabindex = 0; !(table[tabindex]->flag & ARG_TERMINATOR); tabindex++) {
         if (table[tabindex]->glossary) {
             char syntax[200] = "";
-            const char *shortopts = table[tabindex]->shortopts;
-            const char *longopts = table[tabindex]->longopts;
-            const char *datatype = table[tabindex]->datatype;
-            const char *glossary = table[tabindex]->glossary;
-            arg_cat_optionv(syntax, sizeof(syntax), shortopts, longopts, datatype,
-                            table[tabindex]->flag & ARG_HASOPTVALUE, ", ");
+            const char* shortopts = table[tabindex]->shortopts;
+            const char* longopts = table[tabindex]->longopts;
+            const char* datatype = table[tabindex]->datatype;
+            const char* glossary = table[tabindex]->glossary;
+            arg_cat_optionv(syntax, sizeof(syntax), shortopts, longopts, datatype, table[tabindex]->flag & ARG_HASOPTVALUE, ", ");
             arg_dstr_catf(ds, format, syntax, glossary);
         }
     }
 }
 
-void arg_print_glossary(FILE *fp, void **argtable, const char *format) {
+void arg_print_glossary(FILE* fp, void** argtable, const char* format) {
     arg_dstr_t ds = arg_dstr_create();
     arg_print_glossary_ds(ds, argtable, format);
     fputs(arg_dstr_cstr(ds), fp);
@@ -918,8 +879,7 @@ void arg_print_glossary(FILE *fp, void **argtable, const char *format) {
  *
  * Author: Uli Fouquet
  */
-static void arg_print_formatted_ds(arg_dstr_t ds, const unsigned lmargin,
-                                   const unsigned rmargin, const char *text) {
+static void arg_print_formatted_ds(arg_dstr_t ds, const unsigned lmargin, const unsigned rmargin, const char* text) {
     const unsigned int textlen = (unsigned int)strlen(text);
     unsigned int line_start = 0;
     unsigned int line_end = textlen;
@@ -987,17 +947,17 @@ static void arg_print_formatted_ds(arg_dstr_t ds, const unsigned lmargin,
  *
  * Contributed by Uli Fouquet
  */
-void arg_print_glossary_gnu_ds(arg_dstr_t ds, void **argtable) {
-    struct arg_hdr **table = (struct arg_hdr **)argtable;
+void arg_print_glossary_gnu_ds(arg_dstr_t ds, void** argtable) {
+    struct arg_hdr** table = (struct arg_hdr**)argtable;
     int tabindex;
 
     for (tabindex = 0; !(table[tabindex]->flag & ARG_TERMINATOR); tabindex++) {
         if (table[tabindex]->glossary) {
             char syntax[200] = "";
-            const char *shortopts = table[tabindex]->shortopts;
-            const char *longopts = table[tabindex]->longopts;
-            const char *datatype = table[tabindex]->datatype;
-            const char *glossary = table[tabindex]->glossary;
+            const char* shortopts = table[tabindex]->shortopts;
+            const char* longopts = table[tabindex]->longopts;
+            const char* datatype = table[tabindex]->datatype;
+            const char* glossary = table[tabindex]->glossary;
 
             if (!shortopts && longopts) {
                 /* Indent trailing line by 4 spaces... */
@@ -1005,8 +965,7 @@ void arg_print_glossary_gnu_ds(arg_dstr_t ds, void **argtable) {
                 *(syntax + 4) = '\0';
             }
 
-            arg_cat_optionv(syntax, sizeof(syntax), shortopts, longopts, datatype,
-                            table[tabindex]->flag & ARG_HASOPTVALUE, ", ");
+            arg_cat_optionv(syntax, sizeof(syntax), shortopts, longopts, datatype, table[tabindex]->flag & ARG_HASOPTVALUE, ", ");
 
             /* If syntax fits not into column, print glossary in new line... */
             if (strlen(syntax) > 25) {
@@ -1022,7 +981,7 @@ void arg_print_glossary_gnu_ds(arg_dstr_t ds, void **argtable) {
     arg_dstr_cat(ds, "\n");
 }
 
-void arg_print_glossary_gnu(FILE *fp, void **argtable) {
+void arg_print_glossary_gnu(FILE* fp, void** argtable) {
     arg_dstr_t ds = arg_dstr_create();
     arg_print_glossary_gnu_ds(ds, argtable);
     fputs(arg_dstr_cstr(ds), fp);
@@ -1033,8 +992,8 @@ void arg_print_glossary_gnu(FILE *fp, void **argtable) {
  * Checks the argtable[] array for NULL entries and returns 1
  * if any are found, zero otherwise.
  */
-int arg_nullcheck(void **argtable) {
-    struct arg_hdr **table = (struct arg_hdr **)argtable;
+int arg_nullcheck(void** argtable) {
+    struct arg_hdr** table = (struct arg_hdr**)argtable;
     int tabindex;
     /*printf("arg_nullcheck(%p)\n",argtable);*/
 
@@ -1062,8 +1021,8 @@ int arg_nullcheck(void **argtable) {
  * with the newer arg_freetable() function.
  * We still keep arg_free() for backwards compatibility.
  */
-void arg_free(void **argtable) {
-    struct arg_hdr **table = (struct arg_hdr **)argtable;
+void arg_free(void** argtable) {
+    struct arg_hdr** table = (struct arg_hdr**)argtable;
     int tabindex = 0;
     int flag;
     /*printf("arg_free(%p)\n",argtable);*/
@@ -1084,10 +1043,9 @@ void arg_free(void **argtable) {
     } while (!(flag & ARG_TERMINATOR));
 }
 
-/* frees each non-NULL element of argtable[], where n is the size of the number of
- * entries in the array */
-void arg_freetable(void **argtable, size_t n) {
-    struct arg_hdr **table = (struct arg_hdr **)argtable;
+/* frees each non-NULL element of argtable[], where n is the size of the number of entries in the array */
+void arg_freetable(void** argtable, size_t n) {
+    struct arg_hdr** table = (struct arg_hdr**)argtable;
     size_t tabindex = 0;
     /*printf("arg_freetable(%p)\n",argtable);*/
     for (tabindex = 0; tabindex < n; tabindex++) {

@@ -30,10 +30,10 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include "thirdparty/argtable3/argtable3.h"
+#include "argtable3.h"
 
 #ifndef ARG_AMALGAMATION
-#include "thirdparty/argtable3/argtable3_private.h"
+#include "argtable3_private.h"
 #endif
 
 #include <assert.h>
@@ -42,31 +42,30 @@
 
 #define MAX_MODULE_VERSION_SIZE 128
 
-static arg_hashtable_t *s_hashtable = NULL;
-static char *s_module_name = NULL;
+static arg_hashtable_t* s_hashtable = NULL;
+static char* s_module_name = NULL;
 static int s_mod_ver_major = 0;
 static int s_mod_ver_minor = 0;
 static int s_mod_ver_patch = 0;
-static char *s_mod_ver_tag = NULL;
-static char *s_mod_ver = NULL;
+static char* s_mod_ver_tag = NULL;
+static char* s_mod_ver = NULL;
 
-void arg_set_module_name(const char *name) {
+void arg_set_module_name(const char* name) {
     size_t slen;
 
     xfree(s_module_name);
     slen = strlen(name);
-    s_module_name = (char *)xmalloc(slen + 1);
+    s_module_name = (char*)xmalloc(slen + 1);
     memset(s_module_name, 0, slen + 1);
 
-#if (defined(__STDC_LIB_EXT1__) && defined(__STDC_WANT_LIB_EXT1__)) || \
-    (defined(__STDC_SECURE_LIB__) && defined(__STDC_WANT_SECURE_LIB__))
+#if (defined(__STDC_LIB_EXT1__) && defined(__STDC_WANT_LIB_EXT1__)) || (defined(__STDC_SECURE_LIB__) && defined(__STDC_WANT_SECURE_LIB__))
     strncpy_s(s_module_name, slen + 1, name, slen);
 #else
     memcpy(s_module_name, name, slen);
 #endif
 }
 
-void arg_set_module_version(int major, int minor, int patch, const char *tag) {
+void arg_set_module_version(int major, int minor, int patch, const char* tag) {
     size_t slen_tag, slen_ds;
     arg_dstr_t ds;
 
@@ -76,11 +75,10 @@ void arg_set_module_version(int major, int minor, int patch, const char *tag) {
 
     xfree(s_mod_ver_tag);
     slen_tag = strlen(tag);
-    s_mod_ver_tag = (char *)xmalloc(slen_tag + 1);
+    s_mod_ver_tag = (char*)xmalloc(slen_tag + 1);
     memset(s_mod_ver_tag, 0, slen_tag + 1);
 
-#if (defined(__STDC_LIB_EXT1__) && defined(__STDC_WANT_LIB_EXT1__)) || \
-    (defined(__STDC_SECURE_LIB__) && defined(__STDC_WANT_SECURE_LIB__))
+#if (defined(__STDC_LIB_EXT1__) && defined(__STDC_WANT_LIB_EXT1__)) || (defined(__STDC_SECURE_LIB__) && defined(__STDC_WANT_SECURE_LIB__))
     strncpy_s(s_mod_ver_tag, slen_tag + 1, tag, slen_tag);
 #else
     memcpy(s_mod_ver_tag, tag, slen_tag);
@@ -94,11 +92,10 @@ void arg_set_module_version(int major, int minor, int patch, const char *tag) {
 
     xfree(s_mod_ver);
     slen_ds = strlen(arg_dstr_cstr(ds));
-    s_mod_ver = (char *)xmalloc(slen_ds + 1);
+    s_mod_ver = (char*)xmalloc(slen_ds + 1);
     memset(s_mod_ver, 0, slen_ds + 1);
 
-#if (defined(__STDC_LIB_EXT1__) && defined(__STDC_WANT_LIB_EXT1__)) || \
-    (defined(__STDC_SECURE_LIB__) && defined(__STDC_WANT_SECURE_LIB__))
+#if (defined(__STDC_LIB_EXT1__) && defined(__STDC_WANT_LIB_EXT1__)) || (defined(__STDC_SECURE_LIB__) && defined(__STDC_WANT_SECURE_LIB__))
     strncpy_s(s_mod_ver, slen_ds + 1, arg_dstr_cstr(ds), slen_ds);
 #else
     memcpy(s_mod_ver, arg_dstr_cstr(ds), slen_ds);
@@ -107,8 +104,8 @@ void arg_set_module_version(int major, int minor, int patch, const char *tag) {
     arg_dstr_destroy(ds);
 }
 
-static unsigned int hash_key(const void *key) {
-    const char *str = (const char *)key;
+static unsigned int hash_key(const void* key) {
+    const char* str = (const char*)key;
     int c;
     unsigned int hash = 5381;
 
@@ -118,9 +115,9 @@ static unsigned int hash_key(const void *key) {
     return hash;
 }
 
-static int equal_keys(const void *key1, const void *key2) {
-    char *k1 = (char *)key1;
-    char *k2 = (char *)key2;
+static int equal_keys(const void* key1, const void* key2) {
+    char* k1 = (char*)key1;
+    char* k2 = (char*)key2;
     return (0 == strcmp(k1, k2));
 }
 
@@ -132,10 +129,10 @@ void arg_cmd_uninit(void) {
     arg_hashtable_destroy(s_hashtable, 1);
 }
 
-void arg_cmd_register(const char *name, arg_cmdfn *proc, const char *description) {
-    arg_cmd_info_t *cmd_info;
+void arg_cmd_register(const char* name, arg_cmdfn* proc, const char* description) {
+    arg_cmd_info_t* cmd_info;
     size_t slen_name;
-    void *k;
+    void* k;
 
     assert(strlen(name) < ARG_CMD_NAME_LEN);
     assert(strlen(description) < ARG_CMD_DESCRIPTION_LEN);
@@ -143,20 +140,18 @@ void arg_cmd_register(const char *name, arg_cmdfn *proc, const char *description
     /* Check if the command already exists. */
     /* If the command exists, replace the existing command. */
     /* If the command doesn't exist, insert the command. */
-    cmd_info = (arg_cmd_info_t *)arg_hashtable_search(s_hashtable, name);
+    cmd_info = (arg_cmd_info_t*)arg_hashtable_search(s_hashtable, name);
     if (cmd_info) {
         arg_hashtable_remove(s_hashtable, name);
         cmd_info = NULL;
     }
 
-    cmd_info = (arg_cmd_info_t *)xmalloc(sizeof(arg_cmd_info_t));
+    cmd_info = (arg_cmd_info_t*)xmalloc(sizeof(arg_cmd_info_t));
     memset(cmd_info, 0, sizeof(arg_cmd_info_t));
 
-#if (defined(__STDC_LIB_EXT1__) && defined(__STDC_WANT_LIB_EXT1__)) || \
-    (defined(__STDC_SECURE_LIB__) && defined(__STDC_WANT_SECURE_LIB__))
+#if (defined(__STDC_LIB_EXT1__) && defined(__STDC_WANT_LIB_EXT1__)) || (defined(__STDC_SECURE_LIB__) && defined(__STDC_WANT_SECURE_LIB__))
     strncpy_s(cmd_info->name, ARG_CMD_NAME_LEN, name, strlen(name));
-    strncpy_s(cmd_info->description, ARG_CMD_DESCRIPTION_LEN, description,
-              strlen(description));
+    strncpy_s(cmd_info->description, ARG_CMD_DESCRIPTION_LEN, description, strlen(description));
 #else
     memcpy(cmd_info->name, name, strlen(name));
     memcpy(cmd_info->description, description, strlen(description));
@@ -168,22 +163,21 @@ void arg_cmd_register(const char *name, arg_cmdfn *proc, const char *description
     k = xmalloc(slen_name + 1);
     memset(k, 0, slen_name + 1);
 
-#if (defined(__STDC_LIB_EXT1__) && defined(__STDC_WANT_LIB_EXT1__)) || \
-    (defined(__STDC_SECURE_LIB__) && defined(__STDC_WANT_SECURE_LIB__))
-    strncpy_s((char *)k, slen_name + 1, name, slen_name);
+#if (defined(__STDC_LIB_EXT1__) && defined(__STDC_WANT_LIB_EXT1__)) || (defined(__STDC_SECURE_LIB__) && defined(__STDC_WANT_SECURE_LIB__))
+    strncpy_s((char*)k, slen_name + 1, name, slen_name);
 #else
-    memcpy((char *)k, name, slen_name);
+    memcpy((char*)k, name, slen_name);
 #endif
 
     arg_hashtable_insert(s_hashtable, k, cmd_info);
 }
 
-void arg_cmd_unregister(const char *name) {
+void arg_cmd_unregister(const char* name) {
     arg_hashtable_remove(s_hashtable, name);
 }
 
-int arg_cmd_dispatch(const char *name, int argc, char *argv[], arg_dstr_t res) {
-    arg_cmd_info_t *cmd_info = arg_cmd_info(name);
+int arg_cmd_dispatch(const char* name, int argc, char* argv[], arg_dstr_t res) {
+    arg_cmd_info_t* cmd_info = arg_cmd_info(name);
 
     assert(cmd_info != NULL);
     assert(cmd_info->proc != NULL);
@@ -191,8 +185,8 @@ int arg_cmd_dispatch(const char *name, int argc, char *argv[], arg_dstr_t res) {
     return cmd_info->proc(argc, argv, res);
 }
 
-arg_cmd_info_t *arg_cmd_info(const char *name) {
-    return (arg_cmd_info_t *)arg_hashtable_search(s_hashtable, name);
+arg_cmd_info_t* arg_cmd_info(const char* name) {
+    return (arg_cmd_info_t*)arg_hashtable_search(s_hashtable, name);
 }
 
 unsigned int arg_cmd_count(void) {
@@ -204,33 +198,33 @@ arg_cmd_itr_t arg_cmd_itr_create(void) {
 }
 
 int arg_cmd_itr_advance(arg_cmd_itr_t itr) {
-    return arg_hashtable_itr_advance((arg_hashtable_itr_t *)itr);
+    return arg_hashtable_itr_advance((arg_hashtable_itr_t*)itr);
 }
 
-char *arg_cmd_itr_key(arg_cmd_itr_t itr) {
-    return (char *)arg_hashtable_itr_key((arg_hashtable_itr_t *)itr);
+char* arg_cmd_itr_key(arg_cmd_itr_t itr) {
+    return (char*)arg_hashtable_itr_key((arg_hashtable_itr_t*)itr);
 }
 
-arg_cmd_info_t *arg_cmd_itr_value(arg_cmd_itr_t itr) {
-    return (arg_cmd_info_t *)arg_hashtable_itr_value((arg_hashtable_itr_t *)itr);
+arg_cmd_info_t* arg_cmd_itr_value(arg_cmd_itr_t itr) {
+    return (arg_cmd_info_t*)arg_hashtable_itr_value((arg_hashtable_itr_t*)itr);
 }
 
 void arg_cmd_itr_destroy(arg_cmd_itr_t itr) {
-    arg_hashtable_itr_destroy((arg_hashtable_itr_t *)itr);
+    arg_hashtable_itr_destroy((arg_hashtable_itr_t*)itr);
 }
 
-int arg_cmd_itr_search(arg_cmd_itr_t itr, void *k) {
-    return arg_hashtable_itr_search((arg_hashtable_itr_t *)itr, s_hashtable, k);
+int arg_cmd_itr_search(arg_cmd_itr_t itr, void* k) {
+    return arg_hashtable_itr_search((arg_hashtable_itr_t*)itr, s_hashtable, k);
 }
 
-static const char *module_name(void) {
+static const char* module_name(void) {
     if (s_module_name == NULL || strlen(s_module_name) == 0)
         return "<name>";
 
     return s_module_name;
 }
 
-static const char *module_version(void) {
+static const char* module_version(void) {
     if (s_mod_ver == NULL || strlen(s_mod_ver) == 0)
         return "0.0.0.0";
 
@@ -239,13 +233,11 @@ static const char *module_version(void) {
 
 void arg_make_get_help_msg(arg_dstr_t res) {
     arg_dstr_catf(res, "%s v%s\n", module_name(), module_version());
-    arg_dstr_catf(res, "Please type '%s help' to get more information.\n",
-                  module_name());
+    arg_dstr_catf(res, "Please type '%s help' to get more information.\n", module_name());
 }
 
-void arg_make_help_msg(arg_dstr_t ds, char *cmd_name, void **argtable) {
-    arg_cmd_info_t *cmd_info =
-        (arg_cmd_info_t *)arg_hashtable_search(s_hashtable, cmd_name);
+void arg_make_help_msg(arg_dstr_t ds, char* cmd_name, void** argtable) {
+    arg_cmd_info_t* cmd_info = (arg_cmd_info_t*)arg_hashtable_search(s_hashtable, cmd_name);
     if (cmd_info) {
         arg_dstr_catf(ds, "%s: %s\n", cmd_name, cmd_info->description);
     }
@@ -259,7 +251,7 @@ void arg_make_help_msg(arg_dstr_t ds, char *cmd_name, void **argtable) {
     arg_dstr_cat(ds, "\n");
 }
 
-void arg_make_syntax_err_msg(arg_dstr_t ds, void **argtable, struct arg_end *end) {
+void arg_make_syntax_err_msg(arg_dstr_t ds, void** argtable, struct arg_end* end) {
     arg_print_errors_ds(ds, end, module_name());
     arg_dstr_cat(ds, "Usage: \n");
     arg_dstr_catf(ds, "  %s", module_name());
@@ -267,9 +259,7 @@ void arg_make_syntax_err_msg(arg_dstr_t ds, void **argtable, struct arg_end *end
     arg_dstr_cat(ds, "\n");
 }
 
-int arg_make_syntax_err_help_msg(arg_dstr_t ds, char *name, int help, int nerrors,
-                                 void **argtable, struct arg_end *end,
-                                 int *exitcode) {
+int arg_make_syntax_err_help_msg(arg_dstr_t ds, char* name, int help, int nerrors, void** argtable, struct arg_end* end, int* exitcode) {
     /* help handling
      * note: '-h|--help' takes precedence over error reporting
      */

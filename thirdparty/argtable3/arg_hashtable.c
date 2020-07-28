@@ -31,7 +31,7 @@
  ******************************************************************************/
 
 #ifndef ARG_AMALGAMATION
-#include "thirdparty/argtable3/argtable3_private.h"
+#include "argtable3_private.h"
 #endif
 
 #include <math.h>
@@ -80,15 +80,13 @@
  * http://br.endernet.org/~akrowne/
  * http://planetmath.org/encyclopedia/GoodHashTablePrimes.html
  */
-static const unsigned int primes[] = {
-    53,        97,        193,       389,       769,       1543,     3079,
-    6151,      12289,     24593,     49157,     98317,     196613,   393241,
-    786433,    1572869,   3145739,   6291469,   12582917,  25165843, 50331653,
-    100663319, 201326611, 402653189, 805306457, 1610612741};
+static const unsigned int primes[] = {53,       97,       193,      389,       769,       1543,      3079,      6151,      12289,
+                                      24593,    49157,    98317,    196613,    393241,    786433,    1572869,   3145739,   6291469,
+                                      12582917, 25165843, 50331653, 100663319, 201326611, 402653189, 805306457, 1610612741};
 const unsigned int prime_table_length = sizeof(primes) / sizeof(primes[0]);
 const float max_load_factor = (float)0.65;
 
-static unsigned int enhanced_hash(arg_hashtable_t *h, const void *k) {
+static unsigned int enhanced_hash(arg_hashtable_t* h, const void* k) {
     /*
      * Aim to protect against poor hash functions by adding logic here.
      * The logic is taken from Java 1.4 hash table source.
@@ -105,10 +103,8 @@ static unsigned int index_for(unsigned int tablelength, unsigned int hashvalue) 
     return (hashvalue % tablelength);
 }
 
-arg_hashtable_t *arg_hashtable_create(unsigned int minsize,
-                                      unsigned int (*hashfn)(const void *),
-                                      int (*eqfn)(const void *, const void *)) {
-    arg_hashtable_t *h;
+arg_hashtable_t* arg_hashtable_create(unsigned int minsize, unsigned int (*hashfn)(const void*), int (*eqfn)(const void*, const void*)) {
+    arg_hashtable_t* h;
     unsigned int pindex;
     unsigned int size = primes[0];
 
@@ -128,10 +124,9 @@ arg_hashtable_t *arg_hashtable_create(unsigned int minsize,
         }
     }
 
-    h = (arg_hashtable_t *)xmalloc(sizeof(arg_hashtable_t));
-    h->table = (struct arg_hashtable_entry **)xmalloc(
-        sizeof(struct arg_hashtable_entry *) * size);
-    memset(h->table, 0, size * sizeof(struct arg_hashtable_entry *));
+    h = (arg_hashtable_t*)xmalloc(sizeof(arg_hashtable_t));
+    h->table = (struct arg_hashtable_entry**)xmalloc(sizeof(struct arg_hashtable_entry*) * size);
+    memset(h->table, 0, size * sizeof(struct arg_hashtable_entry*));
     h->tablelength = size;
     h->primeindex = pindex;
     h->entrycount = 0;
@@ -141,10 +136,10 @@ arg_hashtable_t *arg_hashtable_create(unsigned int minsize,
     return h;
 }
 
-static int arg_hashtable_expand(arg_hashtable_t *h) {
+static int arg_hashtable_expand(arg_hashtable_t* h) {
     /* Double the size of the table to accommodate more entries */
-    struct arg_hashtable_entry **newtable;
-    struct arg_hashtable_entry *e;
+    struct arg_hashtable_entry** newtable;
+    struct arg_hashtable_entry* e;
     unsigned int newsize;
     unsigned int i;
     unsigned int index;
@@ -154,9 +149,8 @@ static int arg_hashtable_expand(arg_hashtable_t *h) {
         return 0;
     newsize = primes[++(h->primeindex)];
 
-    newtable = (struct arg_hashtable_entry **)xmalloc(
-        sizeof(struct arg_hashtable_entry *) * newsize);
-    memset(newtable, 0, newsize * sizeof(struct arg_hashtable_entry *));
+    newtable = (struct arg_hashtable_entry**)xmalloc(sizeof(struct arg_hashtable_entry*) * newsize);
+    memset(newtable, 0, newsize * sizeof(struct arg_hashtable_entry*));
     /*
      * This algorithm is not 'stable': it reverses the list
      * when it transfers entries between the tables
@@ -177,14 +171,14 @@ static int arg_hashtable_expand(arg_hashtable_t *h) {
     return -1;
 }
 
-unsigned int arg_hashtable_count(arg_hashtable_t *h) {
+unsigned int arg_hashtable_count(arg_hashtable_t* h) {
     return h->entrycount;
 }
 
-void arg_hashtable_insert(arg_hashtable_t *h, void *k, void *v) {
+void arg_hashtable_insert(arg_hashtable_t* h, void* k, void* v) {
     /* This method allows duplicate keys - but they shouldn't be used */
     unsigned int index;
-    struct arg_hashtable_entry *e;
+    struct arg_hashtable_entry* e;
     if ((h->entrycount + 1) > h->loadlimit) {
         /*
          * Ignore the return value. If expand fails, we should
@@ -194,7 +188,7 @@ void arg_hashtable_insert(arg_hashtable_t *h, void *k, void *v) {
          */
         arg_hashtable_expand(h);
     }
-    e = (struct arg_hashtable_entry *)xmalloc(sizeof(struct arg_hashtable_entry));
+    e = (struct arg_hashtable_entry*)xmalloc(sizeof(struct arg_hashtable_entry));
     e->h = enhanced_hash(h, k);
     index = index_for(h->tablelength, e->h);
     e->k = k;
@@ -204,8 +198,8 @@ void arg_hashtable_insert(arg_hashtable_t *h, void *k, void *v) {
     h->entrycount++;
 }
 
-void *arg_hashtable_search(arg_hashtable_t *h, const void *k) {
-    struct arg_hashtable_entry *e;
+void* arg_hashtable_search(arg_hashtable_t* h, const void* k) {
+    struct arg_hashtable_entry* e;
     unsigned int hashvalue;
     unsigned int index;
 
@@ -221,14 +215,14 @@ void *arg_hashtable_search(arg_hashtable_t *h, const void *k) {
     return NULL;
 }
 
-void arg_hashtable_remove(arg_hashtable_t *h, const void *k) {
+void arg_hashtable_remove(arg_hashtable_t* h, const void* k) {
     /*
      * TODO: consider compacting the table when the load factor drops enough,
      *       or provide a 'compact' method.
      */
 
-    struct arg_hashtable_entry *e;
-    struct arg_hashtable_entry **pE;
+    struct arg_hashtable_entry* e;
+    struct arg_hashtable_entry** pE;
     unsigned int hashvalue;
     unsigned int index;
 
@@ -251,10 +245,10 @@ void arg_hashtable_remove(arg_hashtable_t *h, const void *k) {
     }
 }
 
-void arg_hashtable_destroy(arg_hashtable_t *h, int free_values) {
+void arg_hashtable_destroy(arg_hashtable_t* h, int free_values) {
     unsigned int i;
     struct arg_hashtable_entry *e, *f;
-    struct arg_hashtable_entry **table = h->table;
+    struct arg_hashtable_entry** table = h->table;
     if (free_values) {
         for (i = 0; i < h->tablelength; i++) {
             e = table[i];
@@ -281,12 +275,11 @@ void arg_hashtable_destroy(arg_hashtable_t *h, int free_values) {
     xfree(h);
 }
 
-arg_hashtable_itr_t *arg_hashtable_itr_create(arg_hashtable_t *h) {
+arg_hashtable_itr_t* arg_hashtable_itr_create(arg_hashtable_t* h) {
     unsigned int i;
     unsigned int tablelength;
 
-    arg_hashtable_itr_t *itr =
-        (arg_hashtable_itr_t *)xmalloc(sizeof(arg_hashtable_itr_t));
+    arg_hashtable_itr_t* itr = (arg_hashtable_itr_t*)xmalloc(sizeof(arg_hashtable_itr_t));
     itr->h = h;
     itr->e = NULL;
     itr->parent = NULL;
@@ -305,23 +298,23 @@ arg_hashtable_itr_t *arg_hashtable_itr_create(arg_hashtable_t *h) {
     return itr;
 }
 
-void arg_hashtable_itr_destroy(arg_hashtable_itr_t *itr) {
+void arg_hashtable_itr_destroy(arg_hashtable_itr_t* itr) {
     xfree(itr);
 }
 
-void *arg_hashtable_itr_key(arg_hashtable_itr_t *i) {
+void* arg_hashtable_itr_key(arg_hashtable_itr_t* i) {
     return i->e->k;
 }
 
-void *arg_hashtable_itr_value(arg_hashtable_itr_t *i) {
+void* arg_hashtable_itr_value(arg_hashtable_itr_t* i) {
     return i->e->v;
 }
 
-int arg_hashtable_itr_advance(arg_hashtable_itr_t *itr) {
+int arg_hashtable_itr_advance(arg_hashtable_itr_t* itr) {
     unsigned int j;
     unsigned int tablelength;
-    struct arg_hashtable_entry **table;
-    struct arg_hashtable_entry *next;
+    struct arg_hashtable_entry** table;
+    struct arg_hashtable_entry* next;
 
     if (itr->e == NULL)
         return 0; /* stupidity check */
@@ -354,9 +347,9 @@ int arg_hashtable_itr_advance(arg_hashtable_itr_t *itr) {
     return -1;
 }
 
-int arg_hashtable_itr_remove(arg_hashtable_itr_t *itr) {
-    struct arg_hashtable_entry *remember_e;
-    struct arg_hashtable_entry *remember_parent;
+int arg_hashtable_itr_remove(arg_hashtable_itr_t* itr) {
+    struct arg_hashtable_entry* remember_e;
+    struct arg_hashtable_entry* remember_parent;
     int ret;
 
     /* Do the removal */
@@ -383,9 +376,9 @@ int arg_hashtable_itr_remove(arg_hashtable_itr_t *itr) {
     return ret;
 }
 
-int arg_hashtable_itr_search(arg_hashtable_itr_t *itr, arg_hashtable_t *h, void *k) {
-    struct arg_hashtable_entry *e;
-    struct arg_hashtable_entry *parent;
+int arg_hashtable_itr_search(arg_hashtable_itr_t* itr, arg_hashtable_t* h, void* k) {
+    struct arg_hashtable_entry* e;
+    struct arg_hashtable_entry* parent;
     unsigned int hashvalue;
     unsigned int index;
 
@@ -409,8 +402,8 @@ int arg_hashtable_itr_search(arg_hashtable_itr_t *itr, arg_hashtable_t *h, void 
     return 0;
 }
 
-int arg_hashtable_change(arg_hashtable_t *h, void *k, void *v) {
-    struct arg_hashtable_entry *e;
+int arg_hashtable_change(arg_hashtable_t* h, void* k, void* v) {
+    struct arg_hashtable_entry* e;
     unsigned int hashvalue;
     unsigned int index;
 

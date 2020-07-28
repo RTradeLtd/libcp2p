@@ -52,14 +52,14 @@
 
 struct option {
     /* name of long option */
-    const char *name;
+    const char* name;
     /*
      * one of no_argument, required_argument, and optional_argument:
      * whether option takes an argument
      */
     int has_arg;
     /* if not NULL, set *flag to val when option found */
-    int *flag;
+    int* flag;
     /* if flag not NULL, value to set *flag to; else return value */
     int val;
 };
@@ -68,19 +68,19 @@ struct option {
 extern "C" {
 #endif
 
-int getopt_long(int, char *const *, const char *, const struct option *, int *);
-int getopt_long_only(int, char *const *, const char *, const struct option *, int *);
+int getopt_long(int, char* const*, const char*, const struct option*, int*);
+int getopt_long_only(int, char* const*, const char*, const struct option*, int*);
 #ifndef _GETOPT_DEFINED
 #define _GETOPT_DEFINED
-int getopt(int, char *const *, const char *);
-int getsubopt(char **, char *const *, char **);
+int getopt(int, char* const*, const char*);
+int getsubopt(char**, char* const*, char**);
 
-extern char *optarg; /* getopt(3) external variables */
+extern char* optarg; /* getopt(3) external variables */
 extern int opterr;
 extern int optind;
 extern int optopt;
 extern int optreset;
-extern char *suboptarg; /* getsubopt(3) external variable */
+extern char* suboptarg; /* getsubopt(3) external variable */
 #endif                  /* _GETOPT_DEFINED */
 
 #ifdef __cplusplus
