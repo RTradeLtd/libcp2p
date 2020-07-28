@@ -450,117 +450,119 @@ socket_server_config_t *new_socket_server_config(int num_addrs) {
  * @warning if a udp connection we dont close the socket and simply free the resources
  */
 void handle_inbound_rpc(void *data) {
-    conn_handle_data_t *hdata = (conn_handle_data_t *)data;
-    int rc = 0;
-    // read the first byte to determine the size of the buffer
-    char first_byte[1];
-    memset(first_byte, 0, 1);
+    for (;;) {
+        conn_handle_data_t *hdata = (conn_handle_data_t *)data;
+        int rc = 0;
+        // read the first byte to determine the size of the buffer
+        char first_byte[1];
+        memset(first_byte, 0, 1);
 
 
-    if (hdata->is_tcp == true) {
-        // rc = read(hdata->conn->socket_number, first_byte, 1);
-        rc = recv(hdata->conn->socket_number, first_byte, 1, 0);
-    } else {
-        rc = recvfrom(
-            hdata->conn->socket_number,
-            first_byte,
-            1,
-            0,
-            NULL,
-            NULL
-        );
-    }
-    
-    
-    switch (rc) {
-        case 0:
-            hdata->srv->thl->log(hdata->srv->thl, 0, "client disconnected",
-                                LOG_LEVELS_DEBUG);
-            free(hdata->conn);
-            free(hdata);
-            return;
-        case -1:
-            hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR,
-                                "error encountered during read %s",
-                                strerror(errno));
-            free(hdata->conn);
-            free(hdata);
-            return;
-        default:
-            break;
-    }
-    
-    int message_size = atoi(first_byte);
+        if (hdata->is_tcp == true) {
+            // rc = read(hdata->conn->socket_number, first_byte, 1);
+            rc = recv(hdata->conn->socket_number, first_byte, 1, 0);
+        } else {
+            rc = recvfrom(
+                hdata->conn->socket_number,
+                first_byte,
+                1,
+                0,
+                NULL,
+                NULL
+            );
+        }
+        
+        
+        switch (rc) {
+            case 0:
+                hdata->srv->thl->log(hdata->srv->thl, 0, "client disconnected",
+                                    LOG_LEVELS_DEBUG);
+                free(hdata->conn);
+                free(hdata);
+                return;
+            case -1:
+                hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR,
+                                    "error encountered during read %s",
+                                    strerror(errno));
+                free(hdata->conn);
+                free(hdata);
+                return;
+            default:
+                break;
+        }
+        
+        int message_size = atoi(first_byte);
 
-    if (message_size <= 0 || message_size > 8192) {
-        hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR, "invalid message size");        
-        // invalid first byte skip
-        free(hdata->conn);
-        free(hdata);
-        return;
-    }
-
-    // declare an array on stack to hold the rest of the message data
-    unsigned char message_data[message_size];
-    memset(message_data, 0, message_size);
-
-    if (hdata->is_tcp == true) {
-        rc = read(hdata->conn->socket_number, message_data, message_size);
-    } else {
-        rc = recvfrom(
-            hdata->conn->socket_number,
-            message_data,
-            message_size,
-            0,
-            NULL,
-            NULL
-        );
-    }
-    
-    switch (rc) {
-        case 0:
-            hdata->srv->thl->log(hdata->srv->thl, 0, "client disconnected",
-                                 LOG_LEVELS_DEBUG);
-            free(hdata->conn);
-            free(hdata);
-            return;
-        case -1:
-            hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR,
-                                  "error encountered during read %s",
-                                  strerror(errno));
-            free(hdata->conn);
-            free(hdata);
-            return;
-        default:
-            // connection was successful and we read some data
-            break;
-    }
-
-    if (message_size == 6) {
-        if (
-            memcmp(
-                message_data,
-                "6hello",
-                message_size
-            ) == 0
-        ) {
-            printf("size: %i, data: %s\n", message_size, message_data);
+        if (message_size <= 0 || message_size > 8192) {
+            hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR, "invalid message size");        
+            // invalid first byte skip
             free(hdata->conn);
             free(hdata);
             return;
         }
-    }
-    // todo: handle actual message
 
-    cbor_encoded_data_t *cbdata = new_cbor_encoded_data(message_data, (size_t)message_size);
-    if (cbdata == NULL) {
-            free(hdata->conn);
-            free(hdata);
-            return;
-    }
-    printf("got new cbor encoded message\n");
-    free_cbor_encoded_data(cbdata);
+        // declare an array on stack to hold the rest of the message data
+        unsigned char message_data[message_size];
+        memset(message_data, 0, message_size);
 
-    free(hdata->conn);
-    free(hdata);
+        if (hdata->is_tcp == true) {
+            rc = read(hdata->conn->socket_number, message_data, message_size);
+        } else {
+            rc = recvfrom(
+                hdata->conn->socket_number,
+                message_data,
+                message_size,
+                0,
+                NULL,
+                NULL
+            );
+        }
+        
+        switch (rc) {
+            case 0:
+                hdata->srv->thl->log(hdata->srv->thl, 0, "client disconnected",
+                                    LOG_LEVELS_DEBUG);
+                free(hdata->conn);
+                free(hdata);
+                return;
+            case -1:
+                hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR,
+                                    "error encountered during read %s",
+                                    strerror(errno));
+                free(hdata->conn);
+                free(hdata);
+                return;
+            default:
+                // connection was successful and we read some data
+                break;
+        }
+
+        if (message_size == 6) {
+            if (
+                memcmp(
+                    message_data,
+                    "6hello",
+                    message_size
+                ) == 0
+            ) {
+                printf("size: %i, data: %s\n", message_size, message_data);
+                free(hdata->conn);
+                free(hdata);
+                return;
+            }
+        }
+        // todo: handle actual message
+
+        cbor_encoded_data_t *cbdata = new_cbor_encoded_data(message_data, (size_t)message_size);
+        if (cbdata == NULL) {
+                free(hdata->conn);
+                free(hdata);
+                return;
+        }
+        printf("got new cbor encoded message\n");
+        free_cbor_encoded_data(cbdata);
+
+        free(hdata->conn);
+        free(hdata);
+    }
 }
