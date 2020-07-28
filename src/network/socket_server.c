@@ -212,8 +212,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
         }
     }
 
-    socket_server_t *server =
-        calloc(sizeof(socket_server_t), sizeof(socket_server_t));
+    socket_server_t *server = calloc(1, sizeof(socket_server_t));
     if (server == NULL) {
         thl->log(thl, 0, "failed to calloc socket server", LOG_LEVELS_ERROR);
         goto EXIT;
@@ -330,8 +329,8 @@ void start_socket_server(socket_server_t *srv) {
                         continue;
                     }
 
-                    conn_handle_data_t *chdata = calloc(sizeof(conn_handle_data_t),
-                                                        sizeof(conn_handle_data_t));
+                    conn_handle_data_t *chdata =
+                        calloc(1, sizeof(conn_handle_data_t));
                     if (chdata == NULL) {
                         close(conn->socket_number);
                         free(conn);
@@ -347,8 +346,7 @@ void start_socket_server(socket_server_t *srv) {
                 // if it is a udp socket, handle it with the udp worker func
                 if (FD_ISSET(i, &srv->udp_socket_set)) {
 
-                    client_conn_t *conn =
-                        calloc(sizeof(client_conn_t), sizeof(client_conn_t));
+                    client_conn_t *conn = calloc(1, sizeof(client_conn_t));
                     if (conn == NULL) {
                         srv->thl->log(srv->thl, 0, "failed to calloc client_t",
                                       LOG_LEVELS_ERROR);
@@ -357,8 +355,8 @@ void start_socket_server(socket_server_t *srv) {
                     }
                     conn->socket_number = i;
 
-                    conn_handle_data_t *chdata = calloc(sizeof(conn_handle_data_t),
-                                                        sizeof(conn_handle_data_t));
+                    conn_handle_data_t *chdata =
+                        calloc(1, sizeof(conn_handle_data_t));
                     if (chdata == NULL) {
                         free(conn);
                         srv->thl->log(srv->thl, 0, "failed to calloc client_t",
@@ -407,7 +405,7 @@ client_conn_t *accept_client_conn(socket_server_t *srv, int socket_num) {
     if (client_socket_num < 0) {
         return NULL;
     }
-    client_conn_t *connection = calloc(sizeof(client_conn_t), sizeof(client_conn_t));
+    client_conn_t *connection = calloc(1, sizeof(client_conn_t));
     if (connection == NULL) {
         return NULL;
     }
@@ -440,12 +438,11 @@ void free_socket_server_config(socket_server_config_t *config) {
  * @return Failure: NULL pointer
  */
 socket_server_config_t *new_socket_server_config(int num_addrs) {
-    socket_server_config_t *config =
-        calloc(sizeof(socket_server_config_t), sizeof(socket_server_config_t));
+    socket_server_config_t *config = calloc(1, sizeof(socket_server_config_t));
     if (config == NULL) {
         return NULL;
     }
-    config->addrs = calloc(sizeof(multi_addr_t), sizeof(multi_addr_t) * 2);
+    config->addrs = calloc(1, sizeof(multi_addr_t) * 2);
     config->num_addrs = num_addrs;
     return config;
 }

@@ -105,7 +105,7 @@ int multibase_decode(const unsigned char *incoming, size_t incoming_length,
     const char base = incoming[0];
 
     // parse the actual encoded data fro mthe base identifier
-    unsigned char *rest = calloc(sizeof(unsigned char), incoming_length);
+    unsigned char *rest = calloc(1, incoming_length);
     if (rest == NULL) {
         return 0;
     }

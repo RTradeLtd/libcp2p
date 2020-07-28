@@ -69,7 +69,7 @@ unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
     if (public_key == NULL) {
         return NULL;
     }
-    unsigned char *public_key_hash = calloc(sizeof(unsigned char), 64);
+    unsigned char *public_key_hash = calloc(1, 64);
     if (public_key_hash == NULL) {
         return NULL;
     }
@@ -93,7 +93,7 @@ unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
     }
 
     size_t tpid_size = strlen((char *)temp_peer_id);
-    unsigned char *peer_id = calloc(sizeof(unsigned char), tpid_size + 2);
+    unsigned char *peer_id = calloc(1, tpid_size + 2);
     if (peer_id == NULL) {
         free(public_key);
         free(public_key_hash);

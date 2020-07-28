@@ -194,11 +194,11 @@ public_key_t *libp2p_crypto_public_key_cbor_decode(cbor_encoded_data_t *data) {
         return NULL;
     }
 
-    public_key_t *pk = calloc(sizeof(public_key_t), sizeof(public_key_t));
+    public_key_t *pk = calloc(1, sizeof(public_key_t));
     if (pk == NULL) {
         return NULL;
     }
-    pk->data = calloc(sizeof(unsigned char), data_len);
+    pk->data = calloc(1, data_len);
     if (pk->data == NULL) {
         free(pk);
         return NULL;

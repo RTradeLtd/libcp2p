@@ -504,8 +504,7 @@ multicodec_encoded_t *multicodec_encode(char *codec, char *inData,
         return NULL;
     }
 
-    multicodec_encoded_t *encoded =
-        calloc(sizeof(multicodec_encoded_t), sizeof(multicodec_encoded_t));
+    multicodec_encoded_t *encoded = calloc(1, sizeof(multicodec_encoded_t));
     if (encoded == NULL) {
         return NULL;
     }
