@@ -88,7 +88,6 @@ typedef struct socket_server {
  */
 typedef struct client_conn {
     int socket_number;
-    sock_addr_storage *address;
 } client_conn_t;
 
 /*! @typedef conn_handle_data
