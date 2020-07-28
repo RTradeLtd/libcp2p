@@ -14,8 +14,8 @@
  * @brief used to create a tcp/udp socket server listening on multiaddrs
  */
 
-#include "encoding/cbor.h"
 #include "network/socket_server.h"
+#include "encoding/cbor.h"
 #include "utils/thread_pool.h"
 #include <arpa/inet.h>
 #include <errno.h>
@@ -44,8 +44,8 @@ pthread_mutex_t shutdown_mutex;
 bool do_shutdown = false;
 
 /*!
-  * @brief used to check if a receive or send with a socket failed
-*/
+ * @brief used to check if a receive or send with a socket failed
+ */
 bool recv_or_send_failed(socket_server_t *srv, int rc);
 
 /*!
@@ -53,14 +53,18 @@ bool recv_or_send_failed(socket_server_t *srv, int rc);
  * @param thl an instance of a thread_logger
  * @param config the configuration settings used for the tcp/udp server
  * @param sock_opts an array of options to configure the sockets we open with
- * @param num_opts the number of socket options we are using, providing a number that does not match the actual number of options is undefined behavior
+ * @param num_opts the number of socket options we are using, providing a number that
+ * does not match the actual number of options is undefined behavior
  * @return Success: pointer to a socket_server_t instance
  * @return Failure: NULL pointer
- * @details once you have used the config and created a new server with new_socket_server() you can free the socket config with free_socket_config
- * @note once you have used the config and created a new server with new_socket_server() you can free the socket config with free_socket_config
+ * @details once you have used the config and created a new server with
+ * new_socket_server() you can free the socket config with free_socket_config
+ * @note once you have used the config and created a new server with
+ * new_socket_server() you can free the socket config with free_socket_config
  */
 socket_server_t *new_socket_server(thread_logger *thl,
-                                   socket_server_config_t *config, SOCKET_OPTS sock_opts[], int num_opts) {
+                                   socket_server_config_t *config,
+                                   SOCKET_OPTS sock_opts[], int num_opts) {
 
     addr_info tcp_hints;
     addr_info udp_hints;
@@ -141,8 +145,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
                 goto EXIT;
             }
 
-            int tcp_socket_num =
-                get_new_socket(thl, tcp_bind_address, sock_opts, num_opts, false, true);
+            int tcp_socket_num = get_new_socket(thl, tcp_bind_address, sock_opts,
+                                                num_opts, false, true);
             if (tcp_socket_num == -1) {
                 freeaddrinfo(tcp_bind_address);
                 thl->log(thl, 0, "failed to get new tcp socket", LOG_LEVELS_ERROR);
@@ -188,8 +192,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
                 goto EXIT;
             }
 
-            int udp_socket_num =
-                get_new_socket(thl, udp_bind_address, sock_opts, num_opts, false, false);
+            int udp_socket_num = get_new_socket(thl, udp_bind_address, sock_opts,
+                                                num_opts, false, false);
             if (udp_socket_num == -1) {
                 freeaddrinfo(udp_bind_address);
                 thl->log(thl, 0, "failed to get new udp socket", LOG_LEVELS_ERROR);
@@ -227,7 +231,6 @@ socket_server_t *new_socket_server(thread_logger *thl,
     server->thl = thl;
     pthread_mutex_init(&shutdown_mutex, NULL);
     server->thl->log(server->thl, 0, "initialized server", LOG_LEVELS_INFO);
-    
 
     return server;
 
@@ -362,7 +365,7 @@ void start_socket_server(socket_server_t *srv) {
                     }
 
                     chdata->srv = srv;
-                    chdata->conn = conn; 
+                    chdata->conn = conn;
                     chdata->is_tcp = false;
 
                     thpool_add_work(srv->thpool, srv->task_func_udp, chdata);
@@ -445,10 +448,14 @@ socket_server_config_t *new_socket_server_config(int num_addrs) {
 
 /*!
  * @brief handles receiving an rpc message from another peer
- * @note if you send an inbound message of `5hello` you'll invoke a debug handler to print to stdout
- * @warning needs to check to see if the data we are getting is for a tcp or udp connection
- * @warning if a tcp connection we need to close the socket (as its the socket connecting to the client)
- * @warning if a udp connection we dont close the socket and simply free the resources
+ * @note if you send an inbound message of `5hello` you'll invoke a debug handler to
+ * print to stdout
+ * @warning needs to check to see if the data we are getting is for a tcp or udp
+ * connection
+ * @warning if a tcp connection we need to close the socket (as its the socket
+ * connecting to the client)
+ * @warning if a udp connection we dont close the socket and simply free the
+ * resources
  */
 void handle_inbound_rpc(void *data) {
     conn_handle_data_t *hdata = NULL;
@@ -460,7 +467,7 @@ void handle_inbound_rpc(void *data) {
     int rc = 0;
     // read the first byte to determine the size of the buffer
     char first_byte[1];
-    
+
     for (;;) {
 
         memset(first_byte, 0, 1);
@@ -474,25 +481,19 @@ void handle_inbound_rpc(void *data) {
             // rc = read(hdata->conn->socket_number, first_byte, 1);
             rc = recv(hdata->conn->socket_number, first_byte, 1, 0);
         } else {
-            rc = recvfrom(
-                hdata->conn->socket_number,
-                first_byte,
-                1,
-                0,
-                NULL,
-                NULL
-            );
+            rc = recvfrom(hdata->conn->socket_number, first_byte, 1, 0, NULL, NULL);
         }
 
         failed = recv_or_send_failed(hdata->srv, rc);
         if (failed == true) {
             goto RETURN;
         }
-        
+
         int message_size = atoi(first_byte);
 
         if (message_size <= 0 || message_size > 8192) {
-            hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR, "invalid message size");        
+            hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR,
+                                  "invalid message size");
             // invalid first byte skip
             goto RETURN;
         }
@@ -504,14 +505,8 @@ void handle_inbound_rpc(void *data) {
         if (hdata->is_tcp == true) {
             rc = read(hdata->conn->socket_number, message_data, message_size);
         } else {
-            rc = recvfrom(
-                hdata->conn->socket_number,
-                message_data,
-                message_size,
-                0,
-                NULL,
-                NULL
-            );
+            rc = recvfrom(hdata->conn->socket_number, message_data, message_size, 0,
+                          NULL, NULL);
         }
 
         failed = recv_or_send_failed(hdata->srv, rc);
@@ -520,19 +515,14 @@ void handle_inbound_rpc(void *data) {
         }
 
         if (message_size == 6) {
-            if (
-                memcmp(
-                    message_data,
-                    "hello",
-                    message_size
-                ) == 0
-            ) {
+            if (memcmp(message_data, "hello", message_size) == 0) {
                 printf("debug handler\n");
                 printf("size: %i, data: %s\n", message_size, message_data);
                 goto RETURN;
             }
         }
-        cbor_encoded_data_t *cbdata = new_cbor_encoded_data(message_data, (size_t)message_size);
+        cbor_encoded_data_t *cbdata =
+            new_cbor_encoded_data(message_data, (size_t)message_size);
         if (cbdata == NULL) {
             goto RETURN;
         }
@@ -551,28 +541,26 @@ RETURN:
 }
 
 /*!
-  * @brief used to check if a receive or send with a socket failed
-*/
+ * @brief used to check if a receive or send with a socket failed
+ */
 bool recv_or_send_failed(socket_server_t *srv, int rc) {
-   switch (rc) {
-       case 0:
-           srv->thl->log(srv->thl, 0, "client disconnected",
-                               LOG_LEVELS_DEBUG);
-           return true;
-       case -1:
-           srv->thl->logf(srv->thl, 0, LOG_LEVELS_ERROR,
-                               "error encountered during read %s",
-                               strerror(errno));
-           return true;
-       default:
-           // connection was successful and we read some data
-           return false;
-   }    
+    switch (rc) {
+        case 0:
+            srv->thl->log(srv->thl, 0, "client disconnected", LOG_LEVELS_DEBUG);
+            return true;
+        case -1:
+            srv->thl->logf(srv->thl, 0, LOG_LEVELS_ERROR,
+                           "error encountered during read %s", strerror(errno));
+            return true;
+        default:
+            // connection was successful and we read some data
+            return false;
+    }
 }
 
 /*!
-  * @brief used to specify which syscall signals should trigger shutdown process
-*/
+ * @brief used to specify which syscall signals should trigger shutdown process
+ */
 void setup_signal_shutdown(int signals[], int num_signals) {
     for (int i = 0; i < num_signals; i++) {
         signal(signals[i], signal_shutdown);
