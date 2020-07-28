@@ -534,7 +534,7 @@ void handle_inbound_rpc(void *data) {
             if (
                 memcmp(
                     message_data,
-                    "6hello",
+                    "hello",
                     message_size
                 ) == 0
             ) {
@@ -543,8 +543,6 @@ void handle_inbound_rpc(void *data) {
                 goto RETURN;
             }
         }
-        // todo: handle actual message
-        printf("size: %i, data: %s\n", message_size, message_data);
         cbor_encoded_data_t *cbdata = new_cbor_encoded_data(message_data, (size_t)message_size);
         if (cbdata == NULL) {
             goto RETURN;
