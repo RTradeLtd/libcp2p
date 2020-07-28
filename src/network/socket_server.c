@@ -403,12 +403,10 @@ client_conn_t *accept_client_conn(socket_server_t *srv, int socket_num) {
         return NULL;
     }
     connection->socket_number = client_socket_num;
-    if (srv->thl->debug == true) {
-        char *addr_inf = get_name_info((sock_addr *)&addr_temp);
-        srv->thl->logf(srv->thl, 0, LOG_LEVELS_DEBUG, "accepted new connection: %s",
-                       addr_inf);
-        free(addr_inf);
-    }
+    char *addr_inf = get_name_info((sock_addr *)&addr_temp);
+    srv->thl->logf(srv->thl, 0, LOG_LEVELS_INFO, "accepted new connection: %s",
+                   addr_inf);
+    free(addr_inf);
     return connection;
 }
 
@@ -450,8 +448,12 @@ socket_server_config_t *new_socket_server_config(int num_addrs) {
  * @warning if a udp connection we dont close the socket and simply free the resources
  */
 void handle_inbound_rpc(void *data) {
+    conn_handle_data_t *hdata = NULL;
     for (;;) {
-        conn_handle_data_t *hdata = (conn_handle_data_t *)data;
+        hdata = (conn_handle_data_t *)data;
+        if (hdata == NULL) {
+            return;
+        }
         int rc = 0;
         // read the first byte to determine the size of the buffer
         char first_byte[1];
@@ -476,17 +478,13 @@ void handle_inbound_rpc(void *data) {
         switch (rc) {
             case 0:
                 hdata->srv->thl->log(hdata->srv->thl, 0, "client disconnected",
-                                    LOG_LEVELS_DEBUG);
-                free(hdata->conn);
-                free(hdata);
-                return;
+                                    LOG_LEVELS_INFO);
+                goto RETURN;
             case -1:
                 hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR,
                                     "error encountered during read %s",
                                     strerror(errno));
-                free(hdata->conn);
-                free(hdata);
-                return;
+                goto RETURN;
             default:
                 break;
         }
@@ -496,9 +494,7 @@ void handle_inbound_rpc(void *data) {
         if (message_size <= 0 || message_size > 8192) {
             hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR, "invalid message size");        
             // invalid first byte skip
-            free(hdata->conn);
-            free(hdata);
-            return;
+            goto RETURN;
         }
 
         // declare an array on stack to hold the rest of the message data
@@ -521,17 +517,13 @@ void handle_inbound_rpc(void *data) {
         switch (rc) {
             case 0:
                 hdata->srv->thl->log(hdata->srv->thl, 0, "client disconnected",
-                                    LOG_LEVELS_DEBUG);
-                free(hdata->conn);
-                free(hdata);
-                return;
+                                    LOG_LEVELS_INFO);
+                goto RETURN;
             case -1:
                 hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR,
                                     "error encountered during read %s",
                                     strerror(errno));
-                free(hdata->conn);
-                free(hdata);
-                return;
+                goto RETURN;
             default:
                 // connection was successful and we read some data
                 break;
@@ -545,23 +537,26 @@ void handle_inbound_rpc(void *data) {
                     message_size
                 ) == 0
             ) {
+                printf("debug handler\n");
                 printf("size: %i, data: %s\n", message_size, message_data);
-                free(hdata->conn);
-                free(hdata);
-                return;
+                goto RETURN;
             }
         }
         // todo: handle actual message
-
+        printf("size: %i, data: %s\n", message_size, message_data);
         cbor_encoded_data_t *cbdata = new_cbor_encoded_data(message_data, (size_t)message_size);
         if (cbdata == NULL) {
-                free(hdata->conn);
-                free(hdata);
-                return;
+            goto RETURN;
         }
         printf("got new cbor encoded message\n");
         free_cbor_encoded_data(cbdata);
-
+    }
+RETURN:
+    // if TCP, close the connection to the client socket
+    if (hdata->is_tcp == true) {
+        close(hdata->conn->socket_number);
+    }
+    if (hdata != NULL) {
         free(hdata->conn);
         free(hdata);
     }
