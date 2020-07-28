@@ -55,7 +55,7 @@ bool do_shutdown = false;
  * @note once you have used the config and created a new server with new_socket_server() you can free the socket config with free_socket_config
  */
 socket_server_t *new_socket_server(thread_logger *thl,
-                                   socket_server_config_t config, SOCKET_OPTS sock_opts[], int num_opts) {
+                                   socket_server_config_t *config, SOCKET_OPTS sock_opts[], int num_opts) {
 
     addr_info tcp_hints;
     addr_info udp_hints;
@@ -75,14 +75,14 @@ socket_server_t *new_socket_server(thread_logger *thl,
     char ip[1024];
     char cport[7];
 
-    for (int i = 0; i < config.num_addrs; i++) {
+    for (int i = 0; i < config->num_addrs; i++) {
 
         // zero ip and cport, overwriting previous data
         memset(ip, 0, 1024);
         memset(cport, 0, 7);
 
         // get the ip address associated with the multiaddr
-        rc = multi_address_get_ip_address(config.addrs[i], ip);
+        rc = multi_address_get_ip_address(config->addrs[i], ip);
         if (rc != 1) {
             thl->log(thl, 0, "failed to get ip address from multiaddr",
                      LOG_LEVELS_ERROR);
@@ -90,7 +90,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
         }
 
         // get the port for the address
-        int port = multi_address_get_ip_port(config.addrs[i]);
+        int port = multi_address_get_ip_port(config->addrs[i]);
         if (port == -1) {
             thl->log(thl, 0, "failed to get ip port from multiaddr",
                      LOG_LEVELS_ERROR);
@@ -103,10 +103,10 @@ socket_server_t *new_socket_server(thread_logger *thl,
         bool is_udp = false;
 
         // determine whether or not we support tcp and udp
-        if (strstr(config.addrs[i]->string, "/tcp/") != NULL) {
+        if (strstr(config->addrs[i]->string, "/tcp/") != NULL) {
             is_tcp = true;
         }
-        if (strstr(config.addrs[i]->string, "/udp/") != NULL) {
+        if (strstr(config->addrs[i]->string, "/udp/") != NULL) {
             is_udp = true;
         }
 
@@ -144,7 +144,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
                 goto EXIT;
             }
 
-            listen(tcp_socket_num, config.max_connections);
+            listen(tcp_socket_num, config->max_connections);
             if (errno != 0) {
                 freeaddrinfo(tcp_bind_address);
                 thl->logf(thl, 0, LOG_LEVELS_ERROR,
@@ -213,16 +213,17 @@ socket_server_t *new_socket_server(thread_logger *thl,
     max_socket_num += 1;
 
     // setup the server
-    server->thpool = thpool_init(config.num_threads);
+    server->thpool = thpool_init(config->num_threads);
     server->max_socket_num = max_socket_num;
     server->grouped_socket_set = grouped_socket_set;
     server->tcp_socket_set = tcp_socket_set;
     server->udp_socket_set = udp_socket_set;
-    server->task_func_tcp = config.fn_tcp;
-    server->task_func_udp = config.fn_udp;
+    server->task_func_tcp = config->fn_tcp;
+    server->task_func_udp = config->fn_udp;
     server->thl = thl;
-    server->thl->log(server->thl, 0, "initialized server", LOG_LEVELS_INFO);
     pthread_mutex_init(&shutdown_mutex, NULL);
+    server->thl->log(server->thl, 0, "initialized server", LOG_LEVELS_INFO);
+    
 
     return server;
 
@@ -489,7 +490,7 @@ void handle_inbound_rpc(void *data) {
         default:
             break;
     }
-
+    
     int message_size = atoi(first_byte);
 
     if (message_size <= 0 || message_size > 8192) {
@@ -536,12 +537,11 @@ void handle_inbound_rpc(void *data) {
             break;
     }
 
-    printf("got message\n");
-    if (message_size == 5) {
+    if (message_size == 6) {
         if (
             memcmp(
                 message_data,
-                "hello",
+                "6hello",
                 message_size
             ) == 0
         ) {

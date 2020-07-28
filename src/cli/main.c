@@ -85,7 +85,11 @@ void test_server_callback(int argc, char *argv[]) {
         }
         printf("sending udp\n");
         /* UDP based sending */
-        int rc = socket_client_sendto(client, client->peer_address, "5hello\0");
+        int rc = socket_client_sendto(client, client->peer_address, "6");
+        if (rc == 0) {
+            printf("request failed: %s\n", strerror(errno));
+        }
+        rc = socket_client_sendto(client, client->peer_address, "hello");
         if (rc == 0) {
             printf("request failed: %s\n", strerror(errno));
         }
@@ -102,7 +106,9 @@ void test_server_callback(int argc, char *argv[]) {
     printf("closing client\n");
     clear_thread_logger(logger);
     close(client->socket_number);
+    free(client->peer_address);
     free(client);
+    
 }
 
 void start_server_callback(int argc, char *argv[]) {
@@ -138,7 +144,7 @@ void start_server_callback(int argc, char *argv[]) {
         free_socket_server_config(config);
         return;
     }
-    socket_server_t *server = new_socket_server(logger, *config, NULL, 0);
+    socket_server_t *server = new_socket_server(logger, config, NULL, 0);
     if (server == NULL) {
         free_socket_server_config(config);
         clear_thread_logger(logger);

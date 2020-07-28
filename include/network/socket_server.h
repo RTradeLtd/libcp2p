@@ -113,7 +113,7 @@ typedef struct conn_handle_data {
  * @note once you have used the config and created a new server with new_socket_server() you can free the socket config with free_socket_config
  */
 socket_server_t *new_socket_server(thread_logger *thl,
-                                   socket_server_config_t config, SOCKET_OPTS sock_opts[], int num_opts);
+                                   socket_server_config_t *config, SOCKET_OPTS sock_opts[], int num_opts);
 
 /*! @brief helper function for accepting client connections
  * times out new attempts if they take 3 seconds or more
