@@ -162,11 +162,11 @@ message_t *cbor_decode_message_t(cbor_encoded_data_t *input) {
         return NULL;
     }
 
-    message_t *msg = calloc(sizeof(message_t), sizeof(message_t));
+    message_t *msg = calloc(1, sizeof(message_t));
     if (msg == NULL) {
         return NULL;
     }
-    msg->data = calloc(sizeof(unsigned char), data_len);
+    msg->data = calloc(1, data_len);
     if (msg->data == NULL) {
         free(msg);
         return NULL;
@@ -184,4 +184,19 @@ message_t *cbor_decode_message_t(cbor_encoded_data_t *input) {
 void free_message_t(message_t *msg) {
     free(msg->data);
     free(msg);
+}
+
+/*!
+  * @brief returns the size of a message_t instance
+*/
+size_t size_of_message_t(message_t *msg) {
+    if (msg == NULL) {
+        return 0;
+    }
+    
+    size_t size = 0;
+    size += sizeof(*msg);
+    size += msg->len;
+
+    return size;
 }

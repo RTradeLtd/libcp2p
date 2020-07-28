@@ -14,6 +14,7 @@
  * @brief used to create a tcp/udp socket server listening on multiaddrs
  */
 
+#include "network/messages.h"
 #include "network/socket_server.h"
 #include "encoding/cbor.h"
 #include "utils/thread_pool.h"
@@ -526,10 +527,29 @@ void handle_inbound_rpc(void *data) {
         if (cbdata == NULL) {
             goto RETURN;
         }
-        printf("got new cbor encoded message\n");
+        message_t *msg = cbor_decode_message_t(cbdata);
+        if (msg == NULL) {
+            goto RETURN;
+        }
+
+        printf("got cbor encoded message\n");
+        printf("message data: %s\n", msg->data);
+        printf("message len: %lu\n", msg->len);
+        printf("message type: %i\n", msg->type);
+        
+        free_message_t(msg);
         free_cbor_encoded_data(cbdata);
     }
 RETURN:
+
+    hdata->srv->thl->logf(
+        hdata->srv->thl,
+        0,
+        LOG_LEVELS_INFO,
+        "terminating connection. type tcp: %i",
+        hdata->is_tcp
+    );
+
     // if TCP, close the connection to the client socket
     if (hdata->is_tcp == true) {
         close(hdata->conn->socket_number);
