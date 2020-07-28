@@ -1,6 +1,8 @@
 #include "cli/command_line.h"
 #include "multiaddr/multiaddr.h"
 #include "network/socket_server.h"
+#include "network/messages.h"
+#include "encoding/cbor.h"
 #include "thirdparty/argtable3/argtable3.h"
 #include "utils/colors.h"
 #include "utils/logger.h"
@@ -50,6 +52,24 @@ void test_server_callback(int argc, char *argv[]) {
     thread_logger *logger = new_thread_logger(false);
 
     socket_client_t *client = NULL;
+
+    message_t *msg = calloc(1, sizeof(message_t));
+    if (msg == NULL) {
+        return;
+    }    
+    printf("size of message: %lu\n", size_of_message_t(msg));
+    msg->data = realloc(msg->data, 6);
+    //msg->data = calloc(sizeof(unsigned char), 5);
+    msg->data[0] = 'h';
+    msg->data[1] = 'e';
+    msg->data[2] = 'l';
+    msg->data[3] = 'l';
+    msg->data[4] = 'o';
+    msg->data[5] = '\0';
+    msg->len = 5;
+    msg->type = MESSAGE_START_ECDH;
+    printf("size of message: %lu\n", size_of_message_t(msg));
+
 
     if (tcp_addr != NULL) {
         client = new_socket_client(logger, tcp_addr);
@@ -109,6 +129,7 @@ void test_server_callback(int argc, char *argv[]) {
     close(client->socket_number);
     free(client->peer_address);
     free(client);
+    free_message_t(msg);
 }
 
 void start_server_callback(int argc, char *argv[]) {
