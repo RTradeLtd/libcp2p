@@ -70,8 +70,7 @@ typedef enum {
  * address
  */
 int get_new_socket(thread_logger *thl, addr_info *bind_address,
-                   SOCKET_OPTS sock_opts[], int num_opts, bool is_client,
-                   bool is_tcp);
+                   SOCKET_OPTS sock_opts[], int num_opts, bool is_client, bool is_tcp);
 
 /*! @brief used to enable/disable blocking sockets
  * @return Failure: false

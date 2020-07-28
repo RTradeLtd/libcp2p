@@ -139,7 +139,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
             }
 
             int tcp_socket_num =
-                get_new_socket(thl, tcp_bind_address, sock_opts, num_opts, false);
+                get_new_socket(thl, tcp_bind_address, sock_opts, num_opts, false, true);
             if (tcp_socket_num == -1) {
                 freeaddrinfo(tcp_bind_address);
                 thl->log(thl, 0, "failed to get new tcp socket", LOG_LEVELS_ERROR);
@@ -186,7 +186,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
             }
 
             int udp_socket_num =
-                get_new_socket(thl, udp_bind_address, sock_opts, num_opts, false);
+                get_new_socket(thl, udp_bind_address, sock_opts, num_opts, false, false);
             if (udp_socket_num == -1) {
                 freeaddrinfo(udp_bind_address);
                 thl->log(thl, 0, "failed to get new udp socket", LOG_LEVELS_ERROR);
