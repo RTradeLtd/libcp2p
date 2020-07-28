@@ -163,11 +163,9 @@ void start_server_callback(int argc, char *argv[]) {
 
     // start the actual server
     start_socket_server(server);
-    // free up the server resources
+    
+    // free up the server resources (also frees logger)
     free_socket_server(server);
-
-    clear_thread_logger(logger);
-
     return;
 }
 
