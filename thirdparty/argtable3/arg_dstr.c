@@ -30,10 +30,10 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include "argtable3.h"
+#include "thirdparty/argtable3/argtable3.h"
 
 #ifndef ARG_AMALGAMATION
-#include "argtable3_private.h"
+#include "thirdparty/argtable3/argtable3_private.h"
 #endif
 
 #include <stdarg.h>
@@ -94,10 +94,10 @@
  */
 
 typedef struct _internal_arg_dstr {
-    char* data;
-    arg_dstr_freefn* free_proc;
+    char *data;
+    arg_dstr_freefn *free_proc;
     char sbuf[ARG_DSTR_SIZE + 1];
-    char* append_data;
+    char *append_data;
     int append_data_size;
     int append_used;
 } _internal_arg_dstr_t;
@@ -105,7 +105,8 @@ typedef struct _internal_arg_dstr {
 static void setup_append_buf(arg_dstr_t res, int newSpace);
 
 arg_dstr_t arg_dstr_create(void) {
-    _internal_arg_dstr_t* h = (_internal_arg_dstr_t*)xmalloc(sizeof(_internal_arg_dstr_t));
+    _internal_arg_dstr_t *h =
+        (_internal_arg_dstr_t *)xmalloc(sizeof(_internal_arg_dstr_t));
     memset(h, 0, sizeof(_internal_arg_dstr_t));
     h->sbuf[0] = 0;
     h->data = h->sbuf;
@@ -122,10 +123,10 @@ void arg_dstr_destroy(arg_dstr_t ds) {
     return;
 }
 
-void arg_dstr_set(arg_dstr_t ds, char* str, arg_dstr_freefn* free_proc) {
+void arg_dstr_set(arg_dstr_t ds, char *str, arg_dstr_freefn *free_proc) {
     int length;
-    register arg_dstr_freefn* old_free_proc = ds->free_proc;
-    char* old_result = ds->data;
+    register arg_dstr_freefn *old_free_proc = ds->free_proc;
+    char *old_result = ds->data;
 
     if (str == NULL) {
         ds->sbuf[0] = 0;
@@ -134,7 +135,7 @@ void arg_dstr_set(arg_dstr_t ds, char* str, arg_dstr_freefn* free_proc) {
     } else if (free_proc == ARG_DSTR_VOLATILE) {
         length = (int)strlen(str);
         if (length > ARG_DSTR_SIZE) {
-            ds->data = (char*)xmalloc((unsigned)length + 1);
+            ds->data = (char *)xmalloc((unsigned)length + 1);
             ds->free_proc = ARG_DSTR_DYNAMIC;
         } else {
             ds->data = ds->sbuf;
@@ -167,12 +168,12 @@ void arg_dstr_set(arg_dstr_t ds, char* str, arg_dstr_freefn* free_proc) {
     }
 }
 
-char* arg_dstr_cstr(arg_dstr_t ds) /* Interpreter whose result to return. */
+char *arg_dstr_cstr(arg_dstr_t ds) /* Interpreter whose result to return. */
 {
     return ds->data;
 }
 
-void arg_dstr_cat(arg_dstr_t ds, const char* str) {
+void arg_dstr_cat(arg_dstr_t ds, const char *str) {
     setup_append_buf(ds, (int)strlen(str) + 1);
     memcpy(ds->data + strlen(ds->data), str, strlen(str));
 }
@@ -215,9 +216,9 @@ void arg_dstr_catc(arg_dstr_t ds, char c) {
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-void arg_dstr_catf(arg_dstr_t ds, const char* fmt, ...) {
+void arg_dstr_catf(arg_dstr_t ds, const char *fmt, ...) {
     va_list arglist;
-    char* buff;
+    char *buff;
     int n, r;
     size_t slen;
 
@@ -231,7 +232,7 @@ void arg_dstr_catf(arg_dstr_t ds, const char* fmt, ...) {
     if ((n = (int)(2 * strlen(fmt))) < START_VSNBUFF)
         n = START_VSNBUFF;
 
-    buff = (char*)xmalloc(n + 2);
+    buff = (char *)xmalloc(n + 2);
     memset(buff, 0, n + 2);
 
     for (;;) {
@@ -249,7 +250,7 @@ void arg_dstr_catf(arg_dstr_t ds, const char* fmt, ...) {
             n += n;
 
         xfree(buff);
-        buff = (char*)xmalloc(n + 2);
+        buff = (char *)xmalloc(n + 2);
         memset(buff, 0, n + 2);
     }
 
@@ -288,14 +289,14 @@ static void setup_append_buf(arg_dstr_t ds, int new_space) {
 
     total_space = new_space + ds->append_used;
     if (total_space >= ds->append_data_size) {
-        char* newbuf;
+        char *newbuf;
 
         if (total_space < 100) {
             total_space = 200;
         } else {
             total_space *= 2;
         }
-        newbuf = (char*)xmalloc((unsigned)total_space);
+        newbuf = (char *)xmalloc((unsigned)total_space);
         memset(newbuf, 0, total_space);
         strcpy(newbuf, ds->data);
         if (ds->append_data != NULL) {

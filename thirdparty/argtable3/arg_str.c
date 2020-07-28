@@ -30,17 +30,17 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include "argtable3.h"
+#include "thirdparty/argtable3/argtable3.h"
 
 #ifndef ARG_AMALGAMATION
-#include "argtable3_private.h"
+#include "thirdparty/argtable3/argtable3_private.h"
 #endif
 
 #include <stdlib.h>
 
-static void arg_str_resetfn(struct arg_str* parent) {
+static void arg_str_resetfn(struct arg_str *parent) {
     int i;
-    
+
     ARG_TRACE(("%s:resetfn(%p)\n", __FILE__, parent));
     for (i = 0; i < parent->count; i++) {
         parent->sval[i] = "";
@@ -48,7 +48,7 @@ static void arg_str_resetfn(struct arg_str* parent) {
     parent->count = 0;
 }
 
-static int arg_str_scanfn(struct arg_str* parent, const char* argval) {
+static int arg_str_scanfn(struct arg_str *parent, const char *argval) {
     int errorcode = 0;
 
     if (parent->count == parent->hdr.maxcount) {
@@ -67,17 +67,18 @@ static int arg_str_scanfn(struct arg_str* parent, const char* argval) {
     return errorcode;
 }
 
-static int arg_str_checkfn(struct arg_str* parent) {
+static int arg_str_checkfn(struct arg_str *parent) {
     int errorcode = (parent->count < parent->hdr.mincount) ? ARG_ERR_MINCOUNT : 0;
 
     ARG_TRACE(("%s:checkfn(%p) returns %d\n", __FILE__, parent, errorcode));
     return errorcode;
 }
 
-static void arg_str_errorfn(struct arg_str* parent, arg_dstr_t ds, int errorcode, const char* argval, const char* progname) {
-    const char* shortopts = parent->hdr.shortopts;
-    const char* longopts = parent->hdr.longopts;
-    const char* datatype = parent->hdr.datatype;
+static void arg_str_errorfn(struct arg_str *parent, arg_dstr_t ds, int errorcode,
+                            const char *argval, const char *progname) {
+    const char *shortopts = parent->hdr.shortopts;
+    const char *longopts = parent->hdr.longopts;
+    const char *datatype = parent->hdr.datatype;
 
     /* make argval NULL safe */
     argval = argval ? argval : "";
@@ -96,17 +97,21 @@ static void arg_str_errorfn(struct arg_str* parent, arg_dstr_t ds, int errorcode
     }
 }
 
-struct arg_str* arg_str0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary) {
+struct arg_str *arg_str0(const char *shortopts, const char *longopts,
+                         const char *datatype, const char *glossary) {
     return arg_strn(shortopts, longopts, datatype, 0, 1, glossary);
 }
 
-struct arg_str* arg_str1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary) {
+struct arg_str *arg_str1(const char *shortopts, const char *longopts,
+                         const char *datatype, const char *glossary) {
     return arg_strn(shortopts, longopts, datatype, 1, 1, glossary);
 }
 
-struct arg_str* arg_strn(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary) {
+struct arg_str *arg_strn(const char *shortopts, const char *longopts,
+                         const char *datatype, int mincount, int maxcount,
+                         const char *glossary) {
     size_t nbytes;
-    struct arg_str* result;
+    struct arg_str *result;
     int i;
 
     /* should not allow this stupid error */
@@ -114,10 +119,10 @@ struct arg_str* arg_strn(const char* shortopts, const char* longopts, const char
     /* foolproof things by ensuring maxcount is not less than mincount */
     maxcount = (maxcount < mincount) ? mincount : maxcount;
 
-    nbytes = sizeof(struct arg_str)      /* storage for struct arg_str */
-             + maxcount * sizeof(char*); /* storage for sval[maxcount] array */
+    nbytes = sizeof(struct arg_str)       /* storage for struct arg_str */
+             + maxcount * sizeof(char *); /* storage for sval[maxcount] array */
 
-    result = (struct arg_str*)xmalloc(nbytes);
+    result = (struct arg_str *)xmalloc(nbytes);
 
     /* init the arg_hdr struct */
     result->hdr.flag = ARG_HASVALUE;
@@ -128,16 +133,17 @@ struct arg_str* arg_strn(const char* shortopts, const char* longopts, const char
     result->hdr.mincount = mincount;
     result->hdr.maxcount = maxcount;
     result->hdr.parent = result;
-    result->hdr.resetfn = (arg_resetfn*)arg_str_resetfn;
-    result->hdr.scanfn = (arg_scanfn*)arg_str_scanfn;
-    result->hdr.checkfn = (arg_checkfn*)arg_str_checkfn;
-    result->hdr.errorfn = (arg_errorfn*)arg_str_errorfn;
+    result->hdr.resetfn = (arg_resetfn *)arg_str_resetfn;
+    result->hdr.scanfn = (arg_scanfn *)arg_str_scanfn;
+    result->hdr.checkfn = (arg_checkfn *)arg_str_checkfn;
+    result->hdr.errorfn = (arg_errorfn *)arg_str_errorfn;
 
     /* store the sval[maxcount] array immediately after the arg_str struct */
-    result->sval = (const char**)(result + 1);
+    result->sval = (const char **)(result + 1);
     result->count = 0;
 
-    /* foolproof the string pointers by initializing them to reference empty strings */
+    /* foolproof the string pointers by initializing them to reference empty strings
+     */
     for (i = 0; i < maxcount; i++)
         result->sval[i] = "";
 

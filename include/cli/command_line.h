@@ -13,7 +13,7 @@
 // pragma once is an alternative to header guards which can be very verbose
 #pragma once
 
-#include <argtable3.h>
+#include "thirdparty/argtable3/argtable3.h"
 #include <stdbool.h>
 
 #ifndef MAX_COMMANDS

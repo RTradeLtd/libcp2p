@@ -1,5 +1,6 @@
 /*******************************************************************************
- * argtable3_private: Declares private types, constants, and interfaces
+ * "thirdparty/argtable3/argtable3_private: Declares private types, constants, and
+ *interfaces
  *
  * This file is part of the argtable3 library.
  *
@@ -42,9 +43,17 @@
 extern "C" {
 #endif
 
-enum { ARG_ERR_MINCOUNT = 1, ARG_ERR_MAXCOUNT, ARG_ERR_BADINT, ARG_ERR_OVERFLOW, ARG_ERR_BADDOUBLE, ARG_ERR_BADDATE, ARG_ERR_REGNOMATCH };
+enum {
+    ARG_ERR_MINCOUNT = 1,
+    ARG_ERR_MAXCOUNT,
+    ARG_ERR_BADINT,
+    ARG_ERR_OVERFLOW,
+    ARG_ERR_BADDOUBLE,
+    ARG_ERR_BADDATE,
+    ARG_ERR_REGNOMATCH
+};
 
-typedef void(arg_panicfn)(const char* fmt, ...);
+typedef void(arg_panicfn)(const char *fmt, ...);
 
 #if defined(_MSC_VER)
 #define ARG_TRACE(x)                                               \
@@ -76,27 +85,27 @@ typedef void(arg_panicfn)(const char* fmt, ...);
     } while (0)
 #endif
 
-extern void dbg_printf(const char* fmt, ...);
-extern void arg_set_panic(arg_panicfn* proc);
-extern void* xmalloc(size_t size);
-extern void* xcalloc(size_t count, size_t size);
-extern void* xrealloc(void* ptr, size_t size);
-extern void xfree(void* ptr);
+extern void dbg_printf(const char *fmt, ...);
+extern void arg_set_panic(arg_panicfn *proc);
+extern void *xmalloc(size_t size);
+extern void *xcalloc(size_t count, size_t size);
+extern void *xrealloc(void *ptr, size_t size);
+extern void xfree(void *ptr);
 
 struct arg_hashtable_entry {
     void *k, *v;
     unsigned int h;
-    struct arg_hashtable_entry* next;
+    struct arg_hashtable_entry *next;
 };
 
 typedef struct arg_hashtable {
     unsigned int tablelength;
-    struct arg_hashtable_entry** table;
+    struct arg_hashtable_entry **table;
     unsigned int entrycount;
     unsigned int loadlimit;
     unsigned int primeindex;
-    unsigned int (*hashfn)(const void* k);
-    int (*eqfn)(const void* k1, const void* k2);
+    unsigned int (*hashfn)(const void *k);
+    int (*eqfn)(const void *k1, const void *k2);
 } arg_hashtable_t;
 
 /**
@@ -107,7 +116,9 @@ typedef struct arg_hashtable {
  * @param   eqfn      function for determining key equality
  * @return            newly created hash table or NULL on failure
  */
-arg_hashtable_t* arg_hashtable_create(unsigned int minsize, unsigned int (*hashfn)(const void*), int (*eqfn)(const void*, const void*));
+arg_hashtable_t *arg_hashtable_create(unsigned int minsize,
+                                      unsigned int (*hashfn)(const void *),
+                                      int (*eqfn)(const void *, const void *));
 
 /**
  * @brief This function will cause the table to expand if the insertion would take
@@ -124,10 +135,12 @@ arg_hashtable_t* arg_hashtable_create(unsigned int minsize, unsigned int (*hashf
  * @param   v   the value - does not claim ownership
  * @return      non-zero for successful insertion
  */
-void arg_hashtable_insert(arg_hashtable_t* h, void* k, void* v);
+void arg_hashtable_insert(arg_hashtable_t *h, void *k, void *v);
 
 #define ARG_DEFINE_HASHTABLE_INSERT(fnname, keytype, valuetype) \
-    int fnname(arg_hashtable_t* h, keytype* k, valuetype* v) { return arg_hashtable_insert(h, k, v); }
+    int fnname(arg_hashtable_t *h, keytype *k, valuetype *v) {  \
+        return arg_hashtable_insert(h, k, v);                   \
+    }
 
 /**
  * @brief Search the specified key in the hash table.
@@ -136,10 +149,12 @@ void arg_hashtable_insert(arg_hashtable_t* h, void* k, void* v);
  * @param   k   the key to search for  - does not claim ownership
  * @return      the value associated with the key, or NULL if none found
  */
-void* arg_hashtable_search(arg_hashtable_t* h, const void* k);
+void *arg_hashtable_search(arg_hashtable_t *h, const void *k);
 
 #define ARG_DEFINE_HASHTABLE_SEARCH(fnname, keytype, valuetype) \
-    valuetype* fnname(arg_hashtable_t* h, keytype* k) { return (valuetype*)(arg_hashtable_search(h, k)); }
+    valuetype *fnname(arg_hashtable_t *h, keytype *k) {         \
+        return (valuetype *)(arg_hashtable_search(h, k));       \
+    }
 
 /**
  * @brief Remove the specified key from the hash table.
@@ -147,10 +162,12 @@ void* arg_hashtable_search(arg_hashtable_t* h, const void* k);
  * @param   h   the hash table to remove the item from
  * @param   k   the key to search for  - does not claim ownership
  */
-void arg_hashtable_remove(arg_hashtable_t* h, const void* k);
+void arg_hashtable_remove(arg_hashtable_t *h, const void *k);
 
 #define ARG_DEFINE_HASHTABLE_REMOVE(fnname, keytype, valuetype) \
-    valuetype* fnname(arg_hashtable_t* h, keytype* k) { return (valuetype*)(arg_hashtable_remove(h, k)); }
+    valuetype *fnname(arg_hashtable_t *h, keytype *k) {         \
+        return (valuetype *)(arg_hashtable_remove(h, k));       \
+    }
 
 /**
  * @brief Return the number of keys in the hash table.
@@ -158,7 +175,7 @@ void arg_hashtable_remove(arg_hashtable_t* h, const void* k);
  * @param   h   the hash table
  * @return      the number of items stored in the hash table
  */
-unsigned int arg_hashtable_count(arg_hashtable_t* h);
+unsigned int arg_hashtable_count(arg_hashtable_t *h);
 
 /**
  * @brief Change the value associated with the key.
@@ -172,7 +189,7 @@ unsigned int arg_hashtable_count(arg_hashtable_t* h);
  * @param       key
  * @param       value
  */
-int arg_hashtable_change(arg_hashtable_t* h, void* k, void* v);
+int arg_hashtable_change(arg_hashtable_t *h, void *k, void *v);
 
 /**
  * @brief Free the hash table and the memory allocated for each key-value pair.
@@ -180,48 +197,52 @@ int arg_hashtable_change(arg_hashtable_t* h, void* k, void* v);
  * @param   h            the hash table
  * @param   free_values  whether to call 'free' on the remaining values
  */
-void arg_hashtable_destroy(arg_hashtable_t* h, int free_values);
+void arg_hashtable_destroy(arg_hashtable_t *h, int free_values);
 
 typedef struct arg_hashtable_itr {
-    arg_hashtable_t* h;
-    struct arg_hashtable_entry* e;
-    struct arg_hashtable_entry* parent;
+    arg_hashtable_t *h;
+    struct arg_hashtable_entry *e;
+    struct arg_hashtable_entry *parent;
     unsigned int index;
 } arg_hashtable_itr_t;
 
-arg_hashtable_itr_t* arg_hashtable_itr_create(arg_hashtable_t* h);
+arg_hashtable_itr_t *arg_hashtable_itr_create(arg_hashtable_t *h);
 
-void arg_hashtable_itr_destroy(arg_hashtable_itr_t* itr);
-
-/**
- * @brief Return the value of the (key,value) pair at the current position.
- */
-extern void* arg_hashtable_itr_key(arg_hashtable_itr_t* i);
+void arg_hashtable_itr_destroy(arg_hashtable_itr_t *itr);
 
 /**
  * @brief Return the value of the (key,value) pair at the current position.
  */
-extern void* arg_hashtable_itr_value(arg_hashtable_itr_t* i);
+extern void *arg_hashtable_itr_key(arg_hashtable_itr_t *i);
 
 /**
- * @brief Advance the iterator to the next element. Returns zero if advanced to end of table.
+ * @brief Return the value of the (key,value) pair at the current position.
  */
-int arg_hashtable_itr_advance(arg_hashtable_itr_t* itr);
+extern void *arg_hashtable_itr_value(arg_hashtable_itr_t *i);
+
+/**
+ * @brief Advance the iterator to the next element. Returns zero if advanced to end
+ * of table.
+ */
+int arg_hashtable_itr_advance(arg_hashtable_itr_t *itr);
 
 /**
  * @brief Remove current element and advance the iterator to the next element.
  */
-int arg_hashtable_itr_remove(arg_hashtable_itr_t* itr);
+int arg_hashtable_itr_remove(arg_hashtable_itr_t *itr);
 
 /**
- * @brief Search and overwrite the supplied iterator, to point to the entry matching the supplied key.
+ * @brief Search and overwrite the supplied iterator, to point to the entry matching
+ * the supplied key.
  *
  * @return  Zero if not found.
  */
-int arg_hashtable_itr_search(arg_hashtable_itr_t* itr, arg_hashtable_t* h, void* k);
+int arg_hashtable_itr_search(arg_hashtable_itr_t *itr, arg_hashtable_t *h, void *k);
 
-#define ARG_DEFINE_HASHTABLE_ITERATOR_SEARCH(fnname, keytype) \
-    int fnname(arg_hashtable_itr_t* i, arg_hashtable_t* h, keytype* k) { return (arg_hashtable_iterator_search(i, h, k)); }
+#define ARG_DEFINE_HASHTABLE_ITERATOR_SEARCH(fnname, keytype)            \
+    int fnname(arg_hashtable_itr_t *i, arg_hashtable_t *h, keytype *k) { \
+        return (arg_hashtable_iterator_search(i, h, k));                 \
+    }
 
 #ifdef __cplusplus
 }

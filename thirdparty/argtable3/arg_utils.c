@@ -30,10 +30,10 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include "argtable3.h"
+#include "thirdparty/argtable3/argtable3.h"
 
 #ifndef ARG_AMALGAMATION
-#include "argtable3_private.h"
+#include "thirdparty/argtable3/argtable3_private.h"
 #endif
 
 #include <stdarg.h>
@@ -41,19 +41,19 @@
 #include <stdlib.h>
 #include <string.h>
 
-static void panic(const char* fmt, ...);
-static arg_panicfn* s_panic = panic;
+static void panic(const char *fmt, ...);
+static arg_panicfn *s_panic = panic;
 
-void dbg_printf(const char* fmt, ...) {
+void dbg_printf(const char *fmt, ...) {
     va_list args;
     va_start(args, fmt);
     vfprintf(stderr, fmt, args);
     va_end(args);
 }
 
-static void panic(const char* fmt, ...) {
+static void panic(const char *fmt, ...) {
     va_list args;
-    char* s;
+    char *s;
 
     va_start(args, fmt);
     vfprintf(stderr, fmt, args);
@@ -75,44 +75,45 @@ static void panic(const char* fmt, ...) {
     }
 }
 
-void arg_set_panic(arg_panicfn* proc) {
+void arg_set_panic(arg_panicfn *proc) {
     s_panic = proc;
 }
 
-void* xmalloc(size_t size) {
-    void* ret = malloc(size);
+void *xmalloc(size_t size) {
+    void *ret = malloc(size);
     if (!ret) {
         s_panic("Out of memory!\n");
     }
     return ret;
 }
 
-void* xcalloc(size_t count, size_t size) {
+void *xcalloc(size_t count, size_t size) {
     size_t allocated_count = count && size ? count : 1;
     size_t allocated_size = count && size ? size : 1;
-    void* ret = calloc(allocated_count, allocated_size);
+    void *ret = calloc(allocated_count, allocated_size);
     if (!ret) {
         s_panic("Out of memory!\n");
     }
     return ret;
 }
 
-void* xrealloc(void* ptr, size_t size) {
+void *xrealloc(void *ptr, size_t size) {
     size_t allocated_size = size ? size : 1;
-    void* ret = realloc(ptr, allocated_size);
+    void *ret = realloc(ptr, allocated_size);
     if (!ret) {
         s_panic("Out of memory!\n");
     }
     return ret;
 }
 
-void xfree(void* ptr) {
+void xfree(void *ptr) {
     free(ptr);
 }
 
-static void merge(void* data, int esize, int i, int j, int k, arg_comparefn* comparefn) {
-    char* a = (char*)data;
-    char* m;
+static void merge(void *data, int esize, int i, int j, int k,
+                  arg_comparefn *comparefn) {
+    char *a = (char *)data;
+    char *m;
     int ipos, jpos, mpos;
 
     /* Initialize the counters used in merging. */
@@ -121,7 +122,7 @@ static void merge(void* data, int esize, int i, int j, int k, arg_comparefn* com
     mpos = 0;
 
     /* Allocate storage for the merged elements. */
-    m = (char*)xmalloc(esize * ((k - i) + 1));
+    m = (char *)xmalloc(esize * ((k - i) + 1));
 
     /* Continue while either division has elements to merge. */
     while (ipos <= j || jpos <= k) {
@@ -162,7 +163,8 @@ static void merge(void* data, int esize, int i, int j, int k, arg_comparefn* com
     xfree(m);
 }
 
-void arg_mgsort(void* data, int size, int esize, int i, int k, arg_comparefn* comparefn) {
+void arg_mgsort(void *data, int size, int esize, int i, int k,
+                arg_comparefn *comparefn) {
     int j;
 
     /* Stop the recursion when no more divisions can be made. */

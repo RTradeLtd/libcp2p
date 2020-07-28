@@ -30,16 +30,16 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include "argtable3.h"
+#include "thirdparty/argtable3/argtable3.h"
 
 #ifndef ARG_AMALGAMATION
-#include "argtable3_private.h"
+#include "thirdparty/argtable3/argtable3_private.h"
 #endif
 
 #include <stdlib.h>
 
-struct arg_rem* arg_rem(const char* datatype, const char* glossary) {
-    struct arg_rem* result = (struct arg_rem*)xmalloc(sizeof(struct arg_rem));
+struct arg_rem *arg_rem(const char *datatype, const char *glossary) {
+    struct arg_rem *result = (struct arg_rem *)xmalloc(sizeof(struct arg_rem));
 
     result->hdr.flag = 0;
     result->hdr.shortopts = NULL;

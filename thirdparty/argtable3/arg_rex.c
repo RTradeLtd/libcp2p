@@ -30,10 +30,10 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include "argtable3.h"
+#include "thirdparty/argtable3/argtable3.h"
 
 #ifndef ARG_AMALGAMATION
-#include "argtable3_private.h"
+#include "thirdparty/argtable3/argtable3_private.h"
 #endif
 
 #include <stdlib.h>
@@ -92,18 +92,22 @@ typedef unsigned int TRexBool;
 typedef struct TRex TRex;
 
 typedef struct {
-    const TRexChar* begin;
+    const TRexChar *begin;
     int len;
 } TRexMatch;
 
-TREX_API TRex* trex_compile(const TRexChar* pattern, const TRexChar** error, int flags);
-TREX_API void trex_free(TRex* exp);
-TREX_API TRexBool trex_match(TRex* exp, const TRexChar* text);
-TREX_API TRexBool trex_search(TRex* exp, const TRexChar* text, const TRexChar** out_begin, const TRexChar** out_end);
-TREX_API TRexBool
-trex_searchrange(TRex* exp, const TRexChar* text_begin, const TRexChar* text_end, const TRexChar** out_begin, const TRexChar** out_end);
-TREX_API int trex_getsubexpcount(TRex* exp);
-TREX_API TRexBool trex_getsubexp(TRex* exp, int n, TRexMatch* subexp);
+TREX_API TRex *trex_compile(const TRexChar *pattern, const TRexChar **error,
+                            int flags);
+TREX_API void trex_free(TRex *exp);
+TREX_API TRexBool trex_match(TRex *exp, const TRexChar *text);
+TREX_API TRexBool trex_search(TRex *exp, const TRexChar *text,
+                              const TRexChar **out_begin, const TRexChar **out_end);
+TREX_API TRexBool trex_searchrange(TRex *exp, const TRexChar *text_begin,
+                                   const TRexChar *text_end,
+                                   const TRexChar **out_begin,
+                                   const TRexChar **out_end);
+TREX_API int trex_getsubexpcount(TRex *exp);
+TREX_API TRexBool trex_getsubexp(TRex *exp, int n, TRexMatch *subexp);
 
 #ifdef __cplusplus
 }
@@ -112,19 +116,19 @@ TREX_API TRexBool trex_getsubexp(TRex* exp, int n, TRexMatch* subexp);
 #endif
 
 struct privhdr {
-    const char* pattern;
+    const char *pattern;
     int flags;
 };
 
-static void arg_rex_resetfn(struct arg_rex* parent) {
+static void arg_rex_resetfn(struct arg_rex *parent) {
     ARG_TRACE(("%s:resetfn(%p)\n", __FILE__, parent));
     parent->count = 0;
 }
 
-static int arg_rex_scanfn(struct arg_rex* parent, const char* argval) {
+static int arg_rex_scanfn(struct arg_rex *parent, const char *argval) {
     int errorcode = 0;
-    const TRexChar* error = NULL;
-    TRex* rex = NULL;
+    const TRexChar *error = NULL;
+    TRex *rex = NULL;
     TRexBool is_match = TRex_False;
 
     if (parent->count == parent->hdr.maxcount) {
@@ -136,7 +140,7 @@ static int arg_rex_scanfn(struct arg_rex* parent, const char* argval) {
         /* leave parent argument value unaltered but still count the argument. */
         parent->count++;
     } else {
-        struct privhdr* priv = (struct privhdr*)parent->hdr.priv;
+        struct privhdr *priv = (struct privhdr *)parent->hdr.priv;
 
         /* test the current argument value for a match with the regular expression */
         /* if a match is detected, record the argument value in the arg_rex struct */
@@ -155,7 +159,7 @@ static int arg_rex_scanfn(struct arg_rex* parent, const char* argval) {
     return errorcode;
 }
 
-static int arg_rex_checkfn(struct arg_rex* parent) {
+static int arg_rex_checkfn(struct arg_rex *parent) {
     int errorcode = (parent->count < parent->hdr.mincount) ? ARG_ERR_MINCOUNT : 0;
 #if 0
     struct privhdr *priv = (struct privhdr*)parent->hdr.priv;
@@ -168,10 +172,11 @@ static int arg_rex_checkfn(struct arg_rex* parent) {
     return errorcode;
 }
 
-static void arg_rex_errorfn(struct arg_rex* parent, arg_dstr_t ds, int errorcode, const char* argval, const char* progname) {
-    const char* shortopts = parent->hdr.shortopts;
-    const char* longopts = parent->hdr.longopts;
-    const char* datatype = parent->hdr.datatype;
+static void arg_rex_errorfn(struct arg_rex *parent, arg_dstr_t ds, int errorcode,
+                            const char *argval, const char *progname) {
+    const char *shortopts = parent->hdr.shortopts;
+    const char *longopts = parent->hdr.longopts;
+    const char *datatype = parent->hdr.datatype;
 
     /* make argval NULL safe */
     argval = argval ? argval : "";
@@ -194,37 +199,36 @@ static void arg_rex_errorfn(struct arg_rex* parent, arg_dstr_t ds, int errorcode
             break;
 
         default: {
-        #if 0
+#if 0
             char errbuff[256];
             regerror(errorcode, NULL, errbuff, sizeof(errbuff));
             printf("%s\n", errbuff);
-        #endif
+#endif
         } break;
     }
 }
 
-struct arg_rex* arg_rex0(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int flags, const char* glossary) {
+struct arg_rex *arg_rex0(const char *shortopts, const char *longopts,
+                         const char *pattern, const char *datatype, int flags,
+                         const char *glossary) {
     return arg_rexn(shortopts, longopts, pattern, datatype, 0, 1, flags, glossary);
 }
 
-struct arg_rex* arg_rex1(const char* shortopts, const char* longopts, const char* pattern, const char* datatype, int flags, const char* glossary) {
+struct arg_rex *arg_rex1(const char *shortopts, const char *longopts,
+                         const char *pattern, const char *datatype, int flags,
+                         const char *glossary) {
     return arg_rexn(shortopts, longopts, pattern, datatype, 1, 1, flags, glossary);
 }
 
-struct arg_rex* arg_rexn(const char* shortopts,
-                         const char* longopts,
-                         const char* pattern,
-                         const char* datatype,
-                         int mincount,
-                         int maxcount,
-                         int flags,
-                         const char* glossary) {
+struct arg_rex *arg_rexn(const char *shortopts, const char *longopts,
+                         const char *pattern, const char *datatype, int mincount,
+                         int maxcount, int flags, const char *glossary) {
     size_t nbytes;
-    struct arg_rex* result;
-    struct privhdr* priv;
+    struct arg_rex *result;
+    struct privhdr *priv;
     int i;
-    const TRexChar* error = NULL;
-    TRex* rex = NULL;
+    const TRexChar *error = NULL;
+    TRex *rex = NULL;
 
     if (!pattern) {
         printf("argtable: ERROR - illegal regular expression pattern \"(NULL)\"\n");
@@ -235,12 +239,12 @@ struct arg_rex* arg_rexn(const char* shortopts,
     /* foolproof things by ensuring maxcount is not less than mincount */
     maxcount = (maxcount < mincount) ? mincount : maxcount;
 
-    nbytes = sizeof(struct arg_rex)      /* storage for struct arg_rex */
-             + sizeof(struct privhdr)    /* storage for private arg_rex data */
-             + maxcount * sizeof(char*); /* storage for sval[maxcount] array */
+    nbytes = sizeof(struct arg_rex)       /* storage for struct arg_rex */
+             + sizeof(struct privhdr)     /* storage for private arg_rex data */
+             + maxcount * sizeof(char *); /* storage for sval[maxcount] array */
 
     /* init the arg_hdr struct */
-    result = (struct arg_rex*)xmalloc(nbytes);
+    result = (struct arg_rex *)xmalloc(nbytes);
     result->hdr.flag = ARG_HASVALUE;
     result->hdr.shortopts = shortopts;
     result->hdr.longopts = longopts;
@@ -249,22 +253,23 @@ struct arg_rex* arg_rexn(const char* shortopts,
     result->hdr.mincount = mincount;
     result->hdr.maxcount = maxcount;
     result->hdr.parent = result;
-    result->hdr.resetfn = (arg_resetfn*)arg_rex_resetfn;
-    result->hdr.scanfn = (arg_scanfn*)arg_rex_scanfn;
-    result->hdr.checkfn = (arg_checkfn*)arg_rex_checkfn;
-    result->hdr.errorfn = (arg_errorfn*)arg_rex_errorfn;
+    result->hdr.resetfn = (arg_resetfn *)arg_rex_resetfn;
+    result->hdr.scanfn = (arg_scanfn *)arg_rex_scanfn;
+    result->hdr.checkfn = (arg_checkfn *)arg_rex_checkfn;
+    result->hdr.errorfn = (arg_errorfn *)arg_rex_errorfn;
 
     /* store the arg_rex_priv struct immediately after the arg_rex struct */
     result->hdr.priv = result + 1;
-    priv = (struct privhdr*)(result->hdr.priv);
+    priv = (struct privhdr *)(result->hdr.priv);
     priv->pattern = pattern;
     priv->flags = flags;
 
     /* store the sval[maxcount] array immediately after the arg_rex_priv struct */
-    result->sval = (const char**)(priv + 1);
+    result->sval = (const char **)(priv + 1);
     result->count = 0;
 
-    /* foolproof the string pointers by initializing them to reference empty strings */
+    /* foolproof the string pointers by initializing them to reference empty strings
+     */
     for (i = 0; i < maxcount; i++)
         result->sval[i] = "";
 
@@ -276,7 +281,8 @@ struct arg_rex* arg_rexn(const char* shortopts,
 
     rex = trex_compile(priv->pattern, &error, priv->flags);
     if (rex == NULL) {
-        ARG_LOG(("argtable: %s \"%s\"\n", error ? error : _TREXC("undefined"), priv->pattern));
+        ARG_LOG(("argtable: %s \"%s\"\n", error ? error : _TREXC("undefined"),
+                 priv->pattern));
         ARG_LOG(("argtable: Bad argument table.\n"));
     }
 
@@ -307,19 +313,21 @@ struct arg_rex* arg_rexn(const char* shortopts,
 #ifdef ARG_REX_DEBUG
 #include <stdio.h>
 
-static const TRexChar* g_nnames[] = {_SC("NONE"),    _SC("OP_GREEDY"), _SC("OP_OR"),     _SC("OP_EXPR"),   _SC("OP_NOCAPEXPR"),
-                                     _SC("OP_DOT"),  _SC("OP_CLASS"),  _SC("OP_CCLASS"), _SC("OP_NCLASS"), _SC("OP_RANGE"),
-                                     _SC("OP_CHAR"), _SC("OP_EOL"),    _SC("OP_BOL"),    _SC("OP_WB")};
+static const TRexChar *g_nnames[] = {
+    _SC("NONE"),         _SC("OP_GREEDY"), _SC("OP_OR"),    _SC("OP_EXPR"),
+    _SC("OP_NOCAPEXPR"), _SC("OP_DOT"),    _SC("OP_CLASS"), _SC("OP_CCLASS"),
+    _SC("OP_NCLASS"),    _SC("OP_RANGE"),  _SC("OP_CHAR"),  _SC("OP_EOL"),
+    _SC("OP_BOL"),       _SC("OP_WB")};
 
 #endif
-#define OP_GREEDY (MAX_CHAR + 1)  /*  * + ? {n} */
+#define OP_GREEDY (MAX_CHAR + 1) /*  * + ? {n} */
 #define OP_OR (MAX_CHAR + 2)
-#define OP_EXPR (MAX_CHAR + 3)       /* parentesis () */
-#define OP_NOCAPEXPR (MAX_CHAR + 4)  /* parentesis (?:) */
+#define OP_EXPR (MAX_CHAR + 3)      /* parentesis () */
+#define OP_NOCAPEXPR (MAX_CHAR + 4) /* parentesis (?:) */
 #define OP_DOT (MAX_CHAR + 5)
 #define OP_CLASS (MAX_CHAR + 6)
 #define OP_CCLASS (MAX_CHAR + 7)
-#define OP_NCLASS (MAX_CHAR + 8)  /* negates class the [^ */
+#define OP_NCLASS (MAX_CHAR + 8) /* negates class the [^ */
 #define OP_RANGE (MAX_CHAR + 9)
 #define OP_CHAR (MAX_CHAR + 10)
 #define OP_EOL (MAX_CHAR + 11)
@@ -345,25 +353,25 @@ typedef struct tagTRexNode {
 } TRexNode;
 
 struct TRex {
-    const TRexChar* _eol;
-    const TRexChar* _bol;
-    const TRexChar* _p;
+    const TRexChar *_eol;
+    const TRexChar *_bol;
+    const TRexChar *_p;
     int _first;
     int _op;
-    TRexNode* _nodes;
+    TRexNode *_nodes;
     int _nallocated;
     int _nsize;
     int _nsubexpr;
-    TRexMatch* _matches;
+    TRexMatch *_matches;
     int _currsubexp;
-    void* _jmpbuf;
-    const TRexChar** _error;
+    void *_jmpbuf;
+    const TRexChar **_error;
     int _flags;
 };
 
-static int trex_list(TRex* exp);
+static int trex_list(TRex *exp);
 
-static int trex_newnode(TRex* exp, TRexNodeType type) {
+static int trex_newnode(TRex *exp, TRexNodeType type) {
     TRexNode n;
     int newid;
     n.type = type;
@@ -372,26 +380,27 @@ static int trex_newnode(TRex* exp, TRexNodeType type) {
         n.right = exp->_nsubexpr++;
     if (exp->_nallocated < (exp->_nsize + 1)) {
         exp->_nallocated *= 2;
-        exp->_nodes = (TRexNode*)xrealloc(exp->_nodes, exp->_nallocated * sizeof(TRexNode));
+        exp->_nodes =
+            (TRexNode *)xrealloc(exp->_nodes, exp->_nallocated * sizeof(TRexNode));
     }
     exp->_nodes[exp->_nsize++] = n;
     newid = exp->_nsize - 1;
     return (int)newid;
 }
 
-static void trex_error(TRex* exp, const TRexChar* error) {
+static void trex_error(TRex *exp, const TRexChar *error) {
     if (exp->_error)
         *exp->_error = error;
-    longjmp(*((jmp_buf*)exp->_jmpbuf), -1);
+    longjmp(*((jmp_buf *)exp->_jmpbuf), -1);
 }
 
-static void trex_expect(TRex* exp, int n) {
+static void trex_expect(TRex *exp, int n) {
     if ((*exp->_p) != n)
         trex_error(exp, _SC("expected paren"));
     exp->_p++;
 }
 
-static TRexChar trex_escapechar(TRex* exp) {
+static TRexChar trex_escapechar(TRex *exp) {
     if (*exp->_p == TREX_SYMBOL_ESCAPE_CHAR) {
         exp->_p++;
         switch (*exp->_p) {
@@ -418,13 +427,13 @@ static TRexChar trex_escapechar(TRex* exp) {
     return (*exp->_p++);
 }
 
-static int trex_charclass(TRex* exp, int classid) {
+static int trex_charclass(TRex *exp, int classid) {
     int n = trex_newnode(exp, OP_CCLASS);
     exp->_nodes[n].left = classid;
     return n;
 }
 
-static int trex_charnode(TRex* exp, TRexBool isclass) {
+static int trex_charnode(TRex *exp, TRexBool isclass) {
     TRexChar t;
     if (*exp->_p == TREX_SYMBOL_ESCAPE_CHAR) {
         exp->_p++;
@@ -485,7 +494,7 @@ static int trex_charnode(TRex* exp, TRexBool isclass) {
     exp->_p++;
     return trex_newnode(exp, t);
 }
-static int trex_class(TRex* exp) {
+static int trex_class(TRex *exp) {
     int ret = -1;
     int first = -1, chain;
     if (*exp->_p == TREX_SYMBOL_BEGINNING_OF_STRING) {
@@ -536,7 +545,7 @@ static int trex_class(TRex* exp) {
     return ret;
 }
 
-static int trex_parsenumber(TRex* exp) {
+static int trex_parsenumber(TRex *exp) {
     int ret = *exp->_p - '0';
     int positions = 10;
     exp->_p++;
@@ -549,7 +558,7 @@ static int trex_parsenumber(TRex* exp) {
     return ret;
 }
 
-static int trex_element(TRex* exp) {
+static int trex_element(TRex *exp) {
     int ret = -1;
     switch (*exp->_p) {
         case '(': {
@@ -640,7 +649,8 @@ static int trex_element(TRex* exp) {
             ret = nnode;
         }
     }
-    if ((*exp->_p != TREX_SYMBOL_BRANCH) && (*exp->_p != ')') && (*exp->_p != TREX_SYMBOL_GREEDY_ZERO_OR_MORE) &&
+    if ((*exp->_p != TREX_SYMBOL_BRANCH) && (*exp->_p != ')') &&
+        (*exp->_p != TREX_SYMBOL_GREEDY_ZERO_OR_MORE) &&
         (*exp->_p != TREX_SYMBOL_GREEDY_ONE_OR_MORE) && (*exp->_p != '\0')) {
         int nnode = trex_element(exp);
         exp->_nodes[ret].next = nnode;
@@ -649,7 +659,7 @@ static int trex_element(TRex* exp) {
     return ret;
 }
 
-static int trex_list(TRex* exp) {
+static int trex_list(TRex *exp) {
     int ret = -1, e;
     if (*exp->_p == TREX_SYMBOL_BEGINNING_OF_STRING) {
         exp->_p++;
@@ -711,7 +721,7 @@ static TRexBool trex_matchcclass(int cclass, TRexChar c) {
     return TRex_False; /*cannot happen*/
 }
 
-static TRexBool trex_matchclass(TRex* exp, TRexNode* node, TRexChar c) {
+static TRexBool trex_matchclass(TRex *exp, TRexNode *node, TRexChar c) {
     do {
         switch (node->type) {
             case OP_RANGE:
@@ -742,13 +752,16 @@ static TRexBool trex_matchclass(TRex* exp, TRexNode* node, TRexChar c) {
     return TRex_False;
 }
 
-static const TRexChar* trex_matchnode(TRex* exp, TRexNode* node, const TRexChar* str, TRexNode* next) {
+static const TRexChar *trex_matchnode(TRex *exp, TRexNode *node, const TRexChar *str,
+                                      TRexNode *next) {
     TRexNodeType type = node->type;
     switch (type) {
         case OP_GREEDY: {
-            /* TRexNode *greedystop = (node->next != -1) ? &exp->_nodes[node->next] : NULL; */
-            TRexNode* greedystop = NULL;
-            int p0 = (node->right >> 16) & 0x0000FFFF, p1 = node->right & 0x0000FFFF, nmaches = 0;
+            /* TRexNode *greedystop = (node->next != -1) ? &exp->_nodes[node->next] :
+             * NULL; */
+            TRexNode *greedystop = NULL;
+            int p0 = (node->right >> 16) & 0x0000FFFF, p1 = node->right & 0x0000FFFF,
+                nmaches = 0;
             const TRexChar *s = str, *good = str;
 
             if (node->next != -1) {
@@ -758,16 +771,19 @@ static const TRexChar* trex_matchnode(TRex* exp, TRexNode* node, const TRexChar*
             }
 
             while ((nmaches == 0xFFFF || nmaches < p1)) {
-                const TRexChar* stop;
-                if ((s = trex_matchnode(exp, &exp->_nodes[node->left], s, greedystop)) == NULL)
+                const TRexChar *stop;
+                if ((s = trex_matchnode(exp, &exp->_nodes[node->left], s,
+                                        greedystop)) == NULL)
                     break;
                 nmaches++;
                 good = s;
                 if (greedystop) {
                     /* checks that 0 matches satisfy the expression(if so skips) */
                     /* if not would always stop(for instance if is a '?') */
-                    if (greedystop->type != OP_GREEDY || (greedystop->type == OP_GREEDY && ((greedystop->right >> 16) & 0x0000FFFF) != 0)) {
-                        TRexNode* gnext = NULL;
+                    if (greedystop->type != OP_GREEDY ||
+                        (greedystop->type == OP_GREEDY &&
+                         ((greedystop->right >> 16) & 0x0000FFFF) != 0)) {
+                        TRexNode *gnext = NULL;
                         if (greedystop->next != -1) {
                             gnext = &exp->_nodes[greedystop->next];
                         } else if (next && next->next != -1) {
@@ -798,8 +814,8 @@ static const TRexChar* trex_matchnode(TRex* exp, TRexNode* node, const TRexChar*
             return NULL;
         }
         case OP_OR: {
-            const TRexChar* asd = str;
-            TRexNode* temp = &exp->_nodes[node->left];
+            const TRexChar *asd = str;
+            TRexNode *temp = &exp->_nodes[node->left];
             while ((asd = trex_matchnode(exp, temp, asd, NULL)) != NULL) {
                 if (temp->next != -1)
                     temp = &exp->_nodes[temp->next];
@@ -819,8 +835,8 @@ static const TRexChar* trex_matchnode(TRex* exp, TRexNode* node, const TRexChar*
         }
         case OP_EXPR:
         case OP_NOCAPEXPR: {
-            TRexNode* n = &exp->_nodes[node->left];
-            const TRexChar* cur = str;
+            TRexNode *n = &exp->_nodes[node->left];
+            const TRexChar *cur = str;
             int capture = -1;
             if (node->type != OP_NOCAPEXPR && node->right == exp->_currsubexp) {
                 capture = exp->_currsubexp;
@@ -829,7 +845,7 @@ static const TRexChar* trex_matchnode(TRex* exp, TRexNode* node, const TRexChar*
             }
 
             do {
-                TRexNode* subnext = NULL;
+                TRexNode *subnext = NULL;
                 if (n->next != -1) {
                     subnext = &exp->_nodes[n->next];
                 } else {
@@ -845,11 +861,14 @@ static const TRexChar* trex_matchnode(TRex* exp, TRexNode* node, const TRexChar*
             } while ((n->next != -1) && ((n = &exp->_nodes[n->next]) != NULL));
 
             if (capture != -1)
-                exp->_matches[capture].len = (int)(cur - exp->_matches[capture].begin);
+                exp->_matches[capture].len =
+                    (int)(cur - exp->_matches[capture].begin);
             return cur;
         }
         case OP_WB:
-            if ((str == exp->_bol && !isspace(*str)) || (str == exp->_eol && !isspace(*(str - 1))) || (!isspace(*str) && isspace(*(str + 1))) ||
+            if ((str == exp->_bol && !isspace(*str)) ||
+                (str == exp->_eol && !isspace(*(str - 1))) ||
+                (!isspace(*str) && isspace(*(str + 1))) ||
                 (isspace(*str) && !isspace(*(str + 1)))) {
                 return (node->left == 'b') ? str : NULL;
             }
@@ -868,8 +887,9 @@ static const TRexChar* trex_matchnode(TRex* exp, TRexNode* node, const TRexChar*
             return str;
         case OP_NCLASS:
         case OP_CLASS:
-            if (trex_matchclass(exp, &exp->_nodes[node->left], *str) ? (type == OP_CLASS ? TRex_True : TRex_False)
-                                                                     : (type == OP_NCLASS ? TRex_True : TRex_False)) {
+            if (trex_matchclass(exp, &exp->_nodes[node->left], *str)
+                    ? (type == OP_CLASS ? TRex_True : TRex_False)
+                    : (type == OP_NCLASS ? TRex_True : TRex_False)) {
                 str++;
                 return str;
             }
@@ -894,12 +914,12 @@ static const TRexChar* trex_matchnode(TRex* exp, TRexNode* node, const TRexChar*
 }
 
 /* public api */
-TRex* trex_compile(const TRexChar* pattern, const TRexChar** error, int flags) {
-    TRex* exp = (TRex*)xmalloc(sizeof(TRex));
+TRex *trex_compile(const TRexChar *pattern, const TRexChar **error, int flags) {
+    TRex *exp = (TRex *)xmalloc(sizeof(TRex));
     exp->_eol = exp->_bol = NULL;
     exp->_p = pattern;
     exp->_nallocated = (int)scstrlen(pattern) * sizeof(TRexChar);
-    exp->_nodes = (TRexNode*)xmalloc(exp->_nallocated * sizeof(TRexNode));
+    exp->_nodes = (TRexNode *)xmalloc(exp->_nallocated * sizeof(TRexNode));
     exp->_nsize = 0;
     exp->_matches = 0;
     exp->_nsubexpr = 0;
@@ -907,7 +927,7 @@ TRex* trex_compile(const TRexChar* pattern, const TRexChar** error, int flags) {
     exp->_error = error;
     exp->_jmpbuf = xmalloc(sizeof(jmp_buf));
     exp->_flags = flags;
-    if (setjmp(*((jmp_buf*)exp->_jmpbuf)) == 0) {
+    if (setjmp(*((jmp_buf *)exp->_jmpbuf)) == 0) {
         int res = trex_list(exp);
         exp->_nodes[exp->_first].left = res;
         if (*exp->_p != '\0')
@@ -919,15 +939,18 @@ TRex* trex_compile(const TRexChar* pattern, const TRexChar** error, int flags) {
             scprintf(_SC("\n"));
             for (i = 0; i < nsize; i++) {
                 if (exp->_nodes[i].type > MAX_CHAR)
-                    scprintf(_SC("[%02d] %10s "), i, g_nnames[exp->_nodes[i].type - MAX_CHAR]);
+                    scprintf(_SC("[%02d] %10s "), i,
+                             g_nnames[exp->_nodes[i].type - MAX_CHAR]);
                 else
                     scprintf(_SC("[%02d] %10c "), i, exp->_nodes[i].type);
-                scprintf(_SC("left %02d right %02d next %02d\n"), exp->_nodes[i].left, exp->_nodes[i].right, exp->_nodes[i].next);
+                scprintf(_SC("left %02d right %02d next %02d\n"),
+                         exp->_nodes[i].left, exp->_nodes[i].right,
+                         exp->_nodes[i].next);
             }
             scprintf(_SC("\n"));
         }
 #endif
-        exp->_matches = (TRexMatch*)xmalloc(exp->_nsubexpr * sizeof(TRexMatch));
+        exp->_matches = (TRexMatch *)xmalloc(exp->_nsubexpr * sizeof(TRexMatch));
         memset(exp->_matches, 0, exp->_nsubexpr * sizeof(TRexMatch));
     } else {
         trex_free(exp);
@@ -936,7 +959,7 @@ TRex* trex_compile(const TRexChar* pattern, const TRexChar** error, int flags) {
     return exp;
 }
 
-void trex_free(TRex* exp) {
+void trex_free(TRex *exp) {
     if (exp) {
         xfree(exp->_nodes);
         xfree(exp->_jmpbuf);
@@ -945,8 +968,8 @@ void trex_free(TRex* exp) {
     }
 }
 
-TRexBool trex_match(TRex* exp, const TRexChar* text) {
-    const TRexChar* res = NULL;
+TRexBool trex_match(TRex *exp, const TRexChar *text) {
+    const TRexChar *res = NULL;
     exp->_bol = text;
     exp->_eol = text + scstrlen(text);
     exp->_currsubexp = 0;
@@ -956,8 +979,10 @@ TRexBool trex_match(TRex* exp, const TRexChar* text) {
     return TRex_True;
 }
 
-TRexBool trex_searchrange(TRex* exp, const TRexChar* text_begin, const TRexChar* text_end, const TRexChar** out_begin, const TRexChar** out_end) {
-    const TRexChar* cur = NULL;
+TRexBool trex_searchrange(TRex *exp, const TRexChar *text_begin,
+                          const TRexChar *text_end, const TRexChar **out_begin,
+                          const TRexChar **out_end) {
+    const TRexChar *cur = NULL;
     int node = exp->_first;
     if (text_begin >= text_end)
         return TRex_False;
@@ -987,15 +1012,16 @@ TRexBool trex_searchrange(TRex* exp, const TRexChar* text_begin, const TRexChar*
     return TRex_True;
 }
 
-TRexBool trex_search(TRex* exp, const TRexChar* text, const TRexChar** out_begin, const TRexChar** out_end) {
+TRexBool trex_search(TRex *exp, const TRexChar *text, const TRexChar **out_begin,
+                     const TRexChar **out_end) {
     return trex_searchrange(exp, text, text + scstrlen(text), out_begin, out_end);
 }
 
-int trex_getsubexpcount(TRex* exp) {
+int trex_getsubexpcount(TRex *exp) {
     return exp->_nsubexpr;
 }
 
-TRexBool trex_getsubexp(TRex* exp, int n, TRexMatch* subexp) {
+TRexBool trex_getsubexp(TRex *exp, int n, TRexMatch *subexp) {
     if (n < 0 || n >= exp->_nsubexpr)
         return TRex_False;
     *subexp = exp->_matches[n];
