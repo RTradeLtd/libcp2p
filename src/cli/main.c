@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <signal.h>
 
 #ifndef COMMAND_VERSION_STRING
 #define COMMAND_VERSION_STRING "0.0.1"
@@ -150,6 +151,12 @@ void start_server_callback(int argc, char *argv[]) {
         clear_thread_logger(logger);
         return;
     }
+
+    /*!
+      * @brief setup the signals that will trigger shutdown
+    */
+    int shutdown_signals[3] = {SIGINT, SIGTERM, SIGQUIT};
+    setup_signal_shutdown(shutdown_signals, 3);
 
     // free up config as it is no longer needed
     free_socket_server_config(config);
