@@ -135,7 +135,7 @@ char *get_name_info(sock_addr *client_address) {
                 0,                    // length of the second buffer
                 NI_NUMERICHOST        // want to see hostnmae as an ip address
     );
-    char *addr = calloc(sizeof(address_info), sizeof(address_info));
+    char *addr = calloc(1, sizeof(address_info));
     if (addr == NULL) {
         return NULL;
     }
