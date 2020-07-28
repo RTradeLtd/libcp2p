@@ -44,6 +44,11 @@ pthread_mutex_t shutdown_mutex;
 bool do_shutdown = false;
 
 /*!
+  * @brief used to check if a receive or send with a socket failed
+*/
+bool recv_or_send_failed(socket_server_t *srv, int rc);
+
+/*!
  * @brief used to create a TCP/UDP socket server ready to accept connections
  * @param thl an instance of a thread_logger
  * @param config the configuration settings used for the tcp/udp server
@@ -447,16 +452,23 @@ socket_server_config_t *new_socket_server_config(int num_addrs) {
  */
 void handle_inbound_rpc(void *data) {
     conn_handle_data_t *hdata = NULL;
+    hdata = (conn_handle_data_t *)data;
+    if (hdata == NULL) {
+        return;
+    }
+    bool failed = false;
+    int rc = 0;
+    // read the first byte to determine the size of the buffer
+    char first_byte[1];
+    
     for (;;) {
-        hdata = (conn_handle_data_t *)data;
-        if (hdata == NULL) {
-            return;
-        }
-        int rc = 0;
-        // read the first byte to determine the size of the buffer
-        char first_byte[1];
+
         memset(first_byte, 0, 1);
 
+        // check to see if we shoudl exit
+        if (do_shutdown == true) {
+            goto RETURN;
+        }
 
         if (hdata->is_tcp == true) {
             // rc = read(hdata->conn->socket_number, first_byte, 1);
@@ -471,20 +483,10 @@ void handle_inbound_rpc(void *data) {
                 NULL
             );
         }
-        
-        
-        switch (rc) {
-            case 0:
-                hdata->srv->thl->log(hdata->srv->thl, 0, "client disconnected",
-                                    LOG_LEVELS_INFO);
-                goto RETURN;
-            case -1:
-                hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR,
-                                    "error encountered during read %s",
-                                    strerror(errno));
-                goto RETURN;
-            default:
-                break;
+
+        failed = recv_or_send_failed(hdata->srv, rc);
+        if (failed == true) {
+            goto RETURN;
         }
         
         int message_size = atoi(first_byte);
@@ -511,20 +513,10 @@ void handle_inbound_rpc(void *data) {
                 NULL
             );
         }
-        
-        switch (rc) {
-            case 0:
-                hdata->srv->thl->log(hdata->srv->thl, 0, "client disconnected",
-                                    LOG_LEVELS_INFO);
-                goto RETURN;
-            case -1:
-                hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR,
-                                    "error encountered during read %s",
-                                    strerror(errno));
-                goto RETURN;
-            default:
-                // connection was successful and we read some data
-                break;
+
+        failed = recv_or_send_failed(hdata->srv, rc);
+        if (failed == true) {
+            goto RETURN;
         }
 
         if (message_size == 6) {
@@ -555,5 +547,34 @@ RETURN:
     if (hdata != NULL) {
         free(hdata->conn);
         free(hdata);
+    }
+}
+
+/*!
+  * @brief used to check if a receive or send with a socket failed
+*/
+bool recv_or_send_failed(socket_server_t *srv, int rc) {
+   switch (rc) {
+       case 0:
+           srv->thl->log(srv->thl, 0, "client disconnected",
+                               LOG_LEVELS_DEBUG);
+           return true;
+       case -1:
+           srv->thl->logf(srv->thl, 0, LOG_LEVELS_ERROR,
+                               "error encountered during read %s",
+                               strerror(errno));
+           return true;
+       default:
+           // connection was successful and we read some data
+           return false;
+   }    
+}
+
+/*!
+  * @brief used to specify which syscall signals should trigger shutdown process
+*/
+void setup_signal_shutdown(int signals[], int num_signals) {
+    for (int i = 0; i < num_signals; i++) {
+        signal(signals[i], signal_shutdown);
     }
 }
