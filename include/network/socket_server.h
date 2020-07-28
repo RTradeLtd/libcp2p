@@ -172,3 +172,8 @@ socket_server_config_t *new_socket_server_config(int num_addrs);
  * @note if you send an inbound message of `5hello` you'll invoke a debug handler to print to stdout
  */
 void handle_inbound_rpc(void *data);
+
+/*!
+  * @brief used to specify which syscall signals should trigger shutdown process
+*/
+void setup_signal_shutdown(int signals[], int num_signals);
