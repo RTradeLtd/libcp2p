@@ -41,7 +41,7 @@
  * address
  */
 int get_new_socket(thread_logger *thl, addr_info *bind_address,
-                   SOCKET_OPTS sock_opts[], int num_opts, bool is_client) {
+                   SOCKET_OPTS sock_opts[], int num_opts, bool is_client, bool is_tcp) {
     // creates the socket and gets us its file descriptor
     int listen_socket_num =
         socket(bind_address->ai_family, bind_address->ai_socktype,
@@ -94,11 +94,13 @@ int get_new_socket(thread_logger *thl, addr_info *bind_address,
 
     // if client skip bind
     if (is_client == true) {
-        /*! @todo should we not do this on UDP connections?? */
-        rc = connect(listen_socket_num, bind_address->ai_addr, bind_address->ai_addrlen);
-        if (rc != 0) {
-            close(listen_socket_num);
-            return -1;
+        if (is_tcp) {
+            /*! @todo should we not do this on UDP connections?? */
+            rc = connect(listen_socket_num, bind_address->ai_addr, bind_address->ai_addrlen);
+            if (rc != 0) {
+                close(listen_socket_num);
+                return -1;
+            }
         }
         return listen_socket_num;
     }
