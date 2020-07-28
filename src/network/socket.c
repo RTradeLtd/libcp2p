@@ -111,14 +111,11 @@ int get_new_socket(thread_logger *thl, addr_info *bind_address,
 
     // if client skip bind
     if (is_client == true) {
-        if (is_tcp) {
-            /*! @todo should we not do this on UDP connections?? */
-            rc = connect(listen_socket_num, bind_address->ai_addr,
-                         bind_address->ai_addrlen);
-            if (rc != 0) {
-                close(listen_socket_num);
-                return -1;
-            }
+        /*! @todo should we not do this on UDP connections?? */
+        rc = connect(listen_socket_num, bind_address->ai_addr, bind_address->ai_addrlen);
+        if (rc != 0) {
+            close(listen_socket_num);
+            return -1;
         }
         return listen_socket_num;
     }
