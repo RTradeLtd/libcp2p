@@ -57,7 +57,7 @@ bool do_shutdown = false;
  * @note once you have used the config and created a new server with new_socket_server() you can free the socket config with free_socket_config
  */
 socket_server_t *new_socket_server(thread_logger *thl,
-                                   socket_server_config_t config, SOCKET_OPTS sock_opts[], int num_opts) {
+                                   socket_server_config_t *config, SOCKET_OPTS sock_opts[], int num_opts) {
 
     addr_info tcp_hints;
     addr_info udp_hints;
@@ -224,6 +224,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
     server->thl = thl;
     pthread_mutex_init(&shutdown_mutex, NULL);
     server->thl->log(server->thl, 0, "initialized server", LOG_LEVELS_INFO);
+    
 
     return server;
 
@@ -488,7 +489,7 @@ void handle_inbound_rpc(void *data) {
         default:
             break;
     }
-
+    
     int message_size = atoi(first_byte);
 
     if (message_size <= 0 || message_size > 8192) {
@@ -535,12 +536,11 @@ void handle_inbound_rpc(void *data) {
             break;
     }
 
-    printf("got message\n");
-    if (message_size == 5) {
+    if (message_size == 6) {
         if (
             memcmp(
                 message_data,
-                "hello",
+                "6hello",
                 message_size
             ) == 0
         ) {
