@@ -30,20 +30,20 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  ******************************************************************************/
 
-#include "argtable3.h"
+#include "thirdparty/argtable3/argtable3.h"
 
 #ifndef ARG_AMALGAMATION
-#include "argtable3_private.h"
+#include "thirdparty/argtable3/argtable3_private.h"
 #endif
 
 #include <stdlib.h>
 
-static void arg_dbl_resetfn(struct arg_dbl* parent) {
+static void arg_dbl_resetfn(struct arg_dbl *parent) {
     ARG_TRACE(("%s:resetfn(%p)\n", __FILE__, parent));
     parent->count = 0;
 }
 
-static int arg_dbl_scanfn(struct arg_dbl* parent, const char* argval) {
+static int arg_dbl_scanfn(struct arg_dbl *parent, const char *argval) {
     int errorcode = 0;
 
     if (parent->count == parent->hdr.maxcount) {
@@ -56,12 +56,13 @@ static int arg_dbl_scanfn(struct arg_dbl* parent, const char* argval) {
         parent->count++;
     } else {
         double val;
-        char* end;
+        char *end;
 
         /* extract double from argval into val */
         val = strtod(argval, &end);
 
-        /* if success then store result in parent->dval[] array otherwise return error*/
+        /* if success then store result in parent->dval[] array otherwise return
+         * error*/
         if (*end == 0)
             parent->dval[parent->count++] = val;
         else
@@ -72,17 +73,18 @@ static int arg_dbl_scanfn(struct arg_dbl* parent, const char* argval) {
     return errorcode;
 }
 
-static int arg_dbl_checkfn(struct arg_dbl* parent) {
+static int arg_dbl_checkfn(struct arg_dbl *parent) {
     int errorcode = (parent->count < parent->hdr.mincount) ? ARG_ERR_MINCOUNT : 0;
 
     ARG_TRACE(("%s:checkfn(%p) returns %d\n", __FILE__, parent, errorcode));
     return errorcode;
 }
 
-static void arg_dbl_errorfn(struct arg_dbl* parent, arg_dstr_t ds, int errorcode, const char* argval, const char* progname) {
-    const char* shortopts = parent->hdr.shortopts;
-    const char* longopts = parent->hdr.longopts;
-    const char* datatype = parent->hdr.datatype;
+static void arg_dbl_errorfn(struct arg_dbl *parent, arg_dstr_t ds, int errorcode,
+                            const char *argval, const char *progname) {
+    const char *shortopts = parent->hdr.shortopts;
+    const char *longopts = parent->hdr.longopts;
+    const char *datatype = parent->hdr.datatype;
 
     /* make argval NULL safe */
     argval = argval ? argval : "";
@@ -106,27 +108,33 @@ static void arg_dbl_errorfn(struct arg_dbl* parent, arg_dstr_t ds, int errorcode
     }
 }
 
-struct arg_dbl* arg_dbl0(const char* shortopts, const char* longopts, const char* datatype, const char* glossary) {
+struct arg_dbl *arg_dbl0(const char *shortopts, const char *longopts,
+                         const char *datatype, const char *glossary) {
     return arg_dbln(shortopts, longopts, datatype, 0, 1, glossary);
 }
 
-struct arg_dbl* arg_dbl1(const char* shortopts, const char* longopts, const char* datatype, const char* glossary) {
+struct arg_dbl *arg_dbl1(const char *shortopts, const char *longopts,
+                         const char *datatype, const char *glossary) {
     return arg_dbln(shortopts, longopts, datatype, 1, 1, glossary);
 }
 
-struct arg_dbl* arg_dbln(const char* shortopts, const char* longopts, const char* datatype, int mincount, int maxcount, const char* glossary) {
+struct arg_dbl *arg_dbln(const char *shortopts, const char *longopts,
+                         const char *datatype, int mincount, int maxcount,
+                         const char *glossary) {
     size_t nbytes;
-    struct arg_dbl* result;
+    struct arg_dbl *result;
     size_t addr;
     size_t rem;
 
     /* foolproof things by ensuring maxcount is not less than mincount */
     maxcount = (maxcount < mincount) ? mincount : maxcount;
 
-    nbytes = sizeof(struct arg_dbl)             /* storage for struct arg_dbl */
-             + (maxcount + 1) * sizeof(double); /* storage for dval[maxcount] array plus one extra for padding to memory boundary */
+    nbytes = sizeof(struct arg_dbl) /* storage for struct arg_dbl */
+             + (maxcount + 1) *
+                   sizeof(double); /* storage for dval[maxcount] array plus one extra
+                                      for padding to memory boundary */
 
-    result = (struct arg_dbl*)xmalloc(nbytes);
+    result = (struct arg_dbl *)xmalloc(nbytes);
 
     /* init the arg_hdr struct */
     result->hdr.flag = ARG_HASVALUE;
@@ -137,10 +145,10 @@ struct arg_dbl* arg_dbln(const char* shortopts, const char* longopts, const char
     result->hdr.mincount = mincount;
     result->hdr.maxcount = maxcount;
     result->hdr.parent = result;
-    result->hdr.resetfn = (arg_resetfn*)arg_dbl_resetfn;
-    result->hdr.scanfn = (arg_scanfn*)arg_dbl_scanfn;
-    result->hdr.checkfn = (arg_checkfn*)arg_dbl_checkfn;
-    result->hdr.errorfn = (arg_errorfn*)arg_dbl_errorfn;
+    result->hdr.resetfn = (arg_resetfn *)arg_dbl_resetfn;
+    result->hdr.scanfn = (arg_scanfn *)arg_dbl_scanfn;
+    result->hdr.checkfn = (arg_checkfn *)arg_dbl_checkfn;
+    result->hdr.errorfn = (arg_errorfn *)arg_dbl_errorfn;
 
     /* Store the dval[maxcount] array on the first double boundary that
      * immediately follows the arg_dbl struct. We do the memory alignment
@@ -149,8 +157,9 @@ struct arg_dbl* arg_dbln(const char* shortopts, const char* longopts, const char
      */
     addr = (size_t)(result + 1);
     rem = addr % sizeof(double);
-    result->dval = (double*)(addr + sizeof(double) - rem);
-    ARG_TRACE(("addr=%p, dval=%p, sizeof(double)=%d rem=%d\n", addr, result->dval, (int)sizeof(double), (int)rem));
+    result->dval = (double *)(addr + sizeof(double) - rem);
+    ARG_TRACE(("addr=%p, dval=%p, sizeof(double)=%d rem=%d\n", addr, result->dval,
+               (int)sizeof(double), (int)rem));
 
     result->count = 0;
 

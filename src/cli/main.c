@@ -1,15 +1,15 @@
 #include "cli/command_line.h"
 #include "multiaddr/multiaddr.h"
 #include "network/socket_server.h"
+#include "thirdparty/argtable3/argtable3.h"
 #include "utils/colors.h"
 #include "utils/logger.h"
-#include <argtable3.h>
+#include <signal.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <signal.h>
 
 #ifndef COMMAND_VERSION_STRING
 #define COMMAND_VERSION_STRING "0.0.1"
@@ -109,7 +109,6 @@ void test_server_callback(int argc, char *argv[]) {
     close(client->socket_number);
     free(client->peer_address);
     free(client);
-    
 }
 
 void start_server_callback(int argc, char *argv[]) {
@@ -153,8 +152,8 @@ void start_server_callback(int argc, char *argv[]) {
     }
 
     /*!
-      * @brief setup the signals that will trigger shutdown
-    */
+     * @brief setup the signals that will trigger shutdown
+     */
     int shutdown_signals[3] = {SIGINT, SIGTERM, SIGQUIT};
     setup_signal_shutdown(shutdown_signals, 3);
 
@@ -163,7 +162,7 @@ void start_server_callback(int argc, char *argv[]) {
 
     // start the actual server
     start_socket_server(server);
-    
+
     // free up the server resources (also frees logger)
     free_socket_server(server);
     return;

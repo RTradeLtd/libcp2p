@@ -51,7 +51,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "argtable3.h"
+#include "thirdparty/argtable3/argtable3.h"
 
 #ifndef ARG_AMALGAMATION
 #include "getopt.h"
@@ -66,7 +66,7 @@ int opterr = 1;   /* if error message should be printed */
 int optind = 1;   /* index into parent argv vector */
 int optopt = '?'; /* character checked for validity */
 int optreset;     /* reset getopt */
-char* optarg;     /* argument associated with option */
+char *optarg;     /* argument associated with option */
 #endif            /* ARG_REPLACE_GETOPT */
 
 #define PRINT_ERROR ((opterr) && (*options != ':'))
@@ -83,13 +83,15 @@ char* optarg;     /* argument associated with option */
 #define EMSG ""
 
 #if ARG_REPLACE_GETOPT == 1
-static int getopt_internal(int, char* const*, const char*, const struct option*, int*, int);
+static int getopt_internal(int, char *const *, const char *, const struct option *,
+                           int *, int);
 #endif /* ARG_REPLACE_GETOPT */
-static int parse_long_options(char* const*, const char*, const struct option*, int*, int);
+static int parse_long_options(char *const *, const char *, const struct option *,
+                              int *, int);
 static int gcd(int, int);
-static void permute_args(int, int, int, char* const*);
+static void permute_args(int, int, int, char *const *);
 
-static char* place = EMSG; /* option letter processing */
+static char *place = EMSG; /* option letter processing */
 
 /* XXX: set optreset to 1 rather than these two */
 static int nonopt_start = -1; /* first non option argument (for permute) */
@@ -105,7 +107,7 @@ static const char illoptstring[] = "unknown option -- %s";
 
 #ifdef _WIN32
 
-/* 
+/*
  * Windows needs warnx().  We change the definition though:
  *  1. (another) global is defined, opterrmsg, which holds the error message
  *  2. errors are always printed out on stderr w/o the program name
@@ -121,17 +123,18 @@ static const char illoptstring[] = "unknown option -- %s";
 extern char opterrmsg[MAX_OPTERRMSG_SIZE];
 char opterrmsg[MAX_OPTERRMSG_SIZE]; /* buffer for the last error message */
 
-static void warnx(const char* fmt, ...) {
+static void warnx(const char *fmt, ...) {
     va_list ap;
     va_start(ap, fmt);
 
-    /* 
+    /*
      * Make sure opterrmsg is always zero-terminated despite the _vsnprintf()
      * implementation specifics and manually suppress the warning.
      */
     memset(opterrmsg, 0, sizeof(opterrmsg));
     if (fmt != NULL)
-#if (defined(__STDC_LIB_EXT1__) && defined(__STDC_WANT_LIB_EXT1__)) || (defined(__STDC_SECURE_LIB__) && defined(__STDC_WANT_SECURE_LIB__))
+#if (defined(__STDC_LIB_EXT1__) && defined(__STDC_WANT_LIB_EXT1__)) || \
+    (defined(__STDC_SECURE_LIB__) && defined(__STDC_WANT_SECURE_LIB__))
         _vsnprintf_s(opterrmsg, sizeof(opterrmsg), sizeof(opterrmsg) - 1, fmt, ap);
 #else
         _vsnprintf(opterrmsg, sizeof(opterrmsg) - 1, fmt, ap);
@@ -170,9 +173,10 @@ static int gcd(int a, int b) {
  * from nonopt_end to opt_end (keeping the same order of arguments
  * in each block).
  */
-static void permute_args(int panonopt_start, int panonopt_end, int opt_end, char* const* nargv) {
+static void permute_args(int panonopt_start, int panonopt_end, int opt_end,
+                         char *const *nargv) {
     int cstart, cyclelen, i, j, ncycle, nnonopts, nopts, pos;
-    char* swap;
+    char *swap;
 
     /*
      * compute lengths of blocks and number and size of cycles
@@ -192,9 +196,9 @@ static void permute_args(int panonopt_start, int panonopt_end, int opt_end, char
                 pos += nopts;
             swap = nargv[pos];
             /* LINTED const cast */
-            ((char**)nargv)[pos] = nargv[cstart];
+            ((char **)nargv)[pos] = nargv[cstart];
             /* LINTED const cast */
-            ((char**)nargv)[cstart] = swap;
+            ((char **)nargv)[cstart] = swap;
         }
     }
 }
@@ -204,7 +208,9 @@ static void permute_args(int panonopt_start, int panonopt_end, int opt_end, char
  *	Parse long options in argc/argv argument vector.
  * Returns -1 if short_too is set and the option does not match long_options.
  */
-static int parse_long_options(char* const* nargv, const char* options, const struct option* long_options, int* idx, int short_too) {
+static int parse_long_options(char *const *nargv, const char *options,
+                              const struct option *long_options, int *idx,
+                              int short_too) {
     char *current_argv, *has_equal;
     size_t current_argv_len;
     int i, match;
@@ -261,7 +267,8 @@ static int parse_long_options(char* const* nargv, const char* options, const str
                 optopt = 0;
             return (BADARG);
         }
-        if (long_options[match].has_arg == required_argument || long_options[match].has_arg == optional_argument) {
+        if (long_options[match].has_arg == required_argument ||
+            long_options[match].has_arg == optional_argument) {
             if (has_equal)
                 optarg = has_equal;
             else if (long_options[match].has_arg == required_argument) {
@@ -312,8 +319,9 @@ static int parse_long_options(char* const* nargv, const char* options, const str
  * getopt_internal --
  *	Parse argc/argv argument vector.  Called by user level routines.
  */
-static int getopt_internal(int nargc, char* const* nargv, const char* options, const struct option* long_options, int* idx, int flags) {
-    char* oli; /* option letter list index */
+static int getopt_internal(int nargc, char *const *nargv, const char *options,
+                           const struct option *long_options, int *idx, int flags) {
+    char *oli; /* option letter list index */
     int optchar, short_too;
     static int posixly_correct = -1;
 
@@ -369,7 +377,8 @@ start:
             nonopt_start = nonopt_end = -1;
             return (-1);
         }
-        if (*(place = nargv[optind]) != '-' || (place[1] == '\0' && strchr(options, '-') == NULL)) {
+        if (*(place = nargv[optind]) != '-' ||
+            (place[1] == '\0' && strchr(options, '-') == NULL)) {
             place = EMSG; /* found non-option */
             if (flags & FLAG_ALLARGS) {
                 /*
@@ -426,7 +435,8 @@ start:
      *  2) the arg is not just "-"
      *  3) either the arg starts with -- we are getopt_long_only()
      */
-    if (long_options != NULL && place != nargv[optind] && (*place == '-' || (flags & FLAG_LONGONLY))) {
+    if (long_options != NULL && place != nargv[optind] &&
+        (*place == '-' || (flags & FLAG_LONGONLY))) {
         short_too = 0;
         if (*place == '-')
             place++; /* --foo long option */
@@ -440,7 +450,9 @@ start:
         }
     }
 
-    if ((optchar = (int)*place++) == (int)':' || (optchar == (int)'-' && *place != '\0') || (oli = strchr(options, optchar)) == NULL) {
+    if ((optchar = (int)*place++) == (int)':' ||
+        (optchar == (int)'-' && *place != '\0') ||
+        (oli = strchr(options, optchar)) == NULL) {
         /*
          * If the user specified "-" and  '-' isn't listed in
          * options, return -1 (non-option) as per POSIX.
@@ -501,7 +513,7 @@ start:
  *
  * [eventually this will replace the BSD getopt]
  */
-int getopt(int nargc, char* const* nargv, const char* options) {
+int getopt(int nargc, char *const *nargv, const char *options) {
     /*
      * We don't pass FLAG_PERMUTE to getopt_internal() since
      * the BSD getopt(3) (unlike GNU) has never done this.
@@ -518,7 +530,8 @@ int getopt(int nargc, char* const* nargv, const char* options) {
  * getopt_long --
  *	Parse argc/argv argument vector.
  */
-int getopt_long(int nargc, char* const* nargv, const char* options, const struct option* long_options, int* idx) {
+int getopt_long(int nargc, char *const *nargv, const char *options,
+                const struct option *long_options, int *idx) {
     return (getopt_internal(nargc, nargv, options, long_options, idx, FLAG_PERMUTE));
 }
 
@@ -526,6 +539,8 @@ int getopt_long(int nargc, char* const* nargv, const char* options, const struct
  * getopt_long_only --
  *	Parse argc/argv argument vector.
  */
-int getopt_long_only(int nargc, char* const* nargv, const char* options, const struct option* long_options, int* idx) {
-    return (getopt_internal(nargc, nargv, options, long_options, idx, FLAG_PERMUTE | FLAG_LONGONLY));
+int getopt_long_only(int nargc, char *const *nargv, const char *options,
+                     const struct option *long_options, int *idx) {
+    return (getopt_internal(nargc, nargv, options, long_options, idx,
+                            FLAG_PERMUTE | FLAG_LONGONLY));
 }
