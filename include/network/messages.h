@@ -110,3 +110,8 @@ void free_message_t(message_t *msg);
  * @param opts specifies how to send the message to a peer
  */
 int send_message(message_t *msg, message_send_opts_t opts);
+
+/*!
+  * @brief returns the size of a message_t instance
+*/
+size_t size_of_message_t(message_t *msg);
