@@ -26,8 +26,7 @@ void free_cbor_encoded_data(cbor_encoded_data_t *in) {
  * @return Failure: NULL pointer
  */
 cbor_encoded_data_t *new_cbor_encoded_data(uint8_t *data, size_t len) {
-    cbor_encoded_data_t *out =
-        calloc(sizeof(cbor_encoded_data_t), sizeof(cbor_encoded_data_t));
+    cbor_encoded_data_t *out = calloc(1, sizeof(cbor_encoded_data_t));
     if (out == NULL) {
         return NULL;
     }

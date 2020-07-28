@@ -62,7 +62,7 @@ void test_multicodec_encode_decode(void **state) {
             ) == 0
         );
 
-        char *decoded_out = calloc(sizeof(char), 12); 
+        char *decoded_out = calloc(1, 12); 
         int rc = multicodec_decode(
             encoded,
             decoded_out,

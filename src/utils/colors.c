@@ -58,7 +58,7 @@ int write_colored(COLORS color, int file_descriptor, char *message) {
     }
     // 2 for \n
     char *write_message =
-        calloc(sizeof(char), strlen(pcolor) + strlen(reset) + strlen(message) + 2);
+        calloc(1, strlen(pcolor) + strlen(reset) + strlen(message) + 2);
     if (write_message == NULL) {
         printf("failed to calloc write_message\n");
         return -1;
