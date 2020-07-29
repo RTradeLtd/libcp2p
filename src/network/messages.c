@@ -187,13 +187,13 @@ void free_message_t(message_t *msg) {
 }
 
 /*!
-  * @brief returns the size of a message_t instance
-*/
+ * @brief returns the size of a message_t instance
+ */
 size_t size_of_message_t(message_t *msg) {
     if (msg == NULL) {
         return 0;
     }
-    
+
     size_t size = 0;
     size += sizeof(*msg);
     size += msg->len;

@@ -31,7 +31,7 @@ command_object *new_command_object(int argc, char *argv[]) {
     // all provided arguments and typecast it to command_object * command_object
     // *pcobj = (command_object *)malloc(sizeof(command_object) + sizeof(*argv));
     // this prevents valgrind from reporting an error
-    command_object *pcobj = calloc(sizeof(command_object), sizeof(*argv));
+    command_object *pcobj = calloc(1, sizeof(command_object));
     if (pcobj == NULL) {
         printf("failed to malloc command_object\n");
         return NULL;
@@ -42,7 +42,7 @@ command_object *new_command_object(int argc, char *argv[]) {
     pcobj->command_count = 0;
     // parse cli arguments provided by user  and assign to pcobj
     for (int i = 0; i < argc; i++) {
-        pcobj->argv[i] = malloc(strlen(argv[i]) + 1);
+        pcobj->argv[i] = calloc(1, strlen(argv[i]) + 1);
         if (pcobj->argv[i] == NULL) {
             printf("failed to malloc argv space\n");
             return NULL;
