@@ -14,35 +14,36 @@
  * @brief general socket related tooling
  */
 
+#include "network/socket.h"
+#include "utils/logger.h"
 #include <arpa/inet.h>
 #include <errno.h>
+#include <fcntl.h>
 #include <netdb.h>
 #include <netinet/in.h>
+#include <pthread.h>
+#include <signal.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
+#include <sys/time.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include "network/socket.h"
-#include "utils/logger.h"
-#include <fcntl.h>
-#include <pthread.h>
-#include <signal.h>
-#include <stdbool.h>
-#include <sys/time.h>
 
 /*!
-  * @brief sets a socket recv timeout
-  * @param fd the file descriptor of the socket to apply operations to
-  * @param seconds the seconds to timeout a recv or recvfrom after
-  * @warning how does this workon UDP socket
-*/
+ * @brief sets a socket recv timeout
+ * @param fd the file descriptor of the socket to apply operations to
+ * @param seconds the seconds to timeout a recv or recvfrom after
+ * @warning how does this workon UDP socket
+ */
 int set_socket_recv_timeout(int fd, int seconds) {
     timeout tmt;
     tmt.tv_sec = seconds;
     tmt.tv_usec = 0;
-    int rc = setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (const char *)&tmt, sizeof(tmt));
+    int rc =
+        setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (const char *)&tmt, sizeof(tmt));
     if (rc == -1) {
         printf("failed to set socket opt: %s\n", strerror(errno));
     }

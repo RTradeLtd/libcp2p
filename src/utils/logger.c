@@ -120,12 +120,13 @@ void log_func(thread_logger *thl, int file_descriptor, char *message,
         // dont printf log as get_time_str does that
         return;
     }
-    
+
     char date_msg[strlen(time_str) + strlen(message) + 2];
     memset(date_msg, 0, sizeof(date_msg));
 
     strcat(date_msg, time_str);
     strcat(date_msg, message);
+
     switch (level) {
         case LOG_LEVELS_INFO:
             info_log(thl, file_descriptor, date_msg);
@@ -140,6 +141,7 @@ void log_func(thread_logger *thl, int file_descriptor, char *message,
             debug_log(thl, file_descriptor, date_msg);
             break;
     }
+
     free(time_str);
 }
 
