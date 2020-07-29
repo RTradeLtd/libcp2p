@@ -311,7 +311,7 @@ void start_socket_server(socket_server_t *srv) {
                 sleep(0.50);
                 continue;
             case -1:
-                srv->thl->logf(srv->thl, 0, LOG_LEVELS_ERROR,
+                srv->thl->logf(srv->thl, 0, LOG_LEVELS_DEBUG,
                                "an error occured while running select: %s",
                                strerror(errno));
                 sleep(0.50);
@@ -357,7 +357,7 @@ void start_socket_server(socket_server_t *srv) {
                     client_conn_t *conn = calloc(1, sizeof(client_conn_t));
                     if (conn == NULL) {
                         srv->thl->log(srv->thl, 0, "failed to calloc client_t",
-                                      LOG_LEVELS_ERROR);
+                                      LOG_LEVELS_DEBUG);
                         sleep(0.50);
                         continue;
                     }
@@ -368,7 +368,7 @@ void start_socket_server(socket_server_t *srv) {
                     if (chdata == NULL) {
                         free(conn);
                         srv->thl->log(srv->thl, 0, "failed to calloc client_t",
-                                      LOG_LEVELS_ERROR);
+                                      LOG_LEVELS_DEBUG);
                         sleep(0.50);
                         continue;
                     }
@@ -418,10 +418,12 @@ client_conn_t *accept_client_conn(socket_server_t *srv, int socket_num) {
         return NULL;
     }
     connection->socket_number = client_socket_num;
-    char *addr_inf = get_name_info((sock_addr *)&addr_temp);
-    srv->thl->logf(srv->thl, 0, LOG_LEVELS_INFO, "accepted new connection: %s",
-                   addr_inf);
-    free(addr_inf);
+    if (srv->thl->debug == true) {
+        char *addr_inf = get_name_info((sock_addr *)&addr_temp);
+        srv->thl->logf(srv->thl, 0, LOG_LEVELS_DEBUG, "accepted new connection: %s",
+                    addr_inf);
+        free(addr_inf);
+    }
     return connection;
 }
 
@@ -561,7 +563,7 @@ void handle_inbound_rpc(void *data) {
     }
 RETURN:
 
-    hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_INFO,
+    hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_DEBUG,
                           "terminating connection. type tcp: %i", hdata->is_tcp);
 
     // if TCP, close the connection to the client socket
@@ -583,7 +585,7 @@ bool recv_or_send_failed(socket_server_t *srv, int rc) {
             srv->thl->log(srv->thl, 0, "client disconnected", LOG_LEVELS_DEBUG);
             return true;
         case -1:
-            srv->thl->logf(srv->thl, 0, LOG_LEVELS_ERROR,
+            srv->thl->logf(srv->thl, 0, LOG_LEVELS_DEBUG,
                            "error encountered during read %s", strerror(errno));
             return true;
         default:
