@@ -54,6 +54,8 @@ typedef struct socket_server_config {
     int max_connections;
     int num_threads;
     int num_addrs;
+    /*! @brief the timeout in seconds to set on a socket, 0 means nothing is set */
+    int recv_timeout_sec;
     multi_addr_t **addrs;
 } socket_server_config_t;
 
