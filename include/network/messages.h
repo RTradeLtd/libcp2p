@@ -9,8 +9,11 @@
  * @details at a minimum the types here are setup to establish a secure
  * communications channel using ECDSA keys and ECDH key agreement
  */
+
+#include "utils/logger.h"
 #include "encoding/cbor.h"
 #include <stddef.h>
+#include <stdbool.h>
 
 /*!
  * @enum MESSAGE_TYPES
@@ -115,3 +118,18 @@ int send_message(message_t *msg, message_send_opts_t opts);
  * @brief returns the size of a message_t instance
  */
 size_t size_of_message_t(message_t *msg);
+
+
+/*!
+  * @brief used to handle receiving data from a UDP or TCP socket
+  * @details it is designed to reduce the manual overhead with regards to processing messages
+  * @details because the first byte of any data stream coming in defines the size of the total data to receive
+  * @details and the remaining data defines the actual cbor encoded data. therefore we need to properly parse this information
+  * @details and the manner of processing is useful to either the server or client side of things
+  * @param socket_num the file descriptor of the socket to receive from
+  * @param is_tcp indicates whether this is a TCP socket
+  * @param buffer the location to store data, for memory efficiency this should be a stack allocated array, this should not include the the first byte sent down the pipe to specify the cbor encoded data size
+  * @param buffer_len the max size of the buffer, this should not include the first byte sent down the pipe which defines the length of the CBOR encoded data
+  * @warning do not
+*/
+bool handle_receive(thread_logger *thl, int socket_number, bool is_tcp, unsigned char *buffer, size_t buffer_len, size_t *bytes_written);
