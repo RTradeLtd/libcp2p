@@ -87,13 +87,18 @@ void test_server_callback(int argc, char *argv[]) {
             clear_thread_logger(logger);
             return;
         }
-        unsigned char send_buffer[cbdata->len + sizeof(size_t)];
+
+        size_t cbor_len = get_encoded_send_buffer_len(cbdata);
+
+        unsigned char send_buffer[cbor_len];
         memset(send_buffer, 0, sizeof(send_buffer));
-        send_buffer[0] =  cbdata->len;
-        for (int i = 1; i < (int)cbdata->len; i++) {
-            send_buffer[i] = cbdata->data[i - 1];
+        
+        int rc = get_encoded_send_buffer(cbdata, send_buffer, cbor_len);
+        if (rc == -1) {
+            return;
         }
-        int rc = send(client->socket_number, send_buffer, sizeof(send_buffer), 0);
+
+        rc = send(client->socket_number, send_buffer, sizeof(send_buffer), 0);
         if (rc == -1) {
             printf("request failed: %s\n", strerror(errno));
         }
