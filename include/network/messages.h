@@ -115,18 +115,3 @@ int send_message(message_t *msg, message_send_opts_t opts);
  * @brief returns the size of a message_t instance
  */
 size_t size_of_message_t(message_t *msg);
-
-/*!
-  * @brief fills `buffer` with the data to send
-  * @details if the total size needed is greater than max_len the call fails
-  * @return Success: 0
-  * @return Failure: -1
-*/
-int get_message_t_send_buffer(message_t *msg, unsigned char *buffer, size_t max_len);
-
-/*!
-  * @brief gets the size of a buffer needed for sending message_t
-  * @return Success: size of buffer
-  * @return Failure: -1
-*/
-size_t get_message_t_send_buffer_len(message_t *msg);
