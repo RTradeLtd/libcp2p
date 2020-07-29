@@ -490,10 +490,13 @@ void handle_inbound_rpc(void *data) {
             goto RETURN;
         }
 
-        int message_size = atoi(first_byte);
+        // int message_size = atoi(first_byte);
+        int message_size = (int)first_byte[0];
+
+        printf("message size: %i\n", message_size);
 
         if (message_size <= 0 || message_size > 8192) {
-            hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR,
+            hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_DEBUG,
                                   "invalid message size");
             // invalid first byte skip
             goto RETURN;

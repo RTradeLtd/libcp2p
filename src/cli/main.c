@@ -65,9 +65,14 @@ void test_server_callback(int argc, char *argv[]) {
     msg->data[3] = 'l';
     msg->data[4] = 'o';
     msg->data[5] = '\0';
-    msg->len = 5;
+    msg->len = 6;
     msg->type = MESSAGE_START_ECDH;
     printf("size of message: %lu\n", size_of_message_t(msg));
+
+    cbor_encoded_data_t *cbdata = cbor_encode_message_t(msg);
+    if (cbdata == NULL) {
+        return;
+    }
 
     if (tcp_addr != NULL) {
         client = new_socket_client(logger, tcp_addr);
@@ -82,8 +87,13 @@ void test_server_callback(int argc, char *argv[]) {
             clear_thread_logger(logger);
             return;
         }
-        printf("sending tcp\n");
-        int rc = send(client->socket_number, "6hello", 6, 0);
+        unsigned char send_buffer[cbdata->len + sizeof(size_t)];
+        memset(send_buffer, 0, sizeof(send_buffer));
+        send_buffer[0] =  cbdata->len;
+        for (int i = 1; i < (int)cbdata->len; i++) {
+            send_buffer[i] = cbdata->data[i - 1];
+        }
+        int rc = send(client->socket_number, send_buffer, sizeof(send_buffer), 0);
         if (rc == -1) {
             printf("request failed: %s\n", strerror(errno));
         }
