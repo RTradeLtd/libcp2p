@@ -80,6 +80,14 @@ int get_new_socket(thread_logger *thl, addr_info *bind_address,
 bool set_socket_blocking_status(int fd, bool blocking);
 
 /*!
+  * @brief sets a socket recv timeout
+  * @param fd the file descriptor of the socket to apply operations to
+  * @param seconds the seconds to timeout a recv or recvfrom after
+  * @warning how does this workon UDP socket
+*/
+int set_socket_recv_timeout(int fd, int seconds);
+
+/*!
  * @note this only works with tcp
  * @todo enable udp
  */
