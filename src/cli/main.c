@@ -122,11 +122,13 @@ void test_server_callback(int argc, char *argv[]) {
             return;
         }
         /* UDP based sending */
-        int rc = socket_client_sendto(client, client->peer_address, "6");
+        int rc = socket_client_sendto(client, client->peer_address,
+                                      (unsigned char *)"6", strlen("6"));
         if (rc == 0) {
             printf("request failed: %s\n", strerror(errno));
         }
-        rc = socket_client_sendto(client, client->peer_address, "hello");
+        rc = socket_client_sendto(client, client->peer_address,
+                                  (unsigned char *)"hello", strlen("hello"));
         if (rc == 0) {
             printf("request failed: %s\n", strerror(errno));
         }
