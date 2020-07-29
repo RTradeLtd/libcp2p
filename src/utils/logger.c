@@ -103,7 +103,7 @@ void logf_func(thread_logger *thl, int file_descriptor, LOG_LEVELS level,
     va_start(args, message);
     char msg[sizeof(args) + (strlen(message) * 2)];
     memset(msg, 0, sizeof(msg));
-    
+
     int response = vsnprintf(msg, sizeof(msg), message, args);
     if (response < 0) {
         free(msg);
@@ -120,11 +120,10 @@ void log_func(thread_logger *thl, int file_descriptor, char *message,
         // dont printf log as get_time_str does that
         return;
     }
-    char *date_msg = calloc(1, strlen(time_str) + strlen(message) + 2);
-    if (date_msg == NULL) {
-        printf("failed to calloc date_msg\n");
-        return;
-    }
+    
+    char date_msg[strlen(time_str) + strlen(message) + 2];
+    memset(date_msg, 0, sizeof(date_msg));
+
     strcat(date_msg, time_str);
     strcat(date_msg, message);
     switch (level) {
@@ -141,7 +140,6 @@ void log_func(thread_logger *thl, int file_descriptor, char *message,
             debug_log(thl, file_descriptor, date_msg);
             break;
     }
-    free(date_msg);
     free(time_str);
 }
 
