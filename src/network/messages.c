@@ -10,12 +10,14 @@
  * communications channel using ECDSA keys and ECDH key agreement
  */
 
+#include "network/socket.h"
 #include "network/messages.h"
 #include "encoding/cbor.h"
 #include "tinycbor/cbor.h"
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/socket.h>
 
 /*!
  * @brief used to cbor encode a message_t instance
@@ -199,4 +201,77 @@ size_t size_of_message_t(message_t *msg) {
     size += msg->len;
 
     return size;
+}
+
+
+/*!
+  * @brief used to handle receiving data from a UDP or TCP socket
+  * @details it is designed to reduce the manual overhead with regards to processing messages
+  * @details because the first byte of any data stream coming in defines the size of the total data to receive
+  * @details and the remaining data defines the actual cbor encoded data. therefore we need to properly parse this information
+  * @details and the manner of processing is useful to either the server or client side of things
+  * @param socket_num the file descriptor of the socket to receive from
+  * @param is_tcp indicates whether this is a TCP socket
+  * @param buffer the location to store data, for memory efficiency this should be a stack allocated array, this should not include the the first byte sent down the pipe to specify the cbor encoded data size
+  * @param buffer_len the max size of the buffer, this should not include the first byte sent down the pipe which defines the length of the CBOR encoded data
+  * @warning do not
+*/
+bool handle_receive(thread_logger *thl, int socket_number, bool is_tcp, unsigned char *buffer, size_t buffer_len, size_t *bytes_written) {
+
+    size_t rc = 0;
+    bool failed = false;
+    char first_byte[1];
+    memset(first_byte, 0, 1);
+
+    if (is_tcp == true) {
+        rc = recv(socket_number, first_byte, 1, 0);
+    } else {
+        rc = recvfrom(socket_number, first_byte, 1, 0, NULL, NULL);
+    }
+
+    failed = recv_or_send_failed(thl, rc);
+    if (failed == true) {
+        return false;
+    }
+
+    /*!
+     * @brief first attempt to derive the size by using atoi
+     * @brief occasionally this will fail and give 0, even though
+     * @brief there is a non-zero value there
+     * @brief in cases where it fails casting to int returns the correct value
+     * @warning in certain cases casting to int returns the wrong value too
+     */
+    int message_size = atoi(first_byte);
+    if (message_size == 0) {
+        message_size = (int)first_byte[0];
+        if (message_size == 0) {
+            return false;
+        }
+    }
+
+    /*!
+      * @brief abort further handling if message size is less than or equal to 0
+      * @brief greater than the max RPC message size OR greater than the buffer
+    */
+    if (message_size <= 0 || message_size >= MAX_RPC_MSG_SIZE_KB || message_size > (int)buffer_len) {
+        if (thl != NULL) {
+            thl->log(thl, 0, "invalid message size", LOG_LEVELS_DEBUG);
+        }
+        return false;
+    }
+
+    if (is_tcp == true) {
+        rc = recv(socket_number, buffer, buffer_len, 0);
+    } else {
+        rc = recvfrom(socket_number, buffer, buffer_len, 0, NULL, NULL);
+    }
+
+    failed = recv_or_send_failed(thl, rc);
+    if (failed == true) {
+        return false;
+    }
+
+    *bytes_written = (size_t)message_size;
+
+    return true;
 }
