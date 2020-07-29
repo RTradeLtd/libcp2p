@@ -143,6 +143,7 @@ void test_server_callback(int argc, char *argv[]) {
     free(client->peer_address);
     free(client);
     free_message_t(msg);
+    free_cbor_encoded_data(cbdata);
 }
 
 void start_server_callback(int argc, char *argv[]) {
