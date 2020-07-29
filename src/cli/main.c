@@ -96,11 +96,6 @@ void test_server_callback(int argc, char *argv[]) {
             return;
         }
 
-        int rc = get_encoded_send_buffer(cbdata, send_buffer, cbor_len);
-        if (rc == -1) {
-            return;
-        }
-
         rc = send(client->socket_number, send_buffer, sizeof(send_buffer), 0);
         if (rc == -1) {
             printf("request failed: %s\n", strerror(errno));
