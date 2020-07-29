@@ -35,17 +35,16 @@ void free_cbor_encoded_data(cbor_encoded_data_t *in);
 cbor_encoded_data_t *new_cbor_encoded_data(uint8_t *data, size_t len);
 
 /*!
- * @brief fills `buffer` with the data to send
- * @details if the total size needed is greater than max_len the call fails
- * @return Success: 0
- * @return Failure: -1
- */
-int get_encoded_send_buffer(cbor_encoded_data_t *msg, unsigned char *buffer,
-                            size_t max_len);
+  * @brief fills `buffer` with the data to send
+  * @details if the total size needed is greater than max_len the call fails
+  * @return Success: 0
+  * @return Failure: -1
+*/
+int get_encoded_send_buffer(cbor_encoded_data_t *msg, unsigned char *buffer, size_t max_len);
 
 /*!
- * @brief gets the size of a buffer needed for sending cbor_encoded_data_t
- * @return Success: size of buffer
- * @return Failure: -1
- */
+  * @brief gets the size of a buffer needed for sending cbor_encoded_data_t
+  * @return Success: size of buffer
+  * @return Failure: -1
+*/
 size_t get_encoded_send_buffer_len(cbor_encoded_data_t *msg);
