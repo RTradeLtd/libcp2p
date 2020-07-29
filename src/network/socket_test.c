@@ -136,7 +136,7 @@ void test_new_socket_server(void **state) {
     socket_client_t *client = new_socket_client(thl, endpoint);
     assert(client != NULL);
 
-    socket_client_sendto(client, client->peer_address, "hello world\n");
+    socket_client_sendto(client, client->peer_address, (unsigned char *)"hello world\n", strlen("hello world \n"));
     sleep(2);
     freeaddrinfo(client->peer_address);
     close(client->socket_number);
