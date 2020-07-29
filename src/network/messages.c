@@ -177,7 +177,7 @@ message_t *cbor_decode_message_t(cbor_encoded_data_t *input) {
     return msg;
 }
 
-/*!
+/*! 
  * @brief frees up resources allocated for an instance of message_t
  * @param msg an instance of message_t
  */
@@ -199,4 +199,31 @@ size_t size_of_message_t(message_t *msg) {
     size += msg->len;
 
     return size;
+}
+
+/*!
+  * @brief fills `buffer` with the data to send
+  * @details if the total size needed is greater than max_len the call fails
+  * @return Success: 0
+  * @return Failure: -1
+*/
+int get_message_t_send_buffer(message_t *msg, unsigned char *buffer, size_t max_len) {
+    if (msg->len + 1 > max_len || max_len == 0) {
+        return -1;
+    }
+    buffer[0] = msg->len;
+    memcpy(buffer + 1, msg->data, max_len - 1); // max_len -1  because 1 byte for the size
+    return 0;
+}
+/*!
+  * @brief gets the size of a buffer needed for sending message_t
+  * @return Success: size of buffer
+  * @return Failure: -1
+*/
+size_t get_message_t_send_buffer_len(message_t *msg) {
+    /*!
+      * @todo sizeof(size_t) is 8 bytes, maybe we dont need this?
+      * @todo in theory we only need 1 byte to store the value of size_t
+    */
+    return msg->len + 1;
 }
