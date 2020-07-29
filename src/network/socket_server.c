@@ -532,6 +532,7 @@ void handle_inbound_rpc(void *data) {
         }
         message_t *msg = cbor_decode_message_t(cbdata);
         if (msg == NULL) {
+            free_cbor_encoded_data(cbdata);
             goto RETURN;
         }
 
