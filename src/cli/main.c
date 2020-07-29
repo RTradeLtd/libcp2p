@@ -1,8 +1,8 @@
 #include "cli/command_line.h"
-#include "multiaddr/multiaddr.h"
-#include "network/socket_server.h"
-#include "network/messages.h"
 #include "encoding/cbor.h"
+#include "multiaddr/multiaddr.h"
+#include "network/messages.h"
+#include "network/socket_server.h"
 #include "thirdparty/argtable3/argtable3.h"
 #include "utils/colors.h"
 #include "utils/logger.h"
@@ -56,10 +56,9 @@ void test_server_callback(int argc, char *argv[]) {
     message_t *msg = calloc(1, sizeof(message_t));
     if (msg == NULL) {
         return;
-    }    
+    }
     printf("size of message: %lu\n", size_of_message_t(msg));
-    msg->data = realloc(msg->data, 6);
-    //msg->data = calloc(sizeof(unsigned char), 5);
+    msg->data = calloc(1, 6);
     msg->data[0] = 'h';
     msg->data[1] = 'e';
     msg->data[2] = 'l';
@@ -69,7 +68,6 @@ void test_server_callback(int argc, char *argv[]) {
     msg->len = 5;
     msg->type = MESSAGE_START_ECDH;
     printf("size of message: %lu\n", size_of_message_t(msg));
-
 
     if (tcp_addr != NULL) {
         client = new_socket_client(logger, tcp_addr);
