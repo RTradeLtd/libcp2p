@@ -101,11 +101,12 @@ void logf_func(thread_logger *thl, int file_descriptor, LOG_LEVELS level,
                char *message, ...) {
     va_list args;
     va_start(args, message);
-    char *msg = malloc(sizeof(args) + strlen(message) + 1);
+    char *msg = calloc(1, sizeof(args) + strlen(message) + 1);
     if (msg == NULL) {
         return;
     }
-    int response = vsprintf(msg, message, args);
+    int response = vsnprintf(msg, sizeof(args) + strlen(message) + 1, message, args);
+    // int response = vsprintf(msg, message, args);
     if (response < 0) {
         free(msg);
         printf("failed to vsprintf\n");
