@@ -57,7 +57,7 @@ void test_server_callback(int argc, char *argv[]) {
     if (msg == NULL) {
         return;
     }
-    printf("size of message: %lu\n", size_of_message_t(msg));
+
     msg->data = calloc(1, 6);
     msg->data[0] = 'h';
     msg->data[1] = 'e';
@@ -67,16 +67,24 @@ void test_server_callback(int argc, char *argv[]) {
     msg->data[5] = '\0';
     msg->len = 6;
     msg->type = MESSAGE_START_ECDH;
-    printf("size of message: %lu\n", size_of_message_t(msg));
 
     cbor_encoded_data_t *cbdata = cbor_encode_message_t(msg);
     if (cbdata == NULL) {
         return;
     }
 
+    size_t cbor_len = get_encoded_send_buffer_len(cbdata);
+
+    unsigned char send_buffer[cbor_len];
+    memset(send_buffer, 0, sizeof(send_buffer));
+
+    int rc = get_encoded_send_buffer(cbdata, send_buffer, cbor_len);
+    if (rc == -1) {
+        return;
+    }
+
     if (tcp_addr != NULL) {
         client = new_socket_client(logger, tcp_addr);
-        sleep(1);
         if (client == NULL) {
             if (tcp_addr != NULL) {
                 multi_address_free(tcp_addr);
@@ -88,11 +96,6 @@ void test_server_callback(int argc, char *argv[]) {
             return;
         }
 
-        size_t cbor_len = get_encoded_send_buffer_len(cbdata);
-
-        unsigned char send_buffer[cbor_len];
-        memset(send_buffer, 0, sizeof(send_buffer));
-        
         int rc = get_encoded_send_buffer(cbdata, send_buffer, cbor_len);
         if (rc == -1) {
             return;
@@ -101,12 +104,18 @@ void test_server_callback(int argc, char *argv[]) {
         rc = send(client->socket_number, send_buffer, sizeof(send_buffer), 0);
         if (rc == -1) {
             printf("request failed: %s\n", strerror(errno));
+            return;
+        }
+
+        rc = send(client->socket_number, (unsigned char *)"6hello", 6, 0);
+        if (rc == -1) {
+            printf("request failed: %s\n", strerror(errno));
+            return;
         }
     }
 
     if (udp_addr != NULL) {
         client = new_socket_client(logger, udp_addr);
-        sleep(1);
         if (client == NULL) {
             if (tcp_addr != NULL) {
                 multi_address_free(tcp_addr);
@@ -117,7 +126,6 @@ void test_server_callback(int argc, char *argv[]) {
             clear_thread_logger(logger);
             return;
         }
-        printf("sending udp\n");
         /* UDP based sending */
         int rc = socket_client_sendto(client, client->peer_address, "6");
         if (rc == 0) {
@@ -128,15 +136,12 @@ void test_server_callback(int argc, char *argv[]) {
             printf("request failed: %s\n", strerror(errno));
         }
     }
-
-    // no longer needed
     if (tcp_addr != NULL) {
         multi_address_free(tcp_addr);
     }
     if (udp_addr != NULL) {
         multi_address_free(udp_addr);
     }
-
     printf("closing client\n");
     clear_thread_logger(logger);
     close(client->socket_number);
