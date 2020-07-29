@@ -170,6 +170,10 @@ socket_server_t *new_socket_server(thread_logger *thl,
                 max_socket_num = tcp_socket_num;
             }
 
+            if (config->recv_timeout_sec > 0) {
+                set_socket_recv_timeout(tcp_socket_num, config->recv_timeout_sec);
+            }
+
             freeaddrinfo(tcp_bind_address);
         }
 
@@ -206,6 +210,10 @@ socket_server_t *new_socket_server(thread_logger *thl,
 
             if (udp_socket_num > max_socket_num) {
                 max_socket_num = udp_socket_num;
+            }
+
+            if (config->recv_timeout_sec > 0) {
+                set_socket_recv_timeout(udp_socket_num, config->recv_timeout_sec);
             }
 
             freeaddrinfo(udp_bind_address);
