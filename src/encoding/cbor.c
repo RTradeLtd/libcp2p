@@ -30,7 +30,7 @@ cbor_encoded_data_t *new_cbor_encoded_data(uint8_t *data, size_t len) {
     if (out == NULL) {
         return NULL;
     }
-    out->data = realloc(out->data, len);
+    out->data = calloc(1, len);
     if (out->data == NULL) {
         free(out);
         return NULL;
