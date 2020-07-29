@@ -490,10 +490,20 @@ void handle_inbound_rpc(void *data) {
             goto RETURN;
         }
 
-        // int message_size = atoi(first_byte);
-        int message_size = (int)first_byte[0];
-
-        printf("message size: %i\n", message_size);
+        /*!
+         * @brief first attempt to derive the size by using atoi
+         * @brief occasionally this will fail and give 0, even though
+         * @brief there is a non-zero value there
+         * @brief in cases where it fails casting to int returns the correct value
+         * @warning in certain cases casting to int returns the wrong value too
+         */
+        int message_size = atoi(first_byte);
+        if (message_size == 0) {
+            message_size = (int)first_byte[0];
+            if (message_size == 0) {
+                goto RETURN;
+            }
+        }
 
         if (message_size <= 0 || message_size > 8192) {
             hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_DEBUG,
@@ -536,10 +546,7 @@ void handle_inbound_rpc(void *data) {
             goto RETURN;
         }
 
-        printf("got cbor encoded message\n");
-        printf("message data: %s\n", msg->data);
-        printf("message len: %lu\n", msg->len);
-        printf("message type: %i\n", msg->type);
+        printf("cbor decoded message data: %s\n", msg->data);
 
         free_message_t(msg);
         free_cbor_encoded_data(cbdata);

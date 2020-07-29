@@ -41,28 +41,26 @@ cbor_encoded_data_t *new_cbor_encoded_data(uint8_t *data, size_t len) {
 }
 
 /*!
-  * @brief fills `buffer` with the data to send
-  * @details if the total size needed is greater than max_len the call fails
-  * @return Success: 0
-  * @return Failure: -1
-*/
-int get_encoded_send_buffer(cbor_encoded_data_t *msg, unsigned char *buffer, size_t max_len) {
+ * @brief fills `buffer` with the data to send
+ * @details if the total size needed is greater than max_len the call fails
+ * @return Success: 0
+ * @return Failure: -1
+ */
+int get_encoded_send_buffer(cbor_encoded_data_t *msg, unsigned char *buffer,
+                            size_t max_len) {
     if (msg->len + 1 > max_len || max_len == 0) {
         return -1;
     }
-    buffer[0] = msg->len;
-    memcpy(buffer + 1, msg->data, max_len - 1); // max_len -1  because 1 byte for the size
+    buffer[0] = (unsigned char)msg->len;
+    memcpy(buffer + 1, msg->data,
+           max_len - 1); // max_len -1  because 1 byte for the size
     return 0;
 }
 /*!
-  * @brief gets the size of a buffer needed for sending cbor_encoded_data_t
-  * @return Success: size of buffer
-  * @return Failure: -1
-*/
+ * @brief gets the size of a buffer needed for sending cbor_encoded_data_t
+ * @return Success: size of buffer
+ * @return Failure: -1
+ */
 size_t get_encoded_send_buffer_len(cbor_encoded_data_t *msg) {
-    /*!
-      * @todo sizeof(size_t) is 8 bytes, maybe we dont need this?
-      * @todo in theory we only need 1 byte to store the value of size_t
-    */
     return msg->len + 1;
 }

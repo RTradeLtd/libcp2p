@@ -177,7 +177,7 @@ message_t *cbor_decode_message_t(cbor_encoded_data_t *input) {
     return msg;
 }
 
-/*! 
+/*!
  * @brief frees up resources allocated for an instance of message_t
  * @param msg an instance of message_t
  */
@@ -200,4 +200,3 @@ size_t size_of_message_t(message_t *msg) {
 
     return size;
 }
-
