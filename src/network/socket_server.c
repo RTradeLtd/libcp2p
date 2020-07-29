@@ -421,7 +421,7 @@ client_conn_t *accept_client_conn(socket_server_t *srv, int socket_num) {
     if (srv->thl->debug == true) {
         char *addr_inf = get_name_info((sock_addr *)&addr_temp);
         srv->thl->logf(srv->thl, 0, LOG_LEVELS_DEBUG, "accepted new connection: %s",
-                    addr_inf);
+                       addr_inf);
         free(addr_inf);
     }
     return connection;
@@ -516,8 +516,8 @@ void handle_inbound_rpc(void *data) {
         }
 
         if (message_size <= 0 || message_size > 8192) {
-            hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_DEBUG,
-                                  "invalid message size");
+            hdata->srv->thl->log(hdata->srv->thl, 0, "invalid message size",
+                                 LOG_LEVELS_DEBUG);
             // invalid first byte skip
             goto RETURN;
         }
@@ -540,8 +540,11 @@ void handle_inbound_rpc(void *data) {
 
         if (message_size == 6) {
             if (memcmp(message_data, "hello", message_size) == 0) {
-                printf("debug handler\n");
-                printf("size: %i, data: %s\n", message_size, message_data);
+                hdata->srv->thl->log(hdata->srv->thl, 0, "protocol debug",
+                                     LOG_LEVELS_DEBUG);
+                hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_DEBUG,
+                                      "size: %i, data: %s", message_size,
+                                      message_data);
                 goto RETURN;
             }
         }
@@ -556,7 +559,25 @@ void handle_inbound_rpc(void *data) {
             goto RETURN;
         }
 
-        printf("cbor decoded message data: %s\n", msg->data);
+        switch (msg->type) {
+            case MESSAGE_START_ECDH:
+                printf("received ECDH start request\n");
+                break;
+            case MESSAGE_BEGIN_ECDH:
+                break;
+            case MESSAGE_WANT_PEER_ID:
+                break;
+            case MESSAGE_HAVE_PEER_ID:
+                break;
+            case MESSAGE_WANT_PUB_KEY:
+                break;
+            case MESSAGE_HAVE_PUB_KEY:
+                break;
+            case MESSAGE_ARBITRARY:
+                break;
+            default:
+                break;
+        }
 
         free_message_t(msg);
         free_cbor_encoded_data(cbdata);
