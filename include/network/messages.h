@@ -52,9 +52,10 @@ typedef enum MESSAGE_TYPES {
      */
     MESSAGE_BEGIN_ECDH = 5,
     /*!
-      * @brief generally the first message sent in an RPC exchange, and is used to identify peers to each other
-      * @todo add ability to identify the protocols we speak
-    */
+     * @brief generally the first message sent in an RPC exchange, and is used to
+     * identify peers to each other
+     * @todo add ability to identify the protocols we speak
+     */
     MESSAGE_HELLO = 6,
     /*!
      * @brief an arbitrary message type for implementation defined behavior
@@ -76,11 +77,12 @@ typedef struct message {
 } message_t;
 
 /*!
-  * @struct message_hello
-  * @typedef message_hello_t
-  * @brief used to specify the peerid and public key for a MESSAGE_HELLO RPC call
-  * @details when sending a MESSAGE_HELLO RPC to a peer, the message data must be message_hello_t in CBOR encoding
-*/
+ * @struct message_hello
+ * @typedef message_hello_t
+ * @brief used to specify the peerid and public key for a MESSAGE_HELLO RPC call
+ * @details when sending a MESSAGE_HELLO RPC to a peer, the message data must be
+ * message_hello_t in CBOR encoding
+ */
 typedef struct message_hello {
     /*! @brief the size of peer_id */
     size_t peer_id_len;
