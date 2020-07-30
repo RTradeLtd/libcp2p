@@ -212,11 +212,11 @@ size_t size_of_message_t(message_t *msg) {
   * @details and the manner of processing is useful to either the server or client side of things
   * @param socket_num the file descriptor of the socket to receive from
   * @param is_tcp indicates whether this is a TCP socket
-  * @param buffer the location to store data, for memory efficiency this should be a stack allocated array, this should not include the the first byte sent down the pipe to specify the cbor encoded data size
-  * @param buffer_len the max size of the buffer, this should not include the first byte sent down the pipe which defines the length of the CBOR encoded data
-  * @warning do not
+  * @param max_buffer_len specifies the maximum buffer length we are willing to allocate memory for
+  * @param bytes_written we will set to the size of data we allocated
+  * @return Success: pointer to an allocated chu
 */
-bool handle_receive(thread_logger *thl, int socket_number, bool is_tcp, unsigned char *buffer, size_t buffer_len, size_t *bytes_written) {
+unsigned char *handle_receive(thread_logger *thl, int socket_number, bool is_tcp, size_t max_buffer_len, size_t *bytes_written) {
 
     size_t rc = 0;
     bool failed = false;
@@ -231,7 +231,7 @@ bool handle_receive(thread_logger *thl, int socket_number, bool is_tcp, unsigned
 
     failed = recv_or_send_failed(thl, rc);
     if (failed == true) {
-        return false;
+        return NULL;
     }
 
     /*!
@@ -245,7 +245,7 @@ bool handle_receive(thread_logger *thl, int socket_number, bool is_tcp, unsigned
     if (message_size == 0) {
         message_size = (int)first_byte[0];
         if (message_size == 0) {
-            return false;
+            return NULL;
         }
     }
 
@@ -253,25 +253,35 @@ bool handle_receive(thread_logger *thl, int socket_number, bool is_tcp, unsigned
       * @brief abort further handling if message size is less than or equal to 0
       * @brief greater than the max RPC message size OR greater than the buffer
     */
-    if (message_size <= 0 || message_size >= MAX_RPC_MSG_SIZE_KB || message_size > (int)buffer_len) {
+    if (message_size <= 0 || message_size >= MAX_RPC_MSG_SIZE_KB || message_size > (int)max_buffer_len) {
         if (thl != NULL) {
             thl->log(thl, 0, "invalid message size", LOG_LEVELS_DEBUG);
         }
-        return false;
+        return NULL;
     }
 
+    unsigned char buffer[max_buffer_len];
+    memset(buffer, 0, max_buffer_len);
+
     if (is_tcp == true) {
-        rc = recv(socket_number, buffer, buffer_len, 0);
+        rc = recv(socket_number, buffer, max_buffer_len, 0);
     } else {
-        rc = recvfrom(socket_number, buffer, buffer_len, 0, NULL, NULL);
+        rc = recvfrom(socket_number, buffer, max_buffer_len, 0, NULL, NULL);
     }
 
     failed = recv_or_send_failed(thl, rc);
     if (failed == true) {
-        return false;
+        return NULL;
     }
 
     *bytes_written = (size_t)message_size;
 
-    return true;
+    unsigned char *ret_buffer = calloc(1, message_size);
+    if (ret_buffer == NULL) {
+        return NULL;
+    }
+
+    memcpy(ret_buffer, buffer, message_size);
+
+    return ret_buffer;
 }

@@ -187,3 +187,25 @@ addr_info default_hints() {
     hints.ai_flags = AI_PASSIVE;
     return hints;
 }
+
+/*!
+ * @brief used to check if a receive or send with a socket failed
+ */
+bool recv_or_send_failed(thread_logger *thl, int rc) {
+    switch (rc) {
+        case 0:
+            if (thl != NULL) {
+                thl->log(thl, 0, "client disconnected", LOG_LEVELS_DEBUG);
+            }
+            return true;
+        case -1:
+            if (thl != NULL) {
+                thl->logf(thl, 0, LOG_LEVELS_DEBUG,
+                           "error encountered during read %s", strerror(errno));
+            }
+            return true;
+        default:
+            // connection was successful and we read some data
+            return false;
+    }
+}

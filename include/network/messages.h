@@ -128,8 +128,8 @@ size_t size_of_message_t(message_t *msg);
   * @details and the manner of processing is useful to either the server or client side of things
   * @param socket_num the file descriptor of the socket to receive from
   * @param is_tcp indicates whether this is a TCP socket
-  * @param buffer the location to store data, for memory efficiency this should be a stack allocated array, this should not include the the first byte sent down the pipe to specify the cbor encoded data size
-  * @param buffer_len the max size of the buffer, this should not include the first byte sent down the pipe which defines the length of the CBOR encoded data
-  * @warning do not
+  * @param max_buffer_len specifies the maximum buffer length we are willing to allocate memory for
+  * @param bytes_written we will set to the size of data we allocated
+  * @return Success: pointer to an allocated chu
 */
-bool handle_receive(thread_logger *thl, int socket_number, bool is_tcp, unsigned char *buffer, size_t buffer_len, size_t *bytes_written);
+unsigned char *handle_receive(thread_logger *thl, int socket_number, bool is_tcp, size_t max_buffer_len, size_t *bytes_written);

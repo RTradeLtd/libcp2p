@@ -45,11 +45,6 @@ pthread_mutex_t shutdown_mutex;
 bool do_shutdown = false;
 
 /*!
- * @brief used to check if a receive or send with a socket failed
- */
-bool recv_or_send_failed(socket_server_t *srv, int rc);
-
-/*!
  * @brief used to create a TCP/UDP socket server ready to accept connections
  * @param thl an instance of a thread_logger
  * @param config the configuration settings used for the tcp/udp server
@@ -474,94 +469,61 @@ void handle_inbound_rpc(void *data) {
     if (hdata == NULL) {
         return;
     }
-    bool failed = false;
-    int rc = 0;
-    // read the first byte to determine the size of the buffer
-    char first_byte[1];
 
     for (;;) {
-
-        memset(first_byte, 0, 1);
 
         // check to see if we shoudl exit
         if (do_shutdown == true) {
             goto RETURN;
         }
 
-        if (hdata->is_tcp == true) {
-            // rc = read(hdata->conn->socket_number, first_byte, 1);
-            rc = recv(hdata->conn->socket_number, first_byte, 1, 0);
-        } else {
-            rc = recvfrom(hdata->conn->socket_number, first_byte, 1, 0, NULL, NULL);
-        }
+        size_t bytes_written = 0;
+        unsigned char *message_data = handle_receive(
+            hdata->srv->thl,
+            hdata->conn->socket_number,
+            hdata->is_tcp,
+            MAX_RPC_MSG_SIZE_KB,
+            &bytes_written
+        );
 
-        failed = recv_or_send_failed(hdata->srv, rc);
-        if (failed == true) {
+        if (message_data == NULL || bytes_written == 0) {
             goto RETURN;
         }
 
-        /*!
-         * @brief first attempt to derive the size by using atoi
-         * @brief occasionally this will fail and give 0, even though
-         * @brief there is a non-zero value there
-         * @brief in cases where it fails casting to int returns the correct value
-         * @warning in certain cases casting to int returns the wrong value too
-         */
-        int message_size = atoi(first_byte);
-        if (message_size == 0) {
-            message_size = (int)first_byte[0];
-            if (message_size == 0) {
-                goto RETURN;
-            }
-        }
-
-        if (message_size <= 0 || message_size > 8192) {
-            hdata->srv->thl->log(hdata->srv->thl, 0, "invalid message size",
-                                 LOG_LEVELS_DEBUG);
-            // invalid first byte skip
-            goto RETURN;
-        }
-
-        // declare an array on stack to hold the rest of the message data
-        unsigned char message_data[message_size];
-        memset(message_data, 0, message_size);
-
-        if (hdata->is_tcp == true) {
-            rc = read(hdata->conn->socket_number, message_data, message_size);
-        } else {
-            rc = recvfrom(hdata->conn->socket_number, message_data, message_size, 0,
-                          NULL, NULL);
-        }
-
-        failed = recv_or_send_failed(hdata->srv, rc);
-        if (failed == true) {
-            goto RETURN;
-        }
-
-        if (message_size == 6) {
-            if (memcmp(message_data, "hello", message_size) == 0) {
+        if (bytes_written == 6) {
+            if (memcmp(message_data, "hello", bytes_written) == 0) {
                 hdata->srv->thl->log(hdata->srv->thl, 0, "protocol debug",
                                      LOG_LEVELS_DEBUG);
                 hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_DEBUG,
-                                      "size: %i, data: %s", message_size,
+                                      "size: %lu, data: %s", bytes_written,
                                       message_data);
+                free(message_data);
                 goto RETURN;
             }
         }
         cbor_encoded_data_t *cbdata =
-            new_cbor_encoded_data(message_data, (size_t)message_size);
+            new_cbor_encoded_data(message_data, bytes_written);
         if (cbdata == NULL) {
+            free(message_data);
             goto RETURN;
         }
         message_t *msg = cbor_decode_message_t(cbdata);
         if (msg == NULL) {
+            free(message_data);
             free_cbor_encoded_data(cbdata);
             goto RETURN;
         }
 
+        bool success = false;
+
         switch (msg->type) {
             case MESSAGE_START_ECDH:
-                printf("received ECDH start request\n");
+                success = negotiate_secure_connection(hdata);
+                if (success == false) {
+                    printf("failed to negotiate secure connection\n");
+                } else {
+                    printf("successfully negotiated secure connection\n");
+                }
                 break;
             case MESSAGE_BEGIN_ECDH:
                 break;
@@ -578,7 +540,8 @@ void handle_inbound_rpc(void *data) {
             default:
                 break;
         }
-
+    
+        free(message_data);
         free_message_t(msg);
         free_cbor_encoded_data(cbdata);
     }
@@ -598,24 +561,6 @@ RETURN:
 }
 
 /*!
- * @brief used to check if a receive or send with a socket failed
- */
-bool recv_or_send_failed(socket_server_t *srv, int rc) {
-    switch (rc) {
-        case 0:
-            srv->thl->log(srv->thl, 0, "client disconnected", LOG_LEVELS_DEBUG);
-            return true;
-        case -1:
-            srv->thl->logf(srv->thl, 0, LOG_LEVELS_DEBUG,
-                           "error encountered during read %s", strerror(errno));
-            return true;
-        default:
-            // connection was successful and we read some data
-            return false;
-    }
-}
-
-/*!
  * @brief used to specify which syscall signals should trigger shutdown process
  */
 void setup_signal_shutdown(int signals[], int num_signals) {
@@ -623,3 +568,66 @@ void setup_signal_shutdown(int signals[], int num_signals) {
         signal(signals[i], signal_shutdown);
     }
 }
+
+/*!
+  * @brief used to negotiate a secure connection with the current connection
+*/
+bool negotiate_secure_connection(conn_handle_data_t *data) {
+    /*!
+      * @warning UDP secure connections currently disabled
+    */
+   if (data->is_tcp == false) {
+       return false;
+   }
+   message_t *msg = calloc(1, sizeof(message_t));
+   if (msg == NULL) {
+       return false;
+   }
+   
+   msg->data = calloc(1, 2);
+   if (msg->data == NULL) {
+       free(msg);
+       return false;
+   }
+
+   msg->type = MESSAGE_BEGIN_ECDH;
+   msg->data[0] = 'o';
+   msg->data[1] = 'k';
+   msg->len = 2;
+   
+   cbor_encoded_data_t *cbdata = cbor_encode_message_t(msg);
+   if (cbdata == NULL) {
+       free(msg->data);
+       free(msg);
+       return false;
+   }
+
+    size_t cbor_len = get_encoded_send_buffer_len(cbdata);
+    unsigned char send_buffer[cbor_len];
+    memset(send_buffer, 0, sizeof(send_buffer));
+
+    int rc = get_encoded_send_buffer(cbdata, send_buffer, cbor_len);
+    
+    // free up memory before continuing call processing
+    free_cbor_encoded_data(cbdata);
+
+    if (rc == -1) {
+        free(msg->data);
+        free(msg);
+        return false;
+    }
+
+    rc = send(data->conn->socket_number, send_buffer, sizeof(send_buffer), 0);
+    
+    // free up memory allocated for the message_t instance
+    free(msg->data);
+    free(msg);
+    
+
+    // proceed with call handling
+    if (rc == 0 || rc == -1) {
+        return false;
+    }
+
+    return true;
+} 
