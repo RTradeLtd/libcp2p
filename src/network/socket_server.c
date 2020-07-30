@@ -62,11 +62,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
                                    socket_server_config_t *config,
                                    SOCKET_OPTS sock_opts[], int num_opts) {
 
-    addr_info tcp_hints;
-    addr_info udp_hints;
-
     int max_socket_num = 0;
-    int rc = 0;
 
     fd_set grouped_socket_set;
     fd_set tcp_socket_set;
@@ -77,32 +73,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
     FD_ZERO(&udp_socket_set);
     FD_ZERO(&grouped_socket_set);
 
-    char ip[1024];
-    char cport[7];
-
     for (int i = 0; i < config->num_addrs; i++) {
-
-        // zero ip and cport, overwriting previous data
-        memset(ip, 0, 1024);
-        memset(cport, 0, 7);
-
-        // get the ip address associated with the multiaddr
-        rc = multi_address_get_ip_address(config->addrs[i], ip);
-        if (rc != 1) {
-            thl->log(thl, 0, "failed to get ip address from multiaddr",
-                     LOG_LEVELS_ERROR);
-            goto EXIT;
-        }
-
-        // get the port for the address
-        int port = multi_address_get_ip_port(config->addrs[i]);
-        if (port == -1) {
-            thl->log(thl, 0, "failed to get ip port from multiaddr",
-                     LOG_LEVELS_ERROR);
-            goto EXIT;
-        }
-        // store port number as a char *
-        sprintf(cport, "%i", port);
 
         bool is_tcp = false;
         bool is_udp = false;
@@ -124,19 +95,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
         // handle a tcp multi_address
         if (is_tcp) {
 
-            addr_info *tcp_bind_address = NULL;
-
-            memset(&tcp_hints, 0, sizeof(tcp_hints));
-            tcp_hints.ai_family = AF_INET;
-            tcp_hints.ai_socktype = SOCK_STREAM;
-            /*! @warning support non wildcard
-             * @todo support non wildcard
-             */
-            tcp_hints.ai_flags = AI_PASSIVE;
-
-            rc = getaddrinfo(ip, cport, &tcp_hints, &tcp_bind_address);
-            if (rc != 0) {
-                freeaddrinfo(tcp_bind_address);
+            addr_info *tcp_bind_address = multi_addr_to_addr_info(config->addrs[i]);
+            if (tcp_bind_address == NULL) {
                 thl->log(thl, 0, "failed to get tcp addr info", LOG_LEVELS_ERROR);
                 goto EXIT;
             }
@@ -175,19 +135,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
         // handle a udp multi_address
         if (is_udp) {
 
-            addr_info *udp_bind_address = NULL;
-
-            memset(&udp_hints, 0, sizeof(udp_hints));
-            udp_hints.ai_family = AF_INET;
-            udp_hints.ai_socktype = SOCK_DGRAM;
-            /*! @warning support non wildcard
-             * @todo support non wildcard
-             */
-            udp_hints.ai_flags = AI_PASSIVE;
-
-            rc = getaddrinfo(ip, cport, &udp_hints, &udp_bind_address);
-            if (rc != 0) {
-                freeaddrinfo(udp_bind_address);
+            addr_info *udp_bind_address = multi_addr_to_addr_info(config->addrs[i]);
+            if (udp_bind_address == NULL) {
                 thl->log(thl, 0, "failed to get udp addr info", LOG_LEVELS_ERROR);
                 goto EXIT;
             }
