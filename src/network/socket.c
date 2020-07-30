@@ -211,20 +211,21 @@ bool recv_or_send_failed(thread_logger *thl, int rc) {
 }
 
 /*!
-  * @brief returns an addr_info representation of the multiaddress
-  * @details useful for taking a multi address and getting the needed information for using 
-  * @details the address with the sendto function
-  * @param address the multi address to parse
-  * @note does not free up resources associated with address param
-  * @warning only supports TCP and UDP multiaddress(es)
-  * @return Success: pointer to an addr_info instance
-  * @return Failure: NULL pointer
-*/
+ * @brief returns an addr_info representation of the multiaddress
+ * @details useful for taking a multi address and getting the needed information for
+ * using
+ * @details the address with the sendto function
+ * @param address the multi address to parse
+ * @note does not free up resources associated with address param
+ * @warning only supports TCP and UDP multiaddress(es)
+ * @return Success: pointer to an addr_info instance
+ * @return Failure: NULL pointer
+ */
 addr_info *multi_addr_to_addr_info(multi_addr_t *address) {
     bool is_udp = false;
     bool is_tcp = false;
-    
     addr_info hints;
+    memset(&hints, 0, sizeof(addr_info));
 
     if (strstr(address->string, "/tcp/") != NULL) {
         hints.ai_socktype = SOCK_STREAM;
@@ -249,7 +250,7 @@ addr_info *multi_addr_to_addr_info(multi_addr_t *address) {
     if (rc != 1) {
         return NULL;
     }
-    
+
     int port = multi_address_get_ip_port(address);
     if (port == -1) {
         return NULL;
@@ -265,7 +266,7 @@ addr_info *multi_addr_to_addr_info(multi_addr_t *address) {
     hints.ai_flags = AI_PASSIVE;
 
     addr_info *ret_address;
-    
+
     rc = getaddrinfo(ip, cport, &hints, &ret_address);
     if (rc != 0) {
         freeaddrinfo(ret_address);

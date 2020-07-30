@@ -54,7 +54,7 @@ void start_socker_server_wrapper(void *data) {
 void test_new_socket_server(void **state) {
 
     // setup the first server
-    thread_logger *thl1 = new_thread_logger(false);
+    thread_logger *thl1 = new_thread_logger(true);
     socket_server_config_t *config1 = new_socket_server_config(2);
     config1->max_connections = 100;
     config1->num_threads = 6;
@@ -76,7 +76,7 @@ void test_new_socket_server(void **state) {
     thpool_add_work(server1->thpool, start_socker_server_wrapper, server1);
 
     // setup the second server
-    thread_logger *thl2 = new_thread_logger(false);
+    thread_logger *thl2 = new_thread_logger(true);
     socket_server_config_t *config2 = new_socket_server_config(2);
     config2->max_connections = 100;
     config2->num_threads = 6;
@@ -85,7 +85,7 @@ void test_new_socket_server(void **state) {
 
     multi_addr_t *tcp_addr2 = multi_address_new_from_string("/ip4/127.0.0.1/tcp/9092");
     multi_addr_t *udp_addr2 = multi_address_new_from_string("/ip4/127.0.0.1/udp/9093");
-    multi_addr_t *endpoint2 = multi_address_new_from_string("/ip4/127.0.0.1/udp/9092");
+    multi_addr_t *endpoint2 = multi_address_new_from_string("/ip4/127.0.0.1/udp/9093");
     config2->addrs[0] = tcp_addr2;
     config2->addrs[1] = udp_addr2;
     config2->num_addrs = 2;
@@ -95,8 +95,12 @@ void test_new_socket_server(void **state) {
     free_socket_server_config(config2);
     thpool_add_work(server2->thpool, start_socker_server_wrapper, server2);
 
+    sleep(2);
 
-
+    int rc = socket_server_sendto(server1, endpoint2, (unsigned char *)"hello", 5);
+    if (rc != 0) {
+        printf("failed to send from server1 to server2: %s\n", strerror(errno));
+    }
 
 
 

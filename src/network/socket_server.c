@@ -258,11 +258,13 @@ void free_socket_server(socket_server_t *srv) {
     srv->thl->log(srv->thl, 0, "closing sockets", LOG_LEVELS_INFO);
     for (int i = 0; i < srv->max_socket_num; i++) {
         if (FD_ISSET(i, &srv->tcp_socket_set)) {
-            srv->thl->logf(srv->thl, 0, LOG_LEVELS_INFO, "closing tcp socket number %i", i);
+            srv->thl->logf(srv->thl, 0, LOG_LEVELS_INFO,
+                           "closing tcp socket number %i", i);
             close(i);
         }
         if (FD_ISSET(i, &srv->udp_socket_set)) {
-            srv->thl->logf(srv->thl, 0, LOG_LEVELS_INFO, "closing udp socket number %i", i);
+            srv->thl->logf(srv->thl, 0, LOG_LEVELS_INFO,
+                           "closing udp socket number %i", i);
             close(i);
         }
     }
@@ -580,21 +582,27 @@ bool negotiate_secure_connection(conn_handle_data_t *data) {
 #pragma GCC diagnostic ignored "-Wunused-function"
 
 /*!
-  * @brief uses existing server sockets to send data to other socket servers
-  * @details uses existing sockets to send a message to the given multiaddress
-  * @details if the multiaddress is for the UDP protocol and we have no available UDP file descriptors we return an error
-  * @details additionally if the multiaddress is for the TCP protocol and we have no aavailable TCP file descriptors we retun an error
-  * @param srv the server whoses sockets we'll leverage
-  * @param to_address the multiaddress of the host to send data to
-  * @param buffer the actual data to send
-  * @param buffer_len the size of the buffer
-  * @todo support better source file descriptor selection as this simply uses the first available socket
-  * @todo in cases where we only have 1  socket for each protocol (TCP & UDP) this is fine
-  * @todo but in the even of having multiple sockets for each protocol this could become problematic
-  * @return Success: 0
-  * @return Failure: -1
-*/
-int socket_server_sendto(socket_server_t *srv, multi_addr_t *to_address, unsigned char *buffer, size_t buffer_len) {
+ * @brief uses existing server sockets to send data to other socket servers
+ * @details uses existing sockets to send a message to the given multiaddress
+ * @details if the multiaddress is for the UDP protocol and we have no available UDP
+ * file descriptors we return an error
+ * @details additionally if the multiaddress is for the TCP protocol and we have no
+ * aavailable TCP file descriptors we retun an error
+ * @param srv the server whoses sockets we'll leverage
+ * @param to_address the multiaddress of the host to send data to
+ * @param buffer the actual data to send
+ * @param buffer_len the size of the buffer
+ * @todo support better source file descriptor selection as this simply uses the
+ * first available socket
+ * @todo in cases where we only have 1  socket for each protocol (TCP & UDP) this is
+ * fine
+ * @todo but in the even of having multiple sockets for each protocol this could
+ * become problematic
+ * @return Success: 0
+ * @return Failure: -1
+ */
+int socket_server_sendto(socket_server_t *srv, multi_addr_t *to_address,
+                         unsigned char *buffer, size_t buffer_len) {
 
     bool is_udp = false;
     bool is_tcp = false;
@@ -613,43 +621,59 @@ int socket_server_sendto(socket_server_t *srv, multi_addr_t *to_address, unsigne
 
     // iterate over available socket numbers
     for (int i = 0; i < 65536; i++) {
-        
+
         if (is_tcp == true) {
             if (FD_ISSET(i, &srv->tcp_socket_set)) {
+                printf("got tcp socket\n");
                 addr_info *peer_address = multi_addr_to_addr_info(to_address);
                 if (peer_address == NULL) {
+                    printf("failed to get peer_address\n");
                     return -1;
                 }
-                int bytes_sent = sendto(i, buffer, buffer_len, 0, peer_address->ai_addr, peer_address->ai_addrlen);
+                int bytes_sent =
+                    sendto(i, buffer, buffer_len, 0, peer_address->ai_addr,
+                           peer_address->ai_addrlen);
 
                 freeaddrinfo(peer_address);
 
                 if (bytes_sent == -1) {
+                    srv->thl->log(srv->thl, 0, "failed to send message",
+                                  LOG_LEVELS_ERROR);
                     return -1;
                 }
-                return 0; /*! @todo should we log whether or not we failed to send any data? */
+                srv->thl->log(srv->thl, 0, "successfully sent message",
+                              LOG_LEVELS_INFO);
+                return 0; /*! @todo should we log whether or not we failed to send
+                             any data? */
             }
         }
 
         if (is_udp == true) {
             if (FD_ISSET(i, &srv->udp_socket_set)) {
+                printf("got udp socket\n");
                 addr_info *peer_address = multi_addr_to_addr_info(to_address);
                 if (peer_address == NULL) {
+                    printf("failed to get peer_address\n");
                     return -1;
                 }
-                int bytes_sent = sendto(i, buffer, buffer_len, 0, peer_address->ai_addr, peer_address->ai_addrlen);
+                int bytes_sent =
+                    sendto(i, buffer, buffer_len, 0, peer_address->ai_addr,
+                           peer_address->ai_addrlen);
 
                 freeaddrinfo(peer_address);
 
                 if (bytes_sent == -1) {
+                    srv->thl->log(srv->thl, 0, "failed to send message",
+                                  LOG_LEVELS_ERROR);
                     return -1;
                 }
-                return 0; /*! @todo should we log whether or not we failed to send any data? */
+                srv->thl->log(srv->thl, 0, "successfully sent message",
+                              LOG_LEVELS_INFO);
+                return 0; /*! @todo should we log whether or not we failed to send
+                             any data? */
             }
         }
-    
     }
 
     return -1;
-
 }
