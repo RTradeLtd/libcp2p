@@ -137,6 +137,9 @@ void test_server_callback(int argc, char *argv[]) {
             printf("request failed: %s\n", strerror(errno));
             return;
         }
+
+        free_message_t(recv_msg);
+        free(recv_buffer);
     }
 
     if (udp_addr != NULL) {
