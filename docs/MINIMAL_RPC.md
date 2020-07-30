@@ -27,3 +27,31 @@ Messages are encoded on the wire using CBOR encoding. When sending a message the
 | size of remainder | actual data |
 
 ```
+
+Note that the first byte **isn't** CBOR encoded data, while the remainder of the message is CBOR encoded. We do this for simplicity sakes, making it require slightly less work to process the message, as if we first the first byte encoded into CBOR, it would require slightly more work involved in processing.
+
+## Fields
+
+Every message contains three fields before being encoded into CBOR
+
+1) `type` which is a MESSAGE_TYPES_T enum
+2) `len` which is the size of `data`
+3) `data` which is the actual message data
+
+All fields must contain data. If you really do not have actual message data to send, simply set `data` to a null terminator (`\0`) and `len` to 1.
+
+## Sending And Receiving
+
+To simplify the process of sending and receiving messages `network/messages.h` contains two convenience functions:
+
+* 1) `handle_receive`
+  * abstracts the details of receiving a message
+  * allocates memory internally for the returned struct
+* 2) `handle_send`
+  * abstracts the details of sending a message
+
+The usage of these two functions removes the need for all message preprocessing. Note however when sending messages, you'll need to provide the `message_t` struct, but `handle_send` will take care of CBOR encoding the data, and properly sending it on the wire.
+
+## Limitations
+
+At the moment individual RPC messages can't be larger than 8192 bytes (8KiB), although this may be removed in the future.
