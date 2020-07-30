@@ -52,6 +52,11 @@ typedef enum MESSAGE_TYPES {
      */
     MESSAGE_BEGIN_ECDH = 5,
     /*!
+      * @brief generally the first message sent in an RPC exchange, and is used to identify peers to each other
+      * @todo add ability to identify the protocols we speak
+    */
+    MESSAGE_HELLO = 6,
+    /*!
      * @brief an arbitrary message type for implementation defined behavior
      */
     MESSAGE_ARBITRARY = 99
@@ -71,20 +76,21 @@ typedef struct message {
 } message_t;
 
 /*!
- * @struct message_send_opts
- * @typedef message_send_opts_t
- * @brief defines options used for sending messages to peers
- */
-typedef struct message_send_opts {
-    /*!
-     * @brief the source file descriptor we are sending from
-     */
-    int src_fd;
-    /*!
-     * @brief the destination file descriptor we are sending too
-     */
-    int dst_fd;
-} message_send_opts_t;
+  * @struct message_hello
+  * @typedef message_hello_t
+  * @brief used to specify the peerid and public key for a MESSAGE_HELLO RPC call
+  * @details when sending a MESSAGE_HELLO RPC to a peer, the message data must be message_hello_t in CBOR encoding
+*/
+typedef struct message_hello {
+    /*! @brief the size of peer_id */
+    size_t peer_id_len;
+    /*! @brief the size of public_key */
+    size_t public_key_len;
+    /*! @brief a peer's identifier */
+    unsigned char *peer_id;
+    /*! @brief the corresponding public key for the peerid */
+    unsigned char *public_key;
+} message_hello_t;
 
 /*!
  * @brief used to cbor encode a message_t instance
@@ -107,13 +113,6 @@ message_t *cbor_decode_message_t(cbor_encoded_data_t *input);
  * @param msg an instance of message_t
  */
 void free_message_t(message_t *msg);
-
-/*!
- * @brief used to send messages to peers
- * @param msg the actual message we are sending to a peer
- * @param opts specifies how to send the message to a peer
- */
-int send_message(message_t *msg, message_send_opts_t opts);
 
 /*!
  * @brief returns the size of a message_t instance
