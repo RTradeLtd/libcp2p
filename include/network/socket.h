@@ -16,6 +16,7 @@
 
 #pragma once
 
+#include "multiaddr/multiaddr.h"
 #include "thirdparty/logger/logger.h"
 #include <arpa/inet.h>
 #include <netinet/in.h>
@@ -104,3 +105,15 @@ addr_info default_hints();
  * @brief used to check if a receive or send with a socket failed
  */
 bool recv_or_send_failed(thread_logger *thl, int rc);
+
+/*!
+  * @brief returns an addr_info representation of the multiaddress
+  * @details useful for taking a multi address and getting the needed information for using 
+  * @details the address with the sendto function
+  * @param address the multi address to parse
+  * @note does not free up resources associated with address param
+  * @warning only supports TCP and UDP multiaddress(es)
+  * @return Success: pointer to an addr_info instance
+  * @return Failure: NULL pointer
+*/
+addr_info *multi_addr_to_addr_info(multi_addr_t *address);

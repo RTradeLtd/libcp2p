@@ -209,3 +209,68 @@ bool recv_or_send_failed(thread_logger *thl, int rc) {
             return false;
     }
 }
+
+/*!
+  * @brief returns an addr_info representation of the multiaddress
+  * @details useful for taking a multi address and getting the needed information for using 
+  * @details the address with the sendto function
+  * @param address the multi address to parse
+  * @note does not free up resources associated with address param
+  * @warning only supports TCP and UDP multiaddress(es)
+  * @return Success: pointer to an addr_info instance
+  * @return Failure: NULL pointer
+*/
+addr_info *multi_addr_to_addr_info(multi_addr_t *address) {
+    bool is_udp = false;
+    bool is_tcp = false;
+    
+    addr_info hints;
+
+    if (strstr(address->string, "/tcp/") != NULL) {
+        hints.ai_socktype = SOCK_STREAM;
+        is_tcp = true;
+    }
+
+    if (strstr(address->string, "/udp/") != NULL) {
+        hints.ai_socktype = SOCK_DGRAM;
+        is_udp = true;
+    }
+
+    if (is_udp == false && is_tcp == false) {
+        return NULL;
+    }
+
+    char ip[1024];
+    char cport[7];
+    memset(ip, 0, 1024);
+    memset(cport, 0, 1024);
+
+    int rc = multi_address_get_ip_address(address, ip);
+    if (rc != 1) {
+        return NULL;
+    }
+    
+    int port = multi_address_get_ip_port(address);
+    if (port == -1) {
+        return NULL;
+    }
+    sprintf(cport, "%i", port);
+
+    int ip_family = multi_address_get_ip_family(address);
+    if (ip_family == 0) {
+        return NULL;
+    }
+
+    hints.ai_family = ip_family;
+    hints.ai_flags = AI_PASSIVE;
+
+    addr_info *ret_address;
+    
+    rc = getaddrinfo(ip, cport, &hints, &ret_address);
+    if (rc != 0) {
+        freeaddrinfo(ret_address);
+        return NULL;
+    }
+
+    return ret_address;
+}
