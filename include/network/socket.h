@@ -24,6 +24,8 @@
 #include <sys/time.h>
 #include <sys/types.h>
 
+#define MAX_RPC_MSG_SIZE_KB 8192
+
 /*!
  * @struct timeval
  * @typedef timeout
@@ -97,3 +99,8 @@ char *get_name_info(sock_addr *client_address);
  * defaults is IPv4, TCP, and AI_PASSIVE flags
  */
 addr_info default_hints();
+
+/*!
+ * @brief used to check if a receive or send with a socket failed
+ */
+bool recv_or_send_failed(thread_logger *thl, int rc);
