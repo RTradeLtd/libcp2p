@@ -15,7 +15,7 @@
  */
 
 #include "network/socket.h"
-#include "utils/logger.h"
+#include "thirdparty/logger/logger.h"
 #include <arpa/inet.h>
 #include <errno.h>
 #include <fcntl.h>

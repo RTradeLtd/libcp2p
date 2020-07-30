@@ -18,8 +18,8 @@
 
 #include "multiaddr/multiaddr.h"
 #include "network/socket_client.h" // this also imports socket.h
-#include "utils/logger.h"
-#include "utils/thread_pool.h"
+#include "thirdparty/logger/logger.h"
+#include "thirdparty/thread_pool/thread_pool.h"
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <pthread.h>

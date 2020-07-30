@@ -12,8 +12,8 @@
 
 #include "cli/command_line.h"
 #include "thirdparty/argtable3/argtable3.h"
-#include "utils/colors.h"
-#include "utils/logger.h"
+#include "thirdparty/logger/colors.h"
+#include "thirdparty/logger/logger.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
