@@ -102,6 +102,36 @@ void test_server_callback(int argc, char *argv[]) {
             return;
         }
 
+        size_t bytes_written = 0;
+        unsigned char *recv_buffer = handle_receive(
+            NULL,
+            client->socket_number,
+            true,
+            MAX_RPC_MSG_SIZE_KB,
+            &bytes_written
+        );
+        if (recv_buffer == NULL) {
+            printf("failed to receive data\n");
+            return;
+        }
+
+        cbor_encoded_data_t *recv_cbdata = new_cbor_encoded_data(recv_buffer, bytes_written);
+        if (recv_cbdata == NULL) {
+            printf("failed to receive data\n");
+            return;
+        }
+
+        message_t *recv_msg = cbor_decode_message_t(recv_cbdata);
+
+        free_cbor_encoded_data(recv_cbdata);
+
+        if (recv_msg == NULL) {
+            printf("failed to decode received data\n");
+            return;
+        }
+
+        printf("type: %i\n", recv_msg->type);
+
         rc = send(client->socket_number, (unsigned char *)"6hello", 6, 0);
         if (rc == -1) {
             printf("request failed: %s\n", strerror(errno));
