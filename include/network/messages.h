@@ -129,7 +129,8 @@ size_t size_of_message_t(message_t *msg);
   * @param socket_num the file descriptor of the socket to receive from
   * @param is_tcp indicates whether this is a TCP socket
   * @param max_buffer_len specifies the maximum buffer length we are willing to allocate memory for
-  * @param bytes_written we will set to the size of data we allocated
-  * @return Success: pointer to an allocated chu
+  * @return Success: pointer to an a chunk of memory containing an instance of cbor_encoded_data_t
+  * @return Failure: NULL pointer
+  * @warning we will allocate slightly more memory than max_buffer_len since this refers to the maximum buffer size of the data member of a cbor_encoded_data_t instance, althoug h it will only be a few bytes more
 */
-unsigned char *handle_receive(thread_logger *thl, int socket_number, bool is_tcp, size_t max_buffer_len, size_t *bytes_written);
+cbor_encoded_data_t *handle_receive(thread_logger *thl, int socket_number, bool is_tcp, size_t max_buffer_len);

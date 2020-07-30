@@ -477,39 +477,20 @@ void handle_inbound_rpc(void *data) {
             goto RETURN;
         }
 
-        size_t bytes_written = 0;
-        unsigned char *message_data = handle_receive(
+        cbor_encoded_data_t *cbdata = handle_receive(
             hdata->srv->thl,
             hdata->conn->socket_number,
             hdata->is_tcp,
-            MAX_RPC_MSG_SIZE_KB,
-            &bytes_written
+            MAX_RPC_MSG_SIZE_KB
         );
 
-        if (message_data == NULL || bytes_written == 0) {
+        if (cbdata == NULL) {
             goto RETURN;
         }
 
-        if (bytes_written == 6) {
-            if (memcmp(message_data, "hello", bytes_written) == 0) {
-                hdata->srv->thl->log(hdata->srv->thl, 0, "protocol debug",
-                                     LOG_LEVELS_DEBUG);
-                hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_DEBUG,
-                                      "size: %lu, data: %s", bytes_written,
-                                      message_data);
-                free(message_data);
-                goto RETURN;
-            }
-        }
-        cbor_encoded_data_t *cbdata =
-            new_cbor_encoded_data(message_data, bytes_written);
-        if (cbdata == NULL) {
-            free(message_data);
-            goto RETURN;
-        }
         message_t *msg = cbor_decode_message_t(cbdata);
         if (msg == NULL) {
-            free(message_data);
+            printf("shit\n");
             free_cbor_encoded_data(cbdata);
             goto RETURN;
         }
@@ -541,7 +522,6 @@ void handle_inbound_rpc(void *data) {
                 break;
         }
     
-        free(message_data);
         free_message_t(msg);
         free_cbor_encoded_data(cbdata);
     }
