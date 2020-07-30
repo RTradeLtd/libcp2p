@@ -75,19 +75,20 @@ socket_server_t *new_socket_server(thread_logger *thl,
 
     for (int i = 0; i < config->num_addrs; i++) {
 
+        addr_info *bind_address = multi_addr_to_addr_info(config->addrs[i]);
+        if (bind_address == NULL) {
+            thl->log(thl, 0, "failed to get addr info", LOG_LEVELS_ERROR);
+            goto EXIT;
+        }
+
         bool is_tcp = false;
         bool is_udp = false;
 
-        // determine whether or not we support tcp and udp
-        if (strstr(config->addrs[i]->string, "/tcp/") != NULL) {
+        if (bind_address->ai_socktype == SOCK_STREAM) {
             is_tcp = true;
-        }
-        if (strstr(config->addrs[i]->string, "/udp/") != NULL) {
+        } else if (bind_address->ai_socktype == SOCK_DGRAM) {
             is_udp = true;
-        }
-
-        // if the multiaddr has neither a tcp or udp protocol, exit
-        if (is_tcp == false && is_udp == false) {
+        } else {
             thl->log(thl, 0, "invalid multi_address provided", LOG_LEVELS_ERROR);
             goto EXIT;
         }
@@ -95,23 +96,17 @@ socket_server_t *new_socket_server(thread_logger *thl,
         // handle a tcp multi_address
         if (is_tcp) {
 
-            addr_info *tcp_bind_address = multi_addr_to_addr_info(config->addrs[i]);
-            if (tcp_bind_address == NULL) {
-                thl->log(thl, 0, "failed to get tcp addr info", LOG_LEVELS_ERROR);
-                goto EXIT;
-            }
-
-            int tcp_socket_num = get_new_socket(thl, tcp_bind_address, sock_opts,
+            int tcp_socket_num = get_new_socket(thl, bind_address, sock_opts,
                                                 num_opts, false, true);
             if (tcp_socket_num == -1) {
-                freeaddrinfo(tcp_bind_address);
+                freeaddrinfo(bind_address);
                 thl->log(thl, 0, "failed to get new tcp socket", LOG_LEVELS_ERROR);
                 goto EXIT;
             }
 
             listen(tcp_socket_num, config->max_connections);
             if (errno != 0) {
-                freeaddrinfo(tcp_bind_address);
+                freeaddrinfo(bind_address);
                 thl->logf(thl, 0, LOG_LEVELS_ERROR,
                           "failed to start listening on tcp socket with error %s",
                           strerror(errno));
@@ -129,22 +124,16 @@ socket_server_t *new_socket_server(thread_logger *thl,
                 set_socket_recv_timeout(tcp_socket_num, config->recv_timeout_sec);
             }
 
-            freeaddrinfo(tcp_bind_address);
+            freeaddrinfo(bind_address);
         }
 
         // handle a udp multi_address
         if (is_udp) {
 
-            addr_info *udp_bind_address = multi_addr_to_addr_info(config->addrs[i]);
-            if (udp_bind_address == NULL) {
-                thl->log(thl, 0, "failed to get udp addr info", LOG_LEVELS_ERROR);
-                goto EXIT;
-            }
-
-            int udp_socket_num = get_new_socket(thl, udp_bind_address, sock_opts,
+            int udp_socket_num = get_new_socket(thl, bind_address, sock_opts,
                                                 num_opts, false, false);
             if (udp_socket_num == -1) {
-                freeaddrinfo(udp_bind_address);
+                freeaddrinfo(bind_address);
                 thl->log(thl, 0, "failed to get new udp socket", LOG_LEVELS_ERROR);
                 goto EXIT;
             }
@@ -160,7 +149,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
                 set_socket_recv_timeout(udp_socket_num, config->recv_timeout_sec);
             }
 
-            freeaddrinfo(udp_bind_address);
+            freeaddrinfo(bind_address);
         }
     }
 
