@@ -477,21 +477,14 @@ void handle_inbound_rpc(void *data) {
             goto RETURN;
         }
 
-        cbor_encoded_data_t *cbdata = handle_receive(
+        message_t *msg = handle_receive(
             hdata->srv->thl,
             hdata->conn->socket_number,
             hdata->is_tcp,
             MAX_RPC_MSG_SIZE_KB
         );
 
-        if (cbdata == NULL) {
-            goto RETURN;
-        }
-
-        message_t *msg = cbor_decode_message_t(cbdata);
         if (msg == NULL) {
-            printf("shit\n");
-            free_cbor_encoded_data(cbdata);
             goto RETURN;
         }
 
@@ -523,7 +516,6 @@ void handle_inbound_rpc(void *data) {
         }
     
         free_message_t(msg);
-        free_cbor_encoded_data(cbdata);
     }
 RETURN:
 

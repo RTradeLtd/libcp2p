@@ -102,26 +102,18 @@ void test_server_callback(int argc, char *argv[]) {
             return;
         }
 
-        cbor_encoded_data_t *recv_cbdata = handle_receive(
+        message_t *recv_msg = handle_receive(
             NULL,
             client->socket_number,
             true,
             MAX_RPC_MSG_SIZE_KB
         );
 
-        if (recv_cbdata == NULL) {
+        if (recv_msg == NULL) {
             printf("failed to receive data\n");
             return;
         }
 
-        message_t *recv_msg = cbor_decode_message_t(recv_cbdata);
-
-        free_cbor_encoded_data(recv_cbdata);
-
-        if (recv_msg == NULL) {
-            printf("failed to decode received data\n");
-            return;
-        }
 
         // validate the message type
         if (recv_msg->type != MESSAGE_BEGIN_ECDH) {
