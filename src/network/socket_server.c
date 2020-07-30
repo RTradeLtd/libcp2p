@@ -567,37 +567,17 @@ bool negotiate_secure_connection(conn_handle_data_t *data) {
    msg->data[1] = 'k';
    msg->len = 2;
    
-   cbor_encoded_data_t *cbdata = cbor_encode_message_t(msg);
-   if (cbdata == NULL) {
-       free(msg->data);
-       free(msg);
-       return false;
-   }
+    int rc = handle_send(
+        data->srv->thl,
+        data->conn->socket_number,
+        data->is_tcp,
+        msg,
+        NULL
+    );
 
-    size_t cbor_len = get_encoded_send_buffer_len(cbdata);
-    unsigned char send_buffer[cbor_len];
-    memset(send_buffer, 0, sizeof(send_buffer));
-
-    int rc = get_encoded_send_buffer(cbdata, send_buffer, cbor_len);
-    
-    // free up memory before continuing call processing
-    free_cbor_encoded_data(cbdata);
+    free_message_t(msg);
 
     if (rc == -1) {
-        free(msg->data);
-        free(msg);
-        return false;
-    }
-
-    rc = send(data->conn->socket_number, send_buffer, sizeof(send_buffer), 0);
-    
-    // free up memory allocated for the message_t instance
-    free(msg->data);
-    free(msg);
-    
-
-    // proceed with call handling
-    if (rc == 0 || rc == -1) {
         return false;
     }
 
