@@ -258,9 +258,11 @@ void free_socket_server(socket_server_t *srv) {
     srv->thl->log(srv->thl, 0, "closing sockets", LOG_LEVELS_INFO);
     for (int i = 0; i < srv->max_socket_num; i++) {
         if (FD_ISSET(i, &srv->tcp_socket_set)) {
+            srv->thl->logf(srv->thl, 0, LOG_LEVELS_INFO, "closing tcp socket number %i", i);
             close(i);
         }
         if (FD_ISSET(i, &srv->udp_socket_set)) {
+            srv->thl->logf(srv->thl, 0, LOG_LEVELS_INFO, "closing udp socket number %i", i);
             close(i);
         }
     }
