@@ -130,8 +130,21 @@ void test_server_callback(int argc, char *argv[]) {
             return;
         }
 
-        printf("type: %i\n", recv_msg->type);
+        // validate the message type
+        if (recv_msg->type != MESSAGE_BEGIN_ECDH) {
+            printf("bad message type received\n");
+        }
 
+        // validate message data is as expected
+        if (memcmp(
+            recv_msg->data,
+            "ok",
+            recv_msg->len
+        ) != 0) {
+            printf("invalid message data received\n");
+        }
+        
+        // test debug handler
         rc = send(client->socket_number, (unsigned char *)"6hello", 6, 0);
         if (rc == -1) {
             printf("request failed: %s\n", strerror(errno));
