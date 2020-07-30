@@ -40,6 +40,7 @@
 #include <string.h>
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
+#pragma GCC diagnostic ignored "-Wunused-variable"
 
 
 void start_socker_server_wrapper(void *data) {
