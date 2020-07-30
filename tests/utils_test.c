@@ -7,9 +7,9 @@
 #include <cmocka.h>
 #include <assert.h>
 #include <pthread.h>
-#include "utils/logger.h"
-#include "utils/colors.h"
-#include "utils/thread_pool.h"
+#include "thirdparty/logger/logger.h"
+#include "thirdparty/logger/colors.h"
+#include "thirdparty/thread_pool/thread_pool.h"
 
 void *test_thread_log(void *data) {
     thread_logger *thl = (thread_logger *)data;

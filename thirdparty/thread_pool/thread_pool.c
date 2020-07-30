@@ -25,7 +25,7 @@
 #include <sys/prctl.h>
 #endif
 
-#include "utils/thread_pool.h"
+#include "thirdparty/thread_pool/thread_pool.h"
 
 #ifdef THPOOL_DEBUG
 #define THPOOL_DEBUG 1

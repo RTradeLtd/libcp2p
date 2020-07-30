@@ -18,7 +18,7 @@
 
 #include "multiaddr/multiaddr.h"
 #include "socket.h"
-#include "utils/logger.h"
+#include "thirdparty/logger/logger.h"
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <pthread.h>

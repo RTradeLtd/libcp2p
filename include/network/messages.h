@@ -11,7 +11,7 @@
  */
 
 #include "network/socket.h"
-#include "utils/logger.h"
+#include "thirdparty/logger/logger.h"
 #include "encoding/cbor.h"
 #include <stddef.h>
 #include <stdbool.h>

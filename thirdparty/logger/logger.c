@@ -12,7 +12,7 @@
  *  - handling system signals (exit, kill, etc...)
  */
 
-#include "utils/logger.h"
+#include "thirdparty/logger/logger.h"
 #include <fcntl.h>
 #include <pthread.h>
 #include <stdarg.h>
