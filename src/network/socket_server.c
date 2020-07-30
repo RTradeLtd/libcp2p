@@ -578,7 +578,7 @@ bool negotiate_secure_connection(conn_handle_data_t *data) {
 }
 
 #pragma GCC diagnostic ignored "-Wunused-function"
-#pragma GCC diagnostic ignored "-Wunused-parameter"
+
 /*!
   * @brief uses existing server sockets to send data to other socket servers
   * @details uses existing sockets to send a message to the given multiaddress
@@ -616,13 +616,35 @@ int socket_server_sendto(socket_server_t *srv, multi_addr_t *to_address, unsigne
         
         if (is_tcp == true) {
             if (FD_ISSET(i, &srv->tcp_socket_set)) {
-                // use this socket
+                addr_info *peer_address = multi_addr_to_addr_info(to_address);
+                if (peer_address == NULL) {
+                    return -1;
+                }
+                int bytes_sent = sendto(i, buffer, buffer_len, 0, peer_address->ai_addr, peer_address->ai_addrlen);
+
+                freeaddrinfo(peer_address);
+
+                if (bytes_sent == -1) {
+                    return -1;
+                }
+                return 0; /*! @todo should we log whether or not we failed to send any data? */
             }
         }
 
         if (is_udp == true) {
             if (FD_ISSET(i, &srv->udp_socket_set)) {
-                // use this socket
+                addr_info *peer_address = multi_addr_to_addr_info(to_address);
+                if (peer_address == NULL) {
+                    return -1;
+                }
+                int bytes_sent = sendto(i, buffer, buffer_len, 0, peer_address->ai_addr, peer_address->ai_addrlen);
+
+                freeaddrinfo(peer_address);
+
+                if (bytes_sent == -1) {
+                    return -1;
+                }
+                return 0; /*! @todo should we log whether or not we failed to send any data? */
             }
         }
     
