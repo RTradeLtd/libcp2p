@@ -30,7 +30,6 @@
 
 #define MAX_ADDRS 100
 
-
 /*!
  * @brief defines a function signature that is used for submitting tasks to our
  * thread pool
@@ -186,6 +185,6 @@ void handle_inbound_rpc(void *data);
 void setup_signal_shutdown(int signals[], int num_signals);
 
 /*!
-  * @brief used to negotiate a secure connection with the current connection
-*/
+ * @brief used to negotiate a secure connection with the current connection
+ */
 bool negotiate_secure_connection(conn_handle_data_t *data);
