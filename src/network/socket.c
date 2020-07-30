@@ -201,7 +201,7 @@ bool recv_or_send_failed(thread_logger *thl, int rc) {
         case -1:
             if (thl != NULL) {
                 thl->logf(thl, 0, LOG_LEVELS_DEBUG,
-                           "error encountered during read %s", strerror(errno));
+                          "error encountered during read %s", strerror(errno));
             }
             return true;
         default:

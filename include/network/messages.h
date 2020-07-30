@@ -10,11 +10,11 @@
  * communications channel using ECDSA keys and ECDH key agreement
  */
 
+#include "encoding/cbor.h"
 #include "network/socket.h"
 #include "thirdparty/logger/logger.h"
-#include "encoding/cbor.h"
-#include <stddef.h>
 #include <stdbool.h>
+#include <stddef.h>
 
 /*!
  * @enum MESSAGE_TYPES
@@ -120,34 +120,42 @@ int send_message(message_t *msg, message_send_opts_t opts);
  */
 size_t size_of_message_t(message_t *msg);
 
+/*!
+ * @brief used to handle receiving data from a UDP or TCP socket
+ * @details it is designed to reduce the manual overhead with regards to processing
+ * messages
+ * @details because the first byte of any data stream coming in defines the size of
+ * the total data to receive
+ * @details and the remaining data defines the actual cbor encoded data. therefore we
+ * need to properly parse this information
+ * @details and the manner of processing is useful to either the server or client
+ * side of things
+ * @param thl an instance of a thread_logger, can be NULL to disable logging
+ * @param socket_num the file descriptor of the socket to receive from
+ * @param is_tcp indicates whether this is a TCP socket
+ * @param max_buffer_len specifies the maximum buffer length we are willing to
+ * allocate memory for
+ * @return Success: pointer to a chunk of memory containing the received RPC message
+ * @return Failure: NULL pointer
+ * @warning we will allocate slightly more memory than max_buffer_len since we have
+ * to decode the received message into a message_t type
+ */
+message_t *handle_receive(thread_logger *thl, int socket_number, bool is_tcp,
+                          size_t max_buffer_len);
 
 /*!
-  * @brief used to handle receiving data from a UDP or TCP socket
-  * @details it is designed to reduce the manual overhead with regards to processing messages
-  * @details because the first byte of any data stream coming in defines the size of the total data to receive
-  * @details and the remaining data defines the actual cbor encoded data. therefore we need to properly parse this information
-  * @details and the manner of processing is useful to either the server or client side of things
-  * @param thl an instance of a thread_logger, can be NULL to disable logging
-  * @param socket_num the file descriptor of the socket to receive from
-  * @param is_tcp indicates whether this is a TCP socket
-  * @param max_buffer_len specifies the maximum buffer length we are willing to allocate memory for
-  * @return Success: pointer to a chunk of memory containing the received RPC message
-  * @return Failure: NULL pointer
-  * @warning we will allocate slightly more memory than max_buffer_len since we have to decode the received message into a message_t type
-*/
-message_t *handle_receive(thread_logger *thl, int socket_number, bool is_tcp, size_t max_buffer_len);
-
-/*!
-  * @brief used to handle sending data through a TCP or UDP socket
-  * @details designed to reduce manual overhead with sending RPC messages
-  * @details it takes care of encoding the given message_t object into a CBOR object
-  * @details and then sending the CBOR object through the wire
-  * @param thl an instance of a thread_logger, can be NULL to disable logging
-  * @param socket_num the file descriptor of the socket to receive from
-  * @param is_tcp indicates whether this is a TCP socket
-  * @param msg the actual message we want to send
-  * @param peer_address used when sending UDP messages to specify the person to send message to. must not be NULL if is_tcp is false
-  * @return Success: 0
-  * @return Failure: -1
-*/
-int handle_send(thread_logger *thl, int socket_number, bool is_tcp, message_t *msg, addr_info *peer_address);
+ * @brief used to handle sending data through a TCP or UDP socket
+ * @details designed to reduce manual overhead with sending RPC messages
+ * @details it takes care of encoding the given message_t object into a CBOR object
+ * @details and then sending the CBOR object through the wire
+ * @param thl an instance of a thread_logger, can be NULL to disable logging
+ * @param socket_num the file descriptor of the socket to receive from
+ * @param is_tcp indicates whether this is a TCP socket
+ * @param msg the actual message we want to send
+ * @param peer_address used when sending UDP messages to specify the person to send
+ * message to. must not be NULL if is_tcp is false
+ * @return Success: 0
+ * @return Failure: -1
+ */
+int handle_send(thread_logger *thl, int socket_number, bool is_tcp, message_t *msg,
+                addr_info *peer_address);

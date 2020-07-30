@@ -87,18 +87,13 @@ void test_server_callback(int argc, char *argv[]) {
             return;
         }
 
-        message_t *recv_msg = handle_receive(
-            NULL,
-            client->socket_number,
-            true,
-            MAX_RPC_MSG_SIZE_KB
-        );
+        message_t *recv_msg =
+            handle_receive(NULL, client->socket_number, true, MAX_RPC_MSG_SIZE_KB);
 
         if (recv_msg == NULL) {
             printf("failed to receive data\n");
             return;
         }
-
 
         // validate the message type
         if (recv_msg->type != MESSAGE_BEGIN_ECDH) {
@@ -106,11 +101,7 @@ void test_server_callback(int argc, char *argv[]) {
         }
 
         // validate message data is as expected
-        if (memcmp(
-            recv_msg->data,
-            "ok",
-            recv_msg->len
-        ) != 0) {
+        if (memcmp(recv_msg->data, "ok", recv_msg->len) != 0) {
             printf("invalid message data received\n");
         }
 

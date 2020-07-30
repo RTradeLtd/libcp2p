@@ -477,12 +477,8 @@ void handle_inbound_rpc(void *data) {
             goto RETURN;
         }
 
-        message_t *msg = handle_receive(
-            hdata->srv->thl,
-            hdata->conn->socket_number,
-            hdata->is_tcp,
-            MAX_RPC_MSG_SIZE_KB
-        );
+        message_t *msg = handle_receive(hdata->srv->thl, hdata->conn->socket_number,
+                                        hdata->is_tcp, MAX_RPC_MSG_SIZE_KB);
 
         if (msg == NULL) {
             goto RETURN;
@@ -514,7 +510,7 @@ void handle_inbound_rpc(void *data) {
             default:
                 break;
         }
-    
+
         free_message_t(msg);
     }
 RETURN:
@@ -542,38 +538,33 @@ void setup_signal_shutdown(int signals[], int num_signals) {
 }
 
 /*!
-  * @brief used to negotiate a secure connection with the current connection
-*/
+ * @brief used to negotiate a secure connection with the current connection
+ */
 bool negotiate_secure_connection(conn_handle_data_t *data) {
     /*!
-      * @warning UDP secure connections currently disabled
-    */
-   if (data->is_tcp == false) {
-       return false;
-   }
-   message_t *msg = calloc(1, sizeof(message_t));
-   if (msg == NULL) {
-       return false;
-   }
-   
-   msg->data = calloc(1, 2);
-   if (msg->data == NULL) {
-       free(msg);
-       return false;
-   }
+     * @warning UDP secure connections currently disabled
+     */
+    if (data->is_tcp == false) {
+        return false;
+    }
+    message_t *msg = calloc(1, sizeof(message_t));
+    if (msg == NULL) {
+        return false;
+    }
 
-   msg->type = MESSAGE_BEGIN_ECDH;
-   msg->data[0] = 'o';
-   msg->data[1] = 'k';
-   msg->len = 2;
-   
-    int rc = handle_send(
-        data->srv->thl,
-        data->conn->socket_number,
-        data->is_tcp,
-        msg,
-        NULL
-    );
+    msg->data = calloc(1, 2);
+    if (msg->data == NULL) {
+        free(msg);
+        return false;
+    }
+
+    msg->type = MESSAGE_BEGIN_ECDH;
+    msg->data[0] = 'o';
+    msg->data[1] = 'k';
+    msg->len = 2;
+
+    int rc = handle_send(data->srv->thl, data->conn->socket_number, data->is_tcp,
+                         msg, NULL);
 
     free_message_t(msg);
 
@@ -582,4 +573,4 @@ bool negotiate_secure_connection(conn_handle_data_t *data) {
     }
 
     return true;
-} 
+}

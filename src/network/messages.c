@@ -10,15 +10,15 @@
  * communications channel using ECDSA keys and ECDH key agreement
  */
 
-#include "network/socket.h"
 #include "network/messages.h"
 #include "encoding/cbor.h"
+#include "network/socket.h"
 #include "tinycbor/cbor.h"
+#include <netdb.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/socket.h>
-#include <netdb.h>
 
 /*!
  * @brief used to cbor encode a message_t instance
@@ -204,22 +204,30 @@ size_t size_of_message_t(message_t *msg) {
     return size;
 }
 
-
 /*!
-  * @brief used to handle receiving data from a UDP or TCP socket
-  * @details it is designed to reduce the manual overhead with regards to processing messages
-  * @details because the first byte of any data stream coming in defines the size of the total data to receive
-  * @details and the remaining data defines the actual cbor encoded data. therefore we need to properly parse this information
-  * @details and the manner of processing is useful to either the server or client side of things
-  * @param thl an instance of a thread_logger, can be NULL to disable logging
-  * @param socket_num the file descriptor of the socket to receive from
-  * @param is_tcp indicates whether this is a TCP socket
-  * @param max_buffer_len specifies the maximum buffer length we are willing to allocate memory for
-  * @return Success: pointer to an a chunk of memory containing an instance of cbor_encoded_data_t
-  * @return Failure: NULL pointer
-  * @warning we will allocate slightly more memory than max_buffer_len since this refers to the maximum buffer size of the data member of a cbor_encoded_data_t instance, althoug h it will only be a few bytes more
-*/
-message_t *handle_receive(thread_logger *thl, int socket_number, bool is_tcp, size_t max_buffer_len) {
+ * @brief used to handle receiving data from a UDP or TCP socket
+ * @details it is designed to reduce the manual overhead with regards to processing
+ * messages
+ * @details because the first byte of any data stream coming in defines the size of
+ * the total data to receive
+ * @details and the remaining data defines the actual cbor encoded data. therefore we
+ * need to properly parse this information
+ * @details and the manner of processing is useful to either the server or client
+ * side of things
+ * @param thl an instance of a thread_logger, can be NULL to disable logging
+ * @param socket_num the file descriptor of the socket to receive from
+ * @param is_tcp indicates whether this is a TCP socket
+ * @param max_buffer_len specifies the maximum buffer length we are willing to
+ * allocate memory for
+ * @return Success: pointer to an a chunk of memory containing an instance of
+ * cbor_encoded_data_t
+ * @return Failure: NULL pointer
+ * @warning we will allocate slightly more memory than max_buffer_len since this
+ * refers to the maximum buffer size of the data member of a cbor_encoded_data_t
+ * instance, althoug h it will only be a few bytes more
+ */
+message_t *handle_receive(thread_logger *thl, int socket_number, bool is_tcp,
+                          size_t max_buffer_len) {
 
     size_t rc = 0;
     bool failed = false;
@@ -253,10 +261,11 @@ message_t *handle_receive(thread_logger *thl, int socket_number, bool is_tcp, si
     }
 
     /*!
-      * @brief abort further handling if message size is less than or equal to 0
-      * @brief greater than the max RPC message size OR greater than the buffer
-    */
-    if (message_size <= 0 || message_size >= MAX_RPC_MSG_SIZE_KB || message_size > (int)max_buffer_len) {
+     * @brief abort further handling if message size is less than or equal to 0
+     * @brief greater than the max RPC message size OR greater than the buffer
+     */
+    if (message_size <= 0 || message_size >= MAX_RPC_MSG_SIZE_KB ||
+        message_size > (int)max_buffer_len) {
         if (thl != NULL) {
             thl->log(thl, 0, "invalid message size", LOG_LEVELS_DEBUG);
         }
@@ -276,7 +285,7 @@ message_t *handle_receive(thread_logger *thl, int socket_number, bool is_tcp, si
     if (failed == true) {
         return NULL;
     }
-    
+
     // dont allocate memory for this struct so we can use stack memory
     cbor_encoded_data_t cbdata = {.len = rc, .data = buffer};
 
@@ -284,14 +293,15 @@ message_t *handle_receive(thread_logger *thl, int socket_number, bool is_tcp, si
 }
 
 /*!
-  * @brief used to handle sending data through a TCP or UDP socket
-  * @details designed to reduce manual overhead with sending RPC messages
-  * @details it takes care of encoding the given message_t object into a CBOR object
-  * @details and then sending the CBOR object through the wire
-  * @return Success: 0
-  * @return Failure: -1
-*/
-int handle_send(thread_logger *thl, int socket_number, bool is_tcp, message_t *msg, addr_info *peer_address) {
+ * @brief used to handle sending data through a TCP or UDP socket
+ * @details designed to reduce manual overhead with sending RPC messages
+ * @details it takes care of encoding the given message_t object into a CBOR object
+ * @details and then sending the CBOR object through the wire
+ * @return Success: 0
+ * @return Failure: -1
+ */
+int handle_send(thread_logger *thl, int socket_number, bool is_tcp, message_t *msg,
+                addr_info *peer_address) {
 
     if (is_tcp == false && peer_address == NULL) {
         return -1;
@@ -323,12 +333,13 @@ int handle_send(thread_logger *thl, int socket_number, bool is_tcp, message_t *m
     if (is_tcp == true) {
         rc = send(socket_number, send_buffer, sizeof(send_buffer), 0);
     } else {
-        /*! 
-          * @todo we likely need to refactor this and send two datagrams
-          * @todo the first datagram containing the messsage size and
-          * @todo the second datagram containing the actual message data
-        */
-        rc = sendto(socket_number, send_buffer, sizeof(send_buffer), 0, peer_address->ai_addr, peer_address->ai_addrlen);
+        /*!
+         * @todo we likely need to refactor this and send two datagrams
+         * @todo the first datagram containing the messsage size and
+         * @todo the second datagram containing the actual message data
+         */
+        rc = sendto(socket_number, send_buffer, sizeof(send_buffer), 0,
+                    peer_address->ai_addr, peer_address->ai_addrlen);
     }
 
     bool failed = recv_or_send_failed(thl, rc);
@@ -337,5 +348,4 @@ int handle_send(thread_logger *thl, int socket_number, bool is_tcp, message_t *m
     }
 
     return 0;
-
 }
