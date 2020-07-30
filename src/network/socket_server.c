@@ -576,3 +576,58 @@ bool negotiate_secure_connection(conn_handle_data_t *data) {
 
     return true;
 }
+
+#pragma GCC diagnostic ignored "-Wunused-function"
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+/*!
+  * @brief uses existing server sockets to send data to other socket servers
+  * @details uses existing sockets to send a message to the given multiaddress
+  * @details if the multiaddress is for the UDP protocol and we have no available UDP file descriptors we return an error
+  * @details additionally if the multiaddress is for the TCP protocol and we have no aavailable TCP file descriptors we retun an error
+  * @param srv the server whoses sockets we'll leverage
+  * @param to_address the multiaddress of the host to send data to
+  * @param buffer the actual data to send
+  * @param buffer_len the size of the buffer
+  * @todo support better source file descriptor selection as this simply uses the first available socket
+  * @todo in cases where we only have 1  socket for each protocol (TCP & UDP) this is fine
+  * @todo but in the even of having multiple sockets for each protocol this could become problematic
+  * @return Success: 0
+  * @return Failure: -1
+*/
+int socket_server_sendto(socket_server_t *srv, multi_addr_t *to_address, unsigned char *buffer, size_t buffer_len) {
+
+    bool is_udp = false;
+    bool is_tcp = false;
+
+    if (strstr(to_address->string, "/tcp/") != NULL) {
+        is_tcp = true;
+    }
+
+    if (strstr(to_address->string, "/udp/") != NULL) {
+        is_udp = true;
+    }
+
+    if (is_tcp == false && is_udp == false) {
+        return -1;
+    }
+
+    // iterate over available socket numbers
+    for (int i = 0; i < 65536; i++) {
+        
+        if (is_tcp == true) {
+            if (FD_ISSET(i, &srv->tcp_socket_set)) {
+                // use this socket
+            }
+        }
+
+        if (is_udp == true) {
+            if (FD_ISSET(i, &srv->udp_socket_set)) {
+                // use this socket
+            }
+        }
+    
+    }
+
+    return -1;
+
+}
