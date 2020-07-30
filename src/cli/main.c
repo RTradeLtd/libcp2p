@@ -102,20 +102,13 @@ void test_server_callback(int argc, char *argv[]) {
             return;
         }
 
-        size_t bytes_written = 0;
-        unsigned char *recv_buffer = handle_receive(
+        cbor_encoded_data_t *recv_cbdata = handle_receive(
             NULL,
             client->socket_number,
             true,
-            MAX_RPC_MSG_SIZE_KB,
-            &bytes_written
+            MAX_RPC_MSG_SIZE_KB
         );
-        if (recv_buffer == NULL) {
-            printf("failed to receive data\n");
-            return;
-        }
 
-        cbor_encoded_data_t *recv_cbdata = new_cbor_encoded_data(recv_buffer, bytes_written);
         if (recv_cbdata == NULL) {
             printf("failed to receive data\n");
             return;
@@ -143,16 +136,8 @@ void test_server_callback(int argc, char *argv[]) {
         ) != 0) {
             printf("invalid message data received\n");
         }
-        
-        // test debug handler
-        rc = send(client->socket_number, (unsigned char *)"6hello", 6, 0);
-        if (rc == -1) {
-            printf("request failed: %s\n", strerror(errno));
-            return;
-        }
 
         free_message_t(recv_msg);
-        free(recv_buffer);
     }
 
     if (udp_addr != NULL) {
