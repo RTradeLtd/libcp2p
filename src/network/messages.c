@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/socket.h>
+#include <netdb.h>
 
 /*!
  * @brief used to cbor encode a message_t instance
@@ -210,6 +211,7 @@ size_t size_of_message_t(message_t *msg) {
   * @details because the first byte of any data stream coming in defines the size of the total data to receive
   * @details and the remaining data defines the actual cbor encoded data. therefore we need to properly parse this information
   * @details and the manner of processing is useful to either the server or client side of things
+  * @param thl an instance of a thread_logger, can be NULL to disable logging
   * @param socket_num the file descriptor of the socket to receive from
   * @param is_tcp indicates whether this is a TCP socket
   * @param max_buffer_len specifies the maximum buffer length we are willing to allocate memory for
@@ -279,4 +281,61 @@ message_t *handle_receive(thread_logger *thl, int socket_number, bool is_tcp, si
     cbor_encoded_data_t cbdata = {.len = rc, .data = buffer};
 
     return cbor_decode_message_t(&cbdata);
+}
+
+/*!
+  * @brief used to handle sending data through a TCP or UDP socket
+  * @details designed to reduce manual overhead with sending RPC messages
+  * @details it takes care of encoding the given message_t object into a CBOR object
+  * @details and then sending the CBOR object through the wire
+  * @return Success: 0
+  * @return Failure: -1
+*/
+int handle_send(thread_logger *thl, int socket_number, bool is_tcp, message_t *msg, addr_info *peer_address) {
+
+    if (is_tcp == false && peer_address == NULL) {
+        return -1;
+    }
+
+    cbor_encoded_data_t *cbdata = cbor_encode_message_t(msg);
+    if (cbdata == NULL) {
+        return -1;
+    }
+
+    size_t cbor_len = get_encoded_send_buffer_len(cbdata);
+    if (cbor_len <= 0) {
+        free_cbor_encoded_data(cbdata);
+        return -1;
+    }
+
+    unsigned char send_buffer[cbor_len];
+    memset(send_buffer, 0, cbor_len);
+
+    int rc = get_encoded_send_buffer(cbdata, send_buffer, cbor_len);
+
+    // free memory as the cbor encoded data struct is no longer needed
+    free_cbor_encoded_data(cbdata);
+
+    if (rc == -1) {
+        return -1;
+    }
+
+    if (is_tcp == true) {
+        rc = send(socket_number, send_buffer, sizeof(send_buffer), 0);
+    } else {
+        /*! 
+          * @todo we likely need to refactor this and send two datagrams
+          * @todo the first datagram containing the messsage size and
+          * @todo the second datagram containing the actual message data
+        */
+        rc = sendto(socket_number, send_buffer, sizeof(send_buffer), 0, peer_address->ai_addr, peer_address->ai_addrlen);
+    }
+
+    bool failed = recv_or_send_failed(thl, rc);
+    if (failed == true) {
+        return -1;
+    }
+
+    return 0;
+
 }
