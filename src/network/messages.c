@@ -217,7 +217,7 @@ size_t size_of_message_t(message_t *msg) {
   * @return Failure: NULL pointer
   * @warning we will allocate slightly more memory than max_buffer_len since this refers to the maximum buffer size of the data member of a cbor_encoded_data_t instance, althoug h it will only be a few bytes more
 */
-cbor_encoded_data_t *handle_receive(thread_logger *thl, int socket_number, bool is_tcp, size_t max_buffer_len) {
+message_t *handle_receive(thread_logger *thl, int socket_number, bool is_tcp, size_t max_buffer_len) {
 
     size_t rc = 0;
     bool failed = false;
@@ -274,6 +274,9 @@ cbor_encoded_data_t *handle_receive(thread_logger *thl, int socket_number, bool 
     if (failed == true) {
         return NULL;
     }
+    
+    // dont allocate memory for this struct so we can use stack memory
+    cbor_encoded_data_t cbdata = {.len = rc, .data = buffer};
 
-    return new_cbor_encoded_data(buffer, rc);
+    return cbor_decode_message_t(&cbdata);
 }
