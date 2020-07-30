@@ -68,21 +68,6 @@ void test_server_callback(int argc, char *argv[]) {
     msg->len = 6;
     msg->type = MESSAGE_START_ECDH;
 
-    cbor_encoded_data_t *cbdata = cbor_encode_message_t(msg);
-    if (cbdata == NULL) {
-        return;
-    }
-
-    size_t cbor_len = get_encoded_send_buffer_len(cbdata);
-
-    unsigned char send_buffer[cbor_len];
-    memset(send_buffer, 0, sizeof(send_buffer));
-
-    int rc = get_encoded_send_buffer(cbdata, send_buffer, cbor_len);
-    if (rc == -1) {
-        return;
-    }
-
     if (tcp_addr != NULL) {
         client = new_socket_client(logger, tcp_addr);
         if (client == NULL) {
@@ -96,7 +81,7 @@ void test_server_callback(int argc, char *argv[]) {
             return;
         }
 
-        rc = send(client->socket_number, send_buffer, sizeof(send_buffer), 0);
+        int rc = handle_send(NULL, client->socket_number, true, msg, NULL);
         if (rc == -1) {
             printf("request failed: %s\n", strerror(errno));
             return;
@@ -168,7 +153,6 @@ void test_server_callback(int argc, char *argv[]) {
     free(client->peer_address);
     free(client);
     free_message_t(msg);
-    free_cbor_encoded_data(cbdata);
 }
 
 void start_server_callback(int argc, char *argv[]) {
