@@ -4,6 +4,12 @@ There is a very minimal RPC framework included for sending messages between peer
 
 # Messages
 
+## Packet Diagram
+
+The actual RPC packets sent are illustrated below:
+
+![](https://gateway.temporal.cloud/ipfs/QmTH9t2FHSDzPo4yQBi4VRMfiVuYgySch4CRUyeDFhCv6g)
+
 ## Types
 
 The following message types are denoted as an enum `MESSAGE_TYPES`
