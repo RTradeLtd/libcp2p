@@ -517,101 +517,75 @@ bool negotiate_secure_connection(conn_handle_data_t *data) {
     return true;
 }
 
-#pragma GCC diagnostic ignored "-Wunused-function"
-
 /*!
- * @brief uses existing server sockets to send data to other socket servers
- * @details uses existing sockets to send a message to the given multiaddress
- * @details if the multiaddress is for the UDP protocol and we have no available UDP
- * file descriptors we return an error
- * @details additionally if the multiaddress is for the TCP protocol and we have no
- * aavailable TCP file descriptors we retun an error
- * @param srv the server whoses sockets we'll leverage
- * @param to_address the multiaddress of the host to send data to
- * @param buffer the actual data to send
- * @param buffer_len the size of the buffer
- * @todo support better source file descriptor selection as this simply uses the
- * first available socket
- * @todo in cases where we only have 1  socket for each protocol (TCP & UDP) this is
- * fine
- * @todo but in the even of having multiple sockets for each protocol this could
- * become problematic
- * @return Success: 0
- * @return Failure: -1
- */
-int socket_server_sendto(socket_server_t *srv, multi_addr_t *to_address,
-                         unsigned char *buffer, size_t buffer_len) {
-
-    bool is_udp = false;
-    bool is_tcp = false;
-
-    if (strstr(to_address->string, "/tcp/") != NULL) {
-        is_tcp = true;
-    }
-
-    if (strstr(to_address->string, "/udp/") != NULL) {
-        is_udp = true;
-    }
-
-    if (is_tcp == false && is_udp == false) {
+  * @brief used for a server to send a message to another server
+  * @details this is a sort of "bi-directional RPC method" whereby a server can send a
+  * @details request to another server acting as a client, but enabling either us
+  * @details or the peer to invoke RPC methods. Essentially it is like handle_inbound_rpc
+  * @details except it is responsible for sending requests to a remote server, and any responses
+  * @details from the server are ran through handle_inbound_rpc
+  * @return Success: 0
+  * @return Failure: -1
+*/
+int socket_server_send(socket_server_t *srv, multi_addr_t *to_address, message_t *msg) {
+    
+    socket_client_t *srv_client = new_socket_client(srv->thl, to_address);
+    if (srv_client == NULL) {
         return -1;
     }
 
-    // iterate over available socket numbers
-    for (int i = 0; i < 65536; i++) {
-
-        if (is_tcp == true) {
-            if (FD_ISSET(i, &srv->tcp_socket_set)) {
-                printf("got tcp socket\n");
-                addr_info *peer_address = multi_addr_to_addr_info(to_address);
-                if (peer_address == NULL) {
-                    printf("failed to get peer_address\n");
-                    return -1;
-                }
-                int bytes_sent =
-                    sendto(i, buffer, buffer_len, 0, peer_address->ai_addr,
-                           peer_address->ai_addrlen);
-
-                freeaddrinfo(peer_address);
-
-                if (bytes_sent == -1) {
-                    srv->thl->log(srv->thl, 0, "failed to send message",
-                                  LOG_LEVELS_ERROR);
-                    return -1;
-                }
-                srv->thl->log(srv->thl, 0, "successfully sent message",
-                              LOG_LEVELS_INFO);
-                return 0; /*! @todo should we log whether or not we failed to send
-                             any data? */
-            }
-        }
-
-        if (is_udp == true) {
-            if (FD_ISSET(i, &srv->udp_socket_set)) {
-                printf("got udp socket\n");
-                addr_info *peer_address = multi_addr_to_addr_info(to_address);
-                if (peer_address == NULL) {
-                    printf("failed to get peer_address\n");
-                    return -1;
-                }
-                int bytes_sent =
-                    sendto(i, buffer, buffer_len, 0, peer_address->ai_addr,
-                           peer_address->ai_addrlen);
-
-                freeaddrinfo(peer_address);
-
-                if (bytes_sent == -1) {
-                    srv->thl->log(srv->thl, 0, "failed to send message",
-                                  LOG_LEVELS_ERROR);
-                    return -1;
-                }
-                srv->thl->log(srv->thl, 0, "successfully sent message",
-                              LOG_LEVELS_INFO);
-                return 0; /*! @todo should we log whether or not we failed to send
-                             any data? */
-            }
+    addr_info *peer_address = NULL;
+    bool is_tcp = false;
+    if (
+        strstr(to_address->string, "/tcp/") != NULL
+    ) {
+        is_tcp = true;
+    } else {
+        peer_address = multi_addr_to_addr_info(to_address);
+        if (peer_address == NULL) {
+            goto EXIT;
         }
     }
 
+    handle_send(srv->thl, srv_client->socket_number, is_tcp, msg, peer_address);
+
+    client_conn_t *conn_data = calloc(1, sizeof(client_conn_t));
+    if (conn_data == NULL) {
+        goto EXIT;
+    }
+
+    conn_data->socket_number = srv_client->socket_number;
+
+    conn_handle_data_t *chdata = calloc(1, sizeof(conn_handle_data_t));
+    if (chdata == NULL) {
+        free(conn_data);
+        goto EXIT;
+    }
+
+    chdata->conn = conn_data;
+    chdata->is_tcp = is_tcp;
+    chdata->srv = srv;
+
+    if (is_tcp == true) {
+        srv->task_func_tcp(chdata);
+    } else {
+        srv->task_func_udp(chdata);
+    }
+
+EXIT:
+
+    /*!
+      * @note we dont free up resources associated with conn_data and chdata
+      * @note because the resources associated with that get freed up by the task func
+      * @note as such we dont close the socket number fo srv_client unless it is UDP
+    */
+    if (is_tcp == false) {
+        close(srv_client->socket_number);
+    }
+    freeaddrinfo(srv_client->peer_address);
+    free(srv_client);
+    if (peer_address != NULL) {
+        freeaddrinfo(peer_address);
+    }
     return -1;
 }

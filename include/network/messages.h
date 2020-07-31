@@ -10,6 +10,8 @@
  * communications channel using ECDSA keys and ECDH key agreement
  */
 
+#pragma once
+
 #include "encoding/cbor.h"
 #include "network/socket.h"
 #include "thirdparty/logger/logger.h"
