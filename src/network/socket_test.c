@@ -85,7 +85,7 @@ void test_new_socket_server(void **state) {
 
     multi_addr_t *tcp_addr2 = multi_address_new_from_string("/ip4/127.0.0.1/tcp/9092");
     multi_addr_t *udp_addr2 = multi_address_new_from_string("/ip4/127.0.0.1/udp/9093");
-    multi_addr_t *endpoint2 = multi_address_new_from_string("/ip4/127.0.0.1/udp/9093");
+    multi_addr_t *endpoint2 = multi_address_new_from_string("/ip4/127.0.0.1/tcp/9092");
     config2->addrs[0] = tcp_addr2;
     config2->addrs[1] = udp_addr2;
     config2->num_addrs = 2;
@@ -97,7 +97,28 @@ void test_new_socket_server(void **state) {
 
     sleep(2);
 
-    int rc = socket_server_sendto(server1, endpoint2, (unsigned char *)"hello", 5);
+
+    message_t *msg = calloc(1, sizeof(message_t));
+    msg->type = MESSAGE_START_ECDH;
+    msg->data = calloc(1, 2);
+    assert(msg->data != NULL);
+    msg->data[0] = 'o';
+    msg->data[1] = 'k';
+    msg->len = 2;
+
+    cbor_encoded_data_t *msg_encoded = cbor_encode_message_t(msg);
+    assert(msg_encoded != NULL);
+
+    size_t cbor_len = get_encoded_send_buffer_len(msg_encoded);
+    unsigned char send_buffer[cbor_len];
+    memset(send_buffer, 0, cbor_len);
+
+    int rc = get_encoded_send_buffer(msg_encoded, send_buffer, cbor_len);
+    assert(rc == 0);
+
+
+
+    rc = socket_server_sendto(server1, endpoint2, send_buffer, cbor_len);
     if (rc != 0) {
         printf("failed to send from server1 to server2: %s\n", strerror(errno));
     }
