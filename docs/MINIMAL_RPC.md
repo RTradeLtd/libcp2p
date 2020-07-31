@@ -52,6 +52,17 @@ To simplify the process of sending and receiving messages `network/messages.h` c
 
 The usage of these two functions removes the need for all message preprocessing. Note however when sending messages, you'll need to provide the `message_t` struct, but `handle_send` will take care of CBOR encoding the data, and properly sending it on the wire.
 
+## Sending
+
+1) Allocate memory for a `message_t` instance
+2) Populate fields
+3) CBOR encode `message_t` with `cbor_encode_message_t`
+4) Get send buffer length with `get_encoded_send_buffer_len`
+5) Initialize `unsigned char` array to buffer length
+6) Populate send buffer with `get_encoded_send_buffer`
+7) Send data with `send` or `sendto`
+
 ## Limitations
 
 At the moment individual RPC messages can't be larger than 8192 bytes (8KiB), although this may be removed in the future.
+
