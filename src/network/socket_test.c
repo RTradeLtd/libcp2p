@@ -120,6 +120,8 @@ void test_new_socket_server(void **state) {
     sleep(5);
     free_socket_server(server);
     multi_address_free(endpoint);
+    free_message_t(msg);
+    free_message_t(recv_msg);
     // free(config.addrs);
 }
 
