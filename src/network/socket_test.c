@@ -41,35 +41,6 @@
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
-/*!
- * @brief example function used to showcase how you can handle connections
- * @note in general should accept a conn_handle_data_t type but this is implementation define
-*/
-void example_task_func_tcp(void *data) {
-    conn_handle_data_t *hdata = (conn_handle_data_t *)data;
-    char buffer[2048];
-    int rc = read(hdata->conn->socket_number, buffer, 2048);
-    switch (rc) {
-        case 0:
-            hdata->srv->thl->log(hdata->srv->thl, 0, "client disconnected", LOG_LEVELS_DEBUG);
-            goto EXIT;
-        case -1:
-            hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_ERROR, "error encountered during read %s", strerror(errno));
-            goto EXIT;
-        default:
-            // connection was successful and we read some data
-            goto EXIT;
-    }
-    printf("hey\n");
-    send(hdata->conn->socket_number, buffer, (size_t)rc, 0);
-    /*! @todo figure out proper close procedures
-    */
-EXIT:
-   close(hdata->conn->socket_number);
-   free(hdata->conn);
-   free(hdata);
-}
-
 void start_socker_server_wrapper(void *data) {
     socket_server_t *server = (socket_server_t *)data;
     start_socket_server(server);
@@ -83,8 +54,7 @@ void test_new_socket_server(void **state) {
     socket_server_config_t *config = new_socket_server_config(2);
     config->max_connections = 100;
     config->num_threads = 6;
-    config->fn_tcp = example_task_func_tcp;
-    // config->fn_udp = example_task_func_udp;
+    config->fn_tcp = handle_inbound_rpc;
 
     multi_addr_t *tcp_addr = multi_address_new_from_string("/ip4/127.0.0.1/tcp/9090");
     multi_addr_t *endpoint = multi_address_new_from_string("/ip4/127.0.0.1/tcp/9090");
@@ -101,6 +71,46 @@ void test_new_socket_server(void **state) {
 
     socket_client_t *client = new_socket_client(thl, endpoint);
     assert(client != NULL);
+
+
+    message_t *msg = calloc(1, sizeof(message_t));
+    if (msg == NULL) {
+        return;
+    }
+
+    msg->data = calloc(1, 6);
+    msg->data[0] = 'h';
+    msg->data[1] = 'e';
+    msg->data[2] = 'l';
+    msg->data[3] = 'l';
+    msg->data[4] = 'o';
+    msg->data[5] = '\0';
+    msg->len = 6;
+    msg->type = MESSAGE_START_ECDH;
+
+    int rc = handle_send(NULL, client->socket_number, msg);
+    if (rc == -1) {
+        printf("request failed: %s\n", strerror(errno));
+        return;
+    }
+
+    message_t *recv_msg =
+        handle_receive(NULL, client->socket_number, MAX_RPC_MSG_SIZE_KB);
+
+    if (recv_msg == NULL) {
+        printf("failed to receive data\n");
+        return;
+    }
+
+    // validate the message type
+    if (recv_msg->type != MESSAGE_BEGIN_ECDH) {
+        printf("bad message type received\n");
+    }
+
+    // validate message data is as expected
+    if (memcmp(recv_msg->data, "ok", recv_msg->len) != 0) {
+        printf("invalid message data received\n");
+    }
 
     sleep(2);
     freeaddrinfo(client->peer_address);
