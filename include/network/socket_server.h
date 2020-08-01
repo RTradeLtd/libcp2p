@@ -191,13 +191,16 @@ void setup_signal_shutdown(int signals[], int num_signals);
 bool negotiate_secure_connection(conn_handle_data_t *data);
 
 /*!
-  * @brief used for a server to send a message to another server
-  * @details this is a sort of "bi-directional RPC method" whereby a server can send a
-  * @details request to another server acting as a client, but enabling either us
-  * @details or the peer to invoke RPC methods. Essentially it is like handle_inbound_rpc
-  * @details except it is responsible for sending requests to a remote server, and any responses
-  * @details from the server are ran through handle_inbound_rpc
-  * @return Success: 0
-  * @return Failure: -1
-*/
-int socket_server_send(socket_server_t *srv, multi_addr_t *to_address, message_t *msg);
+ * @brief used for a server to send a message to another server
+ * @details this is a sort of "bi-directional RPC method" whereby a server can send a
+ * @details request to another server acting as a client, but enabling either us
+ * @details or the peer to invoke RPC methods. Essentially it is like
+ * handle_inbound_rpc
+ * @details except it is responsible for sending requests to a remote server, and any
+ * responses
+ * @details from the server are ran through handle_inbound_rpc
+ * @return Success: 0
+ * @return Failure: -1
+ */
+int socket_server_send(socket_server_t *srv, multi_addr_t *to_address,
+                       message_t *msg);
