@@ -40,7 +40,6 @@ cbor_encoded_data_t *new_cbor_encoded_data(uint8_t *data, size_t len) {
     return out;
 }
 
-
 /*!
  * @brief gets the size of a buffer needed for sending cbor_encoded_data_t
  * @return Success: size of buffer
