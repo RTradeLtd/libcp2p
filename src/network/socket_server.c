@@ -370,9 +370,13 @@ void handle_inbound_rpc(void *data) {
             case MESSAGE_START_ECDH:
                 success = negotiate_secure_connection(hdata);
                 if (success == false) {
-                    hdata->srv->thl->log(hdata->srv->thl, 0, "failed to negotiate secure connection", LOG_LEVELS_DEBUG);
+                    hdata->srv->thl->log(hdata->srv->thl, 0,
+                                         "failed to negotiate secure connection",
+                                         LOG_LEVELS_DEBUG);
                 } else {
-                    hdata->srv->thl->log(hdata->srv->thl, 0, "negotiated secure connection", LOG_LEVELS_DEBUG);
+                    hdata->srv->thl->log(hdata->srv->thl, 0,
+                                         "negotiated secure connection",
+                                         LOG_LEVELS_DEBUG);
                 }
                 break;
             case MESSAGE_BEGIN_ECDH:
@@ -463,19 +467,6 @@ int socket_server_send(socket_server_t *srv, multi_addr_t *to_address,
         return -1;
     }
 
-    addr_info *peer_address = NULL;
-    bool is_tcp = false;
-    if (strstr(to_address->string, "/tcp/") != NULL) {
-        is_tcp = true;
-    } else {
-        peer_address = multi_addr_to_addr_info(to_address);
-        if (peer_address == NULL) {
-            goto EXIT;
-        }
-    }
-
-    handle_send(srv->thl, srv_client->socket_number, msg);
-
     client_conn_t *conn_data = calloc(1, sizeof(client_conn_t));
     if (conn_data == NULL) {
         goto EXIT;
@@ -492,26 +483,21 @@ int socket_server_send(socket_server_t *srv, multi_addr_t *to_address,
     chdata->conn = conn_data;
     chdata->srv = srv;
 
-    if (is_tcp == true) {
-        srv->task_func_tcp(chdata);
-    } else {
-        srv->task_func_udp(chdata);
-    }
+    // send the message to the peer
+    handle_send(srv->thl, srv_client->socket_number, msg);
+
+    // add work to the threadpool to handle responses to the message we just sent
+    thpool_add_work(srv->thpool, srv->task_func_tcp, chdata);
+
+    // return and dont free up resources as the task func handles this
+    return 0;
 
 EXIT:
 
-    /*!
-     * @note we dont free up resources associated with conn_data and chdata
-     * @note because the resources associated with that get freed up by the task func
-     * @note as such we dont close the socket number fo srv_client unless it is UDP
-     */
-    if (is_tcp == false) {
-        close(srv_client->socket_number);
-    }
+    close(srv_client->socket_number);
+
     freeaddrinfo(srv_client->peer_address);
+
     free(srv_client);
-    if (peer_address != NULL) {
-        freeaddrinfo(peer_address);
-    }
     return -1;
 }
