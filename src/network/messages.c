@@ -10,6 +10,7 @@
  * communications channel using ECDSA keys and ECDH key agreement
  */
 
+#include "network/utils.h"
 #include "network/messages.h"
 #include "encoding/cbor.h"
 #include "network/socket.h"
@@ -231,35 +232,13 @@ message_t *handle_receive(thread_logger *thl, int socket_number, bool is_tcp,
 
     size_t rc = 0;
     bool failed = false;
-    char first_byte[1];
-    memset(first_byte, 0, 1);
+    int message_size = 0;
 
-    if (is_tcp == true) {
-        rc = recv(socket_number, first_byte, 1, 0);
-    } else {
-        rc = recvfrom(socket_number, first_byte, 1, 0, NULL, NULL);
-    }
-
-    failed = recv_or_send_failed(thl, rc);
-    if (failed == true) {
+    int rci = receive_int(&message_size, socket_number);
+    if (rci == -1) {
         return NULL;
     }
-
-    /*!
-     * @brief first attempt to derive the size by using atoi
-     * @brief occasionally this will fail and give 0, even though
-     * @brief there is a non-zero value there
-     * @brief in cases where it fails casting to int returns the correct value
-     * @warning in certain cases casting to int returns the wrong value too
-     */
-    int message_size = atoi(first_byte);
-    if (message_size == 0) {
-        message_size = (int)first_byte[0];
-        if (message_size == 0) {
-            return NULL;
-        }
-    }
-
+    printf("message size: %i\n", message_size);
     /*!
      * @brief abort further handling if message size is less than or equal to 0
      * @brief greater than the max RPC message size OR greater than the buffer
@@ -320,17 +299,22 @@ int handle_send(thread_logger *thl, int socket_number, bool is_tcp, message_t *m
 
     unsigned char send_buffer[cbor_len];
     memset(send_buffer, 0, cbor_len);
-
-    int rc = get_encoded_send_buffer(cbdata, send_buffer, cbor_len);
+    memcpy(send_buffer, cbdata->data, cbor_len - 1);
+    // int rc = get_encoded_send_buffer(cbdata, send_buffer, cbor_len);
 
     // free memory as the cbor encoded data struct is no longer needed
     free_cbor_encoded_data(cbdata);
 
-    if (rc == -1) {
-        return -1;
-    }
-
+//    if (rc == -1) {
+//        return -1;
+//    }
+    int rc = 0;
     if (is_tcp == true) {
+        // send the buffer size
+        rc = send_int((int)cbor_len, socket_number);
+        if (rc == -1) {
+            printf("failed to send message size\n");
+        }
         rc = send(socket_number, send_buffer, sizeof(send_buffer), 0);
     } else {
         /*!
