@@ -233,8 +233,17 @@ message_t *handle_receive(thread_logger *thl, int socket_number, bool is_tcp,
     size_t rc = 0;
     bool failed = false;
     int message_size = 0;
+    int rci = 0;
 
-    int rci = receive_int(&message_size, socket_number);
+    if (is_tcp == true) {
+        rci = receive_int_tcp(&message_size, socket_number);
+    } else {
+        /*!
+         * @brief we currently dont use the peer address so it is null
+         */
+        rci = receive_int_udp(&message_size, socket_number, NULL);
+    }
+
     if (rci == -1) {
         return NULL;
     }
@@ -291,30 +300,35 @@ int handle_send(thread_logger *thl, int socket_number, bool is_tcp, message_t *m
         return -1;
     }
 
-    size_t cbor_len = get_encoded_send_buffer_len(cbdata);
-    if (cbor_len <= 0) {
-        free_cbor_encoded_data(cbdata);
-        return -1;
-    }
+    size_t cbor_len = cbdata->len;
 
     unsigned char send_buffer[cbor_len];
     memset(send_buffer, 0, cbor_len);
-    memcpy(send_buffer, cbdata->data, cbor_len - 1);
-    // free memory as the cbor encoded data struct is no longer needed
+    memcpy(send_buffer, cbdata->data, cbor_len);
+
     free_cbor_encoded_data(cbdata);
 
-    //    if (rc == -1) {
-    //        return -1;
-    //    }
     int rc = 0;
+
     if (is_tcp == true) {
         // send the buffer size
-        rc = send_int((int)cbor_len, socket_number);
+        rc = send_int_tcp((int)cbor_len, socket_number);
         if (rc == -1) {
             printf("failed to send message size\n");
+            return -1;
         }
         rc = send(socket_number, send_buffer, sizeof(send_buffer), 0);
     } else {
+        rc = send_int_udp((int)cbor_len, socket_number, peer_address);
+        if (rc == -1) {
+            printf("failed to send message size\n");
+            return -1;
+        }
+        /*!
+         * @warning we might need to refactor send_int to properly send to
+         * destination address
+         * @todo this likely needs a refactor
+         */
         /*!
          * @todo we likely need to refactor this and send two datagrams
          * @todo the first datagram containing the messsage size and

@@ -33,10 +33,3 @@ void free_cbor_encoded_data(cbor_encoded_data_t *in);
  * @return Failure: NULL pointer
  */
 cbor_encoded_data_t *new_cbor_encoded_data(uint8_t *data, size_t len);
-
-/*!
- * @brief gets the size of a buffer needed for sending cbor_encoded_data_t
- * @return Success: size of buffer
- * @return Failure: -1
- */
-size_t get_encoded_send_buffer_len(cbor_encoded_data_t *msg);
