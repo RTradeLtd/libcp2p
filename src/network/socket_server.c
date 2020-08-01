@@ -63,7 +63,6 @@ socket_server_t *new_socket_server(thread_logger *thl,
                                    SOCKET_OPTS sock_opts[], int num_opts) {
 
     int max_socket_num = 0;
-
     fd_set grouped_socket_set;
     fd_set tcp_socket_set;
     fd_set udp_socket_set;
@@ -96,8 +95,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
         // handle a tcp multi_address
         if (is_tcp) {
 
-            int tcp_socket_num = get_new_socket(thl, bind_address, sock_opts,
-                                                num_opts, false, true);
+            int tcp_socket_num =
+                get_new_socket(thl, bind_address, sock_opts, num_opts, false, true);
             if (tcp_socket_num == -1) {
                 freeaddrinfo(bind_address);
                 thl->log(thl, 0, "failed to get new tcp socket", LOG_LEVELS_ERROR);
@@ -130,8 +129,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
         // handle a udp multi_address
         if (is_udp) {
 
-            int udp_socket_num = get_new_socket(thl, bind_address, sock_opts,
-                                                num_opts, false, false);
+            int udp_socket_num =
+                get_new_socket(thl, bind_address, sock_opts, num_opts, false, false);
             if (udp_socket_num == -1) {
                 freeaddrinfo(bind_address);
                 thl->log(thl, 0, "failed to get new udp socket", LOG_LEVELS_ERROR);
@@ -518,17 +517,20 @@ bool negotiate_secure_connection(conn_handle_data_t *data) {
 }
 
 /*!
-  * @brief used for a server to send a message to another server
-  * @details this is a sort of "bi-directional RPC method" whereby a server can send a
-  * @details request to another server acting as a client, but enabling either us
-  * @details or the peer to invoke RPC methods. Essentially it is like handle_inbound_rpc
-  * @details except it is responsible for sending requests to a remote server, and any responses
-  * @details from the server are ran through handle_inbound_rpc
-  * @return Success: 0
-  * @return Failure: -1
-*/
-int socket_server_send(socket_server_t *srv, multi_addr_t *to_address, message_t *msg) {
-    
+ * @brief used for a server to send a message to another server
+ * @details this is a sort of "bi-directional RPC method" whereby a server can send a
+ * @details request to another server acting as a client, but enabling either us
+ * @details or the peer to invoke RPC methods. Essentially it is like
+ * handle_inbound_rpc
+ * @details except it is responsible for sending requests to a remote server, and any
+ * responses
+ * @details from the server are ran through handle_inbound_rpc
+ * @return Success: 0
+ * @return Failure: -1
+ */
+int socket_server_send(socket_server_t *srv, multi_addr_t *to_address,
+                       message_t *msg) {
+
     socket_client_t *srv_client = new_socket_client(srv->thl, to_address);
     if (srv_client == NULL) {
         return -1;
@@ -536,9 +538,7 @@ int socket_server_send(socket_server_t *srv, multi_addr_t *to_address, message_t
 
     addr_info *peer_address = NULL;
     bool is_tcp = false;
-    if (
-        strstr(to_address->string, "/tcp/") != NULL
-    ) {
+    if (strstr(to_address->string, "/tcp/") != NULL) {
         is_tcp = true;
     } else {
         peer_address = multi_addr_to_addr_info(to_address);
@@ -575,10 +575,10 @@ int socket_server_send(socket_server_t *srv, multi_addr_t *to_address, message_t
 EXIT:
 
     /*!
-      * @note we dont free up resources associated with conn_data and chdata
-      * @note because the resources associated with that get freed up by the task func
-      * @note as such we dont close the socket number fo srv_client unless it is UDP
-    */
+     * @note we dont free up resources associated with conn_data and chdata
+     * @note because the resources associated with that get freed up by the task func
+     * @note as such we dont close the socket number fo srv_client unless it is UDP
+     */
     if (is_tcp == false) {
         close(srv_client->socket_number);
     }
