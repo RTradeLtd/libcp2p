@@ -108,46 +108,6 @@ void test_server_callback(int argc, char *argv[]) {
         free_message_t(recv_msg);
     }
 
-    /*if (udp_addr != NULL) {
-        client = new_socket_client(logger, udp_addr);
-        if (client == NULL) {
-            if (tcp_addr != NULL) {
-                multi_address_free(tcp_addr);
-            }
-            if (udp_addr != NULL) {
-                multi_address_free(udp_addr);
-            }
-            clear_thread_logger(logger);
-            return;
-        }
-
-        int rc = handle_send(NULL, client->socket_number, false, msg,
-                             client->peer_address);
-        if (rc == -1) {
-            printf("request failed: %s\n", strerror(errno));
-            return;
-        }
-        message_t *recv_msg =
-            handle_receive(NULL, client->socket_number, false, MAX_RPC_MSG_SIZE_KB);
-
-        if (recv_msg == NULL) {
-            printf("failed to receive data\n");
-            return;
-        }
-
-        // validate the message type
-        if (recv_msg->type != MESSAGE_BEGIN_ECDH) {
-            printf("bad message type received\n");
-        }
-
-        // validate message data is as expected
-        if (memcmp(recv_msg->data, "ok", recv_msg->len) != 0) {
-            printf("invalid message data received\n");
-        }
-
-        free_message_t(recv_msg);
-    }*/
-
     if (tcp_addr != NULL) {
         multi_address_free(tcp_addr);
     }
