@@ -50,7 +50,7 @@ void start_socker_server_wrapper(void *data) {
   * @brief in this we reuse the thread pool to start the socket server listening process, but you will likely want to do this from your main thread
 */
 void test_new_socket_server(void **state) {
-    thread_logger *thl = new_thread_logger(false);
+    thread_logger *thl = new_thread_logger(true);
     socket_server_config_t *config = new_socket_server_config(2);
     config->max_connections = 100;
     config->num_threads = 6;
