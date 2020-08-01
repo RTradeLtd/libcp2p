@@ -72,7 +72,7 @@ typedef struct socket_server {
     int max_socket_num;
     fd_set grouped_socket_set;
     fd_set tcp_socket_set;
-    fd_set udp_socket_set;
+    // fd_set udp_socket_set;
     thread_logger *thl;
     /*! @brief a thread pool that allows submitting worker tasks to a pool of threads
      */
@@ -102,7 +102,6 @@ typedef struct client_conn {
 typedef struct conn_handle_data {
     socket_server_t *srv;
     client_conn_t *conn;
-    bool is_tcp; /*! @brief if false then this is for a udp connection */
 } conn_handle_data_t;
 
 /*!

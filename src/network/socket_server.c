@@ -65,11 +65,9 @@ socket_server_t *new_socket_server(thread_logger *thl,
     int max_socket_num = 0;
     fd_set grouped_socket_set;
     fd_set tcp_socket_set;
-    fd_set udp_socket_set;
 
     // initialize the file descriptor groups
     FD_ZERO(&tcp_socket_set);
-    FD_ZERO(&udp_socket_set);
     FD_ZERO(&grouped_socket_set);
 
     for (int i = 0; i < config->num_addrs; i++) {
@@ -85,12 +83,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
 
         if (bind_address->ai_socktype == SOCK_STREAM) {
             is_tcp = true;
-        } /* else if (bind_address->ai_socktype == SOCK_DGRAM) {
-             is_udp = true;
-         } else {
-             thl->log(thl, 0, "invalid multi_address provided", LOG_LEVELS_ERROR);
-             goto EXIT;
-         }*/
+        }
 
         // handle a tcp multi_address
         if (is_tcp) {
@@ -125,32 +118,6 @@ socket_server_t *new_socket_server(thread_logger *thl,
 
             freeaddrinfo(bind_address);
         }
-
-        /* handle a udp multi_address
-        if (is_udp) {
-
-            int udp_socket_num =
-                get_new_socket(thl, bind_address, sock_opts, num_opts, false, false);
-            if (udp_socket_num == -1) {
-                freeaddrinfo(bind_address);
-                thl->log(thl, 0, "failed to get new udp socket", LOG_LEVELS_ERROR);
-                goto EXIT;
-            }
-
-            FD_SET(udp_socket_num, &udp_socket_set);
-            FD_SET(udp_socket_num, &grouped_socket_set);
-
-            if (udp_socket_num > max_socket_num) {
-                max_socket_num = udp_socket_num;
-            }
-
-            if (config->recv_timeout_sec > 0) {
-                set_socket_recv_timeout(udp_socket_num, config->recv_timeout_sec);
-            }
-
-            freeaddrinfo(bind_address);
-        }
-        */
     }
 
     socket_server_t *server = calloc(1, sizeof(socket_server_t));
@@ -167,7 +134,6 @@ socket_server_t *new_socket_server(thread_logger *thl,
     server->max_socket_num = max_socket_num;
     server->grouped_socket_set = grouped_socket_set;
     server->tcp_socket_set = tcp_socket_set;
-    server->udp_socket_set = udp_socket_set;
     server->task_func_tcp = config->fn_tcp;
     // server->task_func_udp = config->fn_udp;
     server->thl = thl;
@@ -180,9 +146,6 @@ EXIT:
 
     for (int i = 0; i < max_socket_num; i++) {
         if (FD_ISSET(i, &tcp_socket_set)) {
-            close(i);
-        }
-        if (FD_ISSET(i, &udp_socket_set)) {
             close(i);
         }
     }
@@ -198,11 +161,6 @@ void free_socket_server(socket_server_t *srv) {
         if (FD_ISSET(i, &srv->tcp_socket_set)) {
             srv->thl->logf(srv->thl, 0, LOG_LEVELS_INFO,
                            "closing tcp socket number %i", i);
-            close(i);
-        }
-        if (FD_ISSET(i, &srv->udp_socket_set)) {
-            srv->thl->logf(srv->thl, 0, LOG_LEVELS_INFO,
-                           "closing udp socket number %i", i);
             close(i);
         }
     }
@@ -284,37 +242,7 @@ void start_socket_server(socket_server_t *srv) {
                     }
                     chdata->srv = srv;
                     chdata->conn = conn;
-                    chdata->is_tcp = true;
                     thpool_add_work(srv->thpool, srv->task_func_tcp, chdata);
-                }
-
-                // if it is a udp socket, handle it with the udp worker func
-                if (FD_ISSET(i, &srv->udp_socket_set)) {
-
-                    client_conn_t *conn = calloc(1, sizeof(client_conn_t));
-                    if (conn == NULL) {
-                        srv->thl->log(srv->thl, 0, "failed to calloc client_t",
-                                      LOG_LEVELS_DEBUG);
-                        sleep(0.50);
-                        continue;
-                    }
-                    conn->socket_number = i;
-
-                    conn_handle_data_t *chdata =
-                        calloc(1, sizeof(conn_handle_data_t));
-                    if (chdata == NULL) {
-                        free(conn);
-                        srv->thl->log(srv->thl, 0, "failed to calloc client_t",
-                                      LOG_LEVELS_DEBUG);
-                        sleep(0.50);
-                        continue;
-                    }
-
-                    chdata->srv = srv;
-                    chdata->conn = conn;
-                    chdata->is_tcp = false;
-
-                    thpool_add_work(srv->thpool, srv->task_func_udp, chdata);
                 }
             }
         }
@@ -457,13 +385,8 @@ void handle_inbound_rpc(void *data) {
     }
 RETURN:
 
-    hdata->srv->thl->logf(hdata->srv->thl, 0, LOG_LEVELS_DEBUG,
-                          "terminating connection. type tcp: %i", hdata->is_tcp);
+    close(hdata->conn->socket_number);
 
-    // if TCP, close the connection to the client socket
-    if (hdata->is_tcp == true) {
-        close(hdata->conn->socket_number);
-    }
     if (hdata != NULL) {
         free(hdata->conn);
         free(hdata);
@@ -483,12 +406,6 @@ void setup_signal_shutdown(int signals[], int num_signals) {
  * @brief used to negotiate a secure connection with the current connection
  */
 bool negotiate_secure_connection(conn_handle_data_t *data) {
-    /*!
-     * @warning UDP secure connections currently disabled
-     */
-    if (data->is_tcp == false) {
-        return false;
-    }
     message_t *msg = calloc(1, sizeof(message_t));
     if (msg == NULL) {
         return false;
@@ -563,7 +480,6 @@ int socket_server_send(socket_server_t *srv, multi_addr_t *to_address,
     }
 
     chdata->conn = conn_data;
-    chdata->is_tcp = is_tcp;
     chdata->srv = srv;
 
     if (is_tcp == true) {
