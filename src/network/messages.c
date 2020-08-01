@@ -241,13 +241,14 @@ message_t *handle_receive(thread_logger *thl, int socket_number, bool is_tcp,
         /*!
          * @brief we currently dont use the peer address so it is null
          */
-        rci = receive_int_udp(&message_size, socket_number, NULL);
+        // rci = receive_int_udp(&message_size, socket_number, NULL);
+        rci = recvfrom(socket_number, &message_size, sizeof(message_size), 0, NULL, NULL);
     }
 
     if (rci == -1) {
         return NULL;
     }
-
+    printf("message size: %i\n", message_size);
     /*!
      * @brief abort further handling if message size is less than or equal to 0
      * @brief greater than the max RPC message size OR greater than the buffer
@@ -319,7 +320,9 @@ int handle_send(thread_logger *thl, int socket_number, bool is_tcp, message_t *m
         }
         rc = send(socket_number, send_buffer, sizeof(send_buffer), 0);
     } else {
-        rc = send_int_udp((int)cbor_len, socket_number, peer_address);
+        int cbor_len_i = (int)cbor_len;
+        printf("cobr len: %i\n", cbor_len_i);
+        rc = sendto(socket_number, &cbor_len_i, sizeof(cbor_len_i), 0,  peer_address->ai_addr, peer_address->ai_addrlen);
         if (rc == -1) {
             printf("failed to send message size\n");
             return -1;
