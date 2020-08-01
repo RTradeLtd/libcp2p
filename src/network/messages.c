@@ -10,10 +10,10 @@
  * communications channel using ECDSA keys and ECDH key agreement
  */
 
-#include "network/utils.h"
 #include "network/messages.h"
 #include "encoding/cbor.h"
 #include "network/socket.h"
+#include "network/utils.h"
 #include "tinycbor/cbor.h"
 #include <netdb.h>
 #include <stdint.h>
@@ -238,7 +238,7 @@ message_t *handle_receive(thread_logger *thl, int socket_number, bool is_tcp,
     if (rci == -1) {
         return NULL;
     }
-    
+
     /*!
      * @brief abort further handling if message size is less than or equal to 0
      * @brief greater than the max RPC message size OR greater than the buffer
@@ -300,14 +300,12 @@ int handle_send(thread_logger *thl, int socket_number, bool is_tcp, message_t *m
     unsigned char send_buffer[cbor_len];
     memset(send_buffer, 0, cbor_len);
     memcpy(send_buffer, cbdata->data, cbor_len - 1);
-    // int rc = get_encoded_send_buffer(cbdata, send_buffer, cbor_len);
-
     // free memory as the cbor encoded data struct is no longer needed
     free_cbor_encoded_data(cbdata);
 
-//    if (rc == -1) {
-//        return -1;
-//    }
+    //    if (rc == -1) {
+    //        return -1;
+    //    }
     int rc = 0;
     if (is_tcp == true) {
         // send the buffer size
