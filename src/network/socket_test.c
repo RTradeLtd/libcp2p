@@ -41,39 +41,6 @@
 
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
-
-/*!
- * @brief example function used to showcase how you can udp connections
- * @note in general should accept a conn_handle_data_t type but this is implementation defined
-*/
-void example_task_func_udp(void *data) {
-    conn_handle_data_t *hdata = (conn_handle_data_t *)data;
-    sock_addr client_address;
-    socklen_t len = sizeof(client_address);
-    char buffer[2048];
-    int bytes_received = recvfrom(
-        hdata->conn->socket_number,
-        buffer,
-        2048,
-        0,
-        &client_address,
-        &len
-    );
-    if (bytes_received == -1 || bytes_received == 0) {
-        goto EXIT;
-    }
-    hdata->srv->thl->logf(
-        hdata->srv->thl,
-        0,
-        LOG_LEVELS_INFO,
-        "received message from client %s",
-        buffer
-    );
-EXIT:
-   free(hdata->conn);
-   free(hdata);
-}
-
 /*!
  * @brief example function used to showcase how you can handle connections
  * @note in general should accept a conn_handle_data_t type but this is implementation define
@@ -93,6 +60,7 @@ void example_task_func_tcp(void *data) {
             // connection was successful and we read some data
             goto EXIT;
     }
+    printf("hey\n");
     send(hdata->conn->socket_number, buffer, (size_t)rc, 0);
     /*! @todo figure out proper close procedures
     */
@@ -119,11 +87,9 @@ void test_new_socket_server(void **state) {
     // config->fn_udp = example_task_func_udp;
 
     multi_addr_t *tcp_addr = multi_address_new_from_string("/ip4/127.0.0.1/tcp/9090");
-    multi_addr_t *udp_addr = multi_address_new_from_string("/ip4/127.0.0.1/udp/9091");
-    multi_addr_t *endpoint = multi_address_new_from_string("/ip4/127.0.0.1/udp/9091");
+    multi_addr_t *endpoint = multi_address_new_from_string("/ip4/127.0.0.1/tcp/9090");
     config->addrs[0] = tcp_addr;
-    config->addrs[1] = udp_addr;
-    config->num_addrs = 2;
+    config->num_addrs = 1;
 
     SOCKET_OPTS opts[2] = {REUSEADDR, NOBLOCK};
 
@@ -136,7 +102,6 @@ void test_new_socket_server(void **state) {
     socket_client_t *client = new_socket_client(thl, endpoint);
     assert(client != NULL);
 
-    socket_client_sendto(client, client->peer_address, (unsigned char *)"hello world\n", strlen("hello world \n"));
     sleep(2);
     freeaddrinfo(client->peer_address);
     close(client->socket_number);
