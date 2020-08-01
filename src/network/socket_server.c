@@ -81,16 +81,16 @@ socket_server_t *new_socket_server(thread_logger *thl,
         }
 
         bool is_tcp = false;
-        bool is_udp = false;
+        // bool is_udp = false;
 
         if (bind_address->ai_socktype == SOCK_STREAM) {
             is_tcp = true;
-        } else if (bind_address->ai_socktype == SOCK_DGRAM) {
-            is_udp = true;
-        } else {
-            thl->log(thl, 0, "invalid multi_address provided", LOG_LEVELS_ERROR);
-            goto EXIT;
-        }
+        } /* else if (bind_address->ai_socktype == SOCK_DGRAM) {
+             is_udp = true;
+         } else {
+             thl->log(thl, 0, "invalid multi_address provided", LOG_LEVELS_ERROR);
+             goto EXIT;
+         }*/
 
         // handle a tcp multi_address
         if (is_tcp) {
@@ -126,7 +126,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
             freeaddrinfo(bind_address);
         }
 
-        // handle a udp multi_address
+        /* handle a udp multi_address
         if (is_udp) {
 
             int udp_socket_num =
@@ -150,6 +150,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
 
             freeaddrinfo(bind_address);
         }
+        */
     }
 
     socket_server_t *server = calloc(1, sizeof(socket_server_t));
@@ -168,7 +169,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
     server->tcp_socket_set = tcp_socket_set;
     server->udp_socket_set = udp_socket_set;
     server->task_func_tcp = config->fn_tcp;
-    server->task_func_udp = config->fn_udp;
+    // server->task_func_udp = config->fn_udp;
     server->thl = thl;
     pthread_mutex_init(&shutdown_mutex, NULL);
     server->thl->log(server->thl, 0, "initialized server", LOG_LEVELS_INFO);
@@ -419,7 +420,7 @@ void handle_inbound_rpc(void *data) {
         }
 
         message_t *msg = handle_receive(hdata->srv->thl, hdata->conn->socket_number,
-                                        hdata->is_tcp, MAX_RPC_MSG_SIZE_KB);
+                                        MAX_RPC_MSG_SIZE_KB);
 
         if (msg == NULL) {
             goto RETURN;
@@ -504,8 +505,7 @@ bool negotiate_secure_connection(conn_handle_data_t *data) {
     msg->data[1] = 'k';
     msg->len = 2;
 
-    int rc = handle_send(data->srv->thl, data->conn->socket_number, data->is_tcp,
-                         msg, NULL);
+    int rc = handle_send(data->srv->thl, data->conn->socket_number, msg);
 
     free_message_t(msg);
 
@@ -547,7 +547,7 @@ int socket_server_send(socket_server_t *srv, multi_addr_t *to_address,
         }
     }
 
-    handle_send(srv->thl, srv_client->socket_number, is_tcp, msg, peer_address);
+    handle_send(srv->thl, srv_client->socket_number, msg);
 
     client_conn_t *conn_data = calloc(1, sizeof(client_conn_t));
     if (conn_data == NULL) {

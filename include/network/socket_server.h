@@ -50,8 +50,8 @@ typedef void(threadpool_task_func)(void *data);
 typedef struct socket_server_config {
     /*! @brief the thread pool task function to use for processing tcp connections */
     threadpool_task_func *fn_tcp;
-    /*! @brief the thread pool task function to use for processing tcp connections */
-    threadpool_task_func *fn_udp;
+    // /*! @brief the thread pool task function to use for processing tcp connections
+    // */ threadpool_task_func *fn_udp;
     int max_connections;
     int num_threads;
     int num_addrs;

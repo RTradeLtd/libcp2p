@@ -206,7 +206,7 @@ size_t size_of_message_t(message_t *msg) {
 }
 
 /*!
- * @brief used to handle receiving data from a UDP or TCP socket
+ * @brief used to handle receiving data from a TCP socket
  * @details it is designed to reduce the manual overhead with regards to processing
  * messages
  * @details because the first byte of any data stream coming in defines the size of
@@ -217,37 +217,26 @@ size_t size_of_message_t(message_t *msg) {
  * side of things
  * @param thl an instance of a thread_logger, can be NULL to disable logging
  * @param socket_num the file descriptor of the socket to receive from
- * @param is_tcp indicates whether this is a TCP socket
  * @param max_buffer_len specifies the maximum buffer length we are willing to
  * allocate memory for
- * @return Success: pointer to an a chunk of memory containing an instance of
- * cbor_encoded_data_t
+ * @return Success: pointer to a chunk of memory containing the received RPC message
  * @return Failure: NULL pointer
- * @warning we will allocate slightly more memory than max_buffer_len since this
- * refers to the maximum buffer size of the data member of a cbor_encoded_data_t
- * instance, althoug h it will only be a few bytes more
+ * @warning we will allocate slightly more memory than max_buffer_len since we have
+ * to decode the received message into a message_t type
  */
-message_t *handle_receive(thread_logger *thl, int socket_number, bool is_tcp,
+message_t *handle_receive(thread_logger *thl, int socket_number,
                           size_t max_buffer_len) {
 
     size_t rc = 0;
     bool failed = false;
     int message_size = 0;
-    int rci = 0;
 
-    if (is_tcp == true) {
-        rci = receive_int_tcp(&message_size, socket_number);
-    } else {
-        /*!
-         * @brief we currently dont use the peer address so it is null
-         */
-        // rci = receive_int_udp(&message_size, socket_number, NULL);
-        rci = recvfrom(socket_number, &message_size, sizeof(message_size), 0, NULL, NULL);
-    }
+    int rci = receive_int_tcp(&message_size, socket_number);
 
     if (rci == -1) {
         return NULL;
     }
+
     printf("message size: %i\n", message_size);
     /*!
      * @brief abort further handling if message size is less than or equal to 0
@@ -264,11 +253,7 @@ message_t *handle_receive(thread_logger *thl, int socket_number, bool is_tcp,
     unsigned char buffer[max_buffer_len];
     memset(buffer, 0, max_buffer_len);
 
-    if (is_tcp == true) {
-        rc = recv(socket_number, buffer, max_buffer_len, 0);
-    } else {
-        rc = recvfrom(socket_number, buffer, max_buffer_len, 0, NULL, NULL);
-    }
+    rc = recv(socket_number, buffer, max_buffer_len, 0);
 
     failed = recv_or_send_failed(thl, rc);
     if (failed == true) {
@@ -282,19 +267,18 @@ message_t *handle_receive(thread_logger *thl, int socket_number, bool is_tcp,
 }
 
 /*!
- * @brief used to handle sending data through a TCP or UDP socket
+ * @brief used to handle sending data through a TCP socket
  * @details designed to reduce manual overhead with sending RPC messages
  * @details it takes care of encoding the given message_t object into a CBOR object
  * @details and then sending the CBOR object through the wire
+ * @param thl an instance of a thread_logger, can be NULL to disable logging
+ * @param socket_num the file descriptor of the socket to receive from
+ * @param msg the actual message we want to send
+ * message to. must not be NULL if is_tcp is false
  * @return Success: 0
  * @return Failure: -1
  */
-int handle_send(thread_logger *thl, int socket_number, bool is_tcp, message_t *msg,
-                addr_info *peer_address) {
-
-    if (is_tcp == false && peer_address == NULL) {
-        return -1;
-    }
+int handle_send(thread_logger *thl, int socket_number, message_t *msg) {
 
     cbor_encoded_data_t *cbdata = cbor_encode_message_t(msg);
     if (cbdata == NULL) {
@@ -309,37 +293,12 @@ int handle_send(thread_logger *thl, int socket_number, bool is_tcp, message_t *m
 
     free_cbor_encoded_data(cbdata);
 
-    int rc = 0;
-
-    if (is_tcp == true) {
-        // send the buffer size
-        rc = send_int_tcp((int)cbor_len, socket_number);
-        if (rc == -1) {
-            printf("failed to send message size\n");
-            return -1;
-        }
-        rc = send(socket_number, send_buffer, sizeof(send_buffer), 0);
-    } else {
-        int cbor_len_i = (int)cbor_len;
-        printf("cobr len: %i\n", cbor_len_i);
-        rc = sendto(socket_number, &cbor_len_i, sizeof(cbor_len_i), 0,  peer_address->ai_addr, peer_address->ai_addrlen);
-        if (rc == -1) {
-            printf("failed to send message size\n");
-            return -1;
-        }
-        /*!
-         * @warning we might need to refactor send_int to properly send to
-         * destination address
-         * @todo this likely needs a refactor
-         */
-        /*!
-         * @todo we likely need to refactor this and send two datagrams
-         * @todo the first datagram containing the messsage size and
-         * @todo the second datagram containing the actual message data
-         */
-        rc = sendto(socket_number, send_buffer, sizeof(send_buffer), 0,
-                    peer_address->ai_addr, peer_address->ai_addrlen);
+    int rc = rc = send_int_tcp((int)cbor_len, socket_number);
+    if (rc == -1) {
+        printf("failed to send message size\n");
+        return -1;
     }
+    rc = send(socket_number, send_buffer, sizeof(send_buffer), 0);
 
     bool failed = recv_or_send_failed(thl, rc);
     if (failed == true) {

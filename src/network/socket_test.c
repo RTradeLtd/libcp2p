@@ -116,7 +116,7 @@ void test_new_socket_server(void **state) {
     config->max_connections = 100;
     config->num_threads = 6;
     config->fn_tcp = example_task_func_tcp;
-    config->fn_udp = example_task_func_udp;
+    // config->fn_udp = example_task_func_udp;
 
     multi_addr_t *tcp_addr = multi_address_new_from_string("/ip4/127.0.0.1/tcp/9090");
     multi_addr_t *udp_addr = multi_address_new_from_string("/ip4/127.0.0.1/udp/9091");
