@@ -370,9 +370,9 @@ void handle_inbound_rpc(void *data) {
             case MESSAGE_START_ECDH:
                 success = negotiate_secure_connection(hdata);
                 if (success == false) {
-                    printf("failed to negotiate secure connection\n");
+                    hdata->srv->thl->log(hdata->srv->thl, 0, "failed to negotiate secure connection", LOG_LEVELS_DEBUG);
                 } else {
-                    printf("successfully negotiated secure connection\n");
+                    hdata->srv->thl->log(hdata->srv->thl, 0, "negotiated secure connection", LOG_LEVELS_DEBUG);
                 }
                 break;
             case MESSAGE_BEGIN_ECDH:
