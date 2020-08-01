@@ -157,19 +157,29 @@ EXIT:
  */
 void free_socket_server(socket_server_t *srv) {
     srv->thl->log(srv->thl, 0, "closing sockets", LOG_LEVELS_INFO);
+
     for (int i = 0; i < srv->max_socket_num; i++) {
+
         if (FD_ISSET(i, &srv->tcp_socket_set)) {
+
             srv->thl->logf(srv->thl, 0, LOG_LEVELS_INFO,
                            "closing tcp socket number %i", i);
+
             close(i);
         }
     }
+
     srv->thl->log(srv->thl, 0, "waiting for existing tasks to exit",
                   LOG_LEVELS_INFO);
+
     thpool_destroy(srv->thpool);
+
     srv->thl->log(srv->thl, 0, "all taskes exited, goodbye", LOG_LEVELS_INFO);
+
     pthread_mutex_destroy(&shutdown_mutex);
+
     clear_thread_logger(srv->thl);
+
     free(srv);
 }
 

@@ -237,7 +237,6 @@ message_t *handle_receive(thread_logger *thl, int socket_number,
         return NULL;
     }
 
-    printf("message size: %i\n", message_size);
     /*!
      * @brief abort further handling if message size is less than or equal to 0
      * @brief greater than the max RPC message size OR greater than the buffer
@@ -295,9 +294,9 @@ int handle_send(thread_logger *thl, int socket_number, message_t *msg) {
 
     int rc = rc = send_int_tcp((int)cbor_len, socket_number);
     if (rc == -1) {
-        printf("failed to send message size\n");
         return -1;
     }
+
     rc = send(socket_number, send_buffer, sizeof(send_buffer), 0);
 
     bool failed = recv_or_send_failed(thl, rc);
