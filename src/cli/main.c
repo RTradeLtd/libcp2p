@@ -81,14 +81,14 @@ void test_server_callback(int argc, char *argv[]) {
             return;
         }
 
-        int rc = handle_send(NULL, client->socket_number, true, msg, NULL);
+        int rc = handle_send(NULL, client->socket_number, msg);
         if (rc == -1) {
             printf("request failed: %s\n", strerror(errno));
             return;
         }
 
         message_t *recv_msg =
-            handle_receive(NULL, client->socket_number, true, MAX_RPC_MSG_SIZE_KB);
+            handle_receive(NULL, client->socket_number, MAX_RPC_MSG_SIZE_KB);
 
         if (recv_msg == NULL) {
             printf("failed to receive data\n");
@@ -108,7 +108,7 @@ void test_server_callback(int argc, char *argv[]) {
         free_message_t(recv_msg);
     }
 
-    if (udp_addr != NULL) {
+    /*if (udp_addr != NULL) {
         client = new_socket_client(logger, udp_addr);
         if (client == NULL) {
             if (tcp_addr != NULL) {
@@ -146,7 +146,7 @@ void test_server_callback(int argc, char *argv[]) {
         }
 
         free_message_t(recv_msg);
-    }
+    }*/
 
     if (tcp_addr != NULL) {
         multi_address_free(tcp_addr);
@@ -188,7 +188,7 @@ void start_server_callback(int argc, char *argv[]) {
     config->addrs[0] = tcp_addr;
     config->addrs[1] = udp_addr;
     config->fn_tcp = handle_inbound_rpc;
-    config->fn_udp = handle_inbound_rpc;
+    // config->fn_udp = handle_inbound_rpc;
     config->recv_timeout_sec = 3;
 
     thread_logger *logger = new_thread_logger(true);
