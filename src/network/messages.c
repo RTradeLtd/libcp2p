@@ -238,7 +238,7 @@ message_t *handle_receive(thread_logger *thl, int socket_number, bool is_tcp,
     if (rci == -1) {
         return NULL;
     }
-    printf("message size: %i\n", message_size);
+    
     /*!
      * @brief abort further handling if message size is less than or equal to 0
      * @brief greater than the max RPC message size OR greater than the buffer
