@@ -58,6 +58,7 @@ bool peerstore_have_peer(peerstore_t *pst, unsigned char *peer_id) {
  * @note if we already have the peer we report true and return early
  * @todo fix possible race condition with peerstore_have_peer check and the write
  * lock we claim here
+ * @todo add peer_id and public_key verification
  * @return Success (not addedd): true
  * @return Success(added): true
  * @return Failure: false
