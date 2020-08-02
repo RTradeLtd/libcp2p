@@ -38,10 +38,7 @@
  * start_socket_server function calls
  */
 pthread_mutex_t shutdown_mutex;
-/*!
- * @brief internal boolean variable used to signal async start_socket_server function
- * calls
- */
+
 bool do_shutdown = false;
 
 /*!
@@ -351,7 +348,7 @@ void handle_inbound_rpc(void *data) {
     }
 
     for (;;) {
-
+        printf("looping\n");
         // check to see if we shoudl exit
         if (do_shutdown == true) {
             goto RETURN;
@@ -399,6 +396,8 @@ void handle_inbound_rpc(void *data) {
         free_message_t(msg);
     }
 RETURN:
+
+    hdata->srv->thl->log(hdata->srv->thl, 0, "closing connection", LOG_LEVELS_DEBUG);
 
     close(hdata->conn->socket_number);
 
@@ -489,6 +488,9 @@ int socket_server_send(socket_server_t *srv, multi_addr_t *to_address,
 
     // add work to the threadpool to handle responses to the message we just sent
     thpool_add_work(srv->thpool, srv->task_func_tcp, chdata);
+
+    freeaddrinfo(srv_client->peer_address);
+    free(srv_client);
 
     // return and dont free up resources as the task func handles this
     return 0;
