@@ -1,4 +1,6 @@
 #include "peerstore/peerstore.h"
+#include "crypto/peerutils.h"
+#include "crypto/sha256.h"
 #include <pthread.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -67,20 +69,29 @@ bool peerstore_insert_peer(peerstore_t *pst, unsigned char *peer_id,
                            unsigned char *public_key, size_t peer_id_len,
                            size_t public_key_len) {
 
-    if (peerstore_have_peer(pst, peer_id) == true) {
-        return true;
-    }
-
     bool ok = false;
-    pthread_rwlock_wrlock(&pst->mutex);
 
-    /*!
-     * @todo enable lru type cache to clean out old entries
-     */
+    // perform validation checksbefore we do any expensive computations and blockikng locks
+
+    /*! *@todo enable lru type cache to clean out old entries */
     if (pst->num_peers == pst->max_peers) {
         printf("too many peers stored\n");
         goto EXIT;
     }
+
+    if (peerstore_have_peer(pst, peer_id) == true) {
+        return true;
+    }
+
+    // validate the public key and peerid
+    if (peerstore_validate_peer_id(peer_id, public_key, peer_id_len, public_key_len) == false) {
+        goto EXIT;
+    }
+
+
+    pthread_rwlock_wrlock(&pst->mutex);
+
+
 
     bool resized = peerstore_resize_if_needed(pst);
     if (resized == false) {
@@ -144,7 +155,7 @@ bool peerstore_get_public_key(peerstore_t *pst, unsigned char *peer_id,
             }
             memcpy(output, pst->peers[i].public_key, pst->peers[i].public_key_len);
             ok = true;
-        }        
+        }
     }
 
 EXIT:
@@ -152,6 +163,44 @@ EXIT:
     pthread_rwlock_unlock(&pst->mutex);
 
     return ok;
+}
+
+/*!
+ * @brief used to validate the peerID ensuring that the given public key matches the
+ * given peerid
+ * @param peer_id the actual peerid
+ * @param public_key the public key in PEM format
+ * @param peer_id_len the size of the peer_id
+ * @param public_key_len the size of the public_key
+ */
+bool peerstore_validate_peer_id(unsigned char *peer_id, unsigned char *public_key,
+                                size_t peer_id_len, size_t public_key_len) {
+
+    unsigned char sha256_hash[32];
+    memset(sha256_hash, 0, 32);
+
+    int rc = libp2p_crypto_hashing_sha256(public_key, peer_id_len, sha256_hash);
+    if (rc != 1) {
+        printf("failed to hash public key\n");
+        return false;
+    }
+
+    unsigned char ret_peer_id[1024]; /*! @todo enable better length selection */
+    memset(ret_peer_id, 0, 1024);
+    size_t ret_peer_size = 0;
+
+    rc = libp2p_new_peer_id(ret_peer_id, &ret_peer_size, sha256_hash, 32);
+    if (rc != 1) {
+        printf("failed to generate peerid\n");
+        return false;
+    }
+
+    if (memcmp(peer_id, ret_peer_id, peer_id_len) != 0) {
+        printf("invalid peerid given\n");
+        return false;
+    }
+
+    return true;
 }
 
 /*!

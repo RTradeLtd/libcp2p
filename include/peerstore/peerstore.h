@@ -86,6 +86,17 @@ bool peerstore_get_public_key(peerstore_t *pst, unsigned char *peer_id,
                               unsigned char *output, size_t output_len);
 
 /*!
+ * @brief used to validate the peerID ensuring that the given public key matches the
+ * given peerid
+ * @param peer_id the actual peerid
+ * @param public_key the public key in PEM format
+ * @param peer_id_len the size of the peer_id
+ * @param public_key_len the size of the public_key
+ */
+bool peerstore_validate_peer_id(unsigned char *peer_id, unsigned char *public_key,
+                                size_t peer_id_len, size_t public_key_len);
+
+/*!
  * @brief returns a new instance of peerstore_t
  * @details is responsible for allocating memory and initializing the mutex
  * @details it initially allocates 2 slots of memory for the the peers memory
