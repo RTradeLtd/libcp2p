@@ -65,6 +65,7 @@ bool peerstore_have_peer(peerstore_t *pst, unsigned char *peer_id) {
  * @return Success(added): true
  * @return Failure: false
  */
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 bool peerstore_insert_peer(peerstore_t *pst, unsigned char *peer_id,
                            unsigned char *public_key, size_t peer_id_len,
                            size_t public_key_len) {
