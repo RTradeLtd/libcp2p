@@ -113,7 +113,8 @@ void test_new_socket_server(void **state) {
     free_socket_server(server2);
     multi_address_free(endpoint1);
     multi_address_free(endpoint2);
-
+    free_message_t(msg);
+    
     // free(config.addrs);
 }
 
