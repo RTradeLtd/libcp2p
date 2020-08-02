@@ -348,7 +348,6 @@ void handle_inbound_rpc(void *data) {
     }
 
     for (;;) {
-        printf("looping\n");
         // check to see if we shoudl exit
         if (do_shutdown == true) {
             goto RETURN;
