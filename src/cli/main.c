@@ -123,7 +123,7 @@ void test_server_callback(int argc, char *argv[]) {
 }
 
 void start_server_callback(int argc, char *argv[]) {
-    socket_server_config_t *config = new_socket_server_config(2);
+    socket_server_config_t *config = new_socket_server_config(1);
     if (config == NULL) {
         printf("failed to initialize config\n");
         return;
@@ -136,19 +136,11 @@ void start_server_callback(int argc, char *argv[]) {
         return;
     }
 
-    multi_addr_t *udp_addr =
-        multi_address_new_from_string((char *)*listen_address_udp->sval);
-    if (udp_addr == NULL) {
-        free_socket_server_config(config);
-        return;
-    }
 
     config->max_connections = 100;
     config->num_threads = 6;
     config->addrs[0] = tcp_addr;
-    config->addrs[1] = udp_addr;
     config->fn_tcp = handle_inbound_rpc;
-    // config->fn_udp = handle_inbound_rpc;
     config->recv_timeout_sec = 3;
 
     thread_logger *logger = new_thread_logger(true);
