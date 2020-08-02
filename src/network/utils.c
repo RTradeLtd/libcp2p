@@ -25,7 +25,9 @@ int send_int_tcp(int num, int fd) {
     int left = sizeof(conv);
     int rc;
     do {
-
+        if (do_shutdown == true) {
+            return -1;
+        }
         rc = send(fd, data, left, 0);
         if (rc < 0) {
             if ((errno == EAGAIN) || (errno == EWOULDBLOCK)) {
@@ -55,6 +57,9 @@ int receive_int_tcp(int *num, int fd) {
     int left = sizeof(ret);
     int rc;
     do {
+        if (do_shutdown == true) {
+            return -1;
+        }
         rc = recv(fd, data, left, 0);
         if (rc <= 0) { /* instead of ret */
             if ((errno == EAGAIN) || (errno == EWOULDBLOCK)) {

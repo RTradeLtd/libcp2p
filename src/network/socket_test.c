@@ -50,27 +50,46 @@ void start_socker_server_wrapper(void *data) {
   * @brief in this we reuse the thread pool to start the socket server listening process, but you will likely want to do this from your main thread
 */
 void test_new_socket_server(void **state) {
-    thread_logger *thl = new_thread_logger(true);
-    socket_server_config_t *config = new_socket_server_config(2);
-    config->max_connections = 100;
-    config->num_threads = 6;
-    config->fn_tcp = handle_inbound_rpc;
+    // start server 1
+    thread_logger *thl1 = new_thread_logger(true);
+    socket_server_config_t *config1 = new_socket_server_config(1);
+    config1->max_connections = 100;
+    config1->num_threads = 6;
+    config1->recv_timeout_sec = 3;
+    config1->fn_tcp = handle_inbound_rpc;
 
-    multi_addr_t *tcp_addr = multi_address_new_from_string("/ip4/127.0.0.1/tcp/9090");
-    multi_addr_t *endpoint = multi_address_new_from_string("/ip4/127.0.0.1/tcp/9090");
-    config->addrs[0] = tcp_addr;
-    config->num_addrs = 1;
+    multi_addr_t *tcp_addr1 = multi_address_new_from_string("/ip4/127.0.0.1/tcp/9090");
+    multi_addr_t *endpoint1 = multi_address_new_from_string("/ip4/127.0.0.1/tcp/9090");
+    config1->addrs[0] = tcp_addr1;
+    config1->num_addrs = 1;
 
     SOCKET_OPTS opts[2] = {REUSEADDR, NOBLOCK};
 
     //   .num_threads = 6, .fn_tcp = example_task_func_tcp, .fn_udp = example_task_func_udp };
-    socket_server_t *server = new_socket_server(thl, config, opts, 2);
-    assert(server != NULL);
-    free_socket_server_config(config);
-    thpool_add_work(server->thpool, start_socker_server_wrapper, server);
+    socket_server_t *server1 = new_socket_server(thl1, config1, opts, 2);
+    assert(server1 != NULL);
+    free_socket_server_config(config1);
+    thpool_add_work(server1->thpool, start_socker_server_wrapper, server1);
 
-    socket_client_t *client = new_socket_client(thl, endpoint);
-    assert(client != NULL);
+    // start server2
+    thread_logger *thl2 = new_thread_logger(true);
+    socket_server_config_t *config2 = new_socket_server_config(1);
+    config2->max_connections = 100;
+    config2->num_threads = 6;
+    config2->recv_timeout_sec = 3;
+    config2->fn_tcp = handle_inbound_rpc;
+
+    multi_addr_t *tcp_addr2 = multi_address_new_from_string("/ip4/127.0.0.1/tcp/9091");
+    multi_addr_t *endpoint2 = multi_address_new_from_string("/ip4/127.0.0.1/tcp/9091");
+    config2->addrs[0] = tcp_addr2;
+    config2->num_addrs = 1;
+
+    //   .num_threads = 6, .fn_tcp = example_task_func_tcp, .fn_udp = example_task_func_udp };
+    socket_server_t *server2 = new_socket_server(thl2, config2, opts, 2);
+    assert(server2 != NULL);
+    free_socket_server_config(config2);
+    thpool_add_work(server2->thpool, start_socker_server_wrapper, server2);
+
 
 
     message_t *msg = calloc(1, sizeof(message_t));
@@ -78,50 +97,23 @@ void test_new_socket_server(void **state) {
         return;
     }
 
-    msg->data = calloc(1, 6);
-    msg->data[0] = 'h';
-    msg->data[1] = 'e';
-    msg->data[2] = 'l';
-    msg->data[3] = 'l';
-    msg->data[4] = 'o';
-    msg->data[5] = '\0';
-    msg->len = 6;
+    msg->data = calloc(1, 2);
+    msg->data[0] = 'o';
+    msg->data[1] = 'k';
+    msg->len = 2;
     msg->type = MESSAGE_START_ECDH;
 
-    int rc = handle_send(NULL, client->socket_number, msg);
-    if (rc == -1) {
-        printf("request failed: %s\n", strerror(errno));
-        return;
-    }
+    int rc = socket_server_send(server2, endpoint1, msg);
+    assert(rc == 0);
 
-    message_t *recv_msg =
-        handle_receive(NULL, client->socket_number, MAX_RPC_MSG_SIZE_KB);
 
-    if (recv_msg == NULL) {
-        printf("failed to receive data\n");
-        return;
-    }
-
-    // validate the message type
-    if (recv_msg->type != MESSAGE_BEGIN_ECDH) {
-        printf("bad message type received\n");
-    }
-
-    // validate message data is as expected
-    if (memcmp(recv_msg->data, "ok", recv_msg->len) != 0) {
-        printf("invalid message data received\n");
-    }
-
-    sleep(2);
-    freeaddrinfo(client->peer_address);
-    close(client->socket_number);
-    free(client);
+    sleep(10);
     signal_shutdown();
-    sleep(5);
-    free_socket_server(server);
-    multi_address_free(endpoint);
-    free_message_t(msg);
-    free_message_t(recv_msg);
+    free_socket_server(server1);
+    free_socket_server(server2);
+    multi_address_free(endpoint1);
+    multi_address_free(endpoint2);
+
     // free(config.addrs);
 }
 

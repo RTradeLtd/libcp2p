@@ -28,6 +28,12 @@
 #define MAX_RPC_MSG_SIZE_KB 8192
 
 /*!
+ * @brief internal boolean variable used to signal async start_socket_server function
+ * calls
+ */
+extern bool do_shutdown;
+
+/*!
  * @struct timeval
  * @typedef timeout
  * @brief used to specify timeouts for function calls such as select
