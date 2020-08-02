@@ -371,15 +371,16 @@ void handle_inbound_rpc(void *data) {
                 success = negotiate_secure_connection(hdata);
                 if (success == false) {
                     hdata->srv->thl->log(hdata->srv->thl, 0,
-                                         "failed to negotiate secure connection",
+                                         "failed to start secure connection negotiation",
                                          LOG_LEVELS_DEBUG);
                 } else {
                     hdata->srv->thl->log(hdata->srv->thl, 0,
-                                         "negotiated secure connection",
+                                         "started secure connection negotiation",
                                          LOG_LEVELS_DEBUG);
                 }
                 break;
             case MESSAGE_BEGIN_ECDH:
+                printf("received BEGIN_ECDH message, starting DH process\n");
                 break;
             case MESSAGE_WANT_PEER_ID:
                 break;
