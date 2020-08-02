@@ -60,6 +60,7 @@ bool peerstore_have_peer(peerstore_t *pst, unsigned char *peer_id) {
  * @note if we already have the peer we report true and return early
  * @todo fix possible race condition with peerstore_have_peer check and the write
  * lock we claim here
+ * @warning peer_id must be sha256 based
  * @todo add peer_id and public_key verification
  * @return Success (not addedd): true
  * @return Success(added): true
@@ -72,7 +73,8 @@ bool peerstore_insert_peer(peerstore_t *pst, unsigned char *peer_id,
 
     bool ok = false;
 
-    // perform validation checksbefore we do any expensive computations and blockikng locks
+    // perform validation checksbefore we do any expensive computations and blockikng
+    // locks
 
     /*! *@todo enable lru type cache to clean out old entries */
     if (pst->num_peers == pst->max_peers) {
@@ -85,14 +87,12 @@ bool peerstore_insert_peer(peerstore_t *pst, unsigned char *peer_id,
     }
 
     // validate the public key and peerid
-    if (peerstore_validate_peer_id(peer_id, public_key, peer_id_len, public_key_len) == false) {
+    if (peerstore_validate_peer_id(peer_id, public_key, peer_id_len,
+                                   public_key_len) == false) {
         goto EXIT;
     }
 
-
     pthread_rwlock_wrlock(&pst->mutex);
-
-
 
     bool resized = peerstore_resize_if_needed(pst);
     if (resized == false) {
@@ -177,22 +177,14 @@ EXIT:
 bool peerstore_validate_peer_id(unsigned char *peer_id, unsigned char *public_key,
                                 size_t peer_id_len, size_t public_key_len) {
 
-    unsigned char sha256_hash[32];
-    memset(sha256_hash, 0, 32);
-
-    int rc = libp2p_crypto_hashing_sha256(public_key, peer_id_len, sha256_hash);
-    if (rc != 1) {
-        printf("failed to hash public key\n");
-        return false;
-    }
 
     unsigned char ret_peer_id[1024]; /*! @todo enable better length selection */
     memset(ret_peer_id, 0, 1024);
-    size_t ret_peer_size = 0;
+    size_t ret_peer_size = 1024;
 
-    rc = libp2p_new_peer_id(ret_peer_id, &ret_peer_size, sha256_hash, 32);
+    int rc = libp2p_new_peer_id_sha256(ret_peer_id, &ret_peer_size, public_key, public_key_len);
     if (rc != 1) {
-        printf("failed to generate peerid\n");
+        printf("failed to hash public key\n");
         return false;
     }
 
