@@ -23,6 +23,7 @@ void peerstore_free_peerstore(peerstore_t *pst) {
     }
     free(pst->peers);
     pthread_rwlock_destroy(&pst->mutex);
+    free(pst);
 }
 
 /*!
