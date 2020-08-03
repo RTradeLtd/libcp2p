@@ -177,12 +177,12 @@ EXIT:
 bool peerstore_validate_peer_id(unsigned char *peer_id, unsigned char *public_key,
                                 size_t peer_id_len, size_t public_key_len) {
 
-
     unsigned char ret_peer_id[1024]; /*! @todo enable better length selection */
     memset(ret_peer_id, 0, 1024);
     size_t ret_peer_size = 1024;
 
-    peer_id_t *pid = libp2p_new_peer_id_sha256(ret_peer_id, &ret_peer_size, public_key, public_key_len);
+    peer_id_t *pid = libp2p_new_peer_id_sha256(ret_peer_id, &ret_peer_size,
+                                               public_key, public_key_len);
     if (pid == NULL) {
         printf("failed to hash public key\n");
         return false;

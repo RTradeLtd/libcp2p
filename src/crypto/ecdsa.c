@@ -84,7 +84,7 @@ peer_id_t *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
 
     unsigned char temp_peer_id[1024];
     size_t len = (size_t)1024;
-    peer_id_t *pid  = libp2p_new_peer_id(temp_peer_id, &len, public_key_hash, 32);
+    peer_id_t *pid = libp2p_new_peer_id(temp_peer_id, &len, public_key_hash, 32);
 
     free(public_key);
     free(public_key_hash);
