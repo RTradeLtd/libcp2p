@@ -98,6 +98,15 @@ include(cmake/libraries/network.cmake)
 
 include(cmake/libraries/tinycbor.cmake)
 
+# peerstore #
+
+include(cmake/libraries/peerstore.cmake)
+
+
+# testutils #
+
+include(cmake/libraries/testutils.cmake)
+
 # thirdparty #
 
 include(cmake/thirdparty/argtable3.cmake)

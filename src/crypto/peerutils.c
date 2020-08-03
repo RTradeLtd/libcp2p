@@ -1,64 +1,98 @@
-#include <stdlib.h>
-#include <string.h>
-
 #include "crypto/peerutils.h"
 #include "crypto/sha256.h"
 #include "multibase/multibase.h"
 #include "multihash/hashes.h"
 #include "multihash/multihash.h"
+#include <stdlib.h>
+#include <string.h>
+
+/*!
+ * @brief generates a peerID for the public key using SHA256 as the hashing algorithm
+ * @details is a wrapper around libp2p_new_peer_id that abstracts away hashing and
+ * memory allocs and stuff like that
+ * @param output where to store the resulting peerID
+ * @param output_len the max lenght of the output buffer, but will also be used to
+ * store size of buffer
+ * @param public_key the public key in PEM format to hash
+ * @param public_key_len the length of the public key
+ * @return Success: pointer to an instance of peer_id_t
+ * @return Failure: NULL pointer
+ */
+peer_id_t *libp2p_new_peer_id_sha256(unsigned char *output, size_t *output_len,
+                                     unsigned char *public_key,
+                                     size_t public_key_len) {
+
+    unsigned char temp_hash_output[32];
+    memset(temp_hash_output, 0, 32);
+
+    int rc =
+        libp2p_crypto_hashing_sha256(public_key, public_key_len, temp_hash_output);
+    if (rc != 1) {
+        return 0;
+    }
+
+    return libp2p_new_peer_id(output, output_len, temp_hash_output, 32);
+}
 
 /**
- * @brief returns a libp2p peerid from the sha256 hash of a public key
- * base58 encode a string NOTE: this also puts the prefix 'Qm' in front as the
- * ID is a multihash
- * @param pointyaddr where the results will go
- * @param rezbuflen the length of the results buffer. It will also put how much
- * was used here
- * @param ID_BUF the input text (usually a SHA256 hash)
- * @param ID_BUF_SIZE the input size (normally a SHA256, therefore 32 bytes)
- * @returns true(1) on success
+ * @brief constructs a peer identifier from the given public key
+ * @details this is responsible for taking the hash of a public key
+ * @details turning it into a multihash, and the base encoding it
+ * @note is currently hard coded for the input hash being SHA256
+ * @note if you allocated memory for output param you can free it up after this
+ * function returns
+ * @note this is because we copy the data placed there into the returned struct
+ * @param output where to store the resulting peerID
+ * @param output_len the max lenght of the output buffer, but will also be used to
+ * store size of buffer
+ * @param input_hash the input public key hash, usually sha256
+ * @param input_size the input size, usually 32 bytes
+ * @return Success: pointer to an instance of peer_id_t
+ * @return Failure: NULL pointer
  */
-int libp2p_new_peer_id(unsigned char *pointyaddr, size_t *rezbuflen,
-                       unsigned char *ID_BUF,
-                       size_t ID_BUF_SIZE) // b32 encoded ID buf
-{
-    unsigned char temp_buffer[*rezbuflen];
-    memset(temp_buffer, 0, *rezbuflen);
+peer_id_t *libp2p_new_peer_id(unsigned char *output, size_t *output_len,
+                              unsigned char *input_hash, size_t input_size) {
+    unsigned char temp_buffer[*output_len];
+    memset(temp_buffer, 0, *output_len);
 
     // wrap the base58 into a multihash
-    int retVal = mh_new(temp_buffer, MH_H_SHA2_256, ID_BUF, ID_BUF_SIZE);
+    int retVal = mh_new(temp_buffer, MH_H_SHA2_256, input_hash, input_size);
     if (retVal < 0)
         return 0;
 
-    return multibase_encode(MULTIBASE_BASE32, temp_buffer,
-                            ID_BUF_SIZE + 2, // 2 (1 for code, 1 for digest_len)
-                            pointyaddr, *rezbuflen, rezbuflen);
+    retVal = multibase_encode(MULTIBASE_BASE32, temp_buffer,
+                              input_size + 2, // 2 (1 for code, 1 for digest_len)
+                              output, *output_len, output_len);
+
+    if (retVal != 1) {
+        return 0;
+    }
+
+    peer_id_t *pid = calloc(1, sizeof(peer_id_t));
+    if (pid == NULL) {
+        return NULL;
+    }
+
+    // increase output_len by 1 otherwise valgrind reports invalid read errors
+    *output_len += 1;
+
+    pid->data = calloc(1, *output_len);
+    if (pid->data == NULL) {
+        free(pid);
+        return NULL;
+    }
+
+    memcpy(pid->data, output, *output_len);
+
+    pid->len = *output_len;
+
+    return pid;
 }
 
-/****
- * Make a SHA256 hash of what is usually the DER formatted private key.
- * @param result where to store the result. Should be 32 chars long
- * @param texttohash the text to hash. A DER formatted public key
- * @param text_size the size of the text
+/*!
+ * @brief free up resources allocated for an instance of peer_id_t
  */
-/*
-void ID_FromPK_non_null_terminated(char * result,unsigned char * texttohash,
-size_t text_size)
-{
-
-        libp2p_crypto_hashing_sha256(texttohash, text_size, (unsigned
-char*)result);
+void libp2p_peer_id_free(peer_id_t *pid) {
+    free(pid->data);
+    free(pid);
 }
-*/
-
-/****
- * Make a SHA256 hash of what is usually the DER formatted private key.
- * @param result where to store the result. Should be 32 chars long
- * @param texttohash a null terminated string of the text to hash
- */
-/*
-void ID_FromPK(char * result,unsigned char * texttohash)
-{
-   ID_FromPK_non_null_terminated(result,texttohash,strlen((char*)texttohash));
-}
-*/

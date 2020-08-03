@@ -37,11 +37,17 @@ A libp2p-like protocol written in C with first class support for embedded system
 * multibase
   * supports base16, base32, base64
   
+## peerstore
+
+* Adds a peerstore to contain public key and peer identifier information
+* Eventually will contain addressing information
+
 ## networking
 
-* TCP/UDP socket server capable of leverage multiple threads
+* TCP socket server
+  * UDP has been tabled until we get a stable implementation of TCP
 * Uses the multiaddress standard as the method of addressing other hosts
-* Allows specifying two separate execution handlers whenever a new TCP/UDP connection is received
+* Allows specifying two separate execution handlers whenever a new TCP connection is received
 * todo:
   * enable secure connections
   * enable using peerIds
