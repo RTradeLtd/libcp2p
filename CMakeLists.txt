@@ -102,6 +102,11 @@ include(cmake/libraries/tinycbor.cmake)
 
 include(cmake/libraries/peerstore.cmake)
 
+
+# testutils #
+
+include(cmake/libraries/testutils.cmake)
+
 # thirdparty #
 
 include(cmake/thirdparty/argtable3.cmake)

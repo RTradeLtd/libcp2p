@@ -1,4 +1,5 @@
 #include "peerstore/peerstore.h"
+#include "testutils/testutils.h"
 #include <stdio.h>
 #include <assert.h>
 #include <stdarg.h>
@@ -47,6 +48,18 @@ void peerstore_test_resize_if_needed_not_needed(void **state) {
 
 void peerstore_test_insert_peer(void **state) {
   peerstore_t *pst = peerstore_new_assert(100);
+
+  for (int i = 0; i < 99; i++) {
+    ecdsa_private_key_t *priv_key = new_ecdsa_private_key();
+    assert(priv_key != NULL);
+    peer_id_t *pid = libp2p_crypto_ecdsa_keypair_peerid(priv_key);
+    assert(pid != NULL);
+
+
+    libp2p_crypto_ecdsa_free(priv_key);
+    libp2p_peer_id_free(pid);
+  }
+
   // todo
   peerstore_free_peerstore(pst);
 }
