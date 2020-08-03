@@ -18,7 +18,7 @@
  * @return Success: 1
  * @return Failure: 0
  */
-int libp2p_new_peer_id_sha256(unsigned char *output, size_t *output_len,
+peer_id_t *libp2p_new_peer_id_sha256(unsigned char *output, size_t *output_len,
                               unsigned char *public_key, size_t public_key_len) {
 
     unsigned char temp_hash_output[32];
@@ -43,7 +43,7 @@ int libp2p_new_peer_id_sha256(unsigned char *output, size_t *output_len,
  * @return Success: 1
  * @return Failure: 0
  */
-int libp2p_new_peer_id(unsigned char *output, size_t *output_len,
+peer_id_t *libp2p_new_peer_id(unsigned char *output, size_t *output_len,
                        unsigned char *input_hash, size_t input_size) {
     unsigned char temp_buffer[*output_len];
     memset(temp_buffer, 0, *output_len);
@@ -53,7 +53,21 @@ int libp2p_new_peer_id(unsigned char *output, size_t *output_len,
     if (retVal < 0)
         return 0;
 
-    return multibase_encode(MULTIBASE_BASE32, temp_buffer,
+    retVal = multibase_encode(MULTIBASE_BASE32, temp_buffer,
                             input_size + 2, // 2 (1 for code, 1 for digest_len)
                             output, *output_len, output_len);
+
+    if (retVal != 1) {
+        return 0;
+    }
+
+    peer_id_t *pid = calloc(1, sizeof(peer_id_t));
+    if (pid == NULL) {
+        return NULL;
+    }
+
+    pid->data = output;
+    pid->len = *output_len;
+
+    return pid;
 }

@@ -78,16 +78,16 @@ void test_libp2p_crypto_ecdsa_keypair_generation(void **state) {
     assert(public_key != NULL);
     printf("%s\n", public_key);
 
-    unsigned char *peer_id = libp2p_crypto_ecdsa_keypair_peerid(pk);
-    assert(peer_id != NULL);
-    printf("%s\n", peer_id);
+    peer_id_t *pid = libp2p_crypto_ecdsa_keypair_peerid(pk);
+    assert(pid != NULL);
+    printf("%s\n", pid->data);
     
     rc = libp2p_crypto_ecdsa_free(pk);
     assert(rc == 0);
 
     free(output);
     free(output2);
-    free(peer_id);
+    free(pid);
     free(public_key);
 }
 

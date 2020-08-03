@@ -12,6 +12,19 @@
 #include <stdio.h>
 
 /*!
+ * @struct peer_id
+ * @typedef peer_id_t
+ * @brief a structure containing a peer identifier
+ */
+typedef struct peer_id {
+    /*! @brief the actual peer_id data */
+    unsigned char *data;
+    /*! @brief the size of the data member */
+    size_t len;
+} peer_id_t;
+
+
+/*!
  * @brief generates a SHA256 based PeerID
  * @details is a wrapper around libp2p_new_peer_id that abstracts away hashing and memory allocs
  * @param output where to store the resulting peerID
@@ -22,7 +35,7 @@
  * @return Success: 1
  * @return Failure: 0
  */
-int libp2p_new_peer_id_sha256(unsigned char *output, size_t *output_len,
+peer_id_t *libp2p_new_peer_id_sha256(unsigned char *output, size_t *output_len,
                               unsigned char *public_key, size_t public_key_len);
 
 /**
@@ -36,5 +49,5 @@ int libp2p_new_peer_id_sha256(unsigned char *output, size_t *output_len,
  * @return Success: 1
  * @return Failure: 0
  */
-int libp2p_new_peer_id(unsigned char *output, size_t *output_len,
+peer_id_t *libp2p_new_peer_id(unsigned char *output, size_t *output_len,
                        unsigned char *input_hash, size_t input_size);

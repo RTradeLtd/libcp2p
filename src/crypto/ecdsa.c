@@ -64,7 +64,7 @@ int libp2p_crypto_ecdsa_free(ecdsa_private_key_t *pk) {
  * @param pk a loaded ecdsa_private_key_t instance
  * @return pointer to an unsigned char peerID
  */
-unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
+peer_id_t *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
     unsigned char *public_key = libp2p_crypto_ecdsa_keypair_public(pk);
     if (public_key == NULL) {
         return NULL;
@@ -84,27 +84,16 @@ unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
 
     unsigned char temp_peer_id[1024];
     size_t len = (size_t)1024;
-    rc = libp2p_new_peer_id(temp_peer_id, &len, public_key_hash, 32);
-    if (rc != 1) {
+    peer_id_t *pid  = libp2p_new_peer_id(temp_peer_id, &len, public_key_hash, 32);
+    if (pid == NULL) {
         free(public_key);
         free(public_key_hash);
         print_mbedtls_error(rc);
         return NULL;
     }
 
-    size_t tpid_size = strlen((char *)temp_peer_id);
-    unsigned char *peer_id = calloc(1, tpid_size + 2);
-    if (peer_id == NULL) {
-        free(public_key);
-        free(public_key_hash);
-        return NULL;
-    }
-    strcpy((char *)peer_id, (char *)temp_peer_id);
 
-    free(public_key);
-    free(public_key_hash);
-
-    return peer_id;
+    return pid;
 }
 
 /*!

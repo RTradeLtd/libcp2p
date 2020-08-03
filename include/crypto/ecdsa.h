@@ -14,6 +14,9 @@
  * @brief provides ECDSA cryptography support
  */
 
+#pragma once
+
+#include "crypto/peerutils.h"
 #include "mbedtls/ecdsa.h"
 #include "mbedtls/pk.h"
 #include <pthread.h>
@@ -72,7 +75,7 @@ unsigned char *libp2p_crypto_ecdsa_keypair_public(ecdsa_private_key_t *pk);
  * @param pk a loaded ecdsa_private_key_t instance
  * @return pointer to an unsigned char peerID
  */
-unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk);
+peer_id_t *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk);
 
 /*!
  * @brief frees up resources allocated for the private key
