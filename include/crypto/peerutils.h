@@ -51,3 +51,8 @@ peer_id_t *libp2p_new_peer_id_sha256(unsigned char *output, size_t *output_len,
  */
 peer_id_t *libp2p_new_peer_id(unsigned char *output, size_t *output_len,
                        unsigned char *input_hash, size_t input_size);
+
+/*!
+  * @brief free up resources allocated for an instance of peer_id_t
+*/
+void libp2p_peer_id_free(peer_id_t *pid);

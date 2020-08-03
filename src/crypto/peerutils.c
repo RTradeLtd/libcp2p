@@ -66,8 +66,26 @@ peer_id_t *libp2p_new_peer_id(unsigned char *output, size_t *output_len,
         return NULL;
     }
 
-    pid->data = output;
+    // increase output_len by 1 otherwise valgrind reports invalid read errors
+    *output_len += 1;
+    
+    pid->data = calloc(1, *output_len);
+    if (pid->data == NULL) {
+        free(pid);
+        return NULL;
+    }
+    
+    memcpy(pid->data, output, *output_len);
+
     pid->len = *output_len;
 
     return pid;
+}
+
+/*!
+  * @brief free up resources allocated for an instance of peer_id_t
+*/
+void libp2p_peer_id_free(peer_id_t *pid) {
+    free(pid->data);
+    free(pid);
 }

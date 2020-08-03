@@ -87,7 +87,7 @@ void test_libp2p_crypto_ecdsa_keypair_generation(void **state) {
 
     free(output);
     free(output2);
-    free(pid);
+    libp2p_peer_id_free(pid);
     free(public_key);
 }
 

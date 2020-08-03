@@ -69,7 +69,7 @@ peer_id_t *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
     if (public_key == NULL) {
         return NULL;
     }
-    unsigned char *public_key_hash = calloc(1, 64);
+    unsigned char *public_key_hash = calloc(1, 32);
     if (public_key_hash == NULL) {
         return NULL;
     }
@@ -85,13 +85,9 @@ peer_id_t *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
     unsigned char temp_peer_id[1024];
     size_t len = (size_t)1024;
     peer_id_t *pid  = libp2p_new_peer_id(temp_peer_id, &len, public_key_hash, 32);
-    if (pid == NULL) {
-        free(public_key);
-        free(public_key_hash);
-        print_mbedtls_error(rc);
-        return NULL;
-    }
 
+    free(public_key);
+    free(public_key_hash);
 
     return pid;
 }
