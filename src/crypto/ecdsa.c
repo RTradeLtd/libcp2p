@@ -55,28 +55,32 @@ int libp2p_crypto_ecdsa_free(ecdsa_private_key_t *pk) {
     return 0;
 }
 
-/*! @brief returns the peerid for the corresponding private key
- * @warning if hash of public key contains a 0, the output will be incorrect
+/*! @brief returns a peer_id_t struct for the given private key
+ * @details this is useful for exchanging peer identifier information with
+ * @details anyone who connects to our host
  * @warning caller must free returned pointer when no longer needed
  * @details to get the peerid we take a sha256 hash of the public key file in PEM
  * format
  * @details we then generate a multihash of that sha256, and base58 encode it
+ * @todo this currently relies on hard coded assumptions about hashing algorithm
+ * @todo in the future this will change
  * @param pk a loaded ecdsa_private_key_t instance
- * @return pointer to an unsigned char peerID
+ * @return Success: pointer to an instance of peer_id_t
+ * @return Failure: NULL pointer
  */
-unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
-    unsigned char *public_key = libp2p_crypto_ecdsa_keypair_public(pk);
-    if (public_key == NULL) {
+peer_id_t *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
+    public_key_t *pub_key = libp2p_crypto_ecdsa_keypair_public(pk);
+    if (pub_key == NULL) {
         return NULL;
     }
-    unsigned char *public_key_hash = calloc(sizeof(unsigned char), 64);
+    unsigned char *public_key_hash = calloc(1, 32);
     if (public_key_hash == NULL) {
         return NULL;
     }
-    int rc = libp2p_crypto_hashing_sha256(public_key, strlen((char *)public_key),
-                                          public_key_hash);
+    int rc = libp2p_crypto_hashing_sha256(
+        pub_key->data, strlen((char *)pub_key->data), public_key_hash);
     if (rc != 1) {
-        free(public_key);
+        libp2p_crypto_public_key_free(pub_key);
         free(public_key_hash);
         print_mbedtls_error(rc);
         return NULL;
@@ -84,36 +88,24 @@ unsigned char *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
 
     unsigned char temp_peer_id[1024];
     size_t len = (size_t)1024;
-    rc = libp2p_new_peer_id(temp_peer_id, &len, public_key_hash, 32);
-    if (rc != 1) {
-        free(public_key);
-        free(public_key_hash);
-        print_mbedtls_error(rc);
-        return NULL;
-    }
+    peer_id_t *pid = libp2p_new_peer_id(temp_peer_id, &len, public_key_hash, 32);
 
-    size_t tpid_size = strlen((char *)temp_peer_id);
-    unsigned char *peer_id = calloc(sizeof(unsigned char), tpid_size + 2);
-    if (peer_id == NULL) {
-        free(public_key);
-        free(public_key_hash);
-        return NULL;
-    }
-    strcpy((char *)peer_id, (char *)temp_peer_id);
-
-    free(public_key);
+    libp2p_crypto_public_key_free(pub_key);
     free(public_key_hash);
 
-    return peer_id;
+    return pid;
 }
 
 /*!
- * @brief returns the public key associated with the private key
- * @note returned value has a null terminating byte at the end
+ * @brief returns the public key associated with the private key in PEM format
+ * @details the returned struct is suitable for encoding into CBOR and sending to
+ * peers
  * @warning caller must free returned data when no longer
- * @return the public key in PEM format
+ * @todo this currently relies in usage of `str..` we should use `mem...` instead
+ * @return Success: an instance of public_key_t with the corresponding information
+ * @return Failure: NULL pointer
  */
-unsigned char *libp2p_crypto_ecdsa_keypair_public(ecdsa_private_key_t *pk) {
+public_key_t *libp2p_crypto_ecdsa_keypair_public(ecdsa_private_key_t *pk) {
     // we use `strcpy` and `strlen` as mbedtls_pk_write_pubkey_pem includes null
     // terminating byte
     unsigned char output_buf[1024];
@@ -128,7 +120,18 @@ unsigned char *libp2p_crypto_ecdsa_keypair_public(ecdsa_private_key_t *pk) {
         return NULL;
     }
     strcpy((char *)public_key, (char *)output_buf);
-    return public_key;
+
+    public_key_t *pub_key = libp2p_crypto_public_key_new();
+    if (pub_key == NULL) {
+        free(public_key);
+        return NULL;
+    }
+
+    pub_key->data = public_key;
+    pub_key->data_size = strlen((char *)output_buf);
+    pub_key->type = KEYTYPE_ECDSA;
+
+    return pub_key;
 }
 
 /*!

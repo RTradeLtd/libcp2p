@@ -88,7 +88,7 @@ socket_client_t *new_socket_client(thread_logger *thl, multi_addr_t *addr) {
     }
 
     socket_client_t *sock_client =
-        calloc(sizeof(sock_client), sizeof(sock_client) + sizeof(peer_address));
+        calloc(1, sizeof(sock_client) + sizeof(peer_address));
     if (sock_client == NULL) {
         thl->log(thl, 0, "failed to calloc socket_client_t", LOG_LEVELS_ERROR);
         return NULL;

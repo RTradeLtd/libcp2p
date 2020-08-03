@@ -98,6 +98,21 @@ include(cmake/libraries/network.cmake)
 
 include(cmake/libraries/tinycbor.cmake)
 
+# peerstore #
+
+include(cmake/libraries/peerstore.cmake)
+
+
+# testutils #
+
+include(cmake/libraries/testutils.cmake)
+
+# thirdparty #
+
+include(cmake/thirdparty/argtable3.cmake)
+include(cmake/thirdparty/logger.cmake)
+include(cmake/thirdparty/thread_pool.cmake)
+
 #########################
 # END COMPILE LIBRARIES #
 #########################

@@ -19,7 +19,7 @@ void test_multibase_encode_decode_base16(void **state) {
     );
     assert(esize > 0);
 
-    unsigned char *output = calloc(sizeof(unsigned char), esize);
+    unsigned char *output = calloc(1, esize);
     size_t len;
     int rc = multibase_encode(
         MULTIBASE_BASE16, 
@@ -40,7 +40,7 @@ void test_multibase_encode_decode_base16(void **state) {
     int dsize = multibase_decode_size(MULTIBASE_BASE16, output, len);
     assert(dsize > 0);
 
-    unsigned char *decoded_output = calloc(sizeof(unsigned char), dsize);
+    unsigned char *decoded_output = calloc(1, dsize);
     size_t written;
     rc = multibase_decode(output, len, decoded_output, dsize, &written);
     assert(rc == 1);
@@ -61,7 +61,7 @@ void test_multibase_encode_decode_base32(void **state) {
     int esize = multibase_encode_size(MULTIBASE_BASE32, input, 12);
     assert(esize > 0);
     
-    unsigned char *output = calloc(sizeof(unsigned char), esize);
+    unsigned char *output = calloc(1, esize);
     size_t len;
     int rc = multibase_encode(
         MULTIBASE_BASE32,
@@ -83,7 +83,7 @@ void test_multibase_encode_decode_base32(void **state) {
     int dsize = multibase_decode_size(MULTIBASE_BASE16, output, len);
     assert(dsize > 0);
 
-    unsigned char *decoded_output = calloc(sizeof(unsigned char), dsize);
+    unsigned char *decoded_output = calloc(1, dsize);
     size_t res;
     rc = multibase_decode(
         output,
@@ -110,7 +110,7 @@ void test_multibase_encode_decode_base64(void **state) {
     int esize = multibase_encode_size(MULTIBASE_BASE64, input, 12);
     assert(esize > 0);
 
-    unsigned char *output = calloc(sizeof(unsigned char), esize);
+    unsigned char *output = calloc(1, esize);
     size_t len;
     int rc = multibase_encode(
         MULTIBASE_BASE64,
@@ -132,7 +132,7 @@ void test_multibase_encode_decode_base64(void **state) {
     int dsize = multibase_encode_size(MULTIBASE_BASE64, output, len);
     assert(dsize > 0);
 
-    unsigned char *decoded_output = calloc(sizeof(unsigned char), dsize);
+    unsigned char *decoded_output = calloc(1, dsize);
     size_t res;
     rc = multibase_decode(
         output,

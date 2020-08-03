@@ -56,7 +56,7 @@ int libp2p_crypto_aes_encrypt(char *key, char *iv, char *input, size_t input_siz
     if (new_size % 16 != 0) {
         new_size += new_size % 16;
     }
-    char *padded_input = calloc(sizeof(char), new_size);
+    char *padded_input = calloc(1, new_size);
     if (padded_input == NULL) {
         return 0;
     }
