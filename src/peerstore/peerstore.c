@@ -100,10 +100,24 @@ bool peerstore_insert_peer(peerstore_t *pst, unsigned char *peer_id,
         goto EXIT;
     }
 
-    peer_t pt = {.peer_id = peer_id,
-                 .peer_id_len = peer_id_len,
-                 .public_key = public_key,
+    peer_t pt = {.peer_id_len = peer_id_len,
                  .public_key_len = public_key_len};
+
+
+    pt.peer_id = calloc(1, peer_id_len);
+    if (peer_id == NULL) {
+        goto EXIT;
+    }
+
+    pt.public_key = calloc(1, public_key_len);
+    if (pt.public_key == NULL) {
+        free(pt.peer_id);
+        goto EXIT;
+    }
+
+    memcpy(pt.peer_id, peer_id, peer_id_len);
+    memcpy(pt.public_key, public_key, public_key_len);
+
     pst->peers[pst->num_peers] = pt;
     pst->num_peers += 1;
 
