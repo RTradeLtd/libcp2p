@@ -1,3 +1,31 @@
+// Copyright 2020 RTrade Technologies Ltd
+//
+// licensed under GNU AFFERO GENERAL PUBLIC LICENSE;
+// you may not use this file except in compliance with the License;
+// You may obtain the license via the LICENSE file in the repository root;
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/*!
+ * @file peerstore.c
+ * @author Bonedaddy
+ * @brief peerstore provides a logical grouping of all known peers
+ * @details it provides access to an in-memory store of all known peers
+ * @details peers are indexed by their peer identifier and contain the corresponding
+ * public key
+ * @note in the future this may also contain addressing information
+ * @todo for secure connection negotiation, we need to figure out a way we can cache
+ * the result
+ * @todo of this negotiation to prevent having to continuously do it in between
+ * sessions with a peer
+ * @todo however we also need a way to "clear the cache" periodically to require
+ * reauthentication for security
+ */
+
 #include "peerstore/peerstore.h"
 #include "crypto/peerutils.h"
 #include "crypto/sha256.h"
@@ -9,6 +37,8 @@
 
 /*!
  * @brief frees up resources allocated for peer_t
+ * @param pr an instance of peer_t
+ * @note do not access pr after this function returns
  */
 void peerstore_free_peer(peer_t *pr) {
     free(pr->peer_id);
@@ -17,6 +47,8 @@ void peerstore_free_peer(peer_t *pr) {
 
 /*!
  * @brief frees up resources allocated for peerstore_t and all peers
+ * @note in essence this "shuts down" the peerstore
+ * @warning this deletes all information
  */
 void peerstore_free_peerstore(peerstore_t *pst) {
     pthread_rwlock_wrlock(&pst->mutex);
@@ -29,7 +61,9 @@ void peerstore_free_peerstore(peerstore_t *pst) {
 }
 
 /*!
- * @brief check if we have a record for the given peer_id
+ * @brief check if we have information for the given peer_id
+ * @param pst the actual peerstore
+ * @param peer_id the peer we are checking
  * @return Success: true
  * @return Failure: false
  */
@@ -40,6 +74,7 @@ bool peerstore_have_peer(peerstore_t *pst, unsigned char *peer_id) {
 
     for (size_t i = 0; i < pst->num_peers; i++) {
 
+        // check to see if the peer_id we are searching for matches this entry
         if (memcmp(pst->peers[i].peer_id, peer_id, pst->peers[i].peer_id_len) == 0) {
             have_peer = true;
             break;
@@ -66,15 +101,16 @@ bool peerstore_have_peer(peerstore_t *pst, unsigned char *peer_id) {
  * @return Success(added): true
  * @return Failure: false
  */
-#pragma GCC diagnostic ignored "-Wunused-parameter"
 bool peerstore_insert_peer(peerstore_t *pst, unsigned char *peer_id,
                            unsigned char *public_key, size_t peer_id_len,
                            size_t public_key_len) {
 
     bool ok = false;
 
-    // perform validation checksbefore we do any expensive computations and blockikng
-    // locks
+    // perform validation checks to prevent expensive computation if possible
+
+    /*! @todo this isn't entirely race free, and it is possible for 2 requests to
+     * occur in a row */
 
     /*! *@todo enable lru type cache to clean out old entries */
     if (pst->num_peers == pst->max_peers) {
@@ -82,11 +118,15 @@ bool peerstore_insert_peer(peerstore_t *pst, unsigned char *peer_id,
         return ok;
     }
 
+    /*! @todo dont insert  if we already have data for this peer */
+    /*! @todo this is where the race condition lies */
     if (peerstore_have_peer(pst, peer_id) == true) {
         return ok;
     }
 
-    // validate the public key and peerid
+    /*! @note compute the peerID from the public key we are given */
+    /*! @note we then match this with the peerID we are being given */
+    /*! @note this ensures we dont enter any bad data into the peerstore */
     if (peerstore_validate_peer_id(peer_id, public_key, peer_id_len,
                                    public_key_len) == false) {
         return ok;
@@ -94,30 +134,40 @@ bool peerstore_insert_peer(peerstore_t *pst, unsigned char *peer_id,
 
     pthread_rwlock_wrlock(&pst->mutex);
 
+    /*! @note this checks to see if we have enough room in the dynamic array */
+    /*! @note if we dont have enough room then we will resize increase space by 2x */
+    /*! @note if that isn't greater than the max peers size. if it is greater */
+    /*! @note then we use the max peers as the limit */
+    /*! @note returns true even if we dint need to resize because we have enough room
+     */
     bool resized = peerstore_resize_if_needed(pst);
     if (resized == false) {
         printf("failed to resize memory slot\n");
         goto EXIT;
     }
 
-    peer_t pt = {.peer_id_len = peer_id_len,
-                 .public_key_len = public_key_len};
+    /*! @note right now im not sure if we should store this in the peerstore */
+    /*! @note or use a pointer. i think like this would consume less memory */
+    peer_t pt = {.peer_id_len = peer_id_len, .public_key_len = public_key_len};
 
-
+    // allocate memory to hold peer id
     pt.peer_id = calloc(1, peer_id_len);
     if (peer_id == NULL) {
         goto EXIT;
     }
 
+    // allocate memory to hold public key
     pt.public_key = calloc(1, public_key_len);
     if (pt.public_key == NULL) {
         free(pt.peer_id);
         goto EXIT;
     }
 
+    // copy peerid and public key data into struct
     memcpy(pt.peer_id, peer_id, peer_id_len);
     memcpy(pt.public_key, public_key, public_key_len);
 
+    // store data in the peerstore and increase count
     pst->peers[pst->num_peers] = pt;
     pst->num_peers += 1;
 
@@ -132,18 +182,34 @@ EXIT:
 
 /*!
  * @brief performs a check to see if we need to allocate more memory
+ * @warning caller must take care of locking
  * @details this is called after every insertion to the peerstore
  * @details so that the following call will have fresh memory to store data into
+ * @return Success (enough size): true
+ * @return Success (resized ok): true
+ * @return Failure (resized failed): false
  */
 bool peerstore_resize_if_needed(peerstore_t *pst) {
 
     if (pst->num_peers == pst->peers_size) {
-        // realloc and increase available space by 2x
-        pst->peers = realloc(pst->peers, (pst->peers_size * 2) * sizeof(peer_t));
+        /*!
+         * @note set the new peers size to twice the current
+         * @note but if it ends up being more than the max peers we want
+         * @note lets just use the max limit instead
+         */
+        size_t new_peers_size = pst->peers_size * 2;
+
+        if (new_peers_size > pst->max_peers) {
+            new_peers_size = pst->max_peers;
+        }
+
+        // realloc and increase available space by 2x (or max peers)
+        pst->peers = realloc(pst->peers, new_peers_size * sizeof(peer_t));
         if (pst->peers == NULL) {
             return false;
         }
-        pst->peers_size *= 2; // increase the size by 2
+
+        pst->peers_size = new_peers_size;
     }
 
     return true;
@@ -165,10 +231,14 @@ bool peerstore_get_public_key(peerstore_t *pst, unsigned char *peer_id,
 
     for (size_t i = 0; i < pst->num_peers; i++) {
         if (memcmp(pst->peers[i].peer_id, peer_id, pst->peers[i].peer_id_len) == 0) {
+
             if (pst->peers[i].public_key_len > output_len) {
                 goto EXIT;
             }
+
+            // copy the data to prevent accidental overwrites
             memcpy(output, pst->peers[i].public_key, pst->peers[i].public_key_len);
+
             ok = true;
         }
     }
@@ -191,18 +261,16 @@ EXIT:
 bool peerstore_validate_peer_id(unsigned char *peer_id, unsigned char *public_key,
                                 size_t peer_id_len, size_t public_key_len) {
 
+    bool ok = false;
+    size_t ret_peer_size = 1024;
     unsigned char ret_peer_id[1024]; /*! @todo enable better length selection */
     memset(ret_peer_id, 0, 1024);
-    size_t ret_peer_size = 1024;
 
     peer_id_t *pid = libp2p_new_peer_id_sha256(ret_peer_id, &ret_peer_size,
                                                public_key, public_key_len);
     if (pid == NULL) {
-        printf("failed to hash public key\n");
-        return false;
+        return ok;
     }
-
-    bool ok = false;
 
     if (memcmp(peer_id, pid->data, peer_id_len) == 0) {
         ok = true;
@@ -225,12 +293,12 @@ peerstore_t *peerstore_new_peerstore(size_t max_peers) {
     if (pst == NULL) {
         return NULL;
     }
-    pthread_rwlock_init(&pst->mutex, NULL);
     pst->peers = calloc(2, sizeof(peer_t));
     if (pst->peers == NULL) {
         free(pst);
         return NULL;
     }
+    pthread_rwlock_init(&pst->mutex, NULL);
     pst->max_peers = max_peers;
     pst->num_peers = 0;
     pst->peers_size = 2;

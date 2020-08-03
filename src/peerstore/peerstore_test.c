@@ -60,6 +60,22 @@ void peerstore_test_insert_peer(void **state) {
     bool ok = peerstore_insert_peer(pst, pid->data, pub_key->data, pid->len, pub_key->data_size);
     assert(ok == true);
 
+    unsigned char output[1024];
+    memset(output, 0, 1024);
+    ok = peerstore_get_public_key(pst, pid->data, output, 1024);
+    assert(ok == true);
+
+    assert(
+      memcmp(
+        output,
+        pub_key->data,
+        pub_key->data_size
+      ) == 0
+    );
+
+    ok = peerstore_have_peer(pst, pid->data);
+    assert(ok == true);
+
     libp2p_crypto_ecdsa_free(priv_key);
     libp2p_peer_id_free(pid);
     libp2p_crypto_public_key_free(pub_key);
@@ -81,7 +97,6 @@ void peerstore_test_insert_peer(void **state) {
   libp2p_peer_id_free(pid);
   libp2p_crypto_public_key_free(pub_key);
 
-  // todo
   peerstore_free_peerstore(pst);
 }
 
