@@ -30,19 +30,19 @@ void test_libp2p_crypto_ecdsa_private_key_save(void **stat) {
 
     ecdsa_private_key_t *ret_pk = libp2p_crypto_ecdsa_private_key_from_file("ecdsa.pem");
 
-    unsigned char *pk_pub = libp2p_crypto_ecdsa_keypair_public(pk);
-    unsigned char *ret_pub = libp2p_crypto_ecdsa_keypair_public(ret_pk);
+    public_key_t *pk_pub = libp2p_crypto_ecdsa_keypair_public(pk);
+    public_key_t *ret_pub = libp2p_crypto_ecdsa_keypair_public(ret_pk);
 
     assert(
         memcmp(
-            pk_pub,
-            ret_pub,
-            strlen((char *)pk_pub)
+            pk_pub->data,
+            ret_pub->data,
+            strlen((char *)pk_pub->data)
         ) == 0 &&
         memcmp(
-            pk_pub,
-            ret_pub,
-            strlen((char *)ret_pub)
+            pk_pub->data,
+            ret_pub->data,
+            strlen((char *)ret_pub->data)
         ) == 0         
     );
 
@@ -74,9 +74,9 @@ void test_libp2p_crypto_ecdsa_keypair_generation(void **state) {
         ) == 0
     );
     
-    unsigned char *public_key = libp2p_crypto_ecdsa_keypair_public(pk);
-    assert(public_key != NULL);
-    printf("%s\n", public_key);
+    public_key_t *pub_key = libp2p_crypto_ecdsa_keypair_public(pk);
+    assert(pub_key != NULL);
+    printf("%s\n", pub_key->data);
 
     peer_id_t *pid = libp2p_crypto_ecdsa_keypair_peerid(pk);
     assert(pid != NULL);
@@ -88,7 +88,7 @@ void test_libp2p_crypto_ecdsa_keypair_generation(void **state) {
     free(output);
     free(output2);
     libp2p_peer_id_free(pid);
-    free(public_key);
+    // free(public_key);
 }
 
 void test_libp2p_crypto_hashing_sha1_hmac(void **state) {
@@ -322,14 +322,8 @@ void test_libp2p_crypto_cbor_encode_pub_key(void **state) {
         ecdsa_private_key_t *pk = libp2p_crypto_ecdsa_pem_to_private_key(output);
         assert(pk != NULL);
         
-        unsigned char *public_key_pem = libp2p_crypto_ecdsa_keypair_public(pk);
-        assert(public_key_pem != NULL);
-
-        public_key_t *pub_key = libp2p_crypto_public_key_new();
-        pub_key->data = public_key_pem;
-        pub_key->data = public_key_pem;
-        pub_key->data_size = strlen((char *)public_key_pem);
-        pub_key->type = KEYTYPE_ECDSA;
+        public_key_t *pub_key = libp2p_crypto_ecdsa_keypair_public(pk);
+        assert(pub_key != NULL);
         
         cbor_encoded_data_t *out = libp2p_crypto_public_key_cbor_encode(
             pub_key

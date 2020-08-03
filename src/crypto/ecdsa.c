@@ -65,18 +65,18 @@ int libp2p_crypto_ecdsa_free(ecdsa_private_key_t *pk) {
  * @return pointer to an unsigned char peerID
  */
 peer_id_t *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
-    unsigned char *public_key = libp2p_crypto_ecdsa_keypair_public(pk);
-    if (public_key == NULL) {
+    public_key_t *pub_key = libp2p_crypto_ecdsa_keypair_public(pk);
+    if (pub_key == NULL) {
         return NULL;
     }
     unsigned char *public_key_hash = calloc(1, 32);
     if (public_key_hash == NULL) {
         return NULL;
     }
-    int rc = libp2p_crypto_hashing_sha256(public_key, strlen((char *)public_key),
+    int rc = libp2p_crypto_hashing_sha256(pub_key->data, strlen((char *)pub_key->data),
                                           public_key_hash);
     if (rc != 1) {
-        free(public_key);
+        libp2p_crypto_public_key_free(pub_key);
         free(public_key_hash);
         print_mbedtls_error(rc);
         return NULL;
@@ -86,7 +86,7 @@ peer_id_t *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
     size_t len = (size_t)1024;
     peer_id_t *pid = libp2p_new_peer_id(temp_peer_id, &len, public_key_hash, 32);
 
-    free(public_key);
+    libp2p_crypto_public_key_free(pub_key);
     free(public_key_hash);
 
     return pid;
@@ -98,7 +98,7 @@ peer_id_t *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
  * @warning caller must free returned data when no longer
  * @return the public key in PEM format
  */
-unsigned char *libp2p_crypto_ecdsa_keypair_public(ecdsa_private_key_t *pk) {
+public_key_t *libp2p_crypto_ecdsa_keypair_public(ecdsa_private_key_t *pk) {
     // we use `strcpy` and `strlen` as mbedtls_pk_write_pubkey_pem includes null
     // terminating byte
     unsigned char output_buf[1024];
@@ -113,7 +113,18 @@ unsigned char *libp2p_crypto_ecdsa_keypair_public(ecdsa_private_key_t *pk) {
         return NULL;
     }
     strcpy((char *)public_key, (char *)output_buf);
-    return public_key;
+
+
+    public_key_t *pub_key = libp2p_crypto_public_key_new();
+    if (pub_key == NULL) {
+        free(public_key);
+        return NULL;
+    }
+
+    pub_key->data = public_key;
+    pub_key->data_size = strlen((char *)output_buf);
+
+    return pub_key;
 }
 
 /*!

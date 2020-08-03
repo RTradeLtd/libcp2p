@@ -16,6 +16,7 @@
 
 #pragma once
 
+#include "crypto/key.h"
 #include "crypto/peerutils.h"
 #include "mbedtls/ecdsa.h"
 #include "mbedtls/pk.h"
@@ -65,7 +66,7 @@ libp2p_crypto_ecdsa_pem_to_private_key(unsigned char *pem_input);
  * @param output a buffer to write the key into, ~256 bytes should suffice
  * @return 0 on success, otherwise returns the mbedtls errno
  */
-unsigned char *libp2p_crypto_ecdsa_keypair_public(ecdsa_private_key_t *pk);
+public_key_t *libp2p_crypto_ecdsa_keypair_public(ecdsa_private_key_t *pk);
 
 /*! @brief returns the peerid for the corresponding private key
  * @warning caller must free returned pointer when no longer needed
