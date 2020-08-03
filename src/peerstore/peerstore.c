@@ -79,17 +79,17 @@ bool peerstore_insert_peer(peerstore_t *pst, unsigned char *peer_id,
     /*! *@todo enable lru type cache to clean out old entries */
     if (pst->num_peers == pst->max_peers) {
         printf("too many peers stored\n");
-        goto EXIT;
+        return ok;
     }
 
     if (peerstore_have_peer(pst, peer_id) == true) {
-        return true;
+        return ok;
     }
 
     // validate the public key and peerid
     if (peerstore_validate_peer_id(peer_id, public_key, peer_id_len,
                                    public_key_len) == false) {
-        goto EXIT;
+        return ok;
     }
 
     pthread_rwlock_wrlock(&pst->mutex);
