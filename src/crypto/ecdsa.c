@@ -122,7 +122,8 @@ public_key_t *libp2p_crypto_ecdsa_keypair_public(ecdsa_private_key_t *pk) {
 
     pub_key->data = public_key;
     pub_key->data_size = strlen((char *)output_buf);
-
+    pub_key->type = KEYTYPE_ECDSA;
+    
     return pub_key;
 }
 
