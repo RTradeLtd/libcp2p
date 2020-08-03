@@ -182,13 +182,13 @@ bool peerstore_validate_peer_id(unsigned char *peer_id, unsigned char *public_ke
     memset(ret_peer_id, 0, 1024);
     size_t ret_peer_size = 1024;
 
-    int rc = libp2p_new_peer_id_sha256(ret_peer_id, &ret_peer_size, public_key, public_key_len);
-    if (rc != 1) {
+    peer_id_t *pid = libp2p_new_peer_id_sha256(ret_peer_id, &ret_peer_size, public_key, public_key_len);
+    if (pid == NULL) {
         printf("failed to hash public key\n");
         return false;
     }
 
-    if (memcmp(peer_id, ret_peer_id, peer_id_len) != 0) {
+    if (memcmp(peer_id, pid->data, peer_id_len) != 0) {
         printf("invalid peerid given\n");
         return false;
     }
