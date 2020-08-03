@@ -22,7 +22,7 @@ peer_id_t *libp2p_new_peer_id_sha256(unsigned char *output, size_t *output_len,
                               unsigned char *public_key, size_t public_key_len) {
 
     unsigned char temp_hash_output[32];
-    memset(temp_hash_output, 0, 1024);
+    memset(temp_hash_output, 0, 32);
 
     int rc = libp2p_crypto_hashing_sha256(public_key, public_key_len, temp_hash_output);
     if (rc != 1) {
@@ -68,7 +68,7 @@ peer_id_t *libp2p_new_peer_id(unsigned char *output, size_t *output_len,
 
     // increase output_len by 1 otherwise valgrind reports invalid read errors
     *output_len += 1;
-    
+
     pid->data = calloc(1, *output_len);
     if (pid->data == NULL) {
         free(pid);
