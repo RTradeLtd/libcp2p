@@ -188,12 +188,15 @@ bool peerstore_validate_peer_id(unsigned char *peer_id, unsigned char *public_ke
         return false;
     }
 
-    if (memcmp(peer_id, pid->data, peer_id_len) != 0) {
-        printf("invalid peerid given\n");
-        return false;
+    bool ok = false;
+
+    if (memcmp(peer_id, pid->data, peer_id_len) == 0) {
+        ok = true;
     }
 
-    return true;
+    libp2p_peer_id_free(pid);
+
+    return ok;
 }
 
 /*!

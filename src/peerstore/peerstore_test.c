@@ -44,6 +44,13 @@ void peerstore_test_resize_if_needed_not_needed(void **state) {
   peerstore_free_peerstore(pst);
 }
 
+
+void peerstore_test_insert_peer(void **state) {
+  peerstore_t *pst = peerstore_new_assert(100);
+  // todo
+  peerstore_free_peerstore(pst);
+}
+
 /*
   write your tests here
 */
@@ -51,7 +58,8 @@ void peerstore_test_resize_if_needed_not_needed(void **state) {
 int main(void) {
     const struct CMUnitTest tests[] = {
         cmocka_unit_test(peerstore_test_new_peerstore),
-        cmocka_unit_test(peerstore_test_resize_if_needed_not_needed)
+        cmocka_unit_test(peerstore_test_resize_if_needed_not_needed),
+        cmocka_unit_test(peerstore_test_insert_peer)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);
 }
