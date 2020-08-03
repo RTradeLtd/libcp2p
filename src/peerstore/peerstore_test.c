@@ -54,7 +54,11 @@ void peerstore_test_insert_peer(void **state) {
     assert(priv_key != NULL);
     peer_id_t *pid = libp2p_crypto_ecdsa_keypair_peerid(priv_key);
     assert(pid != NULL);
+    public_key_t *pub_key = libp2p_crypto_ecdsa_keypair_public(priv_key);
+    assert(pub_key != NULL);
 
+    bool ok = peerstore_insert_peer(pst, pid->data, pub_key->data, pid->len, pub_key->data_size);
+    assert(ok == true);
 
     libp2p_crypto_ecdsa_free(priv_key);
     libp2p_peer_id_free(pid);
