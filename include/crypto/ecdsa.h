@@ -62,19 +62,28 @@ ecdsa_private_key_t *
 libp2p_crypto_ecdsa_pem_to_private_key(unsigned char *pem_input);
 
 /*!
- * @brief returns the public key associated with the private key
- * @param output a buffer to write the key into, ~256 bytes should suffice
- * @return 0 on success, otherwise returns the mbedtls errno
+ * @brief returns the public key associated with the private key in PEM format
+ * @details the returned struct is suitable for encoding into CBOR and sending to
+ * peers
+ * @warning caller must free returned data when no longer
+ * @todo this currently relies in usage of `str..` we should use `mem...` instead
+ * @return Success: an instance of public_key_t with the corresponding information
+ * @return Failure: NULL pointer
  */
 public_key_t *libp2p_crypto_ecdsa_keypair_public(ecdsa_private_key_t *pk);
 
-/*! @brief returns the peerid for the corresponding private key
+/*! @brief returns a peer_id_t struct for the given private key
+ * @details this is useful for exchanging peer identifier information with
+ * @details anyone who connects to our host
  * @warning caller must free returned pointer when no longer needed
  * @details to get the peerid we take a sha256 hash of the public key file in PEM
  * format
  * @details we then generate a multihash of that sha256, and base58 encode it
+ * @todo this currently relies on hard coded assumptions about hashing algorithm
+ * @todo in the future this will change
  * @param pk a loaded ecdsa_private_key_t instance
- * @return pointer to an unsigned char peerID
+ * @return Success: pointer to an instance of peer_id_t
+ * @return Failure: NULL pointer
  */
 peer_id_t *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk);
 
