@@ -73,8 +73,8 @@ peer_id_t *libp2p_crypto_ecdsa_keypair_peerid(ecdsa_private_key_t *pk) {
     if (public_key_hash == NULL) {
         return NULL;
     }
-    int rc = libp2p_crypto_hashing_sha256(pub_key->data, strlen((char *)pub_key->data),
-                                          public_key_hash);
+    int rc = libp2p_crypto_hashing_sha256(
+        pub_key->data, strlen((char *)pub_key->data), public_key_hash);
     if (rc != 1) {
         libp2p_crypto_public_key_free(pub_key);
         free(public_key_hash);
@@ -113,7 +113,6 @@ public_key_t *libp2p_crypto_ecdsa_keypair_public(ecdsa_private_key_t *pk) {
         return NULL;
     }
     strcpy((char *)public_key, (char *)output_buf);
-
 
     public_key_t *pub_key = libp2p_crypto_public_key_new();
     if (pub_key == NULL) {

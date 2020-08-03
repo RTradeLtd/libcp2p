@@ -49,8 +49,8 @@ void test_libp2p_crypto_ecdsa_private_key_save(void **stat) {
     libp2p_crypto_ecdsa_free(pk);
     libp2p_crypto_ecdsa_free(ret_pk);
     free(output);
-    free(pk_pub);
-    free(ret_pub);
+    libp2p_crypto_public_key_free(pk_pub);
+    libp2p_crypto_public_key_free(ret_pub);
 }
 
 // also tests getting the associated public key
@@ -88,7 +88,7 @@ void test_libp2p_crypto_ecdsa_keypair_generation(void **state) {
     free(output);
     free(output2);
     libp2p_peer_id_free(pid);
-    // free(public_key);
+    libp2p_crypto_public_key_free(pub_key);
 }
 
 void test_libp2p_crypto_hashing_sha1_hmac(void **state) {
