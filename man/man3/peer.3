@@ -1,0 +1,72 @@
+.TH "peer" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+peer
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <peerstore\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "size_t \fBpeer_id_len\fP"
+.br
+.ti -1c
+.RI "size_t \fBpublic_key_len\fP"
+.br
+.ti -1c
+.RI "unsigned char * \fBpeer_id\fP"
+.br
+.ti -1c
+.RI "unsigned char * \fBpublic_key\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 43 of file peerstore\&.h\&.
+.SH "Field Documentation"
+.PP 
+.SS "unsigned char* peer::peer_id"
+
+.PP
+\fBNote\fP
+.RS 4
+the size of the public key 
+.RE
+.PP
+
+.PP
+Definition at line 46 of file peerstore\&.h\&.
+.SS "size_t peer::peer_id_len"
+
+.PP
+Definition at line 44 of file peerstore\&.h\&.
+.SS "unsigned char* peer::public_key"
+
+.PP
+\fBNote\fP
+.RS 4
+the actual peer id data 
+.RE
+.PP
+
+.PP
+Definition at line 47 of file peerstore\&.h\&.
+.SS "size_t peer::public_key_len"
+
+.PP
+\fBNote\fP
+.RS 4
+the size of the peer id 
+.RE
+.PP
+
+.PP
+Definition at line 45 of file peerstore\&.h\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

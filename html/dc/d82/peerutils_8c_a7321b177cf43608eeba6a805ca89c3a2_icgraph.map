@@ -1,0 +1,9 @@
+<map id="libp2p_peer_id_free" name="libp2p_peer_id_free">
+<area shape="rect" id="node1" title="free up resources allocated for an instance of peer_id_t" alt="" coords="811,40,961,67"/>
+<area shape="rect" id="node2" href="$d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="108,7,304,33"/>
+<area shape="rect" id="node4" href="$d5/d3e/peerstore_8h.html#adec424d7ca6bc416943aff4526e7f351" title="used to validate the peerID ensuring that the given public key matches the given peerid" alt="" coords="591,33,735,74"/>
+<area shape="rect" id="node6" href="$d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="564,98,763,139"/>
+<area shape="rect" id="node3" href="$d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,7,60,33"/>
+<area shape="rect" id="node5" href="$d5/d3e/peerstore_8h.html#ae1716fa6a8fa77ef2971750a57139988" title="used to insert a peer_id public_key pair into our peerstore" alt="" coords="352,36,516,63"/>
+<area shape="rect" id="node7" href="$d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="407,105,461,132"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="libp2p_crypto_ecdsa_keypair_public" name="libp2p_crypto_ecdsa_keypair_public">
+<area shape="rect" id="node1" title="returns the public key associated with the private key in PEM format" alt="" coords="5,35,160,76"/>
+<area shape="rect" id="node2" href="$db/dfd/key_8c.html#a9c803993819a08dc0584b8995eaa3232" title="returns a new instance of public_key_t" alt="" coords="208,5,364,47"/>
+<area shape="rect" id="node3" href="$de/df1/util_8c.html#aceffb5d3f84b98c35c05dc580caddd45" title="prints the corresponding error to stdout" alt="" coords="211,71,361,98"/>
+</map>

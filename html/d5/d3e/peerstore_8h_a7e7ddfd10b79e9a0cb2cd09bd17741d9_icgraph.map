@@ -1,0 +1,6 @@
+<map id="peerstore_have_peer" name="peerstore_have_peer">
+<area shape="rect" id="node1" title="check if we have information for the given peer_id" alt="" coords="564,31,723,57"/>
+<area shape="rect" id="node2" href="$d5/d3e/peerstore_8h.html#ae1716fa6a8fa77ef2971750a57139988" title="used to insert a peer_id public_key pair into our peerstore" alt="" coords="352,5,516,32"/>
+<area shape="rect" id="node3" href="$d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="108,31,304,57"/>
+<area shape="rect" id="node4" href="$d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,31,60,57"/>
+</map>

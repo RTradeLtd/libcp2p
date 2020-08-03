@@ -1,7 +1,12 @@
 <map id="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/encoding/cbor.h" name="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/encoding/cbor.h">
-<area shape="rect" id="node1" title="utilities for working with cbor encoding/decoding" alt="" coords="69,5,247,61"/>
+<area shape="rect" id="node1" title="utilities for working with cbor encoding/decoding" alt="" coords="31,5,210,61"/>
 <area shape="rect" id="node2" href="$db/dfd/key_8c.html" title="public/private key management functions" alt="" coords="5,213,183,269"/>
-<area shape="rect" id="node3" href="$d9/d42/cbor_8c.html" title="utilities for working with cbor encoding/decoding" alt="" coords="69,109,247,165"/>
-<area shape="rect" id="node4" href="$de/de5/key_8h.html" title="public/private key management functions" alt="" coords="271,109,448,165"/>
-<area shape="rect" id="node5" href="$d5/d29/crypto__test_8c.html" title=" " alt="" coords="270,213,449,269"/>
+<area shape="rect" id="node3" href="$d9/d42/cbor_8c.html" title="utilities for working with cbor encoding/decoding" alt="" coords="32,109,209,165"/>
+<area shape="rect" id="node4" href="$de/de5/key_8h.html" title="public/private key management functions" alt="" coords="233,109,411,165"/>
+<area shape="rect" id="node5" href="$d5/d29/crypto__test_8c.html" title=" " alt="" coords="145,317,323,373"/>
+<area shape="rect" id="node6" href="$d5/d5d/ecdsa_8h.html" title="provides ECDSA cryptography support" alt="" coords="348,213,525,269"/>
+<area shape="rect" id="node7" href="$dc/d09/ecdsa_8c.html" title=" " alt="" coords="348,317,525,373"/>
+<area shape="rect" id="node8" href="$d1/dba/testutils_8c.html" title=" " alt="" coords="475,421,652,477"/>
+<area shape="rect" id="node9" href="$d3/d1a/testutils_8h.html" title=" " alt="" coords="600,317,799,373"/>
+<area shape="rect" id="node10" href="$d1/d8e/peerstore__test_8c.html" title=" " alt="" coords="676,421,896,477"/>
 </map>

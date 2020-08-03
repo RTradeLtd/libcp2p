@@ -114,20 +114,19 @@ $(document).ready(function(){initNavTree('d9/d42/cbor_8c_source.html','../../');
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"> * @return Failure: NULL pointer</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="../../d9/d64/encoding_2cbor_8h.html#a2500434b8b3ca0ddab0efb79d0c37c55">   28</a></span>&#160;<a class="code" href="../../d3/de2/structcbor__encoded__data.html">cbor_encoded_data_t</a> *<a class="code" href="../../d9/d42/cbor_8c.html#a2500434b8b3ca0ddab0efb79d0c37c55">new_cbor_encoded_data</a>(uint8_t *data, <span class="keywordtype">size_t</span> len) {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="../../d3/de2/structcbor__encoded__data.html">cbor_encoded_data_t</a> *out =</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        calloc(<span class="keyword">sizeof</span>(<a class="code" href="../../d3/de2/structcbor__encoded__data.html">cbor_encoded_data_t</a>), <span class="keyword">sizeof</span>(<a class="code" href="../../d3/de2/structcbor__encoded__data.html">cbor_encoded_data_t</a>));</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">if</span> (out == NULL) {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    }</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    out-&gt;<a class="code" href="../../d3/de2/structcbor__encoded__data.html#a2dde59c210f818fe7934094c8316a067">data</a> = realloc(out-&gt;<a class="code" href="../../d3/de2/structcbor__encoded__data.html#a2dde59c210f818fe7934094c8316a067">data</a>, len);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordflow">if</span> (out-&gt;<a class="code" href="../../d3/de2/structcbor__encoded__data.html#a2dde59c210f818fe7934094c8316a067">data</a> == NULL) {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        free(out);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    }</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    memcpy(out-&gt;<a class="code" href="../../d3/de2/structcbor__encoded__data.html#a2dde59c210f818fe7934094c8316a067">data</a>, data, len);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    out-&gt;<a class="code" href="../../d3/de2/structcbor__encoded__data.html#afd064d431598565aeb6864e01319c582">len</a> = len;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">return</span> out;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="../../d3/de2/structcbor__encoded__data.html">cbor_encoded_data_t</a> *out = calloc(1, <span class="keyword">sizeof</span>(<a class="code" href="../../d3/de2/structcbor__encoded__data.html">cbor_encoded_data_t</a>));</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">if</span> (out == NULL) {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    }</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    out-&gt;<a class="code" href="../../d3/de2/structcbor__encoded__data.html#a2dde59c210f818fe7934094c8316a067">data</a> = realloc(out-&gt;<a class="code" href="../../d3/de2/structcbor__encoded__data.html#a2dde59c210f818fe7934094c8316a067">data</a>, len);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">if</span> (out-&gt;<a class="code" href="../../d3/de2/structcbor__encoded__data.html#a2dde59c210f818fe7934094c8316a067">data</a> == NULL) {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        free(out);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    memcpy(out-&gt;<a class="code" href="../../d3/de2/structcbor__encoded__data.html#a2dde59c210f818fe7934094c8316a067">data</a>, data, len);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    out-&gt;<a class="code" href="../../d3/de2/structcbor__encoded__data.html#afd064d431598565aeb6864e01319c582">len</a> = len;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">return</span> out;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="acbor_8c_html_a7b13224af44cf3a0da8cb2b989ab2a61"><div class="ttname"><a href="../../d9/d42/cbor_8c.html#a7b13224af44cf3a0da8cb2b989ab2a61">free_cbor_encoded_data</a></div><div class="ttdeci">void free_cbor_encoded_data(cbor_encoded_data_t *in)</div><div class="ttdoc">free up resources associated with an instance of cbor_encoded_t</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d42/cbor_8c_source.html#l00016">cbor.c:16</a></div></div>

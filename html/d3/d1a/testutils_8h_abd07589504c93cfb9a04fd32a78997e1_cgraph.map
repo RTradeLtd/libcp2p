@@ -1,0 +1,7 @@
+<map id="new_ecdsa_private_key" name="new_ecdsa_private_key">
+<area shape="rect" id="node1" title=" " alt="" coords="5,46,183,73"/>
+<area shape="rect" id="node2" href="$dc/d09/ecdsa_8c.html#a921b929610c8f4da6e9e10f6349759d3" title="parses a PEM encoded private key and returns a struct for use" alt="" coords="492,5,653,47"/>
+<area shape="rect" id="node4" href="$d1/dba/testutils_8c.html#acc6bd851ac3572f19cc34d4191e799c3" title="returns a new PEM formatted ECDSA private key" alt="" coords="231,71,444,98"/>
+<area shape="rect" id="node3" href="$de/df1/util_8c.html#aceffb5d3f84b98c35c05dc580caddd45" title="prints the corresponding error to stdout" alt="" coords="701,46,852,73"/>
+<area shape="rect" id="node5" href="$dc/d09/ecdsa_8c.html#ababc4b1b736eb55ea94abd3175fb76ea" title="used to generate an ECDSA keypair" alt="" coords="495,71,650,112"/>
+</map>

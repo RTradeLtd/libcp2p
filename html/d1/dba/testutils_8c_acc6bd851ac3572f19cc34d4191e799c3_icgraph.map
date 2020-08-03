@@ -1,0 +1,6 @@
+<map id="new_ecdsa_private_key_pem" name="new_ecdsa_private_key_pem">
+<area shape="rect" id="node1" title="returns a new PEM formatted ECDSA private key" alt="" coords="577,5,791,32"/>
+<area shape="rect" id="node2" href="$d3/d1a/testutils_8h.html#abd07589504c93cfb9a04fd32a78997e1" title=" " alt="" coords="352,5,529,32"/>
+<area shape="rect" id="node3" href="$d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="108,5,304,32"/>
+<area shape="rect" id="node4" href="$d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,5,60,32"/>
+</map>

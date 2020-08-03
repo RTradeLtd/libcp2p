@@ -1,4 +1,4 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/peerutils.h" 3 "Fri Jul 24 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/peerutils.h" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -18,19 +18,36 @@
 \fC#include 'string\&.h'\fP
 .br
 
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBpeer_id\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBpeer_id\fP \fBpeer_id_t\fP"
+.br
+.RI "contains the peer identifier (base encoded multihash of public key "
+.in -1c
 .SS "Functions"
 
 .in +1c
 .ti -1c
-.RI "int \fBlibp2p_new_peer_id\fP (unsigned char *pointyaddr, size_t *rezbuflen, unsigned char *ID_BUF, size_t ID_BUF_SIZE)"
+.RI "\fBpeer_id_t\fP * \fBlibp2p_new_peer_id_sha256\fP (unsigned char *output, size_t *output_len, unsigned char *\fBpublic_key\fP, size_t public_key_len)"
 .br
-.RI "returns a libp2p peerid from the sha256 hash of a public key base58 encode a string NOTE: this also puts the prefix 'Qm' in front as the ID is a multihash "
+.RI "generates a peerID for the public key using SHA256 as the hashing algorithm "
 .ti -1c
-.RI "void \fBID_FromPK_non_null_terminated\fP (char *result, unsigned char *texttohash, size_t text_size)"
+.RI "\fBpeer_id_t\fP * \fBlibp2p_new_peer_id\fP (unsigned char *output, size_t *output_len, unsigned char *input_hash, size_t input_size)"
 .br
+.RI "constructs a peer identifier from the given public key "
 .ti -1c
-.RI "void \fBID_FromPK\fP (char *result, unsigned char *texttohash)"
+.RI "void \fBlibp2p_peer_id_free\fP (\fBpeer_id_t\fP *pid)"
 .br
+.RI "free up resources allocated for an instance of peer_id_t "
 .in -1c
 .SH "Detailed Description"
 .PP 
@@ -39,52 +56,90 @@ provides utilities for managing peer identifiers
 
 .PP
 Definition in file \fBpeerutils\&.h\fP\&.
+.SH "Typedef Documentation"
+.PP 
+.SS "\fBpeer_id_t\fP"
+
+.PP
+contains the peer identifier (base encoded multihash of public key 
+.PP
+\fBNote\fP
+.RS 4
+not thread safe, should we add locking capabilities? 
+.RE
+.PP
+
 .SH "Function Documentation"
 .PP 
-.SS "void ID_FromPK (char * result, unsigned char * texttohash)"
-
-.SS "void ID_FromPK_non_null_terminated (char * result, unsigned char * texttohash, size_t text_size)"
-
-.SS "int libp2p_new_peer_id (unsigned char * pointyaddr, size_t * rezbuflen, unsigned char * ID_BUF, size_t ID_BUF_SIZE)"
+.SS "\fBpeer_id_t\fP* libp2p_new_peer_id (unsigned char * output, size_t * output_len, unsigned char * input_hash, size_t input_size)"
 
 .PP
-returns a libp2p peerid from the sha256 hash of a public key base58 encode a string NOTE: this also puts the prefix 'Qm' in front as the ID is a multihash base58 encode a string NOTE: this also puts the prefix 'Qm' in front as the ID is a multihash 
+constructs a peer identifier from the given public key this is responsible for taking the hash of a public key
 .PP
-\fBParameters\fP
+turning it into a multihash, and the base encoding it 
+.PP
+\fBNote\fP
 .RS 4
-\fIpointyaddr\fP where the results will go 
-.br
-\fIrezbuflen\fP the length of the results buffer\&. It will also put how much was used here 
-.br
-\fIID_BUF\fP the input text (usually a SHA256 hash) 
-.br
-\fIID_BUF_SIZE\fP the input size (normally a SHA256, therefore 32 bytes) 
-.RE
+is currently hard coded for the input hash being SHA256 
 .PP
-\fBReturns\fP
-.RS 4
-true(1) on success
+if you allocated memory for output param you can free it up after this function returns 
+.PP
+this is because we copy the data placed there into the returned struct 
 .RE
 .PP
 \fBParameters\fP
 .RS 4
-\fIpointyaddr\fP where the results will go 
+\fIoutput\fP where to store the resulting peerID 
 .br
-\fIrezbuflen\fP the length of the results buffer\&. It will also put how much was used here 
+\fIoutput_len\fP the max lenght of the output buffer, but will also be used to store size of buffer 
 .br
-\fIID_BUF\fP the input text (usually a SHA256 hash) 
+\fIinput_hash\fP the input public key hash, usually sha256 
 .br
-\fIID_BUF_SIZE\fP the input size (normally a SHA256, therefore 32 bytes) 
+\fIinput_size\fP the input size, usually 32 bytes 
 .RE
 .PP
 \fBReturns\fP
 .RS 4
-true(1) on success 
+Success: pointer to an instance of peer_id_t 
+.PP
+Failure: NULL pointer 
+.RE
+.PP
+
+.PP
+Definition at line 53 of file peerutils\&.c\&.
+.SS "\fBpeer_id_t\fP* libp2p_new_peer_id_sha256 (unsigned char * output, size_t * output_len, unsigned char * public_key, size_t public_key_len)"
+
+.PP
+generates a peerID for the public key using SHA256 as the hashing algorithm is a wrapper around libp2p_new_peer_id that abstracts away hashing and memory allocs and stuff like that 
+.PP
+\fBParameters\fP
+.RS 4
+\fIoutput\fP where to store the resulting peerID 
+.br
+\fIoutput_len\fP the max lenght of the output buffer, but will also be used to store size of buffer 
+.br
+\fI\fBpublic_key\fP\fP the public key in PEM format to hash 
+.br
+\fIpublic_key_len\fP the length of the public key 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Success: pointer to an instance of peer_id_t 
+.PP
+Failure: NULL pointer 
 .RE
 .PP
 
 .PP
 Definition at line 21 of file peerutils\&.c\&.
+.SS "void libp2p_peer_id_free (\fBpeer_id_t\fP * pid)"
+
+.PP
+free up resources allocated for an instance of peer_id_t 
+.PP
+Definition at line 95 of file peerutils\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for libcp2p from the source code\&.

@@ -1,0 +1,80 @@
+.TH "peerstore" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+peerstore
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <peerstore\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "size_t \fBmax_peers\fP"
+.br
+.RI "the maximum number of allowed peers "
+.ti -1c
+.RI "size_t \fBnum_peers\fP"
+.br
+.RI "the current number of stores peers "
+.ti -1c
+.RI "size_t \fBpeers_size\fP"
+.br
+.RI "identifies the current size of the peers member "
+.ti -1c
+.RI "pthread_rwlock_t \fBmutex\fP"
+.br
+.RI "read-write lock ensuring fine-grained synchronization "
+.ti -1c
+.RI "\fBpeer_t\fP * \fBpeers\fP"
+.br
+.RI "dynamic array/memory containing all known peers "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 59 of file peerstore\&.h\&.
+.SH "Field Documentation"
+.PP 
+.SS "size_t peerstore::max_peers"
+
+.PP
+the maximum number of allowed peers 
+.PP
+Definition at line 63 of file peerstore\&.h\&.
+.SS "pthread_rwlock_t peerstore::mutex"
+
+.PP
+read-write lock ensuring fine-grained synchronization 
+.PP
+Definition at line 75 of file peerstore\&.h\&.
+.SS "size_t peerstore::num_peers"
+
+.PP
+the current number of stores peers 
+.PP
+Definition at line 67 of file peerstore\&.h\&.
+.SS "\fBpeer_t\fP* peerstore::peers"
+
+.PP
+dynamic array/memory containing all known peers 
+.PP
+\fBNote\fP
+.RS 4
+should we do a poitner to poitner of peer_t ?? (aka: peer_t **peers) 
+.RE
+.PP
+
+.PP
+Definition at line 80 of file peerstore\&.h\&.
+.SS "size_t peerstore::peers_size"
+
+.PP
+identifies the current size of the peers member 
+.PP
+Definition at line 71 of file peerstore\&.h\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

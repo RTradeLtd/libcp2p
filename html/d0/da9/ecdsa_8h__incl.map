@@ -1,6 +1,19 @@
 <map id="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/ecdsa.h" name="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/ecdsa.h">
-<area shape="rect" id="node1" title="provides ECDSA cryptography support" alt="" coords="124,5,301,61"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,109,135,136"/>
-<area shape="rect" id="node3" title=" " alt="" coords="159,109,266,136"/>
-<area shape="rect" id="node4" title=" " alt="" coords="291,109,375,136"/>
+<area shape="rect" id="node1" title="provides ECDSA cryptography support" alt="" coords="677,5,855,61"/>
+<area shape="rect" id="node2" href="$de/de5/key_8h.html" title="public/private key management functions" alt="" coords="101,109,201,136"/>
+<area shape="rect" id="node7" href="$d7/dee/peerutils_8h.html" title="provides utilities for managing peer identifiers" alt="" coords="541,109,677,136"/>
+<area shape="rect" id="node15" title=" " alt="" coords="701,109,831,136"/>
+<area shape="rect" id="node16" title=" " alt="" coords="855,109,962,136"/>
+<area shape="rect" id="node17" title=" " alt="" coords="987,109,1071,136"/>
+<area shape="rect" id="node3" href="$d9/d64/encoding_2cbor_8h.html" title="utilities for working with cbor encoding/decoding" alt="" coords="28,184,152,211"/>
+<area shape="rect" id="node5" title=" " alt="" coords="5,259,76,285"/>
+<area shape="rect" id="node6" title=" " alt="" coords="176,184,247,211"/>
+<area shape="rect" id="node4" title=" " alt="" coords="102,259,177,285"/>
+<area shape="rect" id="node8" href="$d5/de3/sha256_8h.html" title="provides sha256 hashing support" alt="" coords="464,184,591,211"/>
+<area shape="rect" id="node10" href="$d6/df9/hashes_8h.html" title="multihash definitions" alt="" coords="615,184,765,211"/>
+<area shape="rect" id="node12" href="$d3/d12/multihash_8h.html" title="functions for working with multihashes" alt="" coords="271,184,439,211"/>
+<area shape="rect" id="node13" title=" " alt="" coords="789,184,855,211"/>
+<area shape="rect" id="node14" title=" " alt="" coords="880,184,951,211"/>
+<area shape="rect" id="node9" title=" " alt="" coords="458,259,597,285"/>
+<area shape="rect" id="node11" href="$de/d45/errors_8h.html" title="helpers for working with multihash errors" alt="" coords="654,259,726,285"/>
 </map>

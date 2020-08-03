@@ -1,4 +1,4 @@
-.TH "md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s" 3 "Fri Jul 24 2020" "libcp2p" \" -*- nroff -*-
+.TH "md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -24,7 +24,7 @@ sequenceDiagram
     Peer2->>+Peer1: 
     Note over Peer1,Peer2: After successful key agreement all messages exchange via encryption
     Note over Peer1,Peer2: Secret key for AES message encryption is sha256 hash of ECDH priv key
-    Note over Peer1,Peer2: We take the sha256 hash of the private key in DER format
+    Note over Peer1,Peer2: We take the sha256 hash of the private key in PEM format
 .fi
 .PP
 .SS "Diagram"

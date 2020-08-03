@@ -1,4 +1,4 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/utils/logger.h" 3 "Fri Jul 24 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/utils/logger.h" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -49,7 +49,7 @@
 
 .in +1c
 .ti -1c
-.RI "enum \fBLOG_LEVELS\fP { \fBLOG_LEVELS_INFO\fP, \fBLOG_LEVELS_WARN\fP, \fBLOG_LEVELS_ERROR\fP, \fBLOG_LEVELS_DEBUG\fP }"
+.RI "enum \fBLOG_LEVELS\fP { \fBLOG_LEVELS_INFO\fP, \fBLOG_LEVELS_WARN\fP, \fBLOG_LEVELS_ERROR\fP, \fBLOG_LEVELS_DEBUG\fP, \fBLOG_LEVELS_INFO\fP, \fBLOG_LEVELS_WARN\fP, \fBLOG_LEVELS_ERROR\fP, \fBLOG_LEVELS_DEBUG\fP }"
 .br
 .in -1c
 .SS "Functions"
@@ -167,6 +167,18 @@ indicates the message we are logging is of type error (color red)
 .TP
 \fB\fILOG_LEVELS_DEBUG \fP\fP
 indicates the message we are logging is of type debug (color soft red) 
+.TP
+\fB\fILOG_LEVELS_INFO \fP\fP
+indicates the message we are logging is of type info (color green) 
+.TP
+\fB\fILOG_LEVELS_WARN \fP\fP
+indicates the message we are logging is of type warn (color yellow) 
+.TP
+\fB\fILOG_LEVELS_ERROR \fP\fP
+indicates the message we are logging is of type error (color red) 
+.TP
+\fB\fILOG_LEVELS_DEBUG \fP\fP
+indicates the message we are logging is of type debug (color soft red) 
 .PP
 Definition at line 29 of file logger\&.h\&.
 .SH "Function Documentation"
@@ -183,7 +195,7 @@ free resources for the file ogger
 .PP
 
 .PP
-Definition at line 239 of file logger\&.c\&.
+Definition at line 235 of file logger\&.c\&.
 .SS "void clear_thread_logger (\fBthread_logger\fP * thl)"
 
 .PP
@@ -196,7 +208,7 @@ free resources for the threaded logger
 .PP
 
 .PP
-Definition at line 235 of file logger\&.c\&.
+Definition at line 231 of file logger\&.c\&.
 .SS "void debug_log (\fBthread_logger\fP * thl, int file_descriptor, char * message)"
 
 .PP
@@ -213,7 +225,7 @@ logs a debug styled message - called by log_fn
 .PP
 
 .PP
-Definition at line 211 of file logger\&.c\&.
+Definition at line 208 of file logger\&.c\&.
 .SS "void error_log (\fBthread_logger\fP * thl, int file_descriptor, char * message)"
 
 .PP
@@ -230,7 +242,7 @@ logs an error styled message - called by log_fn
 .PP
 
 .PP
-Definition at line 192 of file logger\&.c\&.
+Definition at line 190 of file logger\&.c\&.
 .SS "void info_log (\fBthread_logger\fP * thl, int file_descriptor, char * message)"
 
 .PP
@@ -330,7 +342,7 @@ logs a warned styled message - called by log_fn
 .PP
 
 .PP
-Definition at line 169 of file logger\&.c\&.
+Definition at line 168 of file logger\&.c\&.
 .SS "int write_file_log (int file_descriptor, char * message)"
 
 .PP

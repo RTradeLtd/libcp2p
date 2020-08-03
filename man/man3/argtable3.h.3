@@ -1,0 +1,584 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/thirdparty/argtable3/argtable3.h" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/thirdparty/argtable3/argtable3.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <time\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBarg_hdr\fP"
+.br
+.ti -1c
+.RI "struct \fBarg_rem\fP"
+.br
+.ti -1c
+.RI "struct \fBarg_lit\fP"
+.br
+.ti -1c
+.RI "struct \fBarg_int\fP"
+.br
+.ti -1c
+.RI "struct \fBarg_dbl\fP"
+.br
+.ti -1c
+.RI "struct \fBarg_str\fP"
+.br
+.ti -1c
+.RI "struct \fBarg_rex\fP"
+.br
+.ti -1c
+.RI "struct \fBarg_file\fP"
+.br
+.ti -1c
+.RI "struct \fBarg_date\fP"
+.br
+.ti -1c
+.RI "struct \fBarg_end\fP"
+.br
+.ti -1c
+.RI "struct \fBarg_cmd_info\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBARG_REX_ICASE\fP   1"
+.br
+.ti -1c
+.RI "#define \fBARG_DSTR_SIZE\fP   200"
+.br
+.ti -1c
+.RI "#define \fBARG_CMD_NAME_LEN\fP   100"
+.br
+.ti -1c
+.RI "#define \fBARG_CMD_DESCRIPTION_LEN\fP   256"
+.br
+.ti -1c
+.RI "#define \fBARG_REPLACE_GETOPT\fP   1 /* use the embedded getopt as the system getopt(3) */"
+.br
+.ti -1c
+.RI "#define \fBARG_EXTERN\fP"
+.br
+.ti -1c
+.RI "#define \fBARG_DSTR_STATIC\fP   ((\fBarg_dstr_freefn\fP *)0)"
+.br
+.ti -1c
+.RI "#define \fBARG_DSTR_VOLATILE\fP   ((\fBarg_dstr_freefn\fP *)1)"
+.br
+.ti -1c
+.RI "#define \fBARG_DSTR_DYNAMIC\fP   ((\fBarg_dstr_freefn\fP *)3)"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct _internal_arg_dstr * \fBarg_dstr_t\fP"
+.br
+.ti -1c
+.RI "typedef void * \fBarg_cmd_itr_t\fP"
+.br
+.ti -1c
+.RI "typedef void() \fBarg_resetfn\fP(void *parent)"
+.br
+.ti -1c
+.RI "typedef int() \fBarg_scanfn\fP(void *parent, const char *argval)"
+.br
+.ti -1c
+.RI "typedef int() \fBarg_checkfn\fP(void *parent)"
+.br
+.ti -1c
+.RI "typedef void() \fBarg_errorfn\fP(void *parent, \fBarg_dstr_t\fP ds, int error, const char *argval, const char *progname)"
+.br
+.ti -1c
+.RI "typedef void() \fBarg_dstr_freefn\fP(char *buf)"
+.br
+.ti -1c
+.RI "typedef int() \fBarg_cmdfn\fP(int argc, char *argv[], \fBarg_dstr_t\fP res)"
+.br
+.ti -1c
+.RI "typedef int() \fBarg_comparefn\fP(const void *k1, const void *k2)"
+.br
+.ti -1c
+.RI "typedef struct \fBarg_cmd_info\fP \fBarg_cmd_info_t\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum { \fBARG_TERMINATOR\fP = 0x1, \fBARG_HASVALUE\fP = 0x2, \fBARG_HASOPTVALUE\fP = 0x4 }"
+.br
+.ti -1c
+.RI "enum { \fBARG_ELIMIT\fP = 1, \fBARG_EMALLOC\fP, \fBARG_ENOMATCH\fP, \fBARG_ELONGOPT\fP, \fBARG_EMISSARG\fP }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "struct \fBarg_rem\fP * \fBarg_rem\fP (const char *datatype, const char *glossary)"
+.br
+.ti -1c
+.RI "struct \fBarg_lit\fP * \fBarg_lit0\fP (const char *shortopts, const char *longopts, const char *glossary)"
+.br
+.ti -1c
+.RI "struct \fBarg_lit\fP * \fBarg_lit1\fP (const char *shortopts, const char *longopts, const char *glossary)"
+.br
+.ti -1c
+.RI "struct \fBarg_lit\fP * \fBarg_litn\fP (const char *shortopts, const char *longopts, int mincount, int maxcount, const char *glossary)"
+.br
+.ti -1c
+.RI "struct \fBarg_int\fP * \fBarg_int0\fP (const char *shortopts, const char *longopts, const char *datatype, const char *glossary)"
+.br
+.ti -1c
+.RI "struct \fBarg_int\fP * \fBarg_int1\fP (const char *shortopts, const char *longopts, const char *datatype, const char *glossary)"
+.br
+.ti -1c
+.RI "struct \fBarg_int\fP * \fBarg_intn\fP (const char *shortopts, const char *longopts, const char *datatype, int mincount, int maxcount, const char *glossary)"
+.br
+.ti -1c
+.RI "struct \fBarg_dbl\fP * \fBarg_dbl0\fP (const char *shortopts, const char *longopts, const char *datatype, const char *glossary)"
+.br
+.ti -1c
+.RI "struct \fBarg_dbl\fP * \fBarg_dbl1\fP (const char *shortopts, const char *longopts, const char *datatype, const char *glossary)"
+.br
+.ti -1c
+.RI "struct \fBarg_dbl\fP * \fBarg_dbln\fP (const char *shortopts, const char *longopts, const char *datatype, int mincount, int maxcount, const char *glossary)"
+.br
+.ti -1c
+.RI "struct \fBarg_str\fP * \fBarg_str0\fP (const char *shortopts, const char *longopts, const char *datatype, const char *glossary)"
+.br
+.ti -1c
+.RI "struct \fBarg_str\fP * \fBarg_str1\fP (const char *shortopts, const char *longopts, const char *datatype, const char *glossary)"
+.br
+.ti -1c
+.RI "struct \fBarg_str\fP * \fBarg_strn\fP (const char *shortopts, const char *longopts, const char *datatype, int mincount, int maxcount, const char *glossary)"
+.br
+.ti -1c
+.RI "struct \fBarg_rex\fP * \fBarg_rex0\fP (const char *shortopts, const char *longopts, const char *pattern, const char *datatype, int flags, const char *glossary)"
+.br
+.ti -1c
+.RI "struct \fBarg_rex\fP * \fBarg_rex1\fP (const char *shortopts, const char *longopts, const char *pattern, const char *datatype, int flags, const char *glossary)"
+.br
+.ti -1c
+.RI "struct \fBarg_rex\fP * \fBarg_rexn\fP (const char *shortopts, const char *longopts, const char *pattern, const char *datatype, int mincount, int maxcount, int flags, const char *glossary)"
+.br
+.ti -1c
+.RI "struct \fBarg_file\fP * \fBarg_file0\fP (const char *shortopts, const char *longopts, const char *datatype, const char *glossary)"
+.br
+.ti -1c
+.RI "struct \fBarg_file\fP * \fBarg_file1\fP (const char *shortopts, const char *longopts, const char *datatype, const char *glossary)"
+.br
+.ti -1c
+.RI "struct \fBarg_file\fP * \fBarg_filen\fP (const char *shortopts, const char *longopts, const char *datatype, int mincount, int maxcount, const char *glossary)"
+.br
+.ti -1c
+.RI "struct \fBarg_date\fP * \fBarg_date0\fP (const char *shortopts, const char *longopts, const char *format, const char *datatype, const char *glossary)"
+.br
+.ti -1c
+.RI "struct \fBarg_date\fP * \fBarg_date1\fP (const char *shortopts, const char *longopts, const char *format, const char *datatype, const char *glossary)"
+.br
+.ti -1c
+.RI "struct \fBarg_date\fP * \fBarg_daten\fP (const char *shortopts, const char *longopts, const char *format, const char *datatype, int mincount, int maxcount, const char *glossary)"
+.br
+.ti -1c
+.RI "struct \fBarg_end\fP * \fBarg_end\fP (int maxerrors)"
+.br
+.ti -1c
+.RI "int \fBarg_nullcheck\fP (void **argtable)"
+.br
+.ti -1c
+.RI "int \fBarg_parse\fP (int argc, char **argv, void **argtable)"
+.br
+.ti -1c
+.RI "void \fBarg_print_option\fP (FILE *fp, const char *shortopts, const char *longopts, const char *datatype, const char *suffix)"
+.br
+.ti -1c
+.RI "void \fBarg_print_syntax\fP (FILE *fp, void **argtable, const char *suffix)"
+.br
+.ti -1c
+.RI "void \fBarg_print_syntaxv\fP (FILE *fp, void **argtable, const char *suffix)"
+.br
+.ti -1c
+.RI "void \fBarg_print_glossary\fP (FILE *fp, void **argtable, const char *format)"
+.br
+.ti -1c
+.RI "void \fBarg_print_glossary_gnu\fP (FILE *fp, void **argtable)"
+.br
+.ti -1c
+.RI "void \fBarg_print_errors\fP (FILE *fp, struct \fBarg_end\fP *end, const char *progname)"
+.br
+.ti -1c
+.RI "void \fBarg_print_option_ds\fP (\fBarg_dstr_t\fP ds, const char *shortopts, const char *longopts, const char *datatype, const char *suffix)"
+.br
+.ti -1c
+.RI "void \fBarg_print_syntax_ds\fP (\fBarg_dstr_t\fP ds, void **argtable, const char *suffix)"
+.br
+.ti -1c
+.RI "void \fBarg_print_syntaxv_ds\fP (\fBarg_dstr_t\fP ds, void **argtable, const char *suffix)"
+.br
+.ti -1c
+.RI "void \fBarg_print_glossary_ds\fP (\fBarg_dstr_t\fP ds, void **argtable, const char *format)"
+.br
+.ti -1c
+.RI "void \fBarg_print_glossary_gnu_ds\fP (\fBarg_dstr_t\fP ds, void **argtable)"
+.br
+.ti -1c
+.RI "void \fBarg_print_errors_ds\fP (\fBarg_dstr_t\fP ds, struct \fBarg_end\fP *end, const char *progname)"
+.br
+.ti -1c
+.RI "void \fBarg_freetable\fP (void **argtable, size_t n)"
+.br
+.ti -1c
+.RI "\fBarg_dstr_t\fP \fBarg_dstr_create\fP (void)"
+.br
+.ti -1c
+.RI "void \fBarg_dstr_destroy\fP (\fBarg_dstr_t\fP ds)"
+.br
+.ti -1c
+.RI "void \fBarg_dstr_reset\fP (\fBarg_dstr_t\fP ds)"
+.br
+.ti -1c
+.RI "void \fBarg_dstr_free\fP (\fBarg_dstr_t\fP ds)"
+.br
+.ti -1c
+.RI "void \fBarg_dstr_set\fP (\fBarg_dstr_t\fP ds, char *str, \fBarg_dstr_freefn\fP *free_proc)"
+.br
+.ti -1c
+.RI "void \fBarg_dstr_cat\fP (\fBarg_dstr_t\fP ds, const char *str)"
+.br
+.ti -1c
+.RI "void \fBarg_dstr_catc\fP (\fBarg_dstr_t\fP ds, char c)"
+.br
+.ti -1c
+.RI "void \fBarg_dstr_catf\fP (\fBarg_dstr_t\fP ds, const char *fmt,\&.\&.\&.)"
+.br
+.ti -1c
+.RI "char * \fBarg_dstr_cstr\fP (\fBarg_dstr_t\fP ds)"
+.br
+.ti -1c
+.RI "void \fBarg_cmd_init\fP (void)"
+.br
+.ti -1c
+.RI "void \fBarg_cmd_uninit\fP (void)"
+.br
+.ti -1c
+.RI "void \fBarg_cmd_register\fP (const char *name, \fBarg_cmdfn\fP *proc, const char *description)"
+.br
+.ti -1c
+.RI "void \fBarg_cmd_unregister\fP (const char *name)"
+.br
+.ti -1c
+.RI "int \fBarg_cmd_dispatch\fP (const char *name, int argc, char *argv[], \fBarg_dstr_t\fP res)"
+.br
+.ti -1c
+.RI "unsigned int \fBarg_cmd_count\fP (void)"
+.br
+.ti -1c
+.RI "\fBarg_cmd_info_t\fP * \fBarg_cmd_info\fP (const char *name)"
+.br
+.ti -1c
+.RI "\fBarg_cmd_itr_t\fP \fBarg_cmd_itr_create\fP (void)"
+.br
+.ti -1c
+.RI "void \fBarg_cmd_itr_destroy\fP (\fBarg_cmd_itr_t\fP itr)"
+.br
+.ti -1c
+.RI "int \fBarg_cmd_itr_advance\fP (\fBarg_cmd_itr_t\fP itr)"
+.br
+.ti -1c
+.RI "char * \fBarg_cmd_itr_key\fP (\fBarg_cmd_itr_t\fP itr)"
+.br
+.ti -1c
+.RI "\fBarg_cmd_info_t\fP * \fBarg_cmd_itr_value\fP (\fBarg_cmd_itr_t\fP itr)"
+.br
+.ti -1c
+.RI "int \fBarg_cmd_itr_search\fP (\fBarg_cmd_itr_t\fP itr, void *k)"
+.br
+.ti -1c
+.RI "void \fBarg_mgsort\fP (void *data, int size, int esize, int i, int k, \fBarg_comparefn\fP *comparefn)"
+.br
+.ti -1c
+.RI "void \fBarg_make_get_help_msg\fP (\fBarg_dstr_t\fP res)"
+.br
+.ti -1c
+.RI "void \fBarg_make_help_msg\fP (\fBarg_dstr_t\fP ds, char *cmd_name, void **argtable)"
+.br
+.ti -1c
+.RI "void \fBarg_make_syntax_err_msg\fP (\fBarg_dstr_t\fP ds, void **argtable, struct \fBarg_end\fP *end)"
+.br
+.ti -1c
+.RI "int \fBarg_make_syntax_err_help_msg\fP (\fBarg_dstr_t\fP ds, char *name, int help, int nerrors, void **argtable, struct \fBarg_end\fP *end, int *exitcode)"
+.br
+.ti -1c
+.RI "void \fBarg_set_module_name\fP (const char *name)"
+.br
+.ti -1c
+.RI "void \fBarg_set_module_version\fP (int major, int minor, int patch, const char *tag)"
+.br
+.ti -1c
+.RI "void \fBarg_free\fP (void **argtable)"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define ARG_CMD_DESCRIPTION_LEN   256"
+
+.PP
+Definition at line 46 of file argtable3\&.h\&.
+.SS "#define ARG_CMD_NAME_LEN   100"
+
+.PP
+Definition at line 45 of file argtable3\&.h\&.
+.SS "#define ARG_DSTR_DYNAMIC   ((\fBarg_dstr_freefn\fP *)3)"
+
+.PP
+Definition at line 246 of file argtable3\&.h\&.
+.SS "#define ARG_DSTR_SIZE   200"
+
+.PP
+Definition at line 44 of file argtable3\&.h\&.
+.SS "#define ARG_DSTR_STATIC   ((\fBarg_dstr_freefn\fP *)0)"
+
+.PP
+Definition at line 244 of file argtable3\&.h\&.
+.SS "#define ARG_DSTR_VOLATILE   ((\fBarg_dstr_freefn\fP *)1)"
+
+.PP
+Definition at line 245 of file argtable3\&.h\&.
+.SS "#define ARG_EXTERN"
+
+.PP
+Definition at line 64 of file argtable3\&.h\&.
+.SS "#define ARG_REPLACE_GETOPT   1 /* use the embedded getopt as the system getopt(3) */"
+
+.PP
+Definition at line 49 of file argtable3\&.h\&.
+.SS "#define ARG_REX_ICASE   1"
+
+.PP
+Definition at line 43 of file argtable3\&.h\&.
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef int() arg_checkfn(void *parent)"
+
+.PP
+Definition at line 72 of file argtable3\&.h\&.
+.SS "typedef struct \fBarg_cmd_info\fP \fBarg_cmd_info_t\fP"
+
+.SS "typedef void* \fBarg_cmd_itr_t\fP"
+
+.PP
+Definition at line 68 of file argtable3\&.h\&.
+.SS "typedef int() arg_cmdfn(int argc, char *argv[], \fBarg_dstr_t\fP res)"
+
+.PP
+Definition at line 76 of file argtable3\&.h\&.
+.SS "typedef int() arg_comparefn(const void *k1, const void *k2)"
+
+.PP
+Definition at line 77 of file argtable3\&.h\&.
+.SS "typedef void() arg_dstr_freefn(char *buf)"
+
+.PP
+Definition at line 75 of file argtable3\&.h\&.
+.SS "typedef struct _internal_arg_dstr* \fBarg_dstr_t\fP"
+
+.PP
+Definition at line 67 of file argtable3\&.h\&.
+.SS "typedef void() arg_errorfn(void *parent, \fBarg_dstr_t\fP ds, int error, const char *argval, const char *progname)"
+
+.PP
+Definition at line 73 of file argtable3\&.h\&.
+.SS "typedef void() arg_resetfn(void *parent)"
+
+.PP
+Definition at line 70 of file argtable3\&.h\&.
+.SS "typedef int() arg_scanfn(void *parent, const char *argval)"
+
+.PP
+Definition at line 71 of file argtable3\&.h\&.
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "anonymous enum"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIARG_TERMINATOR \fP\fP
+.TP
+\fB\fIARG_HASVALUE \fP\fP
+.TP
+\fB\fIARG_HASOPTVALUE \fP\fP
+.PP
+Definition at line 53 of file argtable3\&.h\&.
+.SS "anonymous enum"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIARG_ELIMIT \fP\fP
+.TP
+\fB\fIARG_EMALLOC \fP\fP
+.TP
+\fB\fIARG_ENOMATCH \fP\fP
+.TP
+\fB\fIARG_ELONGOPT \fP\fP
+.TP
+\fB\fIARG_EMISSARG \fP\fP
+.PP
+Definition at line 161 of file argtable3\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "unsigned int arg_cmd_count (void)"
+
+.SS "int arg_cmd_dispatch (const char * name, int argc, char * argv[], \fBarg_dstr_t\fP res)"
+
+.SS "\fBarg_cmd_info_t\fP* \fBarg_cmd_info\fP (const char * name)"
+
+.SS "void arg_cmd_init (void)"
+
+.SS "int arg_cmd_itr_advance (\fBarg_cmd_itr_t\fP itr)"
+
+.SS "\fBarg_cmd_itr_t\fP arg_cmd_itr_create (void)"
+
+.SS "void arg_cmd_itr_destroy (\fBarg_cmd_itr_t\fP itr)"
+
+.SS "char* arg_cmd_itr_key (\fBarg_cmd_itr_t\fP itr)"
+
+.SS "int arg_cmd_itr_search (\fBarg_cmd_itr_t\fP itr, void * k)"
+
+.SS "\fBarg_cmd_info_t\fP* arg_cmd_itr_value (\fBarg_cmd_itr_t\fP itr)"
+
+.SS "void arg_cmd_register (const char * name, \fBarg_cmdfn\fP * proc, const char * description)"
+
+.SS "void arg_cmd_uninit (void)"
+
+.SS "void arg_cmd_unregister (const char * name)"
+
+.SS "struct \fBarg_date\fP* arg_date0 (const char * shortopts, const char * longopts, const char * format, const char * datatype, const char * glossary)"
+
+.SS "struct \fBarg_date\fP* arg_date1 (const char * shortopts, const char * longopts, const char * format, const char * datatype, const char * glossary)"
+
+.SS "struct \fBarg_date\fP* arg_daten (const char * shortopts, const char * longopts, const char * format, const char * datatype, int mincount, int maxcount, const char * glossary)"
+
+.SS "struct \fBarg_dbl\fP* arg_dbl0 (const char * shortopts, const char * longopts, const char * datatype, const char * glossary)"
+
+.SS "struct \fBarg_dbl\fP* arg_dbl1 (const char * shortopts, const char * longopts, const char * datatype, const char * glossary)"
+
+.SS "struct \fBarg_dbl\fP* arg_dbln (const char * shortopts, const char * longopts, const char * datatype, int mincount, int maxcount, const char * glossary)"
+
+.SS "void arg_dstr_cat (\fBarg_dstr_t\fP ds, const char * str)"
+
+.SS "void arg_dstr_catc (\fBarg_dstr_t\fP ds, char c)"
+
+.SS "void arg_dstr_catf (\fBarg_dstr_t\fP ds, const char * fmt,  \&.\&.\&.)"
+
+.SS "\fBarg_dstr_t\fP arg_dstr_create (void)"
+
+.SS "char* arg_dstr_cstr (\fBarg_dstr_t\fP ds)"
+
+.SS "void arg_dstr_destroy (\fBarg_dstr_t\fP ds)"
+
+.SS "void arg_dstr_free (\fBarg_dstr_t\fP ds)"
+
+.SS "void arg_dstr_reset (\fBarg_dstr_t\fP ds)"
+
+.SS "void arg_dstr_set (\fBarg_dstr_t\fP ds, char * str, \fBarg_dstr_freefn\fP * free_proc)"
+
+.SS "struct \fBarg_end\fP* \fBarg_end\fP (int maxerrors)"
+
+.SS "struct \fBarg_file\fP* arg_file0 (const char * shortopts, const char * longopts, const char * datatype, const char * glossary)"
+
+.SS "struct \fBarg_file\fP* arg_file1 (const char * shortopts, const char * longopts, const char * datatype, const char * glossary)"
+
+.SS "struct \fBarg_file\fP* arg_filen (const char * shortopts, const char * longopts, const char * datatype, int mincount, int maxcount, const char * glossary)"
+
+.SS "void arg_free (void ** argtable)"
+
+.SS "void arg_freetable (void ** argtable, size_t n)"
+
+.SS "struct \fBarg_int\fP* arg_int0 (const char * shortopts, const char * longopts, const char * datatype, const char * glossary)"
+
+.SS "struct \fBarg_int\fP* arg_int1 (const char * shortopts, const char * longopts, const char * datatype, const char * glossary)"
+
+.SS "struct \fBarg_int\fP* arg_intn (const char * shortopts, const char * longopts, const char * datatype, int mincount, int maxcount, const char * glossary)"
+
+.SS "struct \fBarg_lit\fP* arg_lit0 (const char * shortopts, const char * longopts, const char * glossary)"
+
+.SS "struct \fBarg_lit\fP* arg_lit1 (const char * shortopts, const char * longopts, const char * glossary)"
+
+.SS "struct \fBarg_lit\fP* arg_litn (const char * shortopts, const char * longopts, int mincount, int maxcount, const char * glossary)"
+
+.SS "void arg_make_get_help_msg (\fBarg_dstr_t\fP res)"
+
+.SS "void arg_make_help_msg (\fBarg_dstr_t\fP ds, char * cmd_name, void ** argtable)"
+
+.SS "int arg_make_syntax_err_help_msg (\fBarg_dstr_t\fP ds, char * name, int help, int nerrors, void ** argtable, struct \fBarg_end\fP * end, int * exitcode)"
+
+.SS "void arg_make_syntax_err_msg (\fBarg_dstr_t\fP ds, void ** argtable, struct \fBarg_end\fP * end)"
+
+.SS "void arg_mgsort (void * data, int size, int esize, int i, int k, \fBarg_comparefn\fP * comparefn)"
+
+.SS "int arg_nullcheck (void ** argtable)"
+
+.SS "int arg_parse (int argc, char ** argv, void ** argtable)"
+
+.SS "void arg_print_errors (FILE * fp, struct \fBarg_end\fP * end, const char * progname)"
+
+.SS "void arg_print_errors_ds (\fBarg_dstr_t\fP ds, struct \fBarg_end\fP * end, const char * progname)"
+
+.SS "void arg_print_glossary (FILE * fp, void ** argtable, const char * format)"
+
+.SS "void arg_print_glossary_ds (\fBarg_dstr_t\fP ds, void ** argtable, const char * format)"
+
+.SS "void arg_print_glossary_gnu (FILE * fp, void ** argtable)"
+
+.SS "void arg_print_glossary_gnu_ds (\fBarg_dstr_t\fP ds, void ** argtable)"
+
+.SS "void arg_print_option (FILE * fp, const char * shortopts, const char * longopts, const char * datatype, const char * suffix)"
+
+.SS "void arg_print_option_ds (\fBarg_dstr_t\fP ds, const char * shortopts, const char * longopts, const char * datatype, const char * suffix)"
+
+.SS "void arg_print_syntax (FILE * fp, void ** argtable, const char * suffix)"
+
+.SS "void arg_print_syntax_ds (\fBarg_dstr_t\fP ds, void ** argtable, const char * suffix)"
+
+.SS "void arg_print_syntaxv (FILE * fp, void ** argtable, const char * suffix)"
+
+.SS "void arg_print_syntaxv_ds (\fBarg_dstr_t\fP ds, void ** argtable, const char * suffix)"
+
+.SS "struct \fBarg_rem\fP* \fBarg_rem\fP (const char * datatype, const char * glossary)"
+
+.SS "struct \fBarg_rex\fP* arg_rex0 (const char * shortopts, const char * longopts, const char * pattern, const char * datatype, int flags, const char * glossary)"
+
+.SS "struct \fBarg_rex\fP* arg_rex1 (const char * shortopts, const char * longopts, const char * pattern, const char * datatype, int flags, const char * glossary)"
+
+.SS "struct \fBarg_rex\fP* arg_rexn (const char * shortopts, const char * longopts, const char * pattern, const char * datatype, int mincount, int maxcount, int flags, const char * glossary)"
+
+.SS "void arg_set_module_name (const char * name)"
+
+.SS "void arg_set_module_version (int major, int minor, int patch, const char * tag)"
+
+.SS "struct \fBarg_str\fP* arg_str0 (const char * shortopts, const char * longopts, const char * datatype, const char * glossary)"
+
+.SS "struct \fBarg_str\fP* arg_str1 (const char * shortopts, const char * longopts, const char * datatype, const char * glossary)"
+
+.SS "struct \fBarg_str\fP* arg_strn (const char * shortopts, const char * longopts, const char * datatype, int mincount, int maxcount, const char * glossary)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

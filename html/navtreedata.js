@@ -27,16 +27,17 @@ var NAVTREE =
     [ "compatability with libp2p", "index.html#autotoc_md24", null ],
     [ "features", "index.html#autotoc_md25", [
       [ "multiformats", "index.html#autotoc_md26", null ],
-      [ "networking", "index.html#autotoc_md27", null ],
-      [ "misc", "index.html#autotoc_md28", null ]
+      [ "peerstore", "index.html#autotoc_md27", null ],
+      [ "networking", "index.html#autotoc_md28", null ],
+      [ "misc", "index.html#autotoc_md29", null ]
     ] ],
-    [ "installation", "index.html#autotoc_md29", [
-      [ "building", "index.html#autotoc_md30", null ],
-      [ "testing", "index.html#autotoc_md31", null ],
-      [ "dependencies", "index.html#autotoc_md32", null ]
+    [ "installation", "index.html#autotoc_md30", [
+      [ "building", "index.html#autotoc_md31", null ],
+      [ "testing", "index.html#autotoc_md32", null ],
+      [ "dependencies", "index.html#autotoc_md33", null ]
     ] ],
-    [ "development/contribution", "index.html#autotoc_md33", null ],
-    [ "license", "index.html#autotoc_md34", null ],
+    [ "development/contribution", "index.html#autotoc_md34", null ],
+    [ "license", "index.html#autotoc_md35", null ],
     [ "c-multiaddr", "d3/d47/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multiaddr__r_e_a_d_m_e.html", [
       [ "Usage:", "d3/d47/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multiaddr__r_e_a_d_m_e.html#autotoc_md2", [
         [ "Multiaddr provides easy networking protocols nesting, easy encapsulation of extra protocols, easy tunneling, etc.", "d3/d47/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_src_multiaddr__r_e_a_d_m_e.html#autotoc_md1", null ],
@@ -61,14 +62,18 @@ var NAVTREE =
       [ "mbedtls", "dc/d07/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__c_o_n_t_r_i_b_u_t_i_n_g.html#autotoc_md21", null ]
     ] ],
     [ "Peer Identifiers", "d3/d1f/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s.html", [
-      [ "Supported Algorithms", "d3/d1f/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s.html#autotoc_md36", null ],
-      [ "NOTE", "d3/d1f/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s.html#autotoc_md37", null ]
+      [ "Supported Algorithms", "d3/d1f/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s.html#autotoc_md37", null ],
+      [ "Process (Generation)", "d3/d1f/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s.html#autotoc_md38", [
+        [ "MermaidJS Code", "d3/d1f/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s.html#autotoc_md39", null ],
+        [ "Diagram", "d3/d1f/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s.html#autotoc_md40", null ]
+      ] ],
+      [ "NOTE", "d3/d1f/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__p_e_e_r__i_d_e_n_t_i_f_i_e_r_s.html#autotoc_md41", null ]
     ] ],
     [ "Secure Connections Overview", "d3/d9b/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s.html", [
-      [ "Why Not Just Use TLS", "d3/d9b/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s.html#autotoc_md39", null ],
-      [ "Process", "d3/d9b/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s.html#autotoc_md40", [
-        [ "Code", "d3/d9b/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s.html#autotoc_md41", null ],
-        [ "Diagram", "d3/d9b/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s.html#autotoc_md42", null ]
+      [ "Why Not Just Use TLS", "d3/d9b/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s.html#autotoc_md43", null ],
+      [ "Process", "d3/d9b/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s.html#autotoc_md44", [
+        [ "Code", "d3/d9b/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s.html#autotoc_md45", null ],
+        [ "Diagram", "d3/d9b/md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__s_e_c_u_r_e__c_o_n_n_e_c_t_i_o_n_s.html#autotoc_md46", null ]
       ] ]
     ] ],
     [ "Todo List", "dd/da0/todo.html", null ],
@@ -97,7 +102,7 @@ var NAVTREE =
         [ "Variables", "globals_vars.html", null ],
         [ "Typedefs", "globals_type.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
-        [ "Enumerator", "globals_eval.html", null ],
+        [ "Enumerator", "globals_eval.html", "globals_eval" ],
         [ "Macros", "globals_defs.html", "globals_defs" ]
       ] ]
     ] ],
@@ -108,15 +113,16 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d3/d13/colors_8c.html#a9b86c057290aefcc15b20231f9cabe9e",
-"d6/dab/multihash__test_8c.html#a2be1bc627d7fd6fc9e01d3445fda32da",
-"d7/dda/tinycbor_2cbor_8h.html#gac7df91cad1cba43d5d0103284fc390fcaca0e8dca46c4050e122fd51cc8a0f346",
-"d7/ded/codecs_8h.html#a7954590f66ad9db4fabb89389758eed2",
-"d8/d26/multiaddr_8c.html#af237ac393bd1a84840760647189d9633",
-"da/d99/struct_conversion_status.html#acdb5a7a6c53eaeebcb876f74d731ec4f",
-"dc/d6a/src_2protobuf_2protobuf_8h.html#a73fb00c9b846caa4065b423724b5878ea7f91d0a34c0310f9756ed5429575053e",
-"dd/d56/struct_cbor_value.html#a1354c5c243cd5c65c348c25eab481333",
-"globals_defs_s.html"
+"d3/d12/multihash_8h.html",
+"d5/da8/protobuf_8c.html#a03c4f436d3a783edd0d12668a2a7f479",
+"d7/dda/tinycbor_2cbor_8h.html#a76e9c9acc63dd940da4ab7e91309f7b5ac9def664ebebae2e7e2063e1eb4d0542",
+"d7/ded/codecs_8h.html#a421a1975876644999fb067241de3a9ca",
+"d7/ded/codecs_8h.html#ad1cff2df7b5405f12a3eb6a53245d384",
+"d9/d2c/cborinternal__p_8h.html#adc29c2ff13d900c2f185ee95427fb06cac9eed58eaed6a6e2eb118b7914d5b9b4",
+"da/de0/multiaddr_8h.html",
+"dc/d13/cid_8h.html#a3fd7bda791958634eff19d3dd89d71c5",
+"dc/d82/peerutils_8c_source.html",
+"df/d48/protoutils_8h.html#a879be90a7ec99722101eca2fc95578e8"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

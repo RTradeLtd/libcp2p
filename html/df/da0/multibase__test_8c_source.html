@@ -107,7 +107,7 @@ $(document).ready(function(){initNavTree('df/da0/multibase__test_8c_source.html'
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    );</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    assert(esize &gt; 0);</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *output = calloc(<span class="keyword">sizeof</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>), esize);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *output = calloc(1, esize);</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">size_t</span> len;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">int</span> rc = <a class="code" href="../../dc/db3/multibase_8c.html#a5f8db468b8b2ead762ff750b3e57b424">multibase_encode</a>(</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <a class="code" href="../../d4/d43/multibase_8h.html#a0a528c24bc9725f1a055fd835400e3a6">MULTIBASE_BASE16</a>, </div>
@@ -128,7 +128,7 @@ $(document).ready(function(){initNavTree('df/da0/multibase__test_8c_source.html'
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">int</span> dsize = <a class="code" href="../../dc/db3/multibase_8c.html#accefe23bf6cdf404302a63663f3d09cd">multibase_decode_size</a>(<a class="code" href="../../d4/d43/multibase_8h.html#a0a528c24bc9725f1a055fd835400e3a6">MULTIBASE_BASE16</a>, output, len);</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    assert(dsize &gt; 0);</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *decoded_output = calloc(<span class="keyword">sizeof</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>), dsize);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *decoded_output = calloc(1, dsize);</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">size_t</span> written;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    rc = <a class="code" href="../../dc/db3/multibase_8c.html#a29045b9a6ab1fdf18b9097270db442c7">multibase_decode</a>(output, len, decoded_output, dsize, &amp;written);</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    assert(rc == 1);</div>
@@ -149,7 +149,7 @@ $(document).ready(function(){initNavTree('df/da0/multibase__test_8c_source.html'
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">int</span> esize = <a class="code" href="../../dc/db3/multibase_8c.html#a87879636fb4a1f49493a1ebd9b342863">multibase_encode_size</a>(<a class="code" href="../../d4/d43/multibase_8h.html#a40cd867f167c9b5612c1d1b656277df1">MULTIBASE_BASE32</a>, input, 12);</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    assert(esize &gt; 0);</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *output = calloc(<span class="keyword">sizeof</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>), esize);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *output = calloc(1, esize);</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">size_t</span> len;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">int</span> rc = <a class="code" href="../../dc/db3/multibase_8c.html#a5f8db468b8b2ead762ff750b3e57b424">multibase_encode</a>(</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <a class="code" href="../../d4/d43/multibase_8h.html#a40cd867f167c9b5612c1d1b656277df1">MULTIBASE_BASE32</a>,</div>
@@ -171,7 +171,7 @@ $(document).ready(function(){initNavTree('df/da0/multibase__test_8c_source.html'
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">int</span> dsize = <a class="code" href="../../dc/db3/multibase_8c.html#accefe23bf6cdf404302a63663f3d09cd">multibase_decode_size</a>(<a class="code" href="../../d4/d43/multibase_8h.html#a0a528c24bc9725f1a055fd835400e3a6">MULTIBASE_BASE16</a>, output, len);</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    assert(dsize &gt; 0);</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *decoded_output = calloc(<span class="keyword">sizeof</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>), dsize);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *decoded_output = calloc(1, dsize);</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">size_t</span> res;</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    rc = <a class="code" href="../../dc/db3/multibase_8c.html#a29045b9a6ab1fdf18b9097270db442c7">multibase_decode</a>(</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        output,</div>
@@ -198,7 +198,7 @@ $(document).ready(function(){initNavTree('df/da0/multibase__test_8c_source.html'
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">int</span> esize = <a class="code" href="../../dc/db3/multibase_8c.html#a87879636fb4a1f49493a1ebd9b342863">multibase_encode_size</a>(<a class="code" href="../../d4/d43/multibase_8h.html#ab96a3686d225c88018b5828609e24dfa">MULTIBASE_BASE64</a>, input, 12);</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    assert(esize &gt; 0);</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *output = calloc(<span class="keyword">sizeof</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>), esize);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *output = calloc(1, esize);</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">size_t</span> len;</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordtype">int</span> rc = <a class="code" href="../../dc/db3/multibase_8c.html#a5f8db468b8b2ead762ff750b3e57b424">multibase_encode</a>(</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <a class="code" href="../../d4/d43/multibase_8h.html#ab96a3686d225c88018b5828609e24dfa">MULTIBASE_BASE64</a>,</div>
@@ -220,7 +220,7 @@ $(document).ready(function(){initNavTree('df/da0/multibase__test_8c_source.html'
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keywordtype">int</span> dsize = <a class="code" href="../../dc/db3/multibase_8c.html#a87879636fb4a1f49493a1ebd9b342863">multibase_encode_size</a>(<a class="code" href="../../d4/d43/multibase_8h.html#ab96a3686d225c88018b5828609e24dfa">MULTIBASE_BASE64</a>, output, len);</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    assert(dsize &gt; 0);</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *decoded_output = calloc(<span class="keyword">sizeof</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>), dsize);</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *decoded_output = calloc(1, dsize);</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keywordtype">size_t</span> res;</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    rc = <a class="code" href="../../dc/db3/multibase_8c.html#a29045b9a6ab1fdf18b9097270db442c7">multibase_decode</a>(</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        output,</div>

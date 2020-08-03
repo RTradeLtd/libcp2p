@@ -1,13 +1,13 @@
 <map id="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/network/socket.h" name="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/network/socket.h">
 <area shape="rect" id="node1" title="general socket related tooling" alt="" coords="480,5,668,61"/>
-<area shape="rect" id="node2" href="$d1/d8c/logger_8h.html" title="a thread safe logger with optional printf style logging" alt="" coords="143,109,250,136"/>
+<area shape="rect" id="node2" href="$d8/dbe/utils_2logger_8h.html" title="a thread safe logger with optional printf style logging" alt="" coords="143,109,250,136"/>
 <area shape="rect" id="node4" title=" " alt="" coords="75,259,158,285"/>
 <area shape="rect" id="node7" title=" " alt="" coords="409,109,501,136"/>
 <area shape="rect" id="node8" title=" " alt="" coords="526,109,622,136"/>
 <area shape="rect" id="node9" title=" " alt="" coords="647,109,749,136"/>
 <area shape="rect" id="node10" title=" " alt="" coords="774,109,865,136"/>
 <area shape="rect" id="node11" title=" " alt="" coords="889,109,985,136"/>
-<area shape="rect" id="node3" href="$da/dd8/colors_8h.html" title="macros and utilities for printing color to stdout from https://www.quora.com/How&#45;do&#45;I&#45;print&#45;a&#45;colored..." alt="" coords="5,184,79,211"/>
+<area shape="rect" id="node3" href="$d5/d53/utils_2colors_8h.html" title="macros and utilities for printing color to stdout from https://www.quora.com/How&#45;do&#45;I&#45;print&#45;a&#45;colored..." alt="" coords="5,184,79,211"/>
 <area shape="rect" id="node5" title=" " alt="" coords="155,184,239,211"/>
 <area shape="rect" id="node6" title=" " alt="" coords="263,184,333,211"/>
 </map>

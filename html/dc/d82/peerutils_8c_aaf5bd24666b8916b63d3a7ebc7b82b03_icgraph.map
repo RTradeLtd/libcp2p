@@ -1,0 +1,11 @@
+<map id="libp2p_new_peer_id" name="libp2p_new_peer_id">
+<area shape="rect" id="node1" title="constructs a peer identifier from the given public key" alt="" coords="1013,73,1164,99"/>
+<area shape="rect" id="node2" href="$d5/d5d/ecdsa_8h.html#a821e2830f6759f41158ee38c18ca9252" title="returns a peer_id_t struct for the given private key" alt="" coords="811,32,965,73"/>
+<area shape="rect" id="node7" href="$d7/dee/peerutils_8h.html#a20fb9280d827d25e56ff161baa137764" title="generates a peerID for the public key using SHA256 as the hashing algorithm" alt="" coords="813,97,963,139"/>
+<area shape="rect" id="node3" href="$d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="108,42,304,69"/>
+<area shape="rect" id="node5" href="$d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="564,32,763,73"/>
+<area shape="rect" id="node4" href="$d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,42,60,69"/>
+<area shape="rect" id="node6" href="$d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="407,39,461,66"/>
+<area shape="rect" id="node8" href="$d5/d3e/peerstore_8h.html#adec424d7ca6bc416943aff4526e7f351" title="used to validate the peerID ensuring that the given public key matches the given peerid" alt="" coords="591,97,735,139"/>
+<area shape="rect" id="node9" href="$d5/d3e/peerstore_8h.html#ae1716fa6a8fa77ef2971750a57139988" title="used to insert a peer_id public_key pair into our peerstore" alt="" coords="352,97,516,123"/>
+</map>

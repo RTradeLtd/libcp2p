@@ -1,0 +1,37 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/testutils/testutils.h" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/testutils/testutils.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'crypto/ecdsa\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "unsigned char * \fBnew_ecdsa_private_key_pem\fP (void)"
+.br
+.RI "returns a new PEM formatted ECDSA private key "
+.ti -1c
+.RI "\fBecdsa_private_key_t\fP * \fBnew_ecdsa_private_key\fP (void)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "\fBecdsa_private_key_t\fP* new_ecdsa_private_key (void)"
+
+.PP
+Definition at line 20 of file testutils\&.c\&.
+.SS "unsigned char* new_ecdsa_private_key_pem (void)"
+
+.PP
+returns a new PEM formatted ECDSA private key no need to check returned value for NULL PTR as we use assert internally 
+.PP
+Definition at line 11 of file testutils\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

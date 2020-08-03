@@ -1,4 +1,4 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/utils/logger.c" 3 "Fri Jul 24 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/utils/logger.c" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -124,7 +124,7 @@ free resources for the file ogger
 .PP
 
 .PP
-Definition at line 239 of file logger\&.c\&.
+Definition at line 235 of file logger\&.c\&.
 .SS "void clear_thread_logger (\fBthread_logger\fP * thl)"
 
 .PP
@@ -137,7 +137,7 @@ free resources for the threaded logger
 .PP
 
 .PP
-Definition at line 235 of file logger\&.c\&.
+Definition at line 231 of file logger\&.c\&.
 .SS "void debug_log (\fBthread_logger\fP * thl, int file_descriptor, char * message)"
 
 .PP
@@ -154,7 +154,7 @@ logs a debug styled message - called by log_fn
 .PP
 
 .PP
-Definition at line 211 of file logger\&.c\&.
+Definition at line 208 of file logger\&.c\&.
 .SS "void error_log (\fBthread_logger\fP * thl, int file_descriptor, char * message)"
 
 .PP
@@ -171,13 +171,13 @@ logs an error styled message - called by log_fn
 .PP
 
 .PP
-Definition at line 192 of file logger\&.c\&.
+Definition at line 190 of file logger\&.c\&.
 .SS "char * get_time_string ()"
 
 .PP
 private function that returns a timestamp of format \fCJul 06 10:12:20 PM\fP 
 .PP
-Definition at line 245 of file logger\&.c\&.
+Definition at line 241 of file logger\&.c\&.
 .SS "void info_log (\fBthread_logger\fP * thl, int file_descriptor, char * message)"
 
 .PP
@@ -277,7 +277,7 @@ logs a warned styled message - called by log_fn
 .PP
 
 .PP
-Definition at line 169 of file logger\&.c\&.
+Definition at line 168 of file logger\&.c\&.
 .SS "int write_file_log (int file_descriptor, char * message)"
 
 .PP

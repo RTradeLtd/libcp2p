@@ -138,18 +138,27 @@ multiformats</h2>
 </li>
 </ul>
 <h2><a class="anchor" id="autotoc_md27"></a>
+peerstore</h2>
+<ul>
+<li>Adds a peerstore to contain public key and peer identifier information</li>
+<li>Eventually will contain addressing information</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md28"></a>
 networking</h2>
 <ul>
-<li>TCP/UDP socket server capable of leverage multiple threads</li>
+<li>TCP socket server<ul>
+<li>UDP has been tabled until we get a stable implementation of TCP</li>
+</ul>
+</li>
 <li>Uses the multiaddress standard as the method of addressing other hosts</li>
-<li>Allows specifying two separate execution handlers whenever a new TCP/UDP connection is received</li>
+<li>Allows specifying two separate execution handlers whenever a new TCP connection is received</li>
 <li>todo:<ul>
 <li>enable secure connections</li>
 <li>enable using peerIds</li>
 </ul>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md28"></a>
+<h2><a class="anchor" id="autotoc_md29"></a>
 misc</h2>
 <ul>
 <li>cid<ul>
@@ -168,18 +177,18 @@ misc</h2>
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md29"></a>
+<h1><a class="anchor" id="autotoc_md30"></a>
 installation</h1>
-<h2><a class="anchor" id="autotoc_md30"></a>
+<h2><a class="anchor" id="autotoc_md31"></a>
 building</h2>
 <div class="fragment"><div class="line">$&gt; make # builds in release mode</div>
 <div class="line">$&gt; make build-debug # builds in debug mode</div>
 <div class="line">$&gt; make build-analysis # builds in static analysis mode</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md31"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md32"></a>
 testing</h2>
 <div class="fragment"><div class="line">$&gt; cd build &amp;&amp; ctest # runs regular tests</div>
 <div class="line">$&gt; cd build &amp;&amp; ctest -T memcheck # runs valgrind </div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md32"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md33"></a>
 dependencies</h2>
 <ul>
 <li>CMake &gt;= 3.0</li>
@@ -197,10 +206,10 @@ dependencies</h2>
 </ul>
 </li>
 </ul>
-<h1><a class="anchor" id="autotoc_md33"></a>
+<h1><a class="anchor" id="autotoc_md34"></a>
 development/contribution</h1>
 <p>For instructions on development and contribution practices please see <a class="el" href="d2/da7/_c_o_n_t_r_i_b_u_t_i_n_g_8md.html">CONTRIBUTING.md</a></p>
-<h1><a class="anchor" id="autotoc_md34"></a>
+<h1><a class="anchor" id="autotoc_md35"></a>
 license</h1>
 <p>Certain libraries are copy&amp;pasted from other open sources repositories are explicitly licensed under MIT or GPLv3. The code written for this lbirary specifically is licensed under AGPLv3. <a href="https://opensource.stackexchange.com/questions/5909/is-every-license-that-is-gplv3-compatible-also-agplv3-compatible/6785#6785">According to this stack overflow post</a> this is acceptable. If you think this is not acceptable please open a github issue and we will make ammends </p>
 </div></div><!-- PageDoc -->

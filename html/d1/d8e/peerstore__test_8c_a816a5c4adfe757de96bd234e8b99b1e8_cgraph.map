@@ -1,0 +1,4 @@
+<map id="peerstore_new_assert" name="peerstore_new_assert">
+<area shape="rect" id="node1" title="returns the peerstore triggering and assertion failure if creation fails" alt="" coords="5,5,171,32"/>
+<area shape="rect" id="node2" href="$d8/dab/peerstore_8c.html#ac8cb545aa11a4c12c61fa4d5c1a3cacb" title="returns a new instance of peerstore_t" alt="" coords="219,5,405,32"/>
+</map>

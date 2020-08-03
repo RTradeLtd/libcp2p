@@ -1,7 +1,11 @@
 <map id="libp2p_crypto_ecdsa_keypair_generation" name="libp2p_crypto_ecdsa_keypair_generation">
-<area shape="rect" id="node1" title="used to generate an ECDSA keypair" alt="" coords="355,71,509,112"/>
-<area shape="rect" id="node2" href="$d5/d29/crypto__test_8c.html#a1401558d7902d15576f5aec9958a5d0e" title=" " alt="" coords="121,5,293,47"/>
-<area shape="rect" id="node4" href="$d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="108,71,307,112"/>
-<area shape="rect" id="node5" href="$d5/d29/crypto__test_8c.html#a04d295869fa1a64f7c011ce0b287bf03" title=" " alt="" coords="113,136,301,177"/>
-<area shape="rect" id="node3" href="$d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,78,60,105"/>
+<area shape="rect" id="node1" title="used to generate an ECDSA keypair" alt="" coords="839,90,993,131"/>
+<area shape="rect" id="node2" href="$d3/d1a/testutils_8h.html#acc6bd851ac3572f19cc34d4191e799c3" title="returns a new PEM formatted ECDSA private key" alt="" coords="577,5,791,32"/>
+<area shape="rect" id="node6" href="$d5/d29/crypto__test_8c.html#a1401558d7902d15576f5aec9958a5d0e" title=" " alt="" coords="598,57,770,98"/>
+<area shape="rect" id="node8" href="$d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="585,122,783,163"/>
+<area shape="rect" id="node9" href="$d5/d29/crypto__test_8c.html#a04d295869fa1a64f7c011ce0b287bf03" title=" " alt="" coords="590,187,778,229"/>
+<area shape="rect" id="node3" href="$d3/d1a/testutils_8h.html#abd07589504c93cfb9a04fd32a78997e1" title=" " alt="" coords="352,5,529,32"/>
+<area shape="rect" id="node4" href="$d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="108,5,304,32"/>
+<area shape="rect" id="node5" href="$d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,5,60,32"/>
+<area shape="rect" id="node7" href="$d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="413,129,468,156"/>
 </map>

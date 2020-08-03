@@ -1,0 +1,4 @@
+<map id="peerstore_free_peerstore" name="peerstore_free_peerstore">
+<area shape="rect" id="node1" title="frees up resources allocated for peerstore_t and all peers" alt="" coords="5,5,192,32"/>
+<area shape="rect" id="node2" href="$d8/dab/peerstore_8c.html#a803e5ca3ba6db4721b80f46a0a7bad09" title="frees up resources allocated for peer_t" alt="" coords="240,5,393,32"/>
+</map>

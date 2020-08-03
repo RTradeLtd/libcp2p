@@ -1,52 +1,52 @@
 <map id="main" name="main">
-<area shape="rect" id="node1" title=" " alt="" coords="5,1211,60,1237"/>
-<area shape="rect" id="node2" href="$d5/d29/crypto__test_8c.html#a1401558d7902d15576f5aec9958a5d0e" title=" " alt="" coords="121,625,293,666"/>
-<area shape="rect" id="node31" href="$d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="108,315,307,357"/>
-<area shape="rect" id="node34" href="$d5/d29/crypto__test_8c.html#a04d295869fa1a64f7c011ce0b287bf03" title=" " alt="" coords="113,122,301,163"/>
-<area shape="rect" id="node37" href="$d5/d29/crypto__test_8c.html#afa005ffd3cb333bcc7404c32a8ded7ab" title=" " alt="" coords="127,1203,288,1245"/>
-<area shape="rect" id="node43" href="$d5/d29/crypto__test_8c.html#afe42ae6e62a08bff21956adcfcb56a6d" title=" " alt="" coords="136,1301,279,1342"/>
-<area shape="rect" id="node44" href="$d5/d29/crypto__test_8c.html#a4af69d1c57c166dd3449b927f56e45db" title=" " alt="" coords="119,1513,296,1554"/>
-<area shape="rect" id="node49" href="$d5/d29/crypto__test_8c.html#a0f00f2a5fa4b79489f2eea682962d839" title=" " alt="" coords="136,1366,279,1407"/>
-<area shape="rect" id="node3" href="$d9/d42/cbor_8c.html#a7b13224af44cf3a0da8cb2b989ab2a61" title="free up resources associated with an instance of cbor_encoded_t" alt="" coords="358,632,539,659"/>
-<area shape="rect" id="node4" href="$dc/d09/ecdsa_8c.html#adbec9a5580e49bed281b92f9a837c6e3" title="frees up resources allocated for the private key" alt="" coords="355,297,543,324"/>
-<area shape="rect" id="node5" href="$dc/d09/ecdsa_8c.html#ababc4b1b736eb55ea94abd3175fb76ea" title="used to generate an ECDSA keypair" alt="" coords="371,231,526,273"/>
-<area shape="rect" id="node7" href="$dc/d09/ecdsa_8c.html#a00d3cbd7d5de1849d5de9bd830fd7fb7" title="returns the public key associated with the private key" alt="" coords="617,341,772,382"/>
-<area shape="rect" id="node8" href="$dc/d09/ecdsa_8c.html#a921b929610c8f4da6e9e10f6349759d3" title="parses a PEM encoded private key and returns a struct for use" alt="" coords="614,173,775,214"/>
-<area shape="rect" id="node9" href="$db/dfd/key_8c.html#a8c593674228430737badfa42408ec292" title="used to cbor data a chunk of data" alt="" coords="371,990,527,1031"/>
-<area shape="rect" id="node23" href="$db/dfd/key_8c.html#aaa083531f3d820dfd41cc5359cdf1508" title="used to cbor encode a public_key_t type for sending over the wire" alt="" coords="371,801,527,842"/>
-<area shape="rect" id="node28" href="$db/dfd/key_8c.html#abb6b43f3899e4ef603898cb5aedfe4ef" title="free up resources associated with a public_key_t instance" alt="" coords="371,566,527,607"/>
-<area shape="rect" id="node29" href="$db/dfd/key_8c.html#a9c803993819a08dc0584b8995eaa3232" title="returns a new instance of public_key_t" alt="" coords="371,683,527,725"/>
-<area shape="rect" id="node30" href="$db/d36/base64_8c.html#a15d5a6ed9df11e87ac4aa0cf3975aa75" title="encode using base64" alt="" coords="357,1317,540,1358"/>
-<area shape="rect" id="node6" href="$de/df1/util_8c.html#aceffb5d3f84b98c35c05dc580caddd45" title="prints the corresponding error to stdout" alt="" coords="871,239,1021,265"/>
-<area shape="rect" id="node10" href="$d5/d26/cborerrorstrings_8c.html#ad4519e8ab62ea64773fa6dce00c361dc" title=" " alt="" coords="629,808,761,835"/>
-<area shape="rect" id="node11" href="$dc/d74/group___cbor_parsing.html#ga9016334cec2bfedef7eaa54da5144ea3" title=" " alt="" coords="631,1461,758,1488"/>
-<area shape="rect" id="node12" href="$dc/d74/group___cbor_parsing.html#gac0701f791608589ddfff0bdb8acee7b4" title=" " alt="" coords="617,859,772,901"/>
-<area shape="rect" id="node13" href="$dc/d74/group___cbor_parsing.html#gac5204b942fd5e6e1d8064262f3ce96b3" title=" " alt="" coords="611,925,778,966"/>
-<area shape="rect" id="node14" href="$dc/d74/group___cbor_parsing.html#gad864d46aa7cfa3d57813da2b242380b4" title=" " alt="" coords="873,990,1019,1031"/>
-<area shape="rect" id="node15" href="$dc/d74/group___cbor_parsing.html#ga0c8a61e484973272f34b00cfbef9ddfd" title=" " alt="" coords="593,1107,796,1133"/>
-<area shape="rect" id="node16" href="$dc/d74/group___cbor_parsing.html#gae16139e4a8857033b908dad98ddb2ac3" title=" " alt="" coords="614,1157,775,1184"/>
-<area shape="rect" id="node17" href="$dc/d74/group___cbor_parsing.html#ga3ea2ca067d876ca95251005f4ad696b0" title=" " alt="" coords="864,1196,1028,1223"/>
-<area shape="rect" id="node18" href="$dc/d74/group___cbor_parsing.html#ga033d3d2c9570501cf9dce099fe98e863" title=" " alt="" coords="591,1259,799,1285"/>
-<area shape="rect" id="node19" href="$dc/d74/group___cbor_parsing.html#gaae1a1b893975549d5fa74452ba4b79e8" title=" " alt="" coords="847,1272,1045,1299"/>
-<area shape="rect" id="node20" href="$dc/d74/group___cbor_parsing.html#gaf39519cfc9a8fb64a787348af835569c" title=" " alt="" coords="612,990,777,1031"/>
-<area shape="rect" id="node21" href="$dc/d74/group___cbor_parsing.html#gadf427a0fdeb50f7a94d3c3620dd36161" title=" " alt="" coords="619,1360,771,1387"/>
-<area shape="rect" id="node22" href="$dc/d74/group___cbor_parsing.html#ga51e02f0b62bc864fe8cf290988936e15" title=" " alt="" coords="593,1411,797,1437"/>
-<area shape="rect" id="node24" href="$d9/d70/group___cbor_encoding.html#ga1260b72bb0f067fd3c68d49a6b5f58d0" title=" " alt="" coords="603,733,787,760"/>
-<area shape="rect" id="node25" href="$d9/d70/group___cbor_encoding.html#gabbf6e10fd963d673f5ad293dff4a67a9" title=" " alt="" coords="631,551,759,577"/>
-<area shape="rect" id="node26" href="$d9/d70/group___cbor_encoding.html#ga923a63a01dae47a3dd46f74a3f744008" title=" " alt="" coords="617,602,772,643"/>
-<area shape="rect" id="node27" href="$d9/d70/group___cbor_encoding.html#gacb4352260971102dbbd2f2a20e854c57" title=" " alt="" coords="619,667,770,709"/>
-<area shape="rect" id="node32" href="$dc/d09/ecdsa_8c.html#afab4ce5b8e4bde2be242ad28bf9f1474" title="returns the peerid for the corresponding private key" alt="" coords="371,501,526,542"/>
-<area shape="rect" id="node33" href="$da/d01/sha256_8c.html#abec2cc9b75a7053f0b5db97881857712" title=" " alt="" coords="611,485,779,526"/>
-<area shape="rect" id="node35" href="$dc/d09/ecdsa_8c.html#a73c6a8cb5971191ba5dc7f940e45fa43" title="loads an ECDSA private key from a file containing a PEM key" alt="" coords="363,63,534,105"/>
-<area shape="rect" id="node36" href="$dc/d09/ecdsa_8c.html#ab1fbd92d5f77addb900224162e1fb7d0" title="used to save a private key at the given path" alt="" coords="617,31,772,73"/>
-<area shape="rect" id="node38" href="$d2/d24/sha1_8c.html#aafaf694a258e83a59b3edcd3b6f5112c" title="finalize a sha1 hmac process" alt="" coords="365,1251,533,1293"/>
-<area shape="rect" id="node39" href="$d2/d24/sha1_8c.html#a4af1f487322d07eaf0eac8c40a9ca47c" title=" " alt="" coords="365,1055,533,1097"/>
-<area shape="rect" id="node40" href="$d2/d24/sha1_8c.html#acd8d880ca10724ff7a8988e0a15f3661" title="Initialize a sha1 hmac process." alt="" coords="365,1121,533,1162"/>
-<area shape="rect" id="node41" href="$d2/d24/sha1_8c.html#a72daaa79999248d2653c66ae2e88fa11" title="Update a sha1 hmac process." alt="" coords="365,1186,533,1227"/>
-<area shape="rect" id="node42" href="$db/d36/base64_8c.html#a9f243fbc238603a23ba5055551a41f0f" title="decode something that was encoded as base64" alt="" coords="357,1382,540,1423"/>
-<area shape="rect" id="node45" href="$da/d01/sha256_8c.html#a59435a44e5e1ce17c3ae07af1e8cf460" title="finalize a sha256 hmac process" alt="" coords="365,1513,533,1554"/>
-<area shape="rect" id="node46" href="$da/d01/sha256_8c.html#ace71fc6728bc01b1cca38c0c6459639b" title="Clean up allocated memory." alt="" coords="365,1578,533,1619"/>
-<area shape="rect" id="node47" href="$da/d01/sha256_8c.html#ae1f662d5f63efde79710cd861300147d" title="Initialize a sha256 hmac process." alt="" coords="365,1643,533,1685"/>
-<area shape="rect" id="node48" href="$da/d01/sha256_8c.html#a453f0944a96a906a5ca2f8f8545b4fb4" title="Update a sha256 hmac process." alt="" coords="365,1709,533,1750"/>
-<area shape="rect" id="node50" href="$df/dd2/sha512_8c.html#ac144f8abf370f4967769a72afdbc71d7" title=" " alt="" coords="365,1447,533,1489"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,1361,60,1388"/>
+<area shape="rect" id="node2" href="$d5/d29/crypto__test_8c.html#a1401558d7902d15576f5aec9958a5d0e" title=" " alt="" coords="121,806,293,847"/>
+<area shape="rect" id="node30" href="$d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="108,242,307,283"/>
+<area shape="rect" id="node34" href="$d5/d29/crypto__test_8c.html#a04d295869fa1a64f7c011ce0b287bf03" title=" " alt="" coords="113,511,301,553"/>
+<area shape="rect" id="node37" href="$d5/d29/crypto__test_8c.html#afa005ffd3cb333bcc7404c32a8ded7ab" title=" " alt="" coords="127,1354,288,1395"/>
+<area shape="rect" id="node43" href="$d5/d29/crypto__test_8c.html#afe42ae6e62a08bff21956adcfcb56a6d" title=" " alt="" coords="136,1451,279,1493"/>
+<area shape="rect" id="node44" href="$d5/d29/crypto__test_8c.html#a4af69d1c57c166dd3449b927f56e45db" title=" " alt="" coords="119,1663,296,1705"/>
+<area shape="rect" id="node49" href="$d5/d29/crypto__test_8c.html#a0f00f2a5fa4b79489f2eea682962d839" title=" " alt="" coords="136,1517,279,1558"/>
+<area shape="rect" id="node3" href="$d9/d42/cbor_8c.html#a7b13224af44cf3a0da8cb2b989ab2a61" title="free up resources associated with an instance of cbor_encoded_t" alt="" coords="358,813,539,840"/>
+<area shape="rect" id="node4" href="$dc/d09/ecdsa_8c.html#adbec9a5580e49bed281b92f9a837c6e3" title="frees up resources allocated for the private key" alt="" coords="355,443,543,469"/>
+<area shape="rect" id="node5" href="$dc/d09/ecdsa_8c.html#ababc4b1b736eb55ea94abd3175fb76ea" title="used to generate an ECDSA keypair" alt="" coords="371,326,526,367"/>
+<area shape="rect" id="node7" href="$dc/d09/ecdsa_8c.html#abfd5e863b148643f0c78f6a426f21047" title="returns the public key associated with the private key in PEM format" alt="" coords="617,385,772,426"/>
+<area shape="rect" id="node8" href="$db/dfd/key_8c.html#a9c803993819a08dc0584b8995eaa3232" title="returns a new instance of public_key_t" alt="" coords="868,705,1024,746"/>
+<area shape="rect" id="node9" href="$dc/d09/ecdsa_8c.html#a921b929610c8f4da6e9e10f6349759d3" title="parses a PEM encoded private key and returns a struct for use" alt="" coords="614,646,775,687"/>
+<area shape="rect" id="node10" href="$db/dfd/key_8c.html#a8c593674228430737badfa42408ec292" title="used to cbor data a chunk of data" alt="" coords="371,1141,527,1182"/>
+<area shape="rect" id="node24" href="$db/dfd/key_8c.html#aaa083531f3d820dfd41cc5359cdf1508" title="used to cbor encode a public_key_t type for sending over the wire" alt="" coords="371,915,527,957"/>
+<area shape="rect" id="node28" href="$db/dfd/key_8c.html#abb6b43f3899e4ef603898cb5aedfe4ef" title="free up resources associated with a public_key_t instance" alt="" coords="617,129,773,170"/>
+<area shape="rect" id="node29" href="$db/d36/base64_8c.html#a15d5a6ed9df11e87ac4aa0cf3975aa75" title="encode using base64" alt="" coords="357,1467,540,1509"/>
+<area shape="rect" id="node6" href="$de/df1/util_8c.html#aceffb5d3f84b98c35c05dc580caddd45" title="prints the corresponding error to stdout" alt="" coords="871,392,1021,419"/>
+<area shape="rect" id="node11" href="$d5/d26/cborerrorstrings_8c.html#ad4519e8ab62ea64773fa6dce00c361dc" title=" " alt="" coords="629,923,761,949"/>
+<area shape="rect" id="node12" href="$dc/d74/group___cbor_parsing.html#ga9016334cec2bfedef7eaa54da5144ea3" title=" " alt="" coords="631,1024,758,1051"/>
+<area shape="rect" id="node13" href="$dc/d74/group___cbor_parsing.html#gac0701f791608589ddfff0bdb8acee7b4" title=" " alt="" coords="617,1075,772,1117"/>
+<area shape="rect" id="node14" href="$dc/d74/group___cbor_parsing.html#gac5204b942fd5e6e1d8064262f3ce96b3" title=" " alt="" coords="611,1141,778,1182"/>
+<area shape="rect" id="node15" href="$dc/d74/group___cbor_parsing.html#gad864d46aa7cfa3d57813da2b242380b4" title=" " alt="" coords="873,1206,1019,1247"/>
+<area shape="rect" id="node16" href="$dc/d74/group___cbor_parsing.html#ga0c8a61e484973272f34b00cfbef9ddfd" title=" " alt="" coords="593,1272,796,1299"/>
+<area shape="rect" id="node17" href="$dc/d74/group___cbor_parsing.html#gae16139e4a8857033b908dad98ddb2ac3" title=" " alt="" coords="614,1373,775,1400"/>
+<area shape="rect" id="node18" href="$dc/d74/group___cbor_parsing.html#ga3ea2ca067d876ca95251005f4ad696b0" title=" " alt="" coords="864,1399,1028,1425"/>
+<area shape="rect" id="node19" href="$dc/d74/group___cbor_parsing.html#ga033d3d2c9570501cf9dce099fe98e863" title=" " alt="" coords="591,1475,799,1501"/>
+<area shape="rect" id="node20" href="$dc/d74/group___cbor_parsing.html#gaae1a1b893975549d5fa74452ba4b79e8" title=" " alt="" coords="847,1525,1045,1552"/>
+<area shape="rect" id="node21" href="$dc/d74/group___cbor_parsing.html#gaf39519cfc9a8fb64a787348af835569c" title=" " alt="" coords="612,1206,777,1247"/>
+<area shape="rect" id="node22" href="$dc/d74/group___cbor_parsing.html#gadf427a0fdeb50f7a94d3c3620dd36161" title=" " alt="" coords="619,1525,771,1552"/>
+<area shape="rect" id="node23" href="$dc/d74/group___cbor_parsing.html#ga51e02f0b62bc864fe8cf290988936e15" title=" " alt="" coords="593,1576,797,1603"/>
+<area shape="rect" id="node25" href="$d9/d70/group___cbor_encoding.html#ga1260b72bb0f067fd3c68d49a6b5f58d0" title=" " alt="" coords="603,731,787,757"/>
+<area shape="rect" id="node26" href="$d9/d70/group___cbor_encoding.html#gabbf6e10fd963d673f5ad293dff4a67a9" title=" " alt="" coords="631,781,759,808"/>
+<area shape="rect" id="node27" href="$d9/d70/group___cbor_encoding.html#ga923a63a01dae47a3dd46f74a3f744008" title=" " alt="" coords="617,833,772,874"/>
+<area shape="rect" id="node31" href="$dc/d09/ecdsa_8c.html#a821e2830f6759f41158ee38c18ca9252" title="returns a peer_id_t struct for the given private key" alt="" coords="371,158,526,199"/>
+<area shape="rect" id="node33" href="$dc/d82/peerutils_8c.html#a7321b177cf43608eeba6a805ca89c3a2" title="free up resources allocated for an instance of peer_id_t" alt="" coords="373,5,524,32"/>
+<area shape="rect" id="node32" href="$da/d01/sha256_8c.html#abec2cc9b75a7053f0b5db97881857712" title=" " alt="" coords="611,466,779,507"/>
+<area shape="rect" id="node35" href="$dc/d09/ecdsa_8c.html#a73c6a8cb5971191ba5dc7f940e45fa43" title="loads an ECDSA private key from a file containing a PEM key" alt="" coords="363,646,534,687"/>
+<area shape="rect" id="node36" href="$dc/d09/ecdsa_8c.html#ab1fbd92d5f77addb900224162e1fb7d0" title="used to save a private key at the given path" alt="" coords="617,563,772,605"/>
+<area shape="rect" id="node38" href="$d2/d24/sha1_8c.html#aafaf694a258e83a59b3edcd3b6f5112c" title="finalize a sha1 hmac process" alt="" coords="365,1271,533,1313"/>
+<area shape="rect" id="node39" href="$d2/d24/sha1_8c.html#a4af1f487322d07eaf0eac8c40a9ca47c" title=" " alt="" coords="365,1337,533,1378"/>
+<area shape="rect" id="node40" href="$d2/d24/sha1_8c.html#acd8d880ca10724ff7a8988e0a15f3661" title="Initialize a sha1 hmac process." alt="" coords="365,1402,533,1443"/>
+<area shape="rect" id="node41" href="$d2/d24/sha1_8c.html#a72daaa79999248d2653c66ae2e88fa11" title="Update a sha1 hmac process." alt="" coords="365,1206,533,1247"/>
+<area shape="rect" id="node42" href="$db/d36/base64_8c.html#a9f243fbc238603a23ba5055551a41f0f" title="decode something that was encoded as base64" alt="" coords="357,1533,540,1574"/>
+<area shape="rect" id="node45" href="$da/d01/sha256_8c.html#a59435a44e5e1ce17c3ae07af1e8cf460" title="finalize a sha256 hmac process" alt="" coords="365,1859,533,1901"/>
+<area shape="rect" id="node46" href="$da/d01/sha256_8c.html#ace71fc6728bc01b1cca38c0c6459639b" title="Clean up allocated memory." alt="" coords="365,1663,533,1705"/>
+<area shape="rect" id="node47" href="$da/d01/sha256_8c.html#ae1f662d5f63efde79710cd861300147d" title="Initialize a sha256 hmac process." alt="" coords="365,1729,533,1770"/>
+<area shape="rect" id="node48" href="$da/d01/sha256_8c.html#a453f0944a96a906a5ca2f8f8545b4fb4" title="Update a sha256 hmac process." alt="" coords="365,1794,533,1835"/>
+<area shape="rect" id="node50" href="$df/dd2/sha512_8c.html#ac144f8abf370f4967769a72afdbc71d7" title=" " alt="" coords="365,1598,533,1639"/>
 </map>

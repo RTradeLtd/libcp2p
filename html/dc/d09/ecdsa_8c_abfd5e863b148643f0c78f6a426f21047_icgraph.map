@@ -1,0 +1,10 @@
+<map id="libp2p_crypto_ecdsa_keypair_public" name="libp2p_crypto_ecdsa_keypair_public">
+<area shape="rect" id="node1" title="returns the public key associated with the private key in PEM format" alt="" coords="591,99,745,140"/>
+<area shape="rect" id="node2" href="$d5/d5d/ecdsa_8h.html#a821e2830f6759f41158ee38c18ca9252" title="returns a peer_id_t struct for the given private key" alt="" coords="371,40,526,81"/>
+<area shape="rect" id="node3" href="$d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="109,11,305,38"/>
+<area shape="rect" id="node5" href="$d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="108,84,307,125"/>
+<area shape="rect" id="node7" href="$d5/d29/crypto__test_8c.html#a1401558d7902d15576f5aec9958a5d0e" title=" " alt="" coords="121,149,293,191"/>
+<area shape="rect" id="node8" href="$d5/d29/crypto__test_8c.html#a04d295869fa1a64f7c011ce0b287bf03" title=" " alt="" coords="355,208,543,249"/>
+<area shape="rect" id="node4" href="$d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,11,60,38"/>
+<area shape="rect" id="node6" href="$d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,157,60,183"/>
+</map>

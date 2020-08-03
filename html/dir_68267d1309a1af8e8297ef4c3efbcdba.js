@@ -8,7 +8,9 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "multicodec", "dir_60aa3652f71591a1b3e2018330465d2f.html", "dir_60aa3652f71591a1b3e2018330465d2f" ],
     [ "multihash", "dir_baedebe5955e193b57d820134add3223.html", "dir_baedebe5955e193b57d820134add3223" ],
     [ "network", "dir_fc4c7f03e1a69a98c370fae55a743828.html", "dir_fc4c7f03e1a69a98c370fae55a743828" ],
+    [ "peerstore", "dir_16403408b76c90b84749ae558c72be5a.html", "dir_16403408b76c90b84749ae558c72be5a" ],
     [ "protobuf", "dir_eadcfa3f527cf735c897f50f7cfeb82c.html", "dir_eadcfa3f527cf735c897f50f7cfeb82c" ],
+    [ "testutils", "dir_e9280c7c671d1d99191db656f2080cf0.html", "dir_e9280c7c671d1d99191db656f2080cf0" ],
     [ "tinycbor", "dir_2408b56aadeb0e702d2a4c825256198b.html", "dir_2408b56aadeb0e702d2a4c825256198b" ],
     [ "utils", "dir_313caf1132e152dd9b58bea13a4052ca.html", "dir_313caf1132e152dd9b58bea13a4052ca" ]
 ];

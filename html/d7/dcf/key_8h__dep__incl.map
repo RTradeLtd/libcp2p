@@ -1,5 +1,10 @@
 <map id="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/key.h" name="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/key.h">
-<area shape="rect" id="node1" title="public/private key management functions" alt="" coords="107,5,285,61"/>
-<area shape="rect" id="node2" href="$d5/d29/crypto__test_8c.html" title=" " alt="" coords="5,109,184,165"/>
-<area shape="rect" id="node3" href="$db/dfd/key_8c.html" title="public/private key management functions" alt="" coords="209,109,386,165"/>
+<area shape="rect" id="node1" title="public/private key management functions" alt="" coords="133,5,310,61"/>
+<area shape="rect" id="node2" href="$d5/d29/crypto__test_8c.html" title=" " alt="" coords="5,213,184,269"/>
+<area shape="rect" id="node3" href="$db/dfd/key_8c.html" title="public/private key management functions" alt="" coords="133,109,310,165"/>
+<area shape="rect" id="node4" href="$d5/d5d/ecdsa_8h.html" title="provides ECDSA cryptography support" alt="" coords="334,109,511,165"/>
+<area shape="rect" id="node5" href="$dc/d09/ecdsa_8c.html" title=" " alt="" coords="209,213,386,269"/>
+<area shape="rect" id="node6" href="$d1/dba/testutils_8c.html" title=" " alt="" coords="335,317,513,373"/>
+<area shape="rect" id="node7" href="$d3/d1a/testutils_8h.html" title=" " alt="" coords="461,213,659,269"/>
+<area shape="rect" id="node8" href="$d1/d8e/peerstore__test_8c.html" title=" " alt="" coords="537,317,757,373"/>
 </map>

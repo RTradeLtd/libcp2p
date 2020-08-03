@@ -1,0 +1,8 @@
+<map id="peerstore_test_resize_if_needed_not_needed" name="peerstore_test_resize_if_needed_not_needed">
+<area shape="rect" id="node1" title="this doesnt actually test reszigin as that is covered by peer insertion tests" alt="" coords="5,49,181,90"/>
+<area shape="rect" id="node2" href="$d8/dab/peerstore_8c.html#ab4a187b6b216e39ec568d620821145c6" title="frees up resources allocated for peerstore_t and all peers" alt="" coords="229,5,416,32"/>
+<area shape="rect" id="node4" href="$d1/d8e/peerstore__test_8c.html#a816a5c4adfe757de96bd234e8b99b1e8" title="returns the peerstore triggering and assertion failure if creation fails" alt="" coords="240,56,405,83"/>
+<area shape="rect" id="node6" href="$d8/dab/peerstore_8c.html#afb6e5d4569e8a9b65e5049c28c472890" title="performs a check to see if we need to allocate more memory" alt="" coords="249,107,396,149"/>
+<area shape="rect" id="node3" href="$d8/dab/peerstore_8c.html#a803e5ca3ba6db4721b80f46a0a7bad09" title="frees up resources allocated for peer_t" alt="" coords="481,5,634,32"/>
+<area shape="rect" id="node5" href="$d8/dab/peerstore_8c.html#ac8cb545aa11a4c12c61fa4d5c1a3cacb" title="returns a new instance of peerstore_t" alt="" coords="464,56,651,83"/>
+</map>

@@ -1,32 +1,35 @@
 <map id="/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/crypto/ecdsa.c" name="/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/crypto/ecdsa.c">
-<area shape="rect" id="node1" title=" " alt="" coords="1201,5,1379,61"/>
-<area shape="rect" id="node2" title=" " alt="" coords="9,109,139,136"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,184,135,211"/>
-<area shape="rect" id="node4" href="$d5/d5d/ecdsa_8h.html" title="provides ECDSA cryptography support" alt="" coords="214,109,331,136"/>
-<area shape="rect" id="node5" title=" " alt="" coords="159,184,266,211"/>
-<area shape="rect" id="node6" title=" " alt="" coords="291,184,375,211"/>
-<area shape="rect" id="node7" href="$d7/dee/peerutils_8h.html" title="provides utilities for managing peer identifiers" alt="" coords="457,109,593,136"/>
-<area shape="rect" id="node15" title=" " alt="" coords="1007,184,1077,211"/>
-<area shape="rect" id="node16" href="$d8/d3c/util_8h.html" title="utility functions for working with crypto" alt="" coords="668,109,768,136"/>
-<area shape="rect" id="node17" title=" " alt="" coords="791,109,946,136"/>
-<area shape="rect" id="node18" title=" " alt="" coords="971,109,1111,136"/>
-<area shape="rect" id="node19" title=" " alt="" coords="1135,109,1279,136"/>
-<area shape="rect" id="node20" title=" " alt="" coords="1303,109,1442,136"/>
-<area shape="rect" id="node21" title=" " alt="" coords="1467,109,1588,136"/>
-<area shape="rect" id="node22" title=" " alt="" coords="1612,109,1723,136"/>
-<area shape="rect" id="node23" title=" " alt="" coords="1747,109,1894,136"/>
-<area shape="rect" id="node24" title=" " alt="" coords="1918,109,2041,136"/>
-<area shape="rect" id="node25" title=" " alt="" coords="2065,109,2133,136"/>
-<area shape="rect" id="node26" title=" " alt="" coords="2157,109,2220,136"/>
-<area shape="rect" id="node27" title=" " alt="" coords="2244,109,2315,136"/>
-<area shape="rect" id="node28" title=" " alt="" coords="2339,109,2425,136"/>
-<area shape="rect" id="node29" title=" " alt="" coords="2449,109,2545,136"/>
-<area shape="rect" id="node30" title=" " alt="" coords="2569,109,2643,136"/>
-<area shape="rect" id="node8" href="$d5/de3/sha256_8h.html" title="provides sha256 hashing support" alt="" coords="399,184,525,211"/>
-<area shape="rect" id="node10" href="$d6/df9/hashes_8h.html" title="multihash definitions" alt="" coords="550,184,699,211"/>
-<area shape="rect" id="node12" href="$d3/d12/multihash_8h.html" title="functions for working with multihashes" alt="" coords="723,184,891,211"/>
-<area shape="rect" id="node14" title=" " alt="" coords="915,184,982,211"/>
-<area shape="rect" id="node9" title=" " alt="" coords="393,259,531,285"/>
-<area shape="rect" id="node11" href="$de/d45/errors_8h.html" title="helpers for working with multihash errors" alt="" coords="589,259,661,285"/>
-<area shape="rect" id="node13" title=" " alt="" coords="770,259,845,285"/>
+<area shape="rect" id="node1" title=" " alt="" coords="1276,5,1453,61"/>
+<area shape="rect" id="node2" title=" " alt="" coords="71,109,202,136"/>
+<area shape="rect" id="node3" title=" " alt="" coords="277,184,407,211"/>
+<area shape="rect" id="node4" href="$d5/d5d/ecdsa_8h.html" title="provides ECDSA cryptography support" alt="" coords="599,109,717,136"/>
+<area shape="rect" id="node9" title=" " alt="" coords="925,259,996,285"/>
+<area shape="rect" id="node10" href="$d7/dee/peerutils_8h.html" title="provides utilities for managing peer identifiers" alt="" coords="431,184,567,211"/>
+<area shape="rect" id="node17" title=" " alt="" coords="5,259,76,285"/>
+<area shape="rect" id="node18" title=" " alt="" coords="717,184,823,211"/>
+<area shape="rect" id="node19" title=" " alt="" coords="848,184,932,211"/>
+<area shape="rect" id="node20" href="$d8/d3c/util_8h.html" title="utility functions for working with crypto" alt="" coords="909,109,1009,136"/>
+<area shape="rect" id="node21" title=" " alt="" coords="1033,109,1187,136"/>
+<area shape="rect" id="node22" title=" " alt="" coords="1212,109,1352,136"/>
+<area shape="rect" id="node23" title=" " alt="" coords="1377,109,1521,136"/>
+<area shape="rect" id="node24" title=" " alt="" coords="1545,109,1683,136"/>
+<area shape="rect" id="node25" title=" " alt="" coords="1708,109,1829,136"/>
+<area shape="rect" id="node26" title=" " alt="" coords="1853,109,1964,136"/>
+<area shape="rect" id="node27" title=" " alt="" coords="1989,109,2135,136"/>
+<area shape="rect" id="node28" title=" " alt="" coords="2159,109,2282,136"/>
+<area shape="rect" id="node29" title=" " alt="" coords="2307,109,2375,136"/>
+<area shape="rect" id="node30" title=" " alt="" coords="2399,109,2461,136"/>
+<area shape="rect" id="node31" title=" " alt="" coords="2486,109,2571,136"/>
+<area shape="rect" id="node32" title=" " alt="" coords="2595,109,2691,136"/>
+<area shape="rect" id="node33" title=" " alt="" coords="2715,109,2790,136"/>
+<area shape="rect" id="node5" href="$de/de5/key_8h.html" title="public/private key management functions" alt="" coords="592,184,692,211"/>
+<area shape="rect" id="node6" href="$d9/d64/encoding_2cbor_8h.html" title="utilities for working with cbor encoding/decoding" alt="" coords="708,259,832,285"/>
+<area shape="rect" id="node8" title=" " alt="" coords="784,333,855,360"/>
+<area shape="rect" id="node7" title=" " alt="" coords="578,333,653,360"/>
+<area shape="rect" id="node11" href="$d5/de3/sha256_8h.html" title="provides sha256 hashing support" alt="" coords="100,259,227,285"/>
+<area shape="rect" id="node13" href="$d6/df9/hashes_8h.html" title="multihash definitions" alt="" coords="251,259,401,285"/>
+<area shape="rect" id="node15" href="$d3/d12/multihash_8h.html" title="functions for working with multihashes" alt="" coords="425,259,593,285"/>
+<area shape="rect" id="node16" title=" " alt="" coords="617,259,683,285"/>
+<area shape="rect" id="node12" title=" " alt="" coords="94,333,233,360"/>
+<area shape="rect" id="node14" href="$de/d45/errors_8h.html" title="helpers for working with multihash errors" alt="" coords="290,333,362,360"/>
 </map>

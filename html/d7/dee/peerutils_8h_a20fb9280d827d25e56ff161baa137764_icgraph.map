@@ -1,0 +1,7 @@
+<map id="libp2p_new_peer_id_sha256" name="libp2p_new_peer_id_sha256">
+<area shape="rect" id="node1" title="generates a peerID for the public key using SHA256 as the hashing algorithm" alt="" coords="756,5,907,47"/>
+<area shape="rect" id="node2" href="$d5/d3e/peerstore_8h.html#adec424d7ca6bc416943aff4526e7f351" title="used to validate the peerID ensuring that the given public key matches the given peerid" alt="" coords="564,5,708,47"/>
+<area shape="rect" id="node3" href="$d5/d3e/peerstore_8h.html#ae1716fa6a8fa77ef2971750a57139988" title="used to insert a peer_id public_key pair into our peerstore" alt="" coords="352,13,516,39"/>
+<area shape="rect" id="node4" href="$d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="108,13,304,39"/>
+<area shape="rect" id="node5" href="$d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
+</map>

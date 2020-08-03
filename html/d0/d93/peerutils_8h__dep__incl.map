@@ -1,7 +1,12 @@
 <map id="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/peerutils.h" name="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/peerutils.h">
-<area shape="rect" id="node1" title="provides utilities for managing peer identifiers" alt="" coords="302,5,493,61"/>
-<area shape="rect" id="node2" href="$d5/d29/crypto__test_8c.html" title=" " alt="" coords="5,109,184,165"/>
-<area shape="rect" id="node3" href="$dc/d09/ecdsa_8c.html" title=" " alt="" coords="209,109,386,165"/>
-<area shape="rect" id="node4" href="$db/dfd/key_8c.html" title="public/private key management functions" alt="" coords="410,109,587,165"/>
-<area shape="rect" id="node5" href="$dc/d82/peerutils_8c.html" title=" " alt="" coords="611,109,789,165"/>
+<area shape="rect" id="node1" title="provides utilities for managing peer identifiers" alt="" coords="365,5,555,61"/>
+<area shape="rect" id="node2" href="$d5/d29/crypto__test_8c.html" title=" " alt="" coords="5,213,184,269"/>
+<area shape="rect" id="node3" href="$dc/d09/ecdsa_8c.html" title=" " alt="" coords="209,213,386,269"/>
+<area shape="rect" id="node4" href="$db/dfd/key_8c.html" title="public/private key management functions" alt="" coords="473,109,650,165"/>
+<area shape="rect" id="node5" href="$dc/d82/peerutils_8c.html" title=" " alt="" coords="674,109,851,165"/>
+<area shape="rect" id="node6" href="$d8/dab/peerstore_8c.html" title="peerstore provides a logical grouping of all known peers" alt="" coords="875,109,1063,165"/>
+<area shape="rect" id="node7" href="$d5/d5d/ecdsa_8h.html" title="provides ECDSA cryptography support" alt="" coords="271,109,449,165"/>
+<area shape="rect" id="node8" href="$d1/dba/testutils_8c.html" title=" " alt="" coords="335,317,513,373"/>
+<area shape="rect" id="node9" href="$d3/d1a/testutils_8h.html" title=" " alt="" coords="461,213,659,269"/>
+<area shape="rect" id="node10" href="$d1/d8e/peerstore__test_8c.html" title=" " alt="" coords="537,317,757,373"/>
 </map>

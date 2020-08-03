@@ -1,0 +1,75 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/peerstore/peerstore_test.c" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/peerstore/peerstore_test.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'peerstore/peerstore\&.h'\fP
+.br
+\fC#include 'testutils/testutils\&.h'\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <assert\&.h>\fP
+.br
+\fC#include <stdarg\&.h>\fP
+.br
+\fC#include <stddef\&.h>\fP
+.br
+\fC#include <setjmp\&.h>\fP
+.br
+\fC#include <cmocka\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBpeerstore_t\fP * \fBpeerstore_new_assert\fP (size_t max_peers)"
+.br
+.RI "returns the peerstore triggering and assertion failure if creation fails "
+.ti -1c
+.RI "void \fBpeerstore_test_new_peerstore\fP (void **state)"
+.br
+.ti -1c
+.RI "void \fBpeerstore_test_resize_if_needed_not_needed\fP (void **state)"
+.br
+.RI "this doesnt actually test reszigin as that is covered by peer insertion tests "
+.ti -1c
+.RI "void \fBpeerstore_test_insert_peer\fP (void **state)"
+.br
+.ti -1c
+.RI "int \fBmain\fP (void)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int main (void)"
+
+.PP
+Definition at line 107 of file peerstore_test\&.c\&.
+.SS "\fBpeerstore_t\fP * peerstore_new_assert (size_t max_peers)"
+
+.PP
+returns the peerstore triggering and assertion failure if creation fails 
+.PP
+Definition at line 21 of file peerstore_test\&.c\&.
+.SS "void peerstore_test_insert_peer (void ** state)"
+
+.PP
+Definition at line 49 of file peerstore_test\&.c\&.
+.SS "void peerstore_test_new_peerstore (void ** state)"
+
+.PP
+Definition at line 27 of file peerstore_test\&.c\&.
+.SS "void peerstore_test_resize_if_needed_not_needed (void ** state)"
+
+.PP
+this doesnt actually test reszigin as that is covered by peer insertion tests 
+.PP
+Definition at line 41 of file peerstore_test\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

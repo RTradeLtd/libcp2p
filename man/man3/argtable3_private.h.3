@@ -1,0 +1,419 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/thirdparty/argtable3/argtable3_private.h" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/thirdparty/argtable3/argtable3_private.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdlib\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBarg_hashtable_entry\fP"
+.br
+.ti -1c
+.RI "struct \fBarg_hashtable\fP"
+.br
+.ti -1c
+.RI "struct \fBarg_hashtable_itr\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBARG_ENABLE_TRACE\fP   0"
+.br
+.ti -1c
+.RI "#define \fBARG_ENABLE_LOG\fP   1"
+.br
+.ti -1c
+.RI "#define \fBARG_TRACE\fP(x)"
+.br
+.ti -1c
+.RI "#define \fBARG_LOG\fP(x)"
+.br
+.ti -1c
+.RI "#define \fBARG_DEFINE_HASHTABLE_INSERT\fP(fnname,  keytype,  valuetype)"
+.br
+.ti -1c
+.RI "#define \fBARG_DEFINE_HASHTABLE_SEARCH\fP(fnname,  keytype,  valuetype)"
+.br
+.ti -1c
+.RI "#define \fBARG_DEFINE_HASHTABLE_REMOVE\fP(fnname,  keytype,  valuetype)"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef void() \fBarg_panicfn\fP(const char *fmt,\&.\&.\&.)"
+.br
+.ti -1c
+.RI "typedef struct \fBarg_hashtable\fP \fBarg_hashtable_t\fP"
+.br
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum { \fBARG_ERR_MINCOUNT\fP = 1, \fBARG_ERR_MAXCOUNT\fP, \fBARG_ERR_BADINT\fP, \fBARG_ERR_OVERFLOW\fP, \fBARG_ERR_BADDOUBLE\fP, \fBARG_ERR_BADDATE\fP, \fBARG_ERR_REGNOMATCH\fP }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBdbg_printf\fP (const char *fmt,\&.\&.\&.)"
+.br
+.ti -1c
+.RI "void \fBarg_set_panic\fP (\fBarg_panicfn\fP *proc)"
+.br
+.ti -1c
+.RI "void * \fBxmalloc\fP (size_t size)"
+.br
+.ti -1c
+.RI "void * \fBxcalloc\fP (size_t count, size_t size)"
+.br
+.ti -1c
+.RI "void * \fBxrealloc\fP (void *ptr, size_t size)"
+.br
+.ti -1c
+.RI "void \fBxfree\fP (void *ptr)"
+.br
+.ti -1c
+.RI "\fBarg_hashtable_t\fP * \fBarg_hashtable_create\fP (unsigned int minsize, unsigned int(*hashfn)(const void *), int(*eqfn)(const void *, const void *))"
+.br
+.RI "Create a hash table\&. "
+.ti -1c
+.RI "void \fBarg_hashtable_insert\fP (\fBarg_hashtable_t\fP *h, void *k, void *v)"
+.br
+.RI "This function will cause the table to expand if the insertion would take the ratio of entries to table size over the maximum load factor\&. "
+.ti -1c
+.RI "void * \fBarg_hashtable_search\fP (\fBarg_hashtable_t\fP *h, const void *k)"
+.br
+.RI "Search the specified key in the hash table\&. "
+.ti -1c
+.RI "void \fBarg_hashtable_remove\fP (\fBarg_hashtable_t\fP *h, const void *k)"
+.br
+.RI "Remove the specified key from the hash table\&. "
+.ti -1c
+.RI "unsigned int \fBarg_hashtable_count\fP (\fBarg_hashtable_t\fP *h)"
+.br
+.RI "Return the number of keys in the hash table\&. "
+.in -1c
+.SS "hashtable_change"
+Change the value associated with the key\&.
+.PP
+function to change the value associated with a key, where there already exists a value bound to the key in the hash table\&. Source due to Holger Schemel\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIh\fP the hash table 
+.br
+\fIkey\fP 
+.br
+\fIvalue\fP 
+.RE
+.PP
+
+.in +1c
+.ti -1c
+.RI "#define \fBARG_DEFINE_HASHTABLE_ITERATOR_SEARCH\fP(fnname,  keytype)"
+.br
+.ti -1c
+.RI "typedef struct \fBarg_hashtable_itr\fP \fBarg_hashtable_itr_t\fP"
+.br
+.ti -1c
+.RI "int \fBarg_hashtable_change\fP (\fBarg_hashtable_t\fP *h, void *k, void *v)"
+.br
+.ti -1c
+.RI "void \fBarg_hashtable_destroy\fP (\fBarg_hashtable_t\fP *h, int free_values)"
+.br
+.RI "Free the hash table and the memory allocated for each key-value pair\&. "
+.ti -1c
+.RI "\fBarg_hashtable_itr_t\fP * \fBarg_hashtable_itr_create\fP (\fBarg_hashtable_t\fP *h)"
+.br
+.ti -1c
+.RI "void \fBarg_hashtable_itr_destroy\fP (\fBarg_hashtable_itr_t\fP *itr)"
+.br
+.ti -1c
+.RI "void * \fBarg_hashtable_itr_key\fP (\fBarg_hashtable_itr_t\fP *i)"
+.br
+.RI "Return the value of the (key,value) pair at the current position\&. "
+.ti -1c
+.RI "void * \fBarg_hashtable_itr_value\fP (\fBarg_hashtable_itr_t\fP *i)"
+.br
+.RI "Return the value of the (key,value) pair at the current position\&. "
+.ti -1c
+.RI "int \fBarg_hashtable_itr_advance\fP (\fBarg_hashtable_itr_t\fP *itr)"
+.br
+.RI "Advance the iterator to the next element\&. Returns zero if advanced to end of table\&. "
+.ti -1c
+.RI "int \fBarg_hashtable_itr_remove\fP (\fBarg_hashtable_itr_t\fP *itr)"
+.br
+.RI "Remove current element and advance the iterator to the next element\&. "
+.ti -1c
+.RI "int \fBarg_hashtable_itr_search\fP (\fBarg_hashtable_itr_t\fP *itr, \fBarg_hashtable_t\fP *h, void *k)"
+.br
+.RI "Search and overwrite the supplied iterator, to point to the entry matching the supplied key\&. "
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define ARG_DEFINE_HASHTABLE_INSERT(fnname, keytype, valuetype)"
+\fBValue:\fP
+.PP
+.nf
+    int fnname(arg_hashtable_t *h, keytype *k, valuetype *v) {  \
+        return arg_hashtable_insert(h, k, v);                   \
+    }
+.fi
+.PP
+Definition at line 140 of file argtable3_private\&.h\&.
+.SS "#define ARG_DEFINE_HASHTABLE_ITERATOR_SEARCH(fnname, keytype)"
+\fBValue:\fP
+.PP
+.nf
+    int fnname(arg_hashtable_itr_t *i, arg_hashtable_t *h, keytype *k) { \
+        return (arg_hashtable_iterator_search(i, h, k));                 \
+    }
+.fi
+.PP
+Definition at line 242 of file argtable3_private\&.h\&.
+.SS "#define ARG_DEFINE_HASHTABLE_REMOVE(fnname, keytype, valuetype)"
+\fBValue:\fP
+.PP
+.nf
+    valuetype *fnname(arg_hashtable_t *h, keytype *k) {         \
+        return (valuetype *)(arg_hashtable_remove(h, k));       \
+    }
+.fi
+.PP
+Definition at line 167 of file argtable3_private\&.h\&.
+.SS "#define ARG_DEFINE_HASHTABLE_SEARCH(fnname, keytype, valuetype)"
+\fBValue:\fP
+.PP
+.nf
+    valuetype *fnname(arg_hashtable_t *h, keytype *k) {         \
+        return (valuetype *)(arg_hashtable_search(h, k));       \
+    }
+.fi
+.PP
+Definition at line 154 of file argtable3_private\&.h\&.
+.SS "#define ARG_ENABLE_LOG   1"
+
+.PP
+Definition at line 40 of file argtable3_private\&.h\&.
+.SS "#define ARG_ENABLE_TRACE   0"
+
+.PP
+Definition at line 39 of file argtable3_private\&.h\&.
+.SS "#define ARG_LOG(x)"
+\fBValue:\fP
+.PP
+.nf
+    do {                    \
+        if (ARG_ENABLE_LOG) \
+            dbg_printf x;   \
+    } while (0)
+.fi
+.PP
+Definition at line 81 of file argtable3_private\&.h\&.
+.SS "#define ARG_TRACE(x)"
+\fBValue:\fP
+.PP
+.nf
+    do {                      \
+        if (ARG_ENABLE_TRACE) \
+            dbg_printf x;     \
+    } while (0)
+.fi
+.PP
+Definition at line 75 of file argtable3_private\&.h\&.
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fBarg_hashtable_itr\fP \fBarg_hashtable_itr_t\fP"
+
+.SS "typedef struct \fBarg_hashtable\fP \fBarg_hashtable_t\fP"
+
+.SS "typedef void() arg_panicfn(const char *fmt,\&.\&.\&.)"
+
+.PP
+Definition at line 56 of file argtable3_private\&.h\&.
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "anonymous enum"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIARG_ERR_MINCOUNT \fP\fP
+.TP
+\fB\fIARG_ERR_MAXCOUNT \fP\fP
+.TP
+\fB\fIARG_ERR_BADINT \fP\fP
+.TP
+\fB\fIARG_ERR_OVERFLOW \fP\fP
+.TP
+\fB\fIARG_ERR_BADDOUBLE \fP\fP
+.TP
+\fB\fIARG_ERR_BADDATE \fP\fP
+.TP
+\fB\fIARG_ERR_REGNOMATCH \fP\fP
+.PP
+Definition at line 46 of file argtable3_private\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "int arg_hashtable_change (\fBarg_hashtable_t\fP * h, void * k, void * v)"
+
+.SS "unsigned int arg_hashtable_count (\fBarg_hashtable_t\fP * h)"
+
+.PP
+Return the number of keys in the hash table\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIh\fP the hash table 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the number of items stored in the hash table 
+.RE
+.PP
+
+.SS "\fBarg_hashtable_t\fP* arg_hashtable_create (unsigned int minsize, unsigned int(*)(const void *) hashfn, int(*)(const void *, const void *) eqfn)"
+
+.PP
+Create a hash table\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIminsize\fP minimum initial size of hash table 
+.br
+\fIhashfn\fP function for hashing keys 
+.br
+\fIeqfn\fP function for determining key equality 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+newly created hash table or NULL on failure 
+.RE
+.PP
+
+.SS "void arg_hashtable_destroy (\fBarg_hashtable_t\fP * h, int free_values)"
+
+.PP
+Free the hash table and the memory allocated for each key-value pair\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIh\fP the hash table 
+.br
+\fIfree_values\fP whether to call 'free' on the remaining values 
+.RE
+.PP
+
+.SS "void arg_hashtable_insert (\fBarg_hashtable_t\fP * h, void * k, void * v)"
+
+.PP
+This function will cause the table to expand if the insertion would take the ratio of entries to table size over the maximum load factor\&. This function does not check for repeated insertions with a duplicate key\&. The value returned when using a duplicate key is undefined -- when the hash table changes size, the order of retrieval of duplicate key entries is reversed\&. If in doubt, remove before insert\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIh\fP the hash table to insert into 
+.br
+\fIk\fP the key - hash table claims ownership and will free on removal 
+.br
+\fIv\fP the value - does not claim ownership 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+non-zero for successful insertion 
+.RE
+.PP
+
+.SS "int arg_hashtable_itr_advance (\fBarg_hashtable_itr_t\fP * itr)"
+
+.PP
+Advance the iterator to the next element\&. Returns zero if advanced to end of table\&. 
+.SS "\fBarg_hashtable_itr_t\fP* arg_hashtable_itr_create (\fBarg_hashtable_t\fP * h)"
+
+.SS "void arg_hashtable_itr_destroy (\fBarg_hashtable_itr_t\fP * itr)"
+
+.SS "void* arg_hashtable_itr_key (\fBarg_hashtable_itr_t\fP * i)"
+
+.PP
+Return the value of the (key,value) pair at the current position\&. 
+.SS "int arg_hashtable_itr_remove (\fBarg_hashtable_itr_t\fP * itr)"
+
+.PP
+Remove current element and advance the iterator to the next element\&. 
+.SS "int arg_hashtable_itr_search (\fBarg_hashtable_itr_t\fP * itr, \fBarg_hashtable_t\fP * h, void * k)"
+
+.PP
+Search and overwrite the supplied iterator, to point to the entry matching the supplied key\&. 
+.PP
+\fBReturns\fP
+.RS 4
+Zero if not found\&. 
+.RE
+.PP
+
+.SS "void* arg_hashtable_itr_value (\fBarg_hashtable_itr_t\fP * i)"
+
+.PP
+Return the value of the (key,value) pair at the current position\&. 
+.SS "void arg_hashtable_remove (\fBarg_hashtable_t\fP * h, const void * k)"
+
+.PP
+Remove the specified key from the hash table\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIh\fP the hash table to remove the item from 
+.br
+\fIk\fP the key to search for - does not claim ownership 
+.RE
+.PP
+
+.SS "void* arg_hashtable_search (\fBarg_hashtable_t\fP * h, const void * k)"
+
+.PP
+Search the specified key in the hash table\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIh\fP the hash table to search 
+.br
+\fIk\fP the key to search for - does not claim ownership 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+the value associated with the key, or NULL if none found 
+.RE
+.PP
+
+.SS "void arg_set_panic (\fBarg_panicfn\fP * proc)"
+
+.SS "void dbg_printf (const char * fmt,  \&.\&.\&.)"
+
+.SS "void* xcalloc (size_t count, size_t size)"
+
+.SS "void xfree (void * ptr)"
+
+.SS "void* xmalloc (size_t size)"
+
+.SS "void* xrealloc (void * ptr, size_t size)"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

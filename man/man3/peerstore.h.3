@@ -1,0 +1,413 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/peerstore/peerstore.h" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/peerstore/peerstore.h \- peerstore provides a logical grouping of all known peers  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <pthread\&.h>\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+\fC#include <stddef\&.h>\fP
+.br
+\fC#include <stdint\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBpeer\fP"
+.br
+.ti -1c
+.RI "struct \fBpeerstore\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBpeer\fP \fBpeer_t\fP"
+.br
+.RI "contains identification information about a single peer "
+.ti -1c
+.RI "typedef struct \fBpeerstore\fP \fBpeerstore_t\fP"
+.br
+.RI "bundles together all known peer information "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBpeerstore_free_peer\fP (\fBpeer_t\fP *pr)"
+.br
+.RI "frees up resources allocated for peer_t "
+.ti -1c
+.RI "void \fBpeerstore_free_peerstore\fP (\fBpeerstore_t\fP *pst)"
+.br
+.RI "frees up resources allocated for peerstore_t and all peers "
+.ti -1c
+.RI "bool \fBpeerstore_have_peer\fP (\fBpeerstore_t\fP *pst, unsigned char *\fBpeer_id\fP)"
+.br
+.RI "check if we have information for the given \fBpeer_id\fP "
+.ti -1c
+.RI "bool \fBpeerstore_insert_peer\fP (\fBpeerstore_t\fP *pst, unsigned char *\fBpeer_id\fP, unsigned char *\fBpublic_key\fP, size_t peer_id_len, size_t public_key_len)"
+.br
+.RI "used to insert a \fBpeer_id\fP \fBpublic_key\fP pair into our peerstore "
+.ti -1c
+.RI "bool \fBpeerstore_resize_if_needed\fP (\fBpeerstore_t\fP *pst)"
+.br
+.RI "performs a check to see if we need to allocate more memory "
+.ti -1c
+.RI "bool \fBpeerstore_get_public_key\fP (\fBpeerstore_t\fP *pst, unsigned char *\fBpeer_id\fP, unsigned char *output, size_t output_len)"
+.br
+.RI "returns the public key associated with the peer id "
+.ti -1c
+.RI "bool \fBpeerstore_validate_peer_id\fP (unsigned char *\fBpeer_id\fP, unsigned char *\fBpublic_key\fP, size_t peer_id_len, size_t public_key_len)"
+.br
+.RI "used to validate the peerID ensuring that the given public key matches the given peerid "
+.ti -1c
+.RI "\fBpeerstore_t\fP * \fBpeerstore_new_peerstore\fP (size_t max_peers)"
+.br
+.RI "returns a new instance of peerstore_t "
+.in -1c
+.SH "Detailed Description"
+.PP 
+peerstore provides a logical grouping of all known peers 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Bonedaddy
+.RE
+.PP
+it provides access to an in-memory store of all known peers
+.PP
+peers are indexed by their peer identifier and contain the corresponding public key 
+.PP
+\fBNote\fP
+.RS 4
+in the future this may also contain addressing information 
+.RE
+.PP
+\fBTodo\fP
+.RS 4
+for secure connection negotiation, we need to figure out a way we can cache the result 
+.PP
+of this negotiation to prevent having to continuously do it in between sessions with a peer 
+.PP
+however we also need a way to 'clear the cache' periodically to require reauthentication for security 
+.RE
+.PP
+
+.PP
+Definition in file \fBpeerstore\&.h\fP\&.
+.SH "Typedef Documentation"
+.PP 
+.SS "\fBpeer_t\fP"
+
+.PP
+contains identification information about a single peer bundles together a peers identifier (hash of public key) and the public key itself 
+.SS "\fBpeerstore_t\fP"
+
+.PP
+bundles together all known peer information 
+.PP
+\fBNote\fP
+.RS 4
+if accessing any internal members please use the read-write lock accordingly 
+.RE
+.PP
+\fBWarning\fP
+.RS 4
+do not modify any information in the peer records directly 
+.PP
+all infoirmation must first be copied out to prevent accidental overwrites 
+.RE
+.PP
+
+.SH "Function Documentation"
+.PP 
+.SS "void peerstore_free_peer (\fBpeer_t\fP * pr)"
+
+.PP
+frees up resources allocated for peer_t 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpr\fP an instance of peer_t 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+do not access pr after this function returns 
+.RE
+.PP
+
+.PP
+Definition at line 43 of file peerstore\&.c\&.
+.SS "void peerstore_free_peerstore (\fBpeerstore_t\fP * pst)"
+
+.PP
+frees up resources allocated for peerstore_t and all peers 
+.PP
+\fBNote\fP
+.RS 4
+in essence this 'shuts down' the peerstore 
+.RE
+.PP
+\fBWarning\fP
+.RS 4
+this deletes all information 
+.RE
+.PP
+
+.PP
+Definition at line 53 of file peerstore\&.c\&.
+.SS "bool peerstore_get_public_key (\fBpeerstore_t\fP * pst, unsigned char * peer_id, unsigned char * output, size_t output_len)"
+
+.PP
+returns the public key associated with the peer id the contents of the peers public key (if found) are copied into output
+.PP
+if the public key length is greather than output length we false 
+.PP
+\fBReturns\fP
+.RS 4
+Success: true 
+.PP
+Failure: false 
+.RE
+.PP
+
+.PP
+Definition at line 225 of file peerstore\&.c\&.
+.SS "bool peerstore_have_peer (\fBpeerstore_t\fP * pst, unsigned char * peer_id)"
+
+.PP
+check if we have information for the given \fBpeer_id\fP 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpst\fP the actual peerstore 
+.br
+\fI\fBpeer_id\fP\fP the peer we are checking 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Success: true 
+.PP
+Failure: false 
+.RE
+.PP
+
+.PP
+Definition at line 70 of file peerstore\&.c\&.
+.SS "bool peerstore_insert_peer (\fBpeerstore_t\fP * pst, unsigned char * peer_id, unsigned char * public_key, size_t peer_id_len, size_t public_key_len)"
+
+.PP
+used to insert a \fBpeer_id\fP \fBpublic_key\fP pair into our peerstore checks to see if we have a peer before inserting, and all inserts
+.PP
+are verified such that we ensure the given \fBpublic_key\fP matches the \fBpeer_id\fP
+.PP
+however we should do this after we check if we have the peer to prevent excessive work 
+.PP
+\fBNote\fP
+.RS 4
+if we already have the peer we report true and return early 
+.RE
+.PP
+\fBTodo\fP
+.RS 4
+fix possible race condition with peerstore_have_peer check and the write lock we claim here 
+.RE
+.PP
+\fBWarning\fP
+.RS 4
+\fBpeer_id\fP must be sha256 based 
+.RE
+.PP
+\fBTodo\fP
+.RS 4
+add \fBpeer_id\fP and \fBpublic_key\fP verification 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Success (not addedd): true 
+.PP
+Success(added): true 
+.PP
+Failure: false
+.RE
+.PP
+checks to see if we have a peer before inserting, and all inserts
+.PP
+are verified such that we ensure the given \fBpublic_key\fP matches the \fBpeer_id\fP
+.PP
+however we should do this after we check if we have the peer to prevent excessive work 
+.PP
+\fBNote\fP
+.RS 4
+if we already have the peer we report true and return early 
+.RE
+.PP
+\fBTodo\fP
+.RS 4
+fix possible race condition with peerstore_have_peer check and the write lock we claim here 
+.RE
+.PP
+\fBWarning\fP
+.RS 4
+\fBpeer_id\fP must be sha256 based 
+.RE
+.PP
+\fBTodo\fP
+.RS 4
+add \fBpeer_id\fP and \fBpublic_key\fP verification 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Success (not addedd): true 
+.PP
+Success(added): true 
+.PP
+Failure: false 
+.RE
+.PP
+
+.PP
+\fBTodo\fP
+.RS 4
+this isn't entirely race free, and it is possible for 2 requests to occur in a row 
+.RE
+.PP
+.PP
+.IP "\(bu" 2
+\fBTodo\fP
+.RS 4
+enable lru type cache to clean out old entries 
+.RE
+.PP
+.PP
+\fBTodo\fP
+.RS 4
+dont insert if we already have data for this peer 
+.RE
+.PP
+.PP
+\fBTodo\fP
+.RS 4
+this is where the race condition lies 
+.RE
+.PP
+
+.PP
+.PP
+\fBNote\fP
+.RS 4
+compute the peerID from the public key we are given
+.PP
+we then match this with the peerID we are being given
+.PP
+this ensures we dont enter any bad data into the peerstore
+.PP
+this checks to see if we have enough room in the dynamic array
+.PP
+if we dont have enough room then we will resize increase space by 2x
+.PP
+if that isn't greater than the max peers size\&. if it is greater
+.PP
+then we use the max peers as the limit
+.PP
+returns true even if we dint need to resize because we have enough room
+.PP
+right now im not sure if we should store this in the peerstore
+.PP
+or use a pointer\&. i think like this would consume less memory
+.RE
+.PP
+
+.PP
+Definition at line 104 of file peerstore\&.c\&.
+.SS "\fBpeerstore_t\fP* peerstore_new_peerstore (size_t max_peers)"
+
+.PP
+returns a new instance of peerstore_t is responsible for allocating memory and initializing the mutex
+.PP
+it initially allocates 2 slots of memory for the the peers memory
+.PP
+and will double this whenever the max is reached to prevent repeat allocations 
+.PP
+Definition at line 291 of file peerstore\&.c\&.
+.SS "bool peerstore_resize_if_needed (\fBpeerstore_t\fP * pst)"
+
+.PP
+performs a check to see if we need to allocate more memory 
+.PP
+\fBWarning\fP
+.RS 4
+caller must take care of locking
+.RE
+.PP
+this is called after every insertion to the peerstore
+.PP
+so that the following call will have fresh memory to store data into 
+.PP
+\fBReturns\fP
+.RS 4
+Success (enough size): true 
+.PP
+Success (resized ok): true 
+.PP
+Failure (resized failed): false 
+.RE
+.PP
+
+.PP
+\fBNote\fP
+.RS 4
+set the new peers size to twice the current 
+.PP
+but if it ends up being more than the max peers we want 
+.PP
+lets just use the max limit instead
+.RE
+.PP
+
+.PP
+Definition at line 192 of file peerstore\&.c\&.
+.SS "bool peerstore_validate_peer_id (unsigned char * peer_id, unsigned char * public_key, size_t peer_id_len, size_t public_key_len)"
+
+.PP
+used to validate the peerID ensuring that the given public key matches the given peerid 
+.PP
+\fBParameters\fP
+.RS 4
+\fI\fBpeer_id\fP\fP the actual peerid 
+.br
+\fI\fBpublic_key\fP\fP the public key in PEM format 
+.br
+\fIpeer_id_len\fP the size of the \fBpeer_id\fP 
+.br
+\fIpublic_key_len\fP the size of the \fBpublic_key\fP 
+.RE
+.PP
+
+.PP
+\fBTodo\fP
+.RS 4
+enable better length selection 
+.RE
+.PP
+
+.PP
+Definition at line 261 of file peerstore\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

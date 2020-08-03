@@ -282,11 +282,11 @@ $(document).ready(function(){initNavTree('db/dfd/key_8c_source.html','../../'); 
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    }</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <a class="code" href="../../d3/dce/structpublic__key.html">public_key_t</a> *pk = calloc(<span class="keyword">sizeof</span>(<a class="code" href="../../d3/dce/structpublic__key.html">public_key_t</a>), <span class="keyword">sizeof</span>(<a class="code" href="../../d3/dce/structpublic__key.html">public_key_t</a>));</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <a class="code" href="../../d3/dce/structpublic__key.html">public_key_t</a> *pk = calloc(1, <span class="keyword">sizeof</span>(<a class="code" href="../../d3/dce/structpublic__key.html">public_key_t</a>));</div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="keywordflow">if</span> (pk == NULL) {</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    }</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    pk-&gt;<a class="code" href="../../d3/dce/structpublic__key.html#a80060e1da39a9f0fe9e82ef891959a54">data</a> = calloc(<span class="keyword">sizeof</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>), data_len);</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    pk-&gt;<a class="code" href="../../d3/dce/structpublic__key.html#a80060e1da39a9f0fe9e82ef891959a54">data</a> = calloc(1, data_len);</div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keywordflow">if</span> (pk-&gt;<a class="code" href="../../d3/dce/structpublic__key.html#a80060e1da39a9f0fe9e82ef891959a54">data</a> == NULL) {</div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        free(pk);</div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <span class="keywordflow">return</span> NULL;</div>

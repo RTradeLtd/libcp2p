@@ -1,0 +1,14 @@
+<map id="peerstore_validate_peer_id" name="peerstore_validate_peer_id">
+<area shape="rect" id="node1" title="used to validate the peerID ensuring that the given public key matches the given peerid" alt="" coords="5,64,149,105"/>
+<area shape="rect" id="node2" href="$dc/d82/peerutils_8c.html#a20fb9280d827d25e56ff161baa137764" title="generates a peerID for the public key using SHA256 as the hashing algorithm" alt="" coords="197,35,348,76"/>
+<area shape="rect" id="node12" href="$dc/d82/peerutils_8c.html#a7321b177cf43608eeba6a805ca89c3a2" title="free up resources allocated for an instance of peer_id_t" alt="" coords="197,101,348,127"/>
+<area shape="rect" id="node3" href="$da/d01/sha256_8c.html#abec2cc9b75a7053f0b5db97881857712" title=" " alt="" coords="396,5,564,47"/>
+<area shape="rect" id="node4" href="$dc/d82/peerutils_8c.html#aaf5bd24666b8916b63d3a7ebc7b82b03" title="constructs a peer identifier from the given public key" alt="" coords="405,71,555,98"/>
+<area shape="rect" id="node5" href="$d4/da0/multihash_8c.html#a91aa646ac4a3a60ece14436b8123a1b0" title=" " alt="" coords="644,46,721,73"/>
+<area shape="rect" id="node6" href="$dc/db3/multibase_8c.html#a5f8db468b8b2ead762ff750b3e57b424" title="Encode data in multibase format." alt="" coords="612,97,753,123"/>
+<area shape="rect" id="node7" href="$de/df5/base16_8c.html#acd96e587c59cf9bc953e4ee8f7031fc6" title="Encode in Base16 format." alt="" coords="801,24,984,65"/>
+<area shape="rect" id="node8" href="$db/d08/base32_8c.html#a78acce42d5c859aea4c19508c1aaa1c5" title="Encode in Base32 format." alt="" coords="801,89,984,131"/>
+<area shape="rect" id="node11" href="$db/d36/base64_8c.html#a15d5a6ed9df11e87ac4aa0cf3975aa75" title="encode using base64" alt="" coords="801,155,984,196"/>
+<area shape="rect" id="node9" href="$db/d08/base32_8c.html#a7b03b543c865173ec643b3c2ee4fb08f" title=" " alt="" coords="1032,97,1155,123"/>
+<area shape="rect" id="node10" href="$db/d08/base32_8c.html#a3c0c1964c1c1a0c1d499ff6edf8a68b5" title=" " alt="" coords="1203,97,1281,123"/>
+</map>

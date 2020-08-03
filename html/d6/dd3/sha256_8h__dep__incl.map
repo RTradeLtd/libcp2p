@@ -1,9 +1,14 @@
 <map id="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/sha256.h" name="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/sha256.h">
-<area shape="rect" id="node1" title="provides sha256 hashing support" alt="" coords="340,5,521,61"/>
-<area shape="rect" id="node2" href="$d5/d29/crypto__test_8c.html" title=" " alt="" coords="5,213,184,269"/>
-<area shape="rect" id="node3" href="$db/dfd/key_8c.html" title="public/private key management functions" alt="" coords="209,213,386,269"/>
-<area shape="rect" id="node4" href="$dc/d82/peerutils_8c.html" title=" " alt="" coords="611,213,789,269"/>
-<area shape="rect" id="node5" href="$da/d01/sha256_8c.html" title=" " alt="" coords="602,109,779,165"/>
-<area shape="rect" id="node6" href="$d7/dee/peerutils_8h.html" title="provides utilities for managing peer identifiers" alt="" coords="335,109,526,165"/>
-<area shape="rect" id="node7" href="$dc/d09/ecdsa_8c.html" title=" " alt="" coords="410,213,587,269"/>
+<area shape="rect" id="node1" title="provides sha256 hashing support" alt="" coords="405,5,586,61"/>
+<area shape="rect" id="node2" href="$d5/d29/crypto__test_8c.html" title=" " alt="" coords="17,317,196,373"/>
+<area shape="rect" id="node3" href="$db/dfd/key_8c.html" title="public/private key management functions" alt="" coords="27,213,204,269"/>
+<area shape="rect" id="node4" href="$dc/d82/peerutils_8c.html" title=" " alt="" coords="534,213,711,269"/>
+<area shape="rect" id="node5" href="$da/d01/sha256_8c.html" title=" " alt="" coords="651,109,828,165"/>
+<area shape="rect" id="node6" href="$d8/dab/peerstore_8c.html" title="peerstore provides a logical grouping of all known peers" alt="" coords="735,213,923,269"/>
+<area shape="rect" id="node7" href="$d7/dee/peerutils_8h.html" title="provides utilities for managing peer identifiers" alt="" coords="334,109,524,165"/>
+<area shape="rect" id="node8" href="$dc/d09/ecdsa_8c.html" title=" " alt="" coords="492,317,670,373"/>
+<area shape="rect" id="node9" href="$d5/d5d/ecdsa_8h.html" title="provides ECDSA cryptography support" alt="" coords="280,213,458,269"/>
+<area shape="rect" id="node10" href="$d1/dba/testutils_8c.html" title=" " alt="" coords="144,421,322,477"/>
+<area shape="rect" id="node11" href="$d3/d1a/testutils_8h.html" title=" " alt="" coords="270,317,468,373"/>
+<area shape="rect" id="node12" href="$d1/d8e/peerstore__test_8c.html" title=" " alt="" coords="346,421,566,477"/>
 </map>

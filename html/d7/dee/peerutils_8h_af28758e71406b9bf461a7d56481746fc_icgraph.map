@@ -1,6 +1,0 @@
-<map id="libp2p_new_peer_id" name="libp2p_new_peer_id">
-<area shape="rect" id="node1" title="returns a libp2p peerid from the sha256 hash of a public key base58 encode a string NOTE: this also p..." alt="" coords="557,13,708,39"/>
-<area shape="rect" id="node2" href="$d5/d5d/ecdsa_8h.html#afab4ce5b8e4bde2be242ad28bf9f1474" title="returns the peerid for the corresponding private key" alt="" coords="355,5,509,47"/>
-<area shape="rect" id="node3" href="$d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="108,5,307,47"/>
-<area shape="rect" id="node4" href="$d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
-</map>

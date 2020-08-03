@@ -1,4 +1,4 @@
-.TH "todo" 3 "Fri Jul 24 2020" "libcp2p" \" -*- nroff -*-
+.TH "todo" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -16,9 +16,27 @@ enable udp
 enable udp  
 .IP "\fBGlobal \fBlibp2p_crypto_ecdsa_keypair_generation\fP (unsigned char *output, mbedtls_ecp_group_id curve)\fP" 1c
 figure out if we need this  
+.IP "\fBGlobal \fBlibp2p_crypto_ecdsa_keypair_peerid\fP (ecdsa_private_key_t *pk)\fP" 1c
+this currently relies on hard coded assumptions about hashing algorithm 
+.PP
+in the future this will change 
+.PP
+this currently relies on hard coded assumptions about hashing algorithm 
+.PP
+in the future this will change  
+.IP "\fBGlobal \fBlibp2p_crypto_ecdsa_keypair_public\fP (ecdsa_private_key_t *pk)\fP" 1c
+this currently relies in usage of \fCstr\&.\&.\fP we should use \fCmem\&.\&.\&.\fP instead 
+.PP
+this currently relies in usage of \fCstr\&.\&.\fP we should use \fCmem\&.\&.\&.\fP instead  
 .IP "\fBGlobal \fBlibp2p_crypto_public_key_cbor_encode\fP (public_key_t *pub_key)\fP" 1c
 figure out why this returns an error  
 .IP "\fBFile \fBlogger\&.c\fP \fP" 1c
+.IP "\(bu" 2
+buffer logs and use a dedicated thread for writing (avoid blocking locks)
+.IP "\(bu" 2
+handling system signals (exit, kill, etc\&.\&.\&.)  
+.PP
+.IP "\fBFile \fBlogger\&.h\fP \fP" 1c
 .IP "\(bu" 2
 buffer logs and use a dedicated thread for writing (avoid blocking locks)
 .IP "\(bu" 2
@@ -38,6 +56,36 @@ support non wildcard
 support non wildcard  
 .IP "\fBGlobal \fBNum_To_HexVar_64\fP (uint64_t TOHVINPUT)\fP" 1c
 TODO(bonedaddy): figure out the previous code did bzero before memset  
+.IP "\fBFile \fBpeerstore\&.c\fP \fP" 1c
+for secure connection negotiation, we need to figure out a way we can cache the result 
+.PP
+of this negotiation to prevent having to continuously do it in between sessions with a peer 
+.PP
+however we also need a way to 'clear the cache' periodically to require reauthentication for security  
+.IP "\fBFile \fBpeerstore\&.h\fP \fP" 1c
+for secure connection negotiation, we need to figure out a way we can cache the result 
+.PP
+of this negotiation to prevent having to continuously do it in between sessions with a peer 
+.PP
+however we also need a way to 'clear the cache' periodically to require reauthentication for security  
+.IP "\fBGlobal \fBpeerstore_insert_peer\fP (peerstore_t *pst, unsigned char *peer_id, unsigned char *public_key, size_t peer_id_len, size_t public_key_len)\fP" 1c
+fix possible race condition with peerstore_have_peer check and the write lock we claim here 
+.PP
+add \fBpeer_id\fP and \fBpublic_key\fP verification 
+.PP
+this isn't entirely race free, and it is possible for 2 requests to occur in a row 
+.PP
+enable lru type cache to clean out old entries 
+.PP
+dont insert if we already have data for this peer 
+.PP
+this is where the race condition lies 
+.PP
+fix possible race condition with peerstore_have_peer check and the write lock we claim here 
+.PP
+add \fBpeer_id\fP and \fBpublic_key\fP verification  
+.IP "\fBGlobal \fBpeerstore_validate_peer_id\fP (unsigned char *peer_id, unsigned char *public_key, size_t peer_id_len, size_t public_key_len)\fP" 1c
+enable better length selection  
 .IP "\fBGlobal \fBprotocols_with_string\fP (const struct \fBProtocolListItem\fP *head, char *meee, int sizi)\fP" 1c
 TODO(bonedaddy): figure out why bzero is not present and if we should use  
 .IP "\fBGlobal \fBsocket_client_sendto\fP (socket_client_t *client, addr_info *peer_address, char *message)\fP" 1c
