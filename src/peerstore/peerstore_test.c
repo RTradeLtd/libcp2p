@@ -62,6 +62,7 @@ void peerstore_test_insert_peer(void **state) {
 
     libp2p_crypto_ecdsa_free(priv_key);
     libp2p_peer_id_free(pid);
+    libp2p_crypto_public_key_free(pub_key);
   }
 
   // todo
