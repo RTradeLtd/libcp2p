@@ -102,6 +102,9 @@ include(cmake/libraries/tinycbor.cmake)
 
 include(cmake/libraries/peerstore.cmake)
 
+# cli #
+
+include(cmake/libraries/cli.cmake)
 
 # testutils #
 
@@ -113,13 +116,6 @@ include(cmake/thirdparty/argtable3.cmake)
 include(cmake/thirdparty/logger.cmake)
 include(cmake/thirdparty/thread_pool.cmake)
 
-# cli #
-
-include(cmake/libraries/cli.cmake)
-
-# argtable3 #
-
-include(cmake/thirdparty/argtable3.cmake)
 
 #########################
 # END COMPILE LIBRARIES #
