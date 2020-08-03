@@ -49,7 +49,7 @@ void peerstore_test_resize_if_needed_not_needed(void **state) {
 void peerstore_test_insert_peer(void **state) {
   peerstore_t *pst = peerstore_new_assert(100);
 
-  for (int i = 0; i < 99; i++) {
+  for (int i = 0; i < 100; i++) {
     ecdsa_private_key_t *priv_key = new_ecdsa_private_key();
     assert(priv_key != NULL);
     peer_id_t *pid = libp2p_crypto_ecdsa_keypair_peerid(priv_key);
@@ -64,6 +64,22 @@ void peerstore_test_insert_peer(void **state) {
     libp2p_peer_id_free(pid);
     libp2p_crypto_public_key_free(pub_key);
   }
+
+  assert(pst->num_peers == 100);
+
+  ecdsa_private_key_t *priv_key = new_ecdsa_private_key();
+  assert(priv_key != NULL);
+  peer_id_t *pid = libp2p_crypto_ecdsa_keypair_peerid(priv_key);
+  assert(pid != NULL);
+  public_key_t *pub_key = libp2p_crypto_ecdsa_keypair_public(priv_key);
+  assert(pub_key != NULL);
+  
+  bool ok = peerstore_insert_peer(pst, pid->data, pub_key->data, pid->len, pub_key->data_size);
+  assert(ok == false);
+
+  libp2p_crypto_ecdsa_free(priv_key);
+  libp2p_peer_id_free(pid);
+  libp2p_crypto_public_key_free(pub_key);
 
   // todo
   peerstore_free_peerstore(pst);
