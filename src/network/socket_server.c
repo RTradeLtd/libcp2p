@@ -17,6 +17,7 @@
 #include "network/socket_server.h"
 #include "encoding/cbor.h"
 #include "network/messages.h"
+#include "peerstore/peerstore.h"
 #include "thirdparty/thread_pool/thread_pool.h"
 #include <arpa/inet.h>
 #include <errno.h>
@@ -66,6 +67,16 @@ socket_server_t *new_socket_server(thread_logger *thl,
     // initialize the file descriptor groups
     FD_ZERO(&tcp_socket_set);
     FD_ZERO(&grouped_socket_set);
+
+    // if 0 default to 100
+    if (config->max_peers == 0) {
+        config->max_peers = 100;
+    }
+
+    if (config->private_key_path == NULL) {
+        thl->log(thl, 0, "no private key path in config", LOG_LEVELS_ERROR);
+        return NULL;
+    }
 
     for (int i = 0; i < config->num_addrs; i++) {
 
@@ -126,13 +137,30 @@ socket_server_t *new_socket_server(thread_logger *thl,
     // increase max socket number by 1 for select usage
     max_socket_num += 1;
 
-    // setup the server
+    // initialize our peerstore
+    server->pstore = peerstore_new_peerstore((size_t)config->max_peers);
+    if (server->pstore == NULL) {
+        thl->log(thl, 0, "failed to create peerstore", LOG_LEVELS_ERROR);
+        free(server);
+        goto EXIT;
+    }
+
+    // load the private key
+    server->private_key =
+        libp2p_crypto_ecdsa_private_key_from_file(config->private_key_path);
+    if (server->private_key == NULL) {
+        thl->log(thl, 0, "failed to load private key", LOG_LEVELS_ERROR);
+        peerstore_free_peerstore(server->pstore);
+        free(server);
+        goto EXIT;
+    }
+
+    // setup remaining server components
     server->thpool = thpool_init(config->num_threads);
     server->max_socket_num = max_socket_num;
     server->grouped_socket_set = grouped_socket_set;
     server->tcp_socket_set = tcp_socket_set;
     server->task_func_tcp = config->fn_tcp;
-    // server->task_func_udp = config->fn_udp;
     server->thl = thl;
     pthread_mutex_init(&shutdown_mutex, NULL);
     server->thl->log(server->thl, 0, "initialized server", LOG_LEVELS_INFO);
@@ -176,6 +204,10 @@ void free_socket_server(socket_server_t *srv) {
     pthread_mutex_destroy(&shutdown_mutex);
 
     clear_thread_logger(srv->thl);
+
+    peerstore_free_peerstore(srv->pstore);
+
+    libp2p_crypto_ecdsa_free(srv->private_key);
 
     free(srv);
 }

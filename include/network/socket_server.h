@@ -16,10 +16,11 @@
 
 #pragma once
 
-#include "peerstore/peerstore.h"
+#include "crypto/ecdsa.h"
 #include "multiaddr/multiaddr.h"
 #include "network/messages.h"
 #include "network/socket_client.h" // this also imports socket.h
+#include "peerstore/peerstore.h"
 #include "thirdparty/logger/logger.h"
 #include "thirdparty/thread_pool/thread_pool.h"
 #include <arpa/inet.h>
@@ -49,17 +50,18 @@ typedef void(threadpool_task_func)(void *data);
  * new_socket_server() you can free the socket config with free_socket_config
  */
 typedef struct socket_server_config {
-    /*! @brief the thread pool task function to use for processing tcp connections */
-    threadpool_task_func *fn_tcp;
-    // /*! @brief the thread pool task function to use for processing tcp connections
-    // */ threadpool_task_func *fn_udp;
-    int max_peers; 
+    int max_peers;
     int max_connections;
     int num_threads;
     int num_addrs;
     /*! @brief the timeout in seconds to set on a socket, 0 means nothing is set */
     int recv_timeout_sec;
+    /*! @brief the thread pool task function to use for processing tcp connections */
+    threadpool_task_func *fn_tcp;
+    /*! @brief the addresses we will be listening on */
     multi_addr_t **addrs;
+    /*! @brief the path to a pem encoded private ecdsa key */
+    char *private_key_path;
 } socket_server_config_t;
 
 /*!
@@ -85,7 +87,10 @@ typedef struct socket_server {
     /*! @brief used for submitting a task to the thread pool for processing a udp
      * connection */
     threadpool_task_func *task_func_udp;
+    /*! @brief used for storing information about our peers */
     peerstore_t *pstore;
+    /*! @brief our ecdsa private key for handling cryptographic operations */
+    ecdsa_private_key_t *private_key;
 } socket_server_t;
 
 /*! @typedef client_conn
@@ -191,6 +196,13 @@ void setup_signal_shutdown(int signals[], int num_signals);
  * @brief used to negotiate a secure connection with the current connection
  */
 bool negotiate_secure_connection(conn_handle_data_t *data);
+
+/*!
+ * @brief handles receiving a hello protocol message from another peer
+ * @details is responsible for exchanging identification information with a peer
+ * @details and updating our peerstore with the appropriate information
+ */
+bool handle_hello_protocol(conn_handle_data_t *data, message_t *msg);
 
 /*!
  * @brief used for a server to send a message to another server

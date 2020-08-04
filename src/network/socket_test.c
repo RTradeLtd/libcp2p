@@ -57,6 +57,7 @@ void test_new_socket_server(void **state) {
     config1->max_connections = 100;
     config1->num_threads = 6;
     config1->recv_timeout_sec = 3;
+    config1->max_peers = 100;
     config1->fn_tcp = handle_inbound_rpc;
 
     multi_addr_t *tcp_addr1 = multi_address_new_from_string("/ip4/127.0.0.1/tcp/9090");
@@ -78,6 +79,7 @@ void test_new_socket_server(void **state) {
     config2->max_connections = 100;
     config2->num_threads = 6;
     config2->recv_timeout_sec = 3;
+    config2->max_peers = 0; // use to trigger default max peers handling
     config2->fn_tcp = handle_inbound_rpc;
 
     multi_addr_t *tcp_addr2 = multi_address_new_from_string("/ip4/127.0.0.1/tcp/9091");
@@ -91,7 +93,7 @@ void test_new_socket_server(void **state) {
     free_socket_server_config(config2);
     thpool_add_work(server2->thpool, start_socker_server_wrapper, server2);
 
-
+    // todo: validate max peers of both servers
 
     message_t *msg = calloc(1, sizeof(message_t));
     if (msg == NULL) {
