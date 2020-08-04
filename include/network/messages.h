@@ -109,6 +109,11 @@ cbor_encoded_data_t *cbor_encode_hello_t(message_hello_t *msg_hello);
 message_hello_t *cbor_decode_hello_t(cbor_encoded_data_t *input);
 
 /*!
+ * @brief used to free up resources associated with a message_hello_t instance
+ */
+void free_message_hello_t(message_hello_t *msg_hello);
+
+/*!
  * @brief used to cbor encode a message_t instance
  * @param msg pointer to an instance of message_t
  * @return Success: pointer to an instance of cbor_encoded_data_t

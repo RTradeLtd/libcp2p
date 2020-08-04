@@ -167,9 +167,80 @@ void test_cbor_message_t_encoding(void **state) {
     free_message_t(ret_msg);
 }
 
+
+void test_cbor_message_hello_t_encoding(void **state) {
+    message_hello_t *msg_hello = calloc(1, sizeof(message_hello_t));
+    assert(msg_hello != NULL);
+
+    msg_hello->peer_id = calloc(1, 5);
+    assert(msg_hello->peer_id != NULL);
+    
+    msg_hello->public_key = calloc(1, 5);
+    assert(msg_hello->public_key != NULL);
+
+    msg_hello->peer_id[0] = 'h';
+    msg_hello->peer_id[1] = 'e';
+    msg_hello->peer_id[2] = 'l';
+    msg_hello->peer_id[3] = 'l';
+    msg_hello->peer_id[4] = 'o';
+    msg_hello->peer_id_len = 5;
+    msg_hello->public_key[0] = 'w';
+    msg_hello->public_key[1] = 'o';
+    msg_hello->public_key[2] = 'r';
+    msg_hello->public_key[3] = 'l';
+    msg_hello->public_key[4] = 'd';
+    msg_hello->public_key_len = 5;
+
+    cbor_encoded_data_t *encoded_msg_hello = cbor_encode_hello_t(msg_hello);
+    assert(encoded_msg_hello != NULL);
+
+    message_hello_t *decoded_msg_hello = cbor_decode_hello_t(encoded_msg_hello);
+    assert(decoded_msg_hello != NULL);
+
+    // compare member values, but do it twice
+    // using the length from each of the instances
+    // to ensure consistency
+
+    assert(
+        memcmp(
+            decoded_msg_hello->peer_id,
+            msg_hello->peer_id,
+            decoded_msg_hello->peer_id_len
+        ) == 0
+    );
+    assert(
+        memcmp(
+            decoded_msg_hello->peer_id,
+            msg_hello->peer_id,
+            msg_hello->peer_id_len
+        ) == 0
+    );
+
+    assert(
+        memcmp(
+            decoded_msg_hello->public_key,
+            msg_hello->public_key,
+            decoded_msg_hello->public_key_len
+        ) == 0
+    );
+    assert(
+        memcmp(
+            decoded_msg_hello->public_key,
+            msg_hello->public_key,
+            msg_hello->public_key_len
+        ) == 0
+    );
+
+    free_cbor_encoded_data(encoded_msg_hello);
+    free_message_hello_t(msg_hello);
+    free_message_hello_t(decoded_msg_hello);
+    
+}
+
 int main(void) {
     const struct CMUnitTest tests[] = {
         cmocka_unit_test(test_cbor_message_t_encoding),
+        cmocka_unit_test(test_cbor_message_hello_t_encoding),
         cmocka_unit_test(test_new_socket_server)
     };
     return cmocka_run_group_tests(tests, NULL, NULL);

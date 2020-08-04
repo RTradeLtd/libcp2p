@@ -256,6 +256,15 @@ cbor_encoded_data_t *cbor_encode_message_t(message_t *msg) {
 }
 
 /*!
+ * @brief used to free up resources associated with a message_hello_t instance
+ */
+void free_message_hello_t(message_hello_t *msg_hello) {
+    free(msg_hello->peer_id);
+    free(msg_hello->public_key);
+    free(msg_hello);
+}
+
+/*!
  * @brief used to cbor decode data into a message_t instance
  * @param input an instance of cbor_encoded_data_t containing the data to decode
  * @return Success: poitner to an instance of message_t
