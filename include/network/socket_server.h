@@ -17,6 +17,8 @@
 #pragma once
 
 #include "crypto/ecdsa.h"
+#include "crypto/key.h"
+#include "crypto/peerutils.h"
 #include "multiaddr/multiaddr.h"
 #include "network/messages.h"
 #include "network/socket_client.h" // this also imports socket.h
@@ -73,14 +75,17 @@ typedef struct socket_server_config {
  * of socket numbers)
  */
 typedef struct socket_server {
+    /*! @brief the maximum socket number 1 greater than our actual socket */
     int max_socket_num;
+    /*! @brief contains all of our sockets */
     fd_set grouped_socket_set;
+    /*! @brief contains our TCP sockets */
     fd_set tcp_socket_set;
-    // fd_set udp_socket_set;
-    thread_logger *thl;
     /*! @brief a thread pool that allows submitting worker tasks to a pool of threads
      */
     threadpool thpool;
+    /*! @brief colored logging system */
+    thread_logger *thl;
     /*! @brief used for submitting a task to the thread pool for processing a tcp
      * connection */
     threadpool_task_func *task_func_tcp;
@@ -91,6 +96,10 @@ typedef struct socket_server {
     peerstore_t *pstore;
     /*! @brief our ecdsa private key for handling cryptographic operations */
     ecdsa_private_key_t *private_key;
+    /*! @brief our pubilc key information */
+    public_key_t *public_key;
+    /*! @brief our peer id information */
+    peer_id_t *peer_id;
 } socket_server_t;
 
 /*! @typedef client_conn

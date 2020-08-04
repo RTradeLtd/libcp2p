@@ -155,6 +155,27 @@ socket_server_t *new_socket_server(thread_logger *thl,
         goto EXIT;
     }
 
+    // load our public key
+    server->public_key = libp2p_crypto_ecdsa_keypair_public(server->private_key);
+    if (server->public_key == NULL) {
+        thl->log(thl, 0, "failed to load public key", LOG_LEVELS_ERROR);
+        peerstore_free_peerstore(server->pstore);
+        libp2p_crypto_ecdsa_free(server->private_key);
+        free(server);
+        goto EXIT;
+    }
+
+    // load our peer identifier
+    server->peer_id = libp2p_crypto_ecdsa_keypair_peerid(server->private_key);
+    if (server->peer_id == NULL) {
+        thl->log(thl, 0, "failed to load public key", LOG_LEVELS_ERROR);
+        peerstore_free_peerstore(server->pstore);
+        libp2p_crypto_ecdsa_free(server->private_key);
+        libp2p_crypto_public_key_free(server->public_key);
+        free(server);
+        goto EXIT;
+    }
+
     // setup remaining server components
     server->thpool = thpool_init(config->num_threads);
     server->max_socket_num = max_socket_num;
