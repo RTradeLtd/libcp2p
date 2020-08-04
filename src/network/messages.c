@@ -22,6 +22,43 @@
 #include <sys/socket.h>
 
 /*!
+ * @brief used to create a new message_hello_t using the given values
+ * @details this copies the values given and allocates memory to store them
+ * accordingly
+ * @todo add a test specifically for this function
+ */
+message_hello_t *new_message_hello_t(unsigned char *peer_id,
+                                     unsigned char *public_key, size_t peer_id_len,
+                                     size_t public_key_len) {
+
+    message_hello_t *msg = calloc(1, sizeof(message_hello_t));
+    if (msg == NULL) {
+        return NULL;
+    }
+
+    msg->peer_id = calloc(1, peer_id_len);
+    if (msg->peer_id == NULL) {
+        free(msg);
+        return NULL;
+    }
+
+    msg->public_key = calloc(1, public_key_len);
+    if (msg->public_key == NULL) {
+        free(msg->peer_id);
+        free(msg);
+        return NULL;
+    }
+
+    memcpy(msg->peer_id, peer_id, peer_id_len);
+    memcpy(msg->public_key, public_key, public_key_len);
+
+    msg->public_key_len = public_key_len;
+    msg->peer_id_len = peer_id_len;
+
+    return msg;
+}
+
+/*!
  * @brief used to cbor encoded a message_hello_t instance
  * @details the resulting data and length fields can be used with
  * @details the message_t instance to send peer information to another peer
@@ -249,6 +286,7 @@ cbor_encoded_data_t *cbor_encode_message_t(message_t *msg) {
     size_t size = cbor_encoder_get_buffer_size(&encoder, buf);
 
     cbor_encoded_data_t *cbdata = new_cbor_encoded_data(buf, size);
+
     if (cbdata == NULL) {
         return NULL;
     }

@@ -97,6 +97,15 @@ typedef struct message_hello {
 } message_hello_t;
 
 /*!
+ * @brief used to create a new message_hello_t using the given values
+ * @details this copies the values given and allocates memory to store them
+ * accordingly
+ */
+message_hello_t *new_message_hello_t(unsigned char *peer_id,
+                                     unsigned char *public_key, size_t peer_id_len,
+                                     size_t public_key_len);
+
+/*!
  * @brief used to cbor encoded a message_hello_t instance
  * @details the resulting data and length fields can be used with
  * @details the message_t instance to send peer information to another peer
