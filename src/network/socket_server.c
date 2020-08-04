@@ -361,6 +361,7 @@ void handle_inbound_rpc(void *data) {
         }
 
         bool success = false;
+        bool ok = false;
 
         switch (msg->type) {
             case MESSAGE_START_ECDH:
@@ -388,6 +389,17 @@ void handle_inbound_rpc(void *data) {
             case MESSAGE_HAVE_PUB_KEY:
                 break;
             case MESSAGE_HELLO:
+                ok = handle_hello_protocol(hdata, msg);
+                if (ok == false) {
+                    hdata->srv->thl->log(hdata->srv->thl, 0,
+                                         "failed to conduct hello protocol exchange",
+                                         LOG_LEVELS_DEBUG);
+                } else {
+                    hdata->srv->thl->log(
+                        hdata->srv->thl, 0,
+                        "succesfully conducted hello protocol exchange",
+                        LOG_LEVELS_DEBUG);
+                }
                 break;
             case MESSAGE_ARBITRARY:
                 break;
@@ -446,6 +458,37 @@ bool negotiate_secure_connection(conn_handle_data_t *data) {
         return false;
     }
 
+    return true;
+}
+
+/*!
+ * @brief handles receiving a hello protocol message from another peer
+ * @details is responsible for exchanging identification information with a peer
+ * @details and updating our peerstore with the appropriate information
+ */
+bool handle_hello_protocol(conn_handle_data_t *data, message_t *msg) {
+    cbor_encoded_data_t cbdata = {.data = msg->data, .len = msg->len};
+
+    message_hello_t *msg_hello = cbor_decode_hello_t(&cbdata);
+    if (msg_hello == NULL) {
+        data->srv->thl->log(data->srv->thl, 0,
+                            "failed to cbor decode message_hello_t",
+                            LOG_LEVELS_DEBUG);
+        return false;
+    }
+
+    bool ok = peerstore_insert_peer(data->srv->pstore, msg_hello->peer_id,
+                                    msg_hello->public_key, msg_hello->peer_id_len,
+                                    msg_hello->public_key_len);
+
+    if (ok == false) {
+        free_message_hello_t(msg_hello);
+        return false;
+    }
+
+    /*!
+     * @todo send peer our information
+     */
     return true;
 }
 
