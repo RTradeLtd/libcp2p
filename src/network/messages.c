@@ -22,6 +22,59 @@
 #include <sys/socket.h>
 
 /*!
+  * @brief used to cbor encoded a message_hello_t instance
+  * @details the resulting data and length fields can be used with
+  * @details the message_t instance to send peer information to another peer
+*/
+cbor_encoded_data_t *cbor_encode_hello_t(message_hello_t *msg_hello) {
+    uint8_t buf[sizeof(message_hello_t) + msg_hello->peer_id_len + msg_hello->public_key_len];
+    CborEncoder encoder, array_encoder;
+    CborError err;
+
+    cbor_encoder_init(&encoder, buf, sizeof(buf), 0);
+
+    err = cbor_encoder_create_array(&encoder, &array_encoder, 4);
+    if (err != CborNoError) {
+        printf("failed to create array: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
+    err = cbor_encode_int(&array_encoder, (int64_t)msg_hello->peer_id_len);
+    if (err != CborNoError) {
+        printf("failed to encode int: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
+    err = cbor_encode_int(&array_encoder, (int64_t)msg_hello->public_key_len);
+    if (err != CborNoError) {
+        printf("failed to encode int: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
+    err = cbor_encode_byte_string(&array_encoder, msg_hello->peer_id, msg_hello->peer_id_len);
+    if (err != CborNoError) {
+        printf("failed to encode byte string: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
+    err = cbor_encode_byte_string(&array_encoder, msg_hello->public_key, msg_hello->public_key_len);
+    if (err != CborNoError) {
+        printf("failed to encode byte string: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
+    err = cbor_encoder_close_container(&encoder, &array_encoder);
+    if (err != CborNoError) {
+        printf("failed to close container: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
+    size_t size = cbor_encoder_get_buffer_size(&encoder, buf);
+    
+    return new_cbor_encoded_data(buf, size);
+}
+
+/*!
  * @brief used to cbor encode a message_t instance
  * @param msg pointer to an instance of message_t
  * @return Success: pointer to an instance of cbor_encoded_data_t

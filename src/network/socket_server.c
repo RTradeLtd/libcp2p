@@ -386,6 +386,8 @@ void handle_inbound_rpc(void *data) {
                 break;
             case MESSAGE_HAVE_PUB_KEY:
                 break;
+            case MESSAGE_HELLO:
+                break;
             case MESSAGE_ARBITRARY:
                 break;
             default:
