@@ -48,6 +48,7 @@ void start_socker_server_wrapper(void *data) {
 
 /*!
   * @brief in this we reuse the thread pool to start the socket server listening process, but you will likely want to do this from your main thread
+  * @warning this test is currently leaking about 24 bytes likely because we are using two thread pools which rely on some sort of global stuff
 */
 void test_new_socket_server(void **state) {
     // start server 1
