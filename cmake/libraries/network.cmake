@@ -16,6 +16,7 @@ target_link_libraries(libnetwork libtinycbor)
 target_link_libraries(libnetwork libencoding)
 target_link_libraries(libnetwork liblogger)
 target_link_libraries(libnetwork libthreadpool)
+target_link_libraries(libnetwork libpeerstore)
 
 add_executable(libnetwork-test ./src/network/socket_test.c)
 target_compile_options(libnetwork-test PRIVATE ${flags})

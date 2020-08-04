@@ -16,6 +16,7 @@
 
 #pragma once
 
+#include "peerstore/peerstore.h"
 #include "multiaddr/multiaddr.h"
 #include "network/messages.h"
 #include "network/socket_client.h" // this also imports socket.h
@@ -52,6 +53,7 @@ typedef struct socket_server_config {
     threadpool_task_func *fn_tcp;
     // /*! @brief the thread pool task function to use for processing tcp connections
     // */ threadpool_task_func *fn_udp;
+    int max_peers; 
     int max_connections;
     int num_threads;
     int num_addrs;
@@ -83,6 +85,7 @@ typedef struct socket_server {
     /*! @brief used for submitting a task to the thread pool for processing a udp
      * connection */
     threadpool_task_func *task_func_udp;
+    peerstore_t *pstore;
 } socket_server_t;
 
 /*! @typedef client_conn
