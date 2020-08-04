@@ -55,7 +55,8 @@ typedef enum MESSAGE_TYPES {
     MESSAGE_BEGIN_ECDH = 5,
     /*!
      * @brief used for exchanging hello protocol messages
-     * @details the hello protocol is used to exchange peer information (peer id and public key)
+     * @details the hello protocol is used to exchange peer information (peer id and
+     * public key)
      */
     MESSAGE_HELLO = 6,
     /*!
@@ -96,11 +97,16 @@ typedef struct message_hello {
 } message_hello_t;
 
 /*!
-  * @brief used to cbor encoded a message_hello_t instance
-  * @details the resulting data and length fields can be used with
-  * @details the message_t instance to send peer information to another peer
-*/
+ * @brief used to cbor encoded a message_hello_t instance
+ * @details the resulting data and length fields can be used with
+ * @details the message_t instance to send peer information to another peer
+ */
 cbor_encoded_data_t *cbor_encode_hello_t(message_hello_t *msg_hello);
+
+/*!
+ * @brief used to cbor decode encoded data returning an instance of message_hello_t
+ */
+message_hello_t *cbor_decode_hello_t(cbor_encoded_data_t *input);
 
 /*!
  * @brief used to cbor encode a message_t instance

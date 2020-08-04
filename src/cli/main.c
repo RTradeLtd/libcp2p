@@ -136,7 +136,6 @@ void start_server_callback(int argc, char *argv[]) {
         return;
     }
 
-
     config->max_connections = 100;
     config->num_threads = 6;
     config->addrs[0] = tcp_addr;

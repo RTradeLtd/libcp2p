@@ -366,9 +366,10 @@ void handle_inbound_rpc(void *data) {
             case MESSAGE_START_ECDH:
                 success = negotiate_secure_connection(hdata);
                 if (success == false) {
-                    hdata->srv->thl->log(hdata->srv->thl, 0,
-                                         "failed to start secure connection negotiation",
-                                         LOG_LEVELS_DEBUG);
+                    hdata->srv->thl->log(
+                        hdata->srv->thl, 0,
+                        "failed to start secure connection negotiation",
+                        LOG_LEVELS_DEBUG);
                 } else {
                     hdata->srv->thl->log(hdata->srv->thl, 0,
                                          "started secure connection negotiation",

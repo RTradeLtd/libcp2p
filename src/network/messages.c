@@ -22,12 +22,13 @@
 #include <sys/socket.h>
 
 /*!
-  * @brief used to cbor encoded a message_hello_t instance
-  * @details the resulting data and length fields can be used with
-  * @details the message_t instance to send peer information to another peer
-*/
+ * @brief used to cbor encoded a message_hello_t instance
+ * @details the resulting data and length fields can be used with
+ * @details the message_t instance to send peer information to another peer
+ */
 cbor_encoded_data_t *cbor_encode_hello_t(message_hello_t *msg_hello) {
-    uint8_t buf[sizeof(message_hello_t) + msg_hello->peer_id_len + msg_hello->public_key_len];
+    uint8_t buf[sizeof(message_hello_t) + msg_hello->peer_id_len +
+                msg_hello->public_key_len];
     CborEncoder encoder, array_encoder;
     CborError err;
 
@@ -51,13 +52,15 @@ cbor_encoded_data_t *cbor_encode_hello_t(message_hello_t *msg_hello) {
         return NULL;
     }
 
-    err = cbor_encode_byte_string(&array_encoder, msg_hello->peer_id, msg_hello->peer_id_len);
+    err = cbor_encode_byte_string(&array_encoder, msg_hello->peer_id,
+                                  msg_hello->peer_id_len);
     if (err != CborNoError) {
         printf("failed to encode byte string: %s\n", cbor_error_string(err));
         return NULL;
     }
 
-    err = cbor_encode_byte_string(&array_encoder, msg_hello->public_key, msg_hello->public_key_len);
+    err = cbor_encode_byte_string(&array_encoder, msg_hello->public_key,
+                                  msg_hello->public_key_len);
     if (err != CborNoError) {
         printf("failed to encode byte string: %s\n", cbor_error_string(err));
         return NULL;
@@ -70,8 +73,134 @@ cbor_encoded_data_t *cbor_encode_hello_t(message_hello_t *msg_hello) {
     }
 
     size_t size = cbor_encoder_get_buffer_size(&encoder, buf);
-    
+
     return new_cbor_encoded_data(buf, size);
+}
+
+/*!
+ * @brief used to cbor decode encoded data returning an instance of message_hello_t
+ */
+message_hello_t *cbor_decode_hello_t(cbor_encoded_data_t *input) {
+    CborParser parser;
+    CborValue value, recurse;
+    CborError err;
+
+    err = cbor_parser_init(input->data, input->len, 0, &parser, &value);
+    if (err != CborNoError) {
+        printf("failed to init parser: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
+    bool ok = cbor_value_is_array(&value);
+    if (ok == false) {
+        printf("unexpected value encountered\n");
+        return NULL;
+    }
+
+    err = cbor_value_enter_container(&value, &recurse);
+    if (err != CborNoError) {
+        printf("failed to enter container: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
+    ok = cbor_value_is_integer(&recurse);
+    if (ok == false) {
+        printf("unexpected value encountered\n");
+        return NULL;
+    }
+
+    int64_t peer_id_len;
+    err = cbor_value_get_int64(&recurse, &peer_id_len);
+    if (err != CborNoError) {
+        printf("failed to get value: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
+    err = cbor_value_advance(&recurse);
+    if (err != CborNoError) {
+        printf("failed to advance: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
+    ok = cbor_value_is_integer(&recurse);
+    if (ok == false) {
+        printf("unexpected value encountered\n");
+        return NULL;
+    }
+
+    int64_t public_key_len;
+    err = cbor_value_get_int64(&recurse, &public_key_len);
+    if (err != CborNoError) {
+        printf("failed to get value: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
+    err = cbor_value_advance(&recurse);
+    if (err != CborNoError) {
+        printf("failed to advance: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
+    ok = cbor_value_is_byte_string(&recurse);
+    if (ok == false) {
+        printf("unexpected value encountered\n");
+        return NULL;
+    }
+
+    uint8_t peer_id_buf[peer_id_len];
+    size_t peer_id_buf_len = peer_id_len;
+    err = cbor_value_copy_byte_string(&recurse, peer_id_buf, &peer_id_buf_len,
+                                      &recurse);
+    if (err != CborNoError) {
+        printf("failed to copy byte string: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
+    ok = cbor_value_is_byte_string(&recurse);
+    if (ok == false) {
+        printf("unexpected value encountered\n");
+        return NULL;
+    }
+
+    uint8_t public_key_buf[public_key_len];
+    size_t public_key_buf_len = public_key_len;
+    err = cbor_value_copy_byte_string(&recurse, public_key_buf, &public_key_buf_len,
+                                      &recurse);
+    if (err != CborNoError) {
+        printf("failed to copy byte string: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
+    err = cbor_value_leave_container(&value, &recurse);
+    if (err != CborNoError) {
+        printf("failed to leave container: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
+    message_hello_t *msg_hello = calloc(1, sizeof(message_hello_t));
+    if (msg_hello == NULL) {
+        return NULL;
+    }
+
+    msg_hello->peer_id = calloc(1, peer_id_buf_len);
+    if (msg_hello->peer_id == NULL) {
+        free(msg_hello);
+        return NULL;
+    }
+
+    msg_hello->public_key = calloc(1, public_key_buf_len);
+    if (msg_hello->public_key == NULL) {
+        free(msg_hello->peer_id);
+        free(msg_hello);
+        return NULL;
+    }
+
+    memcpy(msg_hello->peer_id, peer_id_buf, peer_id_buf_len);
+    memcpy(msg_hello->public_key, public_key_buf, public_key_buf_len);
+    msg_hello->peer_id_len = peer_id_buf_len;
+    msg_hello->public_key_len = public_key_buf_len;
+
+    return msg_hello;
 }
 
 /*!
