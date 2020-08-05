@@ -230,6 +230,10 @@ void free_socket_server(socket_server_t *srv) {
 
     libp2p_crypto_ecdsa_free(srv->private_key);
 
+    libp2p_crypto_public_key_free(srv->public_key);
+
+    libp2p_peer_id_free(srv->peer_id);
+
     free(srv);
 }
 

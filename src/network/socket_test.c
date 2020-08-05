@@ -127,7 +127,8 @@ void test_new_socket_server(void **state) {
     multi_address_free(endpoint1);
     multi_address_free(endpoint2);
     free_message_t(msg);
-    
+    libp2p_crypto_ecdsa_free(server1_pk);
+    libp2p_crypto_ecdsa_free(server2_pk);
     // free(config.addrs);
 }
 
