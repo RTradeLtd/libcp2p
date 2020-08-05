@@ -428,6 +428,8 @@ void handle_inbound_rpc(void *data) {
                         hdata->srv->thl, 0,
                         "failed to start secure connection negotiation",
                         LOG_LEVELS_DEBUG);
+                    free_message_t(msg);
+                    goto RETURN;
                 } else {
                     hdata->srv->thl->log(hdata->srv->thl, 0,
                                          "started secure connection negotiation",
@@ -451,6 +453,8 @@ void handle_inbound_rpc(void *data) {
                     hdata->srv->thl->log(hdata->srv->thl, 0,
                                          "failed to conduct hello protocol exchange",
                                          LOG_LEVELS_DEBUG);
+                    free_message_t(msg);
+                    goto RETURN;
                 } else {
                     hdata->srv->thl->log(
                         hdata->srv->thl, 0,
@@ -545,11 +549,17 @@ bool handle_hello_protocol(conn_handle_data_t *data, message_t *msg) {
     free_message_hello_t(msg_hello);
 
     if (ok == false) {
+        data->srv->thl->log(data->srv->thl, 0,
+                            "failed to insert peer into peerstore",
+                            LOG_LEVELS_DEBUG);
         return false;
     }
 
     message_hello_t *send_msg_hello = new_server_message_hello_t(data->srv);
     if (send_msg_hello == NULL) {
+        data->srv->thl->log(data->srv->thl, 0,
+                            "failed to create message_hello_t from server",
+                            LOG_LEVELS_DEBUG);
         return false;
     }
 
@@ -558,12 +568,18 @@ bool handle_hello_protocol(conn_handle_data_t *data, message_t *msg) {
     free_message_hello_t(send_msg_hello);
 
     if (send_msg == NULL) {
+        data->srv->thl->log(data->srv->thl, 0,
+                            "failed to get message_t",
+                            LOG_LEVELS_DEBUG);
         return false;
     }
 
     // send the data to our peer
     int rc = handle_send(data->srv->thl, data->conn->socket_number, send_msg);
     if (rc == -1) {
+        data->srv->thl->log(data->srv->thl, 0,
+                            "failed to send message",
+                            LOG_LEVELS_DEBUG);
         return false;
     }
 
