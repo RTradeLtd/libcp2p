@@ -10,8 +10,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 #include "encoding/cbor.h"
+#include "testutils/testutils.h"
 #include "thirdparty/logger/logger.h"
 #include "network/messages.h"
 #include "network/socket_server.h"
@@ -51,6 +51,14 @@ void start_socker_server_wrapper(void *data) {
   * @warning this test is currently leaking about 24 bytes likely because we are using two thread pools which rely on some sort of global stuff
 */
 void test_new_socket_server(void **state) {
+    ecdsa_private_key_t *server1_pk = new_ecdsa_private_key();
+    ecdsa_private_key_t *server2_pk = new_ecdsa_private_key();
+
+    int rc = libp2p_crypto_ecdsa_private_key_save(server1_pk, "server1.pem");
+    assert(rc == 0);
+    rc = libp2p_crypto_ecdsa_private_key_save(server2_pk, "server2.pem");
+    assert(rc == 0);
+
     // start server 1
     thread_logger *thl1 = new_thread_logger(true);
     socket_server_config_t *config1 = new_socket_server_config(1);
@@ -59,6 +67,7 @@ void test_new_socket_server(void **state) {
     config1->recv_timeout_sec = 3;
     config1->max_peers = 100;
     config1->fn_tcp = handle_inbound_rpc;
+    config1->private_key_path = "server1.pem";
 
     multi_addr_t *tcp_addr1 = multi_address_new_from_string("/ip4/127.0.0.1/tcp/9090");
     multi_addr_t *endpoint1 = multi_address_new_from_string("/ip4/127.0.0.1/tcp/9090");
@@ -81,7 +90,8 @@ void test_new_socket_server(void **state) {
     config2->recv_timeout_sec = 3;
     config2->max_peers = 0; // use to trigger default max peers handling
     config2->fn_tcp = handle_inbound_rpc;
-
+    config2->private_key_path = "server2.pem";
+    
     multi_addr_t *tcp_addr2 = multi_address_new_from_string("/ip4/127.0.0.1/tcp/9091");
     multi_addr_t *endpoint2 = multi_address_new_from_string("/ip4/127.0.0.1/tcp/9091");
     config2->addrs[0] = tcp_addr2;
@@ -106,7 +116,7 @@ void test_new_socket_server(void **state) {
     msg->len = 2;
     msg->type = MESSAGE_START_ECDH;
 
-    int rc = socket_server_send(server2, endpoint1, msg);
+    rc = socket_server_send(server2, endpoint1, msg);
     assert(rc == 0);
 
 
