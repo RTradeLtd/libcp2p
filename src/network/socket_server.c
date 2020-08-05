@@ -548,38 +548,26 @@ bool handle_hello_protocol(conn_handle_data_t *data, message_t *msg) {
         return false;
     }
 
-    // create a hello protocol message with our information
-    message_hello_t *send_msg_hello = new_message_hello_t(
-        data->srv->peer_id->data, data->srv->public_key->data,
-        data->srv->peer_id->len, data->srv->public_key->data_size);
+    message_hello_t *send_msg_hello = new_server_message_hello_t(data->srv);
     if (send_msg_hello == NULL) {
         return false;
     }
 
-    // encode the information into CBOR
-    cbor_encoded_data_t *encoded_data_hello = cbor_encode_hello_t(send_msg_hello);
+    message_t *send_msg = message_hello_t_to_message_t(send_msg_hello);
 
-    // we can free this up as its no longer needed
     free_message_hello_t(send_msg_hello);
 
-    if (encoded_data_hello == NULL) {
+    if (send_msg == NULL) {
         return false;
     }
 
-    // temporary struct to hold hello protocol message data
-    message_t send_msg = {.data = encoded_data_hello->data,
-                          .len = encoded_data_hello->len,
-                          .type = MESSAGE_HELLO};
-
     // send the data to our peer
-    int rc = handle_send(data->srv->thl, data->conn->socket_number, &send_msg);
-
-    // we can free this up as its no longer needed
-    free_cbor_encoded_data(encoded_data_hello);
-
+    int rc = handle_send(data->srv->thl, data->conn->socket_number, send_msg);
     if (rc == -1) {
         return false;
     }
+
+    free_message_t(send_msg);
 
     return true;
 }
