@@ -60,10 +60,11 @@ typedef enum MESSAGE_TYPES {
      */
     MESSAGE_HELLO = 6,
     /*!
-      * @brief indicates we are done with the current message exchange
-      * @details the proper way to shutdown a connection to a peer is to
-      * @details send an RPC message with the type of MESSAGE_FINISHED followed by closing both sides of the connection
-    */
+     * @brief indicates we are done with the current message exchange
+     * @details the proper way to shutdown a connection to a peer is to
+     * @details send an RPC message with the type of MESSAGE_FINISHED followed by
+     * closing both sides of the connection
+     */
     MESSAGE_FINISHED = 7,
     /*!
      * @brief an arbitrary message type for implementation defined behavior

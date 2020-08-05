@@ -176,13 +176,11 @@ libp2p_crypto_ecdsa_pem_to_private_key(unsigned char *pem_input) {
 }
 
 /*! @brief used to generate an ECDSA keypair
- * @param private_key the place to store the private key
- * @param curve the ECC curve to use for key generation
- * @returns Fail: 0
- * @returns Success: 1
+ * @returns Success: pointer to an ecdsa_private_key_t instance
+ * @returns NUULL pointer
  */
-int libp2p_crypto_ecdsa_keypair_generation(unsigned char *output,
-                                           mbedtls_ecp_group_id curve) {
+ecdsa_private_key_t *
+libp2p_crypto_ecdsa_keypair_generation(mbedtls_ecp_group_id curve) {
     mbedtls_pk_context ecdsa_key_pair;
     mbedtls_entropy_context entropy_context;
     mbedtls_ctr_drbg_context ctr_drb_context;
@@ -203,7 +201,7 @@ int libp2p_crypto_ecdsa_keypair_generation(unsigned char *output,
     if (rc != 0) {
         print_mbedtls_error(rc);
         // TODO(bonedaddy): free up memory
-        return 0;
+        return NULL;
     }
 
     // generate the actual ecdsa keypair
@@ -213,21 +211,25 @@ int libp2p_crypto_ecdsa_keypair_generation(unsigned char *output,
     );
     if (rc != 0) {
         print_mbedtls_error(rc);
-        return 0;
+        return NULL;
     }
+
+    unsigned char output[1024];
+    memset(output, 0, 1024);
 
     // write the private key in PEM format to output
     rc = mbedtls_pk_write_key_pem(&ecdsa_key_pair, output, 1024);
     if (rc != 0) {
         print_mbedtls_error(rc);
-        return 0;
+        return NULL;
     }
 
     // free up allocated resources
     mbedtls_pk_free(&ecdsa_key_pair);
     mbedtls_ctr_drbg_free(&ctr_drb_context);
     mbedtls_entropy_free(&entropy_context);
-    return 1;
+
+    return libp2p_crypto_ecdsa_pem_to_private_key(output);
 }
 
 /*!
@@ -286,4 +288,28 @@ ecdsa_private_key_t *libp2p_crypto_ecdsa_private_key_from_file(char *path) {
     close(fd);
 
     return libp2p_crypto_ecdsa_pem_to_private_key((unsigned char *)pem_buffer);
+}
+
+/*!
+ * @brief takes a private key and returns its corresponding PEM format
+ */
+unsigned char *libp2p_crypto_ecdsa_private_key_to_pem(ecdsa_private_key_t *pk) {
+    unsigned char buffer[1024];
+    memset(buffer, 0, 1024);
+
+    int rc = mbedtls_pk_write_key_pem(&pk->pk_ctx, buffer, 1024);
+    if (rc != 0) {
+        print_mbedtls_error(rc);
+        return NULL;
+    }
+
+    // this works as the previous function includes null terminating byte
+    unsigned char *ret_buf = calloc(1, strlen((char *)buffer));
+    if (ret_buf == NULL) {
+        return NULL;
+    }
+
+    memcpy(ret_buf, buffer, strlen((char *)buffer));
+
+    return ret_buf;
 }

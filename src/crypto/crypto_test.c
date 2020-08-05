@@ -18,14 +18,10 @@
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
 void test_libp2p_crypto_ecdsa_private_key_save(void **stat) {
-    unsigned char *output = malloc(sizeof(unsigned char) * 1024);
-    int rc = libp2p_crypto_ecdsa_keypair_generation(output, MBEDTLS_ECP_DP_SECP256R1);
-    assert(rc == 1);
-
-    ecdsa_private_key_t *pk = libp2p_crypto_ecdsa_pem_to_private_key(output);
+    ecdsa_private_key_t *pk = libp2p_crypto_ecdsa_keypair_generation(MBEDTLS_ECP_DP_SECP256R1);
     assert(pk != NULL);
 
-    rc = libp2p_crypto_ecdsa_private_key_save(pk, "ecdsa.pem");
+    int rc = libp2p_crypto_ecdsa_private_key_save(pk, "ecdsa.pem");
     assert(rc == 0);
 
     ecdsa_private_key_t *ret_pk = libp2p_crypto_ecdsa_private_key_from_file("ecdsa.pem");
@@ -48,24 +44,19 @@ void test_libp2p_crypto_ecdsa_private_key_save(void **stat) {
 
     libp2p_crypto_ecdsa_free(pk);
     libp2p_crypto_ecdsa_free(ret_pk);
-    free(output);
     libp2p_crypto_public_key_free(pk_pub);
     libp2p_crypto_public_key_free(ret_pub);
 }
 
 // also tests getting the associated public key
 void test_libp2p_crypto_ecdsa_keypair_generation(void **state) {
-    unsigned char *output = malloc(sizeof(unsigned char) * 1024);
-    int rc = libp2p_crypto_ecdsa_keypair_generation(output, MBEDTLS_ECP_DP_SECP256R1);
-    assert(rc == 1);
-    assert(strlen((char *)output) > 0);
+    ecdsa_private_key_t *pk = libp2p_crypto_ecdsa_keypair_generation(MBEDTLS_ECP_DP_SECP256R1);
+    assert(pk != NULL);
+    unsigned char *output = libp2p_crypto_ecdsa_private_key_to_pem(pk);
     printf("%s\n", output);
     
-    ecdsa_private_key_t *pk = libp2p_crypto_ecdsa_pem_to_private_key(output);
-    assert(pk != NULL);
-
     unsigned char *output2 = malloc(sizeof(unsigned char) * 1024);
-    rc = mbedtls_pk_write_key_pem(&pk->pk_ctx, output2, 1024);
+    int rc = mbedtls_pk_write_key_pem(&pk->pk_ctx, output2, 1024);
     assert(rc == 0);
     assert(
         strcmp(
@@ -314,12 +305,7 @@ void test_libp2p_crypto_hashing_sha256(void **state) {
 
 void test_libp2p_crypto_cbor_encode_pub_key(void **state) {
     {
-        unsigned char *output = calloc(1, 1024);
-
-        int rc = libp2p_crypto_ecdsa_keypair_generation(output, MBEDTLS_ECP_DP_SECP256R1);    
-        assert(rc == 1);
-        
-        ecdsa_private_key_t *pk = libp2p_crypto_ecdsa_pem_to_private_key(output);
+        ecdsa_private_key_t *pk = libp2p_crypto_ecdsa_keypair_generation(MBEDTLS_ECP_DP_SECP256R1);
         assert(pk != NULL);
         
         public_key_t *pub_key = libp2p_crypto_ecdsa_keypair_public(pk);
@@ -332,7 +318,7 @@ void test_libp2p_crypto_cbor_encode_pub_key(void **state) {
         
         unsigned char *encoded = calloc(1, 2048);
         size_t encoded_size;
-        rc = libp2p_encoding_base64_encode(
+        int rc = libp2p_encoding_base64_encode(
             out->data,
             out->len,
             encoded,
@@ -359,7 +345,6 @@ void test_libp2p_crypto_cbor_encode_pub_key(void **state) {
 
         free(encoded);
         free_cbor_encoded_data(out);
-        free(output);
         free_cbor_encoded_data(data);
         libp2p_crypto_public_key_free(pub_key);
         libp2p_crypto_public_key_free(ret_key);

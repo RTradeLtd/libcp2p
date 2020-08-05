@@ -43,13 +43,17 @@ typedef struct ecdsa_private_key {
  */
 int libp2p_crypto_ecdsa_private_key_save(ecdsa_private_key_t *pk, char *path);
 
-/*! @brief used to generate an ECDSA keypair
- * @param output a buffer to write the ecdsa keypair into
- * @returns Fail: 0
- * @returns Success: 1
+/*!
+ * @brief takes a private key and returns its corresponding PEM format
  */
-int libp2p_crypto_ecdsa_keypair_generation(unsigned char *output,
-                                           mbedtls_ecp_group_id curve);
+unsigned char *libp2p_crypto_ecdsa_private_key_to_pem(ecdsa_private_key_t *pk);
+
+/*! @brief used to generate an ECDSA keypair
+ * @returns Success: pointer to an ecdsa_private_key_t instance
+ * @returns NUULL pointer
+ */
+ecdsa_private_key_t *
+libp2p_crypto_ecdsa_keypair_generation(mbedtls_ecp_group_id curve);
 
 /*!
  * @brief parses a PEM encoded private key and returns a struct for use
