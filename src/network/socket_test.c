@@ -103,13 +103,7 @@ void test_new_socket_server(void **state) {
     free_socket_server_config(config2);
     thpool_add_work(server2->thpool, start_socker_server_wrapper, server2);
 
-    // todo: validate max peers of both servers
-
-    message_t *msg = calloc(1, sizeof(message_t));
-    if (msg == NULL) {
-        return;
-    }
-
+    sleep(1);
 
     message_hello_t *send_msg_hello = new_server_message_hello_t(server2);
     assert(send_msg_hello != NULL);
@@ -127,7 +121,8 @@ void test_new_socket_server(void **state) {
     free_socket_server(server2);
     multi_address_free(endpoint1);
     multi_address_free(endpoint2);
-    free_message_t(msg);
+    free_message_t(send_msg);
+    free_message_hello_t(send_msg_hello);
     libp2p_crypto_ecdsa_free(server1_pk);
     libp2p_crypto_ecdsa_free(server2_pk);
     // free(config.addrs);
