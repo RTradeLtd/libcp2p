@@ -104,6 +104,11 @@ typedef struct message_hello {
 } message_hello_t;
 
 /*!
+  * @brief helper function to return a message_t object for sending
+*/
+message_t *message_hello_t_to_message_t(message_hello_t *msg);
+
+/*!
  * @brief used to create a new message_hello_t using the given values
  * @details this copies the values given and allocates memory to store them
  * accordingly

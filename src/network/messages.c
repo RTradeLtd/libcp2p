@@ -22,6 +22,36 @@
 #include <sys/socket.h>
 
 /*!
+  * @brief helper function to return a message_t object for sending
+*/
+message_t *message_hello_t_to_message_t(message_hello_t *msg) {
+    cbor_encoded_data_t *encoded = cbor_encode_hello_t(msg);
+    if (encoded == NULL) {
+        return NULL;
+    }
+
+    message_t *output = calloc(1, sizeof(message_t));
+    if (output == NULL) {
+        free_cbor_encoded_data(encoded);
+        return NULL;
+    }
+    
+    output->data = calloc(1, encoded->len);
+    if (output->data == NULL) {
+        free_cbor_encoded_data(encoded);
+        free(output);
+    }
+
+    memcpy(output->data, encoded->data, encoded->len);
+    output->len = encoded->len;
+    output->type = MESSAGE_HELLO;
+
+    free_cbor_encoded_data(encoded);
+
+    return output;
+}
+
+/*!
  * @brief used to create a new message_hello_t using the given values
  * @details this copies the values given and allocates memory to store them
  * accordingly
