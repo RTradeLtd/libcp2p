@@ -641,3 +641,12 @@ EXIT:
     free(srv_client);
     return -1;
 }
+
+/*!
+  * @brief helper function to return a message_hello_t using our server values
+*/
+message_hello_t *new_server_message_hello_t(socket_server_t *srv) {
+    return new_message_hello_t(
+        srv->peer_id->data, srv->public_key->data,
+        srv->peer_id->len,  srv->public_key->data_size);
+}
