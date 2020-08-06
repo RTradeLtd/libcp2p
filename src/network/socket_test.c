@@ -122,8 +122,17 @@ void test_new_socket_server(void **state) {
     rc = socket_server_send(server2, endpoint1, send_msg);
     assert(rc == 0);
 
+    // give more than enough time for hello protocol exchange to complete
+    sleep(5);
+    // assert peerstore stuff
+    assert(server1->pstore->num_peers == 1);
+    assert(server2->pstore->num_peers == 1);
 
-    sleep(10);
+    // TODO: assert peerstore contains expected entries
+
+    // let stuff spin for a bit
+    sleep(5);
+
     signal_shutdown();
 
     multi_address_free(endpoint1);
