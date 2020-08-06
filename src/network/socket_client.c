@@ -15,7 +15,7 @@
  */
 
 #include "network/socket_client.h"
-#include "utils/logger.h"
+#include "thirdparty/logger/logger.h"
 #include <arpa/inet.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -80,7 +80,7 @@ socket_client_t *new_socket_client(thread_logger *thl, multi_addr_t *addr) {
         return NULL;
     }
 
-    int client_socket_num = get_new_socket(thl, peer_address, NULL, 0, true);
+    int client_socket_num = get_new_socket(thl, peer_address, NULL, 0, true, is_tcp);
     if (client_socket_num == -1) {
         thl->log(thl, 0, "failed to get_new_socket", LOG_LEVELS_ERROR);
         freeaddrinfo(peer_address);
@@ -105,18 +105,20 @@ socket_client_t *new_socket_client(thread_logger *thl, multi_addr_t *addr) {
  * @brief used to send a message through the connected socket number
  * @param client an instance of socket_client_t created with new_socket_client
  * @param peer_address the target address to connect to through the socket
- * @param message a null terminated pointer to a char
- * @returns Success: 1
- * @returns Failure: 0
+ * @param message the actual message data to send
+ * @param message_len the length of the message data
+ * @returns Success: 0
+ * @returns Failure: 1
  */
 int socket_client_sendto(socket_client_t *client, addr_info *peer_address,
-                         char *message) {
-    int bytes_sent = sendto(client->socket_number, message, strlen(message), 0,
+                         unsigned char *message, size_t message_len) {
+
+    int bytes_sent = sendto(client->socket_number, message, message_len, 0,
                             peer_address->ai_addr, peer_address->ai_addrlen);
     if (bytes_sent == -1) {
         return 0;
     }
     /*! *@todo if we sent less than total size, send remaining
      */
-    return 0;
+    return 1;
 }
