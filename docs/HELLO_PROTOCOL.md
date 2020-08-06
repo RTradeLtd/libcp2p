@@ -6,12 +6,24 @@ When sending a hello protocol request to a peer, your request should be your inf
 
 Validation of the data received from a hello protocol exchange isn't required to be validated, but it is strongly advised to validate it. The best way to do this would be by inserting the information to our peerstore, as it will conduct validation to prevent inserting bad data.
 
-# Usage
+# Process
 
-* 1) Allocate memory for `message_hello_t` and populate with desired values
-* 2) CBOR encoded `message_hello_t` using `cbor_encode_hello_t`
-* 3) Allocate memory for `message_t`
-* 4) Populate the `data` member of `message_t` with the CBOR encoded data from encoding `message_hello_t`
-* 5) Populate the `len` member of `message_t` with the length of the CBOR encoded data from encoding `message_hello_t`
-* 6) Encode `message_t`
-* 7) Send encoded `message_t` to peer
+## Code
+
+put this into mermaidjs to generate the diagram
+
+```mermaidjs
+sequenceDiagram
+	A->>+B: MESSAGE_INT
+	note right of B: MESSAGE_INT contains peer identifier and public key information
+	note right of B: MESSAGE_INT also informs the receiving peer to send back its info
+	B->>+B: insert A's information into peerstore
+	B->>+A: MESSAGE_FIN
+	note left of A: MESSAGE_FIN contians peer identifier and public key information
+	note left of A: MESSAGE_FIN however doesn't cause the receiving peer to send back its info
+	A->>+A: insert B's information into peerstore
+```
+
+## Diagram
+
+![](https://gateway.temporal.cloud/ipfs/QmRcHy2eRiLSSHXjANSTnW9PhMXBGgkfwgrsCtLaYLKrL8)
