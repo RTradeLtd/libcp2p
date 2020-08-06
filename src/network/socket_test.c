@@ -117,15 +117,18 @@ void test_new_socket_server(void **state) {
 
     sleep(10);
     signal_shutdown();
-    free_socket_server(server1);
-    free_socket_server(server2);
+
     multi_address_free(endpoint1);
     multi_address_free(endpoint2);
     free_message_t(send_msg);
     free_message_hello_t(send_msg_hello);
     libp2p_crypto_ecdsa_free(server1_pk);
     libp2p_crypto_ecdsa_free(server2_pk);
-    // free(config.addrs);
+
+    sleep(1);
+
+    free_socket_server(server1);
+    free_socket_server(server2);
 }
 
 
