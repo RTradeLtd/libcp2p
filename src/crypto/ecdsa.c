@@ -304,7 +304,7 @@ unsigned char *libp2p_crypto_ecdsa_private_key_to_pem(ecdsa_private_key_t *pk) {
     }
 
     // this works as the previous function includes null terminating byte
-    unsigned char *ret_buf = calloc(1, strlen((char *)buffer));
+    unsigned char *ret_buf = calloc(1, strlen((char *)buffer) + 1);
     if (ret_buf == NULL) {
         return NULL;
     }
