@@ -16,13 +16,22 @@
 
 #pragma once
 
-#include "utils/logger.h"
+#include "multiaddr/multiaddr.h"
+#include "thirdparty/logger/logger.h"
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <stdbool.h>
 #include <sys/socket.h>
 #include <sys/time.h>
 #include <sys/types.h>
+
+#define MAX_RPC_MSG_SIZE_KB 8192
+
+/*!
+ * @brief internal boolean variable used to signal async start_socket_server function
+ * calls
+ */
+extern bool do_shutdown;
 
 /*!
  * @struct timeval
@@ -68,7 +77,8 @@ typedef enum {
  * address
  */
 int get_new_socket(thread_logger *thl, addr_info *bind_address,
-                   SOCKET_OPTS sock_opts[], int num_opts, bool is_client);
+                   SOCKET_OPTS sock_opts[], int num_opts, bool is_client,
+                   bool is_tcp);
 
 /*! @brief used to enable/disable blocking sockets
  * @return Failure: false
@@ -77,6 +87,14 @@ int get_new_socket(thread_logger *thl, addr_info *bind_address,
  * https://stackoverflow.com/questions/1543466/how-do-i-change-a-tcp-socket-to-be-non-blocking/1549344#1549344
  */
 bool set_socket_blocking_status(int fd, bool blocking);
+
+/*!
+ * @brief sets a socket recv timeout
+ * @param fd the file descriptor of the socket to apply operations to
+ * @param seconds the seconds to timeout a recv or recvfrom after
+ * @warning how does this workon UDP socket
+ */
+int set_socket_recv_timeout(int fd, int seconds);
 
 /*!
  * @note this only works with tcp
@@ -88,3 +106,21 @@ char *get_name_info(sock_addr *client_address);
  * defaults is IPv4, TCP, and AI_PASSIVE flags
  */
 addr_info default_hints();
+
+/*!
+ * @brief used to check if a receive or send with a socket failed
+ */
+bool recv_or_send_failed(thread_logger *thl, int rc);
+
+/*!
+ * @brief returns an addr_info representation of the multiaddress
+ * @details useful for taking a multi address and getting the needed information for
+ * using
+ * @details the address with the sendto function
+ * @param address the multi address to parse
+ * @note does not free up resources associated with address param
+ * @warning only supports TCP and UDP multiaddress(es)
+ * @return Success: pointer to an addr_info instance
+ * @return Failure: NULL pointer
+ */
+addr_info *multi_addr_to_addr_info(multi_addr_t *address);

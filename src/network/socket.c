@@ -14,25 +14,41 @@
  * @brief general socket related tooling
  */
 
+#include "network/socket.h"
+#include "thirdparty/logger/logger.h"
 #include <arpa/inet.h>
 #include <errno.h>
+#include <fcntl.h>
 #include <netdb.h>
 #include <netinet/in.h>
+#include <pthread.h>
+#include <signal.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
+#include <sys/time.h>
 #include <sys/types.h>
 #include <unistd.h>
-// sys/time.h is needed for the timeval
-//  #include <time.h>
-#include "network/socket.h"
-#include "utils/logger.h"
-#include <fcntl.h>
-#include <pthread.h>
-#include <signal.h>
-#include <stdbool.h>
-#include <sys/time.h>
+
+/*!
+ * @brief sets a socket recv timeout
+ * @param fd the file descriptor of the socket to apply operations to
+ * @param seconds the seconds to timeout a recv or recvfrom after
+ * @warning how does this workon UDP socket
+ */
+int set_socket_recv_timeout(int fd, int seconds) {
+    timeout tmt;
+    tmt.tv_sec = seconds;
+    tmt.tv_usec = 0;
+    int rc =
+        setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (const char *)&tmt, sizeof(tmt));
+    if (rc == -1) {
+        printf("failed to set socket opt: %s\n", strerror(errno));
+    }
+    return rc;
+}
 
 /*! @brief  gets an available socket attached to bind_address
  * @return Success: file descriptor socket number greater than 0
@@ -41,11 +57,16 @@
  * address
  */
 int get_new_socket(thread_logger *thl, addr_info *bind_address,
-                   SOCKET_OPTS sock_opts[], int num_opts, bool is_client) {
+                   SOCKET_OPTS sock_opts[], int num_opts, bool is_client,
+                   bool is_tcp) {
     // creates the socket and gets us its file descriptor
     int listen_socket_num =
         socket(bind_address->ai_family, bind_address->ai_socktype,
                bind_address->ai_protocol);
+    if (listen_socket_num <= 0) {
+        thl->log(thl, 0, "socket creation failed", LOG_LEVELS_ERROR);
+        return -1;
+    }
     int one;
     int rc;
     bool passed;
@@ -90,6 +111,15 @@ int get_new_socket(thread_logger *thl, addr_info *bind_address,
 
     // if client skip bind
     if (is_client == true) {
+        if (is_tcp) {
+            /*! @todo should we not do this on UDP connections?? */
+            rc = connect(listen_socket_num, bind_address->ai_addr,
+                         bind_address->ai_addrlen);
+            if (rc != 0) {
+                close(listen_socket_num);
+                return -1;
+            }
+        }
         return listen_socket_num;
     }
 
@@ -156,4 +186,92 @@ addr_info default_hints() {
     // indicates to getaddrinfo we want to bind to the wildcard address
     hints.ai_flags = AI_PASSIVE;
     return hints;
+}
+
+/*!
+ * @brief used to check if a receive or send with a socket failed
+ */
+bool recv_or_send_failed(thread_logger *thl, int rc) {
+    switch (rc) {
+        case 0:
+            if (thl != NULL) {
+                thl->log(thl, 0, "client disconnected", LOG_LEVELS_DEBUG);
+            }
+            return true;
+        case -1:
+            if (thl != NULL) {
+                thl->logf(thl, 0, LOG_LEVELS_DEBUG,
+                          "error encountered during read %s", strerror(errno));
+            }
+            return true;
+        default:
+            // connection was successful and we read some data
+            return false;
+    }
+}
+
+/*!
+ * @brief returns an addr_info representation of the multiaddress
+ * @details useful for taking a multi address and getting the needed information for
+ * using
+ * @details the address with the sendto function
+ * @param address the multi address to parse
+ * @note does not free up resources associated with address param
+ * @warning only supports TCP and UDP multiaddress(es)
+ * @return Success: pointer to an addr_info instance
+ * @return Failure: NULL pointer
+ */
+addr_info *multi_addr_to_addr_info(multi_addr_t *address) {
+    bool is_udp = false;
+    bool is_tcp = false;
+    addr_info hints;
+    memset(&hints, 0, sizeof(addr_info));
+
+    if (strstr(address->string, "/tcp/") != NULL) {
+        hints.ai_socktype = SOCK_STREAM;
+        is_tcp = true;
+    }
+
+    if (strstr(address->string, "/udp/") != NULL) {
+        hints.ai_socktype = SOCK_DGRAM;
+        is_udp = true;
+    }
+
+    if (is_udp == false && is_tcp == false) {
+        return NULL;
+    }
+
+    char ip[1024];
+    char cport[7];
+    memset(ip, 0, 1024);
+    memset(cport, 0, 1024);
+
+    int rc = multi_address_get_ip_address(address, ip);
+    if (rc != 1) {
+        return NULL;
+    }
+
+    int port = multi_address_get_ip_port(address);
+    if (port == -1) {
+        return NULL;
+    }
+    sprintf(cport, "%i", port);
+
+    int ip_family = multi_address_get_ip_family(address);
+    if (ip_family == 0) {
+        return NULL;
+    }
+
+    hints.ai_family = ip_family;
+    hints.ai_flags = AI_PASSIVE;
+
+    addr_info *ret_address;
+
+    rc = getaddrinfo(ip, cport, &hints, &ret_address);
+    if (rc != 0) {
+        freeaddrinfo(ret_address);
+        return NULL;
+    }
+
+    return ret_address;
 }

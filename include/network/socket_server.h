@@ -16,10 +16,15 @@
 
 #pragma once
 
+#include "crypto/ecdsa.h"
+#include "crypto/key.h"
+#include "crypto/peerutils.h"
 #include "multiaddr/multiaddr.h"
+#include "network/messages.h"
 #include "network/socket_client.h" // this also imports socket.h
-#include "utils/logger.h"
-#include "utils/thread_pool.h"
+#include "peerstore/peerstore.h"
+#include "thirdparty/logger/logger.h"
+#include "thirdparty/thread_pool/thread_pool.h"
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <pthread.h>
@@ -41,16 +46,24 @@ typedef void(threadpool_task_func)(void *data);
  * @typedef socket_server_config_t
  * @brief used for configuring a socket_server_t instance
  * @todo switch to multi_addresses
+ * @details once you have used the config and created a new server with
+ * new_socket_server() you can free the socket config with free_socket_config
+ * @note once you have used the config and created a new server with
+ * new_socket_server() you can free the socket config with free_socket_config
  */
 typedef struct socket_server_config {
-    /*! @brief the thread pool task function to use for processing tcp connections */
-    threadpool_task_func *fn_tcp;
-    /*! @brief the thread pool task function to use for processing tcp connections */
-    threadpool_task_func *fn_udp;
+    int max_peers;
     int max_connections;
     int num_threads;
     int num_addrs;
+    /*! @brief the timeout in seconds to set on a socket, 0 means nothing is set */
+    int recv_timeout_sec;
+    /*! @brief the thread pool task function to use for processing tcp connections */
+    threadpool_task_func *fn_tcp;
+    /*! @brief the addresses we will be listening on */
     multi_addr_t **addrs;
+    /*! @brief the path to a pem encoded private ecdsa key */
+    char *private_key_path;
 } socket_server_config_t;
 
 /*!
@@ -62,20 +75,31 @@ typedef struct socket_server_config {
  * of socket numbers)
  */
 typedef struct socket_server {
+    /*! @brief the maximum socket number 1 greater than our actual socket */
     int max_socket_num;
+    /*! @brief contains all of our sockets */
     fd_set grouped_socket_set;
+    /*! @brief contains our TCP sockets */
     fd_set tcp_socket_set;
-    fd_set udp_socket_set;
-    thread_logger *thl;
     /*! @brief a thread pool that allows submitting worker tasks to a pool of threads
      */
     threadpool thpool;
+    /*! @brief colored logging system */
+    thread_logger *thl;
     /*! @brief used for submitting a task to the thread pool for processing a tcp
      * connection */
     threadpool_task_func *task_func_tcp;
     /*! @brief used for submitting a task to the thread pool for processing a udp
      * connection */
     threadpool_task_func *task_func_udp;
+    /*! @brief used for storing information about our peers */
+    peerstore_t *pstore;
+    /*! @brief our ecdsa private key for handling cryptographic operations */
+    ecdsa_private_key_t *private_key;
+    /*! @brief our pubilc key information */
+    public_key_t *public_key;
+    /*! @brief our peer id information */
+    peer_id_t *peer_id;
 } socket_server_t;
 
 /*! @typedef client_conn
@@ -86,7 +110,6 @@ typedef struct socket_server {
  */
 typedef struct client_conn {
     int socket_number;
-    sock_addr_storage *address;
 } client_conn_t;
 
 /*! @typedef conn_handle_data
@@ -102,11 +125,17 @@ typedef struct conn_handle_data {
  * @brief used to create a TCP/UDP socket server ready to accept connections
  * @param thl an instance of a thread_logger
  * @param config the configuration settings used for the tcp/udp server
+ * @param sock_opts an array of options to configure the sockets we open with
+ * @param num_opts the number of socket options we are using, providing a number that
+ * does not match the actual number of options is undefined behavior
  * @return Success: pointer to a socket_server_t instance
  * @return Failure: NULL pointer
+ * @details once you have used the config and created a new server with
+ * @note once you have used the config and created a new server with
  */
 socket_server_t *new_socket_server(thread_logger *thl,
-                                   socket_server_config_t config);
+                                   socket_server_config_t *config,
+                                   SOCKET_OPTS sock_opts[], int num_opts);
 
 /*! @brief helper function for accepting client connections
  * times out new attempts if they take 3 seconds or more
@@ -156,4 +185,48 @@ void free_socket_server_config(socket_server_config_t *config);
  * socket_server_config_t
  * @return Failure: NULL pointer
  */
-socket_server_config_t *new_socket_server_config();
+socket_server_config_t *new_socket_server_config(int num_addrs);
+
+/*!
+ * @brief handles receiving an rpc message from another peer
+ * @note if you send an inbound message of `5hello` you'll invoke a debug handler to
+ * print to stdout
+ */
+void handle_inbound_rpc(void *data);
+
+/*!
+ * @brief used to specify which syscall signals should trigger shutdown process
+ */
+void setup_signal_shutdown(int signals[], int num_signals);
+
+/*!
+ * @brief used to negotiate a secure connection with the current connection
+ */
+bool negotiate_secure_connection(conn_handle_data_t *data);
+
+/*!
+ * @brief handles receiving a hello protocol message from another peer
+ * @details is responsible for exchanging identification information with a peer
+ * @details and updating our peerstore with the appropriate information
+ */
+bool handle_hello_protocol(conn_handle_data_t *data, message_t *msg);
+
+/*!
+ * @brief used for a server to send a message to another server
+ * @details this is a sort of "bi-directional RPC method" whereby a server can send a
+ * @details request to another server acting as a client, but enabling either us
+ * @details or the peer to invoke RPC methods. Essentially it is like
+ * handle_inbound_rpc
+ * @details except it is responsible for sending requests to a remote server, and any
+ * responses
+ * @details from the server are ran through handle_inbound_rpc
+ * @return Success: 0
+ * @return Failure: -1
+ */
+int socket_server_send(socket_server_t *srv, multi_addr_t *to_address,
+                       message_t *msg);
+
+/*!
+ * @brief helper function to return a message_hello_t using our server values
+ */
+message_hello_t *new_server_message_hello_t(socket_server_t *srv);
