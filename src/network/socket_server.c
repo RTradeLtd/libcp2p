@@ -213,18 +213,14 @@ void free_socket_server(socket_server_t *srv) {
 
             close(i);
         }
-    }
+    } 
 
     srv->thl->log(srv->thl, 0, "waiting for existing tasks to exit",
                   LOG_LEVELS_INFO);
 
     thpool_destroy(srv->thpool);
 
-    srv->thl->log(srv->thl, 0, "all taskes exited, goodbye", LOG_LEVELS_INFO);
-
     pthread_mutex_destroy(&shutdown_mutex);
-
-    clear_thread_logger(srv->thl);
 
     peerstore_free_peerstore(srv->pstore);
 
@@ -233,6 +229,10 @@ void free_socket_server(socket_server_t *srv) {
     libp2p_crypto_public_key_free(srv->public_key);
 
     libp2p_peer_id_free(srv->peer_id);
+
+    srv->thl->log(srv->thl, 0, "all taskes exited, goodbye", LOG_LEVELS_INFO);
+
+    clear_thread_logger(srv->thl);
 
     free(srv);
 }
@@ -477,11 +477,9 @@ RETURN:
     hdata->srv->thl->log(hdata->srv->thl, 0, "closing connection", LOG_LEVELS_DEBUG);
 
     close(hdata->conn->socket_number);
-
-    if (hdata != NULL) {
-        free(hdata->conn);
-        free(hdata);
-    }
+    free(hdata->conn);
+    free(hdata);
+    
 }
 
 /*!
@@ -560,7 +558,7 @@ bool handle_hello_protocol(conn_handle_data_t *data, message_t *msg) {
                             "successfully inserted peer into peerstore",
                             LOG_LEVELS_DEBUG);
     }
-
+    
     // if this is MESSAGE_HELLO_FIN it means we dont need to continue the exchange
     if (msg->type == MESSAGE_HELLO_FIN) {
         return ok;
