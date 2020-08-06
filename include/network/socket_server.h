@@ -131,9 +131,7 @@ typedef struct conn_handle_data {
  * @return Success: pointer to a socket_server_t instance
  * @return Failure: NULL pointer
  * @details once you have used the config and created a new server with
- * new_socket_server() you can free the socket config with free_socket_config
  * @note once you have used the config and created a new server with
- * new_socket_server() you can free the socket config with free_socket_config
  */
 socket_server_t *new_socket_server(thread_logger *thl,
                                    socket_server_config_t *config,

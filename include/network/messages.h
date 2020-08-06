@@ -63,13 +63,6 @@ typedef enum MESSAGE_TYPES {
      */
     MESSAGE_HELLO_FIN = 7,
     /*!
-     * @brief indicates we are done with the current message exchange
-     * @details the proper way to shutdown a connection to a peer is to
-     * @details send an RPC message with the type of MESSAGE_FINISHED followed by
-     * closing both sides of the connection
-     */
-    MESSAGE_FINISHED = 8,
-    /*!
      * @brief an arbitrary message type for implementation defined behavior
      */
     MESSAGE_ARBITRARY = 99
@@ -110,6 +103,12 @@ typedef struct message_hello {
  * @brief helper function to return a message_t object for sending
  * @details if initiate is true, the message type is MESSAGE_HELLO_INT
  * @details if initiate is false, the message type is MESSAGE_HELLO_FIN
+ * @param msg the message_hello_t type we want to encode into message_t format
+ * @param initiate True: set return message_t type to MESSAGE_HELLO_INT
+ * @param initiate False: set return message_t type to MESSAGE_HELLO_FIN
+ * @return Success: pointer to a message_t instance containing the encoded input
+ * message
+ * @return Failure: NULL pointer
  */
 message_t *message_hello_t_to_message_t(message_hello_t *msg, bool initiate);
 

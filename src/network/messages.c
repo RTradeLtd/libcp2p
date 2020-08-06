@@ -25,6 +25,12 @@
  * @brief helper function to return a message_t object for sending
  * @details if initiate is true, the message type is MESSAGE_HELLO_INT
  * @details if initiate is false, the message type is MESSAGE_HELLO_FIN
+ * @param msg the message_hello_t type we want to encode into message_t format
+ * @param initiate True: set return message_t type to MESSAGE_HELLO_INT
+ * @param initiate False: set return message_t type to MESSAGE_HELLO_FIN
+ * @return Success: pointer to a message_t instance containing the encoded input
+ * message
+ * @return Failure: NULL pointer
  */
 message_t *message_hello_t_to_message_t(message_hello_t *msg, bool initiate) {
     cbor_encoded_data_t *encoded = cbor_encode_hello_t(msg);
@@ -42,19 +48,20 @@ message_t *message_hello_t_to_message_t(message_hello_t *msg, bool initiate) {
     if (output->data == NULL) {
         free_cbor_encoded_data(encoded);
         free(output);
+        return NULL;
     }
 
     memcpy(output->data, encoded->data, encoded->len);
-
     output->len = encoded->len;
+
+    // free up as we no longer need
+    free_cbor_encoded_data(encoded);
 
     if (initiate == true) {
         output->type = MESSAGE_HELLO_INT;
     } else {
         output->type = MESSAGE_HELLO_FIN;
     }
-
-    free_cbor_encoded_data(encoded);
 
     return output;
 }

@@ -52,9 +52,7 @@ bool do_shutdown = false;
  * @return Success: pointer to a socket_server_t instance
  * @return Failure: NULL pointer
  * @details once you have used the config and created a new server with
- * new_socket_server() you can free the socket config with free_socket_config
  * @note once you have used the config and created a new server with
- * new_socket_server() you can free the socket config with free_socket_config
  */
 socket_server_t *new_socket_server(thread_logger *thl,
                                    socket_server_config_t *config,
@@ -213,7 +211,7 @@ void free_socket_server(socket_server_t *srv) {
 
             close(i);
         }
-    } 
+    }
 
     srv->thl->log(srv->thl, 0, "waiting for existing tasks to exit",
                   LOG_LEVELS_INFO);
@@ -405,7 +403,7 @@ void handle_inbound_rpc(void *data) {
     }
 
     for (;;) {
-        // check to see if we shoudl exit
+        // check to see if we should exit
         if (do_shutdown == true) {
             goto RETURN;
         }
@@ -437,7 +435,6 @@ void handle_inbound_rpc(void *data) {
                 }
                 break;
             case MESSAGE_BEGIN_ECDH:
-                printf("received BEGIN_ECDH message, starting DH process\n");
                 break;
             case MESSAGE_WANT_PEER_ID:
                 break;
@@ -479,7 +476,6 @@ RETURN:
     close(hdata->conn->socket_number);
     free(hdata->conn);
     free(hdata);
-    
 }
 
 /*!
@@ -558,7 +554,7 @@ bool handle_hello_protocol(conn_handle_data_t *data, message_t *msg) {
                             "successfully inserted peer into peerstore",
                             LOG_LEVELS_DEBUG);
     }
-    
+
     // if this is MESSAGE_HELLO_FIN it means we dont need to continue the exchange
     if (msg->type == MESSAGE_HELLO_FIN) {
         return ok;
@@ -585,13 +581,14 @@ bool handle_hello_protocol(conn_handle_data_t *data, message_t *msg) {
 
     // send the data to our peer
     int rc = handle_send(data->srv->thl, data->conn->socket_number, send_msg);
+
+    free_message_t(send_msg);
+
     if (rc == -1) {
         data->srv->thl->log(data->srv->thl, 0, "failed to send message",
                             LOG_LEVELS_DEBUG);
         return false;
     }
-
-    free_message_t(send_msg);
 
     return true;
 }
