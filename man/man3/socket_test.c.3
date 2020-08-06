@@ -1,4 +1,4 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/network/socket_test.c" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/network/socket_test.c" 3 "Thu Aug 6 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -6,7 +6,13 @@
 .SH SYNOPSIS
 .br
 .PP
-\fC#include 'utils/logger\&.h'\fP
+\fC#include 'encoding/cbor\&.h'\fP
+.br
+\fC#include 'testutils/testutils\&.h'\fP
+.br
+\fC#include 'thirdparty/logger/logger\&.h'\fP
+.br
+\fC#include 'network/messages\&.h'\fP
 .br
 \fC#include 'network/socket_server\&.h'\fP
 .br
@@ -57,14 +63,6 @@
 
 .in +1c
 .ti -1c
-.RI "void \fBexample_task_func_udp\fP (void *data)"
-.br
-.RI "example function used to showcase how you can udp connections "
-.ti -1c
-.RI "void \fBexample_task_func_tcp\fP (void *data)"
-.br
-.RI "example function used to showcase how you can handle connections "
-.ti -1c
 .RI "void \fBstart_socker_server_wrapper\fP (void *data)"
 .br
 .ti -1c
@@ -72,58 +70,46 @@
 .br
 .RI "in this we reuse the thread pool to start the socket server listening process, but you will likely want to do this from your main thread "
 .ti -1c
+.RI "void \fBtest_cbor_message_t_encoding\fP (void **state)"
+.br
+.ti -1c
+.RI "void \fBtest_cbor_message_hello_t_encoding\fP (void **state)"
+.br
+.ti -1c
 .RI "int \fBmain\fP (void)"
 .br
 .in -1c
 .SH "Function Documentation"
 .PP 
-.SS "void example_task_func_tcp (void * data)"
-
-.PP
-example function used to showcase how you can handle connections 
-.PP
-\fBNote\fP
-.RS 4
-in general should accept a conn_handle_data_t type but this is implementation define 
-.RE
-.PP
-
-.PP
-\fBTodo\fP
-.RS 4
-figure out proper close procedures 
-.RE
-.PP
-
-.PP
-Definition at line 78 of file socket_test\&.c\&.
-.SS "void example_task_func_udp (void * data)"
-
-.PP
-example function used to showcase how you can udp connections 
-.PP
-\fBNote\fP
-.RS 4
-in general should accept a conn_handle_data_t type but this is implementation defined 
-.RE
-.PP
-
-.PP
-Definition at line 46 of file socket_test\&.c\&.
 .SS "int main (void)"
 
 .PP
-Definition at line 146 of file socket_test\&.c\&.
+Definition at line 270 of file socket_test\&.c\&.
 .SS "void start_socker_server_wrapper (void * data)"
 
 .PP
-Definition at line 102 of file socket_test\&.c\&.
+Definition at line 44 of file socket_test\&.c\&.
+.SS "void test_cbor_message_hello_t_encoding (void ** state)"
+
+.PP
+Definition at line 201 of file socket_test\&.c\&.
+.SS "void test_cbor_message_t_encoding (void ** state)"
+
+.PP
+Definition at line 152 of file socket_test\&.c\&.
 .SS "void test_new_socket_server (void ** state)"
 
 .PP
 in this we reuse the thread pool to start the socket server listening process, but you will likely want to do this from your main thread 
 .PP
-Definition at line 110 of file socket_test\&.c\&.
+\fBWarning\fP
+.RS 4
+this test is currently leaking about 24 bytes likely because we are using two thread pools which rely on some sort of global stuff 
+.RE
+.PP
+
+.PP
+Definition at line 53 of file socket_test\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for libcp2p from the source code\&.

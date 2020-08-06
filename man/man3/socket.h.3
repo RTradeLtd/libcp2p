@@ -1,4 +1,4 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/network/socket.h" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/network/socket.h" 3 "Thu Aug 6 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,7 +7,9 @@
 .SH SYNOPSIS
 .br
 .PP
-\fC#include 'utils/logger\&.h'\fP
+\fC#include 'multiaddr/multiaddr\&.h'\fP
+.br
+\fC#include 'thirdparty/logger/logger\&.h'\fP
 .br
 \fC#include <arpa/inet\&.h>\fP
 .br
@@ -22,6 +24,13 @@
 \fC#include <sys/types\&.h>\fP
 .br
 
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBMAX_RPC_MSG_SIZE_KB\fP   8192"
+.br
+.in -1c
 .SS "Typedefs"
 
 .in +1c
@@ -51,13 +60,17 @@
 
 .in +1c
 .ti -1c
-.RI "int \fBget_new_socket\fP (\fBthread_logger\fP *thl, \fBaddr_info\fP *bind_address, \fBSOCKET_OPTS\fP sock_opts[], int num_opts, bool is_client)"
+.RI "int \fBget_new_socket\fP (\fBthread_logger\fP *thl, \fBaddr_info\fP *bind_address, \fBSOCKET_OPTS\fP sock_opts[], int num_opts, bool is_client, bool is_tcp)"
 .br
 .RI "gets an available socket attached to bind_address "
 .ti -1c
 .RI "bool \fBset_socket_blocking_status\fP (int fd, bool blocking)"
 .br
 .RI "used to enable/disable blocking sockets "
+.ti -1c
+.RI "int \fBset_socket_recv_timeout\fP (int fd, int seconds)"
+.br
+.RI "sets a socket recv timeout "
 .ti -1c
 .RI "char * \fBget_name_info\fP (\fBsock_addr\fP *client_address)"
 .br
@@ -66,6 +79,22 @@
 .RI "\fBaddr_info\fP \fBdefault_hints\fP ()"
 .br
 .RI "generates an addr_info struct with defaults defaults is IPv4, TCP, and AI_PASSIVE flags "
+.ti -1c
+.RI "bool \fBrecv_or_send_failed\fP (\fBthread_logger\fP *thl, int rc)"
+.br
+.RI "used to check if a receive or send with a socket failed "
+.ti -1c
+.RI "\fBaddr_info\fP * \fBmulti_addr_to_addr_info\fP (\fBmulti_addr_t\fP *address)"
+.br
+.RI "returns an addr_info representation of the multiaddress "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "bool \fBdo_shutdown\fP"
+.br
+.RI "internal boolean variable used to signal async start_socket_server function calls "
 .in -1c
 .SH "Detailed Description"
 .PP 
@@ -74,26 +103,32 @@ general socket related tooling
 
 .PP
 Definition in file \fBsocket\&.h\fP\&.
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define MAX_RPC_MSG_SIZE_KB   8192"
+
+.PP
+Definition at line 28 of file socket\&.h\&.
 .SH "Typedef Documentation"
 .PP 
 .SS "\fBaddr_info\fP"
 
 .PP
-Definition at line 38 of file socket\&.h\&.
+Definition at line 47 of file socket\&.h\&.
 .SS "\fBsock_addr\fP"
 
 .PP
-Definition at line 44 of file socket\&.h\&.
+Definition at line 53 of file socket\&.h\&.
 .SS "\fBsock_addr_storage\fP"
 
 .PP
-Definition at line 50 of file socket\&.h\&.
+Definition at line 59 of file socket\&.h\&.
 .SS "\fBtimeout\fP"
 
 .PP
 used to specify timeouts for function calls such as select 
 .PP
-Definition at line 32 of file socket\&.h\&.
+Definition at line 41 of file socket\&.h\&.
 .SH "Enumeration Type Documentation"
 .PP 
 .SS "enum \fBSOCKET_OPTS\fP"
@@ -113,7 +148,7 @@ sets socket to non-blocking mode
 \fB\fIBLOCK \fP\fP
 sets socket to blocking mode 
 .PP
-Definition at line 55 of file socket\&.h\&.
+Definition at line 64 of file socket\&.h\&.
 .SH "Function Documentation"
 .PP 
 .SS "\fBaddr_info\fP default_hints ()"
@@ -121,7 +156,7 @@ Definition at line 55 of file socket\&.h\&.
 .PP
 generates an addr_info struct with defaults defaults is IPv4, TCP, and AI_PASSIVE flags 
 .PP
-Definition at line 149 of file socket\&.c\&.
+Definition at line 179 of file socket\&.c\&.
 .SS "char* get_name_info (\fBsock_addr\fP * client_address)"
 
 .PP
@@ -150,8 +185,8 @@ enable udp
 .PP
 
 .PP
-Definition at line 129 of file socket\&.c\&.
-.SS "int get_new_socket (\fBthread_logger\fP * thl, \fBaddr_info\fP * bind_address, \fBSOCKET_OPTS\fP sock_opts[], int num_opts, bool is_client)"
+Definition at line 159 of file socket\&.c\&.
+.SS "int get_new_socket (\fBthread_logger\fP * thl, \fBaddr_info\fP * bind_address, \fBSOCKET_OPTS\fP sock_opts[], int num_opts, bool is_client, bool is_tcp)"
 
 .PP
 gets an available socket attached to bind_address 
@@ -165,7 +200,52 @@ Failure: -1 initializers a socket attached to bind_address with sock_opts, and b
 .PP
 
 .PP
-Definition at line 43 of file socket\&.c\&.
+\fBTodo\fP
+.RS 4
+should we not do this on UDP connections?? 
+.RE
+.PP
+
+.PP
+Definition at line 59 of file socket\&.c\&.
+.SS "\fBaddr_info\fP* multi_addr_to_addr_info (\fBmulti_addr_t\fP * address)"
+
+.PP
+returns an addr_info representation of the multiaddress useful for taking a multi address and getting the needed information for using
+.PP
+the address with the sendto function 
+.PP
+\fBParameters\fP
+.RS 4
+\fIaddress\fP the multi address to parse 
+.RE
+.PP
+\fBNote\fP
+.RS 4
+does not free up resources associated with address param 
+.RE
+.PP
+\fBWarning\fP
+.RS 4
+only supports TCP and UDP multiaddress(es) 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Success: pointer to an addr_info instance 
+.PP
+Failure: NULL pointer 
+.RE
+.PP
+
+.PP
+Definition at line 224 of file socket\&.c\&.
+.SS "bool recv_or_send_failed (\fBthread_logger\fP * thl, int rc)"
+
+.PP
+used to check if a receive or send with a socket failed 
+.PP
+Definition at line 194 of file socket\&.c\&.
 .SS "bool set_socket_blocking_status (int fd, bool blocking)"
 
 .PP
@@ -185,7 +265,35 @@ see https://stackoverflow.com/questions/1543466/how-do-i-change-a-tcp-socket-to-
 .PP
 
 .PP
-Definition at line 112 of file socket\&.c\&.
+Definition at line 142 of file socket\&.c\&.
+.SS "int set_socket_recv_timeout (int fd, int seconds)"
+
+.PP
+sets a socket recv timeout 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfd\fP the file descriptor of the socket to apply operations to 
+.br
+\fIseconds\fP the seconds to timeout a recv or recvfrom after 
+.RE
+.PP
+\fBWarning\fP
+.RS 4
+how does this workon UDP socket 
+.RE
+.PP
+
+.PP
+Definition at line 41 of file socket\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "bool do_shutdown"
+
+.PP
+internal boolean variable used to signal async start_socket_server function calls 
+.PP
+Definition at line 43 of file socket_server\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for libcp2p from the source code\&.

@@ -1,0 +1,56 @@
+.TH "md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__m_i_n_i_m_a_l__r_p_c" 3 "Thu Aug 6 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__m_i_n_i_m_a_l__r_p_c \- Minimal RPC 
+There is a very minimal RPC framework included for sending messages between peers\&. It is not intended as a full on RPC system, and simply as a way to help two peers communicate\&. You can implement your own options ontop of this RPC framework by using the \fCARBITRARY\fP message type, which allows for implementation defined behavior\&.
+.SH "Messages"
+.PP
+.SS "Packet Diagram"
+The actual RPC packets sent are illustrated below:
+.PP
+.SS "Types"
+The following message types are denoted as an enum \fCMESSAGE_TYPES\fP
+.PP
+Type Purpose  MESSAGE_WANT_PEER_ID Informs a peer we want information for a particular peerid\&. This is typically used for two purposes\&. One when connecting to a peer and establishing an ECDH key agreement it allows us to request the public key the peer\&. The other is used for exchanging information about other peers  MESSAGE_HAVE_PEER_ID Sent in response to \fCMESSAGE_WANT_PEER_ID\fP and indicates we have the information about a peer that was requested  MESSAGE_WANT_PUB_KEY Informs a peer we want the public key corresponding to a PeerID  MESSAGE_HAVE_PUB_KEY Sent in resposne to a \fCMESSAGE_WANT_PUB_KEY\fP and indicates we have the public key being request  MESSAGE_START_ECDH Informs a peer we want to start an ECDH key agreement process  MESSAGE_BEGIN_ECDH Sent ins response to a \fCMESSAGE_START_ECDH\fP and informs the peer to begin the process  MESSAGE_ARBITRARY Arbitrary message type allowing for implementation defined behavior  
+.SS "Encoding"
+Messages are encoded on the wire using CBOR encoding\&. When sending a message the first byte is used to indicate the size of the message data\&. Essentailly a single message looks like, where \fCX\fP is determined by the first byte sent:
+.PP
+.PP
+.nf
+| 1 Byte            | X Bytes     |
+| size of remainder | actual data |
+.fi
+.PP
+.PP
+Note that the first byte \fBisn't\fP CBOR encoded data, while the remainder of the message is CBOR encoded\&. We do this for simplicity sakes, making it require slightly less work to process the message, as if we first the first byte encoded into CBOR, it would require slightly more work involved in processing\&.
+.SS "Fields"
+Every message contains three fields before being encoded into CBOR
+.PP
+1) \fCtype\fP which is a MESSAGE_TYPES_T enum 2) \fClen\fP which is the size of \fCdata\fP 3) \fCdata\fP which is the actual message data
+.PP
+All fields must contain data\&. If you really do not have actual message data to send, simply set \fCdata\fP to a null terminator (\fC\\0\fP) and \fClen\fP to 1\&.
+.SS "Sending And Receiving"
+To simplify the process of sending and receiving messages \fC\fBnetwork/messages\&.h\fP\fP contains two convenience functions:
+.PP
+.IP "\(bu" 2
+1) \fChandle_receive\fP
+.IP "  \(bu" 4
+abstracts the details of receiving a message
+.IP "  \(bu" 4
+allocates memory internally for the returned struct
+.PP
+
+.IP "\(bu" 2
+2) \fChandle_send\fP
+.IP "  \(bu" 4
+abstracts the details of sending a message
+.PP
+
+.PP
+.PP
+The usage of these two functions removes the need for all message preprocessing\&. Note however when sending messages, you'll need to provide the \fCmessage_t\fP struct, but \fChandle_send\fP will take care of CBOR encoding the data, and properly sending it on the wire\&.
+.SS "Sending"
+1) Allocate memory for a \fCmessage_t\fP instance 2) Populate fields 3) CBOR encode \fCmessage_t\fP with \fCcbor_encode_message_t\fP 4) Get send buffer length with \fCget_encoded_send_buffer_len\fP 5) Initialize \fCunsigned char\fP array to buffer length 6) Populate send buffer with \fCget_encoded_send_buffer\fP 7) Send data with \fCsend\fP or \fCsendto\fP
+.SS "Limitations"
+At the moment individual RPC messages can't be larger than 8192 bytes (8KiB), although this may be removed in the future\&. 

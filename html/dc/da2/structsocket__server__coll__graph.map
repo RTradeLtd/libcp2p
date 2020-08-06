@@ -1,9 +1,9 @@
 <map id="socket_server" name="socket_server">
-<area shape="rect" id="node1" title=" " alt="" coords="64,291,176,317"/>
-<area shape="rect" id="node2" href="$da/da5/structthread__logger.html" title=" " alt="" coords="5,200,117,227"/>
-<area shape="rect" id="node3" href="$d4/d05/structthpool__.html" title=" " alt="" coords="195,200,266,227"/>
-<area shape="rect" id="node4" href="$d3/dc5/structthread.html" title=" " alt="" coords="216,291,280,317"/>
-<area shape="rect" id="node5" href="$d7/dd0/structjobqueue.html" title=" " alt="" coords="189,109,272,136"/>
-<area shape="rect" id="node6" href="$d5/d93/structbsem.html" title=" " alt="" coords="156,5,215,32"/>
-<area shape="rect" id="node7" href="$d3/d8c/structjob.html" title=" " alt="" coords="256,5,299,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="209,187,321,213"/>
+<area shape="rect" id="node2" href="$d1/d33/structpeer__id.html" title=" " alt="" coords="5,96,76,123"/>
+<area shape="rect" id="node3" href="$d4/daa/structpeerstore.html" title=" " alt="" coords="100,96,184,123"/>
+<area shape="rect" id="node4" href="$de/d65/structpeer.html" title=" " alt="" coords="117,5,167,32"/>
+<area shape="rect" id="node5" href="$da/da5/structthread__logger.html" title=" " alt="" coords="209,96,321,123"/>
+<area shape="rect" id="node6" href="$d3/dce/structpublic__key.html" title=" " alt="" coords="398,96,489,123"/>
+<area shape="rect" id="node7" href="$d7/dc6/structecdsa__private__key.html" title=" " alt="" coords="513,96,656,123"/>
 </map>

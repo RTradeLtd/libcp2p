@@ -1,0 +1,7 @@
+<map id="print_colored" name="print_colored">
+<area shape="rect" id="node1" title="prints message to stdout with the given color" alt="" coords="324,56,431,83"/>
+<area shape="rect" id="node2" href="$d8/dfd/command__line_8h.html#a256f96fa435f4cdcc69b740476e50cd6" title="checks to see if we have a command named according to run and executes it" alt="" coords="155,5,229,32"/>
+<area shape="rect" id="node4" href="$d8/dfd/command__line_8h.html#a5f23afcf3ea74099025cbe7fa62243a7" title="loads command handler and makes it executable" alt="" coords="131,56,253,83"/>
+<area shape="rect" id="node5" href="$d8/dfd/command__line_8h.html#ae859dbe92615fada71bc1e3230c0941d" title="intializes a new command_object to have commands loaded into" alt="" coords="108,107,276,133"/>
+<area shape="rect" id="node3" href="$d6/dfd/cli_2main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+</map>

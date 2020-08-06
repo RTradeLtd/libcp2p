@@ -1,0 +1,357 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/network/messages.h" 3 "Thu Aug 6 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/network/messages.h \- defines message types and tooling for a very minimal RPC framework  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'encoding/cbor\&.h'\fP
+.br
+\fC#include 'network/socket\&.h'\fP
+.br
+\fC#include 'thirdparty/logger/logger\&.h'\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+\fC#include <stddef\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBmessage\fP"
+.br
+.ti -1c
+.RI "struct \fBmessage_hello\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef enum \fBMESSAGE_TYPES\fP \fBMESSAGE_TYPES_T\fP"
+.br
+.RI "denotes a type of message in a format for inclusion in structs "
+.ti -1c
+.RI "typedef struct \fBmessage\fP \fBmessage_t\fP"
+.br
+.RI "a structure wrapping a message used by libcp2p "
+.ti -1c
+.RI "typedef struct \fBmessage_hello\fP \fBmessage_hello_t\fP"
+.br
+.RI "used to specify the peerid and public key for a MESSAGE_HELLO RPC call "
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBMESSAGE_TYPES\fP { \fBMESSAGE_WANT_PEER_ID\fP = 0, \fBMESSAGE_HAVE_PEER_ID\fP = 1, \fBMESSAGE_WANT_PUB_KEY\fP = 2, \fBMESSAGE_HAVE_PUB_KEY\fP = 3, \fBMESSAGE_START_ECDH\fP = 4, \fBMESSAGE_BEGIN_ECDH\fP = 5, \fBMESSAGE_HELLO_INT\fP = 6, \fBMESSAGE_HELLO_FIN\fP = 7, \fBMESSAGE_ARBITRARY\fP = 99 }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBmessage_t\fP * \fBmessage_hello_t_to_message_t\fP (\fBmessage_hello_t\fP *msg, bool initiate)"
+.br
+.RI "helper function to return a message_t object for sending "
+.ti -1c
+.RI "\fBmessage_hello_t\fP * \fBnew_message_hello_t\fP (unsigned char *\fBpeer_id\fP, unsigned char *\fBpublic_key\fP, size_t peer_id_len, size_t public_key_len)"
+.br
+.RI "used to create a new message_hello_t using the given values "
+.ti -1c
+.RI "\fBcbor_encoded_data_t\fP * \fBcbor_encode_hello_t\fP (\fBmessage_hello_t\fP *msg_hello)"
+.br
+.RI "used to cbor encoded a message_hello_t instance "
+.ti -1c
+.RI "\fBmessage_hello_t\fP * \fBcbor_decode_hello_t\fP (\fBcbor_encoded_data_t\fP *input)"
+.br
+.RI "used to cbor decode encoded data returning an instance of message_hello_t "
+.ti -1c
+.RI "void \fBfree_message_hello_t\fP (\fBmessage_hello_t\fP *msg_hello)"
+.br
+.RI "used to free up resources associated with a message_hello_t instance "
+.ti -1c
+.RI "\fBcbor_encoded_data_t\fP * \fBcbor_encode_message_t\fP (\fBmessage_t\fP *msg)"
+.br
+.RI "used to cbor encode a message_t instance "
+.ti -1c
+.RI "\fBmessage_t\fP * \fBcbor_decode_message_t\fP (\fBcbor_encoded_data_t\fP *input)"
+.br
+.RI "used to cbor decode data into a message_t instance "
+.ti -1c
+.RI "void \fBfree_message_t\fP (\fBmessage_t\fP *msg)"
+.br
+.RI "frees up resources allocated for an instance of message_t "
+.ti -1c
+.RI "size_t \fBsize_of_message_t\fP (\fBmessage_t\fP *msg)"
+.br
+.RI "returns the size of a message_t instance "
+.ti -1c
+.RI "\fBmessage_t\fP * \fBhandle_receive\fP (\fBthread_logger\fP *thl, int socket_number, size_t max_buffer_len)"
+.br
+.RI "used to handle receiving data from a TCP socket "
+.ti -1c
+.RI "int \fBhandle_send\fP (\fBthread_logger\fP *thl, int socket_number, \fBmessage_t\fP *msg)"
+.br
+.RI "used to handle sending data through a TCP socket "
+.in -1c
+.SH "Detailed Description"
+.PP 
+defines message types and tooling for a very minimal RPC framework 
+
+
+.PP
+\fBNote\fP
+.RS 4
+when sending messages anytime you send a new message, you must first send a single byte that indicates the size of the messsage we are sending 
+.PP
+this helps ensure that we can appropriately handle new requests and allocate enough memory
+.RE
+.PP
+the message types here are intended to be served as a building block for your own applications
+.PP
+at a minimum the types here are setup to establish a secure communications channel using ECDSA keys and ECDH key agreement 
+.PP
+Definition in file \fBmessages\&.h\fP\&.
+.SH "Typedef Documentation"
+.PP 
+.SS "\fBmessage_hello_t\fP"
+
+.PP
+used to specify the peerid and public key for a MESSAGE_HELLO RPC call when sending a MESSAGE_HELLO RPC to a peer, the message data must be message_hello_t in CBOR encoding 
+.SS "\fBmessage_t\fP"
+
+.PP
+a structure wrapping a message used by libcp2p a message is sent to a peer, or received from a peer during communications 
+.SS "\fBMESSAGE_TYPES_T\fP"
+
+.PP
+denotes a type of message in a format for inclusion in structs the actual value of the message is a macro defined at the top of \fBmessages\&.h\fP 
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBMESSAGE_TYPES\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIMESSAGE_WANT_PEER_ID \fP\fP
+indicates we are sending a message wanting the peerID 
+.TP
+\fB\fIMESSAGE_HAVE_PEER_ID \fP\fP
+indicates we have a peer id sent in response to a WANT_PEERID message 
+.TP
+\fB\fIMESSAGE_WANT_PUB_KEY \fP\fP
+indicates we want a public key 
+.TP
+\fB\fIMESSAGE_HAVE_PUB_KEY \fP\fP
+indicates we have a public key sent in response to a WANT_PUB_KEY messages 
+.TP
+\fB\fIMESSAGE_START_ECDH \fP\fP
+indicates we want to start an ECDH key exchange 
+.TP
+\fB\fIMESSAGE_BEGIN_ECDH \fP\fP
+indicates we are willing to start an ECDH key exchange and tells the other peer to begin it 
+.TP
+\fB\fIMESSAGE_HELLO_INT \fP\fP
+used for initiating hello protocol exchange and providing our information 
+.TP
+\fB\fIMESSAGE_HELLO_FIN \fP\fP
+used to reply to an initiation message with our information 
+.TP
+\fB\fIMESSAGE_ARBITRARY \fP\fP
+an arbitrary message type for implementation defined behavior 
+.PP
+Definition at line 40 of file messages\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "\fBmessage_hello_t\fP* cbor_decode_hello_t (\fBcbor_encoded_data_t\fP * input)"
+
+.PP
+used to cbor decode encoded data returning an instance of message_hello_t 
+.PP
+Definition at line 165 of file messages\&.c\&.
+.SS "\fBmessage_t\fP* cbor_decode_message_t (\fBcbor_encoded_data_t\fP * input)"
+
+.PP
+used to cbor decode data into a message_t instance 
+.PP
+\fBParameters\fP
+.RS 4
+\fIinput\fP an instance of cbor_encoded_data_t containing the data to decode 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Success: poitner to an instance of message_t 
+.PP
+Failure: NULL pointer 
+.RE
+.PP
+
+.PP
+Definition at line 356 of file messages\&.c\&.
+.SS "\fBcbor_encoded_data_t\fP* cbor_encode_hello_t (\fBmessage_hello_t\fP * msg_hello)"
+
+.PP
+used to cbor encoded a message_hello_t instance the resulting data and length fields can be used with
+.PP
+the message_t instance to send peer information to another peer 
+.PP
+Definition at line 111 of file messages\&.c\&.
+.SS "\fBcbor_encoded_data_t\fP* cbor_encode_message_t (\fBmessage_t\fP * msg)"
+
+.PP
+used to cbor encode a message_t instance 
+.PP
+\fBParameters\fP
+.RS 4
+\fImsg\fP pointer to an instance of message_t 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Success: pointer to an instance of cbor_encoded_data_t 
+.PP
+Failure: NULL pointer 
+.RE
+.PP
+
+.PP
+Definition at line 294 of file messages\&.c\&.
+.SS "void free_message_hello_t (\fBmessage_hello_t\fP * msg_hello)"
+
+.PP
+used to free up resources associated with a message_hello_t instance 
+.PP
+Definition at line 344 of file messages\&.c\&.
+.SS "void free_message_t (\fBmessage_t\fP * msg)"
+
+.PP
+frees up resources allocated for an instance of message_t 
+.PP
+\fBParameters\fP
+.RS 4
+\fImsg\fP an instance of message_t 
+.RE
+.PP
+
+.PP
+Definition at line 462 of file messages\&.c\&.
+.SS "\fBmessage_t\fP* handle_receive (\fBthread_logger\fP * thl, int socket_number, size_t max_buffer_len)"
+
+.PP
+used to handle receiving data from a TCP socket it is designed to reduce the manual overhead with regards to processing messages
+.PP
+because the first byte of any data stream coming in defines the size of the total data to receive
+.PP
+and the remaining data defines the actual cbor encoded data\&. therefore we need to properly parse this information
+.PP
+and the manner of processing is useful to either the server or client side of things 
+.PP
+\fBParameters\fP
+.RS 4
+\fIthl\fP an instance of a \fBthread_logger\fP, can be NULL to disable logging 
+.br
+\fIsocket_num\fP the file descriptor of the socket to receive from 
+.br
+\fImax_buffer_len\fP specifies the maximum buffer length we are willing to allocate memory for 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Success: pointer to a chunk of memory containing the received RPC message 
+.PP
+Failure: NULL pointer 
+.RE
+.PP
+\fBWarning\fP
+.RS 4
+we will allocate slightly more memory than max_buffer_len since we have to decode the received message into a message_t type 
+.RE
+.PP
+abort further handling if message size is less than or equal to 0 greater than the max RPC message size OR greater than the buffer
+.PP
+Definition at line 501 of file messages\&.c\&.
+.SS "int handle_send (\fBthread_logger\fP * thl, int socket_number, \fBmessage_t\fP * msg)"
+
+.PP
+used to handle sending data through a TCP socket designed to reduce manual overhead with sending RPC messages
+.PP
+it takes care of encoding the given message_t object into a CBOR object
+.PP
+and then sending the CBOR object through the wire 
+.PP
+\fBParameters\fP
+.RS 4
+\fIthl\fP an instance of a \fBthread_logger\fP, can be NULL to disable logging 
+.br
+\fIsocket_num\fP the file descriptor of the socket to receive from 
+.br
+\fImsg\fP the actual message we want to send message to\&. must not be NULL if is_tcp is false 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Success: 0 
+.PP
+Failure: -1 
+.RE
+.PP
+
+.PP
+Definition at line 554 of file messages\&.c\&.
+.SS "\fBmessage_t\fP* message_hello_t_to_message_t (\fBmessage_hello_t\fP * msg, bool initiate)"
+
+.PP
+helper function to return a message_t object for sending if initiate is true, the message type is MESSAGE_HELLO_INT
+.PP
+if initiate is false, the message type is MESSAGE_HELLO_FIN 
+.PP
+\fBParameters\fP
+.RS 4
+\fImsg\fP the message_hello_t type we want to encode into message_t format 
+.br
+\fIinitiate\fP True: set return message_t type to MESSAGE_HELLO_INT 
+.br
+\fIinitiate\fP False: set return message_t type to MESSAGE_HELLO_FIN 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+Success: pointer to a message_t instance containing the encoded input message 
+.PP
+Failure: NULL pointer 
+.RE
+.PP
+
+.PP
+Definition at line 35 of file messages\&.c\&.
+.SS "\fBmessage_hello_t\fP* new_message_hello_t (unsigned char * peer_id, unsigned char * public_key, size_t peer_id_len, size_t public_key_len)"
+
+.PP
+used to create a new message_hello_t using the given values this copies the values given and allocates memory to store them accordingly
+.PP
+this copies the values given and allocates memory to store them accordingly 
+.PP
+\fBTodo\fP
+.RS 4
+add a test specifically for this function 
+.RE
+.PP
+
+.PP
+Definition at line 75 of file messages\&.c\&.
+.SS "size_t size_of_message_t (\fBmessage_t\fP * msg)"
+
+.PP
+returns the size of a message_t instance 
+.PP
+Definition at line 470 of file messages\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

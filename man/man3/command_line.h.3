@@ -1,0 +1,213 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/cli/command_line.h" 3 "Thu Aug 6 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/cli/command_line.h \- provides a basic CLI building tool attribution note: modified version of commander see \fCdeps/commander\fP for the license for that package uses argtable3 for command line configuration and allows loading a list of commands to execute using the \fC--conmmand\fP or \fC-c\fP CLI flag you can specify the command out of the list of commands that have been loaded before calling execute you'll want to load the appropriate \fCargc\fP and \fCargv\fP values for the callback of the command you want to make  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'thirdparty/argtable3/argtable3\&.h'\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBcommand_handler\fP"
+.br
+.ti -1c
+.RI "struct \fBcommand\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBMAX_COMMANDS\fP   32"
+.br
+.ti -1c
+.RI "#define \fBMAX_COMMAND_ARGS\fP   32"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef void(* \fBcommand_handler_callback\fP) (int argc, char *argv[])"
+.br
+.ti -1c
+.RI "typedef struct \fBcommand\fP \fBcommand_object\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "char * \fBget_run_command\fP ()"
+.br
+.RI "returns the value of command_to_run "
+.ti -1c
+.RI "void \fBsetup_args\fP (const char *version_string)"
+.br
+.RI "setups the default argtable arguments "
+.ti -1c
+.RI "void \fBprint_help\fP (char *program_name, void *argtable[])"
+.br
+.RI "formats output "
+.ti -1c
+.RI "int \fBparse_args\fP (int argc, char *argv[], void *argtable[])"
+.br
+.RI "parses arguments, and checks for any errors "
+.ti -1c
+.RI "int \fBexecute\fP (\fBcommand_object\fP *self, char *\fBcommand_to_run\fP)"
+.br
+.RI "checks to see if we have a command named according to run and executes it "
+.ti -1c
+.RI "int \fBload_command\fP (\fBcommand_object\fP *self, \fBcommand_handler\fP *\fBcommand\fP)"
+.br
+.RI "loads command handler and makes it executable "
+.ti -1c
+.RI "\fBcommand_object\fP * \fBnew_command_object\fP (int argc, char *argv[])"
+.br
+.RI "intializes a new command_object to have commands loaded into "
+.ti -1c
+.RI "void \fBfree_command_object\fP (\fBcommand_object\fP *self)"
+.br
+.RI "frees memory allocated for the command_object and sets pointer to null "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "struct \fBarg_lit\fP * \fBhelp\fP"
+.br
+.ti -1c
+.RI "struct \fBarg_lit\fP * \fBversion\fP"
+.br
+.ti -1c
+.RI "struct \fBarg_str\fP * \fBcommand_to_run\fP"
+.br
+.ti -1c
+.RI "struct \fBarg_file\fP * \fBfile\fP"
+.br
+.ti -1c
+.RI "struct \fBarg_file\fP * \fBoutput\fP"
+.br
+.ti -1c
+.RI "struct \fBarg_end\fP * \fBend\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+provides a basic CLI building tool attribution note: modified version of commander see \fCdeps/commander\fP for the license for that package uses argtable3 for command line configuration and allows loading a list of commands to execute using the \fC--conmmand\fP or \fC-c\fP CLI flag you can specify the command out of the list of commands that have been loaded before calling execute you'll want to load the appropriate \fCargc\fP and \fCargv\fP values for the callback of the command you want to make 
+
+
+.PP
+\fBNote\fP
+.RS 4
+from https://github.com/bonedaddy/c-template 
+.RE
+.PP
+
+.PP
+Definition in file \fBcommand_line\&.h\fP\&.
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define MAX_COMMAND_ARGS   32"
+
+.PP
+Definition at line 24 of file command_line\&.h\&.
+.SS "#define MAX_COMMANDS   32"
+
+.PP
+Definition at line 20 of file command_line\&.h\&.
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef void(* command_handler_callback) (int argc, char *argv[])"
+
+.PP
+Definition at line 37 of file command_line\&.h\&.
+.SS "typedef struct \fBcommand\fP \fBcommand_object\fP"
+
+.SH "Function Documentation"
+.PP 
+.SS "int execute (\fBcommand_object\fP * self, char * command_to_run)"
+
+.PP
+checks to see if we have a command named according to run and executes it 
+.PP
+Definition at line 72 of file command_line\&.c\&.
+.SS "void free_command_object (\fBcommand_object\fP * self)"
+
+.PP
+frees memory allocated for the command_object and sets pointer to null frees memory allocated for the command_object and sets pointer to null 
+.PP
+Definition at line 87 of file command_line\&.c\&.
+.SS "char* get_run_command ()"
+
+.PP
+returns the value of command_to_run 
+.PP
+Definition at line 132 of file command_line\&.c\&.
+.SS "int load_command (\fBcommand_object\fP * self, \fBcommand_handler\fP * command)"
+
+.PP
+loads command handler and makes it executable 
+.PP
+Definition at line 57 of file command_line\&.c\&.
+.SS "\fBcommand_object\fP* new_command_object (int argc, char * argv[])"
+
+.PP
+intializes a new command_object to have commands loaded into 
+.PP
+Definition at line 24 of file command_line\&.c\&.
+.SS "int parse_args (int argc, char * argv[], void * argtable[])"
+
+.PP
+parses arguments, and checks for any errors 
+.PP
+Definition at line 98 of file command_line\&.c\&.
+.SS "void print_help (char * program_name, void * argtable[])"
+
+.PP
+formats output 
+.PP
+Definition at line 115 of file command_line\&.c\&.
+.SS "void setup_args (const char * version_string)"
+
+.PP
+setups the default argtable arguments 
+.PP
+Definition at line 122 of file command_line\&.c\&.
+.SH "Variable Documentation"
+.PP 
+.SS "struct \fBarg_str\fP* command_to_run"
+
+.PP
+Definition at line 29 of file command_line\&.h\&.
+.SS "struct \fBarg_end\fP* end"
+
+.PP
+Definition at line 31 of file command_line\&.h\&.
+.SS "struct \fBarg_file\fP* file"
+
+.PP
+Definition at line 30 of file command_line\&.h\&.
+.SS "struct \fBarg_lit\fP* help"
+
+.PP
+Definition at line 28 of file command_line\&.h\&.
+.SS "struct \fBarg_file\fP * output"
+
+.PP
+Definition at line 30 of file command_line\&.h\&.
+.SS "struct \fBarg_lit\fP * version"
+
+.PP
+Definition at line 28 of file command_line\&.h\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

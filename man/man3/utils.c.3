@@ -1,0 +1,72 @@
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/network/utils.c" 3 "Thu Aug 6 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/network/utils.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'network/utils\&.h'\fP
+.br
+\fC#include 'network/socket\&.h'\fP
+.br
+\fC#include <errno\&.h>\fP
+.br
+\fC#include <netdb\&.h>\fP
+.br
+\fC#include <netinet/in\&.h>\fP
+.br
+\fC#include <stdint\&.h>\fP
+.br
+\fC#include <sys/socket\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBsend_int_tcp\fP (int num, int fd)"
+.br
+.RI "utility function to send an int through a socket "
+.ti -1c
+.RI "int \fBreceive_int_tcp\fP (int *num, int fd)"
+.br
+.RI "utility function to read an int through a socket "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int receive_int_tcp (int * num, int fd)"
+
+.PP
+utility function to read an int through a socket handles situations where we may read less than expected bytes 
+.PP
+\fBReturns\fP
+.RS 4
+Success: 0 
+.PP
+Failure: -1 
+.RE
+.PP
+
+.PP
+Definition at line 54 of file utils\&.c\&.
+.SS "int send_int_tcp (int num, int fd)"
+
+.PP
+utility function to send an int through a socket handles situations where we may send less than expected bytes 
+.PP
+\fBReturns\fP
+.RS 4
+Success: 0 
+.PP
+Failure: -1 
+.RE
+.PP
+
+.PP
+Definition at line 22 of file utils\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

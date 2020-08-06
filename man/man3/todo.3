@@ -1,4 +1,4 @@
-.TH "todo" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
+.TH "todo" 3 "Thu Aug 6 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -8,13 +8,13 @@ todo \- Todo List
 .IP "\(bu" 2
 enable a queue/list of these  
 .PP
-.IP "\fBGlobal \fBexample_task_func_tcp\fP (void *data)\fP" 1c
-figure out proper close procedures  
 .IP "\fBGlobal \fBget_name_info\fP (sock_addr *client_address)\fP" 1c
 enable udp 
 .PP
 enable udp  
-.IP "\fBGlobal \fBlibp2p_crypto_ecdsa_keypair_generation\fP (unsigned char *output, mbedtls_ecp_group_id curve)\fP" 1c
+.IP "\fBGlobal \fBget_new_socket\fP (\fBthread_logger\fP *thl, addr_info *bind_address, SOCKET_OPTS sock_opts[], int num_opts, bool is_client, bool is_tcp)\fP" 1c
+should we not do this on UDP connections??  
+.IP "\fBGlobal \fBlibp2p_crypto_ecdsa_keypair_generation\fP (mbedtls_ecp_group_id curve)\fP" 1c
 figure out if we need this  
 .IP "\fBGlobal \fBlibp2p_crypto_ecdsa_keypair_peerid\fP (ecdsa_private_key_t *pk)\fP" 1c
 this currently relies on hard coded assumptions about hashing algorithm 
@@ -30,18 +30,6 @@ this currently relies in usage of \fCstr\&.\&.\fP we should use \fCmem\&.\&.\&.\
 this currently relies in usage of \fCstr\&.\&.\fP we should use \fCmem\&.\&.\&.\fP instead  
 .IP "\fBGlobal \fBlibp2p_crypto_public_key_cbor_encode\fP (public_key_t *pub_key)\fP" 1c
 figure out why this returns an error  
-.IP "\fBFile \fBlogger\&.c\fP \fP" 1c
-.IP "\(bu" 2
-buffer logs and use a dedicated thread for writing (avoid blocking locks)
-.IP "\(bu" 2
-handling system signals (exit, kill, etc\&.\&.\&.)  
-.PP
-.IP "\fBFile \fBlogger\&.h\fP \fP" 1c
-.IP "\(bu" 2
-buffer logs and use a dedicated thread for writing (avoid blocking locks)
-.IP "\(bu" 2
-handling system signals (exit, kill, etc\&.\&.\&.)  
-.PP
 .IP "\fBFile \fBlogger\&.h\fP \fP" 1c
 .IP "\(bu" 2
 buffer logs and use a dedicated thread for writing (avoid blocking locks)
@@ -50,10 +38,8 @@ handling system signals (exit, kill, etc\&.\&.\&.)
 .PP
 .IP "\fBGlobal \fBmulti_address_new\fP ()\fP" 1c
 figure out a better way of estimating size  
-.IP "\fBGlobal \fBnew_socket_server\fP (\fBthread_logger\fP *thl, socket_server_config_t config)\fP" 1c
-support non wildcard 
-.PP
-support non wildcard  
+.IP "\fBGlobal \fBnew_message_hello_t\fP (unsigned char *peer_id, unsigned char *public_key, size_t peer_id_len, size_t public_key_len)\fP" 1c
+add a test specifically for this function  
 .IP "\fBGlobal \fBNum_To_HexVar_64\fP (uint64_t TOHVINPUT)\fP" 1c
 TODO(bonedaddy): figure out the previous code did bzero before memset  
 .IP "\fBFile \fBpeerstore\&.c\fP \fP" 1c
@@ -88,7 +74,7 @@ add \fBpeer_id\fP and \fBpublic_key\fP verification
 enable better length selection  
 .IP "\fBGlobal \fBprotocols_with_string\fP (const struct \fBProtocolListItem\fP *head, char *meee, int sizi)\fP" 1c
 TODO(bonedaddy): figure out why bzero is not present and if we should use  
-.IP "\fBGlobal \fBsocket_client_sendto\fP (socket_client_t *client, addr_info *peer_address, char *message)\fP" 1c
+.IP "\fBGlobal \fBsocket_client_sendto\fP (socket_client_t *client, addr_info *peer_address, unsigned char *message, size_t message_len)\fP" 1c
 if we sent less than total size, send remaining  
 .IP "\fBGlobal \fBsocket_server_config_t\fP \fP" 1c
 switch to multi_addresses  

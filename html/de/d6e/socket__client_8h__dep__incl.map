@@ -2,6 +2,7 @@
 <area shape="rect" id="node1" title="stuff related to socket clients (ie, connecting to socket servers)" alt="" coords="125,5,302,76"/>
 <area shape="rect" id="node2" href="$d4/d39/socket__client_8c.html" title="client socket related tooling" alt="" coords="5,131,208,187"/>
 <area shape="rect" id="node3" href="$d9/d26/socket__server_8h.html" title="used to create a tcp/udp socket server listening on multiaddrs" alt="" coords="233,124,410,195"/>
-<area shape="rect" id="node4" href="$d1/dfc/socket__server_8c.html" title="used to create a tcp/udp socket server listening on multiaddrs" alt="" coords="106,243,313,299"/>
-<area shape="rect" id="node5" href="$d2/d09/socket__test_8c.html" title=" " alt="" coords="337,243,527,299"/>
+<area shape="rect" id="node4" href="$d6/dfd/cli_2main_8c.html" title=" " alt="" coords="17,243,194,299"/>
+<area shape="rect" id="node5" href="$d1/dfc/socket__server_8c.html" title="used to create a tcp/udp socket server listening on multiaddrs" alt="" coords="218,243,425,299"/>
+<area shape="rect" id="node6" href="$d2/d09/socket__test_8c.html" title=" " alt="" coords="449,243,639,299"/>
 </map>

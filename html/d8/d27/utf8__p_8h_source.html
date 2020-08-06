@@ -117,11 +117,11 @@ $(document).ready(function(){initNavTree('d8/d27/utf8__p_8h_source.html','../../
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="../../d8/d27/utf8__p_8h.html#ac04d4159273637aa981d4291632f0cc9">   32</a></span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> uint32_t <a class="code" href="../../d8/d27/utf8__p_8h.html#ac04d4159273637aa981d4291632f0cc9">get_utf8</a>(<span class="keyword">const</span> uint8_t **buffer, <span class="keyword">const</span> uint8_t *end) {</div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="../../d8/d27/utf8__p_8h.html#ac04d4159273637aa981d4291632f0cc9">   32</a></span>&#160;<span class="keyword">static</span> <span class="keyword">inline</span> uint32_t <a class="code" href="../../d8/d27/utf8__p_8h.html#ac04d4159273637aa981d4291632f0cc9">get_utf8</a>(<span class="keyword">const</span> uint8_t **buffer, <span class="keyword">const</span> uint8_t *<a class="code" href="../../d8/dfd/command__line_8h.html#a088ac7ffa534015d5b07ddcc7aef9fd4">end</a>) {</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">int</span> charsNeeded;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    uint32_t uc, min_uc;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    uint8_t b;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    ptrdiff_t n = end - *buffer;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    ptrdiff_t n = <a class="code" href="../../d8/dfd/command__line_8h.html#a088ac7ffa534015d5b07ddcc7aef9fd4">end</a> - *buffer;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">if</span> (n == 0)</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordflow">return</span> ~0U;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
@@ -194,6 +194,7 @@ $(document).ready(function(){initNavTree('d8/d27/utf8__p_8h_source.html','../../
 <div class="ttc" id="acompilersupport__p_8h_html"><div class="ttname"><a href="../../d2/d43/compilersupport__p_8h.html">compilersupport_p.h</a></div></div>
 <div class="ttc" id="autf8__p_8h_html_ac04d4159273637aa981d4291632f0cc9"><div class="ttname"><a href="../../d8/d27/utf8__p_8h.html#ac04d4159273637aa981d4291632f0cc9">get_utf8</a></div><div class="ttdeci">static uint32_t get_utf8(const uint8_t **buffer, const uint8_t *end)</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d27/utf8__p_8h_source.html#l00032">utf8_p.h:32</a></div></div>
 <div class="ttc" id="acompilersupport__p_8h_html_ac6c45889010c1bd68631771b64f18101"><div class="ttname"><a href="../../d2/d43/compilersupport__p_8h.html#ac6c45889010c1bd68631771b64f18101">unlikely</a></div><div class="ttdeci">#define unlikely(x)</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/d43/compilersupport__p_8h_source.html#l00204">compilersupport_p.h:204</a></div></div>
+<div class="ttc" id="acommand__line_8h_html_a088ac7ffa534015d5b07ddcc7aef9fd4"><div class="ttname"><a href="../../d8/dfd/command__line_8h.html#a088ac7ffa534015d5b07ddcc7aef9fd4">end</a></div><div class="ttdeci">struct arg_end * end</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/dfd/command__line_8h_source.html#l00031">command_line.h:31</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

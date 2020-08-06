@@ -1,11 +1,18 @@
 <map id="libp2p_crypto_ecdsa_pem_to_private_key" name="libp2p_crypto_ecdsa_pem_to_private_key">
-<area shape="rect" id="node1" title="parses a PEM encoded private key and returns a struct for use" alt="" coords="599,115,760,157"/>
-<area shape="rect" id="node2" href="$d5/d5d/ecdsa_8h.html#a73c6a8cb5971191ba5dc7f940e45fa43" title="loads an ECDSA private key from a file containing a PEM key" alt="" coords="366,57,537,98"/>
-<area shape="rect" id="node3" href="$d5/d29/crypto__test_8c.html#a04d295869fa1a64f7c011ce0b287bf03" title=" " alt="" coords="112,115,300,157"/>
-<area shape="rect" id="node5" href="$d3/d1a/testutils_8h.html#abd07589504c93cfb9a04fd32a78997e1" title=" " alt="" coords="363,5,540,32"/>
-<area shape="rect" id="node8" href="$d5/d29/crypto__test_8c.html#a1401558d7902d15576f5aec9958a5d0e" title=" " alt="" coords="120,233,292,274"/>
-<area shape="rect" id="node9" href="$d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="352,174,551,215"/>
-<area shape="rect" id="node4" href="$d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,181,60,208"/>
-<area shape="rect" id="node6" href="$d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="108,5,304,32"/>
-<area shape="rect" id="node7" href="$d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,5,60,32"/>
+<area shape="rect" id="node1" title="parses a PEM encoded private key and returns a struct for use" alt="" coords="1084,137,1245,179"/>
+<area shape="rect" id="node2" href="$d5/d5d/ecdsa_8h.html#a07a5404b7d00f5fbeaf7529fd2c1580e" title="used to generate an ECDSA keypair" alt="" coords="873,104,1028,145"/>
+<area shape="rect" id="node12" href="$d5/d5d/ecdsa_8h.html#a73c6a8cb5971191ba5dc7f940e45fa43" title="loads an ECDSA private key from a file containing a PEM key" alt="" coords="865,169,1036,211"/>
+<area shape="rect" id="node3" href="$d3/d1a/testutils_8h.html#abd07589504c93cfb9a04fd32a78997e1" title=" " alt="" coords="629,202,807,229"/>
+<area shape="rect" id="node8" href="$d5/d29/crypto__test_8c.html#a1401558d7902d15576f5aec9958a5d0e" title=" " alt="" coords="632,71,804,112"/>
+<area shape="rect" id="node10" href="$d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="619,5,817,47"/>
+<area shape="rect" id="node11" href="$d5/d29/crypto__test_8c.html#a04d295869fa1a64f7c011ce0b287bf03" title=" " alt="" coords="624,136,812,177"/>
+<area shape="rect" id="node4" href="$d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="375,177,571,203"/>
+<area shape="rect" id="node6" href="$d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="383,227,562,254"/>
+<area shape="rect" id="node5" href="$d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="190,177,245,203"/>
+<area shape="rect" id="node7" href="$d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="190,227,245,254"/>
+<area shape="rect" id="node9" href="$d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="445,78,500,105"/>
+<area shape="rect" id="node13" href="$d9/d26/socket__server_8h.html#a5a2eac1ff27232eba96ba5d41145cd33" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="645,253,791,279"/>
+<area shape="rect" id="node14" href="$d6/dfd/cli_2main_8c.html#a990190006e127641a32a5d37d2368fce" title=" " alt="" coords="392,278,553,305"/>
+<area shape="rect" id="node15" href="$d6/dfd/cli_2main_8c.html#a3cb566e1d17d9a6da5a87bb940f11a26" title=" " alt="" coords="108,278,327,305"/>
+<area shape="rect" id="node16" href="$d6/dfd/cli_2main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,278,60,305"/>
 </map>

@@ -1,0 +1,4 @@
+<map id="execute" name="execute">
+<area shape="rect" id="node1" title="checks to see if we have a command named according to run and executes it" alt="" coords="5,5,79,32"/>
+<area shape="rect" id="node2" href="$da/dd8/colors_8h.html#a9b86c057290aefcc15b20231f9cabe9e" title="prints message to stdout with the given color" alt="" coords="127,5,233,32"/>
+</map>

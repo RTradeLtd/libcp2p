@@ -1,0 +1,30 @@
+.TH "md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__h_e_l_l_o__p_r_o_t_o_c_o_l" 3 "Thu Aug 6 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md__media_solidity__d_a_t_a__code__r_trade_ltd_libcp2p_docs__h_e_l_l_o__p_r_o_t_o_c_o_l \- Hello \fBProtocol\fP 
+The hello protocol is an optional protocol that can be used by libcp2p nodes to introduce themselves to others\&. Essentially it is a way of exchanging information about us, what protocol we support, etc\&.\&.\&. At a minimum it is used to exchange PeerID and public key information\&. Not all libcp2p nodes should be expected to use the hello protocol\&.
+.PP
+When sending a hello protocol request to a peer, your request should be your information\&. This helps to reduce overall round trips to accomplish a full hello protocol exchange\&. The response from your peer will be their hello protocol information\&.
+.PP
+Validation of the data received from a hello protocol exchange isn't required to be validated, but it is strongly advised to validate it\&. The best way to do this would be by inserting the information to our peerstore, as it will conduct validation to prevent inserting bad data\&.
+.SH "Process"
+.PP
+.SS "Code"
+put this into mermaidjs to generate the diagram
+.PP
+.PP
+.nf
+sequenceDiagram
+    A->>+B: MESSAGE_INT
+    note right of B: MESSAGE_INT contains peer identifier and public key information
+    note right of B: MESSAGE_INT also informs the receiving peer to send back its info
+    B->>+B: insert A's information into peerstore
+    B->>+A: MESSAGE_FIN
+    note left of A: MESSAGE_FIN contians peer identifier and public key information
+    note left of A: MESSAGE_FIN however doesn't cause the receiving peer to send back its info
+    A->>+A: insert B's information into peerstore
+.fi
+.PP
+.SS "Diagram"
+ 

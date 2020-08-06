@@ -127,12 +127,16 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../de/d61/ecdsa_8h__dep__incl.png" border="0" usemap="#_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2ecdsa_8hdep" alt=""/></div>
 <map name="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2ecdsa_8hdep" id="_2media_2solidity_2_d_a_t_a_2_code_2_r_trade_ltd_2libcp2p_2include_2crypto_2ecdsa_8hdep">
-<area shape="rect" title="provides ECDSA cryptography support" alt="" coords="271,5,449,61"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html" title=" " alt="" coords="5,109,184,165"/>
-<area shape="rect" href="../../dc/d09/ecdsa_8c.html" title=" " alt="" coords="209,109,386,165"/>
-<area shape="rect" href="../../d1/dba/testutils_8c.html" title=" " alt="" coords="335,213,513,269"/>
-<area shape="rect" href="../../d3/d1a/testutils_8h.html" title=" " alt="" coords="461,109,659,165"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html" title=" " alt="" coords="537,213,757,269"/>
+<area shape="rect" title="provides ECDSA cryptography support" alt="" coords="335,5,513,61"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html" title=" " alt="" coords="5,117,184,173"/>
+<area shape="rect" href="../../dc/d09/ecdsa_8c.html" title=" " alt="" coords="209,117,386,173"/>
+<area shape="rect" href="../../d1/dba/testutils_8c.html" title=" " alt="" coords="249,228,426,284"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html" title="used to create a tcp/udp socket server listening on multiaddrs" alt="" coords="805,109,982,180"/>
+<area shape="rect" href="../../d3/d1a/testutils_8h.html" title=" " alt="" coords="461,117,659,173"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html" title=" " alt="" coords="909,228,1086,284"/>
+<area shape="rect" href="../../d1/dfc/socket__server_8c.html" title="used to create a tcp/udp socket server listening on multiaddrs" alt="" coords="1110,228,1317,284"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html" title=" " alt="" coords="694,228,885,284"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html" title=" " alt="" coords="450,228,670,284"/>
 </map>
 </div>
 </div>
@@ -154,9 +158,12 @@ Functions</h2></td></tr>
 <tr class="memitem:ab1fbd92d5f77addb900224162e1fb7d0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d5d/ecdsa_8h.html#ab1fbd92d5f77addb900224162e1fb7d0">libp2p_crypto_ecdsa_private_key_save</a> (<a class="el" href="../../d5/d5d/ecdsa_8h.html#af8379012776767ebddaa42fede59ccf5">ecdsa_private_key_t</a> *pk, char *path)</td></tr>
 <tr class="memdesc:ab1fbd92d5f77addb900224162e1fb7d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">used to save a private key at the given path  <a href="../../d5/d5d/ecdsa_8h.html#ab1fbd92d5f77addb900224162e1fb7d0">More...</a><br /></td></tr>
 <tr class="separator:ab1fbd92d5f77addb900224162e1fb7d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ababc4b1b736eb55ea94abd3175fb76ea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d5d/ecdsa_8h.html#ababc4b1b736eb55ea94abd3175fb76ea">libp2p_crypto_ecdsa_keypair_generation</a> (unsigned char *output, mbedtls_ecp_group_id curve)</td></tr>
-<tr class="memdesc:ababc4b1b736eb55ea94abd3175fb76ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">used to generate an ECDSA keypair  <a href="../../d5/d5d/ecdsa_8h.html#ababc4b1b736eb55ea94abd3175fb76ea">More...</a><br /></td></tr>
-<tr class="separator:ababc4b1b736eb55ea94abd3175fb76ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a563ea8762a532c798d0fa4b6d50583c1"><td class="memItemLeft" align="right" valign="top">unsigned char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d5d/ecdsa_8h.html#a563ea8762a532c798d0fa4b6d50583c1">libp2p_crypto_ecdsa_private_key_to_pem</a> (<a class="el" href="../../d5/d5d/ecdsa_8h.html#af8379012776767ebddaa42fede59ccf5">ecdsa_private_key_t</a> *pk)</td></tr>
+<tr class="memdesc:a563ea8762a532c798d0fa4b6d50583c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">takes a private key and returns its corresponding PEM format  <a href="../../d5/d5d/ecdsa_8h.html#a563ea8762a532c798d0fa4b6d50583c1">More...</a><br /></td></tr>
+<tr class="separator:a563ea8762a532c798d0fa4b6d50583c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07a5404b7d00f5fbeaf7529fd2c1580e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d5/d5d/ecdsa_8h.html#af8379012776767ebddaa42fede59ccf5">ecdsa_private_key_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d5d/ecdsa_8h.html#a07a5404b7d00f5fbeaf7529fd2c1580e">libp2p_crypto_ecdsa_keypair_generation</a> (mbedtls_ecp_group_id curve)</td></tr>
+<tr class="memdesc:a07a5404b7d00f5fbeaf7529fd2c1580e"><td class="mdescLeft">&#160;</td><td class="mdescRight">used to generate an ECDSA keypair  <a href="../../d5/d5d/ecdsa_8h.html#a07a5404b7d00f5fbeaf7529fd2c1580e">More...</a><br /></td></tr>
+<tr class="separator:a07a5404b7d00f5fbeaf7529fd2c1580e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a921b929610c8f4da6e9e10f6349759d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d5/d5d/ecdsa_8h.html#af8379012776767ebddaa42fede59ccf5">ecdsa_private_key_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d5d/ecdsa_8h.html#a921b929610c8f4da6e9e10f6349759d3">libp2p_crypto_ecdsa_pem_to_private_key</a> (unsigned char *pem_input)</td></tr>
 <tr class="memdesc:a921b929610c8f4da6e9e10f6349759d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">parses a PEM encoded private key and returns a struct for use  <a href="../../d5/d5d/ecdsa_8h.html#a921b929610c8f4da6e9e10f6349759d3">More...</a><br /></td></tr>
 <tr class="separator:a921b929610c8f4da6e9e10f6349759d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -220,93 +227,76 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d5/d5d/ecdsa_8h_adbec9a5580e49bed281b92f9a837c6e3_icgraph.png" border="0" usemap="#d5/d5d/ecdsa_8h_adbec9a5580e49bed281b92f9a837c6e3_icgraph" alt=""/></div>
 <map name="d5/d5d/ecdsa_8h_adbec9a5580e49bed281b92f9a837c6e3_icgraph" id="d5/d5d/ecdsa_8h_adbec9a5580e49bed281b92f9a837c6e3_icgraph">
-<area shape="rect" title="frees up resources allocated for the private key" alt="" coords="355,97,543,124"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="109,5,305,32"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a1401558d7902d15576f5aec9958a5d0e" title=" " alt="" coords="121,57,293,98"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="108,122,307,163"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a04d295869fa1a64f7c011ce0b287bf03" title=" " alt="" coords="113,187,301,229"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,5,60,32"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,129,60,156"/>
+<area shape="rect" title="frees up resources allocated for the private key" alt="" coords="848,157,1036,184"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a0873d0d29f1ce24a3a9c7a199c03a2a1" title="terminates a server and frees up resources associated with it" alt="" coords="628,56,773,83"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="375,56,553,83"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a5a2eac1ff27232eba96ba5d41145cd33" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="627,5,774,32"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="603,157,799,184"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a1401558d7902d15576f5aec9958a5d0e" title=" " alt="" coords="615,209,787,250"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="601,274,800,315"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a04d295869fa1a64f7c011ce0b287bf03" title=" " alt="" coords="607,339,795,381"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a990190006e127641a32a5d37d2368fce" title=" " alt="" coords="383,5,545,32"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a3cb566e1d17d9a6da5a87bb940f11a26" title=" " alt="" coords="108,5,327,32"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="190,56,245,83"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="437,157,491,184"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="437,281,491,308"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="ababc4b1b736eb55ea94abd3175fb76ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ababc4b1b736eb55ea94abd3175fb76ea">&#9670;&nbsp;</a></span>libp2p_crypto_ecdsa_keypair_generation()</h2>
+<a id="a07a5404b7d00f5fbeaf7529fd2c1580e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07a5404b7d00f5fbeaf7529fd2c1580e">&#9670;&nbsp;</a></span>libp2p_crypto_ecdsa_keypair_generation()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int libp2p_crypto_ecdsa_keypair_generation </td>
+          <td class="memname"><a class="el" href="../../d5/d5d/ecdsa_8h.html#af8379012776767ebddaa42fede59ccf5">ecdsa_private_key_t</a>* libp2p_crypto_ecdsa_keypair_generation </td>
           <td>(</td>
-          <td class="paramtype">unsigned char *&#160;</td>
-          <td class="paramname"><em>output</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">mbedtls_ecp_group_id&#160;</td>
-          <td class="paramname"><em>curve</em>&#160;</td>
-        </tr>
-        <tr>
+          <td class="paramname"><em>curve</em></td><td>)</td>
           <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>used to generate an ECDSA keypair </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">output</td><td>a buffer to write the ecdsa keypair into </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Fail: 0 </dd>
+<dl class="section return"><dt>Returns</dt><dd>Success: pointer to an ecdsa_private_key_t instance </dd>
 <dd>
-Success: 1</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname"><a class="el" href="../../d4/d54/structprivate__key.html">private_key</a></td><td>the place to store the private key </td></tr>
-    <tr><td class="paramname">curve</td><td>the ECC curve to use for key generation </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Fail: 0 </dd>
-<dd>
-Success: 1 </dd></dl>
+NUULL pointer </dd></dl>
 <ul>
 <li><dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000003">Todo:</a></b></dt><dd>figure out if we need this </dd></dl>
 </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d09/ecdsa_8c_source.html#l00184">184</a> of file <a class="el" href="../../dc/d09/ecdsa_8c_source.html">ecdsa.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d09/ecdsa_8c_source.html#l00183">183</a> of file <a class="el" href="../../dc/d09/ecdsa_8c_source.html">ecdsa.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="../../d5/d5d/ecdsa_8h_ababc4b1b736eb55ea94abd3175fb76ea_cgraph.png" border="0" usemap="#d5/d5d/ecdsa_8h_ababc4b1b736eb55ea94abd3175fb76ea_cgraph" alt=""/></div>
-<map name="d5/d5d/ecdsa_8h_ababc4b1b736eb55ea94abd3175fb76ea_cgraph" id="d5/d5d/ecdsa_8h_ababc4b1b736eb55ea94abd3175fb76ea_cgraph">
-<area shape="rect" title="used to generate an ECDSA keypair" alt="" coords="5,5,160,47"/>
-<area shape="rect" href="../../de/df1/util_8c.html#aceffb5d3f84b98c35c05dc580caddd45" title="prints the corresponding error to stdout" alt="" coords="208,13,359,39"/>
+<div class="center"><img src="../../d5/d5d/ecdsa_8h_a07a5404b7d00f5fbeaf7529fd2c1580e_cgraph.png" border="0" usemap="#d5/d5d/ecdsa_8h_a07a5404b7d00f5fbeaf7529fd2c1580e_cgraph" alt=""/></div>
+<map name="d5/d5d/ecdsa_8h_a07a5404b7d00f5fbeaf7529fd2c1580e_cgraph" id="d5/d5d/ecdsa_8h_a07a5404b7d00f5fbeaf7529fd2c1580e_cgraph">
+<area shape="rect" title="used to generate an ECDSA keypair" alt="" coords="5,35,160,76"/>
+<area shape="rect" href="../../dc/d09/ecdsa_8c.html#a921b929610c8f4da6e9e10f6349759d3" title="parses a PEM encoded private key and returns a struct for use" alt="" coords="208,5,369,47"/>
+<area shape="rect" href="../../de/df1/util_8c.html#aceffb5d3f84b98c35c05dc580caddd45" title="prints the corresponding error to stdout" alt="" coords="417,42,568,69"/>
 </map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="../../d5/d5d/ecdsa_8h_ababc4b1b736eb55ea94abd3175fb76ea_icgraph.png" border="0" usemap="#d5/d5d/ecdsa_8h_ababc4b1b736eb55ea94abd3175fb76ea_icgraph" alt=""/></div>
-<map name="d5/d5d/ecdsa_8h_ababc4b1b736eb55ea94abd3175fb76ea_icgraph" id="d5/d5d/ecdsa_8h_ababc4b1b736eb55ea94abd3175fb76ea_icgraph">
-<area shape="rect" title="used to generate an ECDSA keypair" alt="" coords="839,90,993,131"/>
-<area shape="rect" href="../../d3/d1a/testutils_8h.html#acc6bd851ac3572f19cc34d4191e799c3" title="returns a new PEM formatted ECDSA private key" alt="" coords="577,5,791,32"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a1401558d7902d15576f5aec9958a5d0e" title=" " alt="" coords="598,57,770,98"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="585,122,783,163"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a04d295869fa1a64f7c011ce0b287bf03" title=" " alt="" coords="590,187,778,229"/>
-<area shape="rect" href="../../d3/d1a/testutils_8h.html#abd07589504c93cfb9a04fd32a78997e1" title=" " alt="" coords="352,5,529,32"/>
+<div class="center"><img src="../../d5/d5d/ecdsa_8h_a07a5404b7d00f5fbeaf7529fd2c1580e_icgraph.png" border="0" usemap="#d5/d5d/ecdsa_8h_a07a5404b7d00f5fbeaf7529fd2c1580e_icgraph" alt=""/></div>
+<map name="d5/d5d/ecdsa_8h_a07a5404b7d00f5fbeaf7529fd2c1580e_icgraph" id="d5/d5d/ecdsa_8h_a07a5404b7d00f5fbeaf7529fd2c1580e_icgraph">
+<area shape="rect" title="used to generate an ECDSA keypair" alt="" coords="599,115,753,157"/>
+<area shape="rect" href="../../d3/d1a/testutils_8h.html#abd07589504c93cfb9a04fd32a78997e1" title=" " alt="" coords="363,31,540,57"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a1401558d7902d15576f5aec9958a5d0e" title=" " alt="" coords="365,82,537,123"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="352,147,551,189"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a04d295869fa1a64f7c011ce0b287bf03" title=" " alt="" coords="357,213,545,254"/>
 <area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="108,5,304,32"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="117,56,295,83"/>
 <area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,5,60,32"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="413,129,468,156"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,56,60,83"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="179,155,233,181"/>
 </map>
 </div>
 
@@ -332,7 +322,7 @@ Here is the caller graph for this function:</div>
 <p>this is useful for exchanging peer identifier information with</p>
 <p>anyone who connects to our host </p><dl class="section warning"><dt>Warning</dt><dd>caller must free returned pointer when no longer needed</dd></dl>
 <p>to get the peerid we take a sha256 hash of the public key file in PEM format</p>
-<p>we then generate a multihash of that sha256, and base58 encode it </p><dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000027">Todo:</a></b></dt><dd><p class="startdd">this currently relies on hard coded assumptions about hashing algorithm </p>
+<p>we then generate a multihash of that sha256, and base58 encode it </p><dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000025">Todo:</a></b></dt><dd><p class="startdd">this currently relies on hard coded assumptions about hashing algorithm </p>
 <p class="enddd">in the future this will change </p>
 </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -387,11 +377,17 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d5/d5d/ecdsa_8h_a821e2830f6759f41158ee38c18ca9252_icgraph.png" border="0" usemap="#d5/d5d/ecdsa_8h_a821e2830f6759f41158ee38c18ca9252_icgraph" alt=""/></div>
 <map name="d5/d5d/ecdsa_8h_a821e2830f6759f41158ee38c18ca9252_icgraph" id="d5/d5d/ecdsa_8h_a821e2830f6759f41158ee38c18ca9252_icgraph">
-<area shape="rect" title="returns a peer_id_t struct for the given private key" alt="" coords="355,27,509,69"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="109,5,305,32"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="108,57,307,98"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,5,60,32"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,64,60,91"/>
+<area shape="rect" title="returns a peer_id_t struct for the given private key" alt="" coords="848,99,1003,141"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a5a2eac1ff27232eba96ba5d41145cd33" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="627,56,774,83"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="603,107,799,133"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="601,158,800,199"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a990190006e127641a32a5d37d2368fce" title=" " alt="" coords="383,5,545,32"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="375,56,553,83"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a3cb566e1d17d9a6da5a87bb940f11a26" title=" " alt="" coords="108,5,327,32"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="190,56,245,83"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="437,107,491,133"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="437,165,491,192"/>
 </map>
 </div>
 
@@ -415,7 +411,7 @@ Here is the caller graph for this function:</div>
 
 <p>returns the public key associated with the private key in PEM format </p>
 <p>the returned struct is suitable for encoding into CBOR and sending to peers </p><dl class="section warning"><dt>Warning</dt><dd>caller must free returned data when no longer </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000026">Todo:</a></b></dt><dd>this currently relies in usage of <code>str..</code> we should use <code>mem...</code> instead </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000024">Todo:</a></b></dt><dd>this currently relies in usage of <code>str..</code> we should use <code>mem...</code> instead </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Success: an instance of public_key_t with the corresponding information </dd>
 <dd>
 Failure: NULL pointer</dd></dl>
@@ -441,14 +437,20 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d5/d5d/ecdsa_8h_abfd5e863b148643f0c78f6a426f21047_icgraph.png" border="0" usemap="#d5/d5d/ecdsa_8h_abfd5e863b148643f0c78f6a426f21047_icgraph" alt=""/></div>
 <map name="d5/d5d/ecdsa_8h_abfd5e863b148643f0c78f6a426f21047_icgraph" id="d5/d5d/ecdsa_8h_abfd5e863b148643f0c78f6a426f21047_icgraph">
-<area shape="rect" title="returns the public key associated with the private key in PEM format" alt="" coords="591,99,745,140"/>
-<area shape="rect" href="../../d5/d5d/ecdsa_8h.html#a821e2830f6759f41158ee38c18ca9252" title="returns a peer_id_t struct for the given private key" alt="" coords="371,40,526,81"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="109,11,305,38"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="108,84,307,125"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a1401558d7902d15576f5aec9958a5d0e" title=" " alt="" coords="121,149,293,191"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a04d295869fa1a64f7c011ce0b287bf03" title=" " alt="" coords="355,208,543,249"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,11,60,38"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,157,60,183"/>
+<area shape="rect" title="returns the public key associated with the private key in PEM format" alt="" coords="1084,138,1239,179"/>
+<area shape="rect" href="../../d5/d5d/ecdsa_8h.html#a821e2830f6759f41158ee38c18ca9252" title="returns a peer_id_t struct for the given private key" alt="" coords="865,54,1019,95"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a5a2eac1ff27232eba96ba5d41145cd33" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="627,31,774,57"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="603,111,799,137"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="601,163,800,205"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a1401558d7902d15576f5aec9958a5d0e" title=" " alt="" coords="856,222,1028,263"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a04d295869fa1a64f7c011ce0b287bf03" title=" " alt="" coords="848,287,1036,329"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a990190006e127641a32a5d37d2368fce" title=" " alt="" coords="383,5,545,32"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="375,56,553,83"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a3cb566e1d17d9a6da5a87bb940f11a26" title=" " alt="" coords="108,5,327,32"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="190,56,245,83"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="437,111,491,137"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="437,229,491,256"/>
 </map>
 </div>
 
@@ -494,15 +496,22 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d5/d5d/ecdsa_8h_a921b929610c8f4da6e9e10f6349759d3_icgraph.png" border="0" usemap="#d5/d5d/ecdsa_8h_a921b929610c8f4da6e9e10f6349759d3_icgraph" alt=""/></div>
 <map name="d5/d5d/ecdsa_8h_a921b929610c8f4da6e9e10f6349759d3_icgraph" id="d5/d5d/ecdsa_8h_a921b929610c8f4da6e9e10f6349759d3_icgraph">
-<area shape="rect" title="parses a PEM encoded private key and returns a struct for use" alt="" coords="599,115,760,157"/>
-<area shape="rect" href="../../d5/d5d/ecdsa_8h.html#a73c6a8cb5971191ba5dc7f940e45fa43" title="loads an ECDSA private key from a file containing a PEM key" alt="" coords="366,57,537,98"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a04d295869fa1a64f7c011ce0b287bf03" title=" " alt="" coords="112,115,300,157"/>
-<area shape="rect" href="../../d3/d1a/testutils_8h.html#abd07589504c93cfb9a04fd32a78997e1" title=" " alt="" coords="363,5,540,32"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a1401558d7902d15576f5aec9958a5d0e" title=" " alt="" coords="120,233,292,274"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="352,174,551,215"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,181,60,208"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="108,5,304,32"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,5,60,32"/>
+<area shape="rect" title="parses a PEM encoded private key and returns a struct for use" alt="" coords="1084,137,1245,179"/>
+<area shape="rect" href="../../d5/d5d/ecdsa_8h.html#a07a5404b7d00f5fbeaf7529fd2c1580e" title="used to generate an ECDSA keypair" alt="" coords="873,104,1028,145"/>
+<area shape="rect" href="../../d5/d5d/ecdsa_8h.html#a73c6a8cb5971191ba5dc7f940e45fa43" title="loads an ECDSA private key from a file containing a PEM key" alt="" coords="865,169,1036,211"/>
+<area shape="rect" href="../../d3/d1a/testutils_8h.html#abd07589504c93cfb9a04fd32a78997e1" title=" " alt="" coords="629,202,807,229"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a1401558d7902d15576f5aec9958a5d0e" title=" " alt="" coords="632,71,804,112"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="619,5,817,47"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a04d295869fa1a64f7c011ce0b287bf03" title=" " alt="" coords="624,136,812,177"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="375,177,571,203"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="383,227,562,254"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="190,177,245,203"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="190,227,245,254"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="445,78,500,105"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a5a2eac1ff27232eba96ba5d41145cd33" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="645,253,791,279"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a990190006e127641a32a5d37d2368fce" title=" " alt="" coords="392,278,553,305"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a3cb566e1d17d9a6da5a87bb940f11a26" title=" " alt="" coords="108,278,327,305"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,278,60,305"/>
 </map>
 </div>
 
@@ -535,7 +544,7 @@ Here is the caller graph for this function:</div>
 <dd>
 Failure: NULL pointer </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d09/ecdsa_8c_source.html#l00273">273</a> of file <a class="el" href="../../dc/d09/ecdsa_8c_source.html">ecdsa.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d09/ecdsa_8c_source.html#l00275">275</a> of file <a class="el" href="../../dc/d09/ecdsa_8c_source.html">ecdsa.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -551,9 +560,15 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d5/d5d/ecdsa_8h_a73c6a8cb5971191ba5dc7f940e45fa43_icgraph.png" border="0" usemap="#d5/d5d/ecdsa_8h_a73c6a8cb5971191ba5dc7f940e45fa43_icgraph" alt=""/></div>
 <map name="d5/d5d/ecdsa_8h_a73c6a8cb5971191ba5dc7f940e45fa43_icgraph" id="d5/d5d/ecdsa_8h_a73c6a8cb5971191ba5dc7f940e45fa43_icgraph">
-<area shape="rect" title="loads an ECDSA private key from a file containing a PEM key" alt="" coords="344,5,515,47"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a04d295869fa1a64f7c011ce0b287bf03" title=" " alt="" coords="108,5,296,47"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
+<area shape="rect" title="loads an ECDSA private key from a file containing a PEM key" alt="" coords="837,74,1008,115"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a5a2eac1ff27232eba96ba5d41145cd33" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="622,52,769,79"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a04d295869fa1a64f7c011ce0b287bf03" title=" " alt="" coords="601,103,789,145"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a990190006e127641a32a5d37d2368fce" title=" " alt="" coords="383,5,545,32"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="375,56,553,83"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a3cb566e1d17d9a6da5a87bb940f11a26" title=" " alt="" coords="108,5,327,32"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="190,56,245,83"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="437,111,491,137"/>
 </map>
 </div>
 
@@ -597,7 +612,7 @@ Here is the caller graph for this function:</div>
 <dd>
 Failure: 1 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d09/ecdsa_8c_source.html#l00240">240</a> of file <a class="el" href="../../dc/d09/ecdsa_8c_source.html">ecdsa.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d09/ecdsa_8c_source.html#l00242">242</a> of file <a class="el" href="../../dc/d09/ecdsa_8c_source.html">ecdsa.c</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -612,8 +627,51 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d5/d5d/ecdsa_8h_ab1fbd92d5f77addb900224162e1fb7d0_icgraph.png" border="0" usemap="#d5/d5d/ecdsa_8h_ab1fbd92d5f77addb900224162e1fb7d0_icgraph" alt=""/></div>
 <map name="d5/d5d/ecdsa_8h_ab1fbd92d5f77addb900224162e1fb7d0_icgraph" id="d5/d5d/ecdsa_8h_ab1fbd92d5f77addb900224162e1fb7d0_icgraph">
-<area shape="rect" title="used to save a private key at the given path" alt="" coords="344,5,499,47"/>
+<area shape="rect" title="used to save a private key at the given path" alt="" coords="344,35,499,76"/>
 <area shape="rect" href="../../d5/d29/crypto__test_8c.html#a04d295869fa1a64f7c011ce0b287bf03" title=" " alt="" coords="108,5,296,47"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="113,71,291,98"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,71,60,98"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a563ea8762a532c798d0fa4b6d50583c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a563ea8762a532c798d0fa4b6d50583c1">&#9670;&nbsp;</a></span>libp2p_crypto_ecdsa_private_key_to_pem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char* libp2p_crypto_ecdsa_private_key_to_pem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d5/d5d/ecdsa_8h.html#af8379012776767ebddaa42fede59ccf5">ecdsa_private_key_t</a> *&#160;</td>
+          <td class="paramname"><em>pk</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>takes a private key and returns its corresponding PEM format </p>
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d09/ecdsa_8c_source.html#l00296">296</a> of file <a class="el" href="../../dc/d09/ecdsa_8c_source.html">ecdsa.c</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d5/d5d/ecdsa_8h_a563ea8762a532c798d0fa4b6d50583c1_cgraph.png" border="0" usemap="#d5/d5d/ecdsa_8h_a563ea8762a532c798d0fa4b6d50583c1_cgraph" alt=""/></div>
+<map name="d5/d5d/ecdsa_8h_a563ea8762a532c798d0fa4b6d50583c1_cgraph" id="d5/d5d/ecdsa_8h_a563ea8762a532c798d0fa4b6d50583c1_cgraph">
+<area shape="rect" title="takes a private key and returns its corresponding PEM format" alt="" coords="5,5,167,47"/>
+<area shape="rect" href="../../de/df1/util_8c.html#aceffb5d3f84b98c35c05dc580caddd45" title="prints the corresponding error to stdout" alt="" coords="215,13,365,39"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d5/d5d/ecdsa_8h_a563ea8762a532c798d0fa4b6d50583c1_icgraph.png" border="0" usemap="#d5/d5d/ecdsa_8h_a563ea8762a532c798d0fa4b6d50583c1_icgraph" alt=""/></div>
+<map name="d5/d5d/ecdsa_8h_a563ea8762a532c798d0fa4b6d50583c1_icgraph" id="d5/d5d/ecdsa_8h_a563ea8762a532c798d0fa4b6d50583c1_icgraph">
+<area shape="rect" title="takes a private key and returns its corresponding PEM format" alt="" coords="355,5,516,47"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="108,5,307,47"/>
 <area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
 </map>
 </div>

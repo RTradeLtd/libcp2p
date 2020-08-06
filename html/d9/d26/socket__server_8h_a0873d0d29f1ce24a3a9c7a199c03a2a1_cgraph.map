@@ -1,13 +1,10 @@
 <map id="free_socket_server" name="free_socket_server">
-<area shape="rect" id="node1" title="terminates a server and frees up resources associated with it" alt="" coords="5,31,151,57"/>
-<area shape="rect" id="node2" href="$d1/d22/logger_8c.html#a8cf74430151bf53ab52b8b94788186af" title="free resources for the threaded logger" alt="" coords="199,5,349,32"/>
-<area shape="rect" id="node3" href="$db/d84/thread__pool_8c.html#ae35764bc7ae46da374abd9d44db547ae" title=" " alt="" coords="215,56,333,83"/>
-<area shape="rect" id="node4" href="$db/d84/thread__pool_8c.html#ae6e1dd79d442233da83062562ee6972c" title=" " alt="" coords="409,5,525,32"/>
-<area shape="rect" id="node5" href="$db/d84/thread__pool_8c.html#a207f3cb12623e70e3cca759ad1b4382b" title=" " alt="" coords="397,56,536,83"/>
-<area shape="rect" id="node11" href="$db/d84/thread__pool_8c.html#aa1d12971ef30887ddfa7ce3cf71c34a8" title=" " alt="" coords="407,107,527,133"/>
-<area shape="rect" id="node6" href="$db/d84/thread__pool_8c.html#a4150995d61669c98f258fdeae6a5c51a" title=" " alt="" coords="584,56,705,83"/>
-<area shape="rect" id="node7" href="$db/d84/thread__pool_8c.html#a142c7c2ae2e4668b79c118be9ac821d9" title=" " alt="" coords="761,31,859,57"/>
-<area shape="rect" id="node9" href="$db/d84/thread__pool_8c.html#abfa490edbbfd573e2994fbe5b835075a" title=" " alt="" coords="753,81,867,108"/>
-<area shape="rect" id="node8" href="$db/d84/thread__pool_8c.html#a5d80ec2da8e51ce42dc7c62cbe4bd5fb" title=" " alt="" coords="918,31,1005,57"/>
-<area shape="rect" id="node10" href="$db/d84/thread__pool_8c.html#a81956b8f532e6b303d98ebc51afbc5f7" title=" " alt="" coords="915,81,1008,108"/>
+<area shape="rect" id="node1" title="terminates a server and frees up resources associated with it" alt="" coords="5,144,151,171"/>
+<area shape="rect" id="node2" href="$d1/d8c/logger_8h.html#a8cf74430151bf53ab52b8b94788186af" title="free resources for the threaded logger" alt="" coords="217,5,368,32"/>
+<area shape="rect" id="node3" href="$dc/d09/ecdsa_8c.html#adbec9a5580e49bed281b92f9a837c6e3" title="frees up resources allocated for the private key" alt="" coords="199,56,387,83"/>
+<area shape="rect" id="node4" href="$db/dfd/key_8c.html#abb6b43f3899e4ef603898cb5aedfe4ef" title="free up resources associated with a public_key_t instance" alt="" coords="215,107,371,149"/>
+<area shape="rect" id="node5" href="$dc/d82/peerutils_8c.html#a7321b177cf43608eeba6a805ca89c3a2" title="free up resources allocated for an instance of peer_id_t" alt="" coords="217,173,368,200"/>
+<area shape="rect" id="node6" href="$d8/dab/peerstore_8c.html#ab4a187b6b216e39ec568d620821145c6" title="frees up resources allocated for peerstore_t and all peers" alt="" coords="199,224,386,251"/>
+<area shape="rect" id="node8" href="$d3/dec/thread__pool_8h.html#a3f7ae2d8df2cc8e116d89af70ef554aa" title=" " alt="" coords="233,275,352,301"/>
+<area shape="rect" id="node7" href="$d8/dab/peerstore_8c.html#a803e5ca3ba6db4721b80f46a0a7bad09" title="frees up resources allocated for peer_t" alt="" coords="435,224,588,251"/>
 </map>

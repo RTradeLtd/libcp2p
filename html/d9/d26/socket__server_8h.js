@@ -14,8 +14,14 @@ var socket__server_8h =
     [ "accept_connections", "d9/d26/socket__server_8h.html#a49c2655f4394c1887f17b5ec7c1fa267", null ],
     [ "free_socket_server", "d9/d26/socket__server_8h.html#a0873d0d29f1ce24a3a9c7a199c03a2a1", null ],
     [ "free_socket_server_config", "d9/d26/socket__server_8h.html#a77df78f3e8eb1b69cca2b4f2c6b3e354", null ],
-    [ "new_socket_server", "d9/d26/socket__server_8h.html#abdfa0f6886955caae3b71928592e0301", null ],
-    [ "new_socket_server_config", "d9/d26/socket__server_8h.html#af4270b309bd086c69ec7390255b7c0ab", null ],
+    [ "handle_hello_protocol", "d9/d26/socket__server_8h.html#a522916191d4db90bdf14749780cfb826", null ],
+    [ "handle_inbound_rpc", "d9/d26/socket__server_8h.html#a3bc7eef996be3f8c2118e4d1a523c8e1", null ],
+    [ "negotiate_secure_connection", "d9/d26/socket__server_8h.html#ac3a6914fea7b9d4bb05788c5d2e7cbf7", null ],
+    [ "new_server_message_hello_t", "d9/d26/socket__server_8h.html#ad94bad804bf1ae605d0264a9d94cd9c4", null ],
+    [ "new_socket_server", "d9/d26/socket__server_8h.html#a5a2eac1ff27232eba96ba5d41145cd33", null ],
+    [ "new_socket_server_config", "d9/d26/socket__server_8h.html#a0a9835b57e74926457725150c2d2fed4", null ],
+    [ "setup_signal_shutdown", "d9/d26/socket__server_8h.html#a82a87ba8f808385b70f1d847246e09d0", null ],
     [ "signal_shutdown", "d9/d26/socket__server_8h.html#a80876c3df4dfb0c5d793cb641c884600", null ],
+    [ "socket_server_send", "d9/d26/socket__server_8h.html#ac46d616db88eb59d2f28ea6e3d3188bf", null ],
     [ "start_socket_server", "d9/d26/socket__server_8h.html#a1ce9882f112a3f405b53cdc3d35a2def", null ]
 ];

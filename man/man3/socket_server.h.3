@@ -1,4 +1,4 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/network/socket_server.h" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/network/socket_server.h" 3 "Thu Aug 6 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,13 +7,23 @@
 .SH SYNOPSIS
 .br
 .PP
+\fC#include 'crypto/ecdsa\&.h'\fP
+.br
+\fC#include 'crypto/key\&.h'\fP
+.br
+\fC#include 'crypto/peerutils\&.h'\fP
+.br
 \fC#include 'multiaddr/multiaddr\&.h'\fP
+.br
+\fC#include 'network/messages\&.h'\fP
 .br
 \fC#include 'network/socket_client\&.h'\fP
 .br
-\fC#include 'utils/logger\&.h'\fP
+\fC#include 'peerstore/peerstore\&.h'\fP
 .br
-\fC#include 'utils/thread_pool\&.h'\fP
+\fC#include 'thirdparty/logger/logger\&.h'\fP
+.br
+\fC#include 'thirdparty/thread_pool/thread_pool\&.h'\fP
 .br
 \fC#include <arpa/inet\&.h>\fP
 .br
@@ -81,7 +91,7 @@
 
 .in +1c
 .ti -1c
-.RI "\fBsocket_server_t\fP * \fBnew_socket_server\fP (\fBthread_logger\fP *thl, \fBsocket_server_config_t\fP config)"
+.RI "\fBsocket_server_t\fP * \fBnew_socket_server\fP (\fBthread_logger\fP *thl, \fBsocket_server_config_t\fP *config, \fBSOCKET_OPTS\fP sock_opts[], int num_opts)"
 .br
 .RI "used to create a TCP/UDP socket server ready to accept connections "
 .ti -1c
@@ -109,9 +119,33 @@
 .br
 .RI "used to free up resources allocated for socket_server_config_t "
 .ti -1c
-.RI "\fBsocket_server_config_t\fP * \fBnew_socket_server_config\fP ()"
+.RI "\fBsocket_server_config_t\fP * \fBnew_socket_server_config\fP (int num_addrs)"
 .br
 .RI "used to initialize a socket_server_config_t object "
+.ti -1c
+.RI "void \fBhandle_inbound_rpc\fP (void *data)"
+.br
+.RI "handles receiving an rpc message from another peer "
+.ti -1c
+.RI "void \fBsetup_signal_shutdown\fP (int signals[], int num_signals)"
+.br
+.RI "used to specify which syscall signals should trigger shutdown process "
+.ti -1c
+.RI "bool \fBnegotiate_secure_connection\fP (\fBconn_handle_data_t\fP *data)"
+.br
+.RI "used to negotiate a secure connection with the current connection "
+.ti -1c
+.RI "bool \fBhandle_hello_protocol\fP (\fBconn_handle_data_t\fP *data, \fBmessage_t\fP *msg)"
+.br
+.RI "handles receiving a hello protocol message from another peer "
+.ti -1c
+.RI "int \fBsocket_server_send\fP (\fBsocket_server_t\fP *srv, \fBmulti_addr_t\fP *to_address, \fBmessage_t\fP *msg)"
+.br
+.RI "used for a server to send a message to another server "
+.ti -1c
+.RI "\fBmessage_hello_t\fP * \fBnew_server_message_hello_t\fP (\fBsocket_server_t\fP *srv)"
+.br
+.RI "helper function to return a message_hello_t using our server values "
 .in -1c
 .SH "Detailed Description"
 .PP 
@@ -125,7 +159,7 @@ Definition in file \fBsocket_server\&.h\fP\&.
 .SS "#define MAX_ADDRS   100"
 
 .PP
-Definition at line 31 of file socket_server\&.h\&.
+Definition at line 36 of file socket_server\&.h\&.
 .SH "Typedef Documentation"
 .PP 
 .SS "typedef struct \fBclient_conn\fP \fBclient_conn_t\fP"
@@ -140,6 +174,14 @@ used for configuring a socket_server_t instance
 \fBTodo\fP
 .RS 4
 switch to multi_addresses 
+.RE
+.PP
+.PP
+once you have used the config and created a new server with \fBnew_socket_server()\fP you can free the socket config with free_socket_config 
+.PP
+\fBNote\fP
+.RS 4
+once you have used the config and created a new server with \fBnew_socket_server()\fP you can free the socket config with free_socket_config 
 .RE
 .PP
 
@@ -159,7 +201,7 @@ dont limit to two sockets (this will requiring using multiaddrs and an array of 
 .PP
 defines a function signature that is used for submitting tasks to our thread pool 
 .PP
-Definition at line 37 of file socket_server\&.h\&.
+Definition at line 42 of file socket_server\&.h\&.
 .SH "Function Documentation"
 .PP 
 .SS "\fBclient_conn_t\fP* accept_client_conn (\fBsocket_server_t\fP * srv, int socket_num)"
@@ -176,7 +218,7 @@ Success: non-NULL populated \fBclient_conn\fP object
 .PP
 
 .PP
-Definition at line 381 of file socket_server\&.c\&.
+Definition at line 330 of file socket_server\&.c\&.
 .SS "void* accept_connections (void * data)"
 
 .PP
@@ -193,7 +235,7 @@ processes new connections by launching them
 .PP
 terminates a server and frees up resources associated with it 
 .PP
-Definition at line 236 of file socket_server\&.c\&.
+Definition at line 201 of file socket_server\&.c\&.
 .SS "void free_socket_server_config (\fBsocket_server_config_t\fP * config)"
 
 .PP
@@ -206,8 +248,52 @@ used to free up resources allocated for socket_server_config_t
 .PP
 
 .PP
-Definition at line 411 of file socket_server\&.c\&.
-.SS "\fBsocket_server_t\fP* new_socket_server (\fBthread_logger\fP * thl, \fBsocket_server_config_t\fP config)"
+Definition at line 361 of file socket_server\&.c\&.
+.SS "bool handle_hello_protocol (\fBconn_handle_data_t\fP * data, \fBmessage_t\fP * msg)"
+
+.PP
+handles receiving a hello protocol message from another peer is responsible for exchanging identification information with a peer
+.PP
+and updating our peerstore with the appropriate information 
+.PP
+Definition at line 525 of file socket_server\&.c\&.
+.SS "void handle_inbound_rpc (void * data)"
+
+.PP
+handles receiving an rpc message from another peer 
+.PP
+\fBNote\fP
+.RS 4
+if you send an inbound message of \fC5hello\fP you'll invoke a debug handler to print to stdout
+.PP
+if you send an inbound message of \fC5hello\fP you'll invoke a debug handler to print to stdout 
+.RE
+.PP
+\fBWarning\fP
+.RS 4
+needs to check to see if the data we are getting is for a tcp or udp connection 
+.PP
+if a tcp connection we need to close the socket (as its the socket connecting to the client) 
+.PP
+if a udp connection we dont close the socket and simply free the resources 
+.RE
+.PP
+
+.PP
+Definition at line 397 of file socket_server\&.c\&.
+.SS "bool negotiate_secure_connection (\fBconn_handle_data_t\fP * data)"
+
+.PP
+used to negotiate a secure connection with the current connection 
+.PP
+Definition at line 492 of file socket_server\&.c\&.
+.SS "\fBmessage_hello_t\fP* new_server_message_hello_t (\fBsocket_server_t\fP * srv)"
+
+.PP
+helper function to return a message_hello_t using our server values 
+.PP
+Definition at line 656 of file socket_server\&.c\&.
+.SS "\fBsocket_server_t\fP* new_socket_server (\fBthread_logger\fP * thl, \fBsocket_server_config_t\fP * config, \fBSOCKET_OPTS\fP sock_opts[], int num_opts)"
 
 .PP
 used to create a TCP/UDP socket server ready to accept connections 
@@ -217,42 +303,30 @@ used to create a TCP/UDP socket server ready to accept connections
 \fIthl\fP an instance of a \fBthread_logger\fP 
 .br
 \fIconfig\fP the configuration settings used for the tcp/udp server 
+.br
+\fIsock_opts\fP an array of options to configure the sockets we open with 
+.br
+\fInum_opts\fP the number of socket options we are using, providing a number that does not match the actual number of options is undefined behavior 
 .RE
 .PP
 \fBReturns\fP
 .RS 4
 Success: pointer to a socket_server_t instance 
 .PP
-Failure: NULL pointer 
+Failure: NULL pointer
+.RE
+.PP
+once you have used the config and created a new server with 
+.PP
+\fBNote\fP
+.RS 4
+once you have used the config and created a new server with 
 .RE
 .PP
 
 .PP
-\fBWarning\fP
-.RS 4
-support non wildcard 
-.RE
-.PP
-\fBTodo\fP
-.RS 4
-support non wildcard 
-.RE
-.PP
-.PP
-\fBWarning\fP
-.RS 4
-support non wildcard 
-.RE
-.PP
-\fBTodo\fP
-.RS 4
-support non wildcard 
-.RE
-.PP
-
-.PP
-Definition at line 52 of file socket_server\&.c\&.
-.SS "\fBsocket_server_config_t\fP* new_socket_server_config ()"
+Definition at line 57 of file socket_server\&.c\&.
+.SS "\fBsocket_server_config_t\fP* new_socket_server_config (int num_addrs)"
 
 .PP
 used to initialize a socket_server_config_t object 
@@ -270,6 +344,14 @@ Failure: NULL pointer
 .RE
 .PP
 
+.PP
+Definition at line 376 of file socket_server\&.c\&.
+.SS "void setup_signal_shutdown (int signals[], int num_signals)"
+
+.PP
+used to specify which syscall signals should trigger shutdown process 
+.PP
+Definition at line 483 of file socket_server\&.c\&.
 .SS "void signal_shutdown ()"
 
 .PP
@@ -282,7 +364,30 @@ this is only useful if you launch start_socket_server in a thread
 .PP
 
 .PP
-Definition at line 370 of file socket_server\&.c\&.
+Definition at line 319 of file socket_server\&.c\&.
+.SS "int socket_server_send (\fBsocket_server_t\fP * srv, \fBmulti_addr_t\fP * to_address, \fBmessage_t\fP * msg)"
+
+.PP
+used for a server to send a message to another server this is a sort of 'bi-directional RPC method' whereby a server can send a
+.PP
+request to another server acting as a client, but enabling either us
+.PP
+or the peer to invoke RPC methods\&. Essentially it is like handle_inbound_rpc
+.PP
+except it is responsible for sending requests to a remote server, and any responses
+.PP
+from the server are ran through handle_inbound_rpc 
+.PP
+\fBReturns\fP
+.RS 4
+Success: 0 
+.PP
+Failure: -1 
+.RE
+.PP
+
+.PP
+Definition at line 607 of file socket_server\&.c\&.
 .SS "void start_socket_server (\fBsocket_server_t\fP * srv)"
 
 .PP
@@ -324,7 +429,7 @@ this will likely search a few extra sockets, but the overhead should be neglibie
 .PP
 
 .PP
-Definition at line 262 of file socket_server\&.c\&.
+Definition at line 244 of file socket_server\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for libcp2p from the source code\&.

@@ -1,4 +1,4 @@
-.TH "CborParsing" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
+.TH "CborParsing" 3 "Thu Aug 6 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -44,7 +44,7 @@ CborParsing \- Group of functions used to parse CBOR streams\&.
 .RI "static uint64_t \fBget64\fP (const uint8_t *ptr)"
 .br
 .ti -1c
-.RI "\fBCborError\fP \fBCBOR_INTERNAL_API_CC\fP \fB_cbor_value_extract_number\fP (const uint8_t **ptr, const uint8_t *end, uint64_t *len)"
+.RI "\fBCborError\fP \fBCBOR_INTERNAL_API_CC\fP \fB_cbor_value_extract_number\fP (const uint8_t **ptr, const uint8_t *\fBend\fP, uint64_t *len)"
 .br
 .ti -1c
 .RI "static \fBCborError\fP \fBextract_length\fP (const \fBCborParser\fP *parser, const uint8_t **ptr, size_t *len)"

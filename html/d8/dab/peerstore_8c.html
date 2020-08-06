@@ -141,7 +141,7 @@ Functions</h2></td></tr>
 <tr class="memitem:afb6e5d4569e8a9b65e5049c28c472890"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dab/peerstore_8c.html#afb6e5d4569e8a9b65e5049c28c472890">peerstore_resize_if_needed</a> (<a class="el" href="../../d5/d3e/peerstore_8h.html#a59e475eb4bc8a2e7f56b1ad2c93ec794">peerstore_t</a> *pst)</td></tr>
 <tr class="memdesc:afb6e5d4569e8a9b65e5049c28c472890"><td class="mdescLeft">&#160;</td><td class="mdescRight">performs a check to see if we need to allocate more memory  <a href="../../d8/dab/peerstore_8c.html#afb6e5d4569e8a9b65e5049c28c472890">More...</a><br /></td></tr>
 <tr class="separator:afb6e5d4569e8a9b65e5049c28c472890"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a751513b93d03c75421391a87fc874f94"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dab/peerstore_8c.html#a751513b93d03c75421391a87fc874f94">peerstore_get_public_key</a> (<a class="el" href="../../d5/d3e/peerstore_8h.html#a59e475eb4bc8a2e7f56b1ad2c93ec794">peerstore_t</a> *pst, unsigned char *<a class="el" href="../../d1/d33/structpeer__id.html">peer_id</a>, unsigned char *output, size_t output_len)</td></tr>
+<tr class="memitem:a751513b93d03c75421391a87fc874f94"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dab/peerstore_8c.html#a751513b93d03c75421391a87fc874f94">peerstore_get_public_key</a> (<a class="el" href="../../d5/d3e/peerstore_8h.html#a59e475eb4bc8a2e7f56b1ad2c93ec794">peerstore_t</a> *pst, unsigned char *<a class="el" href="../../d1/d33/structpeer__id.html">peer_id</a>, unsigned char *<a class="el" href="../../d8/dfd/command__line_8h.html#a3c1da89e54ad92f9a339024d1529b716">output</a>, size_t output_len)</td></tr>
 <tr class="memdesc:a751513b93d03c75421391a87fc874f94"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the public key associated with the peer id  <a href="../../d8/dab/peerstore_8c.html#a751513b93d03c75421391a87fc874f94">More...</a><br /></td></tr>
 <tr class="separator:a751513b93d03c75421391a87fc874f94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adec424d7ca6bc416943aff4526e7f351"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/dab/peerstore_8c.html#adec424d7ca6bc416943aff4526e7f351">peerstore_validate_peer_id</a> (unsigned char *<a class="el" href="../../d1/d33/structpeer__id.html">peer_id</a>, unsigned char *<a class="el" href="../../d3/dce/structpublic__key.html">public_key</a>, size_t peer_id_len, size_t public_key_len)</td></tr>
@@ -156,7 +156,7 @@ Functions</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>Bonedaddy</dd></dl>
 <p>it provides access to an in-memory store of all known peers</p>
 <p>peers are indexed by their peer identifier and contain the corresponding public key </p><dl class="section note"><dt>Note</dt><dd>in the future this may also contain addressing information </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000014">Todo:</a></b></dt><dd><p class="startdd">for secure connection negotiation, we need to figure out a way we can cache the result </p>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000013">Todo:</a></b></dt><dd><p class="startdd">for secure connection negotiation, we need to figure out a way we can cache the result </p>
 <p class="interdd">of this negotiation to prevent having to continuously do it in between sessions with a peer </p>
 <p class="enddd">however we also need a way to "clear the cache" periodically to require reauthentication for security </p>
 </dd></dl>
@@ -194,12 +194,19 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d8/dab/peerstore_8c_a803e5ca3ba6db4721b80f46a0a7bad09_icgraph.png" border="0" usemap="#d8/dab/peerstore_8c_a803e5ca3ba6db4721b80f46a0a7bad09_icgraph" alt=""/></div>
 <map name="d8/dab/peerstore_8c_a803e5ca3ba6db4721b80f46a0a7bad09_icgraph" id="d8/dab/peerstore_8c_a803e5ca3ba6db4721b80f46a0a7bad09_icgraph">
-<area shape="rect" title="frees up resources allocated for peer_t" alt="" coords="587,64,740,91"/>
-<area shape="rect" href="../../d5/d3e/peerstore_8h.html#ab4a187b6b216e39ec568d620821145c6" title="frees up resources allocated for peerstore_t and all peers" alt="" coords="352,64,539,91"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="108,5,304,32"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a0577da79400a4c72e126a69a9dc613cb" title=" " alt="" coords="131,57,281,98"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a5c6fdce90155d4e48c33b2729eacfc79" title="this doesnt actually test reszigin as that is covered by peer insertion tests" alt="" coords="118,122,294,163"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,64,60,91"/>
+<area shape="rect" title="frees up resources allocated for peer_t" alt="" coords="1080,107,1233,133"/>
+<area shape="rect" href="../../d5/d3e/peerstore_8h.html#ab4a187b6b216e39ec568d620821145c6" title="frees up resources allocated for peerstore_t and all peers" alt="" coords="845,107,1032,133"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a0873d0d29f1ce24a3a9c7a199c03a2a1" title="terminates a server and frees up resources associated with it" alt="" coords="627,56,772,83"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a5a2eac1ff27232eba96ba5d41145cd33" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="626,5,773,32"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="601,107,797,133"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a0577da79400a4c72e126a69a9dc613cb" title=" " alt="" coords="624,158,775,199"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a5c6fdce90155d4e48c33b2729eacfc79" title="this doesnt actually test reszigin as that is covered by peer insertion tests" alt="" coords="611,223,787,265"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a990190006e127641a32a5d37d2368fce" title=" " alt="" coords="383,56,545,83"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="375,5,553,32"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a3cb566e1d17d9a6da5a87bb940f11a26" title=" " alt="" coords="108,56,327,83"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="190,5,245,32"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="437,165,491,192"/>
 </map>
 </div>
 
@@ -240,11 +247,18 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d8/dab/peerstore_8c_ab4a187b6b216e39ec568d620821145c6_icgraph.png" border="0" usemap="#d8/dab/peerstore_8c_ab4a187b6b216e39ec568d620821145c6_icgraph" alt=""/></div>
 <map name="d8/dab/peerstore_8c_ab4a187b6b216e39ec568d620821145c6_icgraph" id="d8/dab/peerstore_8c_ab4a187b6b216e39ec568d620821145c6_icgraph">
-<area shape="rect" title="frees up resources allocated for peerstore_t and all peers" alt="" coords="352,64,539,91"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="108,5,304,32"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a0577da79400a4c72e126a69a9dc613cb" title=" " alt="" coords="131,57,281,98"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a5c6fdce90155d4e48c33b2729eacfc79" title="this doesnt actually test reszigin as that is covered by peer insertion tests" alt="" coords="118,122,294,163"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,64,60,91"/>
+<area shape="rect" title="frees up resources allocated for peerstore_t and all peers" alt="" coords="845,107,1032,133"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a0873d0d29f1ce24a3a9c7a199c03a2a1" title="terminates a server and frees up resources associated with it" alt="" coords="627,56,772,83"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a5a2eac1ff27232eba96ba5d41145cd33" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="626,5,773,32"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="601,107,797,133"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a0577da79400a4c72e126a69a9dc613cb" title=" " alt="" coords="624,158,775,199"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a5c6fdce90155d4e48c33b2729eacfc79" title="this doesnt actually test reszigin as that is covered by peer insertion tests" alt="" coords="611,223,787,265"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a990190006e127641a32a5d37d2368fce" title=" " alt="" coords="383,56,545,83"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="375,5,553,32"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a3cb566e1d17d9a6da5a87bb940f11a26" title=" " alt="" coords="108,56,327,83"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,60,83"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="190,5,245,32"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="437,165,491,192"/>
 </map>
 </div>
 
@@ -352,10 +366,17 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d8/dab/peerstore_8c_a7e7ddfd10b79e9a0cb2cd09bd17741d9_icgraph.png" border="0" usemap="#d8/dab/peerstore_8c_a7e7ddfd10b79e9a0cb2cd09bd17741d9_icgraph" alt=""/></div>
 <map name="d8/dab/peerstore_8c_a7e7ddfd10b79e9a0cb2cd09bd17741d9_icgraph" id="d8/dab/peerstore_8c_a7e7ddfd10b79e9a0cb2cd09bd17741d9_icgraph">
-<area shape="rect" title="check if we have information for the given peer_id" alt="" coords="564,31,723,57"/>
-<area shape="rect" href="../../d5/d3e/peerstore_8h.html#ae1716fa6a8fa77ef2971750a57139988" title="used to insert a peer_id public_key pair into our peerstore" alt="" coords="352,5,516,32"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="108,31,304,57"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,31,60,57"/>
+<area shape="rect" title="check if we have information for the given peer_id" alt="" coords="1257,56,1416,83"/>
+<area shape="rect" href="../../d5/d3e/peerstore_8h.html#ae1716fa6a8fa77ef2971750a57139988" title="used to insert a peer_id public_key pair into our peerstore" alt="" coords="1045,31,1209,57"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="801,81,997,108"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a522916191d4db90bdf14749780cfb826" title="handles receiving a hello protocol message from another peer" alt="" coords="817,31,982,57"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a3bc7eef996be3f8c2118e4d1a523c8e1" title="handles receiving an rpc message from another peer" alt="" coords="601,31,753,57"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a990190006e127641a32a5d37d2368fce" title=" " alt="" coords="383,5,545,32"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="375,56,553,83"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a3cb566e1d17d9a6da5a87bb940f11a26" title=" " alt="" coords="108,5,327,32"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="190,56,245,83"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="650,81,705,108"/>
 </map>
 </div>
 
@@ -409,19 +430,19 @@ Here is the caller graph for this function:</div>
 <p>checks to see if we have a peer before inserting, and all inserts</p>
 <p>are verified such that we ensure the given <a class="el" href="../../d3/dce/structpublic__key.html">public_key</a> matches the <a class="el" href="../../d1/d33/structpeer__id.html">peer_id</a></p>
 <p>however we should do this after we check if we have the peer to prevent excessive work </p><dl class="section note"><dt>Note</dt><dd>if we already have the peer we report true and return early </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000015">Todo:</a></b></dt><dd>fix possible race condition with peerstore_have_peer check and the write lock we claim here </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000014">Todo:</a></b></dt><dd>fix possible race condition with peerstore_have_peer check and the write lock we claim here </dd></dl>
 <dl class="section warning"><dt>Warning</dt><dd><a class="el" href="../../d1/d33/structpeer__id.html">peer_id</a> must be sha256 based </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000016">Todo:</a></b></dt><dd>add <a class="el" href="../../d1/d33/structpeer__id.html">peer_id</a> and <a class="el" href="../../d3/dce/structpublic__key.html">public_key</a> verification </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000015">Todo:</a></b></dt><dd>add <a class="el" href="../../d1/d33/structpeer__id.html">peer_id</a> and <a class="el" href="../../d3/dce/structpublic__key.html">public_key</a> verification </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Success (not addedd): true </dd>
 <dd>
 Success(added): true </dd>
 <dd>
 Failure: false </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000017">Todo:</a></b></dt><dd>this isn't entirely race free, and it is possible for 2 requests to occur in a row </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000016">Todo:</a></b></dt><dd>this isn't entirely race free, and it is possible for 2 requests to occur in a row </dd></dl>
 <ul>
-<li><dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000018">Todo:</a></b></dt><dd>enable lru type cache to clean out old entries </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000019">Todo:</a></b></dt><dd>dont insert if we already have data for this peer </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000020">Todo:</a></b></dt><dd>this is where the race condition lies </dd></dl>
+<li><dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000017">Todo:</a></b></dt><dd>enable lru type cache to clean out old entries </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000018">Todo:</a></b></dt><dd>dont insert if we already have data for this peer </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000019">Todo:</a></b></dt><dd>this is where the race condition lies </dd></dl>
 </li>
 </ul>
 <dl class="section note"><dt>Note</dt><dd>compute the peerID from the public key we are given</dd>
@@ -472,9 +493,16 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d8/dab/peerstore_8c_ae1716fa6a8fa77ef2971750a57139988_icgraph.png" border="0" usemap="#d8/dab/peerstore_8c_ae1716fa6a8fa77ef2971750a57139988_icgraph" alt=""/></div>
 <map name="d8/dab/peerstore_8c_ae1716fa6a8fa77ef2971750a57139988_icgraph" id="d8/dab/peerstore_8c_ae1716fa6a8fa77ef2971750a57139988_icgraph">
-<area shape="rect" title="used to insert a peer_id public_key pair into our peerstore" alt="" coords="352,5,516,32"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="108,5,304,32"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,5,60,32"/>
+<area shape="rect" title="used to insert a peer_id public_key pair into our peerstore" alt="" coords="1045,56,1209,83"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a522916191d4db90bdf14749780cfb826" title="handles receiving a hello protocol message from another peer" alt="" coords="817,31,982,57"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="801,81,997,108"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a3bc7eef996be3f8c2118e4d1a523c8e1" title="handles receiving an rpc message from another peer" alt="" coords="601,31,753,57"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a990190006e127641a32a5d37d2368fce" title=" " alt="" coords="383,5,545,32"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="375,56,553,83"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a3cb566e1d17d9a6da5a87bb940f11a26" title=" " alt="" coords="108,5,327,32"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="190,56,245,83"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="650,81,705,108"/>
 </map>
 </div>
 
@@ -507,12 +535,18 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d8/dab/peerstore_8c_ac8cb545aa11a4c12c61fa4d5c1a3cacb_icgraph.png" border="0" usemap="#d8/dab/peerstore_8c_ac8cb545aa11a4c12c61fa4d5c1a3cacb_icgraph" alt=""/></div>
 <map name="d8/dab/peerstore_8c_ac8cb545aa11a4c12c61fa4d5c1a3cacb_icgraph" id="d8/dab/peerstore_8c_ac8cb545aa11a4c12c61fa4d5c1a3cacb_icgraph">
-<area shape="rect" title="returns a new instance of peerstore_t" alt="" coords="565,64,752,91"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a816a5c4adfe757de96bd234e8b99b1e8" title="returns the peerstore triggering and assertion failure if creation fails" alt="" coords="352,64,517,91"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="108,5,304,32"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a0577da79400a4c72e126a69a9dc613cb" title=" " alt="" coords="131,57,281,98"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a5c6fdce90155d4e48c33b2729eacfc79" title="this doesnt actually test reszigin as that is covered by peer insertion tests" alt="" coords="118,122,294,163"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,64,60,91"/>
+<area shape="rect" title="returns a new instance of peerstore_t" alt="" coords="832,111,1019,137"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a5a2eac1ff27232eba96ba5d41145cd33" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="628,56,775,83"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a816a5c4adfe757de96bd234e8b99b1e8" title="returns the peerstore triggering and assertion failure if creation fails" alt="" coords="619,136,784,163"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a990190006e127641a32a5d37d2368fce" title=" " alt="" coords="392,5,553,32"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="383,56,562,83"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a3cb566e1d17d9a6da5a87bb940f11a26" title=" " alt="" coords="108,5,327,32"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="190,56,245,83"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="375,107,571,133"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a0577da79400a4c72e126a69a9dc613cb" title=" " alt="" coords="397,158,548,199"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a5c6fdce90155d4e48c33b2729eacfc79" title="this doesnt actually test reszigin as that is covered by peer insertion tests" alt="" coords="385,223,561,265"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="190,165,245,192"/>
 </map>
 </div>
 
@@ -554,11 +588,18 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d8/dab/peerstore_8c_afb6e5d4569e8a9b65e5049c28c472890_icgraph.png" border="0" usemap="#d8/dab/peerstore_8c_afb6e5d4569e8a9b65e5049c28c472890_icgraph" alt=""/></div>
 <map name="d8/dab/peerstore_8c_afb6e5d4569e8a9b65e5049c28c472890_icgraph" id="d8/dab/peerstore_8c_afb6e5d4569e8a9b65e5049c28c472890_icgraph">
-<area shape="rect" title="performs a check to see if we need to allocate more memory" alt="" coords="564,27,711,69"/>
-<area shape="rect" href="../../d5/d3e/peerstore_8h.html#ae1716fa6a8fa77ef2971750a57139988" title="used to insert a peer_id public_key pair into our peerstore" alt="" coords="352,8,516,35"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a5c6fdce90155d4e48c33b2729eacfc79" title="this doesnt actually test reszigin as that is covered by peer insertion tests" alt="" coords="118,57,294,98"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="108,5,304,32"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,35,60,61"/>
+<area shape="rect" title="performs a check to see if we need to allocate more memory" alt="" coords="1269,95,1416,137"/>
+<area shape="rect" href="../../d5/d3e/peerstore_8h.html#ae1716fa6a8fa77ef2971750a57139988" title="used to insert a peer_id public_key pair into our peerstore" alt="" coords="1051,73,1215,100"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a5c6fdce90155d4e48c33b2729eacfc79" title="this doesnt actually test reszigin as that is covered by peer insertion tests" alt="" coords="1045,125,1221,166"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a522916191d4db90bdf14749780cfb826" title="handles receiving a hello protocol message from another peer" alt="" coords="817,31,982,57"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="801,81,997,108"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a3bc7eef996be3f8c2118e4d1a523c8e1" title="handles receiving an rpc message from another peer" alt="" coords="601,31,753,57"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a990190006e127641a32a5d37d2368fce" title=" " alt="" coords="383,5,545,32"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="375,56,553,83"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a3cb566e1d17d9a6da5a87bb940f11a26" title=" " alt="" coords="108,5,327,32"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="190,56,245,83"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="650,107,705,133"/>
 </map>
 </div>
 
@@ -612,7 +653,7 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000021">Todo:</a></b></dt><dd>enable better length selection </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000020">Todo:</a></b></dt><dd>enable better length selection </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="../../d8/dab/peerstore_8c_source.html#l00261">261</a> of file <a class="el" href="../../d8/dab/peerstore_8c_source.html">peerstore.c</a>.</p>
 <div class="dynheader">
@@ -639,10 +680,17 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d8/dab/peerstore_8c_adec424d7ca6bc416943aff4526e7f351_icgraph.png" border="0" usemap="#d8/dab/peerstore_8c_adec424d7ca6bc416943aff4526e7f351_icgraph" alt=""/></div>
 <map name="d8/dab/peerstore_8c_adec424d7ca6bc416943aff4526e7f351_icgraph" id="d8/dab/peerstore_8c_adec424d7ca6bc416943aff4526e7f351_icgraph">
-<area shape="rect" title="used to validate the peerID ensuring that the given public key matches the given peerid" alt="" coords="564,5,708,47"/>
-<area shape="rect" href="../../d5/d3e/peerstore_8h.html#ae1716fa6a8fa77ef2971750a57139988" title="used to insert a peer_id public_key pair into our peerstore" alt="" coords="352,13,516,39"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="108,13,304,39"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
+<area shape="rect" title="used to validate the peerID ensuring that the given public key matches the given peerid" alt="" coords="1257,49,1401,90"/>
+<area shape="rect" href="../../d5/d3e/peerstore_8h.html#ae1716fa6a8fa77ef2971750a57139988" title="used to insert a peer_id public_key pair into our peerstore" alt="" coords="1045,56,1209,83"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a522916191d4db90bdf14749780cfb826" title="handles receiving a hello protocol message from another peer" alt="" coords="817,31,982,57"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="801,81,997,108"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a3bc7eef996be3f8c2118e4d1a523c8e1" title="handles receiving an rpc message from another peer" alt="" coords="601,31,753,57"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a990190006e127641a32a5d37d2368fce" title=" " alt="" coords="383,5,545,32"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="375,56,553,83"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a3cb566e1d17d9a6da5a87bb940f11a26" title=" " alt="" coords="108,5,327,32"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="190,56,245,83"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="650,81,705,108"/>
 </map>
 </div>
 

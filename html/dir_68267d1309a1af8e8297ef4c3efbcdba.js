@@ -1,6 +1,7 @@
 var dir_68267d1309a1af8e8297ef4c3efbcdba =
 [
     [ "cid", "dir_15b09017219ffb923501d34543ef7f07.html", "dir_15b09017219ffb923501d34543ef7f07" ],
+    [ "cli", "dir_b78fdfbbb632ce54d070469d6a721373.html", "dir_b78fdfbbb632ce54d070469d6a721373" ],
     [ "crypto", "dir_4261af1259721e3e39e0d2dd7354b511.html", "dir_4261af1259721e3e39e0d2dd7354b511" ],
     [ "encoding", "dir_a80b890753823fc77b4fdaa65cdfd0da.html", "dir_a80b890753823fc77b4fdaa65cdfd0da" ],
     [ "multiaddr", "dir_f73a466d3e66293ffd910ce55c788598.html", "dir_f73a466d3e66293ffd910ce55c788598" ],

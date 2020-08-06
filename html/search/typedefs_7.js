@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['log_5ffn_2671',['log_fn',['../d7/dd3/thirdparty_2logger_2logger_8h.html#acbb4363df37107a069aededd1b6c568b',1,'log_fn():&#160;logger.h'],['../d8/dbe/utils_2logger_8h.html#acbb4363df37107a069aededd1b6c568b',1,'log_fn():&#160;logger.h']]],
-  ['log_5ffnf_2672',['log_fnf',['../d7/dd3/thirdparty_2logger_2logger_8h.html#a665ba15eee3a57a2d5b1b0febdf30b96',1,'log_fnf():&#160;logger.h'],['../d8/dbe/utils_2logger_8h.html#a665ba15eee3a57a2d5b1b0febdf30b96',1,'log_fnf():&#160;logger.h']]]
+  ['peer_5fid_5ft_2735',['peer_id_t',['../d7/dee/peerutils_8h.html#a877868d8d731d6fa32261755712baf3b',1,'peerutils.h']]],
+  ['peer_5ft_2736',['peer_t',['../d5/d3e/peerstore_8h.html#addda50b75bf05b054b12d6edc2690463',1,'peerstore.h']]],
+  ['peerstore_5ft_2737',['peerstore_t',['../d5/d3e/peerstore_8h.html#a59e475eb4bc8a2e7f56b1ad2c93ec794',1,'peerstore.h']]],
+  ['private_5fkey_5ft_2738',['private_key_t',['../de/de5/key_8h.html#a7a838446f46ae16af3b1e62140908e4e',1,'key.h']]],
+  ['public_5fkey_5ft_2739',['public_key_t',['../de/de5/key_8h.html#a24ac5e605e5e8cfe4d897ff6acd50d9a',1,'key.h']]]
 ];

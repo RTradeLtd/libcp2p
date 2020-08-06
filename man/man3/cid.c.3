@@ -1,4 +1,4 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/cid/cid.c" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/cid/cid.c" 3 "Thu Aug 6 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -35,10 +35,10 @@
 .RI "int \fBipfs_cid_protobuf_encode\fP (const struct \fBCid\fP *cid, unsigned char *buffer, size_t buffer_length, size_t *bytes_written)"
 .br
 .ti -1c
-.RI "int \fBipfs_cid_protobuf_decode\fP (unsigned char *buffer, size_t buffer_length, struct \fBCid\fP **output)"
+.RI "int \fBipfs_cid_protobuf_decode\fP (unsigned char *buffer, size_t buffer_length, struct \fBCid\fP **\fBoutput\fP)"
 .br
 .ti -1c
-.RI "struct \fBCid\fP * \fBipfs_cid_new\fP (int version, const unsigned char *hash, size_t hash_length, const char codec)"
+.RI "struct \fBCid\fP * \fBipfs_cid_new\fP (int \fBversion\fP, const unsigned char *hash, size_t hash_length, const char codec)"
 .br
 .ti -1c
 .RI "int \fBipfs_cid_free\fP (struct \fBCid\fP *cid)"

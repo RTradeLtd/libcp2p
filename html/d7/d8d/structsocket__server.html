@@ -95,41 +95,55 @@ Collaboration diagram for socket_server:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../dc/da2/structsocket__server__coll__graph.png" border="0" usemap="#socket__server_coll__map" alt="Collaboration graph"/></div>
 <map name="socket__server_coll__map" id="socket__server_coll__map">
-<area shape="rect" title=" " alt="" coords="64,291,176,317"/>
-<area shape="rect" href="../../da/da5/structthread__logger.html" title=" " alt="" coords="5,200,117,227"/>
-<area shape="rect" href="../../d4/d05/structthpool__.html" title=" " alt="" coords="195,200,266,227"/>
-<area shape="rect" href="../../d3/dc5/structthread.html" title=" " alt="" coords="216,291,280,317"/>
-<area shape="rect" href="../../d7/dd0/structjobqueue.html" title=" " alt="" coords="189,109,272,136"/>
-<area shape="rect" href="../../d5/d93/structbsem.html" title=" " alt="" coords="156,5,215,32"/>
-<area shape="rect" href="../../d3/d8c/structjob.html" title=" " alt="" coords="256,5,299,32"/>
+<area shape="rect" title=" " alt="" coords="209,187,321,213"/>
+<area shape="rect" href="../../d1/d33/structpeer__id.html" title=" " alt="" coords="5,96,76,123"/>
+<area shape="rect" href="../../d4/daa/structpeerstore.html" title=" " alt="" coords="100,96,184,123"/>
+<area shape="rect" href="../../de/d65/structpeer.html" title=" " alt="" coords="117,5,167,32"/>
+<area shape="rect" href="../../da/da5/structthread__logger.html" title=" " alt="" coords="209,96,321,123"/>
+<area shape="rect" href="../../d3/dce/structpublic__key.html" title=" " alt="" coords="398,96,489,123"/>
+<area shape="rect" href="../../d7/dc6/structecdsa__private__key.html" title=" " alt="" coords="513,96,656,123"/>
 </map>
 <center><span class="legend">[<a target="top" href="../../graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
 <tr class="memitem:a9b9de030f35cd4317a7ec798325eefdb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/structsocket__server.html#a9b9de030f35cd4317a7ec798325eefdb">max_socket_num</a></td></tr>
+<tr class="memdesc:a9b9de030f35cd4317a7ec798325eefdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">the maximum socket number 1 greater than our actual socket  <a href="../../d7/d8d/structsocket__server.html#a9b9de030f35cd4317a7ec798325eefdb">More...</a><br /></td></tr>
 <tr class="separator:a9b9de030f35cd4317a7ec798325eefdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ba942899c709cc074cba514294838e3"><td class="memItemLeft" align="right" valign="top">fd_set&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/structsocket__server.html#a0ba942899c709cc074cba514294838e3">grouped_socket_set</a></td></tr>
+<tr class="memdesc:a0ba942899c709cc074cba514294838e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">contains all of our sockets  <a href="../../d7/d8d/structsocket__server.html#a0ba942899c709cc074cba514294838e3">More...</a><br /></td></tr>
 <tr class="separator:a0ba942899c709cc074cba514294838e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2140587d9f5584ccdc22002f455b23ee"><td class="memItemLeft" align="right" valign="top">fd_set&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/structsocket__server.html#a2140587d9f5584ccdc22002f455b23ee">tcp_socket_set</a></td></tr>
+<tr class="memdesc:a2140587d9f5584ccdc22002f455b23ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">contains our TCP sockets  <a href="../../d7/d8d/structsocket__server.html#a2140587d9f5584ccdc22002f455b23ee">More...</a><br /></td></tr>
 <tr class="separator:a2140587d9f5584ccdc22002f455b23ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaedc6724c3d56bfe5ad364294e9fa0aa"><td class="memItemLeft" align="right" valign="top">fd_set&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/structsocket__server.html#aaedc6724c3d56bfe5ad364294e9fa0aa">udp_socket_set</a></td></tr>
-<tr class="separator:aaedc6724c3d56bfe5ad364294e9fa0aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaafcdd72385a0156dda2eb7c0949a48a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/da5/structthread__logger.html">thread_logger</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/structsocket__server.html#aaafcdd72385a0156dda2eb7c0949a48a">thl</a></td></tr>
-<tr class="separator:aaafcdd72385a0156dda2eb7c0949a48a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64fec4403103a5fc76f73d357d2ffdb0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dd/d2e/thirdparty_2thread__pool_2thread__pool_8h.html#a615a4a9fc352172af6db87f6787dc65f">threadpool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/structsocket__server.html#a64fec4403103a5fc76f73d357d2ffdb0">thpool</a></td></tr>
+<tr class="memitem:a64fec4403103a5fc76f73d357d2ffdb0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d3/dec/thread__pool_8h.html#a615a4a9fc352172af6db87f6787dc65f">threadpool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/structsocket__server.html#a64fec4403103a5fc76f73d357d2ffdb0">thpool</a></td></tr>
 <tr class="memdesc:a64fec4403103a5fc76f73d357d2ffdb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">a thread pool that allows submitting worker tasks to a pool of threads  <a href="../../d7/d8d/structsocket__server.html#a64fec4403103a5fc76f73d357d2ffdb0">More...</a><br /></td></tr>
 <tr class="separator:a64fec4403103a5fc76f73d357d2ffdb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaafcdd72385a0156dda2eb7c0949a48a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/da5/structthread__logger.html">thread_logger</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/structsocket__server.html#aaafcdd72385a0156dda2eb7c0949a48a">thl</a></td></tr>
+<tr class="memdesc:aaafcdd72385a0156dda2eb7c0949a48a"><td class="mdescLeft">&#160;</td><td class="mdescRight">colored logging system  <a href="../../d7/d8d/structsocket__server.html#aaafcdd72385a0156dda2eb7c0949a48a">More...</a><br /></td></tr>
+<tr class="separator:aaafcdd72385a0156dda2eb7c0949a48a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa47767c843cdf018f134e57ba3423e52"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d9/d26/socket__server_8h.html#aa845560c795f49741639e7aa83524fd3">threadpool_task_func</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/structsocket__server.html#aa47767c843cdf018f134e57ba3423e52">task_func_tcp</a></td></tr>
 <tr class="memdesc:aa47767c843cdf018f134e57ba3423e52"><td class="mdescLeft">&#160;</td><td class="mdescRight">used for submitting a task to the thread pool for processing a tcp connection  <a href="../../d7/d8d/structsocket__server.html#aa47767c843cdf018f134e57ba3423e52">More...</a><br /></td></tr>
 <tr class="separator:aa47767c843cdf018f134e57ba3423e52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31a26ac270d1dd975d68b3000f40f5d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d9/d26/socket__server_8h.html#aa845560c795f49741639e7aa83524fd3">threadpool_task_func</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/structsocket__server.html#a31a26ac270d1dd975d68b3000f40f5d2">task_func_udp</a></td></tr>
 <tr class="memdesc:a31a26ac270d1dd975d68b3000f40f5d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">used for submitting a task to the thread pool for processing a udp connection  <a href="../../d7/d8d/structsocket__server.html#a31a26ac270d1dd975d68b3000f40f5d2">More...</a><br /></td></tr>
 <tr class="separator:a31a26ac270d1dd975d68b3000f40f5d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9374d0841ef7c576fba0c3b33597b40"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d5/d3e/peerstore_8h.html#a59e475eb4bc8a2e7f56b1ad2c93ec794">peerstore_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/structsocket__server.html#ad9374d0841ef7c576fba0c3b33597b40">pstore</a></td></tr>
+<tr class="memdesc:ad9374d0841ef7c576fba0c3b33597b40"><td class="mdescLeft">&#160;</td><td class="mdescRight">used for storing information about our peers  <a href="../../d7/d8d/structsocket__server.html#ad9374d0841ef7c576fba0c3b33597b40">More...</a><br /></td></tr>
+<tr class="separator:ad9374d0841ef7c576fba0c3b33597b40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af270f3c6abfb5d8d8af9af4283ac5e7e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d5/d5d/ecdsa_8h.html#af8379012776767ebddaa42fede59ccf5">ecdsa_private_key_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/structsocket__server.html#af270f3c6abfb5d8d8af9af4283ac5e7e">private_key</a></td></tr>
+<tr class="memdesc:af270f3c6abfb5d8d8af9af4283ac5e7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">our ecdsa private key for handling cryptographic operations  <a href="../../d7/d8d/structsocket__server.html#af270f3c6abfb5d8d8af9af4283ac5e7e">More...</a><br /></td></tr>
+<tr class="separator:af270f3c6abfb5d8d8af9af4283ac5e7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3141ecc1ed64ee2ec731490f0fe9727"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../de/de5/key_8h.html#a24ac5e605e5e8cfe4d897ff6acd50d9a">public_key_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/structsocket__server.html#ad3141ecc1ed64ee2ec731490f0fe9727">public_key</a></td></tr>
+<tr class="memdesc:ad3141ecc1ed64ee2ec731490f0fe9727"><td class="mdescLeft">&#160;</td><td class="mdescRight">our pubilc key information  <a href="../../d7/d8d/structsocket__server.html#ad3141ecc1ed64ee2ec731490f0fe9727">More...</a><br /></td></tr>
+<tr class="separator:ad3141ecc1ed64ee2ec731490f0fe9727"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3aba8898aa4dfb959462efb143887372"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d7/dee/peerutils_8h.html#a877868d8d731d6fa32261755712baf3b">peer_id_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d8d/structsocket__server.html#a3aba8898aa4dfb959462efb143887372">peer_id</a></td></tr>
+<tr class="memdesc:a3aba8898aa4dfb959462efb143887372"><td class="mdescLeft">&#160;</td><td class="mdescRight">our peer id information  <a href="../../d7/d8d/structsocket__server.html#a3aba8898aa4dfb959462efb143887372">More...</a><br /></td></tr>
+<tr class="separator:a3aba8898aa4dfb959462efb143887372"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00064">64</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00077">77</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
 <a id="a0ba942899c709cc074cba514294838e3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0ba942899c709cc074cba514294838e3">&#9670;&nbsp;</a></span>grouped_socket_set</h2>
@@ -143,7 +157,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00066">66</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
+<p>contains all of our sockets </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00081">81</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
 
 </div>
 </div>
@@ -159,7 +175,81 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00065">65</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
+<p>the maximum socket number 1 greater than our actual socket </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00079">79</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
+
+</div>
+</div>
+<a id="a3aba8898aa4dfb959462efb143887372"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3aba8898aa4dfb959462efb143887372">&#9670;&nbsp;</a></span>peer_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d7/dee/peerutils_8h.html#a877868d8d731d6fa32261755712baf3b">peer_id_t</a>* socket_server::peer_id</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>our peer id information </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00102">102</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
+
+</div>
+</div>
+<a id="af270f3c6abfb5d8d8af9af4283ac5e7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af270f3c6abfb5d8d8af9af4283ac5e7e">&#9670;&nbsp;</a></span>private_key</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d5/d5d/ecdsa_8h.html#af8379012776767ebddaa42fede59ccf5">ecdsa_private_key_t</a>* socket_server::private_key</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>our ecdsa private key for handling cryptographic operations </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00098">98</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
+
+</div>
+</div>
+<a id="ad9374d0841ef7c576fba0c3b33597b40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9374d0841ef7c576fba0c3b33597b40">&#9670;&nbsp;</a></span>pstore</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d5/d3e/peerstore_8h.html#a59e475eb4bc8a2e7f56b1ad2c93ec794">peerstore_t</a>* socket_server::pstore</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>used for storing information about our peers </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00096">96</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
+
+</div>
+</div>
+<a id="ad3141ecc1ed64ee2ec731490f0fe9727"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3141ecc1ed64ee2ec731490f0fe9727">&#9670;&nbsp;</a></span>public_key</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../de/de5/key_8h.html#a24ac5e605e5e8cfe4d897ff6acd50d9a">public_key_t</a>* socket_server::public_key</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>our pubilc key information </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00100">100</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
 
 </div>
 </div>
@@ -177,7 +267,7 @@ Data Fields</h2></td></tr>
 
 <p>used for submitting a task to the thread pool for processing a tcp connection </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00075">75</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00091">91</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
 
 </div>
 </div>
@@ -195,7 +285,7 @@ Data Fields</h2></td></tr>
 
 <p>used for submitting a task to the thread pool for processing a udp connection </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00078">78</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00094">94</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
 
 </div>
 </div>
@@ -211,7 +301,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00067">67</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
+<p>contains our TCP sockets </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00083">83</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
 
 </div>
 </div>
@@ -227,7 +319,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00069">69</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
+<p>colored logging system </p>
+
+<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00088">88</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
 
 </div>
 </div>
@@ -238,30 +332,14 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="../../dd/d2e/thirdparty_2thread__pool_2thread__pool_8h.html#a615a4a9fc352172af6db87f6787dc65f">threadpool</a> socket_server::thpool</td>
+          <td class="memname"><a class="el" href="../../d3/dec/thread__pool_8h.html#a615a4a9fc352172af6db87f6787dc65f">threadpool</a> socket_server::thpool</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>a thread pool that allows submitting worker tasks to a pool of threads </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00072">72</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
-
-</div>
-</div>
-<a id="aaedc6724c3d56bfe5ad364294e9fa0aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaedc6724c3d56bfe5ad364294e9fa0aa">&#9670;&nbsp;</a></span>udp_socket_set</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">fd_set socket_server::udp_socket_set</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00068">68</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d26/socket__server_8h_source.html#l00086">86</a> of file <a class="el" href="../../d9/d26/socket__server_8h_source.html">socket_server.h</a>.</p>
 
 </div>
 </div>

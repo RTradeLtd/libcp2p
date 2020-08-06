@@ -1,4 +1,4 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/crypto/peerutils.c" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/crypto/peerutils.c" 3 "Thu Aug 6 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -25,11 +25,11 @@
 
 .in +1c
 .ti -1c
-.RI "\fBpeer_id_t\fP * \fBlibp2p_new_peer_id_sha256\fP (unsigned char *output, size_t *output_len, unsigned char *\fBpublic_key\fP, size_t public_key_len)"
+.RI "\fBpeer_id_t\fP * \fBlibp2p_new_peer_id_sha256\fP (unsigned char *\fBoutput\fP, size_t *output_len, unsigned char *\fBpublic_key\fP, size_t public_key_len)"
 .br
 .RI "generates a peerID for the public key using SHA256 as the hashing algorithm "
 .ti -1c
-.RI "\fBpeer_id_t\fP * \fBlibp2p_new_peer_id\fP (unsigned char *output, size_t *output_len, unsigned char *input_hash, size_t input_size)"
+.RI "\fBpeer_id_t\fP * \fBlibp2p_new_peer_id\fP (unsigned char *\fBoutput\fP, size_t *output_len, unsigned char *input_hash, size_t input_size)"
 .br
 .RI "constructs a peer identifier from the given public key "
 .ti -1c

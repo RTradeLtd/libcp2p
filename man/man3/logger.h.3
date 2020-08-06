@@ -1,8 +1,8 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/utils/logger.h" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/thirdparty/logger/logger.h" 3 "Thu Aug 6 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/utils/logger.h \- a thread safe logger with optional printf style logging  
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/thirdparty/logger/logger.h \- a thread safe logger with optional printf style logging  
 
 .SH SYNOPSIS
 .br
@@ -33,10 +33,10 @@
 .RI "typedef int(* \fBmutex_fn\fP) (pthread_mutex_t *mx)"
 .br
 .ti -1c
-.RI "typedef void(* \fBlog_fn\fP) (struct \fBthread_logger\fP *thl, int file_descriptor, char *message, \fBLOG_LEVELS\fP level)"
+.RI "typedef void(* \fBlog_fn\fP) (struct \fBthread_logger\fP *thl, int file_descriptor, char *\fBmessage\fP, \fBLOG_LEVELS\fP level)"
 .br
 .ti -1c
-.RI "typedef void(* \fBlog_fnf\fP) (struct \fBthread_logger\fP *thl, int file_descriptor, \fBLOG_LEVELS\fP level, char *message,\&.\&.\&.)"
+.RI "typedef void(* \fBlog_fnf\fP) (struct \fBthread_logger\fP *thl, int file_descriptor, \fBLOG_LEVELS\fP level, char *\fBmessage\fP,\&.\&.\&.)"
 .br
 .ti -1c
 .RI "typedef struct \fBthread_logger\fP \fBthread_logger\fP"
@@ -49,7 +49,7 @@
 
 .in +1c
 .ti -1c
-.RI "enum \fBLOG_LEVELS\fP { \fBLOG_LEVELS_INFO\fP, \fBLOG_LEVELS_WARN\fP, \fBLOG_LEVELS_ERROR\fP, \fBLOG_LEVELS_DEBUG\fP, \fBLOG_LEVELS_INFO\fP, \fBLOG_LEVELS_WARN\fP, \fBLOG_LEVELS_ERROR\fP, \fBLOG_LEVELS_DEBUG\fP }"
+.RI "enum \fBLOG_LEVELS\fP { \fBLOG_LEVELS_INFO\fP, \fBLOG_LEVELS_WARN\fP, \fBLOG_LEVELS_ERROR\fP, \fBLOG_LEVELS_DEBUG\fP }"
 .br
 .in -1c
 .SS "Functions"
@@ -72,31 +72,31 @@
 .br
 .RI "free resources for the file ogger "
 .ti -1c
-.RI "void \fBlog_func\fP (\fBthread_logger\fP *thl, int file_descriptor, char *message, \fBLOG_LEVELS\fP level)"
+.RI "void \fBlog_func\fP (\fBthread_logger\fP *thl, int file_descriptor, char *\fBmessage\fP, \fBLOG_LEVELS\fP level)"
 .br
 .RI "main function you should call, which will delegate to the appopriate *_log function "
 .ti -1c
-.RI "void \fBlogf_func\fP (\fBthread_logger\fP *thl, int file_descriptor, \fBLOG_LEVELS\fP level, char *message,\&.\&.\&.)"
+.RI "void \fBlogf_func\fP (\fBthread_logger\fP *thl, int file_descriptor, \fBLOG_LEVELS\fP level, char *\fBmessage\fP,\&.\&.\&.)"
 .br
 .RI "like log_func but for formatted logs "
 .ti -1c
-.RI "void \fBdebug_log\fP (\fBthread_logger\fP *thl, int file_descriptor, char *message)"
+.RI "void \fBdebug_log\fP (\fBthread_logger\fP *thl, int file_descriptor, char *\fBmessage\fP)"
 .br
 .RI "logs a debug styled message - called by log_fn "
 .ti -1c
-.RI "void \fBwarn_log\fP (\fBthread_logger\fP *thl, int file_descriptor, char *message)"
+.RI "void \fBwarn_log\fP (\fBthread_logger\fP *thl, int file_descriptor, char *\fBmessage\fP)"
 .br
 .RI "logs a warned styled message - called by log_fn "
 .ti -1c
-.RI "void \fBerror_log\fP (\fBthread_logger\fP *thl, int file_descriptor, char *message)"
+.RI "void \fBerror_log\fP (\fBthread_logger\fP *thl, int file_descriptor, char *\fBmessage\fP)"
 .br
 .RI "logs an error styled message - called by log_fn "
 .ti -1c
-.RI "void \fBinfo_log\fP (\fBthread_logger\fP *thl, int file_descriptor, char *message)"
+.RI "void \fBinfo_log\fP (\fBthread_logger\fP *thl, int file_descriptor, char *\fBmessage\fP)"
 .br
 .RI "logs an info styled message - called by log_fn "
 .ti -1c
-.RI "int \fBwrite_file_log\fP (int file_descriptor, char *message)"
+.RI "int \fBwrite_file_log\fP (int file_descriptor, char *\fBmessage\fP)"
 .br
 .RI "used to write a log message to file "
 .in -1c
@@ -134,11 +134,11 @@ Definition in file \fBlogger\&.h\fP\&.
 .PP 
 .SS "typedef struct \fBfile_logger\fP \fBfile_logger\fP"
 
-.SS "typedef void(* log_fn) (struct \fBthread_logger\fP *thl, int file_descriptor, char *message, \fBLOG_LEVELS\fP level)"
+.SS "typedef void(* log_fn) (struct \fBthread_logger\fP *thl, int file_descriptor, char *\fBmessage\fP, \fBLOG_LEVELS\fP level)"
 
 .PP
 Definition at line 53 of file logger\&.h\&.
-.SS "typedef void(* log_fnf) (struct \fBthread_logger\fP *thl, int file_descriptor, \fBLOG_LEVELS\fP level, char *message,\&.\&.\&.)"
+.SS "typedef void(* log_fnf) (struct \fBthread_logger\fP *thl, int file_descriptor, \fBLOG_LEVELS\fP level, char *\fBmessage\fP,\&.\&.\&.)"
 
 .PP
 Definition at line 63 of file logger\&.h\&.
@@ -167,18 +167,6 @@ indicates the message we are logging is of type error (color red)
 .TP
 \fB\fILOG_LEVELS_DEBUG \fP\fP
 indicates the message we are logging is of type debug (color soft red) 
-.TP
-\fB\fILOG_LEVELS_INFO \fP\fP
-indicates the message we are logging is of type info (color green) 
-.TP
-\fB\fILOG_LEVELS_WARN \fP\fP
-indicates the message we are logging is of type warn (color yellow) 
-.TP
-\fB\fILOG_LEVELS_ERROR \fP\fP
-indicates the message we are logging is of type error (color red) 
-.TP
-\fB\fILOG_LEVELS_DEBUG \fP\fP
-indicates the message we are logging is of type debug (color soft red) 
 .PP
 Definition at line 29 of file logger\&.h\&.
 .SH "Function Documentation"
@@ -194,8 +182,6 @@ free resources for the file ogger
 .RE
 .PP
 
-.PP
-Definition at line 235 of file logger\&.c\&.
 .SS "void clear_thread_logger (\fBthread_logger\fP * thl)"
 
 .PP
@@ -207,8 +193,6 @@ free resources for the threaded logger
 .RE
 .PP
 
-.PP
-Definition at line 231 of file logger\&.c\&.
 .SS "void debug_log (\fBthread_logger\fP * thl, int file_descriptor, char * message)"
 
 .PP
@@ -224,8 +208,6 @@ logs a debug styled message - called by log_fn
 .RE
 .PP
 
-.PP
-Definition at line 208 of file logger\&.c\&.
 .SS "void error_log (\fBthread_logger\fP * thl, int file_descriptor, char * message)"
 
 .PP
@@ -241,8 +223,6 @@ logs an error styled message - called by log_fn
 .RE
 .PP
 
-.PP
-Definition at line 190 of file logger\&.c\&.
 .SS "void info_log (\fBthread_logger\fP * thl, int file_descriptor, char * message)"
 
 .PP
@@ -258,8 +238,6 @@ logs an info styled message - called by log_fn
 .RE
 .PP
 
-.PP
-Definition at line 150 of file logger\&.c\&.
 .SS "void log_func (\fBthread_logger\fP * thl, int file_descriptor, char * message, \fBLOG_LEVELS\fP level)"
 
 .PP
@@ -277,8 +255,6 @@ main function you should call, which will delegate to the appopriate *_log funct
 .RE
 .PP
 
-.PP
-Definition at line 118 of file logger\&.c\&.
 .SS "void logf_func (\fBthread_logger\fP * thl, int file_descriptor, \fBLOG_LEVELS\fP level, char * message,  \&.\&.\&.)"
 
 .PP
@@ -298,8 +274,6 @@ like log_func but for formatted logs
 .RE
 .PP
 
-.PP
-Definition at line 100 of file logger\&.c\&.
 .SS "\fBfile_logger\fP* new_file_logger (char * output_file, bool with_debug)"
 
 .PP
@@ -311,8 +285,6 @@ returns a new \fBfile_logger\fP Calls new_thread_logger internally
 .RE
 .PP
 
-.PP
-Definition at line 45 of file logger\&.c\&.
 .SS "\fBthread_logger\fP* new_thread_logger (bool with_debug)"
 
 .PP
@@ -324,8 +296,6 @@ returns a new thread safe logger if with_debug is false, then all debug_log call
 .RE
 .PP
 
-.PP
-Definition at line 30 of file logger\&.c\&.
 .SS "void warn_log (\fBthread_logger\fP * thl, int file_descriptor, char * message)"
 
 .PP
@@ -341,8 +311,6 @@ logs a warned styled message - called by log_fn
 .RE
 .PP
 
-.PP
-Definition at line 168 of file logger\&.c\&.
 .SS "int write_file_log (int file_descriptor, char * message)"
 
 .PP
@@ -358,8 +326,6 @@ used to write a log message to file
 .RE
 .PP
 
-.PP
-Definition at line 77 of file logger\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for libcp2p from the source code\&.

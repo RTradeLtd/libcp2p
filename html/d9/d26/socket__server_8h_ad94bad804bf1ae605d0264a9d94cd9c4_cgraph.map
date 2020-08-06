@@ -1,0 +1,4 @@
+<map id="new_server_message_hello_t" name="new_server_message_hello_t">
+<area shape="rect" id="node1" title="helper function to return a message_hello_t using our server values" alt="" coords="5,5,168,47"/>
+<area shape="rect" id="node2" href="$dc/d0a/messages_8c.html#aa04f983050016ae1480adfda622decf1" title="used to create a new message_hello_t using the given values" alt="" coords="216,13,383,39"/>
+</map>

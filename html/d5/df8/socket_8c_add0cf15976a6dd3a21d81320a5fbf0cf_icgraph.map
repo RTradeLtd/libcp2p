@@ -1,8 +1,14 @@
 <map id="set_socket_blocking_status" name="set_socket_blocking_status">
-<area shape="rect" id="node1" title="used to enable/disable blocking sockets" alt="" coords="704,23,857,65"/>
-<area shape="rect" id="node2" href="$da/ddd/socket_8h.html#a1a802d1985754fe6d4d6c050c214e4b4" title="gets an available socket attached to bind_address" alt="" coords="529,31,656,57"/>
-<area shape="rect" id="node3" href="$d0/d3b/socket__client_8h.html#acddf96d2dea8f47ea2d0555c8500630d" title="returns a new socket client connected to addr:port" alt="" coords="337,5,479,32"/>
-<area shape="rect" id="node6" href="$d9/d26/socket__server_8h.html#abdfa0f6886955caae3b71928592e0301" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="335,56,481,83"/>
-<area shape="rect" id="node4" href="$d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="108,31,287,57"/>
-<area shape="rect" id="node5" href="$d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,31,60,57"/>
+<area shape="rect" id="node1" title="used to enable/disable blocking sockets" alt="" coords="953,74,1107,115"/>
+<area shape="rect" id="node2" href="$da/ddd/socket_8h.html#a5abb561217a4ab803beba8a45d5393ef" title="gets an available socket attached to bind_address" alt="" coords="779,81,905,108"/>
+<area shape="rect" id="node3" href="$d0/d3b/socket__client_8h.html#acddf96d2dea8f47ea2d0555c8500630d" title="returns a new socket client connected to addr:port" alt="" coords="587,56,728,83"/>
+<area shape="rect" id="node10" href="$d9/d26/socket__server_8h.html#a5a2eac1ff27232eba96ba5d41145cd33" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="584,107,731,133"/>
+<area shape="rect" id="node4" href="$d9/d26/socket__server_8h.html#ac46d616db88eb59d2f28ea6e3d3188bf" title="used for a server to send a message to another server" alt="" coords="380,5,531,32"/>
+<area shape="rect" id="node7" href="$d6/dfd/cli_2main_8c.html#ae551cfc8ab65a1d29191ffa67e22fd11" title=" " alt="" coords="377,56,533,83"/>
+<area shape="rect" id="node5" href="$d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="128,11,307,37"/>
+<area shape="rect" id="node6" href="$d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,11,60,37"/>
+<area shape="rect" id="node8" href="$d6/dfd/cli_2main_8c.html#a6851f4abbf7ba4c7bb3b987c10d48584" title=" " alt="" coords="128,66,307,107"/>
+<area shape="rect" id="node9" href="$d6/dfd/cli_2main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,103,60,129"/>
+<area shape="rect" id="node11" href="$d6/dfd/cli_2main_8c.html#a990190006e127641a32a5d37d2368fce" title=" " alt="" coords="375,157,536,184"/>
+<area shape="rect" id="node12" href="$d6/dfd/cli_2main_8c.html#a3cb566e1d17d9a6da5a87bb940f11a26" title=" " alt="" coords="108,140,327,167"/>
 </map>

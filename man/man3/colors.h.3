@@ -1,8 +1,8 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/utils/colors.h" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/thirdparty/logger/colors.h" 3 "Thu Aug 6 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/utils/colors.h \- macros and utilities for printing color to stdout from https://www.quora.com/How-do-I-print-a-colored-output-in-C Pass a \fCCOLORS_x\fP enum value into \fCprint_colored\fP and the color will be printed on stdout Note that if you want to disable printing of that color you'll have to send the \fCCOLORS_RESET\fP enum value through to make non-bold change 0->1 (0;31m red) vs (1;31m bold red)  
+/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/thirdparty/logger/colors.h \- macros and utilities for printing color to stdout from https://www.quora.com/How-do-I-print-a-colored-output-in-C Pass a \fCCOLORS_x\fP enum value into \fCprint_colored\fP and the color will be printed on stdout Note that if you want to disable printing of that color you'll have to send the \fCCOLORS_RESET\fP enum value through to make non-bold change 0->1 (0;31m red) vs (1;31m bold red)  
 
 .SH SYNOPSIS
 .br
@@ -42,7 +42,7 @@
 
 .in +1c
 .ti -1c
-.RI "enum \fBCOLORS\fP { \fBCOLORS_RED\fP, \fBCOLORS_SOFT_RED\fP, \fBCOLORS_GREEN\fP, \fBCOLORS_YELLOW\fP, \fBCOLORS_BLUE\fP, \fBCOLORS_MAGENTA\fP, \fBCOLORS_CYAN\fP, \fBCOLORS_RESET\fP, \fBCOLORS_RED\fP, \fBCOLORS_SOFT_RED\fP, \fBCOLORS_GREEN\fP, \fBCOLORS_YELLOW\fP, \fBCOLORS_BLUE\fP, \fBCOLORS_MAGENTA\fP, \fBCOLORS_CYAN\fP, \fBCOLORS_RESET\fP }"
+.RI "enum \fBCOLORS\fP { \fBCOLORS_RED\fP, \fBCOLORS_SOFT_RED\fP, \fBCOLORS_GREEN\fP, \fBCOLORS_YELLOW\fP, \fBCOLORS_BLUE\fP, \fBCOLORS_MAGENTA\fP, \fBCOLORS_CYAN\fP, \fBCOLORS_RESET\fP }"
 .br
 .RI "allows short-handed references to ANSI color schemes, and enables easier color selection anytime you want to extend the available colors with an additional enum, add a switch case in get_ansi_color_scheme "
 .in -1c
@@ -50,7 +50,7 @@
 
 .in +1c
 .ti -1c
-.RI "char * \fBformat_colored\fP (\fBCOLORS\fP color, char *message)"
+.RI "char * \fBformat_colored\fP (\fBCOLORS\fP color, char *\fBmessage\fP)"
 .br
 .RI "returns a \fCchar *\fP with the message formatted with ansi colors "
 .ti -1c
@@ -58,11 +58,11 @@
 .br
 .RI "returns an ansi color string to be used with printf "
 .ti -1c
-.RI "void \fBprint_colored\fP (\fBCOLORS\fP color, char *message)"
+.RI "void \fBprint_colored\fP (\fBCOLORS\fP color, char *\fBmessage\fP)"
 .br
 .RI "prints message to stdout with the given color "
 .ti -1c
-.RI "int \fBwrite_colored\fP (\fBCOLORS\fP color, int file_descriptor, char *message)"
+.RI "int \fBwrite_colored\fP (\fBCOLORS\fP color, int file_descriptor, char *\fBmessage\fP)"
 .br
 .RI "writes a message to fh with the given color For 'sync writes' and to always flush logs to disk immediately set do_flush to true returns 0 if no error, returns 1 if error "
 .in -1c
@@ -132,22 +132,6 @@ allows short-handed references to ANSI color schemes, and enables easier color s
 \fB\fICOLORS_CYAN \fP\fP
 .TP
 \fB\fICOLORS_RESET \fP\fP
-.TP
-\fB\fICOLORS_RED \fP\fP
-.TP
-\fB\fICOLORS_SOFT_RED \fP\fP
-.TP
-\fB\fICOLORS_GREEN \fP\fP
-.TP
-\fB\fICOLORS_YELLOW \fP\fP
-.TP
-\fB\fICOLORS_BLUE \fP\fP
-.TP
-\fB\fICOLORS_MAGENTA \fP\fP
-.TP
-\fB\fICOLORS_CYAN \fP\fP
-.TP
-\fB\fICOLORS_RESET \fP\fP
 .PP
 Definition at line 27 of file colors\&.h\&.
 .SH "Function Documentation"
@@ -156,26 +140,18 @@ Definition at line 27 of file colors\&.h\&.
 
 .PP
 returns a \fCchar *\fP with the message formatted with ansi colors 
-.PP
-Definition at line 31 of file colors\&.c\&.
 .SS "char* get_ansi_color_scheme (\fBCOLORS\fP color)"
 
 .PP
 returns an ansi color string to be used with printf 
-.PP
-Definition at line 8 of file colors\&.c\&.
 .SS "void print_colored (\fBCOLORS\fP color, char * message)"
 
 .PP
 prints message to stdout with the given color 
-.PP
-Definition at line 46 of file colors\&.c\&.
 .SS "int write_colored (\fBCOLORS\fP color, int file_descriptor, char * message)"
 
 .PP
 writes a message to fh with the given color For 'sync writes' and to always flush logs to disk immediately set do_flush to true returns 0 if no error, returns 1 if error 
-.PP
-Definition at line 50 of file colors\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for libcp2p from the source code\&.

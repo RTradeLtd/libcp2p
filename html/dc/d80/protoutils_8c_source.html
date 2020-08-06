@@ -146,7 +146,7 @@ $(document).ready(function(){initNavTree('dc/d80/protoutils_8c_source.html','../
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">/* return 1 if string contain only digits, else return 0 */</span></div>
 <div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="../../df/d48/protoutils_8h.html#aa795818eb0d01911b58ca3ef2c8f980d">   60</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../dc/d80/protoutils_8c.html#aa795818eb0d01911b58ca3ef2c8f980d">valid_digit</a>(<span class="keywordtype">char</span> *ip_str) {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a> = 0;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">int</span> err = 0;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">while</span> (*ip_str) {</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordflow">if</span> (*ip_str &gt;= <span class="charliteral">&#39;0&#39;</span> &amp;&amp; *ip_str &lt;= <span class="charliteral">&#39;9&#39;</span>)</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            ++ip_str;</div>
@@ -160,21 +160,21 @@ $(document).ready(function(){initNavTree('dc/d80/protoutils_8c_source.html','../
 <div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="../../df/d48/protoutils_8h.html#a63c08b81b904d8869edf06f52e031c25">   72</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../dc/d80/protoutils_8c.html#a63c08b81b904d8869edf06f52e031c25">is_valid_ipv4</a>(<span class="keywordtype">char</span> *ip_str) {</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">int</span> i, num, dots = 0;</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">char</span> *ptr;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a> = 0;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">int</span> err = 0;</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordflow">if</span> (ip_str == NULL)</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a> = 1;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        err = 1;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="comment">// See following link for strtok()</span></div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="comment">// http://pubs.opengroup.org/onlinepubs/009695399/functions/strtok_r.html</span></div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    ptr = strtok(ip_str, <a class="code" href="../../dc/d80/protoutils_8c.html#a1129d7e0bed7c31561c8664cfe73ad07">DELIM</a>);</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">if</span> (ptr == NULL)</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a> = 1;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        err = 1;</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">while</span> (ptr) {</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="comment">/* after parsing string, it must contain only digits */</span></div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">if</span> (!<a class="code" href="../../dc/d80/protoutils_8c.html#aa795818eb0d01911b58ca3ef2c8f980d">valid_digit</a>(ptr))</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            <a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a> = 1;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            err = 1;</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        num = atoi(ptr);</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
@@ -185,14 +185,14 @@ $(document).ready(function(){initNavTree('dc/d80/protoutils_8c_source.html','../
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <span class="keywordflow">if</span> (ptr != NULL)</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                ++dots;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        } <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            <a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a> = 1;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            err = 1;</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    }</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="comment">/* valid IP string must contain 3 dots */</span></div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordflow">if</span> (dots != 3) {</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a> = 1;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        err = 1;</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    }</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a> == 0) {</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">if</span> (err == 0) {</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keywordflow">return</span> 1;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="keywordflow">return</span> 0;</div>
@@ -212,7 +212,7 @@ $(document).ready(function(){initNavTree('dc/d80/protoutils_8c_source.html','../
 <div class="line"><a name="l00124"></a><span class="lineno"><a class="line" href="../../df/d48/protoutils_8h.html#ad7042e7fdb56bd59e43ac88fbba7edd8">  124</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../dc/d80/protoutils_8c.html#ad7042e7fdb56bd59e43ac88fbba7edd8">is_valid_ipv6</a>(<span class="keywordtype">char</span> *str) {</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordtype">int</span> hdcount = 0;</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">int</span> hncount = 0;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a> = 0;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordtype">int</span> err = 0;</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keywordtype">int</span> packed = 0;</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keywordflow">if</span> (*str == <span class="charliteral">&#39;:&#39;</span>) {</div>
@@ -237,12 +237,12 @@ $(document).ready(function(){initNavTree('dc/d80/protoutils_8c_source.html','../
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    hncount = 1;</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    str++;</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordflow">while</span> (<a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a> == 0 &amp;&amp; *str != 0) {</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordflow">while</span> (err == 0 &amp;&amp; *str != 0) {</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keywordflow">if</span> (*str == <span class="charliteral">&#39;:&#39;</span>) {</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            str++;</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            <span class="keywordflow">if</span> (*str == <span class="charliteral">&#39;:&#39;</span>) {</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                <span class="keywordflow">if</span> (packed == 1)</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                    <a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a> = 1;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                    err = 1;</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                    str++;</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
@@ -253,7 +253,7 @@ $(document).ready(function(){initNavTree('dc/d80/protoutils_8c_source.html','../
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                        <span class="keywordflow">if</span> (<a class="code" href="../../dc/d80/protoutils_8c.html#aae2bf38fe9e93522548a2d717c6a48b8">ishexdigit</a>(*str)) {</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                            <span class="keywordflow">if</span> (hncount == <a class="code" href="../../dc/d80/protoutils_8c.html#a5c78d21bc1809f5b433c4557bdd53a76">MAX_HEX_NUMBER_COUNT</a>) {</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                                <a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a> = 1;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                                err = 1;</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                            } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                                hdcount = 1;</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                                hncount++;</div>
@@ -261,15 +261,15 @@ $(document).ready(function(){initNavTree('dc/d80/protoutils_8c_source.html','../
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                            }</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                        }</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                        <a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a> = 1;</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                        err = 1;</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                    }</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                }</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;            } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                <span class="keywordflow">if</span> (!<a class="code" href="../../dc/d80/protoutils_8c.html#aae2bf38fe9e93522548a2d717c6a48b8">ishexdigit</a>(*str)) {</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                    <a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a> = 1;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                    err = 1;</div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                    <span class="keywordflow">if</span> (hncount == <a class="code" href="../../dc/d80/protoutils_8c.html#a5c78d21bc1809f5b433c4557bdd53a76">MAX_HEX_NUMBER_COUNT</a>) {</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                        <a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a> = 1;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                        err = 1;</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                        hdcount = 1;</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                        hncount++;</div>
@@ -280,20 +280,20 @@ $(document).ready(function(){initNavTree('dc/d80/protoutils_8c_source.html','../
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="../../dc/d80/protoutils_8c.html#aae2bf38fe9e93522548a2d717c6a48b8">ishexdigit</a>(*str)) {</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                <span class="keywordflow">if</span> (hdcount == 4)</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                    <a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a> = 1;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                    err = 1;</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;                    hdcount++;</div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                    str++;</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                }</div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;            } <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                <a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a> = 1;</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                err = 1;</div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        }</div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    }</div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keywordflow">if</span> (hncount &lt; <a class="code" href="../../dc/d80/protoutils_8c.html#a5c78d21bc1809f5b433c4557bdd53a76">MAX_HEX_NUMBER_COUNT</a> &amp;&amp; packed == 0)</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        <a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a> = 1;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        err = 1;</div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keywordflow">return</span> (<a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a> == 0);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keywordflow">return</span> (err == 0);</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;}</div>
 <div class="line"><a name="l00210"></a><span class="lineno"><a class="line" href="../../df/d48/protoutils_8h.html#a879be90a7ec99722101eca2fc95578e8">  210</a></span>&#160;uint64_t <a class="code" href="../../dc/d80/protoutils_8c.html#a879be90a7ec99722101eca2fc95578e8">ip2int</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *ipconvertint) {</div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    uint64_t final_result = 0;</div>
@@ -688,10 +688,10 @@ $(document).ready(function(){initNavTree('dc/d80/protoutils_8c_source.html','../
 <div class="line"><a name="l00600"></a><span class="lineno">  600</span>&#160; </div>
 <div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;    <span class="comment">// Starting to extract words and process them:</span></div>
 <div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;    <span class="keywordtype">char</span> *wp;</div>
-<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;    <span class="keywordtype">char</span> *end;</div>
+<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;    <span class="keywordtype">char</span> *<a class="code" href="../../d8/dfd/command__line_8h.html#a088ac7ffa534015d5b07ddcc7aef9fd4">end</a>;</div>
 <div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;    <span class="keywordtype">char</span> s_to_b[800]; <span class="comment">/*! @todo figure out a better size */</span></div>
 <div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;    <span class="keywordtype">int</span> s_to_b_size = 800;</div>
-<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;    wp = <a class="code" href="../../dc/d80/protoutils_8c.html#a9c6b43fd17114c06a5b35d60e8b7727b">strtok_r</a>(pstring, <span class="stringliteral">&quot;/&quot;</span>, &amp;end);</div>
+<div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;    wp = <a class="code" href="../../dc/d80/protoutils_8c.html#a9c6b43fd17114c06a5b35d60e8b7727b">strtok_r</a>(pstring, <span class="stringliteral">&quot;/&quot;</span>, &amp;<a class="code" href="../../d8/dfd/command__line_8h.html#a088ac7ffa534015d5b07ddcc7aef9fd4">end</a>);</div>
 <div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;    <span class="keyword">struct </span><a class="code" href="../../d8/dde/struct_protocol.html">Protocol</a> *protx;</div>
 <div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;    <span class="keywordflow">while</span> (wp) {</div>
 <div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;        <span class="keywordflow">if</span> (firstorsecond == 1) <span class="comment">// This is the Protocol</span></div>
@@ -722,7 +722,7 @@ $(document).ready(function(){initNavTree('dc/d80/protoutils_8c_source.html','../
 <div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;                               <span class="comment">// assignment anymore.</span></div>
 <div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;            firstorsecond = 1; <span class="comment">// Since the next word will be an protocol</span></div>
 <div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;        }</div>
-<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;        wp = <a class="code" href="../../dc/d80/protoutils_8c.html#a9c6b43fd17114c06a5b35d60e8b7727b">strtok_r</a>(NULL, <span class="stringliteral">&quot;/&quot;</span>, &amp;end);</div>
+<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160;        wp = <a class="code" href="../../dc/d80/protoutils_8c.html#a9c6b43fd17114c06a5b35d60e8b7727b">strtok_r</a>(NULL, <span class="stringliteral">&quot;/&quot;</span>, &amp;<a class="code" href="../../d8/dfd/command__line_8h.html#a088ac7ffa534015d5b07ddcc7aef9fd4">end</a>);</div>
 <div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;    }</div>
 <div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;    protx = NULL;</div>
 <div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;    <a class="code" href="../../de/db7/protocols_8c.html#a372efb7dae5ecc84c90ddd37f1b2184b">unload_protocols</a>(head);</div>
@@ -748,12 +748,12 @@ $(document).ready(function(){initNavTree('dc/d80/protoutils_8c_source.html','../
 <div class="ttc" id="aprotoutils_8c_html_a63c08b81b904d8869edf06f52e031c25"><div class="ttname"><a href="../../dc/d80/protoutils_8c.html#a63c08b81b904d8869edf06f52e031c25">is_valid_ipv4</a></div><div class="ttdeci">int is_valid_ipv4(char *ip_str)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d80/protoutils_8c_source.html#l00072">protoutils.c:72</a></div></div>
 <div class="ttc" id="astruct_protocol_html_a9b3ab5c38a42933eaaaaf5a041553e38"><div class="ttname"><a href="../../d8/dde/struct_protocol.html#a9b3ab5c38a42933eaaaaf5a041553e38">Protocol::size</a></div><div class="ttdeci">int size</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/dca/protocols_8h_source.html#l00018">protocols.h:18</a></div></div>
 <div class="ttc" id="aprotoutils_8c_html_a32a04b85fa743ee338cfd4ff436f4e13"><div class="ttname"><a href="../../dc/d80/protoutils_8c.html#a32a04b85fa743ee338cfd4ff436f4e13">address_string_to_bytes</a></div><div class="ttdeci">int address_string_to_bytes(struct Protocol *protocol, const char *incoming, size_t incoming_size, char *results, int *results_size)</div><div class="ttdoc">Convert an address string to a byte representation.</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d80/protoutils_8c_source.html#l00381">protoutils.c:381</a></div></div>
-<div class="ttc" id="athread__pool_8c_html_ada8afd8462ce3a222a6d77a7d86115d8"><div class="ttname"><a href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a></div><div class="ttdeci">#define err(str)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d84/thread__pool_8c_source.html#l00037">thread_pool.c:37</a></div></div>
 <div class="ttc" id="aprotoutils_8c_html_a148f88a7817936c9d47e34e3aabf4f45"><div class="ttname"><a href="../../dc/d80/protoutils_8c.html#a148f88a7817936c9d47e34e3aabf4f45">bin2hex</a></div><div class="ttdeci">void bin2hex(char *dst, char *src, int len)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d80/protoutils_8c_source.html#l00048">protoutils.c:48</a></div></div>
 <div class="ttc" id="abase32_8c_html_a78acce42d5c859aea4c19508c1aaa1c5"><div class="ttname"><a href="../../db/d08/base32_8c.html#a78acce42d5c859aea4c19508c1aaa1c5">libp2p_encoding_base32_encode</a></div><div class="ttdeci">int libp2p_encoding_base32_encode(const unsigned char *incoming, size_t incoming_length, unsigned char *results, size_t *results_length)</div><div class="ttdoc">Encode in Base32 format.</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d08/base32_8c_source.html#l00554">base32.c:554</a></div></div>
 <div class="ttc" id="avarhexutils_8h_html"><div class="ttname"><a href="../../d1/d17/varhexutils_8h.html">varhexutils.h</a></div><div class="ttdoc">provides utilities for manipulating hexadecimal data</div></div>
 <div class="ttc" id="aprotoutils_8c_html_a9c6b43fd17114c06a5b35d60e8b7727b"><div class="ttname"><a href="../../dc/d80/protoutils_8c.html#a9c6b43fd17114c06a5b35d60e8b7727b">strtok_r</a></div><div class="ttdeci">char * strtok_r(char *, const char *, char **)</div></div>
 <div class="ttc" id="astruct_protocol_html_a22e2d2712cd6ee2edd72f3c51e07a6b5"><div class="ttname"><a href="../../d8/dde/struct_protocol.html#a22e2d2712cd6ee2edd72f3c51e07a6b5">Protocol::name</a></div><div class="ttdeci">char name[30]</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/dca/protocols_8h_source.html#l00019">protocols.h:19</a></div></div>
+<div class="ttc" id="acommand__line_8h_html_a088ac7ffa534015d5b07ddcc7aef9fd4"><div class="ttname"><a href="../../d8/dfd/command__line_8h.html#a088ac7ffa534015d5b07ddcc7aef9fd4">end</a></div><div class="ttdeci">struct arg_end * end</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/dfd/command__line_8h_source.html#l00031">command_line.h:31</a></div></div>
 <div class="ttc" id="astruct_protocol_html"><div class="ttname"><a href="../../d8/dde/struct_protocol.html">Protocol</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d5/dca/protocols_8h_source.html#l00015">protocols.h:15</a></div></div>
 <div class="ttc" id="aprotoutils_8c_html_a0cb36ee44f522146075a6b5fc651c491"><div class="ttname"><a href="../../dc/d80/protoutils_8c.html#a0cb36ee44f522146075a6b5fc651c491">bytes_to_string</a></div><div class="ttdeci">int bytes_to_string(char *buffer, const uint8_t *in_bytes, int in_bytes_size)</div><div class="ttdoc">Unserialize the bytes into a string.</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d80/protoutils_8c_source.html#l00269">protoutils.c:269</a></div></div>
 <div class="ttc" id="aprotoutils_8c_html_a879be90a7ec99722101eca2fc95578e8"><div class="ttname"><a href="../../dc/d80/protoutils_8c.html#a879be90a7ec99722101eca2fc95578e8">ip2int</a></div><div class="ttdeci">uint64_t ip2int(const char *ipconvertint)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d80/protoutils_8c_source.html#l00210">protoutils.c:210</a></div></div>

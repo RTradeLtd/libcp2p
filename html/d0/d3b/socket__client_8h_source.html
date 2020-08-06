@@ -106,7 +106,7 @@ $(document).ready(function(){initNavTree('d0/d3b/socket__client_8h_source.html',
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../da/de0/multiaddr_8h.html">multiaddr/multiaddr.h</a>&quot;</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../da/ddd/socket_8h.html">socket.h</a>&quot;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d8/dbe/utils_2logger_8h.html">utils/logger.h</a>&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d1/d8c/logger_8h.html">thirdparty/logger/logger.h</a>&quot;</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;arpa/inet.h&gt;</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;netinet/in.h&gt;</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;pthread.h&gt;</span></div>
@@ -129,31 +129,19 @@ $(document).ready(function(){initNavTree('d0/d3b/socket__client_8h_source.html',
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"> * @param addr the multiaddr to connect to</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<a class="code" href="../../d9/d8c/structsocket__client.html">socket_client_t</a> *<a class="code" href="../../d0/d3b/socket__client_8h.html#acddf96d2dea8f47ea2d0555c8500630d">new_socket_client</a>(<a class="code" href="../../da/da5/structthread__logger.html">thread_logger</a> *thl, <a class="code" href="../../d4/dc4/structmulti__address.html">multi_addr_t</a> *addr);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">/*!</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"> * @brief used to send a message through the connected socket number</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"> * @param client an instance of socket_client_t created with new_socket_client</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"> * @param peer_address the target address to connect to through the socket</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"> * @param message a null terminated pointer to a char</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> * @returns Success: 0</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"> * @returns Failure: 1</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d0/d3b/socket__client_8h.html#a46de905844492f3340913c1864e2366b">socket_client_sendto</a>(<a class="code" href="../../d9/d8c/structsocket__client.html">socket_client_t</a> *client, <a class="code" href="../../d6/d9d/structaddrinfo.html">addr_info</a> *peer_address,</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                         <span class="keywordtype">char</span> *message);</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="asocket__client_8h_html_a9f1599fe9ce752bf7b20613ca0f725b2"><div class="ttname"><a href="../../d0/d3b/socket__client_8h.html#a9f1599fe9ce752bf7b20613ca0f725b2">socket_client_t</a></div><div class="ttdeci">struct socket_client socket_client_t</div></div>
+<div class="ttc" id="alogger_8h_html"><div class="ttname"><a href="../../d1/d8c/logger_8h.html">logger.h</a></div><div class="ttdoc">a thread safe logger with optional printf style logging</div></div>
 <div class="ttc" id="astructsocket__client_html"><div class="ttname"><a href="../../d9/d8c/structsocket__client.html">socket_client</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d3b/socket__client_8h_source.html#l00034">socket_client.h:34</a></div></div>
 <div class="ttc" id="astructmulti__address_html"><div class="ttname"><a href="../../d4/dc4/structmulti__address.html">multi_address</a></div><div class="ttdef"><b>Definition:</b> <a href="../../da/de0/multiaddr_8h_source.html#l00036">multiaddr.h:36</a></div></div>
 <div class="ttc" id="asocket__client_8h_html_acddf96d2dea8f47ea2d0555c8500630d"><div class="ttname"><a href="../../d0/d3b/socket__client_8h.html#acddf96d2dea8f47ea2d0555c8500630d">new_socket_client</a></div><div class="ttdeci">socket_client_t * new_socket_client(thread_logger *thl, multi_addr_t *addr)</div><div class="ttdoc">returns a new socket client connected to addr:port</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/d39/socket__client_8c_source.html#l00040">socket_client.c:40</a></div></div>
-<div class="ttc" id="astructthread__logger_html"><div class="ttname"><a href="../../da/da5/structthread__logger.html">thread_logger</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d7/dd3/thirdparty_2logger_2logger_8h_source.html#l00072">logger.h:72</a></div></div>
-<div class="ttc" id="asocket__client_8h_html_a46de905844492f3340913c1864e2366b"><div class="ttname"><a href="../../d0/d3b/socket__client_8h.html#a46de905844492f3340913c1864e2366b">socket_client_sendto</a></div><div class="ttdeci">int socket_client_sendto(socket_client_t *client, addr_info *peer_address, char *message)</div><div class="ttdoc">used to send a message through the connected socket number</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/d39/socket__client_8c_source.html#l00112">socket_client.c:112</a></div></div>
+<div class="ttc" id="astructthread__logger_html"><div class="ttname"><a href="../../da/da5/structthread__logger.html">thread_logger</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d8c/logger_8h_source.html#l00072">logger.h:72</a></div></div>
 <div class="ttc" id="asocket_8h_html"><div class="ttname"><a href="../../da/ddd/socket_8h.html">socket.h</a></div><div class="ttdoc">general socket related tooling</div></div>
 <div class="ttc" id="astructsocket__client_html_a0db314a5928fab116a72c7b09dec567f"><div class="ttname"><a href="../../d9/d8c/structsocket__client.html#a0db314a5928fab116a72c7b09dec567f">socket_client::peer_address</a></div><div class="ttdeci">addr_info * peer_address</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d3b/socket__client_8h_source.html#l00036">socket_client.h:36</a></div></div>
 <div class="ttc" id="astructsocket__client_html_ad01662d80345c9f0b505d0b0b73312a3"><div class="ttname"><a href="../../d9/d8c/structsocket__client.html#ad01662d80345c9f0b505d0b0b73312a3">socket_client::socket_number</a></div><div class="ttdeci">int socket_number</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/d3b/socket__client_8h_source.html#l00035">socket_client.h:35</a></div></div>
 <div class="ttc" id="amultiaddr_8h_html"><div class="ttname"><a href="../../da/de0/multiaddr_8h.html">multiaddr.h</a></div></div>
 <div class="ttc" id="astructaddrinfo_html"><div class="ttname"><a href="../../d6/d9d/structaddrinfo.html">addrinfo</a></div><div class="ttdoc">alias for struct addrinfo</div></div>
-<div class="ttc" id="autils_2logger_8h_html"><div class="ttname"><a href="../../d8/dbe/utils_2logger_8h.html">logger.h</a></div><div class="ttdoc">a thread safe logger with optional printf style logging</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

@@ -1,0 +1,5 @@
+<map id="libp2p_crypto_ecdsa_keypair_generation" name="libp2p_crypto_ecdsa_keypair_generation">
+<area shape="rect" id="node1" title="used to generate an ECDSA keypair" alt="" coords="5,35,160,76"/>
+<area shape="rect" id="node2" href="$dc/d09/ecdsa_8c.html#a921b929610c8f4da6e9e10f6349759d3" title="parses a PEM encoded private key and returns a struct for use" alt="" coords="208,5,369,47"/>
+<area shape="rect" id="node3" href="$de/df1/util_8c.html#aceffb5d3f84b98c35c05dc580caddd45" title="prints the corresponding error to stdout" alt="" coords="417,42,568,69"/>
+</map>

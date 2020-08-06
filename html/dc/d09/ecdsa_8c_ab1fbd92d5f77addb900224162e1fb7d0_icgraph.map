@@ -1,5 +1,7 @@
 <map id="libp2p_crypto_ecdsa_private_key_save" name="libp2p_crypto_ecdsa_private_key_save">
-<area shape="rect" id="node1" title="used to save a private key at the given path" alt="" coords="344,5,499,47"/>
+<area shape="rect" id="node1" title="used to save a private key at the given path" alt="" coords="344,35,499,76"/>
 <area shape="rect" id="node2" href="$d5/d29/crypto__test_8c.html#a04d295869fa1a64f7c011ce0b287bf03" title=" " alt="" coords="108,5,296,47"/>
+<area shape="rect" id="node4" href="$d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="113,71,291,98"/>
 <area shape="rect" id="node3" href="$d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,13,60,39"/>
+<area shape="rect" id="node5" href="$d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,71,60,98"/>
 </map>

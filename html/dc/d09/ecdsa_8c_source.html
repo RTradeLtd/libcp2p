@@ -264,125 +264,152 @@ $(document).ready(function(){initNavTree('dc/d09/ecdsa_8c_source.html','../../')
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;}</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="comment">/*! @brief used to generate an ECDSA keypair</span></div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment"> * @param private_key the place to store the private key</span></div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment"> * @param curve the ECC curve to use for key generation</span></div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment"> * @returns Fail: 0</span></div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="comment"> * @returns Success: 1</span></div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00184"></a><span class="lineno"><a class="line" href="../../d5/d5d/ecdsa_8h.html#ababc4b1b736eb55ea94abd3175fb76ea">  184</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../dc/d09/ecdsa_8c.html#ababc4b1b736eb55ea94abd3175fb76ea">libp2p_crypto_ecdsa_keypair_generation</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *output,</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                                           mbedtls_ecp_group_id curve) {</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    mbedtls_pk_context ecdsa_key_pair;</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    mbedtls_entropy_context entropy_context;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    mbedtls_ctr_drbg_context ctr_drb_context;<span class="comment"></span></div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">    /*! * @todo figure out if we need this</span></div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *pers = <span class="stringliteral">&quot;ecdsa&quot;</span>;</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="comment">// initialize mbedtls context(s)</span></div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    mbedtls_ctr_drbg_init(&amp;ctr_drb_context);</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    mbedtls_entropy_init(&amp;entropy_context);</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    mbedtls_pk_init(&amp;ecdsa_key_pair);</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    mbedtls_pk_setup(&amp;ecdsa_key_pair, mbedtls_pk_info_from_type(MBEDTLS_PK_ECKEY));</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="comment">// seed entropy generation</span></div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="keywordtype">int</span> rc = mbedtls_ctr_drbg_seed(&amp;ctr_drb_context, mbedtls_entropy_func,</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                                   &amp;entropy_context, (<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)pers,</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;                                   strlen(pers) != 0);</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    <span class="keywordflow">if</span> (rc != 0) {</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <a class="code" href="../../de/df1/util_8c.html#aceffb5d3f84b98c35c05dc580caddd45">print_mbedtls_error</a>(rc);</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        <span class="comment">// TODO(bonedaddy): free up memory</span></div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    }</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="comment">// generate the actual ecdsa keypair</span></div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    rc = mbedtls_ecdsa_genkey(mbedtls_pk_ec(ecdsa_key_pair), curve,</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;                              mbedtls_ctr_drbg_random, &amp;ctr_drb_context</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    );</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    <span class="keywordflow">if</span> (rc != 0) {</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        <a class="code" href="../../de/df1/util_8c.html#aceffb5d3f84b98c35c05dc580caddd45">print_mbedtls_error</a>(rc);</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    }</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="comment">// write the private key in PEM format to output</span></div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    rc = mbedtls_pk_write_key_pem(&amp;ecdsa_key_pair, output, 1024);</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <span class="keywordflow">if</span> (rc != 0) {</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        <a class="code" href="../../de/df1/util_8c.html#aceffb5d3f84b98c35c05dc580caddd45">print_mbedtls_error</a>(rc);</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    }</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <span class="comment">// free up allocated resources</span></div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    mbedtls_pk_free(&amp;ecdsa_key_pair);</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    mbedtls_ctr_drbg_free(&amp;ctr_drb_context);</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    mbedtls_entropy_free(&amp;entropy_context);</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;}</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">/*!</span></div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment"> * @brief used to save a private key at the given path</span></div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment"> * @param pk an instance of ecdsa_private_key_t</span></div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment"> * @param path the location on disk to save file at</span></div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment"> * @return Success: 0</span></div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment"> * @return Failure: 1</span></div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00240"></a><span class="lineno"><a class="line" href="../../d5/d5d/ecdsa_8h.html#ab1fbd92d5f77addb900224162e1fb7d0">  240</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../dc/d09/ecdsa_8c.html#ab1fbd92d5f77addb900224162e1fb7d0">libp2p_crypto_ecdsa_private_key_save</a>(<a class="code" href="../../d7/dc6/structecdsa__private__key.html">ecdsa_private_key_t</a> *pk, <span class="keywordtype">char</span> *path) {</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> pem_buffer[1024];</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="keywordtype">int</span> rc = mbedtls_pk_write_key_pem(&amp;pk-&gt;<a class="code" href="../../d7/dc6/structecdsa__private__key.html#a8ee56b1ca318d8825e178ad06c8ac24d">pk_ctx</a>, pem_buffer, 1024);</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="keywordflow">if</span> (rc != 0) {</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        <a class="code" href="../../de/df1/util_8c.html#aceffb5d3f84b98c35c05dc580caddd45">print_mbedtls_error</a>(rc);</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    }</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="keywordtype">int</span> fd = open(path, O_WRONLY | O_CREAT | O_SYNC | O_TRUNC, 0640);</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keywordflow">if</span> (fd &lt;= 0) {</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        printf(<span class="stringliteral">&quot;failed to open: %s\n&quot;</span>, strerror(errno));</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    }</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160; </div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    <span class="keywordtype">size_t</span> stat = write(fd, (<span class="keywordtype">char</span> *)pem_buffer, strlen((<span class="keywordtype">char</span> *)pem_buffer));</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    <span class="keywordflow">if</span> ((<span class="keywordtype">int</span>)stat == -1) {</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        printf(<span class="stringliteral">&quot;failed to write: %s\n&quot;</span>, strerror(errno));</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        rc = 1;</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        rc = 0;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    }</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    close(fd);</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keywordflow">return</span> rc;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;}</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">/*!</span></div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment"> * @brief loads an ECDSA private key from a file containing a PEM key</span></div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment"> * @param path the path on disk to a PEM file containing an ECDSA private key</span></div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment"> * @return Success: pointer to an instance of an ecdsa_private_key_t type</span></div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment"> * @return Failure: NULL pointer</span></div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00273"></a><span class="lineno"><a class="line" href="../../d5/d5d/ecdsa_8h.html#a73c6a8cb5971191ba5dc7f940e45fa43">  273</a></span>&#160;<a class="code" href="../../d7/dc6/structecdsa__private__key.html">ecdsa_private_key_t</a> *<a class="code" href="../../dc/d09/ecdsa_8c.html#a73c6a8cb5971191ba5dc7f940e45fa43">libp2p_crypto_ecdsa_private_key_from_file</a>(<span class="keywordtype">char</span> *path) {</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    <span class="keywordtype">int</span> fd = open(path, O_RDONLY, 0640);</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    <span class="keywordflow">if</span> (fd &lt;= 0) {</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        printf(<span class="stringliteral">&quot;failed to open: %s\n&quot;</span>, strerror(errno));</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    }</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    <span class="keywordtype">char</span> pem_buffer[1024];</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    memset(pem_buffer, 0, 1024);</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <span class="keywordtype">int</span> rc = read(fd, pem_buffer, 1024);</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <span class="keywordflow">if</span> (rc == -1) {</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        printf(<span class="stringliteral">&quot;failed to read from file: %s\n&quot;</span>, strerror(errno));</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    }</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    close(fd);</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="../../dc/d09/ecdsa_8c.html#a921b929610c8f4da6e9e10f6349759d3">libp2p_crypto_ecdsa_pem_to_private_key</a>((<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)pem_buffer);</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;}</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="comment"> * @returns Success: pointer to an ecdsa_private_key_t instance</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="comment"> * @returns NUULL pointer</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<a class="code" href="../../d7/dc6/structecdsa__private__key.html">ecdsa_private_key_t</a> *</div>
+<div class="line"><a name="l00183"></a><span class="lineno"><a class="line" href="../../d5/d5d/ecdsa_8h.html#a07a5404b7d00f5fbeaf7529fd2c1580e">  183</a></span>&#160;<a class="code" href="../../dc/d09/ecdsa_8c.html#a07a5404b7d00f5fbeaf7529fd2c1580e">libp2p_crypto_ecdsa_keypair_generation</a>(mbedtls_ecp_group_id curve) {</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    mbedtls_pk_context ecdsa_key_pair;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    mbedtls_entropy_context entropy_context;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    mbedtls_ctr_drbg_context ctr_drb_context;<span class="comment"></span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment">    /*! * @todo figure out if we need this</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *pers = <span class="stringliteral">&quot;ecdsa&quot;</span>;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="comment">// initialize mbedtls context(s)</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    mbedtls_ctr_drbg_init(&amp;ctr_drb_context);</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    mbedtls_entropy_init(&amp;entropy_context);</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    mbedtls_pk_init(&amp;ecdsa_key_pair);</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    mbedtls_pk_setup(&amp;ecdsa_key_pair, mbedtls_pk_info_from_type(MBEDTLS_PK_ECKEY));</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="comment">// seed entropy generation</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="keywordtype">int</span> rc = mbedtls_ctr_drbg_seed(&amp;ctr_drb_context, mbedtls_entropy_func,</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                                   &amp;entropy_context, (<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)pers,</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;                                   strlen(pers) != 0);</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <span class="keywordflow">if</span> (rc != 0) {</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        <a class="code" href="../../de/df1/util_8c.html#aceffb5d3f84b98c35c05dc580caddd45">print_mbedtls_error</a>(rc);</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        <span class="comment">// TODO(bonedaddy): free up memory</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    }</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="comment">// generate the actual ecdsa keypair</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    rc = mbedtls_ecdsa_genkey(mbedtls_pk_ec(ecdsa_key_pair), curve,</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;                              mbedtls_ctr_drbg_random, &amp;ctr_drb_context</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    );</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keywordflow">if</span> (rc != 0) {</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        <a class="code" href="../../de/df1/util_8c.html#aceffb5d3f84b98c35c05dc580caddd45">print_mbedtls_error</a>(rc);</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    }</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="../../d8/dfd/command__line_8h.html#a3c1da89e54ad92f9a339024d1529b716">output</a>[1024];</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    memset(<a class="code" href="../../d8/dfd/command__line_8h.html#a3c1da89e54ad92f9a339024d1529b716">output</a>, 0, 1024);</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <span class="comment">// write the private key in PEM format to output</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    rc = mbedtls_pk_write_key_pem(&amp;ecdsa_key_pair, <a class="code" href="../../d8/dfd/command__line_8h.html#a3c1da89e54ad92f9a339024d1529b716">output</a>, 1024);</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="keywordflow">if</span> (rc != 0) {</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        <a class="code" href="../../de/df1/util_8c.html#aceffb5d3f84b98c35c05dc580caddd45">print_mbedtls_error</a>(rc);</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    }</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <span class="comment">// free up allocated resources</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    mbedtls_pk_free(&amp;ecdsa_key_pair);</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    mbedtls_ctr_drbg_free(&amp;ctr_drb_context);</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    mbedtls_entropy_free(&amp;entropy_context);</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="../../dc/d09/ecdsa_8c.html#a921b929610c8f4da6e9e10f6349759d3">libp2p_crypto_ecdsa_pem_to_private_key</a>(<a class="code" href="../../d8/dfd/command__line_8h.html#a3c1da89e54ad92f9a339024d1529b716">output</a>);</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;}</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">/*!</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment"> * @brief used to save a private key at the given path</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment"> * @param pk an instance of ecdsa_private_key_t</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment"> * @param path the location on disk to save file at</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment"> * @return Success: 0</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment"> * @return Failure: 1</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno"><a class="line" href="../../d5/d5d/ecdsa_8h.html#ab1fbd92d5f77addb900224162e1fb7d0">  242</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../dc/d09/ecdsa_8c.html#ab1fbd92d5f77addb900224162e1fb7d0">libp2p_crypto_ecdsa_private_key_save</a>(<a class="code" href="../../d7/dc6/structecdsa__private__key.html">ecdsa_private_key_t</a> *pk, <span class="keywordtype">char</span> *path) {</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> pem_buffer[1024];</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; </div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <span class="keywordtype">int</span> rc = mbedtls_pk_write_key_pem(&amp;pk-&gt;<a class="code" href="../../d7/dc6/structecdsa__private__key.html#a8ee56b1ca318d8825e178ad06c8ac24d">pk_ctx</a>, pem_buffer, 1024);</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <span class="keywordflow">if</span> (rc != 0) {</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        <a class="code" href="../../de/df1/util_8c.html#aceffb5d3f84b98c35c05dc580caddd45">print_mbedtls_error</a>(rc);</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    }</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160; </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <span class="keywordtype">int</span> fd = open(path, O_WRONLY | O_CREAT | O_SYNC | O_TRUNC, 0640);</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <span class="keywordflow">if</span> (fd &lt;= 0) {</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        printf(<span class="stringliteral">&quot;failed to open: %s\n&quot;</span>, strerror(errno));</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    }</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    <span class="keywordtype">size_t</span> stat = write(fd, (<span class="keywordtype">char</span> *)pem_buffer, strlen((<span class="keywordtype">char</span> *)pem_buffer));</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="keywordflow">if</span> ((<span class="keywordtype">int</span>)stat == -1) {</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        printf(<span class="stringliteral">&quot;failed to write: %s\n&quot;</span>, strerror(errno));</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        rc = 1;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        rc = 0;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    }</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    close(fd);</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="keywordflow">return</span> rc;</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;}</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">/*!</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment"> * @brief loads an ECDSA private key from a file containing a PEM key</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment"> * @param path the path on disk to a PEM file containing an ECDSA private key</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment"> * @return Success: pointer to an instance of an ecdsa_private_key_t type</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment"> * @return Failure: NULL pointer</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno"><a class="line" href="../../d5/d5d/ecdsa_8h.html#a73c6a8cb5971191ba5dc7f940e45fa43">  275</a></span>&#160;<a class="code" href="../../d7/dc6/structecdsa__private__key.html">ecdsa_private_key_t</a> *<a class="code" href="../../dc/d09/ecdsa_8c.html#a73c6a8cb5971191ba5dc7f940e45fa43">libp2p_crypto_ecdsa_private_key_from_file</a>(<span class="keywordtype">char</span> *path) {</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="keywordtype">int</span> fd = open(path, O_RDONLY, 0640);</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    <span class="keywordflow">if</span> (fd &lt;= 0) {</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        printf(<span class="stringliteral">&quot;failed to open: %s\n&quot;</span>, strerror(errno));</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    }</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <span class="keywordtype">char</span> pem_buffer[1024];</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    memset(pem_buffer, 0, 1024);</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    <span class="keywordtype">int</span> rc = read(fd, pem_buffer, 1024);</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <span class="keywordflow">if</span> (rc == -1) {</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        printf(<span class="stringliteral">&quot;failed to read from file: %s\n&quot;</span>, strerror(errno));</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    }</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    close(fd);</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="../../dc/d09/ecdsa_8c.html#a921b929610c8f4da6e9e10f6349759d3">libp2p_crypto_ecdsa_pem_to_private_key</a>((<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *)pem_buffer);</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;}</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="comment">/*!</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment"> * @brief takes a private key and returns its corresponding PEM format</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno"><a class="line" href="../../d5/d5d/ecdsa_8h.html#a563ea8762a532c798d0fa4b6d50583c1">  296</a></span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *<a class="code" href="../../dc/d09/ecdsa_8c.html#a563ea8762a532c798d0fa4b6d50583c1">libp2p_crypto_ecdsa_private_key_to_pem</a>(<a class="code" href="../../d7/dc6/structecdsa__private__key.html">ecdsa_private_key_t</a> *pk) {</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> buffer[1024];</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    memset(buffer, 0, 1024);</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160; </div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    <span class="keywordtype">int</span> rc = mbedtls_pk_write_key_pem(&amp;pk-&gt;<a class="code" href="../../d7/dc6/structecdsa__private__key.html#a8ee56b1ca318d8825e178ad06c8ac24d">pk_ctx</a>, buffer, 1024);</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    <span class="keywordflow">if</span> (rc != 0) {</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        <a class="code" href="../../de/df1/util_8c.html#aceffb5d3f84b98c35c05dc580caddd45">print_mbedtls_error</a>(rc);</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    }</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    <span class="comment">// this works as the previous function includes null terminating byte</span></div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *ret_buf = calloc(1, strlen((<span class="keywordtype">char</span> *)buffer) + 1);</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    <span class="keywordflow">if</span> (ret_buf == NULL) {</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    }</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    memcpy(ret_buf, buffer, strlen((<span class="keywordtype">char</span> *)buffer));</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    <span class="keywordflow">return</span> ret_buf;</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aecdsa_8c_html_a73c6a8cb5971191ba5dc7f940e45fa43"><div class="ttname"><a href="../../dc/d09/ecdsa_8c.html#a73c6a8cb5971191ba5dc7f940e45fa43">libp2p_crypto_ecdsa_private_key_from_file</a></div><div class="ttdeci">ecdsa_private_key_t * libp2p_crypto_ecdsa_private_key_from_file(char *path)</div><div class="ttdoc">loads an ECDSA private key from a file containing a PEM key</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d09/ecdsa_8c_source.html#l00273">ecdsa.c:273</a></div></div>
+<div class="ttc" id="aecdsa_8c_html_a73c6a8cb5971191ba5dc7f940e45fa43"><div class="ttname"><a href="../../dc/d09/ecdsa_8c.html#a73c6a8cb5971191ba5dc7f940e45fa43">libp2p_crypto_ecdsa_private_key_from_file</a></div><div class="ttdeci">ecdsa_private_key_t * libp2p_crypto_ecdsa_private_key_from_file(char *path)</div><div class="ttdoc">loads an ECDSA private key from a file containing a PEM key</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d09/ecdsa_8c_source.html#l00275">ecdsa.c:275</a></div></div>
 <div class="ttc" id="astructpublic__key_html"><div class="ttname"><a href="../../d3/dce/structpublic__key.html">public_key</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/de5/key_8h_source.html#l00039">key.h:39</a></div></div>
-<div class="ttc" id="aecdsa_8c_html_ab1fbd92d5f77addb900224162e1fb7d0"><div class="ttname"><a href="../../dc/d09/ecdsa_8c.html#ab1fbd92d5f77addb900224162e1fb7d0">libp2p_crypto_ecdsa_private_key_save</a></div><div class="ttdeci">int libp2p_crypto_ecdsa_private_key_save(ecdsa_private_key_t *pk, char *path)</div><div class="ttdoc">used to save a private key at the given path</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d09/ecdsa_8c_source.html#l00240">ecdsa.c:240</a></div></div>
+<div class="ttc" id="aecdsa_8c_html_ab1fbd92d5f77addb900224162e1fb7d0"><div class="ttname"><a href="../../dc/d09/ecdsa_8c.html#ab1fbd92d5f77addb900224162e1fb7d0">libp2p_crypto_ecdsa_private_key_save</a></div><div class="ttdeci">int libp2p_crypto_ecdsa_private_key_save(ecdsa_private_key_t *pk, char *path)</div><div class="ttdoc">used to save a private key at the given path</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d09/ecdsa_8c_source.html#l00242">ecdsa.c:242</a></div></div>
 <div class="ttc" id="astructecdsa__private__key_html_a8ee56b1ca318d8825e178ad06c8ac24d"><div class="ttname"><a href="../../d7/dc6/structecdsa__private__key.html#a8ee56b1ca318d8825e178ad06c8ac24d">ecdsa_private_key::pk_ctx</a></div><div class="ttdeci">mbedtls_pk_context pk_ctx</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d5d/ecdsa_8h_source.html#l00032">ecdsa.h:32</a></div></div>
 <div class="ttc" id="autil_8c_html_aceffb5d3f84b98c35c05dc580caddd45"><div class="ttname"><a href="../../de/df1/util_8c.html#aceffb5d3f84b98c35c05dc580caddd45">print_mbedtls_error</a></div><div class="ttdeci">void print_mbedtls_error(int errcode)</div><div class="ttdoc">prints the corresponding error to stdout</div><div class="ttdef"><b>Definition:</b> <a href="../../de/df1/util_8c_source.html#l00007">util.c:7</a></div></div>
 <div class="ttc" id="aecdsa_8h_html"><div class="ttname"><a href="../../d5/d5d/ecdsa_8h.html">ecdsa.h</a></div><div class="ttdoc">provides ECDSA cryptography support</div></div>
+<div class="ttc" id="aecdsa_8c_html_a563ea8762a532c798d0fa4b6d50583c1"><div class="ttname"><a href="../../dc/d09/ecdsa_8c.html#a563ea8762a532c798d0fa4b6d50583c1">libp2p_crypto_ecdsa_private_key_to_pem</a></div><div class="ttdeci">unsigned char * libp2p_crypto_ecdsa_private_key_to_pem(ecdsa_private_key_t *pk)</div><div class="ttdoc">takes a private key and returns its corresponding PEM format</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d09/ecdsa_8c_source.html#l00296">ecdsa.c:296</a></div></div>
 <div class="ttc" id="aecdsa_8c_html_adbec9a5580e49bed281b92f9a837c6e3"><div class="ttname"><a href="../../dc/d09/ecdsa_8c.html#adbec9a5580e49bed281b92f9a837c6e3">libp2p_crypto_ecdsa_free</a></div><div class="ttdeci">int libp2p_crypto_ecdsa_free(ecdsa_private_key_t *pk)</div><div class="ttdoc">frees up resources allocated for the private key</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d09/ecdsa_8c_source.html#l00050">ecdsa.c:50</a></div></div>
 <div class="ttc" id="akey_8h_html_a4f367c350737c92475175fb229c5570ea0d24a7fdd0814c0edc07dd094adf679c"><div class="ttname"><a href="../../de/de5/key_8h.html#a4f367c350737c92475175fb229c5570ea0d24a7fdd0814c0edc07dd094adf679c">KEYTYPE_ECDSA</a></div><div class="ttdeci">@ KEYTYPE_ECDSA</div><div class="ttdef"><b>Definition:</b> <a href="../../de/de5/key_8h_source.html#l00031">key.h:31</a></div></div>
 <div class="ttc" id="apeerutils_8h_html"><div class="ttname"><a href="../../d7/dee/peerutils_8h.html">peerutils.h</a></div><div class="ttdoc">provides utilities for managing peer identifiers</div></div>
@@ -393,9 +420,10 @@ $(document).ready(function(){initNavTree('dc/d09/ecdsa_8c_source.html','../../')
 <div class="ttc" id="aecdsa_8c_html_abfd5e863b148643f0c78f6a426f21047"><div class="ttname"><a href="../../dc/d09/ecdsa_8c.html#abfd5e863b148643f0c78f6a426f21047">libp2p_crypto_ecdsa_keypair_public</a></div><div class="ttdeci">public_key_t * libp2p_crypto_ecdsa_keypair_public(ecdsa_private_key_t *pk)</div><div class="ttdoc">returns the public key associated with the private key in PEM format</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d09/ecdsa_8c_source.html#l00108">ecdsa.c:108</a></div></div>
 <div class="ttc" id="aecdsa_8c_html_a921b929610c8f4da6e9e10f6349759d3"><div class="ttname"><a href="../../dc/d09/ecdsa_8c.html#a921b929610c8f4da6e9e10f6349759d3">libp2p_crypto_ecdsa_pem_to_private_key</a></div><div class="ttdeci">ecdsa_private_key_t * libp2p_crypto_ecdsa_pem_to_private_key(unsigned char *pem_input)</div><div class="ttdoc">parses a PEM encoded private key and returns a struct for use</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d09/ecdsa_8c_source.html#l00145">ecdsa.c:145</a></div></div>
 <div class="ttc" id="asha256_8c_html_abec2cc9b75a7053f0b5db97881857712"><div class="ttname"><a href="../../da/d01/sha256_8c.html#abec2cc9b75a7053f0b5db97881857712">libp2p_crypto_hashing_sha256</a></div><div class="ttdeci">int libp2p_crypto_hashing_sha256(const unsigned char *input, size_t input_length, unsigned char *output)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d01/sha256_8c_source.html#l00011">sha256.c:11</a></div></div>
-<div class="ttc" id="aecdsa_8c_html_ababc4b1b736eb55ea94abd3175fb76ea"><div class="ttname"><a href="../../dc/d09/ecdsa_8c.html#ababc4b1b736eb55ea94abd3175fb76ea">libp2p_crypto_ecdsa_keypair_generation</a></div><div class="ttdeci">int libp2p_crypto_ecdsa_keypair_generation(unsigned char *output, mbedtls_ecp_group_id curve)</div><div class="ttdoc">used to generate an ECDSA keypair</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d09/ecdsa_8c_source.html#l00184">ecdsa.c:184</a></div></div>
+<div class="ttc" id="aecdsa_8c_html_a07a5404b7d00f5fbeaf7529fd2c1580e"><div class="ttname"><a href="../../dc/d09/ecdsa_8c.html#a07a5404b7d00f5fbeaf7529fd2c1580e">libp2p_crypto_ecdsa_keypair_generation</a></div><div class="ttdeci">ecdsa_private_key_t * libp2p_crypto_ecdsa_keypair_generation(mbedtls_ecp_group_id curve)</div><div class="ttdoc">used to generate an ECDSA keypair</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d09/ecdsa_8c_source.html#l00183">ecdsa.c:183</a></div></div>
 <div class="ttc" id="astructecdsa__private__key_html_a5e1def9e3965a1aa05e00acd8708c331"><div class="ttname"><a href="../../d7/dc6/structecdsa__private__key.html#a5e1def9e3965a1aa05e00acd8708c331">ecdsa_private_key::mutex</a></div><div class="ttdeci">pthread_mutex_t mutex</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d5d/ecdsa_8h_source.html#l00034">ecdsa.h:34</a></div></div>
 <div class="ttc" id="apeerutils_8c_html_aaf5bd24666b8916b63d3a7ebc7b82b03"><div class="ttname"><a href="../../dc/d82/peerutils_8c.html#aaf5bd24666b8916b63d3a7ebc7b82b03">libp2p_new_peer_id</a></div><div class="ttdeci">peer_id_t * libp2p_new_peer_id(unsigned char *output, size_t *output_len, unsigned char *input_hash, size_t input_size)</div><div class="ttdoc">constructs a peer identifier from the given public key</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d82/peerutils_8c_source.html#l00053">peerutils.c:53</a></div></div>
+<div class="ttc" id="acommand__line_8h_html_a3c1da89e54ad92f9a339024d1529b716"><div class="ttname"><a href="../../d8/dfd/command__line_8h.html#a3c1da89e54ad92f9a339024d1529b716">output</a></div><div class="ttdeci">struct arg_file * output</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/dfd/command__line_8h_source.html#l00030">command_line.h:30</a></div></div>
 <div class="ttc" id="astructpublic__key_html_a90db6474f830294f7e5d1357ea3fe788"><div class="ttname"><a href="../../d3/dce/structpublic__key.html#a90db6474f830294f7e5d1357ea3fe788">public_key::type</a></div><div class="ttdeci">key_type_t type</div><div class="ttdef"><b>Definition:</b> <a href="../../de/de5/key_8h_source.html#l00040">key.h:40</a></div></div>
 <div class="ttc" id="akey_8c_html_a9c803993819a08dc0584b8995eaa3232"><div class="ttname"><a href="../../db/dfd/key_8c.html#a9c803993819a08dc0584b8995eaa3232">libp2p_crypto_public_key_new</a></div><div class="ttdeci">public_key_t * libp2p_crypto_public_key_new(void)</div><div class="ttdoc">returns a new instance of public_key_t</div><div class="ttdef"><b>Definition:</b> <a href="../../db/dfd/key_8c_source.html#l00036">key.c:36</a></div></div>
 <div class="ttc" id="astructecdsa__private__key_html"><div class="ttname"><a href="../../d7/dc6/structecdsa__private__key.html">ecdsa_private_key</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d5d/ecdsa_8h_source.html#l00031">ecdsa.h:31</a></div></div>

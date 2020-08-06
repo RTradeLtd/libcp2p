@@ -1,7 +1,0 @@
-<map id="clear_thread_logger" name="clear_thread_logger">
-<area shape="rect" id="node1" title="free resources for the threaded logger" alt="" coords="528,31,679,57"/>
-<area shape="rect" id="node2" href="$d8/dbe/utils_2logger_8h.html#acb35852b4fbddea293c8aa641f5e5524" title="free resources for the file ogger" alt="" coords="343,5,472,32"/>
-<area shape="rect" id="node3" href="$d9/d26/socket__server_8h.html#a0873d0d29f1ce24a3a9c7a199c03a2a1" title="terminates a server and frees up resources associated with it" alt="" coords="335,56,480,83"/>
-<area shape="rect" id="node4" href="$d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="108,56,287,83"/>
-<area shape="rect" id="node5" href="$d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,56,60,83"/>
-</map>

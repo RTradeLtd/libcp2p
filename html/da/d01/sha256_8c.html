@@ -105,7 +105,7 @@ Include dependency graph for sha256.c:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:abec2cc9b75a7053f0b5db97881857712"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d01/sha256_8c.html#abec2cc9b75a7053f0b5db97881857712">libp2p_crypto_hashing_sha256</a> (const unsigned char *input, size_t input_length, unsigned char *output)</td></tr>
+<tr class="memitem:abec2cc9b75a7053f0b5db97881857712"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d01/sha256_8c.html#abec2cc9b75a7053f0b5db97881857712">libp2p_crypto_hashing_sha256</a> (const unsigned char *input, size_t input_length, unsigned char *<a class="el" href="../../d8/dfd/command__line_8h.html#a3c1da89e54ad92f9a339024d1529b716">output</a>)</td></tr>
 <tr class="separator:abec2cc9b75a7053f0b5db97881857712"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1f662d5f63efde79710cd861300147d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d01/sha256_8c.html#ae1f662d5f63efde79710cd861300147d">libp2p_crypto_hashing_sha256_init</a> (mbedtls_sha256_context *ctx)</td></tr>
 <tr class="memdesc:ae1f662d5f63efde79710cd861300147d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a sha256 hmac process.  <a href="../../da/d01/sha256_8c.html#ae1f662d5f63efde79710cd861300147d">More...</a><br /></td></tr>
@@ -159,16 +159,24 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../da/d01/sha256_8c_abec2cc9b75a7053f0b5db97881857712_icgraph.png" border="0" usemap="#da/d01/sha256_8c_abec2cc9b75a7053f0b5db97881857712_icgraph" alt=""/></div>
 <map name="da/d01/sha256_8c_abec2cc9b75a7053f0b5db97881857712_icgraph" id="da/d01/sha256_8c_abec2cc9b75a7053f0b5db97881857712_icgraph">
-<area shape="rect" title=" " alt="" coords="1013,109,1181,151"/>
-<area shape="rect" href="../../d5/d5d/ecdsa_8h.html#a821e2830f6759f41158ee38c18ca9252" title="returns a peer_id_t struct for the given private key" alt="" coords="811,109,965,151"/>
-<area shape="rect" href="../../d7/dee/peerutils_8h.html#a20fb9280d827d25e56ff161baa137764" title="generates a peerID for the public key using SHA256 as the hashing algorithm" alt="" coords="813,19,963,60"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#afe42ae6e62a08bff21956adcfcb56a6d" title=" " alt="" coords="592,188,735,229"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="108,45,304,71"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="564,123,763,164"/>
-<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,45,60,71"/>
-<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="407,162,461,189"/>
-<area shape="rect" href="../../d5/d3e/peerstore_8h.html#adec424d7ca6bc416943aff4526e7f351" title="used to validate the peerID ensuring that the given public key matches the given peerid" alt="" coords="591,5,735,47"/>
-<area shape="rect" href="../../d5/d3e/peerstore_8h.html#ae1716fa6a8fa77ef2971750a57139988" title="used to insert a peer_id public_key pair into our peerstore" alt="" coords="352,17,516,43"/>
+<area shape="rect" title=" " alt="" coords="1651,102,1819,143"/>
+<area shape="rect" href="../../d5/d5d/ecdsa_8h.html#a821e2830f6759f41158ee38c18ca9252" title="returns a peer_id_t struct for the given private key" alt="" coords="1053,34,1207,75"/>
+<area shape="rect" href="../../d7/dee/peerutils_8h.html#a20fb9280d827d25e56ff161baa137764" title="generates a peerID for the public key using SHA256 as the hashing algorithm" alt="" coords="1452,102,1603,143"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#afe42ae6e62a08bff21956adcfcb56a6d" title=" " alt="" coords="1261,171,1403,212"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a5a2eac1ff27232eba96ba5d41145cd33" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="604,44,751,70"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="803,94,999,121"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="801,28,1000,70"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a990190006e127641a32a5d37d2368fce" title=" " alt="" coords="383,57,545,84"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="375,120,553,146"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a3cb566e1d17d9a6da5a87bb940f11a26" title=" " alt="" coords="108,57,327,84"/>
+<area shape="rect" href="../../d6/dfd/cli_2main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,57,60,84"/>
+<area shape="rect" href="../../d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="190,120,245,146"/>
+<area shape="rect" href="../../d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="650,94,705,121"/>
+<area shape="rect" href="../../d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="650,196,705,222"/>
+<area shape="rect" href="../../d5/d3e/peerstore_8h.html#adec424d7ca6bc416943aff4526e7f351" title="used to validate the peerID ensuring that the given public key matches the given peerid" alt="" coords="1260,102,1404,143"/>
+<area shape="rect" href="../../d5/d3e/peerstore_8h.html#ae1716fa6a8fa77ef2971750a57139988" title="used to insert a peer_id public_key pair into our peerstore" alt="" coords="1048,109,1212,136"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a522916191d4db90bdf14749780cfb826" title="handles receiving a hello protocol message from another peer" alt="" coords="818,145,983,172"/>
+<area shape="rect" href="../../d9/d26/socket__server_8h.html#a3bc7eef996be3f8c2118e4d1a523c8e1" title="handles receiving an rpc message from another peer" alt="" coords="601,145,753,172"/>
 </map>
 </div>
 

@@ -1,0 +1,4 @@
+<map id="new_command_object" name="new_command_object">
+<area shape="rect" id="node1" title="intializes a new command_object to have commands loaded into" alt="" coords="5,5,173,32"/>
+<area shape="rect" id="node2" href="$da/dd8/colors_8h.html#a9b86c057290aefcc15b20231f9cabe9e" title="prints message to stdout with the given color" alt="" coords="221,5,328,32"/>
+</map>

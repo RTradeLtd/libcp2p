@@ -1,0 +1,63 @@
+.TH "message_hello" 3 "Thu Aug 6 2020" "libcp2p" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+message_hello
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <messages\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "size_t \fBpeer_id_len\fP"
+.br
+.RI "the size of \fBpeer_id\fP "
+.ti -1c
+.RI "size_t \fBpublic_key_len\fP"
+.br
+.RI "the size of \fBpublic_key\fP "
+.ti -1c
+.RI "unsigned char * \fBpeer_id\fP"
+.br
+.RI "a peer's identifier "
+.ti -1c
+.RI "unsigned char * \fBpublic_key\fP"
+.br
+.RI "the corresponding public key for the peerid "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 103 of file messages\&.h\&.
+.SH "Field Documentation"
+.PP 
+.SS "unsigned char* message_hello::peer_id"
+
+.PP
+a peer's identifier 
+.PP
+Definition at line 109 of file messages\&.h\&.
+.SS "size_t message_hello::peer_id_len"
+
+.PP
+the size of \fBpeer_id\fP 
+.PP
+Definition at line 105 of file messages\&.h\&.
+.SS "unsigned char* message_hello::public_key"
+
+.PP
+the corresponding public key for the peerid 
+.PP
+Definition at line 111 of file messages\&.h\&.
+.SS "size_t message_hello::public_key_len"
+
+.PP
+the size of \fBpublic_key\fP 
+.PP
+Definition at line 107 of file messages\&.h\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libcp2p from the source code\&.

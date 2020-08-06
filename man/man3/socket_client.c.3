@@ -1,4 +1,4 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/network/socket_client.c" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/src/network/socket_client.c" 3 "Thu Aug 6 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -9,7 +9,7 @@
 .PP
 \fC#include 'network/socket_client\&.h'\fP
 .br
-\fC#include 'utils/logger\&.h'\fP
+\fC#include 'thirdparty/logger/logger\&.h'\fP
 .br
 \fC#include <arpa/inet\&.h>\fP
 .br
@@ -50,7 +50,7 @@
 .br
 .RI "returns a new socket client connected to \fCaddr:port\fP "
 .ti -1c
-.RI "int \fBsocket_client_sendto\fP (\fBsocket_client_t\fP *client, \fBaddr_info\fP *peer_address, char *message)"
+.RI "int \fBsocket_client_sendto\fP (\fBsocket_client_t\fP *client, \fBaddr_info\fP *peer_address, unsigned char *\fBmessage\fP, size_t message_len)"
 .br
 .RI "used to send a message through the connected socket number "
 .in -1c
@@ -78,7 +78,7 @@ returns a new socket client connected to \fCaddr:port\fP
 
 .PP
 Definition at line 40 of file socket_client\&.c\&.
-.SS "int socket_client_sendto (\fBsocket_client_t\fP * client, \fBaddr_info\fP * peer_address, char * message)"
+.SS "int socket_client_sendto (\fBsocket_client_t\fP * client, \fBaddr_info\fP * peer_address, unsigned char * message, size_t message_len)"
 
 .PP
 used to send a message through the connected socket number 
@@ -89,14 +89,16 @@ used to send a message through the connected socket number
 .br
 \fIpeer_address\fP the target address to connect to through the socket 
 .br
-\fImessage\fP a null terminated pointer to a char 
+\fImessage\fP the actual message data to send 
+.br
+\fImessage_len\fP the length of the message data 
 .RE
 .PP
 \fBReturns\fP
 .RS 4
-Success: 1 
+Success: 0 
 .PP
-Failure: 0 
+Failure: 1 
 .RE
 .PP
 
@@ -110,7 +112,7 @@ if we sent less than total size, send remaining
 .PP
 
 .PP
-Definition at line 112 of file socket_client\&.c\&.
+Definition at line 113 of file socket_client\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for libcp2p from the source code\&.

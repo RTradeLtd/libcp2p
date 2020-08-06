@@ -1,0 +1,52 @@
+<map id="start_server_callback" name="start_server_callback">
+<area shape="rect" id="node1" title=" " alt="" coords="5,920,167,947"/>
+<area shape="rect" id="node2" href="$d1/d8c/logger_8h.html#a8cf74430151bf53ab52b8b94788186af" title="free resources for the threaded logger" alt="" coords="485,5,636,32"/>
+<area shape="rect" id="node3" href="$d1/dfc/socket__server_8c.html#a0873d0d29f1ce24a3a9c7a199c03a2a1" title="terminates a server and frees up resources associated with it" alt="" coords="238,157,383,184"/>
+<area shape="rect" id="node10" href="$d1/dfc/socket__server_8c.html#a77df78f3e8eb1b69cca2b4f2c6b3e354" title="used to free up resources allocated for socket_server_config_t" alt="" coords="238,797,383,838"/>
+<area shape="rect" id="node12" href="$d1/dfc/socket__server_8c.html#a3bc7eef996be3f8c2118e4d1a523c8e1" title="handles receiving an rpc message from another peer" alt="" coords="235,949,387,976"/>
+<area shape="rect" id="node26" href="$d8/d26/multiaddr_8c.html#af237ac393bd1a84840760647189d9633" title=" " alt="" coords="217,870,404,911"/>
+<area shape="rect" id="node35" href="$d1/dfc/socket__server_8c.html#a5a2eac1ff27232eba96ba5d41145cd33" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="237,499,384,525"/>
+<area shape="rect" id="node44" href="$d1/dfc/socket__server_8c.html#a0a9835b57e74926457725150c2d2fed4" title="used to initialize a socket_server_config_t object" alt="" coords="215,1000,407,1027"/>
+<area shape="rect" id="node45" href="$d1/d8c/logger_8h.html#aba435ba2ea5433b4dc792c5d8038a0d1" title="returns a new thread safe logger if with_debug is false, then all debug_log calls will be ignored" alt="" coords="237,1051,384,1077"/>
+<area shape="rect" id="node46" href="$d1/dfc/socket__server_8c.html#a82a87ba8f808385b70f1d847246e09d0" title="used to specify which syscall signals should trigger shutdown process" alt="" coords="223,1211,398,1237"/>
+<area shape="rect" id="node48" href="$d1/dfc/socket__server_8c.html#a1ce9882f112a3f405b53cdc3d35a2def" title="starts the socket server which processes new connections" alt="" coords="236,1344,385,1371"/>
+<area shape="rect" id="node4" href="$dc/d09/ecdsa_8c.html#adbec9a5580e49bed281b92f9a837c6e3" title="frees up resources allocated for the private key" alt="" coords="467,259,655,285"/>
+<area shape="rect" id="node5" href="$db/dfd/key_8c.html#abb6b43f3899e4ef603898cb5aedfe4ef" title="free up resources associated with a public_key_t instance" alt="" coords="728,403,884,445"/>
+<area shape="rect" id="node6" href="$dc/d82/peerutils_8c.html#a7321b177cf43608eeba6a805ca89c3a2" title="free up resources allocated for an instance of peer_id_t" alt="" coords="485,107,636,133"/>
+<area shape="rect" id="node7" href="$d8/dab/peerstore_8c.html#ab4a187b6b216e39ec568d620821145c6" title="frees up resources allocated for peerstore_t and all peers" alt="" coords="467,208,654,235"/>
+<area shape="rect" id="node9" href="$d3/dec/thread__pool_8h.html#a3f7ae2d8df2cc8e116d89af70ef554aa" title=" " alt="" coords="501,56,620,83"/>
+<area shape="rect" id="node8" href="$d8/dab/peerstore_8c.html#a803e5ca3ba6db4721b80f46a0a7bad09" title="frees up resources allocated for peer_t" alt="" coords="729,208,883,235"/>
+<area shape="rect" id="node11" href="$d8/d26/multiaddr_8c.html#a115898734d2b42e9445b5b4b7e60595a" title=" " alt="" coords="487,797,634,824"/>
+<area shape="rect" id="node13" href="$dc/d0a/messages_8c.html#ad15d4fcff19466c54e44a29c3fce2c50" title="frees up resources allocated for an instance of message_t" alt="" coords="743,949,869,976"/>
+<area shape="rect" id="node14" href="$d1/dfc/socket__server_8c.html#a522916191d4db90bdf14749780cfb826" title="handles receiving a hello protocol message from another peer" alt="" coords="478,1076,643,1103"/>
+<area shape="rect" id="node22" href="$dc/d0a/messages_8c.html#a1f1ec655db4b7701cb26df9ebd709780" title="used to handle receiving data from a TCP socket" alt="" coords="500,1243,621,1269"/>
+<area shape="rect" id="node25" href="$d1/dfc/socket__server_8c.html#ac3a6914fea7b9d4bb05788c5d2e7cbf7" title="used to negotiate a secure connection with the current connection" alt="" coords="455,1000,667,1027"/>
+<area shape="rect" id="node15" href="$dc/d0a/messages_8c.html#ac71672fe68fd77c429de389ecff484e3" title="used to cbor decode encoded data returning an instance of message_hello_t" alt="" coords="729,1051,883,1077"/>
+<area shape="rect" id="node16" href="$dc/d0a/messages_8c.html#aec2a142741419cb9d10b7caae90e9675" title="used to free up resources associated with a message_hello_t instance" alt="" coords="723,1101,889,1128"/>
+<area shape="rect" id="node17" href="$dc/d0a/messages_8c.html#acfaa89a1a9a81a97550067f36eeb8c48" title="used to handle sending data through a TCP socket" alt="" coords="754,1000,858,1027"/>
+<area shape="rect" id="node19" href="$dc/d0a/messages_8c.html#a9e89a43b838d829e44dcda5510af9b61" title="helper function to return a message_t object for sending" alt="" coords="730,1153,882,1194"/>
+<area shape="rect" id="node20" href="$d1/dfc/socket__server_8c.html#ad94bad804bf1ae605d0264a9d94cd9c4" title="helper function to return a message_hello_t using our server values" alt="" coords="725,1218,887,1259"/>
+<area shape="rect" id="node21" href="$d8/dab/peerstore_8c.html#ae1716fa6a8fa77ef2971750a57139988" title="used to insert a peer_id public_key pair into our peerstore" alt="" coords="724,1284,888,1311"/>
+<area shape="rect" id="node18" href="$d5/df8/socket_8c.html#aeb9839f417f791e3581875512d1de3e9" title="used to check if a receive or send with a socket failed" alt="" coords="945,1167,1097,1193"/>
+<area shape="rect" id="node23" href="$dc/d0a/messages_8c.html#aefbe730cee81e7a0a12d50291e9cf331" title="used to cbor decode data into a message_t instance" alt="" coords="715,1436,897,1463"/>
+<area shape="rect" id="node24" href="$d3/d91/utils_8c.html#a1d691c864cf50331d4241562b2aa2d8a" title="utility function to read an int through a socket" alt="" coords="745,1385,867,1412"/>
+<area shape="rect" id="node27" href="$d8/d26/multiaddr_8c.html#a5cca5e1cfb7f87de3990471d022d3e52" title=" " alt="" coords="487,899,635,925"/>
+<area shape="rect" id="node28" href="$dc/d80/protoutils_8c.html#a07260974981a08120ce7d210952aa0b9" title=" " alt="" coords="499,848,622,875"/>
+<area shape="rect" id="node29" href="$dc/d80/protoutils_8c.html#a32a04b85fa743ee338cfd4ff436f4e13" title="Convert an address string to a byte representation." alt="" coords="716,797,896,824"/>
+<area shape="rect" id="node30" href="$dc/d9a/varhexutils_8c.html#a4867d8e7469e092a578b10887669fdb1" title=" " alt="" coords="975,823,1068,849"/>
+<area shape="rect" id="node31" href="$dc/d9a/varhexutils_8c.html#a2a5d4ea35e5a01291806f4355836dd50" title=" " alt="" coords="757,899,855,925"/>
+<area shape="rect" id="node32" href="$de/db7/protocols_8c.html#a6d46ac1a0a6df5b003cb1bca51d74950" title="load the available protocols into the global protocol_P" alt="" coords="747,645,865,672"/>
+<area shape="rect" id="node33" href="$de/db7/protocols_8c.html#a61a5cdc3683c4369618899eab5c19418" title=" " alt="" coords="739,696,873,723"/>
+<area shape="rect" id="node34" href="$dc/d80/protoutils_8c.html#a9c6b43fd17114c06a5b35d60e8b7727b" title=" " alt="" coords="770,747,842,773"/>
+<area shape="rect" id="node36" href="$d5/df8/socket_8c.html#a5abb561217a4ab803beba8a45d5393ef" title="gets an available socket attached to bind_address" alt="" coords="497,629,624,656"/>
+<area shape="rect" id="node37" href="$dc/d09/ecdsa_8c.html#a821e2830f6759f41158ee38c18ca9252" title="returns a peer_id_t struct for the given private key" alt="" coords="483,462,638,503"/>
+<area shape="rect" id="node38" href="$dc/d09/ecdsa_8c.html#abfd5e863b148643f0c78f6a426f21047" title="returns the public key associated with the private key in PEM format" alt="" coords="729,494,883,535"/>
+<area shape="rect" id="node39" href="$dc/d09/ecdsa_8c.html#a73c6a8cb5971191ba5dc7f940e45fa43" title="loads an ECDSA private key from a file containing a PEM key" alt="" coords="475,681,646,722"/>
+<area shape="rect" id="node40" href="$d5/df8/socket_8c.html#a1135e55b56db95ee15a2e7fa6dbd9d22" title="returns an addr_info representation of the multiaddress" alt="" coords="471,747,651,773"/>
+<area shape="rect" id="node41" href="$d8/dab/peerstore_8c.html#ac8cb545aa11a4c12c61fa4d5c1a3cacb" title="returns a new instance of peerstore_t" alt="" coords="467,309,654,336"/>
+<area shape="rect" id="node42" href="$d5/df8/socket_8c.html#a18671fbf7f59e94434d0a33536b1fc11" title="sets a socket recv timeout" alt="" coords="469,360,653,387"/>
+<area shape="rect" id="node43" href="$d3/dec/thread__pool_8h.html#a7614111c3506926e142b7db0208d9553" title=" " alt="" coords="515,579,606,605"/>
+<area shape="rect" id="node47" href="$d1/dfc/socket__server_8c.html#a80876c3df4dfb0c5d793cb641c884600" title="used to signal that we should exit the main start_socket_server function" alt="" coords="495,1293,626,1320"/>
+<area shape="rect" id="node49" href="$d1/dfc/socket__server_8c.html#a0a85f1e22b043be60df800b7e0be8cae" title="helper function for accepting client connections times out new attempts if they take 3 seconds or mor..." alt="" coords="487,1395,634,1421"/>
+<area shape="rect" id="node50" href="$d3/dec/thread__pool_8h.html#a6c132d9e0b77dce9d4e193ae038b9342" title=" " alt="" coords="494,1344,627,1371"/>
+</map>

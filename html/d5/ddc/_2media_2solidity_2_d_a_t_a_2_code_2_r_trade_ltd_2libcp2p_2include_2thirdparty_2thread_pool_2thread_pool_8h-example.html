@@ -110,7 +110,7 @@ $(document).ready(function(){initNavTree('d5/ddc/_2media_2solidity_2_d_a_t_a_2_c
 <div class="line"> </div>
 <div class="line"><span class="comment">/* =================================== API ======================================= */</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span><a name="_a0"></a><a class="code" href="../../d4/d05/structthpool__.html">thpool_</a> *<a name="a1"></a><a class="code" href="../../dd/d2e/thirdparty_2thread__pool_2thread__pool_8h.html#a615a4a9fc352172af6db87f6787dc65f">threadpool</a>;</div>
+<div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>thpool_ *<a name="a0"></a><a class="code" href="../../d3/dec/thread__pool_8h.html#a615a4a9fc352172af6db87f6787dc65f">threadpool</a>;</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">/**</span></div>
 <div class="line"><span class="comment"> * @brief  Initialize threadpool</span></div>
@@ -129,7 +129,7 @@ $(document).ready(function(){initNavTree('d5/ddc/_2media_2solidity_2_d_a_t_a_2_c
 <div class="line"><span class="comment"> * @return threadpool    created threadpool on success,</span></div>
 <div class="line"><span class="comment"> *                       NULL on error</span></div>
 <div class="line"><span class="comment"> */</span></div>
-<div class="line"><a class="code" href="../../d4/d05/structthpool__.html">threadpool</a> <a name="a2"></a><a class="code" href="../../db/d84/thread__pool_8c.html#a3e6ebbdd6aecc6fc0035e5780c9878c8">thpool_init</a>(<span class="keywordtype">int</span> num_threads);</div>
+<div class="line"><a class="code" href="../../d3/dec/thread__pool_8h.html#a615a4a9fc352172af6db87f6787dc65f">threadpool</a> <a name="a1"></a><a class="code" href="../../d3/dec/thread__pool_8h.html#a7614111c3506926e142b7db0208d9553">thpool_init</a>(<span class="keywordtype">int</span> num_threads);</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">/**</span></div>
 <div class="line"><span class="comment"> * @brief Add work to the job queue</span></div>
@@ -158,7 +158,7 @@ $(document).ready(function(){initNavTree('d5/ddc/_2media_2solidity_2_d_a_t_a_2_c
 <div class="line"><span class="comment"> * @param  arg_p         pointer to an argument</span></div>
 <div class="line"><span class="comment"> * @return 0 on successs, -1 otherwise.</span></div>
 <div class="line"><span class="comment"> */</span></div>
-<div class="line"><span class="keywordtype">int</span> <a name="a3"></a><a class="code" href="../../db/d84/thread__pool_8c.html#ad3587d247f5458dc2c75539715665b7a">thpool_add_work</a>(<a class="code" href="../../d4/d05/structthpool__.html">threadpool</a>, <span class="keywordtype">void</span> (*function_p)(<span class="keywordtype">void</span> *), <span class="keywordtype">void</span> *arg_p);</div>
+<div class="line"><span class="keywordtype">int</span> <a name="a2"></a><a class="code" href="../../d3/dec/thread__pool_8h.html#a6c132d9e0b77dce9d4e193ae038b9342">thpool_add_work</a>(<a class="code" href="../../d3/dec/thread__pool_8h.html#a615a4a9fc352172af6db87f6787dc65f">threadpool</a>, <span class="keywordtype">void</span> (*function_p)(<span class="keywordtype">void</span> *), <span class="keywordtype">void</span> *arg_p);</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">/**</span></div>
 <div class="line"><span class="comment"> * @brief Wait for all queued jobs to finish</span></div>
@@ -187,7 +187,7 @@ $(document).ready(function(){initNavTree('d5/ddc/_2media_2solidity_2_d_a_t_a_2_c
 <div class="line"><span class="comment"> * @param threadpool     the threadpool to wait for</span></div>
 <div class="line"><span class="comment"> * @return nothing</span></div>
 <div class="line"><span class="comment"> */</span></div>
-<div class="line"><span class="keywordtype">void</span> <a name="a4"></a><a class="code" href="../../db/d84/thread__pool_8c.html#a94f118e460b8f15dd42b5fbe9009b0b3">thpool_wait</a>(<a class="code" href="../../d4/d05/structthpool__.html">threadpool</a>);</div>
+<div class="line"><span class="keywordtype">void</span> <a name="a3"></a><a class="code" href="../../d3/dec/thread__pool_8h.html#ab76a0d4e43fa1740111c184089efcb5f">thpool_wait</a>(<a class="code" href="../../d3/dec/thread__pool_8h.html#a615a4a9fc352172af6db87f6787dc65f">threadpool</a>);</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">/**</span></div>
 <div class="line"><span class="comment"> * @brief Pauses all threads immediately</span></div>
@@ -210,7 +210,7 @@ $(document).ready(function(){initNavTree('d5/ddc/_2media_2solidity_2_d_a_t_a_2_c
 <div class="line"><span class="comment"> * @param threadpool    the threadpool where the threads should be paused</span></div>
 <div class="line"><span class="comment"> * @return nothing</span></div>
 <div class="line"><span class="comment"> */</span></div>
-<div class="line"><span class="keywordtype">void</span> <a name="a5"></a><a class="code" href="../../db/d84/thread__pool_8c.html#abf8fa61b319a14f1f7e7f7a17dd0692d">thpool_pause</a>(<a class="code" href="../../d4/d05/structthpool__.html">threadpool</a>);</div>
+<div class="line"><span class="keywordtype">void</span> <a name="a4"></a><a class="code" href="../../d3/dec/thread__pool_8h.html#a07f755f051413884f2f5ea8095472ba2">thpool_pause</a>(<a class="code" href="../../d3/dec/thread__pool_8h.html#a615a4a9fc352172af6db87f6787dc65f">threadpool</a>);</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">/**</span></div>
 <div class="line"><span class="comment"> * @brief Unpauses all threads if they are paused</span></div>
@@ -225,7 +225,7 @@ $(document).ready(function(){initNavTree('d5/ddc/_2media_2solidity_2_d_a_t_a_2_c
 <div class="line"><span class="comment"> * @param threadpool     the threadpool where the threads should be unpaused</span></div>
 <div class="line"><span class="comment"> * @return nothing</span></div>
 <div class="line"><span class="comment"> */</span></div>
-<div class="line"><span class="keywordtype">void</span> <a name="a6"></a><a class="code" href="../../db/d84/thread__pool_8c.html#aa4ab3968a4ee39e301cde9f71568181f">thpool_resume</a>(<a class="code" href="../../d4/d05/structthpool__.html">threadpool</a>);</div>
+<div class="line"><span class="keywordtype">void</span> <a name="a5"></a><a class="code" href="../../d3/dec/thread__pool_8h.html#a78e63c5e9ab173cd67d8852471186a56">thpool_resume</a>(<a class="code" href="../../d3/dec/thread__pool_8h.html#a615a4a9fc352172af6db87f6787dc65f">threadpool</a>);</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">/**</span></div>
 <div class="line"><span class="comment"> * @brief Destroy the threadpool</span></div>
@@ -246,7 +246,7 @@ $(document).ready(function(){initNavTree('d5/ddc/_2media_2solidity_2_d_a_t_a_2_c
 <div class="line"><span class="comment"> * @param threadpool     the threadpool to destroy</span></div>
 <div class="line"><span class="comment"> * @return nothing</span></div>
 <div class="line"><span class="comment"> */</span></div>
-<div class="line"><span class="keywordtype">void</span> <a name="a7"></a><a class="code" href="../../db/d84/thread__pool_8c.html#ae35764bc7ae46da374abd9d44db547ae">thpool_destroy</a>(<a class="code" href="../../d4/d05/structthpool__.html">threadpool</a>);</div>
+<div class="line"><span class="keywordtype">void</span> <a name="a6"></a><a class="code" href="../../d3/dec/thread__pool_8h.html#a3f7ae2d8df2cc8e116d89af70ef554aa">thpool_destroy</a>(<a class="code" href="../../d3/dec/thread__pool_8h.html#a615a4a9fc352172af6db87f6787dc65f">threadpool</a>);</div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">/**</span></div>
 <div class="line"><span class="comment"> * @brief Show currently working threads</span></div>
@@ -266,7 +266,7 @@ $(document).ready(function(){initNavTree('d5/ddc/_2media_2solidity_2_d_a_t_a_2_c
 <div class="line"><span class="comment"> * @param threadpool     the threadpool of interest</span></div>
 <div class="line"><span class="comment"> * @return integer       number of threads working</span></div>
 <div class="line"><span class="comment"> */</span></div>
-<div class="line"><span class="keywordtype">int</span> <a name="a8"></a><a class="code" href="../../db/d84/thread__pool_8c.html#a470300f14659db6251602a98981e7ada">thpool_num_threads_working</a>(<a class="code" href="../../d4/d05/structthpool__.html">threadpool</a>);</div>
+<div class="line"><span class="keywordtype">int</span> <a name="a7"></a><a class="code" href="../../d3/dec/thread__pool_8h.html#a7b469cf06d129729f8ff6296b5c2d1aa">thpool_num_threads_working</a>(<a class="code" href="../../d3/dec/thread__pool_8h.html#a615a4a9fc352172af6db87f6787dc65f">threadpool</a>);</div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#ifdef __cplusplus</span></div>
 <div class="line">}</div>
@@ -275,15 +275,14 @@ $(document).ready(function(){initNavTree('d5/ddc/_2media_2solidity_2_d_a_t_a_2_c
 <div class="line"><span class="preprocessor">#endif</span></div>
 </div><!-- fragment --> </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="astructthpool___html"><div class="ttname"><a href="../../d4/d05/structthpool__.html">thpool_</a></div><div class="ttdef"><b>Definition:</b> <a href="../../db/d84/thread__pool_8c_source.html#l00078">thread_pool.c:78</a></div></div>
-<div class="ttc" id="athirdparty_2thread__pool_2thread__pool_8h_html_a615a4a9fc352172af6db87f6787dc65f"><div class="ttname"><a href="../../dd/d2e/thirdparty_2thread__pool_2thread__pool_8h.html#a615a4a9fc352172af6db87f6787dc65f">threadpool</a></div><div class="ttdeci">struct thpool_ * threadpool</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d2e/thirdparty_2thread__pool_2thread__pool_8h_source.html#l00016">thread_pool.h:16</a></div></div>
-<div class="ttc" id="athread__pool_8c_html_a3e6ebbdd6aecc6fc0035e5780c9878c8"><div class="ttname"><a href="../../db/d84/thread__pool_8c.html#a3e6ebbdd6aecc6fc0035e5780c9878c8">thpool_init</a></div><div class="ttdeci">struct thpool_ * thpool_init(int num_threads)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d84/thread__pool_8c_source.html#l00109">thread_pool.c:109</a></div></div>
-<div class="ttc" id="athread__pool_8c_html_ad3587d247f5458dc2c75539715665b7a"><div class="ttname"><a href="../../db/d84/thread__pool_8c.html#ad3587d247f5458dc2c75539715665b7a">thpool_add_work</a></div><div class="ttdeci">int thpool_add_work(thpool_ *thpool_p, void(*function_p)(void *), void *arg_p)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d84/thread__pool_8c_source.html#l00165">thread_pool.c:165</a></div></div>
-<div class="ttc" id="athread__pool_8c_html_a94f118e460b8f15dd42b5fbe9009b0b3"><div class="ttname"><a href="../../db/d84/thread__pool_8c.html#a94f118e460b8f15dd42b5fbe9009b0b3">thpool_wait</a></div><div class="ttdeci">void thpool_wait(thpool_ *thpool_p)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d84/thread__pool_8c_source.html#l00185">thread_pool.c:185</a></div></div>
-<div class="ttc" id="athread__pool_8c_html_ae35764bc7ae46da374abd9d44db547ae"><div class="ttname"><a href="../../db/d84/thread__pool_8c.html#ae35764bc7ae46da374abd9d44db547ae">thpool_destroy</a></div><div class="ttdeci">void thpool_destroy(thpool_ *thpool_p)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d84/thread__pool_8c_source.html#l00194">thread_pool.c:194</a></div></div>
-<div class="ttc" id="athread__pool_8c_html_aa4ab3968a4ee39e301cde9f71568181f"><div class="ttname"><a href="../../db/d84/thread__pool_8c.html#aa4ab3968a4ee39e301cde9f71568181f">thpool_resume</a></div><div class="ttdeci">void thpool_resume(thpool_ *thpool_p)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d84/thread__pool_8c_source.html#l00241">thread_pool.c:241</a></div></div>
-<div class="ttc" id="athread__pool_8c_html_a470300f14659db6251602a98981e7ada"><div class="ttname"><a href="../../db/d84/thread__pool_8c.html#a470300f14659db6251602a98981e7ada">thpool_num_threads_working</a></div><div class="ttdeci">int thpool_num_threads_working(thpool_ *thpool_p)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d84/thread__pool_8c_source.html#l00250">thread_pool.c:250</a></div></div>
-<div class="ttc" id="athread__pool_8c_html_abf8fa61b319a14f1f7e7f7a17dd0692d"><div class="ttname"><a href="../../db/d84/thread__pool_8c.html#abf8fa61b319a14f1f7e7f7a17dd0692d">thpool_pause</a></div><div class="ttdeci">void thpool_pause(thpool_ *thpool_p)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d84/thread__pool_8c_source.html#l00233">thread_pool.c:233</a></div></div>
+<div class="ttc" id="athread__pool_8h_html_a6c132d9e0b77dce9d4e193ae038b9342"><div class="ttname"><a href="../../d3/dec/thread__pool_8h.html#a6c132d9e0b77dce9d4e193ae038b9342">thpool_add_work</a></div><div class="ttdeci">int thpool_add_work(threadpool, void(*function_p)(void *), void *arg_p)</div></div>
+<div class="ttc" id="athread__pool_8h_html_a3f7ae2d8df2cc8e116d89af70ef554aa"><div class="ttname"><a href="../../d3/dec/thread__pool_8h.html#a3f7ae2d8df2cc8e116d89af70ef554aa">thpool_destroy</a></div><div class="ttdeci">void thpool_destroy(threadpool)</div></div>
+<div class="ttc" id="athread__pool_8h_html_a07f755f051413884f2f5ea8095472ba2"><div class="ttname"><a href="../../d3/dec/thread__pool_8h.html#a07f755f051413884f2f5ea8095472ba2">thpool_pause</a></div><div class="ttdeci">void thpool_pause(threadpool)</div></div>
+<div class="ttc" id="athread__pool_8h_html_a78e63c5e9ab173cd67d8852471186a56"><div class="ttname"><a href="../../d3/dec/thread__pool_8h.html#a78e63c5e9ab173cd67d8852471186a56">thpool_resume</a></div><div class="ttdeci">void thpool_resume(threadpool)</div></div>
+<div class="ttc" id="athread__pool_8h_html_ab76a0d4e43fa1740111c184089efcb5f"><div class="ttname"><a href="../../d3/dec/thread__pool_8h.html#ab76a0d4e43fa1740111c184089efcb5f">thpool_wait</a></div><div class="ttdeci">void thpool_wait(threadpool)</div></div>
+<div class="ttc" id="athread__pool_8h_html_a7614111c3506926e142b7db0208d9553"><div class="ttname"><a href="../../d3/dec/thread__pool_8h.html#a7614111c3506926e142b7db0208d9553">thpool_init</a></div><div class="ttdeci">threadpool thpool_init(int num_threads)</div></div>
+<div class="ttc" id="athread__pool_8h_html_a615a4a9fc352172af6db87f6787dc65f"><div class="ttname"><a href="../../d3/dec/thread__pool_8h.html#a615a4a9fc352172af6db87f6787dc65f">threadpool</a></div><div class="ttdeci">struct thpool_ * threadpool</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/dec/thread__pool_8h_source.html#l00016">thread_pool.h:16</a></div></div>
+<div class="ttc" id="athread__pool_8h_html_a7b469cf06d129729f8ff6296b5c2d1aa"><div class="ttname"><a href="../../d3/dec/thread__pool_8h.html#a7b469cf06d129729f8ff6296b5c2d1aa">thpool_num_threads_working</a></div><div class="ttdeci">int thpool_num_threads_working(threadpool)</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

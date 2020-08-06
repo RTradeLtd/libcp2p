@@ -1,6 +1,7 @@
 var annotated_dup =
 [
     [ "addrinfo", "d6/d9d/structaddrinfo.html", null ],
+    [ "an", "df/ddb/structan.html", null ],
     [ "arg_cmd_info", "d8/d62/structarg__cmd__info.html", "d8/d62/structarg__cmd__info" ],
     [ "arg_date", "d2/dbf/structarg__date.html", "d2/dbf/structarg__date" ],
     [ "arg_dbl", "d1/d69/structarg__dbl.html", "d1/d69/structarg__dbl" ],
@@ -17,7 +18,6 @@ var annotated_dup =
     [ "arg_str", "d9/dcd/structarg__str.html", "d9/dcd/structarg__str" ],
     [ "base", "d4/d87/structbase.html", null ],
     [ "base32_decode_context", "d3/d2c/structbase32__decode__context.html", "d3/d2c/structbase32__decode__context" ],
-    [ "bsem", "d5/d93/structbsem.html", "d5/d93/structbsem" ],
     [ "Buffer", "d6/de4/struct_buffer.html", "d6/de4/struct_buffer" ],
     [ "cbor_encoded_data", "d3/de2/structcbor__encoded__data.html", "d3/de2/structcbor__encoded__data" ],
     [ "CborEncoder", "db/d79/struct_cbor_encoder.html", "db/d79/struct_cbor_encoder" ],
@@ -26,6 +26,8 @@ var annotated_dup =
     [ "Cid", "d5/d6c/struct_cid.html", "d5/d6c/struct_cid" ],
     [ "CidSet", "d8/d0e/struct_cid_set.html", "d8/d0e/struct_cid_set" ],
     [ "client_conn", "d5/de2/structclient__conn.html", "d5/de2/structclient__conn" ],
+    [ "command", "dc/d76/structcommand.html", "dc/d76/structcommand" ],
+    [ "command_handler", "da/d6d/structcommand__handler.html", "da/d6d/structcommand__handler" ],
     [ "conn_handle_data", "de/da7/structconn__handle__data.html", "de/da7/structconn__handle__data" ],
     [ "ConversionStatus", "da/d99/struct_conversion_status.html", "da/d99/struct_conversion_status" ],
     [ "ecdsa_private_key", "d7/dc6/structecdsa__private__key.html", "d7/dc6/structecdsa__private__key" ],
@@ -33,9 +35,9 @@ var annotated_dup =
     [ "EphemeralPublicKey", "d7/d04/struct_ephemeral_public_key.html", "d7/d04/struct_ephemeral_public_key" ],
     [ "file_logger", "d5/d99/structfile__logger.html", "d5/d99/structfile__logger" ],
     [ "hash_info", "d8/da0/structhash__info.html", "d8/da0/structhash__info" ],
-    [ "job", "d3/d8c/structjob.html", "d3/d8c/structjob" ],
-    [ "jobqueue", "d7/dd0/structjobqueue.html", "d7/dd0/structjobqueue" ],
     [ "KnownTagData", "d1/d89/struct_known_tag_data.html", "d1/d89/struct_known_tag_data" ],
+    [ "message", "d8/d9e/structmessage.html", "d8/d9e/structmessage" ],
+    [ "message_hello", "da/d60/structmessage__hello.html", "da/d60/structmessage__hello" ],
     [ "multi_address", "d4/dc4/structmulti__address.html", "d4/dc4/structmulti__address" ],
     [ "multicodec_encoded", "d1/d8e/structmulticodec__encoded.html", "d1/d8e/structmulticodec__encoded" ],
     [ "peer", "de/d65/structpeer.html", "de/d65/structpeer" ],
@@ -54,8 +56,7 @@ var annotated_dup =
     [ "Test1", "d0/dc5/struct_test1.html", "d0/dc5/struct_test1" ],
     [ "Test2", "d0/d2d/struct_test2.html", "d0/d2d/struct_test2" ],
     [ "Test3", "d7/dcc/struct_test3.html", "d7/dcc/struct_test3" ],
-    [ "thpool_", "d4/d05/structthpool__.html", "d4/d05/structthpool__" ],
-    [ "thread", "d3/dc5/structthread.html", "d3/dc5/structthread" ],
+    [ "the", "d5/db5/structthe.html", null ],
     [ "thread_logger", "da/da5/structthread__logger.html", "da/da5/structthread__logger" ],
     [ "timeval", "d1/d1b/structtimeval.html", null ]
 ];

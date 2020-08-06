@@ -1,6 +1,6 @@
 <map id="new_socket_client" name="new_socket_client">
 <area shape="rect" id="node1" title="returns a new socket client connected to addr:port" alt="" coords="5,71,147,98"/>
-<area shape="rect" id="node2" href="$d5/df8/socket_8c.html#a1a802d1985754fe6d4d6c050c214e4b4" title="gets an available socket attached to bind_address" alt="" coords="229,13,355,39"/>
+<area shape="rect" id="node2" href="$d5/df8/socket_8c.html#a5abb561217a4ab803beba8a45d5393ef" title="gets an available socket attached to bind_address" alt="" coords="229,13,355,39"/>
 <area shape="rect" id="node4" href="$d8/d26/multiaddr_8c.html#a236413d41a686e0c50d86bf995fe21c8" title=" " alt="" coords="211,64,373,105"/>
 <area shape="rect" id="node5" href="$d8/d26/multiaddr_8c.html#a99ba138d04c90a2afae80dd7e46ae3a9" title=" " alt="" coords="195,130,389,157"/>
 <area shape="rect" id="node3" href="$d5/df8/socket_8c.html#add0cf15976a6dd3a21d81320a5fbf0cf" title="used to enable/disable blocking sockets" alt="" coords="437,5,591,47"/>

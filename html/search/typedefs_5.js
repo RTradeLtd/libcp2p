@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['iteratefunction_2668',['IterateFunction',['../dc/d74/group___cbor_parsing.html#gabd1d1cdefd13316b96c6676fde6ee2ae',1,'cborparser.c']]]
+  ['log_5ffn_2727',['log_fn',['../d1/d8c/logger_8h.html#acbb4363df37107a069aededd1b6c568b',1,'logger.h']]],
+  ['log_5ffnf_2728',['log_fnf',['../d1/d8c/logger_8h.html#a665ba15eee3a57a2d5b1b0febdf30b96',1,'logger.h']]]
 ];

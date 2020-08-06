@@ -1,4 +1,4 @@
-.TH "socket_server_config" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
+.TH "socket_server_config" 3 "Thu Aug 6 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -12,13 +12,8 @@ socket_server_config
 
 .in +1c
 .ti -1c
-.RI "\fBthreadpool_task_func\fP * \fBfn_tcp\fP"
+.RI "int \fBmax_peers\fP"
 .br
-.RI "the thread pool task function to use for processing tcp connections "
-.ti -1c
-.RI "\fBthreadpool_task_func\fP * \fBfn_udp\fP"
-.br
-.RI "the thread pool task function to use for processing tcp connections "
 .ti -1c
 .RI "int \fBmax_connections\fP"
 .br
@@ -29,42 +24,67 @@ socket_server_config
 .RI "int \fBnum_addrs\fP"
 .br
 .ti -1c
+.RI "int \fBrecv_timeout_sec\fP"
+.br
+.RI "the timeout in seconds to set on a socket, 0 means nothing is set "
+.ti -1c
+.RI "\fBthreadpool_task_func\fP * \fBfn_tcp\fP"
+.br
+.RI "the thread pool task function to use for processing tcp connections "
+.ti -1c
 .RI "\fBmulti_addr_t\fP ** \fBaddrs\fP"
 .br
+.RI "the addresses we will be listening on "
+.ti -1c
+.RI "char * \fBprivate_key_path\fP"
+.br
+.RI "the path to a pem encoded private ecdsa key "
 .in -1c
 .SH "Detailed Description"
 .PP 
-Definition at line 45 of file socket_server\&.h\&.
+Definition at line 54 of file socket_server\&.h\&.
 .SH "Field Documentation"
 .PP 
 .SS "\fBmulti_addr_t\fP** socket_server_config::addrs"
 
 .PP
-Definition at line 53 of file socket_server\&.h\&.
+the addresses we will be listening on 
+.PP
+Definition at line 64 of file socket_server\&.h\&.
 .SS "\fBthreadpool_task_func\fP* socket_server_config::fn_tcp"
 
 .PP
 the thread pool task function to use for processing tcp connections 
 .PP
-Definition at line 47 of file socket_server\&.h\&.
-.SS "\fBthreadpool_task_func\fP* socket_server_config::fn_udp"
-
-.PP
-the thread pool task function to use for processing tcp connections 
-.PP
-Definition at line 49 of file socket_server\&.h\&.
+Definition at line 62 of file socket_server\&.h\&.
 .SS "int socket_server_config::max_connections"
 
 .PP
-Definition at line 50 of file socket_server\&.h\&.
+Definition at line 56 of file socket_server\&.h\&.
+.SS "int socket_server_config::max_peers"
+
+.PP
+Definition at line 55 of file socket_server\&.h\&.
 .SS "int socket_server_config::num_addrs"
 
 .PP
-Definition at line 52 of file socket_server\&.h\&.
+Definition at line 58 of file socket_server\&.h\&.
 .SS "int socket_server_config::num_threads"
 
 .PP
-Definition at line 51 of file socket_server\&.h\&.
+Definition at line 57 of file socket_server\&.h\&.
+.SS "char* socket_server_config::private_key_path"
+
+.PP
+the path to a pem encoded private ecdsa key 
+.PP
+Definition at line 66 of file socket_server\&.h\&.
+.SS "int socket_server_config::recv_timeout_sec"
+
+.PP
+the timeout in seconds to set on a socket, 0 means nothing is set 
+.PP
+Definition at line 60 of file socket_server\&.h\&.
 
 .SH "Author"
 .PP 

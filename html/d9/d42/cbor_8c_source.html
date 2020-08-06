@@ -118,7 +118,7 @@ $(document).ready(function(){initNavTree('d9/d42/cbor_8c_source.html','../../');
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">if</span> (out == NULL) {</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    }</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    out-&gt;<a class="code" href="../../d3/de2/structcbor__encoded__data.html#a2dde59c210f818fe7934094c8316a067">data</a> = realloc(out-&gt;<a class="code" href="../../d3/de2/structcbor__encoded__data.html#a2dde59c210f818fe7934094c8316a067">data</a>, len);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    out-&gt;<a class="code" href="../../d3/de2/structcbor__encoded__data.html#a2dde59c210f818fe7934094c8316a067">data</a> = calloc(1, len);</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">if</span> (out-&gt;<a class="code" href="../../d3/de2/structcbor__encoded__data.html#a2dde59c210f818fe7934094c8316a067">data</a> == NULL) {</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        free(out);</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordflow">return</span> NULL;</div>

@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['warn_5flog_2432',['warn_log',['../d1/d22/logger_8c.html#a1979109bb7f9b3fccd5d35ab62af76b0',1,'warn_log(thread_logger *thl, int file_descriptor, char *message):&#160;logger.c'],['../d7/dd3/thirdparty_2logger_2logger_8h.html#a1979109bb7f9b3fccd5d35ab62af76b0',1,'warn_log(thread_logger *thl, int file_descriptor, char *message):&#160;logger.c'],['../d8/dbe/utils_2logger_8h.html#a1979109bb7f9b3fccd5d35ab62af76b0',1,'warn_log(thread_logger *thl, int file_descriptor, char *message):&#160;logger.c']]],
-  ['would_5foverflow_2433',['would_overflow',['../d9/d70/group___cbor_encoding.html#gadc3a796b0b4d21c6e297d9ff34149bd7',1,'cborencoder.c']]],
-  ['write_5fcolored_2434',['write_colored',['../d3/d13/colors_8c.html#aa1fa3472b5bc15e07fe0d5ce481617a1',1,'write_colored(COLORS color, int file_descriptor, char *message):&#160;colors.c'],['../de/da6/thirdparty_2logger_2colors_8h.html#aa1fa3472b5bc15e07fe0d5ce481617a1',1,'write_colored(COLORS color, int file_descriptor, char *message):&#160;colors.c'],['../d5/d53/utils_2colors_8h.html#aa1fa3472b5bc15e07fe0d5ce481617a1',1,'write_colored(COLORS color, int file_descriptor, char *message):&#160;colors.c']]],
-  ['write_5ffile_5flog_2435',['write_file_log',['../d1/d22/logger_8c.html#a6362ea8a304cd179fbd42e2971ed71f3',1,'write_file_log(int file_descriptor, char *message):&#160;logger.c'],['../d7/dd3/thirdparty_2logger_2logger_8h.html#a6362ea8a304cd179fbd42e2971ed71f3',1,'write_file_log(int file_descriptor, char *message):&#160;logger.c'],['../d8/dbe/utils_2logger_8h.html#a6362ea8a304cd179fbd42e2971ed71f3',1,'write_file_log(int file_descriptor, char *message):&#160;logger.c']]],
-  ['write_5fto_5fbuffer_2436',['write_to_buffer',['../dd/df6/open__memstream_8c.html#a7ba6301bf710be9ca945654a5eee5ab9',1,'open_memstream.c']]]
+  ['xcalloc_2500',['xcalloc',['../d9/daf/argtable3__private_8h.html#a83c47bc0397d90cc9f2eb9e35a5cda4e',1,'argtable3_private.h']]],
+  ['xfree_2501',['xfree',['../d9/daf/argtable3__private_8h.html#a976e14808b9247ec952c262553f09f8f',1,'argtable3_private.h']]],
+  ['xmalloc_2502',['xmalloc',['../d9/daf/argtable3__private_8h.html#a42ccfa6fc49cc4ce90cc44cd05052490',1,'argtable3_private.h']]],
+  ['xor_5fbin_2503',['xor_bin',['../d6/d43/operations_8c.html#aac525193c10373a352e3a284b33cd19a',1,'xor_bin(const unsigned char *bin1, const unsigned char *bin2, unsigned char *dest):&#160;operations.c'],['../da/d4f/operations_8h.html#aac525193c10373a352e3a284b33cd19a',1,'xor_bin(const unsigned char *bin1, const unsigned char *bin2, unsigned char *dest):&#160;operations.c']]],
+  ['xrealloc_2504',['xrealloc',['../d9/daf/argtable3__private_8h.html#a93a8ec6e8a6eef0f62b7e5b50d0bf9e4',1,'argtable3_private.h']]]
 ];

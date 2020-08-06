@@ -104,94 +104,136 @@ $(document).ready(function(){initNavTree('da/ddd/socket_8h_source.html','../../'
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d8/dbe/utils_2logger_8h.html">utils/logger.h</a>&quot;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;arpa/inet.h&gt;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;netinet/in.h&gt;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;sys/socket.h&gt;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;sys/time.h&gt;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;sys/types.h&gt;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">/*!</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"> * @struct timeval</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"> * @typedef timeout</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"> * @brief used to specify timeouts for function calls such as select</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="../../da/ddd/socket_8h.html#aee145bfca8e9b2eaf3cd3c47157be9a3">   32</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="../../d1/d1b/structtimeval.html">timeval</a> <a class="code" href="../../d1/d1b/structtimeval.html">timeout</a>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">/*! @typedef addr_info</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> * @struct addrinfo</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * @brief alias for `struct addrinfo`</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="../../da/ddd/socket_8h.html#abd605b1edfb94b9967b92e0e99d931ba">   38</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="../../d6/d9d/structaddrinfo.html">addrinfo</a> <a class="code" href="../../d6/d9d/structaddrinfo.html">addr_info</a>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">/*! @typedef sock_addr</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"> * @struct sockaddr</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"> * @brief alias for `struct sockaddr`</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="../../da/ddd/socket_8h.html#acf77d3554add8fce8fc0590f75e303f6">   44</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="../../d5/dad/structsockaddr.html">sockaddr</a> <a class="code" href="../../d5/dad/structsockaddr.html">sock_addr</a>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">/*! @typedef sock_addr_storage</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"> * @struct sockaddr_storage</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"> * @brief alias for `struct sockaddr_storage`</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="../../da/ddd/socket_8h.html#ab6caab1c6770adc9cabffb6a2a40ad75">   50</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="../../d0/d6d/structsockaddr__storage.html">sockaddr_storage</a> <a class="code" href="../../d0/d6d/structsockaddr__storage.html">sock_addr_storage</a>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">/*! @enum SOCKET_OPTS</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"> * @brief used to configure new sockets</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304">   55</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {<span class="comment"></span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">    /*! sets socket with SO_REUSEADDR */</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304ab36c794486119080f412a907638452a2">   57</a></span>&#160;    <a class="code" href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304ab36c794486119080f412a907638452a2">REUSEADDR</a>,<span class="comment"></span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">    /*! sets socket to non-blocking mode */</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304a2be9044f7a5785fb4db63bae7d099a9b">   59</a></span>&#160;    <a class="code" href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304a2be9044f7a5785fb4db63bae7d099a9b">NOBLOCK</a>,<span class="comment"></span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">    /*! sets socket to blocking mode */</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304a02fc27068fe9a3c151ffcc08ec5bb65d">   61</a></span>&#160;    <a class="code" href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304a02fc27068fe9a3c151ffcc08ec5bb65d">BLOCK</a>,</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;} <a class="code" href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304">SOCKET_OPTS</a>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">/*! @brief  gets an available socket attached to bind_address</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment"> * @return Success: file descriptor socket number greater than 0</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"> * @return Failure: -1</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"> * initializers a socket attached to bind_address with sock_opts, and binds the</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"> * address</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../da/ddd/socket_8h.html#a1a802d1985754fe6d4d6c050c214e4b4">get_new_socket</a>(<a class="code" href="../../da/da5/structthread__logger.html">thread_logger</a> *thl, <a class="code" href="../../d6/d9d/structaddrinfo.html">addr_info</a> *bind_address,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                   <a class="code" href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304">SOCKET_OPTS</a> sock_opts[], <span class="keywordtype">int</span> num_opts, <span class="keywordtype">bool</span> is_client);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../da/de0/multiaddr_8h.html">multiaddr/multiaddr.h</a>&quot;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d1/d8c/logger_8h.html">thirdparty/logger/logger.h</a>&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &lt;arpa/inet.h&gt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &lt;netinet/in.h&gt;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;sys/socket.h&gt;</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;sys/time.h&gt;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;sys/types.h&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="../../da/ddd/socket_8h.html#aa4a5329a539df95f1e1b176cd0be6e78">   28</a></span>&#160;<span class="preprocessor">#define MAX_RPC_MSG_SIZE_KB 8192</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">/*!</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment"> * @brief internal boolean variable used to signal async start_socket_server function</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> * calls</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">bool</span> <a class="code" href="../../da/ddd/socket_8h.html#a69190721f6d0052a238df8b0d1e781db">do_shutdown</a>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">/*!</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> * @struct timeval</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"> * @typedef timeout</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"> * @brief used to specify timeouts for function calls such as select</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="../../da/ddd/socket_8h.html#aee145bfca8e9b2eaf3cd3c47157be9a3">   41</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="../../d1/d1b/structtimeval.html">timeval</a> <a class="code" href="../../d1/d1b/structtimeval.html">timeout</a>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">/*! @typedef addr_info</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"> * @struct addrinfo</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"> * @brief alias for `struct addrinfo`</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="../../da/ddd/socket_8h.html#abd605b1edfb94b9967b92e0e99d931ba">   47</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="../../d6/d9d/structaddrinfo.html">addrinfo</a> <a class="code" href="../../d6/d9d/structaddrinfo.html">addr_info</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">/*! @typedef sock_addr</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> * @struct sockaddr</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"> * @brief alias for `struct sockaddr`</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="../../da/ddd/socket_8h.html#acf77d3554add8fce8fc0590f75e303f6">   53</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="../../d5/dad/structsockaddr.html">sockaddr</a> <a class="code" href="../../d5/dad/structsockaddr.html">sock_addr</a>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">/*! @typedef sock_addr_storage</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"> * @struct sockaddr_storage</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"> * @brief alias for `struct sockaddr_storage`</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="../../da/ddd/socket_8h.html#ab6caab1c6770adc9cabffb6a2a40ad75">   59</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="../../d0/d6d/structsockaddr__storage.html">sockaddr_storage</a> <a class="code" href="../../d0/d6d/structsockaddr__storage.html">sock_addr_storage</a>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">/*! @enum SOCKET_OPTS</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"> * @brief used to configure new sockets</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304">   64</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {<span class="comment"></span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">    /*! sets socket with SO_REUSEADDR */</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304ab36c794486119080f412a907638452a2">   66</a></span>&#160;    <a class="code" href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304ab36c794486119080f412a907638452a2">REUSEADDR</a>,<span class="comment"></span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">    /*! sets socket to non-blocking mode */</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304a2be9044f7a5785fb4db63bae7d099a9b">   68</a></span>&#160;    <a class="code" href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304a2be9044f7a5785fb4db63bae7d099a9b">NOBLOCK</a>,<span class="comment"></span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">    /*! sets socket to blocking mode */</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304a02fc27068fe9a3c151ffcc08ec5bb65d">   70</a></span>&#160;    <a class="code" href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304a02fc27068fe9a3c151ffcc08ec5bb65d">BLOCK</a>,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;} <a class="code" href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304">SOCKET_OPTS</a>;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">/*! @brief used to enable/disable blocking sockets</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment"> * @return Failure: false</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"> * @return Success: true</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"> * @note see</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"> * https://stackoverflow.com/questions/1543466/how-do-i-change-a-tcp-socket-to-be-non-blocking/1549344#1549344</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">/*! @brief  gets an available socket attached to bind_address</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment"> * @return Success: file descriptor socket number greater than 0</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"> * @return Failure: -1</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"> * initializers a socket attached to bind_address with sock_opts, and binds the</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"> * address</span></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="../../da/ddd/socket_8h.html#add0cf15976a6dd3a21d81320a5fbf0cf">set_socket_blocking_status</a>(<span class="keywordtype">int</span> fd, <span class="keywordtype">bool</span> blocking);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">/*!</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"> * @note this only works with tcp</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment"> * @todo enable udp</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keywordtype">char</span> *<a class="code" href="../../da/ddd/socket_8h.html#aa3f161176f86bd430439429fbd7aec09">get_name_info</a>(<a class="code" href="../../d5/dad/structsockaddr.html">sock_addr</a> *client_address);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">/*! @brief generates an addr_info struct with defaults</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment"> * defaults is IPv4, TCP, and AI_PASSIVE flags</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<a class="code" href="../../d6/d9d/structaddrinfo.html">addr_info</a> <a class="code" href="../../da/ddd/socket_8h.html#a698af564637e1245e56bbb56c5d5b3f2">default_hints</a>();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../da/ddd/socket_8h.html#a5abb561217a4ab803beba8a45d5393ef">get_new_socket</a>(<a class="code" href="../../da/da5/structthread__logger.html">thread_logger</a> *thl, <a class="code" href="../../d6/d9d/structaddrinfo.html">addr_info</a> *bind_address,</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                   <a class="code" href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304">SOCKET_OPTS</a> sock_opts[], <span class="keywordtype">int</span> num_opts, <span class="keywordtype">bool</span> is_client,</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                   <span class="keywordtype">bool</span> is_tcp);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">/*! @brief used to enable/disable blocking sockets</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"> * @return Failure: false</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment"> * @return Success: true</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"> * @note see</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"> * https://stackoverflow.com/questions/1543466/how-do-i-change-a-tcp-socket-to-be-non-blocking/1549344#1549344</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="../../da/ddd/socket_8h.html#add0cf15976a6dd3a21d81320a5fbf0cf">set_socket_blocking_status</a>(<span class="keywordtype">int</span> fd, <span class="keywordtype">bool</span> blocking);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">/*!</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment"> * @brief sets a socket recv timeout</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment"> * @param fd the file descriptor of the socket to apply operations to</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment"> * @param seconds the seconds to timeout a recv or recvfrom after</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment"> * @warning how does this workon UDP socket</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../da/ddd/socket_8h.html#a18671fbf7f59e94434d0a33536b1fc11">set_socket_recv_timeout</a>(<span class="keywordtype">int</span> fd, <span class="keywordtype">int</span> seconds);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">/*!</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment"> * @note this only works with tcp</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment"> * @todo enable udp</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keywordtype">char</span> *<a class="code" href="../../da/ddd/socket_8h.html#aa3f161176f86bd430439429fbd7aec09">get_name_info</a>(<a class="code" href="../../d5/dad/structsockaddr.html">sock_addr</a> *client_address);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">/*! @brief generates an addr_info struct with defaults</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment"> * defaults is IPv4, TCP, and AI_PASSIVE flags</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<a class="code" href="../../d6/d9d/structaddrinfo.html">addr_info</a> <a class="code" href="../../da/ddd/socket_8h.html#a698af564637e1245e56bbb56c5d5b3f2">default_hints</a>();</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">/*!</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment"> * @brief used to check if a receive or send with a socket failed</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="../../da/ddd/socket_8h.html#aeb9839f417f791e3581875512d1de3e9">recv_or_send_failed</a>(<a class="code" href="../../da/da5/structthread__logger.html">thread_logger</a> *thl, <span class="keywordtype">int</span> rc);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">/*!</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment"> * @brief returns an addr_info representation of the multiaddress</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment"> * @details useful for taking a multi address and getting the needed information for</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment"> * using</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment"> * @details the address with the sendto function</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment"> * @param address the multi address to parse</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment"> * @note does not free up resources associated with address param</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment"> * @warning only supports TCP and UDP multiaddress(es)</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment"> * @return Success: pointer to an addr_info instance</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment"> * @return Failure: NULL pointer</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<a class="code" href="../../d6/d9d/structaddrinfo.html">addr_info</a> *<a class="code" href="../../da/ddd/socket_8h.html#a1135e55b56db95ee15a2e7fa6dbd9d22">multi_addr_to_addr_info</a>(<a class="code" href="../../d4/dc4/structmulti__address.html">multi_addr_t</a> *address);</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="asocket_8h_html_a698af564637e1245e56bbb56c5d5b3f2"><div class="ttname"><a href="../../da/ddd/socket_8h.html#a698af564637e1245e56bbb56c5d5b3f2">default_hints</a></div><div class="ttdeci">addr_info default_hints()</div><div class="ttdoc">generates an addr_info struct with defaults defaults is IPv4, TCP, and AI_PASSIVE flags</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/df8/socket_8c_source.html#l00149">socket.c:149</a></div></div>
-<div class="ttc" id="asocket_8h_html_ab4d0cb4769ae6fb5127d2c8ccf2b7304ab36c794486119080f412a907638452a2"><div class="ttname"><a href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304ab36c794486119080f412a907638452a2">REUSEADDR</a></div><div class="ttdeci">@ REUSEADDR</div><div class="ttdef"><b>Definition:</b> <a href="../../da/ddd/socket_8h_source.html#l00057">socket.h:57</a></div></div>
-<div class="ttc" id="asocket_8h_html_a1a802d1985754fe6d4d6c050c214e4b4"><div class="ttname"><a href="../../da/ddd/socket_8h.html#a1a802d1985754fe6d4d6c050c214e4b4">get_new_socket</a></div><div class="ttdeci">int get_new_socket(thread_logger *thl, addr_info *bind_address, SOCKET_OPTS sock_opts[], int num_opts, bool is_client)</div><div class="ttdoc">gets an available socket attached to bind_address</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/df8/socket_8c_source.html#l00043">socket.c:43</a></div></div>
+<div class="ttc" id="asocket_8h_html_a698af564637e1245e56bbb56c5d5b3f2"><div class="ttname"><a href="../../da/ddd/socket_8h.html#a698af564637e1245e56bbb56c5d5b3f2">default_hints</a></div><div class="ttdeci">addr_info default_hints()</div><div class="ttdoc">generates an addr_info struct with defaults defaults is IPv4, TCP, and AI_PASSIVE flags</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/df8/socket_8c_source.html#l00179">socket.c:179</a></div></div>
+<div class="ttc" id="asocket_8h_html_ab4d0cb4769ae6fb5127d2c8ccf2b7304ab36c794486119080f412a907638452a2"><div class="ttname"><a href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304ab36c794486119080f412a907638452a2">REUSEADDR</a></div><div class="ttdeci">@ REUSEADDR</div><div class="ttdef"><b>Definition:</b> <a href="../../da/ddd/socket_8h_source.html#l00066">socket.h:66</a></div></div>
+<div class="ttc" id="alogger_8h_html"><div class="ttname"><a href="../../d1/d8c/logger_8h.html">logger.h</a></div><div class="ttdoc">a thread safe logger with optional printf style logging</div></div>
+<div class="ttc" id="astructmulti__address_html"><div class="ttname"><a href="../../d4/dc4/structmulti__address.html">multi_address</a></div><div class="ttdef"><b>Definition:</b> <a href="../../da/de0/multiaddr_8h_source.html#l00036">multiaddr.h:36</a></div></div>
 <div class="ttc" id="astructsockaddr__storage_html"><div class="ttname"><a href="../../d0/d6d/structsockaddr__storage.html">sockaddr_storage</a></div><div class="ttdoc">alias for struct sockaddr_storage</div></div>
+<div class="ttc" id="asocket_8h_html_a69190721f6d0052a238df8b0d1e781db"><div class="ttname"><a href="../../da/ddd/socket_8h.html#a69190721f6d0052a238df8b0d1e781db">do_shutdown</a></div><div class="ttdeci">bool do_shutdown</div><div class="ttdoc">internal boolean variable used to signal async start_socket_server function calls</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/dfc/socket__server_8c_source.html#l00043">socket_server.c:43</a></div></div>
 <div class="ttc" id="astructsockaddr_html"><div class="ttname"><a href="../../d5/dad/structsockaddr.html">sockaddr</a></div><div class="ttdoc">alias for struct sockaddr</div></div>
-<div class="ttc" id="asocket_8h_html_ab4d0cb4769ae6fb5127d2c8ccf2b7304a2be9044f7a5785fb4db63bae7d099a9b"><div class="ttname"><a href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304a2be9044f7a5785fb4db63bae7d099a9b">NOBLOCK</a></div><div class="ttdeci">@ NOBLOCK</div><div class="ttdef"><b>Definition:</b> <a href="../../da/ddd/socket_8h_source.html#l00059">socket.h:59</a></div></div>
-<div class="ttc" id="astructthread__logger_html"><div class="ttname"><a href="../../da/da5/structthread__logger.html">thread_logger</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d7/dd3/thirdparty_2logger_2logger_8h_source.html#l00072">logger.h:72</a></div></div>
-<div class="ttc" id="asocket_8h_html_ab4d0cb4769ae6fb5127d2c8ccf2b7304a02fc27068fe9a3c151ffcc08ec5bb65d"><div class="ttname"><a href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304a02fc27068fe9a3c151ffcc08ec5bb65d">BLOCK</a></div><div class="ttdeci">@ BLOCK</div><div class="ttdef"><b>Definition:</b> <a href="../../da/ddd/socket_8h_source.html#l00061">socket.h:61</a></div></div>
+<div class="ttc" id="asocket_8h_html_ab4d0cb4769ae6fb5127d2c8ccf2b7304a2be9044f7a5785fb4db63bae7d099a9b"><div class="ttname"><a href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304a2be9044f7a5785fb4db63bae7d099a9b">NOBLOCK</a></div><div class="ttdeci">@ NOBLOCK</div><div class="ttdef"><b>Definition:</b> <a href="../../da/ddd/socket_8h_source.html#l00068">socket.h:68</a></div></div>
+<div class="ttc" id="asocket_8h_html_a5abb561217a4ab803beba8a45d5393ef"><div class="ttname"><a href="../../da/ddd/socket_8h.html#a5abb561217a4ab803beba8a45d5393ef">get_new_socket</a></div><div class="ttdeci">int get_new_socket(thread_logger *thl, addr_info *bind_address, SOCKET_OPTS sock_opts[], int num_opts, bool is_client, bool is_tcp)</div><div class="ttdoc">gets an available socket attached to bind_address</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/df8/socket_8c_source.html#l00059">socket.c:59</a></div></div>
+<div class="ttc" id="astructthread__logger_html"><div class="ttname"><a href="../../da/da5/structthread__logger.html">thread_logger</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d8c/logger_8h_source.html#l00072">logger.h:72</a></div></div>
+<div class="ttc" id="asocket_8h_html_ab4d0cb4769ae6fb5127d2c8ccf2b7304a02fc27068fe9a3c151ffcc08ec5bb65d"><div class="ttname"><a href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304a02fc27068fe9a3c151ffcc08ec5bb65d">BLOCK</a></div><div class="ttdeci">@ BLOCK</div><div class="ttdef"><b>Definition:</b> <a href="../../da/ddd/socket_8h_source.html#l00070">socket.h:70</a></div></div>
+<div class="ttc" id="asocket_8h_html_a18671fbf7f59e94434d0a33536b1fc11"><div class="ttname"><a href="../../da/ddd/socket_8h.html#a18671fbf7f59e94434d0a33536b1fc11">set_socket_recv_timeout</a></div><div class="ttdeci">int set_socket_recv_timeout(int fd, int seconds)</div><div class="ttdoc">sets a socket recv timeout</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/df8/socket_8c_source.html#l00041">socket.c:41</a></div></div>
+<div class="ttc" id="asocket_8h_html_a1135e55b56db95ee15a2e7fa6dbd9d22"><div class="ttname"><a href="../../da/ddd/socket_8h.html#a1135e55b56db95ee15a2e7fa6dbd9d22">multi_addr_to_addr_info</a></div><div class="ttdeci">addr_info * multi_addr_to_addr_info(multi_addr_t *address)</div><div class="ttdoc">returns an addr_info representation of the multiaddress</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/df8/socket_8c_source.html#l00224">socket.c:224</a></div></div>
 <div class="ttc" id="astructtimeval_html"><div class="ttname"><a href="../../d1/d1b/structtimeval.html">timeval</a></div></div>
-<div class="ttc" id="asocket_8h_html_add0cf15976a6dd3a21d81320a5fbf0cf"><div class="ttname"><a href="../../da/ddd/socket_8h.html#add0cf15976a6dd3a21d81320a5fbf0cf">set_socket_blocking_status</a></div><div class="ttdeci">bool set_socket_blocking_status(int fd, bool blocking)</div><div class="ttdoc">used to enable/disable blocking sockets</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/df8/socket_8c_source.html#l00112">socket.c:112</a></div></div>
-<div class="ttc" id="asocket_8h_html_ab4d0cb4769ae6fb5127d2c8ccf2b7304"><div class="ttname"><a href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304">SOCKET_OPTS</a></div><div class="ttdeci">SOCKET_OPTS</div><div class="ttdoc">used to configure new sockets</div><div class="ttdef"><b>Definition:</b> <a href="../../da/ddd/socket_8h_source.html#l00055">socket.h:55</a></div></div>
+<div class="ttc" id="asocket_8h_html_add0cf15976a6dd3a21d81320a5fbf0cf"><div class="ttname"><a href="../../da/ddd/socket_8h.html#add0cf15976a6dd3a21d81320a5fbf0cf">set_socket_blocking_status</a></div><div class="ttdeci">bool set_socket_blocking_status(int fd, bool blocking)</div><div class="ttdoc">used to enable/disable blocking sockets</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/df8/socket_8c_source.html#l00142">socket.c:142</a></div></div>
+<div class="ttc" id="asocket_8h_html_ab4d0cb4769ae6fb5127d2c8ccf2b7304"><div class="ttname"><a href="../../da/ddd/socket_8h.html#ab4d0cb4769ae6fb5127d2c8ccf2b7304">SOCKET_OPTS</a></div><div class="ttdeci">SOCKET_OPTS</div><div class="ttdoc">used to configure new sockets</div><div class="ttdef"><b>Definition:</b> <a href="../../da/ddd/socket_8h_source.html#l00064">socket.h:64</a></div></div>
+<div class="ttc" id="asocket_8h_html_aeb9839f417f791e3581875512d1de3e9"><div class="ttname"><a href="../../da/ddd/socket_8h.html#aeb9839f417f791e3581875512d1de3e9">recv_or_send_failed</a></div><div class="ttdeci">bool recv_or_send_failed(thread_logger *thl, int rc)</div><div class="ttdoc">used to check if a receive or send with a socket failed</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/df8/socket_8c_source.html#l00194">socket.c:194</a></div></div>
+<div class="ttc" id="amultiaddr_8h_html"><div class="ttname"><a href="../../da/de0/multiaddr_8h.html">multiaddr.h</a></div></div>
 <div class="ttc" id="astructaddrinfo_html"><div class="ttname"><a href="../../d6/d9d/structaddrinfo.html">addrinfo</a></div><div class="ttdoc">alias for struct addrinfo</div></div>
-<div class="ttc" id="asocket_8h_html_aa3f161176f86bd430439429fbd7aec09"><div class="ttname"><a href="../../da/ddd/socket_8h.html#aa3f161176f86bd430439429fbd7aec09">get_name_info</a></div><div class="ttdeci">char * get_name_info(sock_addr *client_address)</div><div class="ttdoc">returns the address the client is connecting from</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/df8/socket_8c_source.html#l00129">socket.c:129</a></div></div>
-<div class="ttc" id="autils_2logger_8h_html"><div class="ttname"><a href="../../d8/dbe/utils_2logger_8h.html">logger.h</a></div><div class="ttdoc">a thread safe logger with optional printf style logging</div></div>
+<div class="ttc" id="asocket_8h_html_aa3f161176f86bd430439429fbd7aec09"><div class="ttname"><a href="../../da/ddd/socket_8h.html#aa3f161176f86bd430439429fbd7aec09">get_name_info</a></div><div class="ttdeci">char * get_name_info(sock_addr *client_address)</div><div class="ttdoc">returns the address the client is connecting from</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/df8/socket_8c_source.html#l00159">socket.c:159</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

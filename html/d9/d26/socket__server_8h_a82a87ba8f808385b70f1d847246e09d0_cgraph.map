@@ -1,0 +1,4 @@
+<map id="setup_signal_shutdown" name="setup_signal_shutdown">
+<area shape="rect" id="node1" title="used to specify which syscall signals should trigger shutdown process" alt="" coords="5,5,180,32"/>
+<area shape="rect" id="node2" href="$d1/dfc/socket__server_8c.html#a80876c3df4dfb0c5d793cb641c884600" title="used to signal that we should exit the main start_socket_server function" alt="" coords="228,5,359,32"/>
+</map>

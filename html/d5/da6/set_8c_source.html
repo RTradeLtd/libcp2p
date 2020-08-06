@@ -252,19 +252,19 @@ $(document).ready(function(){initNavTree('d5/da6/set_8c_source.html','../../'); 
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;}</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
 <div class="line"><a name="l00166"></a><span class="lineno"><a class="line" href="../../dc/d13/cid_8h.html#aa70a1e3b4bb508ec72dd07185f4a04cd">  166</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="../../d5/da6/set_8c.html#aa70a1e3b4bb508ec72dd07185f4a04cd">ipfs_cid_set_foreach</a>(<span class="keyword">struct</span> <a class="code" href="../../d8/d0e/struct_cid_set.html">CidSet</a> *set, <span class="keywordtype">int</span> (*func)(<span class="keyword">struct</span> <a class="code" href="../../d5/d6c/struct_cid.html">Cid</a> *)) {</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a> = 0;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keywordtype">int</span> err = 0;</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keywordflow">while</span> (set) {</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        <span class="keywordflow">if</span> (set-&gt;<a class="code" href="../../d8/d0e/struct_cid_set.html#ae6846d1676eef6d0db5dfbafdda77566">cid</a>) {</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            <a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a> = func(set-&gt;<a class="code" href="../../d8/d0e/struct_cid_set.html#ae6846d1676eef6d0db5dfbafdda77566">cid</a>);</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a>) {</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a>;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            err = func(set-&gt;<a class="code" href="../../d8/d0e/struct_cid_set.html#ae6846d1676eef6d0db5dfbafdda77566">cid</a>);</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            <span class="keywordflow">if</span> (err) {</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                <span class="keywordflow">return</span> err;</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            }</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        }</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        set = set-&gt;<a class="code" href="../../d8/d0e/struct_cid_set.html#af4cfa4ef291c2c12561023d788ef4617">next</a>;</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    }</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a>;</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <span class="keywordflow">return</span> err;</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -278,7 +278,6 @@ $(document).ready(function(){initNavTree('d5/da6/set_8c_source.html','../../'); 
 <div class="ttc" id="aset_8c_html_a1c02effa6b8c889fdab336eff9b7dd00"><div class="ttname"><a href="../../d5/da6/set_8c.html#a1c02effa6b8c889fdab336eff9b7dd00">ipfs_cid_set_len</a></div><div class="ttdeci">int ipfs_cid_set_len(struct CidSet *set)</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/da6/set_8c_source.html#l00134">set.c:134</a></div></div>
 <div class="ttc" id="aset_8c_html_aa70a1e3b4bb508ec72dd07185f4a04cd"><div class="ttname"><a href="../../d5/da6/set_8c.html#aa70a1e3b4bb508ec72dd07185f4a04cd">ipfs_cid_set_foreach</a></div><div class="ttdeci">int ipfs_cid_set_foreach(struct CidSet *set, int(*func)(struct Cid *))</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/da6/set_8c_source.html#l00166">set.c:166</a></div></div>
 <div class="ttc" id="aset_8c_html_a7e8fb78dbd4ab0deee333f9e3212f6d3"><div class="ttname"><a href="../../d5/da6/set_8c.html#a7e8fb78dbd4ab0deee333f9e3212f6d3">ipfs_cid_set_destroy</a></div><div class="ttdeci">void ipfs_cid_set_destroy(struct CidSet **set)</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/da6/set_8c_source.html#l00009">set.c:9</a></div></div>
-<div class="ttc" id="athread__pool_8c_html_ada8afd8462ce3a222a6d77a7d86115d8"><div class="ttname"><a href="../../db/d84/thread__pool_8c.html#ada8afd8462ce3a222a6d77a7d86115d8">err</a></div><div class="ttdeci">#define err(str)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d84/thread__pool_8c_source.html#l00037">thread_pool.c:37</a></div></div>
 <div class="ttc" id="acid_8h_html"><div class="ttname"><a href="../../dc/d13/cid_8h.html">cid.h</a></div></div>
 <div class="ttc" id="astruct_cid_set_html"><div class="ttname"><a href="../../d8/d0e/struct_cid_set.html">CidSet</a></div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d13/cid_8h_source.html#l00046">cid.h:46</a></div></div>
 <div class="ttc" id="aset_8c_html_af3337ef3eb9657237173c4e7bfae3095"><div class="ttname"><a href="../../d5/da6/set_8c.html#af3337ef3eb9657237173c4e7bfae3095">ipfs_cid_set_keys</a></div><div class="ttdeci">unsigned char ** ipfs_cid_set_keys(struct CidSet *set)</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/da6/set_8c_source.html#l00147">set.c:147</a></div></div>

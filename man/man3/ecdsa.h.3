@@ -1,4 +1,4 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/ecdsa.h" 3 "Sun Aug 2 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/ecdsa.h" 3 "Thu Aug 6 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -41,7 +41,11 @@
 .br
 .RI "used to save a private key at the given path "
 .ti -1c
-.RI "int \fBlibp2p_crypto_ecdsa_keypair_generation\fP (unsigned char *output, mbedtls_ecp_group_id curve)"
+.RI "unsigned char * \fBlibp2p_crypto_ecdsa_private_key_to_pem\fP (\fBecdsa_private_key_t\fP *pk)"
+.br
+.RI "takes a private key and returns its corresponding PEM format "
+.ti -1c
+.RI "\fBecdsa_private_key_t\fP * \fBlibp2p_crypto_ecdsa_keypair_generation\fP (mbedtls_ecp_group_id curve)"
 .br
 .RI "used to generate an ECDSA keypair "
 .ti -1c
@@ -93,35 +97,16 @@ the contexts are not thread safe, so you'll need to guard access using the mutex
 frees up resources allocated for the private key 
 .PP
 Definition at line 50 of file ecdsa\&.c\&.
-.SS "int libp2p_crypto_ecdsa_keypair_generation (unsigned char * output, mbedtls_ecp_group_id curve)"
+.SS "\fBecdsa_private_key_t\fP* libp2p_crypto_ecdsa_keypair_generation (mbedtls_ecp_group_id curve)"
 
 .PP
 used to generate an ECDSA keypair 
 .PP
-\fBParameters\fP
-.RS 4
-\fIoutput\fP a buffer to write the ecdsa keypair into 
-.RE
-.PP
 \fBReturns\fP
 .RS 4
-Fail: 0 
+Success: pointer to an ecdsa_private_key_t instance 
 .PP
-Success: 1
-.RE
-.PP
-\fBParameters\fP
-.RS 4
-\fI\fBprivate_key\fP\fP the place to store the private key 
-.br
-\fIcurve\fP the ECC curve to use for key generation 
-.RE
-.PP
-\fBReturns\fP
-.RS 4
-Fail: 0 
-.PP
-Success: 1 
+NUULL pointer 
 .RE
 .PP
 
@@ -135,7 +120,7 @@ figure out if we need this
 .PP
 
 .PP
-Definition at line 184 of file ecdsa\&.c\&.
+Definition at line 183 of file ecdsa\&.c\&.
 .SS "\fBpeer_id_t\fP* libp2p_crypto_ecdsa_keypair_peerid (\fBecdsa_private_key_t\fP * pk)"
 
 .PP
@@ -287,7 +272,7 @@ Failure: NULL pointer
 .PP
 
 .PP
-Definition at line 273 of file ecdsa\&.c\&.
+Definition at line 275 of file ecdsa\&.c\&.
 .SS "int libp2p_crypto_ecdsa_private_key_save (\fBecdsa_private_key_t\fP * pk, char * path)"
 
 .PP
@@ -309,7 +294,13 @@ Failure: 1
 .PP
 
 .PP
-Definition at line 240 of file ecdsa\&.c\&.
+Definition at line 242 of file ecdsa\&.c\&.
+.SS "unsigned char* libp2p_crypto_ecdsa_private_key_to_pem (\fBecdsa_private_key_t\fP * pk)"
+
+.PP
+takes a private key and returns its corresponding PEM format 
+.PP
+Definition at line 296 of file ecdsa\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for libcp2p from the source code\&.

@@ -1,9 +1,21 @@
 var searchData=
 [
-  ['random_5f512_2584',['random_512',['../d6/dab/multihash__test_8c.html#a2be1bc627d7fd6fc9e01d3445fda32da',1,'multihash_test.c']]],
-  ['rear_2585',['rear',['../d7/dd0/structjobqueue.html#adf078b067b9c9ad269c64d73c4bd667c',1,'jobqueue']]],
-  ['release_2586',['release',['../d5/d89/namespaceconf.html#a325dc746d8bf05c54d26351c35a21d90',1,'conf']]],
-  ['remaining_2587',['remaining',['../db/d79/struct_cbor_encoder.html#a545676bb8c7eebcee03a1eeb8a001c7e',1,'CborEncoder::remaining()'],['../dd/d56/struct_cbor_value.html#a3a7e8ff14adf8c01baeaeadf30f9f692',1,'CborValue::remaining()']]],
-  ['resetfn_2588',['resetfn',['../dd/df9/structarg__hdr.html#a6ed05b7c388dea710b41c8da72bfe987',1,'arg_hdr']]],
-  ['rwmutex_2589',['rwmutex',['../d7/dd0/structjobqueue.html#a86c0492954cff4ffda78b29fe422ff54',1,'jobqueue']]]
+  ['scanfn_2654',['scanfn',['../dd/df9/structarg__hdr.html#a263be45e6d91e91fea4fc539df9a54fd',1,'arg_hdr']]],
+  ['secret_5fkey_2655',['secret_key',['../d0/d5b/struct_ephemeral_private_key.html#a3a02bced66e45f0b00e7a0dc6b8b3859',1,'EphemeralPrivateKey']]],
+  ['sha1_5fexample_2656',['sha1_example',['../d6/dab/multihash__test_8c.html#a3d78a29458e71f884c603a5fac37fa80',1,'multihash_test.c']]],
+  ['sha1_5fexample_5flength_2657',['sha1_example_length',['../d6/dab/multihash__test_8c.html#a0b865ac1ba7901cc49300f9b52b77432',1,'multihash_test.c']]],
+  ['sha2_5fexample_2658',['sha2_example',['../d6/dab/multihash__test_8c.html#a9e67b5d877583fb82f4fbe93f0075af3',1,'multihash_test.c']]],
+  ['sha2_5fexample_5flength_2659',['sha2_example_length',['../d6/dab/multihash__test_8c.html#a6386b47ee009e4a8d7c90a934a222860',1,'multihash_test.c']]],
+  ['sha3_5fexample_2660',['sha3_example',['../d6/dab/multihash__test_8c.html#afbafb1619896f3f354b9b1ed77458a55',1,'multihash_test.c']]],
+  ['sha3_5fexample_5flength_2661',['sha3_example_length',['../d6/dab/multihash__test_8c.html#a0d5cecec7fbc17e5de8497b913a07342',1,'multihash_test.c']]],
+  ['shared_5fkey_2662',['shared_key',['../d7/d04/struct_ephemeral_public_key.html#a42788c9b35b422c0c241c09577f3a33b',1,'EphemeralPublicKey']]],
+  ['shared_5fkey_5fsize_2663',['shared_key_size',['../d7/d04/struct_ephemeral_public_key.html#ad122a5d09416bbb78dc099860328249e',1,'EphemeralPublicKey']]],
+  ['shortopts_2664',['shortopts',['../dd/df9/structarg__hdr.html#a48c0d7fb876e6f6e57850f282373ec0e',1,'arg_hdr']]],
+  ['shutdown_5fmutex_2665',['shutdown_mutex',['../d1/dfc/socket__server_8c.html#a2dcb91dbf62539f1f198053eb5ea87fa',1,'socket_server.c']]],
+  ['size_2666',['size',['../d8/dde/struct_protocol.html#a9b3ab5c38a42933eaaaaf5a041553e38',1,'Protocol']]],
+  ['socket_5fnumber_2667',['socket_number',['../d9/d8c/structsocket__client.html#ad01662d80345c9f0b505d0b0b73312a3',1,'socket_client::socket_number()'],['../d5/de2/structclient__conn.html#a6b2e7870e2cd463fd42807b72200e2eb',1,'client_conn::socket_number()']]],
+  ['source_5fsuffix_2668',['source_suffix',['../d5/d89/namespaceconf.html#a10af2a769eb3bd3322e874f677e435b1',1,'conf']]],
+  ['srv_2669',['srv',['../de/da7/structconn__handle__data.html#ae5a7d5c9e564b3fff4bdf9b327b18f31',1,'conn_handle_data']]],
+  ['string_2670',['string',['../d4/dc4/structmulti__address.html#a79e6c3fb42cb90d46434b40233e1a4ea',1,'multi_address']]],
+  ['sval_2671',['sval',['../d9/dcd/structarg__str.html#ad41813dbbf8d8666a45bf071437ca61d',1,'arg_str::sval()'],['../d9/dbd/structarg__rex.html#a3508cb79a9ff78ac5d074b6fc8a34b31',1,'arg_rex::sval()']]]
 ];
