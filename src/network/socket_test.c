@@ -65,7 +65,7 @@ void test_new_socket_server(void **state) {
     config1->max_connections = 100;
     config1->num_threads = 6;
     config1->recv_timeout_sec = 3;
-    config1->max_peers = 100;
+    config1->max_peers = 90;
     config1->fn_tcp = handle_inbound_rpc;
     config1->private_key_path = "server1.pem";
 
@@ -79,7 +79,9 @@ void test_new_socket_server(void **state) {
     //   .num_threads = 6, .fn_tcp = example_task_func_tcp, .fn_udp = example_task_func_udp };
     socket_server_t *server1 = new_socket_server(thl1, config1, opts, 2);
     assert(server1 != NULL);
+    assert(server1->pstore->max_peers == 90);
     free_socket_server_config(config1);
+
     thpool_add_work(server1->thpool, start_socker_server_wrapper, server1);
 
     // start server2
@@ -100,9 +102,15 @@ void test_new_socket_server(void **state) {
     //   .num_threads = 6, .fn_tcp = example_task_func_tcp, .fn_udp = example_task_func_udp };
     socket_server_t *server2 = new_socket_server(thl2, config2, opts, 2);
     assert(server2 != NULL);
+    
+    // verify max peers
+    assert(server2->pstore->max_peers == 100);
+    
     free_socket_server_config(config2);
+
     thpool_add_work(server2->thpool, start_socker_server_wrapper, server2);
 
+    // give time for the last server to start
     sleep(1);
 
     message_hello_t *send_msg_hello = new_server_message_hello_t(server2);
