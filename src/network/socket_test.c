@@ -108,7 +108,7 @@ void test_new_socket_server(void **state) {
     message_hello_t *send_msg_hello = new_server_message_hello_t(server2);
     assert(send_msg_hello != NULL);
 
-    message_t *send_msg = message_hello_t_to_message_t(send_msg_hello);
+    message_t *send_msg = message_hello_t_to_message_t(send_msg_hello, true);
     assert(send_msg != NULL);
 
     rc = socket_server_send(server2, endpoint1, send_msg);

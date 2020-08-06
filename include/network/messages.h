@@ -54,18 +54,21 @@ typedef enum MESSAGE_TYPES {
      */
     MESSAGE_BEGIN_ECDH = 5,
     /*!
-     * @brief used for exchanging hello protocol messages
-     * @details the hello protocol is used to exchange peer information (peer id and
-     * public key)
+     * @brief used for initiating hello protocol exchange  and providing our
+     * information
      */
-    MESSAGE_HELLO = 6,
+    MESSAGE_HELLO_INT = 6,
+    /*!
+     * @brief used to reply to an initiation message with our information
+     */
+    MESSAGE_HELLO_FIN = 7,
     /*!
      * @brief indicates we are done with the current message exchange
      * @details the proper way to shutdown a connection to a peer is to
      * @details send an RPC message with the type of MESSAGE_FINISHED followed by
      * closing both sides of the connection
      */
-    MESSAGE_FINISHED = 7,
+    MESSAGE_FINISHED = 8,
     /*!
      * @brief an arbitrary message type for implementation defined behavior
      */
@@ -104,9 +107,11 @@ typedef struct message_hello {
 } message_hello_t;
 
 /*!
-  * @brief helper function to return a message_t object for sending
-*/
-message_t *message_hello_t_to_message_t(message_hello_t *msg);
+ * @brief helper function to return a message_t object for sending
+ * @details if initiate is true, the message type is MESSAGE_HELLO_INT
+ * @details if initiate is false, the message type is MESSAGE_HELLO_FIN
+ */
+message_t *message_hello_t_to_message_t(message_hello_t *msg, bool initiate);
 
 /*!
  * @brief used to create a new message_hello_t using the given values

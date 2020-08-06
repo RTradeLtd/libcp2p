@@ -22,9 +22,11 @@
 #include <sys/socket.h>
 
 /*!
-  * @brief helper function to return a message_t object for sending
-*/
-message_t *message_hello_t_to_message_t(message_hello_t *msg) {
+ * @brief helper function to return a message_t object for sending
+ * @details if initiate is true, the message type is MESSAGE_HELLO_INT
+ * @details if initiate is false, the message type is MESSAGE_HELLO_FIN
+ */
+message_t *message_hello_t_to_message_t(message_hello_t *msg, bool initiate) {
     cbor_encoded_data_t *encoded = cbor_encode_hello_t(msg);
     if (encoded == NULL) {
         return NULL;
@@ -35,7 +37,7 @@ message_t *message_hello_t_to_message_t(message_hello_t *msg) {
         free_cbor_encoded_data(encoded);
         return NULL;
     }
-    
+
     output->data = calloc(1, encoded->len);
     if (output->data == NULL) {
         free_cbor_encoded_data(encoded);
@@ -43,8 +45,14 @@ message_t *message_hello_t_to_message_t(message_hello_t *msg) {
     }
 
     memcpy(output->data, encoded->data, encoded->len);
+
     output->len = encoded->len;
-    output->type = MESSAGE_HELLO;
+
+    if (initiate == true) {
+        output->type = MESSAGE_HELLO_INT;
+    } else {
+        output->type = MESSAGE_HELLO_FIN;
+    }
 
     free_cbor_encoded_data(encoded);
 

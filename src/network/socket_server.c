@@ -447,7 +447,9 @@ void handle_inbound_rpc(void *data) {
                 break;
             case MESSAGE_HAVE_PUB_KEY:
                 break;
-            case MESSAGE_HELLO:
+            case MESSAGE_HELLO_INT:
+                // fallthrough
+            case MESSAGE_HELLO_FIN:
                 ok = handle_hello_protocol(hdata, msg);
                 if (ok == false) {
                     hdata->srv->thl->log(hdata->srv->thl, 0,
@@ -552,7 +554,16 @@ bool handle_hello_protocol(conn_handle_data_t *data, message_t *msg) {
         data->srv->thl->log(data->srv->thl, 0,
                             "failed to insert peer into peerstore",
                             LOG_LEVELS_DEBUG);
-        return false;
+        return ok;
+    } else {
+        data->srv->thl->log(data->srv->thl, 0,
+                            "successfully inserted peer into peerstore",
+                            LOG_LEVELS_DEBUG);
+    }
+
+    // if this is MESSAGE_HELLO_FIN it means we dont need to continue the exchange
+    if (msg->type == MESSAGE_HELLO_FIN) {
+        return ok;
     }
 
     message_hello_t *send_msg_hello = new_server_message_hello_t(data->srv);
@@ -563,13 +574,13 @@ bool handle_hello_protocol(conn_handle_data_t *data, message_t *msg) {
         return false;
     }
 
-    message_t *send_msg = message_hello_t_to_message_t(send_msg_hello);
+    // send the MESSSAGE_HELLO_FIN message in the exchange
+    message_t *send_msg = message_hello_t_to_message_t(send_msg_hello, false);
 
     free_message_hello_t(send_msg_hello);
 
     if (send_msg == NULL) {
-        data->srv->thl->log(data->srv->thl, 0,
-                            "failed to get message_t",
+        data->srv->thl->log(data->srv->thl, 0, "failed to get message_t",
                             LOG_LEVELS_DEBUG);
         return false;
     }
@@ -577,8 +588,7 @@ bool handle_hello_protocol(conn_handle_data_t *data, message_t *msg) {
     // send the data to our peer
     int rc = handle_send(data->srv->thl, data->conn->socket_number, send_msg);
     if (rc == -1) {
-        data->srv->thl->log(data->srv->thl, 0,
-                            "failed to send message",
+        data->srv->thl->log(data->srv->thl, 0, "failed to send message",
                             LOG_LEVELS_DEBUG);
         return false;
     }
@@ -647,10 +657,9 @@ EXIT:
 }
 
 /*!
-  * @brief helper function to return a message_hello_t using our server values
-*/
+ * @brief helper function to return a message_hello_t using our server values
+ */
 message_hello_t *new_server_message_hello_t(socket_server_t *srv) {
-    return new_message_hello_t(
-        srv->peer_id->data, srv->public_key->data,
-        srv->peer_id->len,  srv->public_key->data_size);
+    return new_message_hello_t(srv->peer_id->data, srv->public_key->data,
+                               srv->peer_id->len, srv->public_key->data_size);
 }

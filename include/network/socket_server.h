@@ -229,6 +229,6 @@ int socket_server_send(socket_server_t *srv, multi_addr_t *to_address,
                        message_t *msg);
 
 /*!
-  * @brief helper function to return a message_hello_t using our server values
-*/
+ * @brief helper function to return a message_hello_t using our server values
+ */
 message_hello_t *new_server_message_hello_t(socket_server_t *srv);
