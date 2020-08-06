@@ -85,7 +85,6 @@ socket_server_t *new_socket_server(thread_logger *thl,
         }
 
         bool is_tcp = false;
-        // bool is_udp = false;
 
         if (bind_address->ai_socktype == SOCK_STREAM) {
             is_tcp = true;
