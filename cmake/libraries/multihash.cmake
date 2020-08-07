@@ -14,7 +14,7 @@ add_library(libmultihash
 target_compile_options(libmultihash PRIVATE ${flags})
 target_link_libraries(libmultihash libencoding)
 
-add_executable(libmultihash-test ./src/multihash/multihash_test.c)
+add_executable(libmultihash-test ./tests/multihash_test.c)
 target_link_libraries(libmultihash-test cmocka)
 target_link_libraries(libmultihash-test libmultihash)
 target_link_libraries(libmultihash-test m)

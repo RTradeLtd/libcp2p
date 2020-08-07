@@ -20,7 +20,7 @@ target_link_libraries(libcrypto libtinycbor)
 
 
 
-add_executable(libcrypto-test ./src/crypto/crypto_test.c)
+add_executable(libcrypto-test ./tests/crypto_test.c)
 target_link_libraries(libcrypto-test mbedtls)
 target_link_libraries(libcrypto-test mbedx509)
 target_link_libraries(libcrypto-test mbedcrypto)
