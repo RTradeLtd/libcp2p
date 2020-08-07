@@ -45,6 +45,8 @@ When it comes to managing memory, there is no strict rule on whether or not you 
 
 # writing tests
 
+> NOTE: all tests should be placed into the `tests` directory in the project root
+
 If starting a new test file, make sure the last part of the file name is `_test.c`, and that your actual tests have the following function signature:
 ```C
 void test_your_test_name(void **state)
