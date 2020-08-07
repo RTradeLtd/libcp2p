@@ -1,19 +1,13 @@
 <map id="libp2p_new_peer_id" name="libp2p_new_peer_id">
-<area shape="rect" id="node1" title="constructs a peer identifier from the given public key" alt="" coords="1651,83,1801,109"/>
-<area shape="rect" id="node2" href="$d5/d5d/ecdsa_8h.html#a821e2830f6759f41158ee38c18ca9252" title="returns a peer_id_t struct for the given private key" alt="" coords="1053,46,1207,87"/>
-<area shape="rect" id="node13" href="$d7/dee/peerutils_8h.html#a20fb9280d827d25e56ff161baa137764" title="generates a peerID for the public key using SHA256 as the hashing algorithm" alt="" coords="1452,105,1603,146"/>
-<area shape="rect" id="node3" href="$d9/d26/socket__server_8h.html#a5a2eac1ff27232eba96ba5d41145cd33" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="604,5,751,32"/>
-<area shape="rect" id="node9" href="$d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="803,112,999,139"/>
-<area shape="rect" id="node11" href="$d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="801,46,1000,87"/>
-<area shape="rect" id="node4" href="$d6/dfd/cli_2main_8c.html#a990190006e127641a32a5d37d2368fce" title=" " alt="" coords="383,32,545,59"/>
-<area shape="rect" id="node7" href="$d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="375,108,553,135"/>
-<area shape="rect" id="node5" href="$d6/dfd/cli_2main_8c.html#a3cb566e1d17d9a6da5a87bb940f11a26" title=" " alt="" coords="108,32,327,59"/>
-<area shape="rect" id="node6" href="$d6/dfd/cli_2main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,32,60,59"/>
-<area shape="rect" id="node8" href="$d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="190,108,245,135"/>
-<area shape="rect" id="node10" href="$d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="650,108,705,135"/>
-<area shape="rect" id="node12" href="$d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="650,56,705,83"/>
-<area shape="rect" id="node14" href="$d5/d3e/peerstore_8h.html#adec424d7ca6bc416943aff4526e7f351" title="used to validate the peerID ensuring that the given public key matches the given peerid" alt="" coords="1260,105,1404,146"/>
-<area shape="rect" id="node15" href="$d5/d3e/peerstore_8h.html#ae1716fa6a8fa77ef2971750a57139988" title="used to insert a peer_id public_key pair into our peerstore" alt="" coords="1048,112,1212,139"/>
-<area shape="rect" id="node16" href="$d9/d26/socket__server_8h.html#a522916191d4db90bdf14749780cfb826" title="handles receiving a hello protocol message from another peer" alt="" coords="818,163,983,189"/>
-<area shape="rect" id="node17" href="$d9/d26/socket__server_8h.html#a3bc7eef996be3f8c2118e4d1a523c8e1" title="handles receiving an rpc message from another peer" alt="" coords="601,159,753,185"/>
+<area shape="rect" id="node1" title="constructs a peer identifier from the given public key" alt="" coords="1604,46,1755,73"/>
+<area shape="rect" id="node2" href="$d5/d5d/ecdsa_8h.html#a821e2830f6759f41158ee38c18ca9252" title="returns a peer_id_t struct for the given private key" alt="" coords="1401,5,1556,47"/>
+<area shape="rect" id="node7" href="$d7/dee/peerutils_8h.html#a20fb9280d827d25e56ff161baa137764" title="generates a peerID for the public key using SHA256 as the hashing algorithm" alt="" coords="1403,71,1554,112"/>
+<area shape="rect" id="node3" href="$d9/d26/socket__server_8h.html#a5a2eac1ff27232eba96ba5d41145cd33" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="1006,19,1153,46"/>
+<area shape="rect" id="node4" href="$d6/dfd/cli_2main_8c.html#a990190006e127641a32a5d37d2368fce" title=" " alt="" coords="375,46,536,73"/>
+<area shape="rect" id="node5" href="$d6/dfd/cli_2main_8c.html#a3cb566e1d17d9a6da5a87bb940f11a26" title=" " alt="" coords="108,46,327,73"/>
+<area shape="rect" id="node6" href="$d6/dfd/cli_2main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,46,60,73"/>
+<area shape="rect" id="node8" href="$d5/d3e/peerstore_8h.html#adec424d7ca6bc416943aff4526e7f351" title="used to validate the peerID ensuring that the given public key matches the given peerid" alt="" coords="1209,68,1353,109"/>
+<area shape="rect" id="node9" href="$d5/d3e/peerstore_8h.html#ae1716fa6a8fa77ef2971750a57139988" title="used to insert a peer_id public_key pair into our peerstore" alt="" coords="997,71,1161,98"/>
+<area shape="rect" id="node10" href="$d9/d26/socket__server_8h.html#a522916191d4db90bdf14749780cfb826" title="handles receiving a hello protocol message from another peer" alt="" coords="784,71,949,98"/>
+<area shape="rect" id="node11" href="$d9/d26/socket__server_8h.html#a3bc7eef996be3f8c2118e4d1a523c8e1" title="handles receiving an rpc message from another peer" alt="" coords="584,71,736,98"/>
 </map>

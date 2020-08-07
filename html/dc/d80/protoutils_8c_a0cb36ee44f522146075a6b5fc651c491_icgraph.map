@@ -1,9 +1,4 @@
 <map id="bytes_to_string" name="bytes_to_string">
-<area shape="rect" id="node1" title="Unserialize the bytes into a string." alt="" coords="563,81,685,108"/>
-<area shape="rect" id="node2" href="$da/de0/multiaddr_8h.html#a95a6ce34e140ffc9ab32edd57380568f" title=" " alt="" coords="328,74,515,115"/>
-<area shape="rect" id="node3" href="$d8/dca/multiaddr__test_8c.html#ad1e7c139c6cb28364f2b46fb50574d74" title=" " alt="" coords="157,5,231,32"/>
-<area shape="rect" id="node5" href="$d8/dca/multiaddr__test_8c.html#a812e26f1859f9c8a120e9874f37dd83a" title=" " alt="" coords="114,56,274,83"/>
-<area shape="rect" id="node6" href="$d8/dca/multiaddr__test_8c.html#a125eea8e927949eceff7c1395b6e9bbe" title=" " alt="" coords="108,107,280,133"/>
-<area shape="rect" id="node7" href="$d8/dca/multiaddr__test_8c.html#aa4d82d7d7bba467a48e4f48178a650d8" title=" " alt="" coords="115,157,273,184"/>
-<area shape="rect" id="node4" href="$d8/dca/multiaddr__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,81,60,108"/>
+<area shape="rect" id="node1" title="Unserialize the bytes into a string." alt="" coords="240,13,363,39"/>
+<area shape="rect" id="node2" href="$da/de0/multiaddr_8h.html#a95a6ce34e140ffc9ab32edd57380568f" title=" " alt="" coords="5,5,192,47"/>
 </map>

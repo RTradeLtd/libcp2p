@@ -1,17 +1,9 @@
 <map id="libp2p_crypto_public_key_new" name="libp2p_crypto_public_key_new">
-<area shape="rect" id="node1" title="returns a new instance of public_key_t" alt="" coords="1287,225,1443,266"/>
-<area shape="rect" id="node2" href="$d5/d5d/ecdsa_8h.html#abfd5e863b148643f0c78f6a426f21047" title="returns the public key associated with the private key in PEM format" alt="" coords="1084,163,1239,205"/>
-<area shape="rect" id="node14" href="$d5/d29/crypto__test_8c.html#a1401558d7902d15576f5aec9958a5d0e" title=" " alt="" coords="856,287,1028,329"/>
-<area shape="rect" id="node3" href="$d5/d5d/ecdsa_8h.html#a821e2830f6759f41158ee38c18ca9252" title="returns a peer_id_t struct for the given private key" alt="" coords="865,105,1019,146"/>
-<area shape="rect" id="node4" href="$d9/d26/socket__server_8h.html#a5a2eac1ff27232eba96ba5d41145cd33" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="627,31,774,57"/>
-<area shape="rect" id="node10" href="$d1/d8e/peerstore__test_8c.html#a835845973266669ab75ae03588e646c0" title=" " alt="" coords="603,111,799,137"/>
-<area shape="rect" id="node12" href="$d5/d29/crypto__test_8c.html#a60ebfdf4ef161532c2faf2723b36955a" title=" " alt="" coords="601,163,800,205"/>
-<area shape="rect" id="node15" href="$d5/d29/crypto__test_8c.html#a04d295869fa1a64f7c011ce0b287bf03" title=" " alt="" coords="848,222,1036,263"/>
-<area shape="rect" id="node5" href="$d6/dfd/cli_2main_8c.html#a990190006e127641a32a5d37d2368fce" title=" " alt="" coords="383,5,545,32"/>
-<area shape="rect" id="node8" href="$d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="375,56,553,83"/>
-<area shape="rect" id="node6" href="$d6/dfd/cli_2main_8c.html#a3cb566e1d17d9a6da5a87bb940f11a26" title=" " alt="" coords="108,5,327,32"/>
-<area shape="rect" id="node7" href="$d6/dfd/cli_2main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,60,32"/>
-<area shape="rect" id="node9" href="$d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="190,56,245,83"/>
-<area shape="rect" id="node11" href="$d1/d8e/peerstore__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="437,111,491,137"/>
-<area shape="rect" id="node13" href="$d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="437,229,491,256"/>
+<area shape="rect" id="node1" title="returns a new instance of public_key_t" alt="" coords="1184,35,1340,76"/>
+<area shape="rect" id="node2" href="$d5/d5d/ecdsa_8h.html#abfd5e863b148643f0c78f6a426f21047" title="returns the public key associated with the private key in PEM format" alt="" coords="981,35,1136,76"/>
+<area shape="rect" id="node3" href="$d5/d5d/ecdsa_8h.html#a821e2830f6759f41158ee38c18ca9252" title="returns a peer_id_t struct for the given private key" alt="" coords="779,5,933,47"/>
+<area shape="rect" id="node4" href="$d9/d26/socket__server_8h.html#a5a2eac1ff27232eba96ba5d41145cd33" title="used to create a TCP/UDP socket server ready to accept connections" alt="" coords="584,42,731,69"/>
+<area shape="rect" id="node5" href="$d6/dfd/cli_2main_8c.html#a990190006e127641a32a5d37d2368fce" title=" " alt="" coords="375,42,536,69"/>
+<area shape="rect" id="node6" href="$d6/dfd/cli_2main_8c.html#a3cb566e1d17d9a6da5a87bb940f11a26" title=" " alt="" coords="108,42,327,69"/>
+<area shape="rect" id="node7" href="$d6/dfd/cli_2main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,42,60,69"/>
 </map>

@@ -130,16 +130,16 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d2/da6/multicodec_8h.html#ae8f25d9186ed7d247e851221a27cf231",
-"d5/da6/set_8c.html#a6b8d516b630ace3af26d58de7f9dd827",
-"d7/dda/tinycbor_2cbor_8h.html#a76e9c9acc63dd940da4ab7e91309f7b5adf6429cf3d900727c7c8e54625d8660b",
-"d7/ded/codecs_8h.html#a463978c916f00b3b52e26a1797b0bbd1",
-"d7/ded/codecs_8h.html#ad486f26e704a76393147d0ed1d5b4314",
-"d9/d2c/cborinternal__p_8h.html#adc29c2ff13d900c2f185ee95427fb06ca1cabc887a5c8c2d42b188c1f1b01ef46",
-"da/dd8/colors_8h.html#aa1fa3472b5bc15e07fe0d5ce481617a1",
-"dc/d0a/messages_8c.html#acfaa89a1a9a81a97550067f36eeb8c48",
-"dc/d80/protoutils_8c.html#a07260974981a08120ce7d210952aa0b9",
-"df/dbd/include_2protobuf_2protobuf_8h.html#a5d85ab711fbe0beb180ae073370b691e"
+"d3/d12/multihash_8h.html",
+"d5/dca/protocols_8h.html",
+"d7/dda/tinycbor_2cbor_8h.html#ade6fa23a8fb3df9db434c69ca05d5ec1af3a84052cf873056a78348757273075f",
+"d7/ded/codecs_8h.html#a609b50e132b2e4c24c46f193844836bb",
+"d7/ded/codecs_8h.html#af6686dfa5d9d479861f1e10727ac856f",
+"d9/d70/group___cbor_encoding.html#ga923a63a01dae47a3dd46f74a3f744008",
+"db/d08/base32_8c.html#a7b03b543c865173ec643b3c2ee4fb08f",
+"dc/d6a/src_2protobuf_2protobuf_8h_source.html",
+"dd/d56/struct_cbor_value.html#a0597b9f5fce9bb4d86f94bcf4f984e88",
+"globals.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

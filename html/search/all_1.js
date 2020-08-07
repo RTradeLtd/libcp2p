@@ -175,6 +175,5 @@ var searchData=
   ['array_5fto_5fjson_187',['array_to_json',['../de/d6b/group___cbor_to_json.html#ga30877718ddc416a52fc2717208da9abb',1,'cbortojson.c']]],
   ['arraytype_188',['ArrayType',['../d9/d2c/cborinternal__p_8h.html#a58af37618f95513c8889bfd211b6167ea1a61178bfe6eb8f88743e31e8ca00bac',1,'cborinternal_p.h']]],
   ['ascii2bits_189',['ASCII2bits',['../dc/d80/protoutils_8c.html#ae619e48219615dd45bd86f0a259fb407',1,'ASCII2bits(char ch):&#160;protoutils.c'],['../df/d48/protoutils_8h.html#ae619e48219615dd45bd86f0a259fb407',1,'ASCII2bits(char ch):&#160;protoutils.c']]],
-  ['assert_5f_5f_190',['assert__',['../d8/dca/multiaddr__test_8c.html#a58d40919f8cb58567dbefcaf873b363e',1,'multiaddr_test.c']]],
-  ['author_191',['author',['../d5/d89/namespaceconf.html#a637c239d256432248aa8d9f3ab0b8c52',1,'conf']]]
+  ['author_190',['author',['../d5/d89/namespaceconf.html#a637c239d256432248aa8d9f3ab0b8c52',1,'conf']]]
 ];

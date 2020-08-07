@@ -1,12 +1,9 @@
 <map id="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/ecdsa.h" name="/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/crypto/ecdsa.h">
-<area shape="rect" id="node1" title="provides ECDSA cryptography support" alt="" coords="335,5,513,61"/>
-<area shape="rect" id="node2" href="$d5/d29/crypto__test_8c.html" title=" " alt="" coords="5,117,184,173"/>
-<area shape="rect" id="node3" href="$dc/d09/ecdsa_8c.html" title=" " alt="" coords="209,117,386,173"/>
-<area shape="rect" id="node4" href="$d1/dba/testutils_8c.html" title=" " alt="" coords="249,228,426,284"/>
-<area shape="rect" id="node5" href="$d9/d26/socket__server_8h.html" title="used to create a tcp/udp socket server listening on multiaddrs" alt="" coords="805,109,982,180"/>
-<area shape="rect" id="node9" href="$d3/d1a/testutils_8h.html" title=" " alt="" coords="461,117,659,173"/>
-<area shape="rect" id="node6" href="$d6/dfd/cli_2main_8c.html" title=" " alt="" coords="909,228,1086,284"/>
-<area shape="rect" id="node7" href="$d1/dfc/socket__server_8c.html" title="used to create a tcp/udp socket server listening on multiaddrs" alt="" coords="1110,228,1317,284"/>
-<area shape="rect" id="node8" href="$d2/d09/socket__test_8c.html" title=" " alt="" coords="694,228,885,284"/>
-<area shape="rect" id="node10" href="$d1/d8e/peerstore__test_8c.html" title=" " alt="" coords="450,228,670,284"/>
+<area shape="rect" id="node1" title="provides ECDSA cryptography support" alt="" coords="200,5,377,61"/>
+<area shape="rect" id="node2" href="$dc/d09/ecdsa_8c.html" title=" " alt="" coords="5,117,183,173"/>
+<area shape="rect" id="node3" href="$d1/dba/testutils_8c.html" title=" " alt="" coords="200,228,377,284"/>
+<area shape="rect" id="node4" href="$d9/d26/socket__server_8h.html" title="used to create a tcp/udp socket server listening on multiaddrs" alt="" coords="480,109,657,180"/>
+<area shape="rect" id="node7" href="$d3/d1a/testutils_8h.html" title=" " alt="" coords="257,117,456,173"/>
+<area shape="rect" id="node5" href="$d6/dfd/cli_2main_8c.html" title=" " alt="" coords="440,228,617,284"/>
+<area shape="rect" id="node6" href="$d1/dfc/socket__server_8c.html" title="used to create a tcp/udp socket server listening on multiaddrs" alt="" coords="641,228,848,284"/>
 </map>

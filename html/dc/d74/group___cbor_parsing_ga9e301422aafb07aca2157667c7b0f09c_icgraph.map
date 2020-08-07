@@ -1,52 +1,52 @@
 <map id="preparse_next_value_nodecrement" name="preparse_next_value_nodecrement">
-<area shape="rect" id="node1" title=" " alt="" coords="2293,441,2452,482"/>
-<area shape="rect" id="node2" href="$dc/d74/group___cbor_parsing.html#ga0c8a61e484973272f34b00cfbef9ddfd" title=" " alt="" coords="1443,398,1646,424"/>
-<area shape="rect" id="node39" href="$dc/d74/group___cbor_parsing.html#gac507e83b72711c29ddd53d6c7f596991" title=" " alt="" coords="2087,474,2245,500"/>
-<area shape="rect" id="node3" href="$dc/d74/group___cbor_parsing.html#ga3a78e3668bd0c680e52585d6fe3753f5" title=" " alt="" coords="1235,136,1379,163"/>
-<area shape="rect" id="node5" href="$d5/d48/messages_8h.html#ac71672fe68fd77c429de389ecff484e3" title="used to cbor decode encoded data returning an instance of message_hello_t" alt="" coords="785,238,939,264"/>
-<area shape="rect" id="node12" href="$d5/d48/messages_8h.html#aefbe730cee81e7a0a12d50291e9cf331" title="used to cbor decode data into a message_t instance" alt="" coords="771,292,953,319"/>
-<area shape="rect" id="node17" href="$dc/d74/group___cbor_parsing.html#gaf145f4513ce734265d0128429cc4d5bd" title=" " alt="" coords="782,60,942,101"/>
-<area shape="rect" id="node19" href="$de/de5/key_8h.html#a8c593674228430737badfa42408ec292" title="used to cbor data a chunk of data" alt="" coords="784,534,940,576"/>
-<area shape="rect" id="node22" href="$dc/d74/group___cbor_parsing.html#ga02bd54c869993e795b4a9d923e922a38" title=" " alt="" coords="1248,474,1367,500"/>
-<area shape="rect" id="node26" href="$de/d6b/group___cbor_to_json.html#gaa89444d97dee28c6d07d48b3428ab9c1" title=" " alt="" coords="1251,822,1363,848"/>
-<area shape="rect" id="node32" href="$d1/d5f/group___cbor_pretty.html#ga6c7b516310321617d204c3cc95690715" title=" " alt="" coords="1245,592,1369,619"/>
-<area shape="rect" id="node4" href="$dc/d74/group___cbor_parsing.html#gae2ede5aacd59f04437c24ef8ca2f449a" title=" " alt="" coords="1009,187,1164,214"/>
-<area shape="rect" id="node18" href="$dc/d74/group___cbor_parsing.html#ga19b60bc2cff3d3ffcc81adbcad09fd58" title=" " alt="" coords="785,172,939,213"/>
-<area shape="rect" id="node6" href="$d9/d26/socket__server_8h.html#a522916191d4db90bdf14749780cfb826" title="handles receiving a hello protocol message from another peer" alt="" coords="554,183,719,210"/>
-<area shape="rect" id="node11" href="$d2/d09/socket__test_8c.html#a9f13356713b2addca5c16f8c206b7dae" title=" " alt="" coords="108,230,295,272"/>
-<area shape="rect" id="node7" href="$d9/d26/socket__server_8h.html#a3bc7eef996be3f8c2118e4d1a523c8e1" title="handles receiving an rpc message from another peer" alt="" coords="347,180,499,207"/>
-<area shape="rect" id="node8" href="$d6/dfd/cli_2main_8c.html#a990190006e127641a32a5d37d2368fce" title=" " alt="" coords="121,179,282,206"/>
-<area shape="rect" id="node9" href="$d2/d09/socket__test_8c.html#adae5b35e4a72cde364e65f04fc883646" title="in this we reuse the thread pool to start the socket server listening process, but you will likely wa..." alt="" coords="112,128,291,155"/>
-<area shape="rect" id="node10" href="$d2/d09/socket__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,238,60,264"/>
-<area shape="rect" id="node13" href="$d5/d48/messages_8h.html#a1f1ec655db4b7701cb26df9ebd709780" title="used to handle receiving data from a TCP socket" alt="" coords="576,292,697,319"/>
-<area shape="rect" id="node16" href="$d2/d09/socket__test_8c.html#ac67938c5b1868f7a249f59ad7d6e8ba4" title=" " alt="" coords="343,352,503,393"/>
-<area shape="rect" id="node14" href="$d6/dfd/cli_2main_8c.html#ae551cfc8ab65a1d29191ffa67e22fd11" title=" " alt="" coords="345,294,501,320"/>
-<area shape="rect" id="node15" href="$d6/dfd/cli_2main_8c.html#a6851f4abbf7ba4c7bb3b987c10d48584" title=" " alt="" coords="112,296,291,337"/>
-<area shape="rect" id="node20" href="$d5/d29/crypto__test_8c.html#a1401558d7902d15576f5aec9958a5d0e" title=" " alt="" coords="551,534,723,576"/>
-<area shape="rect" id="node21" href="$d5/d29/crypto__test_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="395,542,450,568"/>
-<area shape="rect" id="node23" href="$dc/d74/group___cbor_parsing.html#ga4d114f26cbc9c40e3424a783a0c08e7e" title=" " alt="" coords="1010,440,1163,467"/>
-<area shape="rect" id="node24" href="$dc/d74/group___cbor_parsing.html#ga583ed2812c0b125ea8f5d4d9fa0874aa" title=" " alt="" coords="1015,390,1158,416"/>
-<area shape="rect" id="node25" href="$dc/d74/group___cbor_parsing.html#ga85b8acfad1b3ec6e1c8c88df30b1a433" title=" " alt="" coords="1035,491,1138,518"/>
-<area shape="rect" id="node27" href="$de/d6b/group___cbor_to_json.html#ga30877718ddc416a52fc2717208da9abb" title=" " alt="" coords="1031,811,1142,838"/>
-<area shape="rect" id="node28" href="$de/d6b/group___cbor_to_json.html#ga558485bab0ebcb2646e7669d13861d79" title=" " alt="" coords="1013,862,1160,904"/>
-<area shape="rect" id="node30" href="$de/d6b/group___cbor_to_json.html#ga1eea7808811043f291c3d39fd866fcac" title=" " alt="" coords="370,940,475,967"/>
-<area shape="rect" id="node31" href="$de/d6b/group___cbor_to_json.html#ga1eed871d0a3cebbaa609a99df7b4f996" title=" " alt="" coords="1005,1003,1169,1030"/>
-<area shape="rect" id="node29" href="$de/d6b/group___cbor_to_json.html#ga3f2ce7eadf9a355654186166d24e69cf" title=" " alt="" coords="789,874,935,900"/>
-<area shape="rect" id="node33" href="$d1/d5f/group___cbor_pretty.html#gab43d4414c47f00c74262e0687e23dcda" title=" " alt="" coords="1007,745,1166,786"/>
-<area shape="rect" id="node38" href="$d1/d5f/group___cbor_pretty.html#gaa00a31933d869e6d622ce412d6346184" title=" " alt="" coords="1012,592,1161,619"/>
-<area shape="rect" id="node34" href="$d7/dda/tinycbor_2cbor_8h.html#aef4d5dc4b2bfaf458e82e350509f9c30" title=" " alt="" coords="783,808,941,849"/>
-<area shape="rect" id="node36" href="$d7/dda/tinycbor_2cbor_8h.html#adba89091b9618b1b6daa22284321cce7" title=" " alt="" coords="783,742,941,784"/>
-<area shape="rect" id="node35" href="$de/d6b/group___cbor_to_json.html#ga599095a4a3ddd438f8d8ec91c498b246" title=" " alt="" coords="566,848,707,875"/>
-<area shape="rect" id="node37" href="$d7/dda/tinycbor_2cbor_8h.html#a0529f04ea9045bbd351ea03ee0a21b7b" title=" " alt="" coords="557,750,716,776"/>
-<area shape="rect" id="node40" href="$dc/d74/group___cbor_parsing.html#gae9c049502ae29ce7963e6c0c830756a0" title=" " alt="" coords="1709,499,1843,526"/>
-<area shape="rect" id="node45" href="$dc/d74/group___cbor_parsing.html#ga51e02f0b62bc864fe8cf290988936e15" title=" " alt="" coords="1443,550,1647,576"/>
-<area shape="rect" id="node46" href="$dc/d74/group___cbor_parsing.html#ga24705c019707220bf7e57bde322ac8ea" title=" " alt="" coords="1905,448,2039,475"/>
-<area shape="rect" id="node41" href="$dc/d74/group___cbor_parsing.html#gac0701f791608589ddfff0bdb8acee7b4" title=" " alt="" coords="1467,601,1622,642"/>
-<area shape="rect" id="node42" href="$dc/d74/group___cbor_parsing.html#ga2b805f0f440905a7ba4f93b3569bb97b" title=" " alt="" coords="1230,288,1385,315"/>
-<area shape="rect" id="node44" href="$de/d6b/group___cbor_to_json.html#ga385ef724e814c16776c8031f23f40dc3" title=" " alt="" coords="1240,991,1375,1018"/>
-<area shape="rect" id="node43" href="$dc/d74/group___cbor_parsing.html#gac8f08df74d65c8454528824a667550ec" title=" " alt="" coords="1001,70,1172,112"/>
-<area shape="rect" id="node47" href="$dc/d74/group___cbor_parsing.html#ga084482fb62455e3770a4dff15679c0a4" title=" " alt="" coords="1459,466,1631,508"/>
-<area shape="rect" id="node48" href="$dc/d74/group___cbor_parsing.html#ga2dc05ef57e7e0380ae199cac8365e1df" title=" " alt="" coords="1695,60,1857,87"/>
-<area shape="rect" id="node49" href="$dc/d74/group___cbor_parsing.html#ga126e0ea555950684450f57dab407bc26" title=" " alt="" coords="1453,86,1636,112"/>
-<area shape="rect" id="node50" href="$d7/dda/tinycbor_2cbor_8h.html#ad58717fd11cae32726724aef31446e58" title=" " alt="" coords="1220,86,1395,112"/>
+<area shape="rect" id="node1" title=" " alt="" coords="2524,523,2683,564"/>
+<area shape="rect" id="node2" href="$dc/d74/group___cbor_parsing.html#ga0c8a61e484973272f34b00cfbef9ddfd" title=" " alt="" coords="1674,505,1877,531"/>
+<area shape="rect" id="node35" href="$dc/d74/group___cbor_parsing.html#gac507e83b72711c29ddd53d6c7f596991" title=" " alt="" coords="2317,555,2476,582"/>
+<area shape="rect" id="node3" href="$dc/d74/group___cbor_parsing.html#ga3a78e3668bd0c680e52585d6fe3753f5" title=" " alt="" coords="1466,297,1610,323"/>
+<area shape="rect" id="node5" href="$d5/d48/messages_8h.html#ac71672fe68fd77c429de389ecff484e3" title="used to cbor decode encoded data returning an instance of message_hello_t" alt="" coords="1015,158,1170,185"/>
+<area shape="rect" id="node11" href="$d5/d48/messages_8h.html#aefbe730cee81e7a0a12d50291e9cf331" title="used to cbor decode data into a message_t instance" alt="" coords="1001,107,1184,134"/>
+<area shape="rect" id="node15" href="$dc/d74/group___cbor_parsing.html#gaf145f4513ce734265d0128429cc4d5bd" title=" " alt="" coords="1013,825,1173,867"/>
+<area shape="rect" id="node17" href="$de/de5/key_8h.html#a8c593674228430737badfa42408ec292" title="used to cbor data a chunk of data" alt="" coords="1015,239,1171,280"/>
+<area shape="rect" id="node18" href="$dc/d74/group___cbor_parsing.html#ga02bd54c869993e795b4a9d923e922a38" title=" " alt="" coords="1479,691,1597,718"/>
+<area shape="rect" id="node22" href="$de/d6b/group___cbor_to_json.html#gaa89444d97dee28c6d07d48b3428ab9c1" title=" " alt="" coords="1482,521,1594,547"/>
+<area shape="rect" id="node28" href="$d1/d5f/group___cbor_pretty.html#ga6c7b516310321617d204c3cc95690715" title=" " alt="" coords="1476,843,1600,870"/>
+<area shape="rect" id="node4" href="$dc/d74/group___cbor_parsing.html#gae2ede5aacd59f04437c24ef8ca2f449a" title=" " alt="" coords="1240,297,1395,323"/>
+<area shape="rect" id="node16" href="$dc/d74/group___cbor_parsing.html#ga19b60bc2cff3d3ffcc81adbcad09fd58" title=" " alt="" coords="1016,304,1169,345"/>
+<area shape="rect" id="node6" href="$d9/d26/socket__server_8h.html#a522916191d4db90bdf14749780cfb826" title="handles receiving a hello protocol message from another peer" alt="" coords="788,158,953,185"/>
+<area shape="rect" id="node7" href="$d9/d26/socket__server_8h.html#a3bc7eef996be3f8c2118e4d1a523c8e1" title="handles receiving an rpc message from another peer" alt="" coords="586,158,738,185"/>
+<area shape="rect" id="node8" href="$d6/dfd/cli_2main_8c.html#a990190006e127641a32a5d37d2368fce" title=" " alt="" coords="375,159,536,186"/>
+<area shape="rect" id="node9" href="$d6/dfd/cli_2main_8c.html#a3cb566e1d17d9a6da5a87bb940f11a26" title=" " alt="" coords="108,163,327,190"/>
+<area shape="rect" id="node10" href="$d6/dfd/cli_2main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,134,60,161"/>
+<area shape="rect" id="node12" href="$d5/d48/messages_8h.html#a1f1ec655db4b7701cb26df9ebd709780" title="used to handle receiving data from a TCP socket" alt="" coords="810,107,931,134"/>
+<area shape="rect" id="node13" href="$d6/dfd/cli_2main_8c.html#ae551cfc8ab65a1d29191ffa67e22fd11" title=" " alt="" coords="584,107,740,134"/>
+<area shape="rect" id="node14" href="$d6/dfd/cli_2main_8c.html#a6851f4abbf7ba4c7bb3b987c10d48584" title=" " alt="" coords="128,97,307,139"/>
+<area shape="rect" id="node19" href="$dc/d74/group___cbor_parsing.html#ga4d114f26cbc9c40e3424a783a0c08e7e" title=" " alt="" coords="1241,641,1394,667"/>
+<area shape="rect" id="node20" href="$dc/d74/group___cbor_parsing.html#ga583ed2812c0b125ea8f5d4d9fa0874aa" title=" " alt="" coords="1246,742,1389,769"/>
+<area shape="rect" id="node21" href="$dc/d74/group___cbor_parsing.html#ga85b8acfad1b3ec6e1c8c88df30b1a433" title=" " alt="" coords="1266,691,1369,718"/>
+<area shape="rect" id="node23" href="$de/d6b/group___cbor_to_json.html#ga30877718ddc416a52fc2717208da9abb" title=" " alt="" coords="1262,398,1373,425"/>
+<area shape="rect" id="node24" href="$de/d6b/group___cbor_to_json.html#ga558485bab0ebcb2646e7669d13861d79" title=" " alt="" coords="1244,449,1391,491"/>
+<area shape="rect" id="node26" href="$de/d6b/group___cbor_to_json.html#ga1eea7808811043f291c3d39fd866fcac" title=" " alt="" coords="609,527,715,554"/>
+<area shape="rect" id="node27" href="$de/d6b/group___cbor_to_json.html#ga1eed871d0a3cebbaa609a99df7b4f996" title=" " alt="" coords="1235,590,1399,617"/>
+<area shape="rect" id="node25" href="$de/d6b/group___cbor_to_json.html#ga3f2ce7eadf9a355654186166d24e69cf" title=" " alt="" coords="1019,457,1166,483"/>
+<area shape="rect" id="node29" href="$d1/d5f/group___cbor_pretty.html#gab43d4414c47f00c74262e0687e23dcda" title=" " alt="" coords="1238,996,1397,1037"/>
+<area shape="rect" id="node34" href="$d1/d5f/group___cbor_pretty.html#gaa00a31933d869e6d622ce412d6346184" title=" " alt="" coords="1243,843,1392,870"/>
+<area shape="rect" id="node30" href="$d7/dda/tinycbor_2cbor_8h.html#aef4d5dc4b2bfaf458e82e350509f9c30" title=" " alt="" coords="1013,996,1172,1037"/>
+<area shape="rect" id="node32" href="$d7/dda/tinycbor_2cbor_8h.html#adba89091b9618b1b6daa22284321cce7" title=" " alt="" coords="1013,931,1172,972"/>
+<area shape="rect" id="node31" href="$de/d6b/group___cbor_to_json.html#ga599095a4a3ddd438f8d8ec91c498b246" title=" " alt="" coords="800,995,941,1022"/>
+<area shape="rect" id="node33" href="$d7/dda/tinycbor_2cbor_8h.html#a0529f04ea9045bbd351ea03ee0a21b7b" title=" " alt="" coords="791,938,950,965"/>
+<area shape="rect" id="node36" href="$dc/d74/group___cbor_parsing.html#gae9c049502ae29ce7963e6c0c830756a0" title=" " alt="" coords="1939,555,2074,582"/>
+<area shape="rect" id="node41" href="$dc/d74/group___cbor_parsing.html#ga51e02f0b62bc864fe8cf290988936e15" title=" " alt="" coords="1673,307,1877,334"/>
+<area shape="rect" id="node42" href="$dc/d74/group___cbor_parsing.html#ga24705c019707220bf7e57bde322ac8ea" title=" " alt="" coords="2136,774,2269,801"/>
+<area shape="rect" id="node37" href="$dc/d74/group___cbor_parsing.html#gac0701f791608589ddfff0bdb8acee7b4" title=" " alt="" coords="1698,633,1853,675"/>
+<area shape="rect" id="node38" href="$dc/d74/group___cbor_parsing.html#ga2b805f0f440905a7ba4f93b3569bb97b" title=" " alt="" coords="1461,894,1615,921"/>
+<area shape="rect" id="node40" href="$de/d6b/group___cbor_to_json.html#ga385ef724e814c16776c8031f23f40dc3" title=" " alt="" coords="1471,641,1605,667"/>
+<area shape="rect" id="node39" href="$dc/d74/group___cbor_parsing.html#gac8f08df74d65c8454528824a667550ec" title=" " alt="" coords="1232,1083,1403,1124"/>
+<area shape="rect" id="node43" href="$dc/d74/group___cbor_parsing.html#ga084482fb62455e3770a4dff15679c0a4" title=" " alt="" coords="1689,767,1861,808"/>
+<area shape="rect" id="node44" href="$dc/d74/group___cbor_parsing.html#ga2dc05ef57e7e0380ae199cac8365e1df" title=" " alt="" coords="1925,974,2088,1001"/>
+<area shape="rect" id="node45" href="$dc/d74/group___cbor_parsing.html#ga126e0ea555950684450f57dab407bc26" title=" " alt="" coords="1684,999,1867,1026"/>
+<area shape="rect" id="node46" href="$d7/dda/tinycbor_2cbor_8h.html#ad58717fd11cae32726724aef31446e58" title=" " alt="" coords="1451,1178,1625,1205"/>
+<area shape="rect" id="node48" href="$dc/d74/group___cbor_parsing.html#gad5b2dd803244946b15603e09ce147044" title=" " alt="" coords="1459,996,1617,1037"/>
+<area shape="rect" id="node49" href="$dc/d74/group___cbor_parsing.html#gac5204b942fd5e6e1d8064262f3ce96b3" title=" " alt="" coords="1234,180,1401,221"/>
+<area shape="rect" id="node50" href="$dc/d74/group___cbor_parsing.html#ga02ec0b5c8346f407cf5def566ddcf5ae" title=" " alt="" coords="1456,1061,1620,1103"/>
+<area shape="rect" id="node47" href="$d7/dda/tinycbor_2cbor_8h.html#adf17ef706737dc8c30d7a424d6bfc4b9" title=" " alt="" coords="1237,1171,1397,1212"/>
 </map>

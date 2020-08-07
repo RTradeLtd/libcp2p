@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['zcash_5fblock_1760',['ZCASH_BLOCK',['../d7/ded/codecs_8h.html#aa9199bfc431af403a02029882d82a693',1,'codecs.h']]],
-  ['zcash_5ftx_1761',['ZCASH_TX',['../d7/ded/codecs_8h.html#af6686dfa5d9d479861f1e10727ac856f',1,'codecs.h']]],
-  ['zeronet_1762',['ZERONET',['../d7/ded/codecs_8h.html#acd0f5ba1712c9f389940c724abbaa0cf',1,'codecs.h']]]
+  ['zcash_5fblock_1703',['ZCASH_BLOCK',['../d7/ded/codecs_8h.html#aa9199bfc431af403a02029882d82a693',1,'codecs.h']]],
+  ['zcash_5ftx_1704',['ZCASH_TX',['../d7/ded/codecs_8h.html#af6686dfa5d9d479861f1e10727ac856f',1,'codecs.h']]],
+  ['zeronet_1705',['ZERONET',['../d7/ded/codecs_8h.html#acd0f5ba1712c9f389940c724abbaa0cf',1,'codecs.h']]]
 ];
