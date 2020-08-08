@@ -64,7 +64,8 @@ int get_new_socket(thread_logger *thl, addr_info *bind_address,
         socket(bind_address->ai_family, bind_address->ai_socktype,
                bind_address->ai_protocol);
     if (listen_socket_num <= 0) {
-        thl->log(thl, 0, "socket creation failed", LOG_LEVELS_ERROR);
+        thl->log(thl, 0, "socket creation failed", LOG_LEVELS_ERROR, __FILE__,
+                 __LINE__);
         return -1;
     }
     int one;
@@ -80,31 +81,35 @@ int get_new_socket(thread_logger *thl, addr_info *bind_address,
                                 sizeof(int));
                 if (rc != 0) {
                     thl->log(thl, 0, "failed to set socket reuse addr",
-                             LOG_LEVELS_ERROR);
+                             LOG_LEVELS_ERROR, __FILE__, __LINE__);
                     return -1;
                 }
-                thl->log(thl, 0, "set socket opt REUSEADDR", LOG_LEVELS_INFO);
+                thl->log(thl, 0, "set socket opt REUSEADDR", LOG_LEVELS_INFO,
+                         __FILE__, __LINE__);
                 break;
             case BLOCK:
                 passed = set_socket_blocking_status(listen_socket_num, true);
                 if (passed == false) {
                     thl->log(thl, 0, "failed to set socket blocking mode",
-                             LOG_LEVELS_ERROR);
+                             LOG_LEVELS_ERROR, __FILE__, __LINE__);
                     return -1;
                 }
-                thl->log(thl, 0, "set socket opt BLOCK", LOG_LEVELS_INFO);
+                thl->log(thl, 0, "set socket opt BLOCK", LOG_LEVELS_INFO, __FILE__,
+                         __LINE__);
                 break;
             case NOBLOCK:
                 passed = set_socket_blocking_status(listen_socket_num, false);
                 if (passed == false) {
                     thl->log(thl, 0, "failed to set socket blocking mode",
-                             LOG_LEVELS_ERROR);
+                             LOG_LEVELS_ERROR, __FILE__, __LINE__);
                     return -1;
                 }
-                thl->log(thl, 0, "set socket opt NOBLOCK", LOG_LEVELS_INFO);
+                thl->log(thl, 0, "set socket opt NOBLOCK", LOG_LEVELS_INFO, __FILE__,
+                         __LINE__);
                 break;
             default:
-                thl->log(thl, 0, "invalid socket option", LOG_LEVELS_ERROR);
+                thl->log(thl, 0, "invalid socket option", LOG_LEVELS_ERROR, __FILE__,
+                         __LINE__);
                 return -1;
         }
     }
@@ -126,8 +131,8 @@ int get_new_socket(thread_logger *thl, addr_info *bind_address,
     // binds the address to the socket
     bind(listen_socket_num, bind_address->ai_addr, bind_address->ai_addrlen);
     if (errno != 0) {
-        thl->logf(thl, 0, LOG_LEVELS_ERROR, "socket bind failed with error %s",
-                  strerror(errno));
+        thl->logf(thl, 0, LOG_LEVELS_ERROR, __FILE__, __LINE__,
+                  "socket bind failed with error %s", strerror(errno));
         return -1;
     }
     return listen_socket_num;
@@ -195,12 +200,13 @@ bool recv_or_send_failed(thread_logger *thl, int rc) {
     switch (rc) {
         case 0:
             if (thl != NULL) {
-                thl->log(thl, 0, "client disconnected", LOG_LEVELS_DEBUG);
+                thl->log(thl, 0, "client disconnected", LOG_LEVELS_DEBUG, __FILE__,
+                         __LINE__);
             }
             return true;
         case -1:
             if (thl != NULL) {
-                thl->logf(thl, 0, LOG_LEVELS_DEBUG,
+                thl->logf(thl, 0, LOG_LEVELS_DEBUG, __FILE__, __LINE__,
                           "error encountered during read %s", strerror(errno));
             }
             return true;

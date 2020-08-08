@@ -72,7 +72,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
     }
 
     if (config->private_key_path == NULL) {
-        thl->log(thl, 0, "no private key path in config", LOG_LEVELS_ERROR);
+        thl->log(thl, 0, "no private key path in config", LOG_LEVELS_ERROR, __FILE__,
+                 __LINE__);
         return NULL;
     }
 
@@ -80,7 +81,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
 
         addr_info *bind_address = multi_addr_to_addr_info(config->addrs[i]);
         if (bind_address == NULL) {
-            thl->log(thl, 0, "failed to get addr info", LOG_LEVELS_ERROR);
+            thl->log(thl, 0, "failed to get addr info", LOG_LEVELS_ERROR, __FILE__,
+                     __LINE__);
             goto EXIT;
         }
 
@@ -97,14 +99,15 @@ socket_server_t *new_socket_server(thread_logger *thl,
                 get_new_socket(thl, bind_address, sock_opts, num_opts, false, true);
             if (tcp_socket_num == -1) {
                 freeaddrinfo(bind_address);
-                thl->log(thl, 0, "failed to get new tcp socket", LOG_LEVELS_ERROR);
+                thl->log(thl, 0, "failed to get new tcp socket", LOG_LEVELS_ERROR,
+                         __FILE__, __LINE__);
                 goto EXIT;
             }
 
             listen(tcp_socket_num, config->max_connections);
             if (errno != 0) {
                 freeaddrinfo(bind_address);
-                thl->logf(thl, 0, LOG_LEVELS_ERROR,
+                thl->logf(thl, 0, LOG_LEVELS_ERROR, __FILE__, __LINE__,
                           "failed to start listening on tcp socket with error %s",
                           strerror(errno));
                 goto EXIT;
@@ -127,7 +130,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
 
     socket_server_t *server = calloc(1, sizeof(socket_server_t));
     if (server == NULL) {
-        thl->log(thl, 0, "failed to calloc socket server", LOG_LEVELS_ERROR);
+        thl->log(thl, 0, "failed to calloc socket server", LOG_LEVELS_ERROR,
+                 __FILE__, __LINE__);
         goto EXIT;
     }
 
@@ -137,7 +141,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
     // initialize our peerstore
     server->pstore = peerstore_new_peerstore((size_t)config->max_peers);
     if (server->pstore == NULL) {
-        thl->log(thl, 0, "failed to create peerstore", LOG_LEVELS_ERROR);
+        thl->log(thl, 0, "failed to create peerstore", LOG_LEVELS_ERROR, __FILE__,
+                 __LINE__);
         free(server);
         goto EXIT;
     }
@@ -146,7 +151,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
     server->private_key =
         libp2p_crypto_ecdsa_private_key_from_file(config->private_key_path);
     if (server->private_key == NULL) {
-        thl->log(thl, 0, "failed to load private key", LOG_LEVELS_ERROR);
+        thl->log(thl, 0, "failed to load private key", LOG_LEVELS_ERROR, __FILE__,
+                 __LINE__);
         peerstore_free_peerstore(server->pstore);
         free(server);
         goto EXIT;
@@ -155,7 +161,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
     // load our public key
     server->public_key = libp2p_crypto_ecdsa_keypair_public(server->private_key);
     if (server->public_key == NULL) {
-        thl->log(thl, 0, "failed to load public key", LOG_LEVELS_ERROR);
+        thl->log(thl, 0, "failed to load public key", LOG_LEVELS_ERROR, __FILE__,
+                 __LINE__);
         peerstore_free_peerstore(server->pstore);
         libp2p_crypto_ecdsa_free(server->private_key);
         free(server);
@@ -165,7 +172,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
     // load our peer identifier
     server->peer_id = libp2p_crypto_ecdsa_keypair_peerid(server->private_key);
     if (server->peer_id == NULL) {
-        thl->log(thl, 0, "failed to load public key", LOG_LEVELS_ERROR);
+        thl->log(thl, 0, "failed to load public key", LOG_LEVELS_ERROR, __FILE__,
+                 __LINE__);
         peerstore_free_peerstore(server->pstore);
         libp2p_crypto_ecdsa_free(server->private_key);
         libp2p_crypto_public_key_free(server->public_key);
@@ -181,7 +189,8 @@ socket_server_t *new_socket_server(thread_logger *thl,
     server->task_func_tcp = config->fn_tcp;
     server->thl = thl;
     pthread_mutex_init(&shutdown_mutex, NULL);
-    server->thl->log(server->thl, 0, "initialized server", LOG_LEVELS_INFO);
+    server->thl->log(server->thl, 0, "initialized server", LOG_LEVELS_INFO, __FILE__,
+                     __LINE__);
 
     return server;
 
@@ -199,21 +208,22 @@ EXIT:
 /*! @brief terminates a server and frees up resources associated with it
  */
 void free_socket_server(socket_server_t *srv) {
-    srv->thl->log(srv->thl, 0, "closing sockets", LOG_LEVELS_INFO);
+    srv->thl->log(srv->thl, 0, "closing sockets", LOG_LEVELS_INFO, __FILE__,
+                  __LINE__);
 
     for (int i = 0; i < srv->max_socket_num; i++) {
 
         if (FD_ISSET(i, &srv->tcp_socket_set)) {
 
-            srv->thl->logf(srv->thl, 0, LOG_LEVELS_INFO,
+            srv->thl->logf(srv->thl, 0, LOG_LEVELS_INFO, __FILE__, __LINE__,
                            "closing tcp socket number %i", i);
 
             close(i);
         }
     }
 
-    srv->thl->log(srv->thl, 0, "waiting for existing tasks to exit",
-                  LOG_LEVELS_INFO);
+    srv->thl->log(srv->thl, 0, "waiting for existing tasks to exit", LOG_LEVELS_INFO,
+                  __FILE__, __LINE__);
 
     thpool_destroy(srv->thpool);
 
@@ -227,7 +237,8 @@ void free_socket_server(socket_server_t *srv) {
 
     libp2p_peer_id_free(srv->peer_id);
 
-    srv->thl->log(srv->thl, 0, "all taskes exited, goodbye", LOG_LEVELS_INFO);
+    srv->thl->log(srv->thl, 0, "all taskes exited, goodbye", LOG_LEVELS_INFO,
+                  __FILE__, __LINE__);
 
     clear_thread_logger(srv->thl);
 
@@ -252,7 +263,7 @@ void start_socket_server(socket_server_t *srv) {
     for (;;) {
         if (do_shutdown == true) {
             srv->thl->log(srv->thl, 0, "shutdown signal received, exiting",
-                          LOG_LEVELS_INFO);
+                          LOG_LEVELS_INFO, __FILE__, __LINE__);
             return;
         }
 
@@ -267,7 +278,7 @@ void start_socket_server(socket_server_t *srv) {
                 sleep(0.50);
                 continue;
             case -1:
-                srv->thl->logf(srv->thl, 0, LOG_LEVELS_DEBUG,
+                srv->thl->logf(srv->thl, 0, LOG_LEVELS_DEBUG, __FILE__, __LINE__,
                                "an error occured while running select: %s",
                                strerror(errno));
                 sleep(0.50);
@@ -346,8 +357,8 @@ client_conn_t *accept_client_conn(socket_server_t *srv, int socket_num) {
     connection->socket_number = client_socket_num;
     if (srv->thl->debug == true) {
         char *addr_inf = get_name_info((sock_addr *)&addr_temp);
-        srv->thl->logf(srv->thl, 0, LOG_LEVELS_DEBUG, "accepted new connection: %s",
-                       addr_inf);
+        srv->thl->logf(srv->thl, 0, LOG_LEVELS_DEBUG, __FILE__, __LINE__,
+                       "accepted new connection: %s", addr_inf);
         free(addr_inf);
     }
     return connection;
@@ -424,13 +435,13 @@ void handle_inbound_rpc(void *data) {
                     hdata->srv->thl->log(
                         hdata->srv->thl, 0,
                         "failed to start secure connection negotiation",
-                        LOG_LEVELS_DEBUG);
+                        LOG_LEVELS_DEBUG, __FILE__, __LINE__);
                     free_message_t(msg);
                     goto RETURN;
                 } else {
                     hdata->srv->thl->log(hdata->srv->thl, 0,
                                          "started secure connection negotiation",
-                                         LOG_LEVELS_DEBUG);
+                                         LOG_LEVELS_DEBUG, __FILE__, __LINE__);
                 }
                 break;
             case MESSAGE_BEGIN_ECDH:
@@ -450,14 +461,14 @@ void handle_inbound_rpc(void *data) {
                 if (ok == false) {
                     hdata->srv->thl->log(hdata->srv->thl, 0,
                                          "failed to conduct hello protocol exchange",
-                                         LOG_LEVELS_DEBUG);
+                                         LOG_LEVELS_DEBUG, __FILE__, __LINE__);
                     free_message_t(msg);
                     goto RETURN;
                 } else {
                     hdata->srv->thl->log(
                         hdata->srv->thl, 0,
                         "succesfully conducted hello protocol exchange",
-                        LOG_LEVELS_DEBUG);
+                        LOG_LEVELS_DEBUG, __FILE__, __LINE__);
                 }
                 break;
             case MESSAGE_ARBITRARY:
@@ -470,7 +481,8 @@ void handle_inbound_rpc(void *data) {
     }
 RETURN:
 
-    hdata->srv->thl->log(hdata->srv->thl, 0, "closing connection", LOG_LEVELS_DEBUG);
+    hdata->srv->thl->log(hdata->srv->thl, 0, "closing connection", LOG_LEVELS_DEBUG,
+                         __FILE__, __LINE__);
 
     close(hdata->conn->socket_number);
     free(hdata->conn);
@@ -532,7 +544,7 @@ bool handle_hello_protocol(conn_handle_data_t *data, message_t *msg) {
     if (msg_hello == NULL) {
         data->srv->thl->log(data->srv->thl, 0,
                             "failed to cbor decode message_hello_t",
-                            LOG_LEVELS_DEBUG);
+                            LOG_LEVELS_DEBUG, __FILE__, __LINE__);
         return false;
     }
 
@@ -545,13 +557,13 @@ bool handle_hello_protocol(conn_handle_data_t *data, message_t *msg) {
 
     if (ok == false) {
         data->srv->thl->log(data->srv->thl, 0,
-                            "failed to insert peer into peerstore",
-                            LOG_LEVELS_DEBUG);
+                            "failed to insert peer into peerstore", LOG_LEVELS_DEBUG,
+                            __FILE__, __LINE__);
         return ok;
     } else {
         data->srv->thl->log(data->srv->thl, 0,
                             "successfully inserted peer into peerstore",
-                            LOG_LEVELS_DEBUG);
+                            LOG_LEVELS_DEBUG, __FILE__, __LINE__);
     }
 
     // if this is MESSAGE_HELLO_FIN it means we dont need to continue the exchange
@@ -563,7 +575,7 @@ bool handle_hello_protocol(conn_handle_data_t *data, message_t *msg) {
     if (send_msg_hello == NULL) {
         data->srv->thl->log(data->srv->thl, 0,
                             "failed to create message_hello_t from server",
-                            LOG_LEVELS_DEBUG);
+                            LOG_LEVELS_DEBUG, __FILE__, __LINE__);
         return false;
     }
 
@@ -574,7 +586,7 @@ bool handle_hello_protocol(conn_handle_data_t *data, message_t *msg) {
 
     if (send_msg == NULL) {
         data->srv->thl->log(data->srv->thl, 0, "failed to get message_t",
-                            LOG_LEVELS_DEBUG);
+                            LOG_LEVELS_DEBUG, __FILE__, __LINE__);
         return false;
     }
 
@@ -585,7 +597,7 @@ bool handle_hello_protocol(conn_handle_data_t *data, message_t *msg) {
 
     if (rc == -1) {
         data->srv->thl->log(data->srv->thl, 0, "failed to send message",
-                            LOG_LEVELS_DEBUG);
+                            LOG_LEVELS_DEBUG, __FILE__, __LINE__);
         return false;
     }
 

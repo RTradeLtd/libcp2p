@@ -518,7 +518,8 @@ message_t *handle_receive(thread_logger *thl, int socket_number,
     if (message_size <= 0 || message_size >= MAX_RPC_MSG_SIZE_KB ||
         message_size > (int)max_buffer_len) {
         if (thl != NULL) {
-            thl->log(thl, 0, "invalid message size", LOG_LEVELS_DEBUG);
+            thl->log(thl, 0, "invalid message size", LOG_LEVELS_DEBUG, __FILE__,
+                     __LINE__);
         }
         return NULL;
     }

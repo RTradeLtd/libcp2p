@@ -51,7 +51,8 @@ typedef int (*mutex_fn)(pthread_mutex_t *mx);
  * @param level the log level to use (effects color used)
  */
 typedef void (*log_fn)(struct thread_logger *thl, int file_descriptor, char *message,
-                       LOG_LEVELS level);
+                       LOG_LEVELS level, char *file, int line);
+
 /*! @typedef signatured used by the thread_logger for printf style log_fn calls
  * @param thl pointer to an instance of thread_logger
  * @param file_descriptor file descriptor to write log messages to, if 0 then only
@@ -61,7 +62,7 @@ typedef void (*log_fn)(struct thread_logger *thl, int file_descriptor, char *mes
  * @param ... values to supply to message
  */
 typedef void (*log_fnf)(struct thread_logger *thl, int file_descriptor,
-                        LOG_LEVELS level, char *message, ...);
+                        LOG_LEVELS level, char *file, int line, char *message, ...);
 
 /*! @typedef a thread safe logger
  * @brief guards all log calls with a mutex lock/unlock
@@ -123,7 +124,7 @@ void clear_file_logger(file_logger *fhl);
  * @param level the log level to use (effects color used)
  */
 void log_func(thread_logger *thl, int file_descriptor, char *message,
-              LOG_LEVELS level);
+              LOG_LEVELS level, char *file, int line);
 
 /*! @brief like log_func but for formatted logs
  * @param thl pointer to an instance of thread_logger
@@ -133,8 +134,8 @@ void log_func(thread_logger *thl, int file_descriptor, char *message,
  * @param message format string like `<percent-sign>sFOO<percent-sign>sBAR`
  * @param ... values to supply to message
  */
-void logf_func(thread_logger *thl, int file_descriptor, LOG_LEVELS level,
-               char *message, ...);
+void logf_func(thread_logger *thl, int file_descriptor, LOG_LEVELS level, char *file,
+               int line, char *message, ...);
 
 /*! @brief logs a debug styled message - called by log_fn
  * @param thl pointer to an instance of thread_logger

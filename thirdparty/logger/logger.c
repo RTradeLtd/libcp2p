@@ -97,8 +97,8 @@ int write_file_log(int file_descriptor, char *message) {
     return response;
 }
 
-void logf_func(thread_logger *thl, int file_descriptor, LOG_LEVELS level,
-               char *message, ...) {
+void logf_func(thread_logger *thl, int file_descriptor, LOG_LEVELS level, char *file,
+               int line, char *message, ...) {
     va_list args;
     va_start(args, message);
     char msg[sizeof(args) + (strlen(message) * 2)];
@@ -110,22 +110,29 @@ void logf_func(thread_logger *thl, int file_descriptor, LOG_LEVELS level,
         printf("failed to vsprintf\n");
         return;
     }
-    log_func(thl, file_descriptor, msg, level);
+    log_func(thl, file_descriptor, msg, level, file, line);
 }
 
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 void log_func(thread_logger *thl, int file_descriptor, char *message,
-              LOG_LEVELS level) {
+              LOG_LEVELS level, char *file, int line) {
     char *time_str = get_time_string();
     if (time_str == NULL) {
         // dont printf log as get_time_str does that
         return;
     }
+    char location_info[strlen(file) + sizeof(line) + 4];
+    memset(location_info, 0, sizeof(location_info));
 
-    char date_msg[strlen(time_str) + strlen(message) + 2];
+    sprintf(location_info, " %s:%i", file, line);
+
+    char
+        date_msg[strlen(time_str) + strlen(message) + 2 + sizeof(location_info) + 2];
     memset(date_msg, 0, sizeof(date_msg));
 
     strcat(date_msg, time_str);
     strcat(date_msg, message);
+    strcat(date_msg, location_info);
 
     switch (level) {
         case LOG_LEVELS_INFO:
