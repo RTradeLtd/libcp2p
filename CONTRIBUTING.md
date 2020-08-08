@@ -75,6 +75,21 @@ int main(void) {
 }
 ```
 
+# logging
+
+The `logger.h` header defines a few macros to ease interaction with the logger system. After instantiating a `thread_logger` type, you can use the `LOG_INFO`, `LOG_WARN`, `LOG_ERROR`, or `LOG_DEBUG` macros as the method of logging. If you want `printf` style logging you can use `LOGF_INFO`, `LOGF_WARN`, `LOGF_ERROR`, or `LOGF_DEBUG`.
+
+Examples:
+
+
+```C
+thread_logger *thl = new_thread_logger(true); /* enable debug logging */
+LOG_INFO(thl, 0, "this is an info log");
+LOGF_INFO(thl, 0, "this is an info log: %s", "yes");
+
+```
+
+
 # mbedtls
 
 * [storing ecdsa context](https://forums.mbed.com/t/write-rsa-public-key-top-pem/4524/2)
