@@ -20,6 +20,22 @@
 #include <string.h>
 
 #define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
+#define LOG_INFO(thl, fd, msg) \
+    thl->log(thl, fd, msg, LOG_LEVELS_INFO, __FILENAME__, __LINE__);
+#define LOG_WARN(thl, fd, msg) \
+    thl->log(thl, fd, msg, LOG_LEVELS_WARN, __FILENAME__, __LINE__);
+#define LOG_ERROR(thl, fd, msg) \
+    thl->log(thl, fd, msg, LOG_LEVELS_ERROR, __FILENAME__, __LINE__);
+#define LOG_DEBUG(thl, fd, msg) \
+    thl->log(thl, fd, msg, LOG_LEVELS_DEBUG, __FILENAME__, __LINE__);
+#define LOGF_INFO(thl, fd, msg, ...) \
+    thl->logf(thl, fd, LOG_LEVELS_INFO, __FILENAME__, __LINE__, msg, __VA_ARGS__);
+#define LOGF_WARN(thl, fd, msg, ...) \
+    thl->logf(thl, fd, LOG_LEVELS_WARN, __FILENAME__, __LINE__, msg, __VA_ARGS__);
+#define LOGF_ERROR(thl, fd, msg, ...) \
+    thl->logf(thl, fd, LOG_LEVELS_ERROR, __FILENAME__, __LINE__, msg, __VA_ARGS__);
+#define LOGF_DEBUG(thl, fd, msg, ...) \
+    thl->logf(thl, fd, LOG_LEVELS_DEBUG, __FILENAME__, __LINE__, msg, __VA_ARGS__);
 
 /*! @struct base struct used by the thread_logger
  */

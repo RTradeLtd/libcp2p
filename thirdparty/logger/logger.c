@@ -248,7 +248,6 @@ void clear_file_logger(file_logger *fhl) {
 char *get_time_string() {
     char date[75];
     strftime(date, sizeof date, "%b %d %r", localtime(&(time_t){time(NULL)}));
-    // 4 for [ ] and 1 for \0
     char *msg = calloc(1, sizeof(date) + 1);
     if (msg == NULL) {
         printf("failed to calloc get_time_string\n");
@@ -256,6 +255,5 @@ char *get_time_string() {
     }
     strcat(msg, "");
     strcat(msg, date);
-    // strcat(msg, "] ");
     return msg;
 }
