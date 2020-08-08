@@ -1,4 +1,4 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/network/socket_server.h" 3 "Thu Aug 6 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/network/socket_server.h" 3 "Sat Aug 8 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -218,7 +218,7 @@ Success: non-NULL populated \fBclient_conn\fP object
 .PP
 
 .PP
-Definition at line 330 of file socket_server\&.c\&.
+Definition at line 325 of file socket_server\&.c\&.
 .SS "void* accept_connections (void * data)"
 
 .PP
@@ -235,7 +235,7 @@ processes new connections by launching them
 .PP
 terminates a server and frees up resources associated with it 
 .PP
-Definition at line 201 of file socket_server\&.c\&.
+Definition at line 200 of file socket_server\&.c\&.
 .SS "void free_socket_server_config (\fBsocket_server_config_t\fP * config)"
 
 .PP
@@ -248,7 +248,7 @@ used to free up resources allocated for socket_server_config_t
 .PP
 
 .PP
-Definition at line 361 of file socket_server\&.c\&.
+Definition at line 355 of file socket_server\&.c\&.
 .SS "bool handle_hello_protocol (\fBconn_handle_data_t\fP * data, \fBmessage_t\fP * msg)"
 
 .PP
@@ -256,7 +256,7 @@ handles receiving a hello protocol message from another peer is responsible for 
 .PP
 and updating our peerstore with the appropriate information 
 .PP
-Definition at line 525 of file socket_server\&.c\&.
+Definition at line 513 of file socket_server\&.c\&.
 .SS "void handle_inbound_rpc (void * data)"
 
 .PP
@@ -280,19 +280,19 @@ if a udp connection we dont close the socket and simply free the resources
 .PP
 
 .PP
-Definition at line 397 of file socket_server\&.c\&.
+Definition at line 391 of file socket_server\&.c\&.
 .SS "bool negotiate_secure_connection (\fBconn_handle_data_t\fP * data)"
 
 .PP
 used to negotiate a secure connection with the current connection 
 .PP
-Definition at line 492 of file socket_server\&.c\&.
+Definition at line 480 of file socket_server\&.c\&.
 .SS "\fBmessage_hello_t\fP* new_server_message_hello_t (\fBsocket_server_t\fP * srv)"
 
 .PP
 helper function to return a message_hello_t using our server values 
 .PP
-Definition at line 656 of file socket_server\&.c\&.
+Definition at line 634 of file socket_server\&.c\&.
 .SS "\fBsocket_server_t\fP* new_socket_server (\fBthread_logger\fP * thl, \fBsocket_server_config_t\fP * config, \fBSOCKET_OPTS\fP sock_opts[], int num_opts)"
 
 .PP
@@ -345,13 +345,13 @@ Failure: NULL pointer
 .PP
 
 .PP
-Definition at line 376 of file socket_server\&.c\&.
+Definition at line 370 of file socket_server\&.c\&.
 .SS "void setup_signal_shutdown (int signals[], int num_signals)"
 
 .PP
 used to specify which syscall signals should trigger shutdown process 
 .PP
-Definition at line 483 of file socket_server\&.c\&.
+Definition at line 471 of file socket_server\&.c\&.
 .SS "void signal_shutdown ()"
 
 .PP
@@ -364,7 +364,7 @@ this is only useful if you launch start_socket_server in a thread
 .PP
 
 .PP
-Definition at line 319 of file socket_server\&.c\&.
+Definition at line 314 of file socket_server\&.c\&.
 .SS "int socket_server_send (\fBsocket_server_t\fP * srv, \fBmulti_addr_t\fP * to_address, \fBmessage_t\fP * msg)"
 
 .PP
@@ -387,7 +387,7 @@ Failure: -1
 .PP
 
 .PP
-Definition at line 607 of file socket_server\&.c\&.
+Definition at line 585 of file socket_server\&.c\&.
 .SS "void start_socket_server (\fBsocket_server_t\fP * srv)"
 
 .PP
@@ -429,7 +429,7 @@ this will likely search a few extra sockets, but the overhead should be neglibie
 .PP
 
 .PP
-Definition at line 244 of file socket_server\&.c\&.
+Definition at line 241 of file socket_server\&.c\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for libcp2p from the source code\&.

@@ -1,4 +1,4 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/network/socket.h" 3 "Thu Aug 6 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/network/socket.h" 3 "Sat Aug 8 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -156,7 +156,7 @@ Definition at line 64 of file socket\&.h\&.
 .PP
 generates an addr_info struct with defaults defaults is IPv4, TCP, and AI_PASSIVE flags 
 .PP
-Definition at line 179 of file socket\&.c\&.
+Definition at line 175 of file socket\&.c\&.
 .SS "char* get_name_info (\fBsock_addr\fP * client_address)"
 
 .PP
@@ -185,7 +185,7 @@ enable udp
 .PP
 
 .PP
-Definition at line 159 of file socket\&.c\&.
+Definition at line 155 of file socket\&.c\&.
 .SS "int get_new_socket (\fBthread_logger\fP * thl, \fBaddr_info\fP * bind_address, \fBSOCKET_OPTS\fP sock_opts[], int num_opts, bool is_client, bool is_tcp)"
 
 .PP
@@ -239,13 +239,13 @@ Failure: NULL pointer
 .PP
 
 .PP
-Definition at line 224 of file socket\&.c\&.
+Definition at line 220 of file socket\&.c\&.
 .SS "bool recv_or_send_failed (\fBthread_logger\fP * thl, int rc)"
 
 .PP
 used to check if a receive or send with a socket failed 
 .PP
-Definition at line 194 of file socket\&.c\&.
+Definition at line 190 of file socket\&.c\&.
 .SS "bool set_socket_blocking_status (int fd, bool blocking)"
 
 .PP
@@ -265,7 +265,7 @@ see https://stackoverflow.com/questions/1543466/how-do-i-change-a-tcp-socket-to-
 .PP
 
 .PP
-Definition at line 142 of file socket\&.c\&.
+Definition at line 138 of file socket\&.c\&.
 .SS "int set_socket_recv_timeout (int fd, int seconds)"
 
 .PP

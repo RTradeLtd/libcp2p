@@ -1,4 +1,4 @@
-.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/thirdparty/logger/logger.h" 3 "Thu Aug 6 2020" "libcp2p" \" -*- nroff -*-
+.TH "/media/solidity/DATA/Code/RTradeLtd/libcp2p/include/thirdparty/logger/logger.h" 3 "Sat Aug 8 2020" "libcp2p" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -26,6 +26,37 @@
 .RI "struct \fBfile_logger\fP"
 .br
 .in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fB__FILENAME__\fP   (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)"
+.br
+.ti -1c
+.RI "#define \fBLOG_INFO\fP(thl,  fd,  msg)   thl\->log(thl, fd, msg, \fBLOG_LEVELS_INFO\fP, \fB__FILENAME__\fP, __LINE__);"
+.br
+.ti -1c
+.RI "#define \fBLOG_WARN\fP(thl,  fd,  msg)   thl\->log(thl, fd, msg, \fBLOG_LEVELS_WARN\fP, \fB__FILENAME__\fP, __LINE__);"
+.br
+.ti -1c
+.RI "#define \fBLOG_ERROR\fP(thl,  fd,  msg)   thl\->log(thl, fd, msg, \fBLOG_LEVELS_ERROR\fP, \fB__FILENAME__\fP, __LINE__);"
+.br
+.ti -1c
+.RI "#define \fBLOG_DEBUG\fP(thl,  fd,  msg)   thl\->log(thl, fd, msg, \fBLOG_LEVELS_DEBUG\fP, \fB__FILENAME__\fP, __LINE__);"
+.br
+.ti -1c
+.RI "#define \fBLOGF_INFO\fP(thl,  fd,  msg, \&.\&.\&.)   thl\->logf(thl, fd, \fBLOG_LEVELS_INFO\fP, \fB__FILENAME__\fP, __LINE__, msg, __VA_ARGS__);"
+.br
+.ti -1c
+.RI "#define \fBLOGF_WARN\fP(thl,  fd,  msg, \&.\&.\&.)   thl\->logf(thl, fd, \fBLOG_LEVELS_WARN\fP, \fB__FILENAME__\fP, __LINE__, msg, __VA_ARGS__);"
+.br
+.ti -1c
+.RI "#define \fBLOGF_ERROR\fP(thl,  fd,  msg, \&.\&.\&.)   thl\->logf(thl, fd, \fBLOG_LEVELS_ERROR\fP, \fB__FILENAME__\fP, __LINE__, msg, __VA_ARGS__);"
+.br
+.ti -1c
+.RI "#define \fBLOGF_DEBUG\fP(thl,  fd,  msg, \&.\&.\&.)   thl\->logf(thl, fd, \fBLOG_LEVELS_DEBUG\fP, \fB__FILENAME__\fP, __LINE__, msg, __VA_ARGS__);"
+.br
+.in -1c
 .SS "Typedefs"
 
 .in +1c
@@ -33,10 +64,10 @@
 .RI "typedef int(* \fBmutex_fn\fP) (pthread_mutex_t *mx)"
 .br
 .ti -1c
-.RI "typedef void(* \fBlog_fn\fP) (struct \fBthread_logger\fP *thl, int file_descriptor, char *\fBmessage\fP, \fBLOG_LEVELS\fP level)"
+.RI "typedef void(* \fBlog_fn\fP) (struct \fBthread_logger\fP *thl, int file_descriptor, char *\fBmessage\fP, \fBLOG_LEVELS\fP level, char *\fBfile\fP, int line)"
 .br
 .ti -1c
-.RI "typedef void(* \fBlog_fnf\fP) (struct \fBthread_logger\fP *thl, int file_descriptor, \fBLOG_LEVELS\fP level, char *\fBmessage\fP,\&.\&.\&.)"
+.RI "typedef void(* \fBlog_fnf\fP) (struct \fBthread_logger\fP *thl, int file_descriptor, \fBLOG_LEVELS\fP level, char *\fBfile\fP, int line, char *\fBmessage\fP,\&.\&.\&.)"
 .br
 .ti -1c
 .RI "typedef struct \fBthread_logger\fP \fBthread_logger\fP"
@@ -72,11 +103,11 @@
 .br
 .RI "free resources for the file ogger "
 .ti -1c
-.RI "void \fBlog_func\fP (\fBthread_logger\fP *thl, int file_descriptor, char *\fBmessage\fP, \fBLOG_LEVELS\fP level)"
+.RI "void \fBlog_func\fP (\fBthread_logger\fP *thl, int file_descriptor, char *\fBmessage\fP, \fBLOG_LEVELS\fP level, char *\fBfile\fP, int line)"
 .br
 .RI "main function you should call, which will delegate to the appopriate *_log function "
 .ti -1c
-.RI "void \fBlogf_func\fP (\fBthread_logger\fP *thl, int file_descriptor, \fBLOG_LEVELS\fP level, char *\fBmessage\fP,\&.\&.\&.)"
+.RI "void \fBlogf_func\fP (\fBthread_logger\fP *thl, int file_descriptor, \fBLOG_LEVELS\fP level, char *\fBfile\fP, int line, char *\fBmessage\fP,\&.\&.\&.)"
 .br
 .RI "like log_func but for formatted logs "
 .ti -1c
@@ -130,22 +161,60 @@ handling system signals (exit, kill, etc\&.\&.\&.)
 
 .PP
 Definition in file \fBlogger\&.h\fP\&.
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define __FILENAME__   (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)"
+
+.PP
+Definition at line 22 of file logger\&.h\&.
+.SS "#define LOG_DEBUG(thl, fd, msg)   thl\->log(thl, fd, msg, \fBLOG_LEVELS_DEBUG\fP, \fB__FILENAME__\fP, __LINE__);"
+
+.PP
+Definition at line 29 of file logger\&.h\&.
+.SS "#define LOG_ERROR(thl, fd, msg)   thl\->log(thl, fd, msg, \fBLOG_LEVELS_ERROR\fP, \fB__FILENAME__\fP, __LINE__);"
+
+.PP
+Definition at line 27 of file logger\&.h\&.
+.SS "#define LOG_INFO(thl, fd, msg)   thl\->log(thl, fd, msg, \fBLOG_LEVELS_INFO\fP, \fB__FILENAME__\fP, __LINE__);"
+
+.PP
+Definition at line 23 of file logger\&.h\&.
+.SS "#define LOG_WARN(thl, fd, msg)   thl\->log(thl, fd, msg, \fBLOG_LEVELS_WARN\fP, \fB__FILENAME__\fP, __LINE__);"
+
+.PP
+Definition at line 25 of file logger\&.h\&.
+.SS "#define LOGF_DEBUG(thl, fd, msg,  \&.\&.\&.)   thl\->logf(thl, fd, \fBLOG_LEVELS_DEBUG\fP, \fB__FILENAME__\fP, __LINE__, msg, __VA_ARGS__);"
+
+.PP
+Definition at line 37 of file logger\&.h\&.
+.SS "#define LOGF_ERROR(thl, fd, msg,  \&.\&.\&.)   thl\->logf(thl, fd, \fBLOG_LEVELS_ERROR\fP, \fB__FILENAME__\fP, __LINE__, msg, __VA_ARGS__);"
+
+.PP
+Definition at line 35 of file logger\&.h\&.
+.SS "#define LOGF_INFO(thl, fd, msg,  \&.\&.\&.)   thl\->logf(thl, fd, \fBLOG_LEVELS_INFO\fP, \fB__FILENAME__\fP, __LINE__, msg, __VA_ARGS__);"
+
+.PP
+Definition at line 31 of file logger\&.h\&.
+.SS "#define LOGF_WARN(thl, fd, msg,  \&.\&.\&.)   thl\->logf(thl, fd, \fBLOG_LEVELS_WARN\fP, \fB__FILENAME__\fP, __LINE__, msg, __VA_ARGS__);"
+
+.PP
+Definition at line 33 of file logger\&.h\&.
 .SH "Typedef Documentation"
 .PP 
 .SS "typedef struct \fBfile_logger\fP \fBfile_logger\fP"
 
-.SS "typedef void(* log_fn) (struct \fBthread_logger\fP *thl, int file_descriptor, char *\fBmessage\fP, \fBLOG_LEVELS\fP level)"
+.SS "typedef void(* log_fn) (struct \fBthread_logger\fP *thl, int file_descriptor, char *\fBmessage\fP, \fBLOG_LEVELS\fP level, char *\fBfile\fP, int line)"
 
 .PP
-Definition at line 53 of file logger\&.h\&.
-.SS "typedef void(* log_fnf) (struct \fBthread_logger\fP *thl, int file_descriptor, \fBLOG_LEVELS\fP level, char *\fBmessage\fP,\&.\&.\&.)"
+Definition at line 71 of file logger\&.h\&.
+.SS "typedef void(* log_fnf) (struct \fBthread_logger\fP *thl, int file_descriptor, \fBLOG_LEVELS\fP level, char *\fBfile\fP, int line, char *\fBmessage\fP,\&.\&.\&.)"
 
 .PP
-Definition at line 63 of file logger\&.h\&.
+Definition at line 82 of file logger\&.h\&.
 .SS "typedef int(* mutex_fn) (pthread_mutex_t *mx)"
 
 .PP
-Definition at line 44 of file logger\&.h\&.
+Definition at line 62 of file logger\&.h\&.
 .SS "typedef struct \fBthread_logger\fP \fBthread_logger\fP"
 
 .SH "Enumeration Type Documentation"
@@ -168,7 +237,7 @@ indicates the message we are logging is of type error (color red)
 \fB\fILOG_LEVELS_DEBUG \fP\fP
 indicates the message we are logging is of type debug (color soft red) 
 .PP
-Definition at line 29 of file logger\&.h\&.
+Definition at line 47 of file logger\&.h\&.
 .SH "Function Documentation"
 .PP 
 .SS "void clear_file_logger (\fBfile_logger\fP * fhl)"
@@ -238,7 +307,7 @@ logs an info styled message - called by log_fn
 .RE
 .PP
 
-.SS "void log_func (\fBthread_logger\fP * thl, int file_descriptor, char * message, \fBLOG_LEVELS\fP level)"
+.SS "void log_func (\fBthread_logger\fP * thl, int file_descriptor, char * message, \fBLOG_LEVELS\fP level, char * file, int line)"
 
 .PP
 main function you should call, which will delegate to the appopriate *_log function 
@@ -255,7 +324,7 @@ main function you should call, which will delegate to the appopriate *_log funct
 .RE
 .PP
 
-.SS "void logf_func (\fBthread_logger\fP * thl, int file_descriptor, \fBLOG_LEVELS\fP level, char * message,  \&.\&.\&.)"
+.SS "void logf_func (\fBthread_logger\fP * thl, int file_descriptor, \fBLOG_LEVELS\fP level, char * file, int line, char * message,  \&.\&.\&.)"
 
 .PP
 like log_func but for formatted logs 

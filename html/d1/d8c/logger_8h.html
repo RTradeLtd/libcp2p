@@ -84,6 +84,7 @@ $(document).ready(function(){initNavTree('d1/d8c/logger_8h.html','../../'); init
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
@@ -140,14 +141,35 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d99/structfile__logger.html">file_logger</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a5fccb4fc71e44089a1b1a77fc76c0b68"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8c/logger_8h.html#a5fccb4fc71e44089a1b1a77fc76c0b68">__FILENAME__</a>&#160;&#160;&#160;(strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)</td></tr>
+<tr class="separator:a5fccb4fc71e44089a1b1a77fc76c0b68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a663c757fa1a7b61074f6da01acabbd12"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8c/logger_8h.html#a663c757fa1a7b61074f6da01acabbd12">LOG_INFO</a>(thl,  fd,  msg)&#160;&#160;&#160;thl-&gt;log(thl, fd, msg, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99ace50ff5547ca932c712f3e62fc70d868">LOG_LEVELS_INFO</a>, <a class="el" href="../../d1/d8c/logger_8h.html#a5fccb4fc71e44089a1b1a77fc76c0b68">__FILENAME__</a>, __LINE__);</td></tr>
+<tr class="separator:a663c757fa1a7b61074f6da01acabbd12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10ef0ebfb4079b7270f555fae9a10e12"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8c/logger_8h.html#a10ef0ebfb4079b7270f555fae9a10e12">LOG_WARN</a>(thl,  fd,  msg)&#160;&#160;&#160;thl-&gt;log(thl, fd, msg, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99a511ee5c792e61122a792f213d025dd06">LOG_LEVELS_WARN</a>, <a class="el" href="../../d1/d8c/logger_8h.html#a5fccb4fc71e44089a1b1a77fc76c0b68">__FILENAME__</a>, __LINE__);</td></tr>
+<tr class="separator:a10ef0ebfb4079b7270f555fae9a10e12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d912cd3694fbcbdfb204b29f2345422"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8c/logger_8h.html#a9d912cd3694fbcbdfb204b29f2345422">LOG_ERROR</a>(thl,  fd,  msg)&#160;&#160;&#160;thl-&gt;log(thl, fd, msg, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99a24093121542f3c608c0b7094d97e49cb">LOG_LEVELS_ERROR</a>, <a class="el" href="../../d1/d8c/logger_8h.html#a5fccb4fc71e44089a1b1a77fc76c0b68">__FILENAME__</a>, __LINE__);</td></tr>
+<tr class="separator:a9d912cd3694fbcbdfb204b29f2345422"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1946d2d37922323bc8800c6cfff91af"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8c/logger_8h.html#ad1946d2d37922323bc8800c6cfff91af">LOG_DEBUG</a>(thl,  fd,  msg)&#160;&#160;&#160;thl-&gt;log(thl, fd, msg, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99aaf1acdeaa38597b53624a1692c7f894f">LOG_LEVELS_DEBUG</a>, <a class="el" href="../../d1/d8c/logger_8h.html#a5fccb4fc71e44089a1b1a77fc76c0b68">__FILENAME__</a>, __LINE__);</td></tr>
+<tr class="separator:ad1946d2d37922323bc8800c6cfff91af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29dbd2356dc6f23cdba5fafde6873771"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8c/logger_8h.html#a29dbd2356dc6f23cdba5fafde6873771">LOGF_INFO</a>(thl,  fd,  msg, ...)&#160;&#160;&#160;thl-&gt;logf(thl, fd, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99ace50ff5547ca932c712f3e62fc70d868">LOG_LEVELS_INFO</a>, <a class="el" href="../../d1/d8c/logger_8h.html#a5fccb4fc71e44089a1b1a77fc76c0b68">__FILENAME__</a>, __LINE__, msg, __VA_ARGS__);</td></tr>
+<tr class="separator:a29dbd2356dc6f23cdba5fafde6873771"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d765dc8f0829d66174c23413539db0c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8c/logger_8h.html#a5d765dc8f0829d66174c23413539db0c">LOGF_WARN</a>(thl,  fd,  msg, ...)&#160;&#160;&#160;thl-&gt;logf(thl, fd, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99a511ee5c792e61122a792f213d025dd06">LOG_LEVELS_WARN</a>, <a class="el" href="../../d1/d8c/logger_8h.html#a5fccb4fc71e44089a1b1a77fc76c0b68">__FILENAME__</a>, __LINE__, msg, __VA_ARGS__);</td></tr>
+<tr class="separator:a5d765dc8f0829d66174c23413539db0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bdb2ee39fb10f7ced0e14735158aba4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8c/logger_8h.html#a7bdb2ee39fb10f7ced0e14735158aba4">LOGF_ERROR</a>(thl,  fd,  msg, ...)&#160;&#160;&#160;thl-&gt;logf(thl, fd, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99a24093121542f3c608c0b7094d97e49cb">LOG_LEVELS_ERROR</a>, <a class="el" href="../../d1/d8c/logger_8h.html#a5fccb4fc71e44089a1b1a77fc76c0b68">__FILENAME__</a>, __LINE__, msg, __VA_ARGS__);</td></tr>
+<tr class="separator:a7bdb2ee39fb10f7ced0e14735158aba4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55930c941161b084e39cd6436de028f0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8c/logger_8h.html#a55930c941161b084e39cd6436de028f0">LOGF_DEBUG</a>(thl,  fd,  msg, ...)&#160;&#160;&#160;thl-&gt;logf(thl, fd, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99aaf1acdeaa38597b53624a1692c7f894f">LOG_LEVELS_DEBUG</a>, <a class="el" href="../../d1/d8c/logger_8h.html#a5fccb4fc71e44089a1b1a77fc76c0b68">__FILENAME__</a>, __LINE__, msg, __VA_ARGS__);</td></tr>
+<tr class="separator:a55930c941161b084e39cd6436de028f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:ac8dc34c8e7f433a3b80d5bfa0aa59032"><td class="memItemLeft" align="right" valign="top">typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8c/logger_8h.html#ac8dc34c8e7f433a3b80d5bfa0aa59032">mutex_fn</a>) (pthread_mutex_t *mx)</td></tr>
 <tr class="separator:ac8dc34c8e7f433a3b80d5bfa0aa59032"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acbb4363df37107a069aededd1b6c568b"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8c/logger_8h.html#acbb4363df37107a069aededd1b6c568b">log_fn</a>) (struct <a class="el" href="../../da/da5/structthread__logger.html">thread_logger</a> *thl, int file_descriptor, char *<a class="el" href="../../d8/d9e/structmessage.html">message</a>, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99">LOG_LEVELS</a> level)</td></tr>
-<tr class="separator:acbb4363df37107a069aededd1b6c568b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a665ba15eee3a57a2d5b1b0febdf30b96"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8c/logger_8h.html#a665ba15eee3a57a2d5b1b0febdf30b96">log_fnf</a>) (struct <a class="el" href="../../da/da5/structthread__logger.html">thread_logger</a> *thl, int file_descriptor, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99">LOG_LEVELS</a> level, char *<a class="el" href="../../d8/d9e/structmessage.html">message</a>,...)</td></tr>
-<tr class="separator:a665ba15eee3a57a2d5b1b0febdf30b96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7abc854da0a2035ee0a66c364abdda8c"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8c/logger_8h.html#a7abc854da0a2035ee0a66c364abdda8c">log_fn</a>) (struct <a class="el" href="../../da/da5/structthread__logger.html">thread_logger</a> *thl, int file_descriptor, char *<a class="el" href="../../d8/d9e/structmessage.html">message</a>, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99">LOG_LEVELS</a> level, char *<a class="el" href="../../d8/dfd/command__line_8h.html#aa7a791adcdf1369207438191eff7dc11">file</a>, int line)</td></tr>
+<tr class="separator:a7abc854da0a2035ee0a66c364abdda8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43eebf604de40c507564f84cb759088d"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8c/logger_8h.html#a43eebf604de40c507564f84cb759088d">log_fnf</a>) (struct <a class="el" href="../../da/da5/structthread__logger.html">thread_logger</a> *thl, int file_descriptor, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99">LOG_LEVELS</a> level, char *<a class="el" href="../../d8/dfd/command__line_8h.html#aa7a791adcdf1369207438191eff7dc11">file</a>, int line, char *<a class="el" href="../../d8/d9e/structmessage.html">message</a>,...)</td></tr>
+<tr class="separator:a43eebf604de40c507564f84cb759088d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa700e2a3210dcd775964660f191f29de"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="../../da/da5/structthread__logger.html">thread_logger</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8c/logger_8h.html#aa700e2a3210dcd775964660f191f29de">thread_logger</a></td></tr>
 <tr class="separator:aa700e2a3210dcd775964660f191f29de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d9012aa0b71163e5cc71ddd0c227529"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="../../d5/d99/structfile__logger.html">file_logger</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8c/logger_8h.html#a8d9012aa0b71163e5cc71ddd0c227529">file_logger</a></td></tr>
@@ -176,12 +198,12 @@ Functions</h2></td></tr>
 <tr class="memitem:acb35852b4fbddea293c8aa641f5e5524"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8c/logger_8h.html#acb35852b4fbddea293c8aa641f5e5524">clear_file_logger</a> (<a class="el" href="../../d5/d99/structfile__logger.html">file_logger</a> *fhl)</td></tr>
 <tr class="memdesc:acb35852b4fbddea293c8aa641f5e5524"><td class="mdescLeft">&#160;</td><td class="mdescRight">free resources for the file ogger  <a href="../../d1/d8c/logger_8h.html#acb35852b4fbddea293c8aa641f5e5524">More...</a><br /></td></tr>
 <tr class="separator:acb35852b4fbddea293c8aa641f5e5524"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01cf0356db3e561c2ec43fa766ef56af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8c/logger_8h.html#a01cf0356db3e561c2ec43fa766ef56af">log_func</a> (<a class="el" href="../../da/da5/structthread__logger.html">thread_logger</a> *thl, int file_descriptor, char *<a class="el" href="../../d8/d9e/structmessage.html">message</a>, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99">LOG_LEVELS</a> level)</td></tr>
-<tr class="memdesc:a01cf0356db3e561c2ec43fa766ef56af"><td class="mdescLeft">&#160;</td><td class="mdescRight">main function you should call, which will delegate to the appopriate *_log function  <a href="../../d1/d8c/logger_8h.html#a01cf0356db3e561c2ec43fa766ef56af">More...</a><br /></td></tr>
-<tr class="separator:a01cf0356db3e561c2ec43fa766ef56af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4ca0f60df17abc4a0cfcbd71049aef9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8c/logger_8h.html#ad4ca0f60df17abc4a0cfcbd71049aef9">logf_func</a> (<a class="el" href="../../da/da5/structthread__logger.html">thread_logger</a> *thl, int file_descriptor, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99">LOG_LEVELS</a> level, char *<a class="el" href="../../d8/d9e/structmessage.html">message</a>,...)</td></tr>
-<tr class="memdesc:ad4ca0f60df17abc4a0cfcbd71049aef9"><td class="mdescLeft">&#160;</td><td class="mdescRight">like log_func but for formatted logs  <a href="../../d1/d8c/logger_8h.html#ad4ca0f60df17abc4a0cfcbd71049aef9">More...</a><br /></td></tr>
-<tr class="separator:ad4ca0f60df17abc4a0cfcbd71049aef9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a070efe5c00ac2e245b407b87a8314091"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8c/logger_8h.html#a070efe5c00ac2e245b407b87a8314091">log_func</a> (<a class="el" href="../../da/da5/structthread__logger.html">thread_logger</a> *thl, int file_descriptor, char *<a class="el" href="../../d8/d9e/structmessage.html">message</a>, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99">LOG_LEVELS</a> level, char *<a class="el" href="../../d8/dfd/command__line_8h.html#aa7a791adcdf1369207438191eff7dc11">file</a>, int line)</td></tr>
+<tr class="memdesc:a070efe5c00ac2e245b407b87a8314091"><td class="mdescLeft">&#160;</td><td class="mdescRight">main function you should call, which will delegate to the appopriate *_log function  <a href="../../d1/d8c/logger_8h.html#a070efe5c00ac2e245b407b87a8314091">More...</a><br /></td></tr>
+<tr class="separator:a070efe5c00ac2e245b407b87a8314091"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af467d23bd5262499508f556c4f530160"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8c/logger_8h.html#af467d23bd5262499508f556c4f530160">logf_func</a> (<a class="el" href="../../da/da5/structthread__logger.html">thread_logger</a> *thl, int file_descriptor, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99">LOG_LEVELS</a> level, char *<a class="el" href="../../d8/dfd/command__line_8h.html#aa7a791adcdf1369207438191eff7dc11">file</a>, int line, char *<a class="el" href="../../d8/d9e/structmessage.html">message</a>,...)</td></tr>
+<tr class="memdesc:af467d23bd5262499508f556c4f530160"><td class="mdescLeft">&#160;</td><td class="mdescRight">like log_func but for formatted logs  <a href="../../d1/d8c/logger_8h.html#af467d23bd5262499508f556c4f530160">More...</a><br /></td></tr>
+<tr class="separator:af467d23bd5262499508f556c4f530160"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbd079d224c0a17760bd34be2b94d4d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d8c/logger_8h.html#adbd079d224c0a17760bd34be2b94d4d4">debug_log</a> (<a class="el" href="../../da/da5/structthread__logger.html">thread_logger</a> *thl, int file_descriptor, char *<a class="el" href="../../d8/d9e/structmessage.html">message</a>)</td></tr>
 <tr class="memdesc:adbd079d224c0a17760bd34be2b94d4d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">logs a debug styled message - called by log_fn  <a href="../../d1/d8c/logger_8h.html#adbd079d224c0a17760bd34be2b94d4d4">More...</a><br /></td></tr>
 <tr class="separator:adbd079d224c0a17760bd34be2b94d4d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -214,7 +236,336 @@ warn, and info appear to not respect format, while debug and error do </dd></dl>
 </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="../../d1/d8c/logger_8h_source.html">logger.h</a>.</p>
-</div><h2 class="groupheader">Typedef Documentation</h2>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a5fccb4fc71e44089a1b1a77fc76c0b68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5fccb4fc71e44089a1b1a77fc76c0b68">&#9670;&nbsp;</a></span>__FILENAME__</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define __FILENAME__&#160;&#160;&#160;(strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d1/d8c/logger_8h_source.html#l00022">22</a> of file <a class="el" href="../../d1/d8c/logger_8h_source.html">logger.h</a>.</p>
+
+</div>
+</div>
+<a id="ad1946d2d37922323bc8800c6cfff91af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1946d2d37922323bc8800c6cfff91af">&#9670;&nbsp;</a></span>LOG_DEBUG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LOG_DEBUG</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">thl, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">fd, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">msg&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;thl-&gt;log(thl, fd, msg, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99aaf1acdeaa38597b53624a1692c7f894f">LOG_LEVELS_DEBUG</a>, <a class="el" href="../../d1/d8c/logger_8h.html#a5fccb4fc71e44089a1b1a77fc76c0b68">__FILENAME__</a>, __LINE__);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d1/d8c/logger_8h_source.html#l00029">29</a> of file <a class="el" href="../../d1/d8c/logger_8h_source.html">logger.h</a>.</p>
+
+</div>
+</div>
+<a id="a9d912cd3694fbcbdfb204b29f2345422"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d912cd3694fbcbdfb204b29f2345422">&#9670;&nbsp;</a></span>LOG_ERROR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LOG_ERROR</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">thl, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">fd, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">msg&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;thl-&gt;log(thl, fd, msg, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99a24093121542f3c608c0b7094d97e49cb">LOG_LEVELS_ERROR</a>, <a class="el" href="../../d1/d8c/logger_8h.html#a5fccb4fc71e44089a1b1a77fc76c0b68">__FILENAME__</a>, __LINE__);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d1/d8c/logger_8h_source.html#l00027">27</a> of file <a class="el" href="../../d1/d8c/logger_8h_source.html">logger.h</a>.</p>
+
+</div>
+</div>
+<a id="a663c757fa1a7b61074f6da01acabbd12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a663c757fa1a7b61074f6da01acabbd12">&#9670;&nbsp;</a></span>LOG_INFO</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LOG_INFO</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">thl, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">fd, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">msg&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;thl-&gt;log(thl, fd, msg, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99ace50ff5547ca932c712f3e62fc70d868">LOG_LEVELS_INFO</a>, <a class="el" href="../../d1/d8c/logger_8h.html#a5fccb4fc71e44089a1b1a77fc76c0b68">__FILENAME__</a>, __LINE__);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d1/d8c/logger_8h_source.html#l00023">23</a> of file <a class="el" href="../../d1/d8c/logger_8h_source.html">logger.h</a>.</p>
+
+</div>
+</div>
+<a id="a10ef0ebfb4079b7270f555fae9a10e12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10ef0ebfb4079b7270f555fae9a10e12">&#9670;&nbsp;</a></span>LOG_WARN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LOG_WARN</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">thl, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">fd, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">msg&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;thl-&gt;log(thl, fd, msg, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99a511ee5c792e61122a792f213d025dd06">LOG_LEVELS_WARN</a>, <a class="el" href="../../d1/d8c/logger_8h.html#a5fccb4fc71e44089a1b1a77fc76c0b68">__FILENAME__</a>, __LINE__);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d1/d8c/logger_8h_source.html#l00025">25</a> of file <a class="el" href="../../d1/d8c/logger_8h_source.html">logger.h</a>.</p>
+
+</div>
+</div>
+<a id="a55930c941161b084e39cd6436de028f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55930c941161b084e39cd6436de028f0">&#9670;&nbsp;</a></span>LOGF_DEBUG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LOGF_DEBUG</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">thl, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">fd, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">msg, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;thl-&gt;logf(thl, fd, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99aaf1acdeaa38597b53624a1692c7f894f">LOG_LEVELS_DEBUG</a>, <a class="el" href="../../d1/d8c/logger_8h.html#a5fccb4fc71e44089a1b1a77fc76c0b68">__FILENAME__</a>, __LINE__, msg, __VA_ARGS__);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d1/d8c/logger_8h_source.html#l00037">37</a> of file <a class="el" href="../../d1/d8c/logger_8h_source.html">logger.h</a>.</p>
+
+</div>
+</div>
+<a id="a7bdb2ee39fb10f7ced0e14735158aba4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bdb2ee39fb10f7ced0e14735158aba4">&#9670;&nbsp;</a></span>LOGF_ERROR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LOGF_ERROR</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">thl, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">fd, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">msg, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;thl-&gt;logf(thl, fd, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99a24093121542f3c608c0b7094d97e49cb">LOG_LEVELS_ERROR</a>, <a class="el" href="../../d1/d8c/logger_8h.html#a5fccb4fc71e44089a1b1a77fc76c0b68">__FILENAME__</a>, __LINE__, msg, __VA_ARGS__);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d1/d8c/logger_8h_source.html#l00035">35</a> of file <a class="el" href="../../d1/d8c/logger_8h_source.html">logger.h</a>.</p>
+
+</div>
+</div>
+<a id="a29dbd2356dc6f23cdba5fafde6873771"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29dbd2356dc6f23cdba5fafde6873771">&#9670;&nbsp;</a></span>LOGF_INFO</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LOGF_INFO</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">thl, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">fd, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">msg, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;thl-&gt;logf(thl, fd, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99ace50ff5547ca932c712f3e62fc70d868">LOG_LEVELS_INFO</a>, <a class="el" href="../../d1/d8c/logger_8h.html#a5fccb4fc71e44089a1b1a77fc76c0b68">__FILENAME__</a>, __LINE__, msg, __VA_ARGS__);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d1/d8c/logger_8h_source.html#l00031">31</a> of file <a class="el" href="../../d1/d8c/logger_8h_source.html">logger.h</a>.</p>
+
+</div>
+</div>
+<a id="a5d765dc8f0829d66174c23413539db0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d765dc8f0829d66174c23413539db0c">&#9670;&nbsp;</a></span>LOGF_WARN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LOGF_WARN</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">thl, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">fd, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">msg, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;thl-&gt;logf(thl, fd, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99a511ee5c792e61122a792f213d025dd06">LOG_LEVELS_WARN</a>, <a class="el" href="../../d1/d8c/logger_8h.html#a5fccb4fc71e44089a1b1a77fc76c0b68">__FILENAME__</a>, __LINE__, msg, __VA_ARGS__);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="../../d1/d8c/logger_8h_source.html#l00033">33</a> of file <a class="el" href="../../d1/d8c/logger_8h_source.html">logger.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Typedef Documentation</h2>
 <a id="a8d9012aa0b71163e5cc71ddd0c227529"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8d9012aa0b71163e5cc71ddd0c227529">&#9670;&nbsp;</a></span>file_logger</h2>
 
@@ -229,35 +580,35 @@ warn, and info appear to not respect format, while debug and error do </dd></dl>
 
 </div>
 </div>
-<a id="acbb4363df37107a069aededd1b6c568b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acbb4363df37107a069aededd1b6c568b">&#9670;&nbsp;</a></span>log_fn</h2>
+<a id="a7abc854da0a2035ee0a66c364abdda8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7abc854da0a2035ee0a66c364abdda8c">&#9670;&nbsp;</a></span>log_fn</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* log_fn) (struct <a class="el" href="../../da/da5/structthread__logger.html">thread_logger</a> *thl, int file_descriptor, char *<a class="el" href="../../d8/d9e/structmessage.html">message</a>, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99">LOG_LEVELS</a> level)</td>
+          <td class="memname">typedef void(* log_fn) (struct <a class="el" href="../../da/da5/structthread__logger.html">thread_logger</a> *thl, int file_descriptor, char *<a class="el" href="../../d8/d9e/structmessage.html">message</a>, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99">LOG_LEVELS</a> level, char *<a class="el" href="../../d8/dfd/command__line_8h.html#aa7a791adcdf1369207438191eff7dc11">file</a>, int line)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d8c/logger_8h_source.html#l00053">53</a> of file <a class="el" href="../../d1/d8c/logger_8h_source.html">logger.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d8c/logger_8h_source.html#l00071">71</a> of file <a class="el" href="../../d1/d8c/logger_8h_source.html">logger.h</a>.</p>
 
 </div>
 </div>
-<a id="a665ba15eee3a57a2d5b1b0febdf30b96"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a665ba15eee3a57a2d5b1b0febdf30b96">&#9670;&nbsp;</a></span>log_fnf</h2>
+<a id="a43eebf604de40c507564f84cb759088d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43eebf604de40c507564f84cb759088d">&#9670;&nbsp;</a></span>log_fnf</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* log_fnf) (struct <a class="el" href="../../da/da5/structthread__logger.html">thread_logger</a> *thl, int file_descriptor, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99">LOG_LEVELS</a> level, char *<a class="el" href="../../d8/d9e/structmessage.html">message</a>,...)</td>
+          <td class="memname">typedef void(* log_fnf) (struct <a class="el" href="../../da/da5/structthread__logger.html">thread_logger</a> *thl, int file_descriptor, <a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99">LOG_LEVELS</a> level, char *<a class="el" href="../../d8/dfd/command__line_8h.html#aa7a791adcdf1369207438191eff7dc11">file</a>, int line, char *<a class="el" href="../../d8/d9e/structmessage.html">message</a>,...)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d8c/logger_8h_source.html#l00063">63</a> of file <a class="el" href="../../d1/d8c/logger_8h_source.html">logger.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d8c/logger_8h_source.html#l00082">82</a> of file <a class="el" href="../../d1/d8c/logger_8h_source.html">logger.h</a>.</p>
 
 </div>
 </div>
@@ -273,7 +624,7 @@ warn, and info appear to not respect format, while debug and error do </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d8c/logger_8h_source.html#l00044">44</a> of file <a class="el" href="../../d1/d8c/logger_8h_source.html">logger.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d8c/logger_8h_source.html#l00062">62</a> of file <a class="el" href="../../d1/d8c/logger_8h_source.html">logger.h</a>.</p>
 
 </div>
 </div>
@@ -314,7 +665,7 @@ warn, and info appear to not respect format, while debug and error do </dd></dl>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="../../d1/d8c/logger_8h_source.html#l00029">29</a> of file <a class="el" href="../../d1/d8c/logger_8h_source.html">logger.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d1/d8c/logger_8h_source.html#l00047">47</a> of file <a class="el" href="../../d1/d8c/logger_8h_source.html">logger.h</a>.</p>
 
 </div>
 </div>
@@ -517,8 +868,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a01cf0356db3e561c2ec43fa766ef56af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01cf0356db3e561c2ec43fa766ef56af">&#9670;&nbsp;</a></span>log_func()</h2>
+<a id="a070efe5c00ac2e245b407b87a8314091"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a070efe5c00ac2e245b407b87a8314091">&#9670;&nbsp;</a></span>log_func()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -545,7 +896,19 @@ Here is the caller graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99">LOG_LEVELS</a>&#160;</td>
-          <td class="paramname"><em>level</em>&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>line</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -568,8 +931,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="ad4ca0f60df17abc4a0cfcbd71049aef9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad4ca0f60df17abc4a0cfcbd71049aef9">&#9670;&nbsp;</a></span>logf_func()</h2>
+<a id="af467d23bd5262499508f556c4f530160"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af467d23bd5262499508f556c4f530160">&#9670;&nbsp;</a></span>logf_func()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -591,6 +954,18 @@ Here is the caller graph for this function:</div>
           <td></td>
           <td class="paramtype"><a class="el" href="../../d1/d8c/logger_8h.html#a6cfcf0d1e54151523d73f747ea51ba99">LOG_LEVELS</a>&#160;</td>
           <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
