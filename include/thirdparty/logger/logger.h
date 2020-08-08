@@ -19,6 +19,8 @@
 #include <stdbool.h>
 #include <string.h>
 
+#define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
+
 /*! @struct base struct used by the thread_logger
  */
 struct thread_logger;

@@ -82,7 +82,7 @@ socket_client_t *new_socket_client(thread_logger *thl, multi_addr_t *addr) {
 
     int client_socket_num = get_new_socket(thl, peer_address, NULL, 0, true, is_tcp);
     if (client_socket_num == -1) {
-        thl->log(thl, 0, "failed to get_new_socket", LOG_LEVELS_ERROR, __FILE__,
+        thl->log(thl, 0, "failed to get_new_socket", LOG_LEVELS_ERROR, __FILENAME__,
                  __LINE__);
         freeaddrinfo(peer_address);
         return NULL;
@@ -92,13 +92,13 @@ socket_client_t *new_socket_client(thread_logger *thl, multi_addr_t *addr) {
         calloc(1, sizeof(sock_client) + sizeof(peer_address));
     if (sock_client == NULL) {
         thl->log(thl, 0, "failed to calloc socket_client_t", LOG_LEVELS_ERROR,
-                 __FILE__, __LINE__);
+                 __FILENAME__, __LINE__);
         return NULL;
     }
     sock_client->socket_number = client_socket_num;
     sock_client->peer_address = peer_address;
 
-    thl->log(thl, 0, "client successfully created", LOG_LEVELS_INFO, __FILE__,
+    thl->log(thl, 0, "client successfully created", LOG_LEVELS_INFO, __FILENAME__,
              __LINE__);
 
     return sock_client;

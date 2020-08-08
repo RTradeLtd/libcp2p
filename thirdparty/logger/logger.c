@@ -127,12 +127,14 @@ void log_func(thread_logger *thl, int file_descriptor, char *message,
     sprintf(location_info, " %s:%i", file, line);
 
     char
-        date_msg[strlen(time_str) + strlen(message) + 2 + sizeof(location_info) + 2];
+        date_msg[strlen(time_str) + strlen(message) + 2 + sizeof(location_info) + 6];
     memset(date_msg, 0, sizeof(date_msg));
 
     strcat(date_msg, time_str);
-    strcat(date_msg, message);
+    strcat(date_msg, " -");
     strcat(date_msg, location_info);
+    strcat(date_msg, "] ");
+    strcat(date_msg, message);
 
     switch (level) {
         case LOG_LEVELS_INFO:
@@ -247,13 +249,13 @@ char *get_time_string() {
     char date[75];
     strftime(date, sizeof date, "%b %d %r", localtime(&(time_t){time(NULL)}));
     // 4 for [ ] and 1 for \0
-    char *msg = calloc(1, sizeof(date) + 2);
+    char *msg = calloc(1, sizeof(date) + 1);
     if (msg == NULL) {
         printf("failed to calloc get_time_string\n");
         return NULL;
     }
     strcat(msg, "");
     strcat(msg, date);
-    strcat(msg, "] ");
+    // strcat(msg, "] ");
     return msg;
 }

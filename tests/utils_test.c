@@ -13,17 +13,17 @@
 
 void *test_thread_log(void *data) {
     thread_logger *thl = (thread_logger *)data;
-    thl->log(thl, 0, "this is an info log", LOG_LEVELS_INFO, __FILE__, __LINE__);
-    thl->logf(thl, 0, LOG_LEVELS_INFO, __FILE__, __LINE__, "%s\t%s", "one", "two");
+    thl->log(thl, 0, "this is an info log", LOG_LEVELS_INFO, __FILENAME__, __LINE__);
+    thl->logf(thl, 0, LOG_LEVELS_INFO, __FILENAME__, __LINE__, "%s\t%s", "one", "two");
 
-    thl->log(thl, 0, "this is a warn log", LOG_LEVELS_WARN, __FILE__, __LINE__);
-    thl->logf(thl, 0, LOG_LEVELS_WARN, __FILE__, __LINE__, "%s\t%s", "one", "two");
+    thl->log(thl, 0, "this is a warn log", LOG_LEVELS_WARN, __FILENAME__, __LINE__);
+    thl->logf(thl, 0, LOG_LEVELS_WARN, __FILENAME__, __LINE__, "%s\t%s", "one", "two");
 
-    thl->log(thl, 0, "this is an error log", LOG_LEVELS_ERROR, __FILE__, __LINE__);
-    thl->logf(thl, 0, LOG_LEVELS_ERROR, __FILE__, __LINE__, "%s\t%s", "one", "two");
+    thl->log(thl, 0, "this is an error log", LOG_LEVELS_ERROR, __FILENAME__, __LINE__);
+    thl->logf(thl, 0, LOG_LEVELS_ERROR, __FILENAME__, __LINE__, "%s\t%s", "one", "two");
 
-    thl->log(thl, 0, "this is a debug log", LOG_LEVELS_DEBUG, __FILE__, __LINE__);
-    thl->logf(thl, 0, LOG_LEVELS_DEBUG, __FILE__, __LINE__, "%s\t%s", "one", "two");
+    thl->log(thl, 0, "this is a debug log", LOG_LEVELS_DEBUG, __FILENAME__, __LINE__);
+    thl->logf(thl, 0, LOG_LEVELS_DEBUG, __FILENAME__, __LINE__, "%s\t%s", "one", "two");
     // commenting this out seems to get rid of memleaks reported by valgrind
     // pthread_exit(NULL);
     return NULL;
@@ -31,17 +31,17 @@ void *test_thread_log(void *data) {
 
 void *test_file_log(void *data) {
     file_logger *fhl = (file_logger *)data;
-    fhl->thl->log(fhl->thl, fhl->file_descriptor, "this is an info log", LOG_LEVELS_INFO, __FILE__, __LINE__);
-    fhl->thl->logf(fhl->thl, fhl->file_descriptor, LOG_LEVELS_INFO, __FILE__, __LINE__, "%s\t%s", "one", "two");
+    fhl->thl->log(fhl->thl, fhl->file_descriptor, "this is an info log", LOG_LEVELS_INFO, __FILENAME__, __LINE__);
+    fhl->thl->logf(fhl->thl, fhl->file_descriptor, LOG_LEVELS_INFO, __FILENAME__, __LINE__, "%s\t%s", "one", "two");
 
-    fhl->thl->log(fhl->thl, fhl->file_descriptor, "this is a warn log", LOG_LEVELS_WARN, __FILE__, __LINE__);
-    fhl->thl->logf(fhl->thl, fhl->file_descriptor, LOG_LEVELS_WARN, __FILE__, __LINE__, "%s\t%s", "one", "two");
+    fhl->thl->log(fhl->thl, fhl->file_descriptor, "this is a warn log", LOG_LEVELS_WARN, __FILENAME__, __LINE__);
+    fhl->thl->logf(fhl->thl, fhl->file_descriptor, LOG_LEVELS_WARN, __FILENAME__, __LINE__, "%s\t%s", "one", "two");
 
-    fhl->thl->log(fhl->thl, fhl->file_descriptor, "this is an error log", LOG_LEVELS_ERROR, __FILE__, __LINE__);
-    fhl->thl->logf(fhl->thl, fhl->file_descriptor, LOG_LEVELS_ERROR, __FILE__, __LINE__, "%s\t%s", "one", "two");
+    fhl->thl->log(fhl->thl, fhl->file_descriptor, "this is an error log", LOG_LEVELS_ERROR, __FILENAME__, __LINE__);
+    fhl->thl->logf(fhl->thl, fhl->file_descriptor, LOG_LEVELS_ERROR, __FILENAME__, __LINE__, "%s\t%s", "one", "two");
     
-    fhl->thl->log(fhl->thl, fhl->file_descriptor, "this is a debug log", LOG_LEVELS_DEBUG, __FILE__, __LINE__);
-    fhl->thl->logf(fhl->thl, fhl->file_descriptor, LOG_LEVELS_DEBUG, __FILE__, __LINE__, "%s\t%s", "one", "two");
+    fhl->thl->log(fhl->thl, fhl->file_descriptor, "this is a debug log", LOG_LEVELS_DEBUG, __FILENAME__, __LINE__);
+    fhl->thl->logf(fhl->thl, fhl->file_descriptor, LOG_LEVELS_DEBUG, __FILENAME__, __LINE__, "%s\t%s", "one", "two");
     // commenting this out seems to get rid of memleaks reported by valgrind
     // pthread_exit(NULL);
     return NULL;
@@ -53,10 +53,10 @@ void test_thread_logger(void **state) {
     for (int i = 0; i < 2; i++) {
         thread_logger *thl = new_thread_logger(args[i]);
         assert(thl != NULL);
-        thl->log(thl, 0, "this is an info log", LOG_LEVELS_INFO, __FILE__, __LINE__);
-        thl->log(thl, 0, "this is a warn log", LOG_LEVELS_WARN, __FILE__, __LINE__);
-        thl->log(thl, 0, "this is an error log", LOG_LEVELS_ERROR, __FILE__, __LINE__);
-        thl->log(thl, 0, "this is a debug log", LOG_LEVELS_DEBUG, __FILE__, __LINE__);
+        thl->log(thl, 0, "this is an info log", LOG_LEVELS_INFO, __FILENAME__, __LINE__);
+        thl->log(thl, 0, "this is a warn log", LOG_LEVELS_WARN, __FILENAME__, __LINE__);
+        thl->log(thl, 0, "this is an error log", LOG_LEVELS_ERROR, __FILENAME__, __LINE__);
+        thl->log(thl, 0, "this is a debug log", LOG_LEVELS_DEBUG, __FILENAME__, __LINE__);
         pthread_t threads[4];
         pthread_attr_t attrs[4];
         for (int i = 0; i < 4; i++) {
@@ -77,10 +77,10 @@ void test_file_logger(void **state) {
     for (int i = 0; i < 2; i++) {
         file_logger *fhl = new_file_logger("file_logger_test.log", args[i]);
         assert(fhl != NULL);
-        fhl->thl->log(fhl->thl, fhl->file_descriptor, "this is an info log", LOG_LEVELS_INFO, __FILE__, __LINE__);
-        fhl->thl->log(fhl->thl, fhl->file_descriptor, "this is a warn log", LOG_LEVELS_WARN, __FILE__, __LINE__);
-        fhl->thl->log(fhl->thl, fhl->file_descriptor, "this is an error log", LOG_LEVELS_ERROR, __FILE__, __LINE__);
-        fhl->thl->log(fhl->thl, fhl->file_descriptor, "this is a debug log", LOG_LEVELS_DEBUG, __FILE__, __LINE__);
+        fhl->thl->log(fhl->thl, fhl->file_descriptor, "this is an info log", LOG_LEVELS_INFO, __FILENAME__, __LINE__);
+        fhl->thl->log(fhl->thl, fhl->file_descriptor, "this is a warn log", LOG_LEVELS_WARN, __FILENAME__, __LINE__);
+        fhl->thl->log(fhl->thl, fhl->file_descriptor, "this is an error log", LOG_LEVELS_ERROR, __FILENAME__, __LINE__);
+        fhl->thl->log(fhl->thl, fhl->file_descriptor, "this is a debug log", LOG_LEVELS_DEBUG, __FILENAME__, __LINE__);
         pthread_t threads[4];
         pthread_attr_t attrs[4];
         for (int i = 0; i < 4; i++) {
