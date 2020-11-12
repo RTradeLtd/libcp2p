@@ -35,12 +35,15 @@ void gen_key_callback(int argc, char *argv[]) {
     }
     // generate the actual ecdsa key
     ecdsa_private_key_t *pk = assert_new_ecdsa_private_key();
+    // save the ecdsa key in pem format at path
     int rc = libp2p_crypto_ecdsa_private_key_save(pk, (char *)*pem_file_path->sval);
     if (rc != 0) {
         printf("failed to save ecdsa key\n");
-        return;
-    } 
-    printf("generated ecdsa key and saved to %s\n", (char *)*pem_file_path->sval);
+    }  else {
+        printf("generated ecdsa key and saved to %s\n", (char *)*pem_file_path->sval);
+    }
+    // free up memory allocated to pk struct
+    libp2p_crypto_ecdsa_free(pk);
 }
 
 void test_server_callback(int argc, char *argv[]) {
