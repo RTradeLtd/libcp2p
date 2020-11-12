@@ -109,8 +109,14 @@ message_hello_t *new_message_hello_t(unsigned char *peer_id,
  * @details the message_t instance to send peer information to another peer
  */
 cbor_encoded_data_t *cbor_encode_hello_t(message_hello_t *msg_hello) {
+    size_t maddr_size;
+    for (size_t i = 0; i < msg_hello->num_addrs; i++) {
+        maddr_size += msg_hello->addrs[i]->bsize;
+    }
+    // maddr_size covers the actual size of the multiaddrs, and sizeof(size_t)
+    // covers the size of the size_t variable
     uint8_t buf[sizeof(message_hello_t) + msg_hello->peer_id_len +
-                msg_hello->public_key_len];
+                msg_hello->public_key_len + maddr_size + sizeof(size_t)];
     CborEncoder encoder, array_encoder;
     CborError err;
 
@@ -134,6 +140,13 @@ cbor_encoded_data_t *cbor_encode_hello_t(message_hello_t *msg_hello) {
         return NULL;
     }
 
+    // encode the total number of multiaddresses
+    err = cbor_encode_int(&array_encoder, (int64_t)msg_hello->num_addrs);
+    if (err != CborNoError) {
+        printf("failed to encode int: %s\n", cbor_error_string(err));
+        return NULL;
+    }
+
     err = cbor_encode_byte_string(&array_encoder, msg_hello->peer_id,
                                   msg_hello->peer_id_len);
     if (err != CborNoError) {
@@ -147,6 +160,7 @@ cbor_encoded_data_t *cbor_encode_hello_t(message_hello_t *msg_hello) {
         printf("failed to encode byte string: %s\n", cbor_error_string(err));
         return NULL;
     }
+
 
     err = cbor_encoder_close_container(&encoder, &array_encoder);
     if (err != CborNoError) {
