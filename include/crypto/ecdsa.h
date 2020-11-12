@@ -103,3 +103,8 @@ int libp2p_crypto_ecdsa_free(ecdsa_private_key_t *pk);
  * @return Failure: NULL pointer
  */
 ecdsa_private_key_t *libp2p_crypto_ecdsa_private_key_from_file(char *path);
+
+/*!
+  * @brief generates a new ecdsa key asserting there is no error
+*/
+ecdsa_private_key_t *assert_new_ecdsa_private_key(void);

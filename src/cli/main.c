@@ -6,6 +6,7 @@
 #include "thirdparty/argtable3/argtable3.h"
 #include "thirdparty/logger/colors.h"
 #include "thirdparty/logger/logger.h"
+#include "crypto/ecdsa.h"
 #include <signal.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -21,10 +22,29 @@
 
 void start_server_callback(int argc, char *argv[]);
 void test_server_callback(int argc, char *argv[]);
+void gen_key_callback(int argc, char *argv[]);
 
 struct arg_str *listen_address_tcp;
 struct arg_str *listen_address_udp;
 struct arg_str *pem_file_path;
+
+void gen_key_callback(int argc, char *argv[]) {
+    // ensure pem file path is present
+    if (pem_file_path->count == 0) {
+        return;
+    }
+    // generate the actual ecdsa key
+    ecdsa_private_key_t *pk = assert_new_ecdsa_private_key();
+    // save the ecdsa key in pem format at path
+    int rc = libp2p_crypto_ecdsa_private_key_save(pk, (char *)*pem_file_path->sval);
+    if (rc != 0) {
+        printf("failed to save ecdsa key\n");
+    }  else {
+        printf("generated ecdsa key and saved to %s\n", (char *)*pem_file_path->sval);
+    }
+    // free up memory allocated to pk struct
+    libp2p_crypto_ecdsa_free(pk);
+}
 
 void test_server_callback(int argc, char *argv[]) {
     multi_addr_t *tcp_addr = NULL;
@@ -123,6 +143,10 @@ void test_server_callback(int argc, char *argv[]) {
 }
 
 void start_server_callback(int argc, char *argv[]) {
+    if (pem_file_path->count == 0) {
+        printf("no key file path given\n");
+        return;
+    }
     socket_server_config_t *config = new_socket_server_config(1);
     if (config == NULL) {
         printf("failed to initialize config\n");
@@ -141,7 +165,8 @@ void start_server_callback(int argc, char *argv[]) {
     config->addrs[0] = tcp_addr;
     config->fn_tcp = handle_inbound_rpc;
     config->recv_timeout_sec = 3;
-
+    config->private_key_path = (char *)*pem_file_path->sval;
+    
     thread_logger *logger = new_thread_logger(true);
     if (logger == NULL) {
         free_socket_server_config(config);
@@ -174,6 +199,18 @@ void start_server_callback(int argc, char *argv[]) {
 // displays the help command
 command_handler *new_socket_server_command();
 command_handler *new_socket_server_test_command();
+command_handler *new_gen_key_command();
+
+command_handler *new_gen_key_command() {
+    command_handler *handler = malloc(sizeof(command_handler));
+    if (handler == NULL) {
+        printf("failed to malloc command_handler\n");
+        return NULL;
+    }
+    handler->callback = gen_key_callback;
+    handler->name = "gen-key";
+    return handler;
+}
 
 command_handler *new_socket_server_command() {
     command_handler *handler = malloc(sizeof(command_handler));
@@ -247,6 +284,7 @@ int main(int argc, char *argv[]) {
 
     load_command(pcmd, new_socket_server_command());
     load_command(pcmd, new_socket_server_test_command());
+    load_command(pcmd, new_gen_key_command());
 
     // END COMMAND INPUT PREPARATION
     int resp = execute(pcmd, (char *)*command_to_run->sval);

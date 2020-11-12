@@ -1,5 +1,6 @@
 #include "peerstore/peerstore.h"
-#include "testutils/testutils.h"
+// #include "testutils/testutils.h"
+#include "crypto/ecdsa.h"
 #include <stdio.h>
 #include <assert.h>
 #include <stdarg.h>
@@ -50,7 +51,7 @@ void peerstore_test_insert_peer(void **state) {
   peerstore_t *pst = peerstore_new_assert(100);
 
   for (int i = 0; i < 100; i++) {
-    ecdsa_private_key_t *priv_key = new_ecdsa_private_key();
+    ecdsa_private_key_t *priv_key = assert_new_ecdsa_private_key();
     assert(priv_key != NULL);
     peer_id_t *pid = libp2p_crypto_ecdsa_keypair_peerid(priv_key);
     assert(pid != NULL);
@@ -83,7 +84,7 @@ void peerstore_test_insert_peer(void **state) {
 
   assert(pst->num_peers == 100);
 
-  ecdsa_private_key_t *priv_key = new_ecdsa_private_key();
+  ecdsa_private_key_t *priv_key = assert_new_ecdsa_private_key();
   assert(priv_key != NULL);
   peer_id_t *pid = libp2p_crypto_ecdsa_keypair_peerid(priv_key);
   assert(pid != NULL);

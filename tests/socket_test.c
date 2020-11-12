@@ -16,10 +16,11 @@
 #include "network/messages.h"
 #include "network/socket_server.h"
 #include "multiaddr/multiaddr.h"
+#include "crypto/ecdsa.h"
 #include <arpa/inet.h>
 #include <errno.h>
 #include <fcntl.h>
-#include <netdb.h>
+#include <netdb.h> 
 #include <netinet/in.h>
 #include <pthread.h>
 #include <signal.h>
@@ -51,8 +52,8 @@ void start_socker_server_wrapper(void *data) {
   * @warning this test is currently leaking about 24 bytes likely because we are using two thread pools which rely on some sort of global stuff
 */
 void test_new_socket_server(void **state) {
-    ecdsa_private_key_t *server1_pk = new_ecdsa_private_key();
-    ecdsa_private_key_t *server2_pk = new_ecdsa_private_key();
+    ecdsa_private_key_t *server1_pk = assert_new_ecdsa_private_key();
+    ecdsa_private_key_t *server2_pk = assert_new_ecdsa_private_key();
 
     int rc = libp2p_crypto_ecdsa_private_key_save(server1_pk, "server1.pem");
     assert(rc == 0);

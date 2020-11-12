@@ -43,6 +43,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <assert.h>
 
 /*!
  * @brief frees up resources allocated for the private key
@@ -312,4 +313,14 @@ unsigned char *libp2p_crypto_ecdsa_private_key_to_pem(ecdsa_private_key_t *pk) {
     memcpy(ret_buf, buffer, strlen((char *)buffer));
 
     return ret_buf;
+}
+
+/*!
+  * @brief generates a new ecdsa key asserting there is no error
+*/
+ecdsa_private_key_t *assert_new_ecdsa_private_key(void) {
+    ecdsa_private_key_t *pk =
+        libp2p_crypto_ecdsa_keypair_generation(MBEDTLS_ECP_DP_SECP256R1);
+    assert(pk != NULL);
+    return pk;
 }
