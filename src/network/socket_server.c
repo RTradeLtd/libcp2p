@@ -71,7 +71,7 @@ socket_server_t *new_socket_server(thread_logger *thl,
         config->max_peers = 100;
     }
 
-    if (config->private_key_path == NULL) {
+    if (config->private_key_path == NULL) { 
         LOG_ERROR(thl, 0, "no private key path in config");
         return NULL;
     }
@@ -525,7 +525,7 @@ bool handle_hello_protocol(conn_handle_data_t *data, message_t *msg) {
     // insert the peers information into our peerstore
     bool ok = peerstore_insert_peer(data->srv->pstore, msg_hello->peer_id,
                                     msg_hello->public_key, msg_hello->peer_id_len,
-                                    msg_hello->public_key_len);
+                                    msg_hello->public_key_len, msg_hello->num_addrs, msg_hello->addrs);
 
     free_message_hello_t(msg_hello);
 
@@ -634,4 +634,12 @@ EXIT:
 message_hello_t *new_server_message_hello_t(socket_server_t *srv) {
     return new_message_hello_t(srv->peer_id->data, srv->public_key->data,
                                srv->peer_id->len, srv->public_key->data_size);
+}
+
+multi_addr_t **socket_server_config_copy_multi_addrs(socket_server_config_t *cfg) {
+    multi_addr_t **addrs = calloc(1, sizeof(multi_addr_t) * cfg->num_addrs);
+    for (int i = 0; i < cfg->num_addrs; i++) {
+        addrs[i] = multi_address_copy(cfg->addrs[i]);
+    }
+    return addrs;
 }

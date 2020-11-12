@@ -1,4 +1,5 @@
 #include "peerstore/peerstore.h"
+#include "multiaddr/multiaddr.h"
 // #include "testutils/testutils.h"
 #include "crypto/ecdsa.h"
 #include <stdio.h>
@@ -57,8 +58,15 @@ void peerstore_test_insert_peer(void **state) {
     assert(pid != NULL);
     public_key_t *pub_key = libp2p_crypto_ecdsa_keypair_public(priv_key);
     assert(pub_key != NULL);
+    
+    char addr[1024];
+    sprintf(addr, "/ip4/127.0.0.1/tcp/%i", i);
+    
+    multi_addr_t **maddrs = calloc(1, sizeof(multi_addr_t) * 1);
+    multi_addr_t *maddr = multi_address_new_from_string((const char *)addr);
+    maddrs[0] = maddr;
 
-    bool ok = peerstore_insert_peer(pst, pid->data, pub_key->data, pid->len, pub_key->data_size);
+    bool ok = peerstore_insert_peer(pst, pid->data, pub_key->data, pid->len, pub_key->data_size, 1, maddrs);
     assert(ok == true);
 
     unsigned char output[1024];
@@ -90,8 +98,12 @@ void peerstore_test_insert_peer(void **state) {
   assert(pid != NULL);
   public_key_t *pub_key = libp2p_crypto_ecdsa_keypair_public(priv_key);
   assert(pub_key != NULL);
+    
+  multi_addr_t **maddrs = calloc(1, sizeof(multi_addr_t) * 1);
+  multi_addr_t *maddr = multi_address_new_from_string("/ip4/127.0.0.1/tcp/5001");
+  maddrs[0] = maddr;
   
-  bool ok = peerstore_insert_peer(pst, pid->data, pub_key->data, pid->len, pub_key->data_size);
+  bool ok = peerstore_insert_peer(pst, pid->data, pub_key->data, pid->len, pub_key->data_size, 1, maddrs);
   assert(ok == false);
 
   libp2p_crypto_ecdsa_free(priv_key);

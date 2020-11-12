@@ -103,7 +103,7 @@ bool peerstore_have_peer(peerstore_t *pst, unsigned char *peer_id) {
  */
 bool peerstore_insert_peer(peerstore_t *pst, unsigned char *peer_id,
                            unsigned char *public_key, size_t peer_id_len,
-                           size_t public_key_len) {
+                           size_t public_key_len, size_t num_addrs, multi_addr_t **addrs) {
 
     bool ok = false;
 
@@ -148,7 +148,7 @@ bool peerstore_insert_peer(peerstore_t *pst, unsigned char *peer_id,
 
     /*! @note right now im not sure if we should store this in the peerstore */
     /*! @note or use a pointer. i think like this would consume less memory */
-    peer_t pt = {.peer_id_len = peer_id_len, .public_key_len = public_key_len};
+    peer_t pt = {.peer_id_len = peer_id_len, .public_key_len = public_key_len, .num_addrs = num_addrs, .addrs = addrs};
 
     // allocate memory to hold peer id
     pt.peer_id = calloc(1, peer_id_len);
