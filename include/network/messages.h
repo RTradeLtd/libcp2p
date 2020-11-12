@@ -105,10 +105,14 @@ typedef struct message_hello {
     size_t peer_id_len;
     /*! @brief the size of public_key */
     size_t public_key_len;
+    /*! @brief the number of multiaddrs being sent */
+    size_t num_addrs;
     /*! @brief a peer's identifier */
     unsigned char *peer_id;
     /*! @brief the corresponding public key for the peerid */
     unsigned char *public_key;
+    /*! @brief the peers multiaddrs */
+    multi_addr_t **addrs;
 } message_hello_t;
 
 /*!

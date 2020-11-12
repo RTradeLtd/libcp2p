@@ -28,13 +28,14 @@
 
 #pragma once
 
+#include "multiaddr/multiaddr.h"
 #include <pthread.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 
 /*!
- * @struct peer
+ * @struct peer 
  * @typedef peer_t
  * @brief contains identification information about a single peer
  * @details bundles together a peers identifier (hash of public key) and the public
@@ -43,8 +44,10 @@
 typedef struct peer {
     size_t peer_id_len;        /*! @note the size of the peer id */
     size_t public_key_len;     /*! @note the size of the public key */
+    size_t num_addrs;
     unsigned char *peer_id;    /*! @note the actual peer id data */
     unsigned char *public_key; /*! @note the actual public key data */
+    multi_addr_t **addrs;
 } peer_t;
 
 /*!
@@ -120,7 +123,7 @@ bool peerstore_have_peer(peerstore_t *pst, unsigned char *peer_id);
  */
 bool peerstore_insert_peer(peerstore_t *pst, unsigned char *peer_id,
                            unsigned char *public_key, size_t peer_id_len,
-                           size_t public_key_len);
+                           size_t public_key_len, size_t num_addrs, multi_addr_t **addrs);
 
 /*!
  * @brief performs a check to see if we need to allocate more memory

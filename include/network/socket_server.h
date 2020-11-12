@@ -100,6 +100,7 @@ typedef struct socket_server {
     public_key_t *public_key;
     /*! @brief our peer id information */
     peer_id_t *peer_id;
+    multi_addr_t **listen_addrs;
 } socket_server_t;
 
 /*! @typedef client_conn
@@ -230,3 +231,5 @@ int socket_server_send(socket_server_t *srv, multi_addr_t *to_address,
  * @brief helper function to return a message_hello_t using our server values
  */
 message_hello_t *new_server_message_hello_t(socket_server_t *srv);
+
+multi_addr_t **socket_server_config_copy_multi_addrs(socket_server_config_t *cfg);
